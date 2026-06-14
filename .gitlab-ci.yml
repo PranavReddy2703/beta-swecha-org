@@ -1,0 +1,74 @@
+image: node:22
+
+stages:
+  - quality
+  - i18n
+  - test
+  - build
+
+default:
+  interruptible: true
+  cache:
+    key:
+      files:
+        - package-lock.json
+    paths:
+      - .npm/
+    policy: pull-push
+  before_script:
+    - npm ci --cache .npm --prefer-offline
+
+variables:
+  CI: 'true'
+  NPM_CONFIG_CACHE: '.npm'
+
+quality_checks:
+  stage: quality
+  script:
+    - export NODE_OPTIONS="--import tsx"
+    - npm run format:check
+    - npm run lint
+    - npm run typecheck
+    - npm run knip
+  only:
+    - merge_requests
+    - dev
+
+i18n_validation:
+  stage: i18n
+  script:
+    - npm run validate:i18n
+    - npm run i18n:replace
+  only:
+    - merge_requests
+    - dev
+
+test_coverage:
+  stage: test
+  coverage: '/All files[^|]*\|[^|]*\s+([\d\.]+)/'
+  script:
+    - npm run test:coverage
+  artifacts:
+    when: always
+    reports:
+      coverage_report:
+        coverage_format: cobertura
+        path: coverage/cobertura-coverage.xml
+    paths:
+      - coverage/
+    expire_in: 7 days
+  only:
+    - merge_requests
+    - dev
+
+build_production:
+  stage: build
+  script:
+    - npm run build
+  artifacts:
+    paths:
+      - dist/
+    expire_in: 7 days
+  only:
+    - merge_requests
+    - dev
