@@ -1,7 +1,6 @@
 ---
 // src/components/LandingPage.astro
 import { getLangFromUrl, useTranslations, useTranslatedPath } from '../i18n/utils';
-import AboutSection from './AboutSection.astro';
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
@@ -93,5 +92,4 @@ const translatePath = useTranslatedPath(lang);
   </div>
 </section>
 
-<!-- About Section Component -->
-<AboutSection />
+
