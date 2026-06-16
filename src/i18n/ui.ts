@@ -35,23 +35,10 @@ const en = {
   "card.responsive.desc": siteData.cards.find(c => c.id === "responsive")?.desc || "",
 
   "about.title": siteData.about.title,
-  "about.subtitle": siteData.about.subtitle,
-  
-  "about.mission.title": siteData.pillars.find(p => p.id === "mission")?.title || "",
-  "about.mission.summary": siteData.pillars.find(p => p.id === "mission")?.summary || "",
-  "about.mission.detail": siteData.pillars.find(p => p.id === "mission")?.detail || "",
-
-  "about.origins.title": siteData.pillars.find(p => p.id === "origins")?.title || "",
-  "about.origins.summary": siteData.pillars.find(p => p.id === "origins")?.summary || "",
-  "about.origins.detail": siteData.pillars.find(p => p.id === "origins")?.detail || "",
-
-  "about.technical.title": siteData.pillars.find(p => p.id === "technical")?.title || "",
-  "about.technical.summary": siteData.pillars.find(p => p.id === "technical")?.summary || "",
-  "about.technical.detail": siteData.pillars.find(p => p.id === "technical")?.detail || "",
-
-  "about.impact.title": siteData.pillars.find(p => p.id === "impact")?.title || "",
-  "about.impact.summary": siteData.pillars.find(p => p.id === "impact")?.summary || "",
-  "about.impact.detail": siteData.pillars.find(p => p.id === "impact")?.detail || "",
+  "about.p1": siteData.about.paragraphs[0] || "",
+  "about.p2": siteData.about.paragraphs[1] || "",
+  "about.p3": siteData.about.paragraphs[2] || "",
+  "about.p4": siteData.about.paragraphs[3] || "",
 
   "layout.defaultTitle": siteData.layout.defaultTitle,
   "layout.defaultDesc": siteData.layout.defaultDesc,
