@@ -1,0 +1,16 @@
+{
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint .",
+    "format:check": "prettier --check .",
+    "knip": "knip"
+  },
+  "devDependencies": {
+    "@types/node": "^25.9.3",
+    "astro": "^6.4.7",
+    "typescript": "^6.0.3"
+  }
+}
