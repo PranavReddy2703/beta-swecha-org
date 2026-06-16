@@ -43,10 +43,10 @@
   "about": {
     "title": "About Us",
     "paragraphs": [
-      "Swecha was founded in 2005 as an organisation to support the Swecha project, it is now a vibrant community of software users, students, academicians and software professionals/developers determined to provide quality software built on the guidelines of free software development model.",
-      "Swecha aims at providing global software solutions to the local people with the Free Software development model by working together with the community of developers and users all over. The prime objective of Swecha OS is to provide a complete computing solution to a population that speaks and understands only Telugu.",
+      "Swecha was founded in 2005 as an organisation to support the <a href=\"https://swecha.org/content/swecha-project\" class=\"glow-link\">Swecha project</a>, it is now a vibrant community of software users, students, academicians and software professionals/developers determined to provide quality software built on the guidelines of free software development model.",
+      "Swecha aims at providing global software solutions to the local people with the Free Software development model by working together with the community of developers and users all over. The prime objective of <a href=\"#\" class=\"glow-link\">Swecha OS</a> is to provide a complete computing solution to a population that speaks and understands only Telugu.",
       "The project aims at bridging the gap between the computer technology that exists predominantly in English and the Telugu-speaking community of India. The project also aims at providing a framework for development and maintenance of Free Software projects taken up by the community.",
-      "Swecha is a project aimed at coming out with a localised version of GNU/Linux in Telugu. The target users of the distro being the entire community that is a prey of the digital divide. This project helps in coming out with a solution for the digital divide and allows the possibility of digital unite becoming a reality."
+      "<a href=\"https://www.swecha.org/\" class=\"glow-link\">Swecha</a> is a project aimed at coming out with a localised version of <a href=\"#\" class=\"glow-link\">GNU/Linux</a> in Telugu. The target users of the distro being the entire community that is a prey of the digital divide. This project helps in coming out with a solution for the digital divide and allows the possibility of digital unite becoming a reality."
     ]
   },
   "layout": {

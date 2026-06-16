@@ -30,7 +30,7 @@ const paragraphs = [
             style={`animation-delay: ${index * 150 + 150}ms;`}
           >
             <span class="block hover-lift">
-              {p}
+              <Fragment set:html={p} />
             </span>
           </p>
         ))}
@@ -82,12 +82,31 @@ const paragraphs = [
 
   /* Hover lift animation on text paragraphs (separated from entrance container transitions) */
   .hover-lift {
-    transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), color 0.3s ease, text-shadow 0.3s ease;
+    transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), color 0.3s ease;
   }
 
   .hover-lift:hover {
     transform: translateY(-4px) scale(1.008);
     color: #ffffff;
-    text-shadow: 0 0 12px rgba(0, 212, 255, 0.35);
+  }
+
+  /* Blue and Green Gradient Glowing Hyperlinks (Global Scoped for set:html compatibility) */
+  :global(.glow-link) {
+    position: relative;
+    z-index: 10;
+    cursor: pointer !important;
+    pointer-events: auto !important;
+    background: linear-gradient(135deg, #00D4FF, #4DFFB8) !important;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    font-weight: 700;
+    display: inline-block;
+    filter: drop-shadow(0 0 2px rgba(0, 212, 255, 0.5));
+    transition: filter 0.3s cubic-bezier(0.25, 1, 0.5, 1), transform 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+  }
+
+  :global(.glow-link:hover) {
+    filter: drop-shadow(0 0 8px rgba(0, 212, 255, 0.85)) drop-shadow(0 0 16px rgba(77, 255, 180, 0.6)) !important;
+    transform: translateY(-1px) scale(1.03) !important;
   }
 </style>
