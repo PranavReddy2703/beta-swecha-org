@@ -30,16 +30,16 @@ All contributors must align with the following runtime baselines to ensure consi
 
 ## 2. Local Setup
 
-Run the following commands from the project root in order:
+Execute the following commands from the repository root sequentially:
 
 ```bash
-# Clear any cache anomalies from a previous or broken branch state
+# Purge local package manager cache to prevent dependency resolution issues
 npm cache clean --force
 
-# Install exact, deterministic dependencies from the lockfile
+# Install project dependencies based on package-lock.json
 npm ci
 
-# Start the local development server
+# Launch local development server
 npm run dev
 ```
 
@@ -126,14 +126,14 @@ git push origin feature/issue-12-navigation-bar
 
 ## 6. Naming Conventions
 
-To keep the Git tree clean and searchable, all branch names and commit messages must strictly map to the issue tracking categories defined below.
+All branch names and commit messages must conform to the issue tracking categories defined below to maintain repository traceability and cleanliness.
 
 ### Branch Naming
 
-All feature branches must fork from `dev` and follow this lowercase, hyphenated pattern:
+All branches must fork from `dev` and conform to the following lowercase, hyphenated structural template:
 
 ```
-Pattern:<type>issue-<ID>-<kebab-case-summary>
+Pattern: <type>/issue-<ID>-<kebab-case-summary>
 ```
 
 | Type | Pattern | Example |
@@ -144,7 +144,7 @@ Pattern:<type>issue-<ID>-<kebab-case-summary>
 | Performance | `perf/issue-[ID]-short-description` | `perf/issue-112-optimize-daisyui-asset-loading` |
 | Chore / CI | `chore/issue-[ID]-short-description` | `chore/issue-12-update-gitlab-ci-node-cache` |
 
-Vague branch names such as `pranav-fix` or `updated-ui` are not permitted.
+Generic branch naming patterns (e.g., `pranav-fix` or `updated-ui`) are prohibited.
 
 ### Commit Message Format
 
