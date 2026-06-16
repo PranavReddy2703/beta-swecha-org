@@ -30,6 +30,16 @@ const getPathnameWithoutLang = (pathname: string) => {
 };
 
 const cleanPath = getPathnameWithoutLang(Astro.url.pathname);
+
+const isCurrentPage = (href: string) => {
+  const normalize = (path: string) => path.replace(/\/$/, '') || '/';
+  const normPathname = normalize(Astro.url.pathname);
+  const normHref = normalize(href);
+  if (normHref === '/') {
+    return normPathname === '/';
+  }
+  return normPathname === normHref || normPathname.startsWith(normHref + '/');
+};
 ---
 
 <header class="sticky top-0 z-50 w-full border-b border-structural-borders bg-secondary-bg/85 backdrop-blur-md transition-all duration-300">
@@ -47,14 +57,21 @@ const cleanPath = getPathnameWithoutLang(Astro.url.pathname);
 
       <!-- Desktop Navigation Menu -->
       <nav class="hidden md:flex space-x-1 lg:space-x-2">
-        {navItems.map((item) => (
-          <a
-            href={item.href}
-            class="rounded-md px-3 py-2 text-sm font-semibold text-text-muted transition-all duration-200 hover:bg-elevated-surface hover:text-primary-brand active:scale-95"
-          >
-            {item.name}
-          </a>
-        ))}
+        {navItems.map((item) => {
+          const isActive = isCurrentPage(item.href);
+          return (
+            <a
+              href={item.href}
+              class={`rounded-md px-3 py-2 text-sm font-semibold transition-all duration-200 active:scale-95 ${
+                isActive 
+                  ? 'text-primary-brand bg-elevated-surface/30 shadow-nav-active' 
+                  : 'text-text-muted hover:bg-elevated-surface hover:text-primary-brand'
+              }`}
+            >
+              {item.name}
+            </a>
+          );
+        })}
       </nav>
 
       <!-- Actions Container (Language + Theme + Mobile Menu) -->
@@ -137,14 +154,21 @@ const cleanPath = getPathnameWithoutLang(Astro.url.pathname);
   <!-- Mobile Drawer Menu (Initially Hidden) -->
   <div id="mobile-menu" class="hidden md:hidden border-t border-structural-borders bg-secondary-bg/95 backdrop-blur-lg">
     <div class="space-y-1 px-4 py-3">
-      {navItems.map((item) => (
-        <a
-          href={item.href}
-          class="block rounded-md px-3 py-2.5 text-base font-semibold text-text-main hover:bg-elevated-surface hover:text-primary-brand transition duration-200"
-        >
-          {item.name}
-        </a>
-      ))}
+      {navItems.map((item) => {
+        const isActive = isCurrentPage(item.href);
+        return (
+          <a
+            href={item.href}
+            class={`block rounded-md px-3 py-2.5 text-base font-semibold transition duration-200 ${
+              isActive 
+                ? 'text-primary-brand bg-elevated-surface/30 shadow-nav-active' 
+                : 'text-text-main hover:bg-elevated-surface hover:text-primary-brand'
+            }`}
+          >
+            {item.name}
+          </a>
+        );
+      })}
       
       <!-- Mobile Language Divider & Selection -->
       <div class="my-3 border-t border-structural-borders/50"></div>
@@ -219,3 +243,10 @@ const cleanPath = getPathnameWithoutLang(Astro.url.pathname);
     });
   }
 </script>
+
+<style>
+  .shadow-nav-active {
+    text-shadow: 0 0 10px rgba(0, 212, 255, 0.6), 0 0 20px rgba(0, 212, 255, 0.2);
+  }
+</style>
+
