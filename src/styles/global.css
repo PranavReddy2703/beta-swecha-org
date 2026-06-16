@@ -1,0 +1,65 @@
+@import "tailwindcss";
+@plugin "daisyui";
+
+@theme {
+  --color-canvas-base: var(--canvas-base);
+  --color-secondary-bg: var(--secondary-bg);
+  --color-card-bg: var(--card-bg);
+  --color-elevated-surface: var(--elevated-surface);
+  --color-primary-brand: var(--primary-brand);
+  --color-hover-brand: var(--hover-brand);
+  --color-secondary-accent: var(--secondary-accent);
+  --color-structural-borders: var(--structural-borders);
+  --color-text-main: var(--text-primary);
+  --color-text-muted: var(--text-muted);
+}
+
+:root {
+  --canvas-base: #080B10;
+  --secondary-bg: #111827;
+  --card-bg: #1B2432;
+  --elevated-surface: #263445;
+  --primary-brand: #00D4FF;
+  --hover-brand: #33E4FF;
+  --secondary-accent: #4DFFB8;
+  --structural-borders: #273449;
+  --text-primary: #F8FAFC;
+  --text-muted: #94A3B8;
+}
+
+/* Force dark theme overrides matching the default and light theme */
+html[data-theme="dark"] {
+  --canvas-base: #080B10;
+  --secondary-bg: #111827;
+  --card-bg: #1B2432;
+  --elevated-surface: #263445;
+  --primary-brand: #00D4FF;
+  --hover-brand: #33E4FF;
+  --secondary-accent: #4DFFB8;
+  --structural-borders: #273449;
+  --text-primary: #F8FAFC;
+  --text-muted: #94A3B8;
+}
+
+html[data-theme="light"] {
+  --canvas-base: #F8FAFC;
+  --secondary-bg: #FFFFFF;
+  --card-bg: #F1F5F9;
+  --elevated-surface: #E2E8F0;
+  --primary-brand: #0088CC;
+  --hover-brand: #00A3F5;
+  --secondary-accent: #10B981;
+  --structural-borders: #E2E8F0;
+  --text-primary: #0F172A;
+  --text-muted: #475569;
+}
+
+html,
+body {
+  background-color: var(--canvas-base);
+  color: var(--text-primary);
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  margin: 0;
+  padding: 0;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}

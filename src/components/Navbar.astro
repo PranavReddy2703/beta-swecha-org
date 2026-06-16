@@ -1,0 +1,221 @@
+---
+// src/components/Navbar.astro
+import { getLangFromUrl, useTranslations, useTranslatedPath } from '../i18n/utils';
+import { languages, defaultLang } from '../i18n/ui';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const translatePath = useTranslatedPath(lang);
+
+const navItems = [
+  { name: t('nav.about'), href: translatePath('/about') },
+  { name: t('nav.projects'), href: translatePath('/projects') },
+  { name: t('nav.programs'), href: translatePath('/programs') },
+  { name: t('nav.resources'), href: translatePath('/resources') },
+  { name: t('nav.news'), href: translatePath('/news') },
+];
+
+const languagesList = Object.entries(languages).map(([code, name]) => ({
+  code,
+  name,
+}));
+
+// Function to strip current lang prefix from the current pathname to build clean redirects
+const getPathnameWithoutLang = (pathname: string) => {
+  const parts = pathname.split('/');
+  if (parts[1] && parts[1] in languages) {
+    parts.splice(1, 1);
+  }
+  return parts.join('/') || '/';
+};
+
+const cleanPath = getPathnameWithoutLang(Astro.url.pathname);
+---
+
+<header class="sticky top-0 z-50 w-full border-b border-structural-borders bg-secondary-bg/85 backdrop-blur-md transition-all duration-300">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <div class="flex h-16 items-center justify-between">
+      
+      <!-- Logo Container -->
+      <div class="flex-shrink-0">
+        <a href={translatePath('/')} class="group flex items-center space-x-2">
+          <span class="text-2xl font-black tracking-wider text-text-main transition duration-300 group-hover:text-primary-brand">
+            SWECHA<span class="text-primary-brand transition duration-300 group-hover:text-secondary-accent">.ORG</span>
+          </span>
+        </a>
+      </div>
+
+      <!-- Desktop Navigation Menu -->
+      <nav class="hidden md:flex space-x-1 lg:space-x-2">
+        {navItems.map((item) => (
+          <a
+            href={item.href}
+            class="rounded-md px-3 py-2 text-sm font-semibold text-text-muted transition-all duration-200 hover:bg-elevated-surface hover:text-primary-brand active:scale-95"
+          >
+            {item.name}
+          </a>
+        ))}
+      </nav>
+
+      <!-- Actions Container (Language + Theme + Mobile Menu) -->
+      <div class="flex items-center space-x-2">
+        
+        <!-- Circular Language Switcher Dropdown -->
+        <div class="dropdown dropdown-end">
+          <button 
+            tabindex="0" 
+            aria-haspopup="true" 
+            aria-expanded="false" 
+            class="btn btn-circle btn-ghost border border-structural-borders/30 bg-card-bg/40 text-text-main hover:bg-elevated-surface hover:text-primary-brand transition duration-200"
+            title={t('nav.selectLanguage')}
+          >
+            <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5c-.313 1.565-.95 3.107-1.859 4.5M11.25 10.5a9 9 0 01-4.8 3.59" />
+            </svg>
+          </button>
+          <ul tabindex="0" class="dropdown-content menu p-2 shadow-2xl bg-card-bg border border-structural-borders rounded-box w-36 mt-2 text-text-main z-[1]">
+            {languagesList.map((langOption) => {
+              const targetHref = langOption.code === defaultLang 
+                ? cleanPath 
+                : `/${langOption.code}${cleanPath === '/' ? '' : cleanPath}`;
+              
+              return (
+                <li>
+                  <a 
+                    href={targetHref} 
+                    class={`hover:bg-elevated-surface hover:text-primary-brand py-2 transition duration-150 ${lang === langOption.code ? 'text-primary-brand font-bold bg-elevated-surface/30' : ''}`}
+                  >
+                    {langOption.name}
+                  </a>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+
+        <!-- Circular Theme Toggle Button -->
+        <button 
+          id="theme-toggle" 
+          class="btn btn-circle btn-ghost border border-structural-borders/30 bg-card-bg/40 text-text-main hover:bg-elevated-surface hover:text-primary-brand transition duration-200"
+          title={t('nav.toggleTheme')}
+          aria-label={t('nav.toggleTheme')}
+        >
+          <!-- Sun Icon (visible in dark mode) -->
+          <svg id="theme-icon-sun" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m0-11.314l.707.707m11.314 11.314l.707-.707M12 8a4 4 0 100 8 4 4 0 000-8z" />
+          </svg>
+          <!-- Moon Icon (visible in light mode) -->
+          <svg id="theme-icon-moon" class="h-5 w-5 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+          </svg>
+        </button>
+
+        <!-- Mobile Navigation Hamburger Toggle Button -->
+        <button
+          type="button"
+          id="mobile-menu-toggle"
+          aria-controls="mobile-menu"
+          aria-expanded="false"
+          class="inline-flex md:hidden items-center justify-center rounded-md p-2 text-text-muted hover:bg-elevated-surface hover:text-primary-brand focus:outline-none transition duration-200"
+        >
+          <span class="sr-only">{t('nav.openMenu')}</span>
+          <!-- Icon Menu Closed -->
+          <svg id="menu-icon-closed" class="block h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+          <!-- Icon Menu Open -->
+          <svg id="menu-icon-open" class="hidden h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Mobile Drawer Menu (Initially Hidden) -->
+  <div id="mobile-menu" class="hidden md:hidden border-t border-structural-borders bg-secondary-bg/95 backdrop-blur-lg">
+    <div class="space-y-1 px-4 py-3">
+      {navItems.map((item) => (
+        <a
+          href={item.href}
+          class="block rounded-md px-3 py-2.5 text-base font-semibold text-text-main hover:bg-elevated-surface hover:text-primary-brand transition duration-200"
+        >
+          {item.name}
+        </a>
+      ))}
+      
+      <!-- Mobile Language Divider & Selection -->
+      <div class="my-3 border-t border-structural-borders/50"></div>
+      <p class="text-xs font-semibold uppercase tracking-wider text-text-muted mb-2 px-3">{t('nav.selectLanguage')}</p>
+      <div class="grid grid-cols-3 gap-2 px-3 pb-2">
+        {languagesList.map((langOption) => {
+          const targetHref = langOption.code === defaultLang 
+            ? cleanPath 
+            : `/${langOption.code}${cleanPath === '/' ? '' : cleanPath}`;
+          
+          return (
+            <a
+              href={targetHref}
+              class={`flex items-center justify-center rounded-md border border-structural-borders bg-card-bg/40 py-2 text-xs font-semibold text-text-main hover:bg-elevated-surface hover:text-primary-brand transition duration-200 ${lang === langOption.code ? 'border-primary-brand text-primary-brand bg-elevated-surface/25' : ''}`}
+            >
+              {langOption.name}
+            </a>
+          );
+        })}
+      </div>
+    </div>
+  </div>
+</header>
+
+<script>
+  // Mobile drawer interaction logic
+  const toggleBtn = document.getElementById('mobile-menu-toggle');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const closedIcon = document.getElementById('menu-icon-closed');
+  const openIcon = document.getElementById('menu-icon-open');
+
+  if (toggleBtn && mobileMenu && closedIcon && openIcon) {
+    toggleBtn.addEventListener('click', () => {
+      const isExpanded = toggleBtn.getAttribute('aria-expanded') === 'true';
+      toggleBtn.setAttribute('aria-expanded', (!isExpanded).toString());
+      mobileMenu.classList.toggle('hidden');
+      closedIcon.classList.toggle('hidden');
+      closedIcon.classList.toggle('block');
+      openIcon.classList.toggle('hidden');
+      openIcon.classList.toggle('block');
+    });
+  }
+
+  // Theme toggle functionality
+  const themeToggle = document.getElementById('theme-toggle');
+  const sunIcon = document.getElementById('theme-icon-sun');
+  const moonIcon = document.getElementById('theme-icon-moon');
+
+  if (themeToggle && sunIcon && moonIcon) {
+    const updateIconVisibility = (theme: string) => {
+      if (theme === 'dark') {
+        sunIcon.classList.remove('hidden');
+        sunIcon.classList.add('block');
+        moonIcon.classList.remove('block');
+        moonIcon.classList.add('hidden');
+      } else {
+        sunIcon.classList.remove('block');
+        sunIcon.classList.add('hidden');
+        moonIcon.classList.remove('hidden');
+        moonIcon.classList.add('block');
+      }
+    };
+
+    const currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
+    updateIconVisibility(currentTheme);
+
+    themeToggle.addEventListener('click', () => {
+      const activeTheme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', activeTheme);
+      localStorage.setItem('theme', activeTheme);
+      updateIconVisibility(activeTheme);
+    });
+  }
+</script>

@@ -1,0 +1,96 @@
+{
+  "brand": {
+    "name": "Swecha",
+    "suffix": "org",
+    "tagline": "Free Software, Free Society"
+  },
+  "navLinks": [
+    { "id": "about", "label": "About" },
+    { "id": "projects", "label": "Projects" },
+    { "id": "programs", "label": "Programs" },
+    { "id": "resources", "label": "Resources" },
+    { "id": "news", "label": "News" }
+  ],
+  "hero": {
+    "badge": "System Active: Electric Cyan Matrix",
+    "heading": [
+      "Modern Presentation Layer for",
+      "swecha.org"
+    ],
+    "subheading": "A high-performance, decoupled frontend architecture engineered with Astro, Tailwind CSS, and daisyUI. Designed for optimal load speeds, structural localization stability, and visual premium interfaces.",
+    "buttons": {
+      "explore": "Explore Projects",
+      "learn": "Learn More"
+    }
+  },
+  "cards": [
+    {
+      "id": "island",
+      "title": "Island Architecture",
+      "desc": "Zero client-side JavaScript by default, hydrating interactive blocks only when needed for peak performance."
+    },
+    {
+      "id": "i18n",
+      "title": "Multilingual Routing",
+      "desc": "Integrated localization engines mapped to locale subdirectory routes for seamless user access."
+    },
+    {
+      "id": "responsive",
+      "title": "Responsive Specs",
+      "desc": "Structured breakpoints ensuring clean interface delivery on mobile devices, tablets, and wide monitors."
+    }
+  ],
+  "about": {
+    "title": "About Swecha",
+    "subtitle": "Driven by free software values, we build technologies to empower communities."
+  },
+  "pillars": [
+    {
+      "id": "mission",
+      "title": "Mission",
+      "summary": "Empowering Telugu-speaking communities.",
+      "detail": "Bridging the digital divide by providing localized GNU/Linux solutions and global software tools to local users."
+    },
+    {
+      "id": "origins",
+      "title": "Origins",
+      "summary": "Community-driven since 2005.",
+      "detail": "Founded to support the Swecha project, we are a vibrant collective of developers, students, and academicians dedicated to the free software model."
+    },
+    {
+      "id": "technical",
+      "title": "Technical",
+      "summary": "Building infrastructure from scratch.",
+      "detail": "Overcoming technical barriers by developing GPL-licensed Telugu fonts and collaborating globally with the FontForge community."
+    },
+    {
+      "id": "impact",
+      "title": "Impact",
+      "summary": "From vocabulary to release.",
+      "detail": "By standardizing technical terminology through community feedback and collaborative translation, we successfully launched the localized GNU/Linux version in 2005."
+    }
+  ],
+  "layout": {
+    "defaultTitle": "Swecha.org Frontend Platform",
+    "defaultDesc": "Decoupled, high-performance presentation layer for the swecha.org overhaul platform.",
+    "openMenu": "Open main menu",
+    "selectLanguage": "Select Language",
+    "toggleTheme": "Toggle Theme"
+  },
+  "dev": {
+    "stage": "Development Stage",
+    "returnHome": "Return Home",
+    "news": {
+      "desc": "This section is currently under development. Check back soon for announcements, blogs, and community news."
+    },
+    "programs": {
+      "desc": "This section is currently under development. Check back soon for the active programs and community initiatives."
+    },
+    "projects": {
+      "desc": "This section is currently under development. Check back soon for the active project listings."
+    },
+    "resources": {
+      "desc": "This section is currently under development. Check back soon to access our educational resource catalog and downloads."
+    }
+  }
+}

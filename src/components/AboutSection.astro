@@ -1,0 +1,107 @@
+---
+// src/components/AboutSection.astro
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const items = [
+  {
+    key: 'mission',
+    title: t('about.mission.title'),
+    summary: t('about.mission.summary'),
+    detail: t('about.mission.detail'),
+    color: 'text-primary-brand',
+    icon: `<svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+           </svg>`
+  },
+  {
+    key: 'origins',
+    title: t('about.origins.title'),
+    summary: t('about.origins.summary'),
+    detail: t('about.origins.detail'),
+    color: 'text-secondary-accent',
+    icon: `<svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
+           </svg>`
+  },
+  {
+    key: 'technical',
+    title: t('about.technical.title'),
+    summary: t('about.technical.summary'),
+    detail: t('about.technical.detail'),
+    color: 'text-primary-brand',
+    icon: `<svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+           </svg>`
+  },
+  {
+    key: 'impact',
+    title: t('about.impact.title'),
+    summary: t('about.impact.summary'),
+    detail: t('about.impact.detail'),
+    color: 'text-secondary-accent',
+    icon: `<svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+           </svg>`
+  }
+];
+---
+
+<section id="about" class="py-20 min-h-[calc(100vh-4rem)] flex flex-col justify-center bg-canvas-base border-t border-structural-borders/30 relative overflow-hidden transition-colors duration-300">
+  <!-- Background glow/grid decorations -->
+  <div class="absolute inset-0 pointer-events-none opacity-20">
+    <div class="absolute -top-40 left-1/4 h-[500px] w-[500px] rounded-full bg-primary-brand blur-[120px]"></div>
+    <div class="absolute bottom-10 right-1/4 h-[400px] w-[400px] rounded-full bg-secondary-accent blur-[120px]"></div>
+    <div class="absolute inset-0 bg-[linear-gradient(to_right,#273449_1px,transparent_1px),linear-gradient(to_bottom,#273449_1px,transparent_1px)] bg-[size:4rem_4rem]"></div>
+  </div>
+
+  <div class="container mx-auto px-4 max-w-5xl relative z-10">
+    
+    <!-- Header Block -->
+    <div class="text-center mb-16">
+      <h2 class="text-3xl font-extrabold tracking-tight text-text-main sm:text-4xl mb-4">
+        {t('about.title')}
+      </h2>
+      <div class="h-1 w-20 bg-primary-brand mx-auto mb-6 rounded-full"></div>
+      <p class="max-w-2xl mx-auto text-base text-text-muted leading-relaxed">
+        {t('about.subtitle')}
+      </p>
+    </div>
+
+    <!-- Grid Container -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      {items.map((item) => (
+        
+        /* Card Item - Scoped hover-reveal block */
+        <div class="group relative overflow-hidden rounded-xl border border-structural-borders bg-card-bg/60 p-6 backdrop-blur-md transition-all duration-500 hover:border-primary-brand/40 hover:-translate-y-1 hover:shadow-lg hover:shadow-primary-brand/5">
+          
+          <!-- Card Title & Icon Header -->
+          <div class="flex items-center space-x-3 mb-4">
+            <div class={`p-2 rounded-lg bg-secondary-bg/50 ${item.color} transition-colors duration-300`}>
+              <Fragment set:html={item.icon} />
+            </div>
+            <h3 class="text-lg font-bold text-text-main group-hover:text-primary-brand transition-colors duration-300">
+              {item.title}
+            </h3>
+          </div>
+
+          <!-- Summary Block (Always visible) -->
+          <p class="text-base font-semibold text-text-main leading-relaxed transition-all duration-300">
+            {item.summary}
+          </p>
+
+          <!-- Detail Block (Reveals on Hover) -->
+          <div class="max-h-0 opacity-0 overflow-hidden transition-all duration-500 ease-in-out group-hover:max-h-32 group-hover:opacity-100 group-hover:mt-4">
+            <div class="border-t border-structural-borders/30 pt-3 text-sm text-text-muted leading-relaxed">
+              {item.detail}
+            </div>
+          </div>
+          
+        </div>
+      ))}
+    </div>
+
+  </div>
+</section>
