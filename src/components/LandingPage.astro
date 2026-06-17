@@ -1,6 +1,10 @@
 ---
 // src/components/LandingPage.astro
-import { getLangFromUrl, useTranslations, useTranslatedPath } from '../i18n/utils';
+import {
+  getLangFromUrl,
+  useTranslations,
+  useTranslatedPath,
+} from "../i18n/utils";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
@@ -8,87 +12,155 @@ const translatePath = useTranslatedPath(lang);
 ---
 
 <!-- Hero Section -->
-<section class="relative overflow-hidden py-24 md:py-32 flex flex-col items-center justify-center min-h-[calc(100vh-4rem)] bg-canvas-base transition-colors duration-300">
-  
-  <!-- Background glow decorations -->
+<section
+  class="relative overflow-hidden py-24 md:py-32 flex flex-col items-center justify-center min-h-[calc(100vh-4rem)] bg-canvas-base transition-colors duration-300"
+>
+  <!-- Background glow/grid decorations -->
   <div class="absolute inset-0 pointer-events-none opacity-20">
-    <div class="absolute -top-40 left-1/4 h-[500px] w-[500px] rounded-full bg-primary-brand blur-[120px]"></div>
-    <div class="absolute bottom-10 right-1/4 h-[400px] w-[400px] rounded-full bg-secondary-accent blur-[120px]"></div>
+    <div
+      class="absolute -top-40 left-1/4 h-[500px] w-[500px] rounded-full bg-primary-brand blur-[120px]"
+    >
+    </div>
+    <div
+      class="absolute bottom-10 right-1/4 h-[400px] w-[400px] rounded-full bg-secondary-accent blur-[120px]"
+    >
+    </div>
+    <div
+      class="absolute inset-0 bg-[linear-gradient(to_right,#273449_1px,transparent_1px),linear-gradient(to_bottom,#273449_1px,transparent_1px)] bg-[size:4rem_4rem]"
+    >
+    </div>
   </div>
 
   <!-- Main Container -->
   <div class="relative mx-auto max-w-5xl px-4 text-center sm:px-6 lg:px-8">
-    
     <!-- Badge element -->
-    <span class="inline-flex items-center gap-1.5 rounded-full border border-secondary-accent/30 bg-secondary-accent/10 px-3 py-1 text-xs font-semibold tracking-wider text-secondary-accent uppercase mb-6 animate-pulse">
-      {t('hero.badge')}
+    <span
+      class="inline-flex items-center gap-1.5 rounded-full border border-secondary-accent/30 bg-secondary-accent/10 px-3 py-1 text-xs font-semibold tracking-wider text-secondary-accent uppercase mb-6 animate-pulse"
+    >
+      {t("hero.badge")}
     </span>
 
     <!-- Core heading with gradient -->
-    <h1 class="text-4xl font-extrabold tracking-tight text-text-main sm:text-6xl md:text-7xl mb-6">
-      {t('hero.title1')}
-      <span class="block mt-2 bg-gradient-to-r from-primary-brand via-hover-brand to-secondary-accent bg-clip-text text-transparent drop-shadow-[0_2px_15px_rgba(0,212,255,0.3)]">
-        {t('hero.title2')}
+    <h1
+      class="text-4xl font-extrabold tracking-tight text-text-main sm:text-6xl md:text-7xl mb-6"
+    >
+      {t("hero.title1")}
+      <span
+        class="block mt-2 bg-gradient-to-r from-primary-brand via-hover-brand to-secondary-accent bg-clip-text text-transparent drop-shadow-[0_2px_15px_rgba(0,212,255,0.3)]"
+      >
+        {t("hero.title2")}
       </span>
     </h1>
 
     <!-- Subtitle description -->
-    <p class="mx-auto max-w-2xl text-lg text-text-muted md:text-xl mb-10 leading-relaxed">
-      {t('hero.desc')}
+    <p
+      class="mx-auto max-w-2xl text-lg text-text-muted md:text-xl mb-10 leading-relaxed"
+    >
+      {t("hero.desc")}
     </p>
 
     <!-- Action buttons -->
-    <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-20">
-      <a 
-        href={translatePath('/projects')} 
+    <div
+      class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-20"
+    >
+      <a
+        href={translatePath("/projects")}
         class="inline-flex items-center justify-center rounded-lg bg-primary-brand px-6 py-3.5 text-base font-bold text-slate-950 shadow-lg shadow-primary-brand/20 transition-all duration-300 hover:bg-hover-brand hover:shadow-hover-brand/30 hover:-translate-y-0.5 active:translate-y-0"
       >
-        {t('hero.btn.explore')}
+        {t("hero.btn.explore")}
       </a>
-      <a 
-        href={translatePath('/about')} 
+      <a
+        href={translatePath("/about")}
         class="inline-flex items-center justify-center rounded-lg border border-structural-borders bg-card-bg/50 px-6 py-3.5 text-base font-bold text-text-main backdrop-blur-sm transition-all duration-300 hover:bg-elevated-surface hover:text-primary-brand hover:-translate-y-0.5 active:translate-y-0"
       >
-        {t('hero.btn.learn')}
+        {t("hero.btn.learn")}
       </a>
     </div>
 
     <!-- Feature cards showcasing design tokens -->
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-left">
-      
-      <div class="group relative rounded-xl border border-structural-borders bg-card-bg/60 p-6 backdrop-blur-sm transition-all duration-300 hover:border-primary-brand/40 hover:-translate-y-1">
+      <div
+        class="group relative rounded-xl border border-structural-borders bg-card-bg/60 p-6 backdrop-blur-sm transition-all duration-300 hover:border-primary-brand/40 hover:-translate-y-1"
+      >
         <div class="mb-4 text-primary-brand">
-          <svg class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+          <svg
+            class="h-8 w-8"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M13 10V3L4 14h7v7l9-11h-7z"></path>
           </svg>
         </div>
-        <h3 class="text-lg font-bold text-text-main group-hover:text-primary-brand transition duration-200 mb-2">{t('card.island.title')}</h3>
-        <p class="text-sm text-text-muted leading-relaxed">{t('card.island.desc')}</p>
+        <h3
+          class="text-lg font-bold text-text-main group-hover:text-primary-brand transition duration-200 mb-2"
+        >
+          {t("card.island.title")}
+        </h3>
+        <p class="text-sm text-text-muted leading-relaxed">
+          {t("card.island.desc")}
+        </p>
       </div>
 
-      <div class="group relative rounded-xl border border-structural-borders bg-card-bg/60 p-6 backdrop-blur-sm transition-all duration-300 hover:border-primary-brand/40 hover:-translate-y-1">
+      <div
+        class="group relative rounded-xl border border-structural-borders bg-card-bg/60 p-6 backdrop-blur-sm transition-all duration-300 hover:border-primary-brand/40 hover:-translate-y-1"
+      >
         <div class="mb-4 text-secondary-accent">
-          <svg class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5c-.313 1.565-.95 3.107-1.859 4.5M11.25 10.5a9 9 0 01-4.8 3.59" />
+          <svg
+            class="h-8 w-8"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5c-.313 1.565-.95 3.107-1.859 4.5M11.25 10.5a9 9 0 01-4.8 3.59"
+            ></path>
           </svg>
         </div>
-        <h3 class="text-lg font-bold text-text-main group-hover:text-secondary-accent transition duration-200 mb-2">{t('card.i18n.title')}</h3>
-        <p class="text-sm text-text-muted leading-relaxed">{t('card.i18n.desc')}</p>
+        <h3
+          class="text-lg font-bold text-text-main group-hover:text-secondary-accent transition duration-200 mb-2"
+        >
+          {t("card.i18n.title")}
+        </h3>
+        <p class="text-sm text-text-muted leading-relaxed">
+          {t("card.i18n.desc")}
+        </p>
       </div>
 
-      <div class="group relative rounded-xl border border-structural-borders bg-card-bg/60 p-6 backdrop-blur-sm transition-all duration-300 hover:border-primary-brand/40 hover:-translate-y-1">
+      <div
+        class="group relative rounded-xl border border-structural-borders bg-card-bg/60 p-6 backdrop-blur-sm transition-all duration-300 hover:border-primary-brand/40 hover:-translate-y-1"
+      >
         <div class="mb-4 text-primary-brand">
-          <svg class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+          <svg
+            class="h-8 w-8"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
+            ></path>
           </svg>
         </div>
-        <h3 class="text-lg font-bold text-text-main group-hover:text-primary-brand transition duration-200 mb-2">{t('card.responsive.title')}</h3>
-        <p class="text-sm text-text-muted leading-relaxed">{t('card.responsive.desc')}</p>
+        <h3
+          class="text-lg font-bold text-text-main group-hover:text-primary-brand transition duration-200 mb-2"
+        >
+          {t("card.responsive.title")}
+        </h3>
+        <p class="text-sm text-text-muted leading-relaxed">
+          {t("card.responsive.desc")}
+        </p>
       </div>
-
     </div>
-
   </div>
 </section>
-
-
