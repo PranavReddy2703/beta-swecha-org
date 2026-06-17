@@ -78,6 +78,7 @@ const en = {
   "contact.cta.btn.email": "Email Us",
   "contact.cta.btn.projects": "Explore Projects",
   "contact.cta.btn.join": "Join Community",
+
   "timeline.0.title": siteData.timeline[0].title,
   "timeline.0.description": siteData.timeline[0].desc,
   "timeline.1.title": siteData.timeline[1].title,
@@ -87,7 +88,50 @@ const en = {
   "timeline.3.title": siteData.timeline[3].title,
   "timeline.3.description": siteData.timeline[3].desc,
   "timeline.4.title": siteData.timeline[4].title,
-  "timeline.4.description": siteData.timeline[4].desc
+  "timeline.4.description": siteData.timeline[4].desc,
+
+  "news.title": "News & Updates",
+  "news.subtitle": "Latest announcements, community initiatives, AI developments, open-source projects, events, and technology updates from Swecha.",
+  "news.btn.explore": "Explore Initiatives",
+  "news.btn.learn": "Learn More",
+  "news.btn.read": "Read Article",
+  "news.btn.view": "View Event",
+  "news.btn.join": "Join Meetup",
+  "news.btn.readMore": "Read More",
+  "news.latest.title": "Latest Updates",
+
+  "news.featured.category": "FEATURED",
+  "news.featured.headline": "Building India's Open AI Future",
+  "news.featured.desc": "Swecha is helping shape India's open and community-driven AI ecosystem.",
+
+  "news.card1.category": "DATATHON",
+  "news.card1.headline": "Telangana Launches Datathon for Telugu LLM",
+  "news.card1.desc": "Statewide initiative to build a Telugu Large Language Model.",
+
+  "news.card2.category": "OPEN SOURCE AI",
+  "news.card2.headline": "VISWAM.AI Releases Draft Open AI License",
+  "news.card2.desc": "Draft framework promoting responsible and community-owned AI.",
+
+  "news.card3.category": "AI HACKDAY",
+  "news.card3.headline": "AI Hackday Empowers 2,000 Students",
+  "news.card3.desc": "Over 2,000 students collaborated on AI solutions for social impact.",
+
+  "news.card4.category": "COMMUNITY",
+  "news.card4.headline": "Join the Swecha Open Source Community",
+  "news.card4.desc": "Join developers, educators, and contributors across India.",
+
+  "news.card5.category": "DIGITAL FREEDOM",
+  "news.card5.headline": "Promoting Digital Freedom Through Open Technology",
+  "news.card5.desc": "Advancing open technology, digital rights, and free software.",
+
+  "news.update1.headline": "Understanding Trust & Safety in AI",
+  "news.update1.desc": "Responsible AI governance and transparency.",
+
+  "news.update2.headline": "Open Source Fellowship Program",
+  "news.update2.desc": "Mentorship-driven contributor program.",
+
+  "news.update3.headline": "Rural Technology Initiative",
+  "news.update3.desc": "Expanding digital literacy and access."
 };
 
 export const ui = {

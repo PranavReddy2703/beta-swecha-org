@@ -1,0 +1,261 @@
+---
+// src/components/news/FeaturedNewsCard.astro
+import CategoryBadge from './CategoryBadge.astro';
+
+interface Slide {
+  title: string;
+  description: string;
+  link: string;
+  image: string;
+}
+
+interface Props {
+  category: string;
+  buttonText: string;
+  slides: Slide[];
+  index: number;
+}
+
+const { category, buttonText, slides, index } = Astro.props;
+---
+
+<div 
+  class="group featured-card relative overflow-hidden rounded-2xl border border-structural-borders bg-[#111827] transition-all duration-300 flex flex-col lg:flex-row gap-5 p-5 md:p-6 select-none reveal-card cursor-pointer h-full"
+  style={`animation-delay: ${index * 120}ms`}
+>
+  <!-- Text Block (Left Side on Desktop) -->
+  <div class="flex-1 flex flex-col justify-between space-y-4 order-2 lg:order-1 relative min-h-[220px] lg:min-h-0 z-10">
+    <div class="space-y-4">
+      <div>
+        <CategoryBadge text={category} variant="green" />
+      </div>
+
+      <!-- Slides Text Container -->
+      <div class="relative flex-grow flex flex-col justify-center min-h-[120px] md:min-h-[140px] lg:min-h-[150px]">
+        {slides.map((slide, sIdx) => (
+          <div 
+            data-slide-text={sIdx}
+            class={`slide-text-item flex flex-col justify-center space-y-3 transition-all duration-500 ease-out ${
+              sIdx === 0 ? 'opacity-100 translate-y-0 relative z-10' : 'opacity-0 translate-y-4 absolute inset-0 pointer-events-none z-0'
+            }`}
+          >
+            <h2 class="text-xl md:text-2.5xl font-extrabold text-text-main group-hover:text-secondary-accent transition-colors duration-300 leading-tight">
+              {slide.title}
+            </h2>
+            <p class="text-xs md:text-sm text-text-muted leading-relaxed font-medium">
+              {slide.description}
+            </p>
+            
+            <div class="pt-1">
+              <a 
+                href={slide.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex items-center gap-1.5 rounded-lg bg-secondary-accent px-3.5 py-2 text-xs font-bold text-slate-950 transition duration-200 hover:bg-hover-brand hover:scale-[1.02] cta-btn"
+                onclick="event.stopPropagation();"
+              >
+                <span>{buttonText}</span>
+                <svg class="h-3.5 w-3.5 transform transition-transform duration-300 group-hover:translate-x-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                </svg>
+              </a>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <!-- Carousel Nav Indicators (Bottom Row) -->
+    <div class="flex items-center justify-between pt-4 border-t border-structural-borders/30">
+      <!-- Dots Indicator (Green active state) -->
+      <div class="flex items-center space-x-2">
+        {slides.map((_, sIdx) => (
+          <button 
+            type="button"
+            data-dot={sIdx}
+            class={`h-1.5 rounded-full transition-all duration-300 ${
+              sIdx === 0 ? 'bg-secondary-accent w-4.5' : 'bg-text-muted/40 hover:bg-text-muted/65 w-1.5'
+            }`}
+            aria-label={`Go to slide ${sIdx + 1}`}
+          />
+        ))}
+      </div>
+
+      <!-- Arrow Controls (Always visible on mobile/tablet, fade in on desktop hover) -->
+      <div class="flex items-center space-x-2 opacity-100 lg:opacity-0 transition-opacity duration-300 group-hover:opacity-100" id="carousel-controls">
+        <button 
+          type="button" 
+          id="prev-slide-btn"
+          class="flex items-center justify-center p-2 rounded-lg bg-[#1f2937]/50 border border-structural-borders/80 text-text-muted hover:text-secondary-accent hover:border-secondary-accent/40 hover:bg-secondary-accent/10 transition-all duration-200 cursor-pointer"
+          aria-label="Previous story"
+        >
+          <svg class="h-4.5 w-4.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+          </svg>
+        </button>
+        <button 
+          type="button" 
+          id="next-slide-btn"
+          class="flex items-center justify-center p-2 rounded-lg bg-[#1f2937]/50 border border-structural-borders/80 text-text-muted hover:text-secondary-accent hover:border-secondary-accent/40 hover:bg-secondary-accent/10 transition-all duration-200 cursor-pointer"
+          aria-label="Next story"
+        >
+          <svg class="h-4.5 w-4.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Image Block (Right Side on Desktop, Top on Mobile) -->
+  <div class="w-full lg:w-[46%] overflow-hidden rounded-xl bg-slate-950 order-1 lg:order-2 lg:self-stretch flex-shrink-0 aspect-[16/9.5] lg:aspect-auto min-h-[180px] lg:min-h-0 relative z-0">
+    {slides.map((slide, sIdx) => (
+      <img 
+        src={slide.image} 
+        alt={slide.title}
+        data-slide-image={sIdx}
+        class={`absolute inset-0 h-full w-full object-cover object-center transition-opacity duration-500 ease-out ${
+          sIdx === 0 ? 'opacity-100 z-10' : 'opacity-0 z-0'
+        }`}
+      />
+    ))}
+  </div>
+</div>
+
+<script>
+  // Scoped to avoid conflict in multi-instance or compilation
+  const carousel = document.querySelector('.featured-card');
+  if (carousel) {
+    const textItems = carousel.querySelectorAll('.slide-text-item');
+    const images = carousel.querySelectorAll('img[data-slide-image]');
+    const dots = carousel.querySelectorAll('button[data-dot]');
+    const prevBtn = carousel.querySelector('#prev-slide-btn');
+    const nextBtn = carousel.querySelector('#next-slide-btn');
+    let currentIdx = 0;
+    const totalSlides = textItems.length;
+
+    function showSlide(index: number) {
+      // Handle wrapping/looping
+      if (index < 0) {
+        currentIdx = totalSlides - 1;
+      } else if (index >= totalSlides) {
+        currentIdx = 0;
+      } else {
+        currentIdx = index;
+      }
+
+      // Update text slides visibility with fade + translate transitions
+      textItems.forEach((item, idx) => {
+        if (idx === currentIdx) {
+          item.classList.remove('opacity-0', 'translate-y-4', 'absolute', 'pointer-events-none', 'z-0');
+          item.classList.add('opacity-100', 'translate-y-0', 'relative', 'z-10');
+        } else {
+          item.classList.remove('opacity-100', 'translate-y-0', 'relative', 'z-10');
+          item.classList.add('opacity-0', 'translate-y-4', 'absolute', 'pointer-events-none', 'z-0');
+        }
+      });
+
+      // Update images visibility (crossfade)
+      images.forEach((img, idx) => {
+        if (idx === currentIdx) {
+          img.classList.remove('opacity-0', 'z-0');
+          img.classList.add('opacity-100', 'z-10');
+        } else {
+          img.classList.remove('opacity-100', 'z-10');
+          img.classList.add('opacity-0', 'z-0');
+        }
+      });
+
+      // Update dots active state
+      dots.forEach((dot, idx) => {
+        if (idx === currentIdx) {
+          dot.classList.remove('bg-text-muted/40', 'hover:bg-text-muted/65', 'w-1.5');
+          dot.classList.add('bg-secondary-accent', 'w-4.5');
+        } else {
+          dot.classList.remove('bg-secondary-accent', 'w-4.5');
+          dot.classList.add('bg-text-muted/40', 'hover:bg-text-muted/65', 'w-1.5');
+        }
+      });
+    }
+
+    // Previous Button handler
+    if (prevBtn) {
+      prevBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        showSlide(currentIdx - 1);
+      });
+    }
+
+    // Next Button handler
+    if (nextBtn) {
+      nextBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        showSlide(currentIdx + 1);
+      });
+    }
+
+    // Dot indicators handler
+    dots.forEach((dot, idx) => {
+      dot.addEventListener('click', (e) => {
+        e.stopPropagation();
+        showSlide(idx);
+      });
+    });
+
+    // Touch Swiping Support for mobile layout
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    carousel.addEventListener('touchstart', (e: any) => {
+      touchStartX = e.changedTouches[0].screenX;
+    }, { passive: true });
+
+    carousel.addEventListener('touchend', (e: any) => {
+      touchEndX = e.changedTouches[0].screenX;
+      const threshold = 50;
+      if (touchEndX < touchStartX - threshold) {
+        showSlide(currentIdx + 1);
+      } else if (touchEndX > touchStartX + threshold) {
+        showSlide(currentIdx - 1);
+      }
+    }, { passive: true });
+
+    // Outer card container click navigation
+    carousel.addEventListener('click', (e) => {
+      // If the click is on controls, ignore it
+      if ((e.target as HTMLElement).closest('button, a')) {
+        return;
+      }
+      // Retrieve the URL from the active slide text CTA element
+      const activeCTA = textItems[currentIdx]?.querySelector('.cta-btn');
+      const activeUrl = activeCTA?.getAttribute('href');
+      if (activeUrl) {
+        window.open(activeUrl, '_blank', 'noopener,noreferrer');
+      }
+    });
+  }
+</script>
+
+<style>
+  @keyframes revealCard {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .reveal-card {
+    opacity: 0;
+    animation: revealCard 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  /* Custom premium green glow for Featured card on hover */
+  .featured-card:hover {
+    border-color: color-mix(in srgb, var(--secondary-accent) 35%, transparent);
+    box-shadow: 0 4px 25px color-mix(in srgb, var(--secondary-accent) 15%, transparent);
+  }
+</style>
