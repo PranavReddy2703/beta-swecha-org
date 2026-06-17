@@ -1,0 +1,58 @@
+---
+// src/components/projects/ProjectCard.astro
+interface Props {
+  title: string;
+  description: string;
+  tags: string[];
+  status: 'Active' | 'Completed' | 'Ongoing';
+  link?: string;
+}
+
+const { title, description, tags, status, link = '#' } = Astro.props;
+const tagsString = tags.join(',');
+
+// Determine status color
+const statusColors = {
+  Active: 'text-secondary-accent bg-secondary-accent/10 border-secondary-accent/20',
+  Completed: 'text-primary-brand bg-primary-brand/10 border-primary-brand/20',
+  Ongoing: 'text-yellow-400 bg-yellow-400/10 border-yellow-400/20'
+};
+
+const statusClass = statusColors[status] || statusColors.Active;
+---
+
+<a href={link} data-tags={tagsString} class="project-card group relative flex flex-col h-full bg-card-surface border border-structural-borders rounded-2xl p-6 md:p-8 transition-all duration-300 hover:bg-elevated-surface hover:-translate-y-1 hover:border-primary-brand/50 hover:shadow-[0_10px_40px_-10px_rgba(0,212,255,0.15)] overflow-hidden">
+  
+  <!-- Hover Glow Effect -->
+  <div class="absolute inset-0 bg-gradient-to-br from-primary-brand/0 to-primary-brand/0 group-hover:from-primary-brand/5 group-hover:to-transparent transition-colors duration-500 pointer-events-none"></div>
+
+  <!-- Header: Status and External Icon -->
+  <div class="flex justify-between items-start mb-6">
+    <span class={`inline-flex items-center gap-1.5 px-3 py-1 text-[10px] sm:text-xs font-bold uppercase tracking-wider rounded-full border ${statusClass}`}>
+      <span class="w-1.5 h-1.5 rounded-full bg-current"></span>
+      {status}
+    </span>
+    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-slate-500 group-hover:text-primary-brand transition-colors duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+    </svg>
+  </div>
+
+  <!-- Body: Title and Description -->
+  <div class="flex-grow">
+    <h3 class="text-xl md:text-2xl font-bold text-white mb-3 group-hover:text-primary-brand transition-colors duration-300">
+      {title}
+    </h3>
+    <p class="text-sm md:text-base text-slate-400 leading-relaxed mb-6">
+      {description}
+    </p>
+  </div>
+
+  <!-- Footer: Tags -->
+  <div class="flex flex-wrap gap-2 mt-auto pt-6 border-t border-structural-borders/50">
+    {tags.map((tag) => (
+      <span class="px-2.5 py-1 text-xs font-medium text-slate-300 bg-secondary-bg rounded-md border border-structural-borders/80 group-hover:border-primary-brand/30 transition-colors duration-300">
+        {tag}
+      </span>
+    ))}
+  </div>
+</a>
