@@ -1,0 +1,24 @@
+---
+// src/components/Footer.astro
+import { getLangFromUrl, useTranslations, useTranslatedPath } from '../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const translatePath = useTranslatedPath(lang);
+---
+
+<footer class="w-full border-t border-structural-borders bg-secondary-bg/30 backdrop-blur-md py-6 transition-colors duration-300">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <div class="flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-text-muted/60">
+      <div>
+        &copy; {new Date().getFullYear()} Swecha. All rights reserved.
+      </div>
+      <div class="flex items-center gap-6">
+        <a href="https://github.com/swecha-org" target="_blank" rel="noopener noreferrer" class="hover:text-primary-brand transition-colors duration-200">GitHub</a>
+        <a href="https://gitlab.com/swecha" target="_blank" rel="noopener noreferrer" class="hover:text-primary-brand transition-colors duration-200">GitLab</a>
+        <a href="https://twitter.com/swechaap" target="_blank" rel="noopener noreferrer" class="hover:text-primary-brand transition-colors duration-200">Twitter</a>
+        <a href={translatePath('/contact')} class="hover:text-primary-brand transition-colors duration-200">{t('nav.contact')}</a>
+      </div>
+    </div>
+  </div>
+</footer>
