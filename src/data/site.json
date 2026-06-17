@@ -71,5 +71,32 @@
     "resources": {
       "desc": "This section is currently under development. Check back soon to access our educational resource catalog and downloads."
     }
-  }
+  },
+  "timeline": [
+    {
+      "year": "2005",
+      "title": "Founding & Telugu OS Release",
+      "desc": "Swecha was founded to localize GNU/Linux solutions, bridging the digital divide with Telugu font development."
+    },
+    {
+      "year": "2010",
+      "title": "Vast Community Growth",
+      "desc": "Expanded community networks, hosting workshops and localizing key desktop tools for Telugu users."
+    },
+    {
+      "year": "2015",
+      "title": "Digital Literacy Drives",
+      "desc": "Launched massive education initiatives across schools to empower students using Free Software."
+    },
+    {
+      "year": "2020",
+      "title": "Emerging Tech Focus",
+      "desc": "Began tracks for AI, Python programming, and collaborating on global public data initiatives."
+    },
+    {
+      "year": "2026",
+      "title": "Modern Overhaul",
+      "desc": "Re-engineering the presentation layer using Astro and decoupled design architecture."
+    }
+  ]
 }

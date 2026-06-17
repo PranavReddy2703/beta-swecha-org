@@ -19,7 +19,7 @@ const en = {
   "nav.news": siteData.navLinks.find(l => l.id === "news")?.label || "",
   "nav.selectLanguage": siteData.layout.selectLanguage,
   "nav.toggleTheme": siteData.layout.toggleTheme,
-  
+
   "hero.badge": siteData.hero.badge,
   "hero.title1": siteData.hero.heading[0],
   "hero.title2": siteData.hero.heading[1],
@@ -50,7 +50,6 @@ const en = {
   "programs.dev.desc": siteData.dev.programs.desc,
   "projects.dev.desc": siteData.dev.projects.desc,
   "resources.dev.desc": siteData.dev.resources.desc,
-
   "nav.contact": "Contact Us",
   "contact.title": "Contact Us",
   "contact.subtitle": "We'd love to hear from you. Connect with the Swecha community through any of the channels below.",
@@ -78,7 +77,17 @@ const en = {
   "contact.cta.desc": "We're always excited to work with contributors, volunteers, educators, and open-source enthusiasts.",
   "contact.cta.btn.email": "Email Us",
   "contact.cta.btn.projects": "Explore Projects",
-  "contact.cta.btn.join": "Join Community"
+  "contact.cta.btn.join": "Join Community",
+  "timeline.0.title": siteData.timeline[0].title,
+  "timeline.0.description": siteData.timeline[0].desc,
+  "timeline.1.title": siteData.timeline[1].title,
+  "timeline.1.description": siteData.timeline[1].desc,
+  "timeline.2.title": siteData.timeline[2].title,
+  "timeline.2.description": siteData.timeline[2].desc,
+  "timeline.3.title": siteData.timeline[3].title,
+  "timeline.3.description": siteData.timeline[3].desc,
+  "timeline.4.title": siteData.timeline[4].title,
+  "timeline.4.description": siteData.timeline[4].desc
 };
 
 export const ui = {
