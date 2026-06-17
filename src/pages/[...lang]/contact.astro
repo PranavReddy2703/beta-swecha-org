@@ -4,7 +4,7 @@ import Layout from '@layouts/Layout.astro';
 import { getLangFromUrl, useTranslations, useTranslatedPath } from '../../i18n/utils';
 import { languages, defaultLang } from '../../i18n/ui';
 import ContactCard from '@components/contact/ContactCard.astro';
-import ContactMiniMap from '@components/contact/ContactMiniMap.astro';
+import OpenStreetMap from '@components/contact/OpenStreetMap.astro';
 import ContactForm from '@components/contact/ContactForm.astro';
 
 export function getStaticPaths() {
@@ -46,10 +46,10 @@ const internshipsGmail = `https://mail.google.com/mail/?view=cm&fs=1&to=internsh
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-12">
       
       <!-- TWO-COLUMN MAIN CONTENT (Desktop 50/50, Mobile Stacked) -->
-      <section class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start scroll-reveal-section opacity-0 translate-y-8 transition-all duration-700 ease-out">
+      <section class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch scroll-reveal-section opacity-0 translate-y-8 transition-all duration-700 ease-out">
         
         <!-- Left Side: Contact Form -->
-        <div class="w-full">
+        <div class="w-full h-full">
           <ContactForm 
             title={t('contact.form.title')} 
             subtitle={t('contact.form.subtitle')}
@@ -101,7 +101,7 @@ const internshipsGmail = `https://mail.google.com/mail/?view=cm&fs=1&to=internsh
 
           <!-- Large Mini Map embedded inside the card -->
           <div class="mt-5 w-full flex-grow">
-            <ContactMiniMap title={t('contact.map.title')} />
+            <OpenStreetMap />
           </div>
         </div>
 

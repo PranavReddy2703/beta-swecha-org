@@ -3,6 +3,8 @@
 import Layout from '@layouts/Layout.astro';
 import { getLangFromUrl, useTranslations, useTranslatedPath } from '../../i18n/utils';
 import { languages, defaultLang } from '../../i18n/ui';
+import BentoGrid from '@components/news/BentoGrid.astro';
+import UpdateCard from '@components/news/UpdateCard.astro';
 
 export function getStaticPaths() {
   return Object.keys(languages).map((lang) => {
@@ -17,32 +19,86 @@ export function getStaticPaths() {
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 const translatePath = useTranslatedPath(lang);
+
+// Latest updates array
+const latestUpdates = [
+  {
+    title: t('news.update1.headline'),
+    description: t('news.update1.desc'),
+    link: 'https://www.tripurastarnews.com/viswam-ai-and-sflc-in-release-draft-license-for-consultation-aimed-at-safeguarding-open-source-aiand-community-ownership/'
+  },
+  {
+    title: t('news.update2.headline'),
+    description: t('news.update2.desc'),
+    link: 'https://www.meetup.com/swechafsmi/'
+  },
+  {
+    title: t('news.update3.headline'),
+    description: t('news.update3.desc'),
+    link: 'https://freedommatters.in/untitled-8/'
+  }
+];
 ---
 
-<Layout title={`${t('nav.news')} - Swecha.org`}>
-  <section class="py-20 flex flex-col items-center justify-center min-h-[calc(100vh-4rem)] relative overflow-hidden bg-canvas-base">
-    <div class="absolute inset-0 pointer-events-none opacity-10">
-      <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-[500px] w-[500px] rounded-full bg-primary-brand/30 blur-[120px]"></div>
-    </div>
+<Layout title={`${t('news.title')} - Swecha.org`} description={t('news.subtitle')}>
+  
+  <div class="relative min-h-[calc(100vh-4rem)] bg-[#080B10] text-text-main transition-colors duration-300 pt-6 pb-16 overflow-hidden">
     
-    <div class="container mx-auto px-4 max-w-xl text-center relative z-10">
-      <div class="rounded-2xl border border-structural-borders bg-card-bg/60 p-8 md:p-12 backdrop-blur-md shadow-2xl">
-        <span class="inline-flex items-center gap-1.5 rounded-full border border-primary-brand/30 bg-primary-brand/10 px-3 py-1 text-xs font-semibold tracking-wider text-primary-brand uppercase mb-6">
-          {t('dev.stage')}
-        </span>
-        <h1 class="text-3xl font-extrabold tracking-tight text-text-main sm:text-4xl mb-4">
-          {t('nav.news')}
-        </h1>
-        <p class="text-base text-text-muted leading-relaxed mb-6">
-          {t('news.dev.desc')}
-        </p>
-        <a 
-          href={translatePath('/')} 
-          class="inline-flex items-center justify-center rounded-lg bg-primary-brand px-5 py-2.5 text-sm font-bold text-slate-950 transition duration-200 hover:bg-hover-brand"
-        >
-          {t('dev.returnHome')}
-        </a>
-      </div>
+    <!-- Subtle background cyber grid & single soft top glow -->
+    <div class="absolute inset-0 pointer-events-none opacity-10 z-0">
+      <div class="absolute -top-60 left-1/2 -translate-x-1/2 h-[300px] w-[500px] rounded-full bg-primary-brand/10 blur-[80px]"></div>
+      <!-- Minimal grid backdrop -->
+      <div class="absolute inset-0 bg-[linear-gradient(to_right,#273449_1px,transparent_1px),linear-gradient(to_bottom,#273449_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,#000_70%,transparent_100%)]"></div>
     </div>
-  </section>
+
+    <!-- Main Container -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-10">
+      
+      <!-- FEATURED BENTO NEWS GRID -->
+      <section class="scroll-reveal-section opacity-0 translate-y-6 transition-all duration-500 ease-out pt-2">
+        <BentoGrid t={t} />
+      </section>
+
+      <!-- LATEST UPDATES SECTION -->
+      <section class="space-y-5 scroll-reveal-section opacity-0 translate-y-6 transition-all duration-500 ease-out">
+        <div class="flex items-center space-x-3">
+          <h2 class="text-lg md:text-xl font-bold text-text-main select-none">
+            {t('news.latest.title')}
+          </h2>
+          <span class="h-[1px] flex-grow bg-gradient-to-r from-structural-borders via-structural-borders/30 to-transparent"></span>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+          {latestUpdates.map((update, index) => (
+            <UpdateCard 
+              title={update.title}
+              description={update.description}
+              link={update.link}
+              index={index}
+            />
+          ))}
+        </div>
+      </section>
+
+    </div>
+  </div>
 </Layout>
+
+<script>
+  // Scroll Reveal triggers for clean entry animation
+  const scrollObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.remove('opacity-0', 'translate-y-6');
+        entry.target.classList.add('opacity-100', 'translate-y-0');
+        scrollObserver.unobserve(entry.target);
+      }
+    });
+  }, {
+    threshold: 0.05
+  });
+
+  document.querySelectorAll('.scroll-reveal-section').forEach(section => {
+    scrollObserver.observe(section);
+  });
+</script>
