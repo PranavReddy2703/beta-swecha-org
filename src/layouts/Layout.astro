@@ -1,6 +1,7 @@
 ---
 // src/layouts/Layout.astro
 import Navbar from '../components/Navbar.astro';
+import BackgroundDecorations from '../components/BackgroundDecorations.astro';
 import '../styles/global.css';
 import { getLangFromUrl, useTranslations } from '../i18n/utils';
 
@@ -48,6 +49,9 @@ const {
     </style>
   </head>
   <body class="min-h-screen bg-canvas-base text-text-main antialiased flex flex-col transition-colors duration-300">
+    <!-- Background Decor (Birds) -->
+    <BackgroundDecorations />
+
     <!-- Navbar Component -->
     <Navbar />
     
