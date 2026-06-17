@@ -49,7 +49,36 @@ const en = {
   "news.dev.desc": siteData.dev.news.desc,
   "programs.dev.desc": siteData.dev.programs.desc,
   "projects.dev.desc": siteData.dev.projects.desc,
-  "resources.dev.desc": siteData.dev.resources.desc
+  "resources.dev.desc": siteData.dev.resources.desc,
+
+  "nav.contact": "Contact Us",
+  "contact.title": "Contact Us",
+  "contact.subtitle": "We'd love to hear from you. Connect with the Swecha community through any of the channels below.",
+  "contact.address.title": "Address",
+  "contact.address.value": "Swecha\nSy No. 91\nBeside Centre for Good Governance\nGreenlands Colony\nSVM\nJawaharlal\nNehru Outer Ring Road\nMadhava Reddy Colony\nGachibowli\nHyderabad\nTelangana 500032",
+  "contact.email.title": "Email Us",
+  "contact.email.value": "reachus@swecha.net",
+  "contact.phone.title": "Call Us",
+  "contact.phone.value": "+91 89775 03615",
+  "contact.internship.title": "Internship Queries",
+  "contact.internship.value": "internships@swecha.org",
+  "contact.map.title": "Office Location",
+  "contact.location.directions": "Get Directions",
+  "contact.location.open_maps": "Open Google Maps",
+  "contact.location.copy": "Copy Address",
+  "contact.location.copied": "Copied!",
+  "contact.form.title": "Send Us a Message",
+  "contact.form.subtitle": "We'll get back to you as soon as possible.",
+  "contact.form.name": "Name",
+  "contact.form.email": "Email",
+  "contact.form.subject": "Subject",
+  "contact.form.message": "Message",
+  "contact.form.send": "Send Message",
+  "contact.cta.title": "Want to collaborate with Swecha?",
+  "contact.cta.desc": "We're always excited to work with contributors, volunteers, educators, and open-source enthusiasts.",
+  "contact.cta.btn.email": "Email Us",
+  "contact.cta.btn.projects": "Explore Projects",
+  "contact.cta.btn.join": "Join Community"
 };
 
 export const ui = {
