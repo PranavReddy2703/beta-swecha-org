@@ -1,0 +1,28 @@
+---
+// src/pages/[...lang]/about.astro
+import Layout from '@layouts/Layout.astro';
+import AboutIntro from '@components/AboutIntro.astro';
+import Timeline from '@components/Timeline.astro';
+import { getLangFromUrl, useTranslations } from '../../i18n/utils';
+import { languages, defaultLang } from '../../i18n/ui';
+
+export function getStaticPaths() {
+  return Object.keys(languages).map((lang) => {
+    return {
+      params: {
+        lang: lang === defaultLang ? undefined : lang,
+      },
+    };
+  });
+}
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+
+<Layout title={`${t('about.title')} - Swecha.org`}>
+  <div class="relative overflow-hidden w-full flex flex-col">
+    <AboutIntro />
+    <Timeline />
+  </div>
+</Layout>

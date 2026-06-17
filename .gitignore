@@ -1,0 +1,92 @@
+# ==============================================================================
+# Astro + Node.js Project gitignore
+# ==============================================================================
+
+# ------------------------------------------------------------------------------
+# 1. Dependency Directories
+# These folders contain packages downloaded from external registries.
+# ------------------------------------------------------------------------------
+node_modules/
+.npm/
+
+# ------------------------------------------------------------------------------
+# 2. Build and Distribution Outputs
+# Compiled assets, static generation outputs, and server-side entrypoints.
+# ------------------------------------------------------------------------------
+dist/
+dist-ssr/
+
+# ------------------------------------------------------------------------------
+# 3. Astro Cache & Temp Files
+# Compiler cache, schema generation, and type definitions.
+# ------------------------------------------------------------------------------
+.astro/
+.eslintcache
+
+# ------------------------------------------------------------------------------
+# 4. Logs and Diagnostics
+# Build logs, dependency manager warnings, and test coverage outputs.
+# ------------------------------------------------------------------------------
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+coverage/
+.nyc_output/
+
+# ------------------------------------------------------------------------------
+# 5. Environment Variables and Secrets
+# Local environment credentials, API tokens, and development-specific parameters.
+# ------------------------------------------------------------------------------
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+.env.*.local
+
+# ------------------------------------------------------------------------------
+# 6. OS Metadata & System Files
+# System-specific configurations and cache indexes.
+# ------------------------------------------------------------------------------
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+.Spotlight-V100
+.Trashes
+
+# Windows
+Thumbs.db
+Ehthumbs.db
+Desktop.ini
+
+# ------------------------------------------------------------------------------
+# 7. IDEs, Editors & Workspaces
+# Personal editor states, workspace variables, and compiler info.
+# ------------------------------------------------------------------------------
+# VS Code
+.vscode/*
+!.vscode/extensions.json
+!.vscode/launch.json
+!.vscode/settings.json
+!.vscode/tasks.json
+
+# WebStorm / JetBrains
+.idea/
+
+# TypeScript Build Info
+*.tsbuildinfo
+
+# Local history & temporary backup files
+.history/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.swp
+*.swo
+*~

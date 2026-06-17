@@ -1,0 +1,55 @@
+---
+// src/components/contact/ContactMiniMap.astro
+interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<a 
+  href="https://maps.google.com/?q=Swecha+Gachibowli+Hyderabad" 
+  target="_blank" 
+  rel="noopener noreferrer" 
+  class="group relative block w-full h-[220px] md:h-[280px] lg:h-[350px] rounded-xl border border-structural-borders/80 bg-card-bg/40 backdrop-blur-md overflow-hidden text-left cursor-pointer transition-all duration-300 hover:border-primary-brand/50 hover:shadow-[0_0_20px_rgba(0,212,255,0.15)] focus:outline-none focus:ring-2 focus:ring-primary-brand select-none"
+  aria-label="Open Swecha Office location on Google Maps"
+>
+  <!-- Static Map Thumbnail with hover scale -->
+  <div class="absolute inset-0 overflow-hidden z-0">
+    <img 
+      src="/images/swecha-location-preview.png" 
+      alt="Swecha Office location map preview"
+      class="w-full h-full object-cover grayscale opacity-45 transform transition-transform duration-700 ease-out group-hover:scale-105 group-hover:opacity-60"
+    />
+    
+    <!-- Dark overlay gradient matching the matrix theme -->
+    <div class="absolute inset-0 bg-gradient-to-t from-canvas-base/90 via-canvas-base/40 to-canvas-base/10"></div>
+  </div>
+
+  <!-- Small Location Badge -->
+  <div class="absolute top-4 left-4 z-10 flex flex-col items-start pointer-events-none">
+    <div class="inline-flex items-center space-x-1 mb-2 self-start bg-canvas-base/90 border border-structural-borders/85 rounded px-2.5 py-0.5 text-[10px] font-bold text-primary-brand">
+      <span class="uppercase tracking-wider">Swecha Office</span>
+    </div>
+  </div>
+
+  <!-- Pulsing Marker Pin (absolute positioned in the center) -->
+  <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 flex flex-col items-center pointer-events-none">
+    <span class="relative flex h-6 w-6">
+      <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-secondary-accent/60 opacity-75"></span>
+      <span class="relative inline-flex rounded-full h-6 w-6 bg-secondary-accent/20 border-2 border-secondary-accent flex items-center justify-center shadow-[0_0_15px_rgba(77,255,184,0.6)]">
+        <span class="h-2 w-2 rounded-full bg-secondary-accent"></span>
+      </span>
+    </span>
+  </div>
+
+  <!-- Open in Maps action (Bottom-right corner) -->
+  <div class="absolute bottom-4 right-4 z-10">
+    <div class="flex items-center text-xs font-black text-canvas-base bg-primary-brand px-3 py-1.5 rounded-lg shadow-md transition-all duration-300 group-hover:bg-hover-brand group-hover:shadow-[0_0_12px_rgba(0,212,255,0.3)]">
+      <span class="mr-1">Open in Maps</span>
+      <svg class="h-3 w-3 transform transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+      </svg>
+    </div>
+  </div>
+</a>

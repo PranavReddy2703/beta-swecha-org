@@ -1,0 +1,792 @@
+---
+// src/components/Navbar.astro
+import { getLangFromUrl, useTranslations, useTranslatedPath } from '../i18n/utils';
+import { languages, defaultLang } from '../i18n/ui';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const translatePath = useTranslatedPath(lang);
+
+const navItems = [
+  { name: t('nav.about'), href: translatePath('/about') },
+  { name: t('nav.projects'), href: translatePath('/projects') },
+  { name: t('nav.programs'), href: translatePath('/programs') },
+  { name: t('nav.resources'), href: translatePath('/resources') },
+  { name: t('nav.news'), href: translatePath('/news') },
+  { name: t('nav.contact'), href: translatePath('/contact') },
+];
+
+const languagesList = Object.entries(languages).map(([code, name]) => ({
+  code,
+  name,
+}));
+
+// Function to strip current lang prefix from the current pathname to build clean redirects
+const getPathnameWithoutLang = (pathname: string) => {
+  const parts = pathname.split('/');
+  if (parts[1] && parts[1] in languages) {
+    parts.splice(1, 1);
+  }
+  return parts.join('/') || '/';
+};
+
+const cleanPath = getPathnameWithoutLang(Astro.url.pathname);
+
+const isCurrentPage = (href: string) => {
+  const normalize = (path: string) => path.replace(/\/$/, '') || '/';
+  const normPathname = normalize(Astro.url.pathname);
+  const normHref = normalize(href);
+  if (normHref === '/') {
+    return normPathname === '/';
+  }
+  return normPathname === normHref || normPathname.startsWith(normHref + '/');
+};
+---
+
+<header id="site-header" class="navbar-header">
+  <!-- Animated gradient border at bottom -->
+  <div class="navbar-gradient-border"></div>
+
+  <div class="px-6 sm:px-10 lg:px-16">
+    <div class="navbar-inner">
+      
+      <!-- Logo Container (UNCHANGED) -->
+      <div class="flex-shrink-0">
+        <a href={translatePath('/')} class="group flex items-center space-x-2">
+          <span class="text-2xl font-black tracking-wider text-text-main transition duration-300 group-hover:text-primary-brand">
+            SWECHA<span class="text-primary-brand transition duration-300 group-hover:text-secondary-accent">.ORG</span>
+          </span>
+        </a>
+      </div>
+
+      <!-- Desktop Navigation Menu -->
+      <nav class="hidden md:flex items-center space-x-3 lg:space-x-5" id="desktop-nav">
+        {navItems.map((item) => {
+          const isActive = isCurrentPage(item.href);
+          return (
+            <a
+              href={item.href}
+              class={`nav-link ${isActive ? 'nav-link-active' : ''}`}
+              data-active={isActive ? 'true' : 'false'}
+            >
+              <span class="nav-link-text">{item.name}</span>
+              <span class="nav-link-indicator"></span>
+            </a>
+          );
+        })}
+      </nav>
+
+      <!-- Actions Container (Language + Theme + Mobile Menu) -->
+      <div class="flex items-center space-x-2">
+        
+        <!-- Enhanced Language Switcher Dropdown -->
+        <div class="dropdown dropdown-end">
+          <button 
+            tabindex="0" 
+            aria-haspopup="true" 
+            aria-expanded="false" 
+            class="action-btn"
+            title={t('nav.selectLanguage')}
+            id="lang-toggle"
+          >
+            <svg class="h-5 w-5 action-btn-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5c-.313 1.565-.95 3.107-1.859 4.5M11.25 10.5a9 9 0 01-4.8 3.59" />
+            </svg>
+          </button>
+          <ul tabindex="0" class="dropdown-content menu lang-dropdown">
+            {languagesList.map((langOption) => {
+              const targetHref = langOption.code === defaultLang 
+                ? cleanPath 
+                : `/${langOption.code}${cleanPath === '/' ? '' : cleanPath}`;
+              
+              return (
+                <li>
+                  <a 
+                    href={targetHref} 
+                    class={`lang-option ${lang === langOption.code ? 'lang-option-active' : ''}`}
+                  >
+                    <span class="lang-dot"></span>
+                    {langOption.name}
+                  </a>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+
+        <!-- Enhanced Theme Toggle Button -->
+        <button 
+          id="theme-toggle" 
+          class="action-btn theme-toggle-btn"
+          title={t('nav.toggleTheme')}
+          aria-label={t('nav.toggleTheme')}
+        >
+          <!-- Sun Icon (visible in dark mode) -->
+          <svg id="theme-icon-sun" class="h-5 w-5 action-btn-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m0-11.314l.707.707m11.314 11.314l.707-.707M12 8a4 4 0 100 8 4 4 0 000-8z" />
+          </svg>
+          <!-- Moon Icon (visible in light mode) -->
+          <svg id="theme-icon-moon" class="h-5 w-5 action-btn-icon hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+          </svg>
+        </button>
+
+        <!-- Mobile Navigation Hamburger Toggle Button -->
+        <button
+          type="button"
+          id="mobile-menu-toggle"
+          aria-controls="mobile-menu"
+          aria-expanded="false"
+          class="mobile-hamburger md:hidden"
+        >
+          <span class="sr-only">{t('nav.openMenu')}</span>
+          <div class="hamburger-lines" id="hamburger-lines">
+            <span class="hamburger-line hamburger-line-1"></span>
+            <span class="hamburger-line hamburger-line-2"></span>
+            <span class="hamburger-line hamburger-line-3"></span>
+          </div>
+        </button>
+
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Mobile Drawer Menu (Initially Hidden) -->
+  <div id="mobile-menu" class="mobile-drawer md:hidden">
+    <div class="mobile-drawer-inner">
+      {navItems.map((item, index) => {
+        const isActive = isCurrentPage(item.href);
+        return (
+          <a
+            href={item.href}
+            class={`mobile-nav-link ${isActive ? 'mobile-nav-link-active' : ''}`}
+            style={`--stagger-delay: ${index * 60}ms`}
+          >
+            <span class="mobile-nav-indicator"></span>
+            {item.name}
+          </a>
+        );
+      })}
+      
+      <!-- Mobile Language Divider & Selection -->
+      <div class="mobile-divider"></div>
+      <p class="text-xs font-semibold uppercase tracking-wider text-text-muted mb-3 px-3">{t('nav.selectLanguage')}</p>
+      <div class="grid grid-cols-3 gap-2 px-3 pb-2">
+        {languagesList.map((langOption) => {
+          const targetHref = langOption.code === defaultLang 
+            ? cleanPath 
+            : `/${langOption.code}${cleanPath === '/' ? '' : cleanPath}`;
+          
+          return (
+            <a
+              href={targetHref}
+              class={`mobile-lang-btn ${lang === langOption.code ? 'mobile-lang-btn-active' : ''}`}
+            >
+              {langOption.name}
+            </a>
+          );
+        })}
+      </div>
+    </div>
+  </div>
+</header>
+
+<script>
+  // ── Scroll-aware header ──
+  const header = document.getElementById('site-header');
+  let lastScroll = 0;
+  let ticking = false;
+  
+  const handleScroll = () => {
+    const scrollY = window.scrollY;
+    
+    if (header) {
+      if (scrollY > 20) {
+        header.classList.add('navbar-scrolled');
+      } else {
+        header.classList.remove('navbar-scrolled');
+      }
+    }
+    
+    lastScroll = scrollY;
+    ticking = false;
+  };
+  
+  window.addEventListener('scroll', () => {
+    if (!ticking) {
+      requestAnimationFrame(handleScroll);
+      ticking = true;
+    }
+  }, { passive: true });
+
+  // ── Mobile drawer interaction logic with animated hamburger ──
+  const toggleBtn = document.getElementById('mobile-menu-toggle');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const hamburgerLines = document.getElementById('hamburger-lines');
+
+  if (toggleBtn && mobileMenu && hamburgerLines) {
+    toggleBtn.addEventListener('click', () => {
+      const isExpanded = toggleBtn.getAttribute('aria-expanded') === 'true';
+      toggleBtn.setAttribute('aria-expanded', (!isExpanded).toString());
+      
+      mobileMenu.classList.toggle('mobile-drawer-open');
+      hamburgerLines.classList.toggle('hamburger-active');
+      
+      // Stagger animate mobile links
+      if (!isExpanded) {
+        const links = mobileMenu.querySelectorAll('.mobile-nav-link');
+        links.forEach((link) => {
+          (link as HTMLElement).style.animationPlayState = 'running';
+        });
+      }
+    });
+  }
+
+  // ── Theme toggle functionality with animation ──
+  const themeToggle = document.getElementById('theme-toggle');
+  const sunIcon = document.getElementById('theme-icon-sun');
+  const moonIcon = document.getElementById('theme-icon-moon');
+
+  if (themeToggle && sunIcon && moonIcon) {
+    const updateIconVisibility = (theme: string) => {
+      if (theme === 'dark') {
+        sunIcon.classList.remove('hidden');
+        sunIcon.classList.add('block');
+        moonIcon.classList.remove('block');
+        moonIcon.classList.add('hidden');
+      } else {
+        sunIcon.classList.remove('block');
+        sunIcon.classList.add('hidden');
+        moonIcon.classList.remove('hidden');
+        moonIcon.classList.add('block');
+      }
+    };
+
+    const currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
+    updateIconVisibility(currentTheme);
+
+    themeToggle.addEventListener('click', () => {
+      // Add spin animation
+      themeToggle.classList.add('theme-toggle-spin');
+      
+      const activeTheme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', activeTheme);
+      localStorage.setItem('theme', activeTheme);
+      updateIconVisibility(activeTheme);
+      
+      // Remove spin class after animation
+      setTimeout(() => {
+        themeToggle.classList.remove('theme-toggle-spin');
+      }, 500);
+    });
+  }
+</script>
+
+<style>
+  /* ═══════════════════════════════════════════════════
+     NAVBAR HEADER
+     ═══════════════════════════════════════════════════ */
+  .navbar-header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    width: 100%;
+    background: color-mix(in srgb, var(--secondary-bg) 80%, transparent);
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+    transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .navbar-header.navbar-scrolled {
+    background: color-mix(in srgb, var(--secondary-bg) 92%, transparent);
+    box-shadow:
+      0 1px 3px rgba(0, 0, 0, 0.12),
+      0 8px 24px rgba(0, 0, 0, 0.08);
+  }
+
+  .navbar-header.navbar-scrolled .navbar-inner {
+    height: 3.5rem;
+  }
+
+  .navbar-header.navbar-scrolled .navbar-gradient-border {
+    opacity: 1;
+  }
+
+  /* ── Animated gradient bottom border ── */
+  .navbar-gradient-border {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      var(--structural-borders) 15%,
+      var(--primary-brand) 40%,
+      var(--secondary-accent) 60%,
+      var(--structural-borders) 85%,
+      transparent 100%
+    );
+    background-size: 200% 100%;
+    opacity: 0.5;
+    animation: borderShimmer 8s ease-in-out infinite;
+    transition: opacity 0.35s ease;
+  }
+
+  @keyframes borderShimmer {
+    0%, 100% { background-position: 200% 0; }
+    50% { background-position: -200% 0; }
+  }
+
+  .navbar-inner {
+    display: flex;
+    height: 4rem;
+    align-items: center;
+    justify-content: space-between;
+    transition: height 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  /* ═══════════════════════════════════════════════════
+     DESKTOP NAV LINKS
+     ═══════════════════════════════════════════════════ */
+  .nav-link {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    padding: 0.5rem 0.875rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    text-decoration: none;
+    border-radius: 0.5rem;
+    transition: color 0.25s ease;
+    overflow: hidden;
+  }
+
+  .nav-link-text {
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Sliding pill background on hover */
+  .nav-link::before {
+    content: '';
+    position: absolute;
+    inset: 4px;
+    border-radius: 0.375rem;
+    background: var(--elevated-surface);
+    opacity: 0;
+    transform: scale(0.85);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .nav-link:hover::before {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  .nav-link:hover {
+    color: var(--primary-brand);
+  }
+
+  .nav-link:active {
+    transform: scale(0.97);
+  }
+
+  /* Animated underline indicator */
+  .nav-link-indicator {
+    position: absolute;
+    bottom: 2px;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    border-radius: 1px;
+    background: linear-gradient(90deg, var(--primary-brand), var(--secondary-accent));
+    transform: translateX(-50%);
+    transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 0 8px rgba(0, 212, 255, 0.4);
+  }
+
+  .nav-link:hover .nav-link-indicator {
+    width: 60%;
+  }
+
+  /* Active state */
+  .nav-link-active {
+    color: var(--primary-brand);
+  }
+
+  .nav-link-active .nav-link-indicator {
+    width: 70%;
+  }
+
+  .nav-link-active::before {
+    opacity: 0.5;
+    transform: scale(1);
+  }
+
+  /* ═══════════════════════════════════════════════════
+     ACTION BUTTONS (language, theme)
+     ═══════════════════════════════════════════════════ */
+  .action-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.25rem;
+    height: 2.25rem;
+    border-radius: 9999px;
+    border: 1px solid color-mix(in srgb, var(--structural-borders) 40%, transparent) !important;
+    background: color-mix(in srgb, var(--card-bg) 50%, transparent) !important;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+    outline: none !important;
+    box-shadow: none;
+    padding: 0;
+    min-height: unset;
+    height: 2.25rem;
+  }
+
+  .action-btn:focus,
+  .action-btn:focus-visible {
+    outline: none !important;
+    box-shadow: none !important;
+  }
+
+  .action-btn::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 9999px;
+    background: radial-gradient(circle at center, var(--primary-brand), transparent 70%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .action-btn:hover {
+    border-color: color-mix(in srgb, var(--primary-brand) 50%, transparent);
+    color: var(--primary-brand);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 212, 255, 0.15);
+  }
+
+  .action-btn:hover::before {
+    opacity: 0.08;
+  }
+
+  .action-btn:active {
+    transform: translateY(0) scale(0.95);
+  }
+
+  .action-btn-icon {
+    position: relative;
+    z-index: 1;
+    transition: transform 0.3s ease;
+  }
+
+  .action-btn:hover .action-btn-icon {
+    transform: scale(1.1);
+  }
+
+  /* ── Theme toggle spin animation ── */
+  .theme-toggle-spin .action-btn-icon {
+    animation: toggleSpin 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  @keyframes toggleSpin {
+    0% { transform: rotate(0deg) scale(1); }
+    50% { transform: rotate(180deg) scale(0.7); }
+    100% { transform: rotate(360deg) scale(1); }
+  }
+
+  /* ═══════════════════════════════════════════════════
+     LANGUAGE DROPDOWN
+     ═══════════════════════════════════════════════════ */
+  .lang-dropdown {
+    position: absolute;
+    right: 0;
+    margin-top: 0.75rem;
+    padding: 0.5rem;
+    min-width: 10rem;
+    background: var(--card-bg);
+    border: 1px solid var(--structural-borders);
+    border-radius: 0.75rem;
+    box-shadow:
+      0 10px 40px rgba(0, 0, 0, 0.3),
+      0 0 0 1px color-mix(in srgb, var(--primary-brand) 8%, transparent);
+    list-style: none;
+    z-index: 100;
+    backdrop-filter: blur(20px);
+    animation: dropdownReveal 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  @keyframes dropdownReveal {
+    from {
+      opacity: 0;
+      transform: translateY(-8px) scale(0.96);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+
+  .lang-option {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 0.75rem;
+    border-radius: 0.5rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--text-primary);
+    text-decoration: none;
+    transition: all 0.2s ease;
+  }
+
+  .lang-option:hover {
+    background: var(--elevated-surface);
+    color: var(--primary-brand);
+    padding-left: 1rem;
+  }
+
+  .lang-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--text-muted);
+    transition: all 0.2s ease;
+    flex-shrink: 0;
+  }
+
+  .lang-option:hover .lang-dot {
+    background: var(--primary-brand);
+    box-shadow: 0 0 8px rgba(0, 212, 255, 0.5);
+  }
+
+  .lang-option-active {
+    color: var(--primary-brand);
+    font-weight: 700;
+    background: color-mix(in srgb, var(--elevated-surface) 40%, transparent);
+  }
+
+  .lang-option-active .lang-dot {
+    background: var(--primary-brand);
+    box-shadow: 0 0 8px rgba(0, 212, 255, 0.5);
+  }
+
+  /* ═══════════════════════════════════════════════════
+     ANIMATED HAMBURGER
+     ═══════════════════════════════════════════════════ */
+  .mobile-hamburger {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 0.5rem;
+    background: transparent !important;
+    border: none !important;
+    cursor: pointer;
+    color: var(--text-muted);
+    transition: all 0.2s ease;
+    outline: none !important;
+    box-shadow: none !important;
+    padding: 0;
+    min-height: unset;
+  }
+
+  @media (min-width: 768px) {
+    .mobile-hamburger {
+      display: none !important;
+    }
+  }
+
+  .mobile-hamburger:hover {
+    color: var(--primary-brand);
+    background: color-mix(in srgb, var(--elevated-surface) 50%, transparent) !important;
+  }
+
+  .mobile-hamburger:focus,
+  .mobile-hamburger:focus-visible {
+    outline: none !important;
+    box-shadow: none !important;
+    border: none !important;
+  }
+
+  .hamburger-lines {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    width: 20px;
+  }
+
+  .hamburger-line {
+    display: block;
+    width: 100%;
+    height: 2px;
+    border-radius: 1px;
+    background: currentColor;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transform-origin: center;
+  }
+
+  .hamburger-line-2 {
+    width: 70%;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  /* Animated X transformation */
+  .hamburger-active .hamburger-line-1 {
+    transform: translateY(7px) rotate(45deg);
+  }
+
+  .hamburger-active .hamburger-line-2 {
+    opacity: 0;
+    width: 0;
+  }
+
+  .hamburger-active .hamburger-line-3 {
+    transform: translateY(-7px) rotate(-45deg);
+  }
+
+  /* ═══════════════════════════════════════════════════
+     MOBILE DRAWER
+     ═══════════════════════════════════════════════════ */
+  .mobile-drawer {
+    max-height: 0;
+    overflow: hidden;
+    border-top: 1px solid transparent;
+    background: color-mix(in srgb, var(--secondary-bg) 95%, transparent);
+    backdrop-filter: blur(20px);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .mobile-drawer-open {
+    max-height: 32rem;
+    border-top-color: var(--structural-borders);
+  }
+
+  .mobile-drawer-inner {
+    padding: 0.75rem 1rem 1rem;
+  }
+
+  .mobile-nav-link {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem 1rem;
+    margin-bottom: 0.25rem;
+    border-radius: 0.75rem;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    text-decoration: none;
+    transition: all 0.25s ease;
+    transform: translateX(-10px);
+    opacity: 0;
+    animation: slideInLink 0.35s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    animation-delay: var(--stagger-delay, 0ms);
+    animation-play-state: paused;
+  }
+
+  .mobile-drawer-open .mobile-nav-link {
+    animation-play-state: running;
+  }
+
+  @keyframes slideInLink {
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+
+  .mobile-nav-indicator {
+    width: 3px;
+    height: 0;
+    border-radius: 2px;
+    background: var(--primary-brand);
+    transition: height 0.3s ease;
+    flex-shrink: 0;
+  }
+
+  .mobile-nav-link:hover {
+    background: var(--elevated-surface);
+    color: var(--primary-brand);
+  }
+
+  .mobile-nav-link:hover .mobile-nav-indicator {
+    height: 1.25rem;
+  }
+
+  .mobile-nav-link-active {
+    color: var(--primary-brand);
+    background: color-mix(in srgb, var(--elevated-surface) 40%, transparent);
+  }
+
+  .mobile-nav-link-active .mobile-nav-indicator {
+    height: 1.25rem;
+    box-shadow: 0 0 10px rgba(0, 212, 255, 0.5);
+  }
+
+  .mobile-divider {
+    margin: 0.75rem 0;
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      var(--structural-borders),
+      transparent
+    );
+  }
+
+  .mobile-lang-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    border: 1px solid var(--structural-borders);
+    background: color-mix(in srgb, var(--card-bg) 50%, transparent);
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    text-decoration: none;
+    transition: all 0.25s ease;
+  }
+
+  .mobile-lang-btn:hover {
+    background: var(--elevated-surface);
+    color: var(--primary-brand);
+    border-color: color-mix(in srgb, var(--primary-brand) 40%, transparent);
+    transform: translateY(-1px);
+  }
+
+  .mobile-lang-btn-active {
+    border-color: var(--primary-brand);
+    color: var(--primary-brand);
+    background: color-mix(in srgb, var(--primary-brand) 10%, transparent);
+  }
+
+  /* ═══════════════════════════════════════════════════
+     ENTRANCE ANIMATION
+     ═══════════════════════════════════════════════════ */
+  .navbar-header {
+    animation: navbarSlideIn 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  @keyframes navbarSlideIn {
+    from {
+      transform: translateY(-100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+</style>
