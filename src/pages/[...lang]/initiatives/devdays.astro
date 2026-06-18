@@ -1,0 +1,38 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import { getLangFromUrl, useTranslations } from '../../../i18n/utils';
+import { languages, defaultLang } from '../../../i18n/ui';
+
+export function getStaticPaths() {
+  return Object.keys(languages).map((lang) => {
+    return {
+      params: {
+        lang: lang === defaultLang ? undefined : lang,
+      },
+    };
+  });
+}
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+
+<Layout title={`DevDays - Swecha.org`}>
+  <div class="pt-32 pb-16 px-6 sm:px-10 lg:px-16 container mx-auto">
+    <div class="max-w-4xl">
+      <h1 class="text-4xl md:text-6xl font-black text-white mb-6 tracking-tight">
+        DevDays
+      </h1>
+      <p class="text-xl text-slate-300 mb-12 leading-relaxed">
+        A platform for developers, open-source contributors, and technology enthusiasts to collaborate, learn, and build together.
+      </p>
+      
+      <div class="bg-card-surface border border-structural-borders p-8 rounded-2xl shadow-xl">
+        <h2 class="text-2xl font-bold text-white mb-4">Under Development</h2>
+        <p class="text-slate-400">
+          We are preparing exciting resources and schedules for upcoming DevDays events. Check back soon!
+        </p>
+      </div>
+    </div>
+  </div>
+</Layout>
