@@ -6,7 +6,6 @@
   "nav.initiatives.devdays": "DevDays",
   "nav.initiatives.ehrs": "eHRS",
   "nav.initiatives.more": "More",
-  "nav.resources": "Resources",
   "nav.news": "News",
   "nav.selectLanguage": "Select Language",
   "nav.toggleTheme": "Toggle Theme",
@@ -34,6 +33,5 @@
   "dev.returnHome": "Return Home",
   "news.dev.desc": "This section is currently under development. Check back soon for announcements, blogs, and community news.",
   "initiatives.dev.desc": "This section is currently under development. Check back soon for the active initiatives.",
-  "projects.dev.desc": "This section is currently under development. Check back soon for the active project listings.",
-  "resources.dev.desc": "This section is currently under development. Check back soon to access our educational resource catalog and downloads."
+  "projects.dev.desc": "This section is currently under development. Check back soon for the active project listings."
 }

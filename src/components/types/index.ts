@@ -153,7 +153,6 @@ export interface DevPageData {
   news: { desc: string };
   initiatives: { desc: string };
   projects: { desc: string };
-  resources: { desc: string };
 }
 
 export interface SiteData {

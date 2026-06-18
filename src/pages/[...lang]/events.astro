@@ -1,0 +1,378 @@
+---
+// src/pages/[...lang]/events.astro
+import Layout from '@layouts/Layout.astro';
+import { getLangFromUrl, useTranslations, useTranslatedPath } from '../../i18n/utils';
+import { languages, defaultLang } from '../../i18n/ui';
+import eventsData from '../../data/events.json';
+
+import EventCard from '@components/events/EventCard.astro';
+import PastEventCard from '@components/events/PastEventCard.astro';
+
+export function getStaticPaths() {
+  return Object.keys(languages).map((lang) => {
+    return {
+      params: {
+        lang: lang === defaultLang ? undefined : lang,
+      },
+    };
+  });
+}
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const translatePath = useTranslatedPath(lang);
+
+// Extract active (ongoing) events
+const activeEvents = eventsData.filter(e => !e.past && e.ongoing);
+
+// Extract upcoming events
+const upcomingEvents = eventsData.filter(e => !e.past && !e.ongoing);
+
+// Extract past events
+const pastEvents = eventsData.filter(e => e.past);
+---
+
+<Layout title={`${t('events.title')} - Swecha.org`} description="Explore events, conferences, and workshops hosted by Swecha.">
+  <div class="relative min-h-screen bg-[#080B10] text-text-main overflow-hidden pb-24">
+    
+    <!-- Subtle Background Glows matching main site style -->
+    <div class="absolute inset-0 pointer-events-none z-0">
+      <div class="absolute top-[-10%] left-[-10%] w-[500px] h-[500px] bg-primary-brand/5 blur-[150px] rounded-full"></div>
+      <div class="absolute top-[40%] right-[-10%] w-[450px] h-[450px] bg-secondary-accent/5 blur-[130px] rounded-full"></div>
+    </div>
+
+    <!-- Main Content Container -->
+    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 space-y-12">
+
+
+
+
+      <!-- CONTROLS & FILTERING BAR -->
+      <section class="flex flex-col md:flex-row md:items-center justify-between gap-6 pb-6 border-b border-structural-borders/30 scroll-reveal-section opacity-0 translate-y-4 transition-all duration-500 delay-200">
+        <!-- Filter Pills Container -->
+        <div class="flex flex-wrap gap-2.5" id="filter-container">
+          <button class="filter-btn active" data-filter="all">{t('events.filter.all')}</button>
+          <button class="filter-btn" data-filter="upcoming">{t('events.filter.upcoming')}</button>
+          <button class="filter-btn" data-filter="ongoing">{t('events.filter.ongoing')}</button>
+          <button class="filter-btn" data-filter="past">{t('events.filter.past')}</button>
+          <button class="filter-btn" data-filter="workshops">{t('events.filter.workshops')}</button>
+          <button class="filter-btn" data-filter="hackathons">{t('events.filter.hackathons')}</button>
+          <button class="filter-btn" data-filter="meetups">{t('events.filter.meetups')}</button>
+        </div>
+
+        <!-- Localized Search Box -->
+        <div class="relative w-full md:max-w-xs">
+          <span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-text-muted">
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+            </svg>
+          </span>
+          <input 
+            type="text" 
+            id="event-search" 
+            placeholder={t('events.search.placeholder')} 
+            class="w-full pl-9 pr-4 py-2.5 rounded-xl bg-card-bg/20 border border-structural-borders text-text-main placeholder-text-muted outline-none focus:border-primary-brand focus:ring-1 focus:ring-primary-brand/35 transition-all text-sm font-medium"
+          />
+        </div>
+      </section>
+
+      <!-- ACTIVE (ONGOING) EVENTS SECTION -->
+      {activeEvents.length > 0 && (
+        <section id="active-events-section" class="space-y-8 scroll-reveal-section opacity-0 translate-y-4 transition-all duration-500 delay-100">
+          <div class="flex items-center space-x-4">
+            <h2 class="text-2xl md:text-3xl font-black text-text-main select-none">
+              {t('events.active.title')}
+            </h2>
+            <span class="h-[1px] flex-grow bg-gradient-to-r from-structural-borders via-structural-borders/30 to-transparent"></span>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl" id="active-events-grid">
+            {activeEvents.map((event, index) => (
+              <div class="event-card-item transition-all duration-300 reveal-card" 
+                   style={`animation-delay: ${index * 100}ms`}
+                   data-category={event.category.toLowerCase()} 
+                   data-ongoing="true"
+                   data-title={event.title.toLowerCase()}
+                   data-desc={event.shortDescription.toLowerCase()}>
+                <EventCard event={event} isGlow={true} />
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
+
+      <!-- UPCOMING EVENTS SECTION -->
+      {upcomingEvents.length > 0 && (
+        <section id="upcoming-events-section" class="space-y-8 scroll-reveal-section opacity-0 translate-y-4 transition-all duration-500 delay-150">
+          <div class="flex items-center space-x-4">
+            <h2 class="text-2xl md:text-3xl font-black text-text-main select-none">
+              {t('events.upcoming.title')}
+            </h2>
+            <span class="h-[1px] flex-grow bg-gradient-to-r from-structural-borders via-structural-borders/30 to-transparent"></span>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6" id="upcoming-events-grid">
+            {upcomingEvents.map((event, index) => (
+              <div class="event-card-item transition-all duration-300 reveal-card" 
+                   style={`animation-delay: ${(index + activeEvents.length) * 100}ms`}
+                   data-category={event.category.toLowerCase()} 
+                   data-ongoing="false"
+                   data-title={event.title.toLowerCase()}
+                   data-desc={event.shortDescription.toLowerCase()}>
+                <EventCard event={event} />
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
+
+      <!-- Empty Grid State -->
+      <div id="empty-state" class="hidden text-center py-20 space-y-4 transition-all duration-300">
+        <svg class="w-16 h-16 text-text-muted mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+        <p class="text-text-muted text-base font-semibold max-w-sm mx-auto">{t('events.empty')}</p>
+      </div>
+
+      <!-- PAST EVENTS SECTION -->
+      {pastEvents.length > 0 && (
+        <section id="past-events-section" class="space-y-8 pt-8 border-t border-structural-borders/30 scroll-reveal-section opacity-0 translate-y-4 transition-all duration-500 delay-300">
+          <div class="flex items-center space-x-4">
+            <h2 class="text-2xl md:text-3xl font-black text-text-main select-none">
+              {t('events.past.title')}
+            </h2>
+            <span class="h-[1px] flex-grow bg-gradient-to-r from-structural-borders via-structural-borders/30 to-transparent"></span>
+          </div>
+
+          <!-- 4-column desktop, 2-column tablet, 1-column mobile past events grid -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6" id="past-events-grid">
+            {pastEvents.map((event) => (
+              <div class="past-event-item transition-all duration-300"
+                   data-category={event.category.toLowerCase()}
+                   data-title={event.title.toLowerCase()}>
+                <PastEventCard event={event} />
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
+
+    </div>
+  </div>
+</Layout>
+
+<!-- Client Side Filters & Dynamic Search Script -->
+<script>
+  const filterBtns = document.querySelectorAll('#filter-container .filter-btn');
+  const searchInput = document.getElementById('event-search') as HTMLInputElement | null;
+  const activeCards = document.querySelectorAll('.event-card-item');
+  const pastCards = document.querySelectorAll('.past-event-item');
+  const activeSection = document.getElementById('active-events-section');
+  const upcomingSection = document.getElementById('upcoming-events-section');
+  const pastSection = document.getElementById('past-events-section');
+  const emptyState = document.getElementById('empty-state');
+
+  let activeFilter = 'all';
+  let searchQuery = '';
+
+  function applyFilters() {
+    let visibleActive = 0;
+    let visibleUpcoming = 0;
+    let visiblePast = 0;
+
+    // Filter Active Cards
+    activeCards.forEach((card) => {
+      const category = card.getAttribute('data-category') || '';
+      const isOngoing = card.getAttribute('data-ongoing') === 'true';
+      const title = card.getAttribute('data-title') || '';
+      const desc = card.getAttribute('data-desc') || '';
+
+      const matchesSearch = title.includes(searchQuery) || desc.includes(searchQuery);
+
+      let matchesFilter = false;
+      if (activeFilter === 'all') {
+        matchesFilter = true;
+      } else if (activeFilter === 'upcoming') {
+        matchesFilter = !isOngoing;
+      } else if (activeFilter === 'ongoing') {
+        matchesFilter = isOngoing;
+      } else if (activeFilter === 'past') {
+        matchesFilter = false; // Hide all active cards for 'past' filter
+      } else if (activeFilter === 'workshops') {
+        matchesFilter = category === 'workshop';
+      } else if (activeFilter === 'hackathons') {
+        matchesFilter = category === 'hackathon';
+      } else if (activeFilter === 'meetups') {
+        matchesFilter = category === 'meetup';
+      }
+
+      if (matchesSearch && matchesFilter) {
+        if (isOngoing) {
+          visibleActive++;
+        } else {
+          visibleUpcoming++;
+        }
+        (card as HTMLElement).style.display = 'block';
+        setTimeout(() => {
+          card.classList.remove('opacity-0', 'scale-95');
+          card.classList.add('opacity-100', 'scale-100');
+        }, 10);
+      } else {
+        card.classList.add('opacity-0', 'scale-95');
+        card.classList.remove('opacity-100', 'scale-100');
+        setTimeout(() => {
+          (card as HTMLElement).style.display = 'none';
+        }, 200);
+      }
+    });
+
+    // Filter Past Cards
+    pastCards.forEach((card) => {
+      const category = card.getAttribute('data-category') || '';
+      const title = card.getAttribute('data-title') || '';
+
+      const matchesSearch = title.includes(searchQuery);
+
+      let matchesFilter = false;
+      if (activeFilter === 'all') {
+        matchesFilter = true;
+      } else if (activeFilter === 'upcoming' || activeFilter === 'ongoing') {
+        matchesFilter = false; // Hide past cards for upcoming/ongoing status filters
+      } else if (activeFilter === 'past') {
+        matchesFilter = true;
+      } else if (activeFilter === 'workshops') {
+        matchesFilter = category === 'workshop';
+      } else if (activeFilter === 'hackathons') {
+        matchesFilter = category === 'hackathon';
+      } else if (activeFilter === 'meetups') {
+        matchesFilter = category === 'meetup';
+      }
+
+      if (matchesSearch && matchesFilter) {
+        visiblePast++;
+        (card as HTMLElement).style.display = 'block';
+        setTimeout(() => {
+          card.classList.remove('opacity-0', 'scale-95');
+          card.classList.add('opacity-100', 'scale-100');
+        }, 10);
+      } else {
+        card.classList.add('opacity-0', 'scale-95');
+        card.classList.remove('opacity-100', 'scale-100');
+        setTimeout(() => {
+          (card as HTMLElement).style.display = 'none';
+        }, 200);
+      }
+    });
+
+    // Show/Hide Active Events Section
+    if (activeSection) {
+      if (visibleActive === 0 || activeFilter === 'upcoming') {
+        activeSection.style.display = 'none';
+      } else {
+        activeSection.style.display = 'block';
+      }
+    }
+
+    // Show/Hide Upcoming Events Section
+    if (upcomingSection) {
+      if (visibleUpcoming === 0 || activeFilter === 'ongoing') {
+        upcomingSection.style.display = 'none';
+      } else {
+        upcomingSection.style.display = 'block';
+      }
+    }
+
+    // Show/Hide Past Events Section
+    if (pastSection) {
+      if (visiblePast === 0 || activeFilter === 'upcoming' || activeFilter === 'ongoing') {
+        pastSection.style.display = 'none';
+      } else {
+        pastSection.style.display = 'block';
+      }
+    }
+
+    // Toggle Empty State message
+    if (emptyState) {
+      if (visibleActive === 0 && visibleUpcoming === 0 && visiblePast === 0) {
+        emptyState.classList.remove('hidden');
+        emptyState.style.display = 'block';
+      } else {
+        emptyState.classList.add('hidden');
+        emptyState.style.display = 'none';
+      }
+    }
+
+  }
+
+  // Bind click listeners to filter buttons
+  filterBtns.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      filterBtns.forEach((b) => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      activeFilter = btn.getAttribute('data-filter')?.toLowerCase() || 'all';
+      applyFilters();
+    });
+  });
+
+  // Bind input listeners to search box
+  if (searchInput) {
+    searchInput.addEventListener('input', (e) => {
+      searchQuery = (e.target as HTMLInputElement).value.trim().toLowerCase();
+      applyFilters();
+    });
+  }
+
+  // Run initial animation trigger
+  setTimeout(() => {
+    document.querySelectorAll('.scroll-reveal-section').forEach(section => {
+      section.classList.remove('opacity-0', 'translate-y-4');
+      section.classList.add('opacity-100', 'translate-y-0');
+    });
+  }, 50);
+</script>
+
+<style>
+  /* Filter Buttons Styling */
+  .filter-btn {
+    flex-shrink: 0;
+    font-size: 0.825rem;
+    font-weight: 700;
+    padding: 0.5rem 1.25rem;
+    border-radius: 9999px;
+    border: 1px solid var(--structural-borders);
+    background-color: color-mix(in srgb, var(--card-bg) 40%, transparent);
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+  }
+
+  .filter-btn:hover {
+    background-color: var(--elevated-surface);
+    color: var(--text-primary);
+    border-color: var(--primary-brand);
+  }
+
+  .filter-btn.active {
+    background-color: var(--primary-brand);
+    color: #080B10;
+    border-color: var(--primary-brand);
+    box-shadow: 0 4px 14px rgba(0, 212, 255, 0.25);
+  }
+
+  @keyframes revealCard {
+    from {
+      opacity: 0;
+      transform: translateY(15px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .reveal-card {
+    opacity: 0;
+    animation: revealCard 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+</style>

@@ -23,7 +23,7 @@ const en = {
   "nav.initiatives.devdays": "DevDays",
   "nav.initiatives.ehrs": "eHRS",
   "nav.initiatives.more": "More",
-  "nav.resources": navbarData.links.find(l => l.id === "resources")?.label || "",
+  "nav.events": navbarData.links.find(l => l.id === "events")?.label || "",
   "nav.news": navbarData.links.find(l => l.id === "news")?.label || "",
   "nav.contact": navbarData.links.find(l => l.id === "contact")?.label || "Contact Us",
   "nav.selectLanguage": siteData.layout.selectLanguage,
@@ -58,7 +58,6 @@ const en = {
   "news.dev.desc": siteData.dev.news.desc,
   "initiatives.dev.desc": siteData.dev.initiatives.desc,
   "projects.dev.desc": siteData.dev.projects.desc,
-  "resources.dev.desc": siteData.dev.resources.desc,
 
   "contact.title": "Contact Us",
   "contact.subtitle": "We'd love to hear from you. Connect with the Swecha community through any of the channels below.",
@@ -141,7 +140,64 @@ const en = {
   "news.update2.desc": "Mentorship-driven contributor program.",
 
   "news.update3.headline": "Rural Technology Initiative",
-  "news.update3.desc": "Expanding digital literacy and access."
+  "news.update3.desc": "Expanding digital literacy and access.",
+
+  // ── Event Experience Page ──
+  "event.badge": "AI GOVERNANCE EVENT",
+  "event.title": "Understanding Trust & Safety in AI",
+  "event.subtitle": "From Code to Creativity",
+  "event.description": "A stakeholder consultation event exploring responsible AI development, governance, transparency, and community participation.",
+  
+  "event.info.date.label": "Date",
+  "event.info.date.value": "31 January 2026",
+  "event.info.time.label": "Time",
+  "event.info.time.value": "9:30 AM – 2:00 PM",
+  "event.info.venue.label": "Venue",
+  "event.info.venue.value": "IIIT Hyderabad",
+  "event.info.mode.label": "Mode",
+  "event.info.mode.value": "In-Person",
+
+  "event.about.title": "About The Event",
+  "event.about.desc": "Artificial Intelligence is rapidly reshaping our world, from the code that powers our systems to the creative works that define our culture. As AI models become more integrated into daily life, understanding the frameworks for trust, safety, and governance is paramount.\n\nThis stakeholder consultation event at IIIT Hyderabad brings together developers, academicians, policymakers, and open-source advocates to explore the path forward. By focusing on transparency, accountability, and community participation, we aim to bridge the gap between rapid technological innovation and responsible societal impact. Join us to discuss how open-source technologies can ensure that the benefits of AI are shared equitably and developed ethically.",
+
+  "event.tracks.title": "Discussion Tracks",
+  "event.track1.title": "Harnessing Open Source AI",
+  "event.track1.desc": "Exploring transparent, accountable, and inclusive AI through open technologies and community collaboration.",
+  "event.track2.title": "Balancing AI Innovation & Copyright",
+  "event.track2.desc": "Examining licensing frameworks, governance models, copyright implications, and responsible AI innovation.",
+
+  "event.highlights.title": "Event Highlights",
+  "event.highlight1": "Open Source AI",
+  "event.highlight2": "Responsible Innovation",
+  "event.highlight3": "AI Governance",
+  "event.highlight4": "Community Participation",
+  "event.highlight5": "Policy Discussions",
+  "event.highlight6": "Industry Collaboration",
+
+  "event.cta.title": "Join the Consultation",
+  "event.cta.desc": "Be part of shaping the future of AI governance. Register to reserve your seat at IIIT Hyderabad.",
+  "event.btn.register": "Register Now",
+  "event.btn.readMore": "Read More",
+
+  // ── Events Platform Listing Page ──
+  "events.title": "Events",
+  "events.subtitle": "Explore upcoming conferences, hackathons, workshops, meetups, and open-source community programs organized by Swecha.",
+  "events.filter.all": "All",
+  "events.filter.upcoming": "Upcoming",
+  "events.filter.ongoing": "Ongoing",
+  "events.filter.past": "Past",
+  "events.filter.workshops": "Workshops",
+  "events.filter.hackathons": "Hackathons",
+  "events.filter.meetups": "Meetups",
+  "events.search.placeholder": "Search events...",
+  "events.btn.register": "Register Now",
+  "events.btn.viewDetails": "View Details",
+  "events.btn.viewEvent": "View Event",
+  "events.btn.viewSummary": "View Summary",
+  "events.active.title": "Active Events",
+  "events.upcoming.title": "Upcoming Events",
+  "events.past.title": "Past Events",
+  "events.empty": "No events match your search or filter."
 };
 
 export const ui = {
