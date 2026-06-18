@@ -1,8 +1,8 @@
 ---
 // src/pages/[...lang]/about.astro
 import Layout from '@layouts/Layout.astro';
-import AboutIntro from '@components/AboutIntro.astro';
-import Timeline from '@components/Timeline.astro';
+import AboutIntro from '@organisms/AboutIntro.astro';
+import Timeline from '@organisms/Timeline.astro';
 import { getLangFromUrl, useTranslations } from '../../i18n/utils';
 import { languages, defaultLang } from '../../i18n/ui';
 

@@ -3,9 +3,10 @@
 import Layout from '@layouts/Layout.astro';
 import { getLangFromUrl, useTranslations, useTranslatedPath } from '../../i18n/utils';
 import { languages, defaultLang } from '../../i18n/ui';
-import ContactCard from '@components/contact/ContactCard.astro';
-import OpenStreetMap from '@components/contact/OpenStreetMap.astro';
-import ContactForm from '@components/contact/ContactForm.astro';
+import ContactCard from '@molecules/ContactCard.astro';
+import OpenStreetMap from '@molecules/OpenStreetMap.astro';
+import ContactForm from '@organisms/ContactForm.astro';
+import contactData from '@data/organisms/contact.json';
 
 export function getStaticPaths() {
   return Object.keys(languages).map((lang) => {
@@ -21,12 +22,7 @@ const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 const translatePath = useTranslatedPath(lang);
 
-// Format the address for raw clipboard copy (GPL compliance format with newlines)
-const rawAddress = `Swecha\nSy No. 91\nBeside Centre for Good Governance\nGreenlands Colony\nSVM\nJawaharlal\nNehru Outer Ring Road\nMadhava Reddy Colony\nGachibowli\nHyderabad\nTelangana 500032`;
-
-// Google Mail redirect URLs for composition
-const reachUsGmail = `https://mail.google.com/mail/?view=cm&fs=1&to=reachus@swecha.net`;
-const internshipsGmail = `https://mail.google.com/mail/?view=cm&fs=1&to=internships@swecha.org`;
+const rawAddress = contactData.address.raw;
 ---
 
 <Layout title={`${t('nav.contact')} - Swecha.org`} description={t('contact.subtitle')}>
@@ -66,7 +62,6 @@ const internshipsGmail = `https://mail.google.com/mail/?view=cm&fs=1&to=internsh
           
           <!-- Header with Title and Ghost Copy Button -->
           <div class="flex items-center justify-between">
-            <!-- Font-family and heading tags match the Send Us a Message font -->
             <h3 class="text-xl md:text-2xl font-extrabold text-text-main group-hover:text-primary-brand transition-colors duration-300">
               {t('contact.map.title')}
             </h3>
@@ -80,26 +75,24 @@ const internshipsGmail = `https://mail.google.com/mail/?view=cm&fs=1&to=internsh
                 class="group/btn inline-flex items-center justify-center p-2 rounded-lg bg-transparent text-text-muted hover:text-primary-brand hover:bg-primary-brand/5 hover:scale-[1.02] hover:shadow-[0_0_10px_rgba(0,212,255,0.12)] focus:outline-none transition-all duration-200 cursor-pointer"
                 aria-label="Copy Address"
               >
-                <!-- Lucide Copy SVG Icon -->
                 <svg class="h-4.5 w-4.5 transition-transform duration-200 group-hover/btn:scale-105" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
                   <rect width="14" height="14" x="8" y="8" rx="2" ry="2"/>
                   <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/>
                 </svg>
               </button>
               
-              <!-- Tooltip text overlay -->
               <span class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-2.5 py-1 bg-secondary-bg border border-structural-borders/80 text-[10px] text-text-muted font-bold tracking-wider uppercase rounded shadow-lg opacity-0 pointer-events-none transition-opacity duration-200 tooltip-text">
                 Copy address
               </span>
             </div>
           </div>
 
-          <!-- Horizontal wrapped address display (No emoji) -->
+          <!-- Horizontal wrapped address display -->
           <p class="text-xs md:text-sm text-text-muted leading-relaxed flex items-start gap-1.5 font-medium select-all mt-2.5">
-            <span>{t('contact.address.value').replace(/\n/g, ', ')}</span>
+            <span>{contactData.address.display}</span>
           </p>
 
-          <!-- Large Mini Map embedded inside the card -->
+          <!-- OpenStreetMap (upstream Leaflet-based interactive map) -->
           <div class="mt-5 w-full flex-grow">
             <OpenStreetMap />
           </div>
@@ -110,27 +103,15 @@ const internshipsGmail = `https://mail.google.com/mail/?view=cm&fs=1&to=internsh
       <!-- QUICK CONTACT CHANNELS (3 cards below layout) -->
       <section class="opacity-0 translate-y-8 transition-all duration-700 ease-out scroll-reveal-section pt-2">
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
-          <ContactCard 
-            title={t('contact.email.title')} 
-            value={t('contact.email.value')} 
-            icon="Mail" 
-            link={reachUsGmail}
-            index={0}
-          />
-          <ContactCard 
-            title={t('contact.phone.title')} 
-            value={t('contact.phone.value')} 
-            icon="Phone" 
-            link="tel:+918977503615"
-            index={1}
-          />
-          <ContactCard 
-            title={t('contact.internship.title')} 
-            value={t('contact.internship.value')} 
-            icon="GraduationCap" 
-            link={internshipsGmail}
-            index={2}
-          />
+          {contactData.channels.map((channel, index) => (
+            <ContactCard 
+              title={t(`contact.${channel.icon === 'Mail' ? 'email' : channel.icon === 'Phone' ? 'phone' : 'internship'}.title` as Parameters<typeof t>[0])} 
+              value={t(`contact.${channel.icon === 'Mail' ? 'email' : channel.icon === 'Phone' ? 'phone' : 'internship'}.value` as Parameters<typeof t>[0])} 
+              icon={channel.icon} 
+              link={channel.link}
+              index={index}
+            />
+          ))}
         </div>
       </section>
 
@@ -154,7 +135,6 @@ const internshipsGmail = `https://mail.google.com/mail/?view=cm&fs=1&to=internsh
 </Layout>
 
 <style>
-  /* Tooltip hover rule */
   .tooltip-container:hover .tooltip-text {
     opacity: 1;
   }
@@ -172,7 +152,6 @@ const internshipsGmail = `https://mail.google.com/mail/?view=cm&fs=1&to=internsh
       try {
         await navigator.clipboard.writeText(addressToCopy);
         
-        // Trigger Toast Pop-up
         toast.classList.remove('translate-y-20', 'opacity-0');
         toast.classList.add('translate-y-0', 'opacity-100');
         
@@ -186,7 +165,7 @@ const internshipsGmail = `https://mail.google.com/mail/?view=cm&fs=1&to=internsh
     });
   }
 
-  // Scroll Reveal triggers for premium entry animation
+  // Scroll Reveal triggers
   const scrollObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {

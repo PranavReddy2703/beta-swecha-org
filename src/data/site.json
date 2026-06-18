@@ -4,42 +4,13 @@
     "suffix": "org",
     "tagline": "Free Software, Free Society"
   },
-  "navLinks": [
-    { "id": "about", "label": "About" },
-    { "id": "projects", "label": "Projects" },
-    { "id": "programs", "label": "Programs" },
-    { "id": "resources", "label": "Resources" },
-    { "id": "news", "label": "News" }
-  ],
-  "hero": {
-    "badge": "System Active: Electric Cyan Matrix",
-    "heading": [
-      "Modern Presentation Layer for",
-      "swecha.org"
-    ],
-    "subheading": "A high-performance, decoupled frontend architecture engineered with Astro, Tailwind CSS, and daisyUI. Designed for optimal load speeds, structural localization stability, and visual premium interfaces.",
-    "buttons": {
-      "explore": "Explore Projects",
-      "learn": "Learn More"
-    }
+  "layout": {
+    "defaultTitle": "Swecha.org Frontend Platform",
+    "defaultDesc": "Decoupled, high-performance presentation layer for the swecha.org overhaul platform.",
+    "openMenu": "Open main menu",
+    "selectLanguage": "Select Language",
+    "toggleTheme": "Toggle Theme"
   },
-  "cards": [
-    {
-      "id": "island",
-      "title": "Island Architecture",
-      "desc": "Zero client-side JavaScript by default, hydrating interactive blocks only when needed for peak performance."
-    },
-    {
-      "id": "i18n",
-      "title": "Multilingual Routing",
-      "desc": "Integrated localization engines mapped to locale subdirectory routes for seamless user access."
-    },
-    {
-      "id": "responsive",
-      "title": "Responsive Specs",
-      "desc": "Structured breakpoints ensuring clean interface delivery on mobile devices, tablets, and wide monitors."
-    }
-  ],
   "about": {
     "title": "About Us",
     "paragraphs": [
@@ -48,13 +19,6 @@
       "The project aims at bridging the gap between the computer technology that exists predominantly in English and the Telugu-speaking community of India. The project also aims at providing a framework for development and maintenance of Free Software projects taken up by the community.",
       "<a href=\"https://www.swecha.org/\" class=\"glow-link\">Swecha</a> is a project aimed at coming out with a localised version of <a href=\"#\" class=\"glow-link\">GNU/Linux</a> in Telugu. The target users of the distro being the entire community that is a prey of the digital divide. This project helps in coming out with a solution for the digital divide and allows the possibility of digital unite becoming a reality."
     ]
-  },
-  "layout": {
-    "defaultTitle": "Swecha.org Frontend Platform",
-    "defaultDesc": "Decoupled, high-performance presentation layer for the swecha.org overhaul platform.",
-    "openMenu": "Open main menu",
-    "selectLanguage": "Select Language",
-    "toggleTheme": "Toggle Theme"
   },
   "dev": {
     "stage": "Development Stage",
@@ -71,32 +35,5 @@
     "resources": {
       "desc": "This section is currently under development. Check back soon to access our educational resource catalog and downloads."
     }
-  },
-  "timeline": [
-    {
-      "year": "2005",
-      "title": "Founding & Telugu OS Release",
-      "desc": "Swecha was founded to localize GNU/Linux solutions, bridging the digital divide with Telugu font development."
-    },
-    {
-      "year": "2010",
-      "title": "Vast Community Growth",
-      "desc": "Expanded community networks, hosting workshops and localizing key desktop tools for Telugu users."
-    },
-    {
-      "year": "2015",
-      "title": "Digital Literacy Drives",
-      "desc": "Launched massive education initiatives across schools to empower students using Free Software."
-    },
-    {
-      "year": "2020",
-      "title": "Emerging Tech Focus",
-      "desc": "Began tracks for AI, Python programming, and collaborating on global public data initiatives."
-    },
-    {
-      "year": "2026",
-      "title": "Modern Overhaul",
-      "desc": "Re-engineering the presentation layer using Astro and decoupled design architecture."
-    }
-  ]
+  }
 }

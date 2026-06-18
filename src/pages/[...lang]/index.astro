@@ -1,7 +1,7 @@
 ---
 // src/pages/[...lang]/index.astro
 import Layout from '@layouts/Layout.astro';
-import LandingPage from '@components/LandingPage.astro';
+import HeroSection from '@organisms/HeroSection.astro';
 import { languages, defaultLang } from '../../i18n/ui';
 
 export function getStaticPaths() {
@@ -16,5 +16,5 @@ export function getStaticPaths() {
 ---
 
 <Layout>
-  <LandingPage />
+  <HeroSection />
 </Layout>

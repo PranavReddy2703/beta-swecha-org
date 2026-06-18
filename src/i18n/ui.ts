@@ -1,5 +1,9 @@
 // src/i18n/ui.ts
 import siteData from '../data/site.json';
+import navbarData from '../data/organisms/navbar.json';
+import heroData from '../data/organisms/hero.json';
+import timelineData from '../data/organisms/timeline.json';
+import featureCardsData from '../data/molecules/featureCards.json';
 import te from './locales/te.json';
 import hi from './locales/hi.json';
 
@@ -12,27 +16,28 @@ export const languages = {
 export const defaultLang = 'en';
 
 const en = {
-  "nav.about": siteData.navLinks.find(l => l.id === "about")?.label || "",
-  "nav.projects": siteData.navLinks.find(l => l.id === "projects")?.label || "",
-  "nav.programs": siteData.navLinks.find(l => l.id === "programs")?.label || "",
-  "nav.resources": siteData.navLinks.find(l => l.id === "resources")?.label || "",
-  "nav.news": siteData.navLinks.find(l => l.id === "news")?.label || "",
+  "nav.about": navbarData.links.find(l => l.id === "about")?.label || "",
+  "nav.projects": navbarData.links.find(l => l.id === "projects")?.label || "",
+  "nav.programs": navbarData.links.find(l => l.id === "programs")?.label || "",
+  "nav.resources": navbarData.links.find(l => l.id === "resources")?.label || "",
+  "nav.news": navbarData.links.find(l => l.id === "news")?.label || "",
+  "nav.contact": navbarData.links.find(l => l.id === "contact")?.label || "Contact Us",
   "nav.selectLanguage": siteData.layout.selectLanguage,
   "nav.toggleTheme": siteData.layout.toggleTheme,
 
-  "hero.badge": siteData.hero.badge,
-  "hero.title1": siteData.hero.heading[0],
-  "hero.title2": siteData.hero.heading[1],
-  "hero.desc": siteData.hero.subheading,
-  "hero.btn.explore": siteData.hero.buttons.explore,
-  "hero.btn.learn": siteData.hero.buttons.learn,
+  "hero.badge": heroData.badge,
+  "hero.title1": heroData.heading[0],
+  "hero.title2": heroData.heading[1],
+  "hero.desc": heroData.subheading,
+  "hero.btn.explore": heroData.buttons.explore,
+  "hero.btn.learn": heroData.buttons.learn,
 
-  "card.island.title": siteData.cards.find(c => c.id === "island")?.title || "",
-  "card.island.desc": siteData.cards.find(c => c.id === "island")?.desc || "",
-  "card.i18n.title": siteData.cards.find(c => c.id === "i18n")?.title || "",
-  "card.i18n.desc": siteData.cards.find(c => c.id === "i18n")?.desc || "",
-  "card.responsive.title": siteData.cards.find(c => c.id === "responsive")?.title || "",
-  "card.responsive.desc": siteData.cards.find(c => c.id === "responsive")?.desc || "",
+  "card.island.title": featureCardsData.find(c => c.id === "island")?.title || "",
+  "card.island.desc": featureCardsData.find(c => c.id === "island")?.description || "",
+  "card.i18n.title": featureCardsData.find(c => c.id === "i18n")?.title || "",
+  "card.i18n.desc": featureCardsData.find(c => c.id === "i18n")?.description || "",
+  "card.responsive.title": featureCardsData.find(c => c.id === "responsive")?.title || "",
+  "card.responsive.desc": featureCardsData.find(c => c.id === "responsive")?.description || "",
 
   "about.title": siteData.about.title,
   "about.p1": siteData.about.paragraphs[0] || "",
@@ -50,7 +55,7 @@ const en = {
   "programs.dev.desc": siteData.dev.programs.desc,
   "projects.dev.desc": siteData.dev.projects.desc,
   "resources.dev.desc": siteData.dev.resources.desc,
-  "nav.contact": "Contact Us",
+
   "contact.title": "Contact Us",
   "contact.subtitle": "We'd love to hear from you. Connect with the Swecha community through any of the channels below.",
   "contact.address.title": "Address",
@@ -79,17 +84,18 @@ const en = {
   "contact.cta.btn.projects": "Explore Projects",
   "contact.cta.btn.join": "Join Community",
 
-  "timeline.0.title": siteData.timeline[0].title,
-  "timeline.0.description": siteData.timeline[0].desc,
-  "timeline.1.title": siteData.timeline[1].title,
-  "timeline.1.description": siteData.timeline[1].desc,
-  "timeline.2.title": siteData.timeline[2].title,
-  "timeline.2.description": siteData.timeline[2].desc,
-  "timeline.3.title": siteData.timeline[3].title,
-  "timeline.3.description": siteData.timeline[3].desc,
-  "timeline.4.title": siteData.timeline[4].title,
-  "timeline.4.description": siteData.timeline[4].desc,
+  "timeline.0.title": timelineData[0].title,
+  "timeline.0.description": timelineData[0].description,
+  "timeline.1.title": timelineData[1].title,
+  "timeline.1.description": timelineData[1].description,
+  "timeline.2.title": timelineData[2].title,
+  "timeline.2.description": timelineData[2].description,
+  "timeline.3.title": timelineData[3].title,
+  "timeline.3.description": timelineData[3].description,
+  "timeline.4.title": timelineData[4].title,
+  "timeline.4.description": timelineData[4].description,
 
+  // ── News & Updates (upstream merge) ──
   "news.title": "News & Updates",
   "news.subtitle": "Latest announcements, community initiatives, AI developments, open-source projects, events, and technology updates from Swecha.",
   "news.btn.explore": "Explore Initiatives",

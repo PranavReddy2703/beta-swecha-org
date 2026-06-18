@@ -1,0 +1,29 @@
+---
+// src/components/atoms/Button.astro
+import type { ButtonVariant } from '../types/index';
+
+interface Props {
+  href: string;
+  label: string;
+  variant?: ButtonVariant;
+  class?: string;
+  target?: string;
+  rel?: string;
+}
+
+const { href, label, variant = 'primary', class: className = '', target, rel } = Astro.props;
+
+const variantStyles: Record<ButtonVariant, string> = {
+  primary: 'inline-flex items-center justify-center rounded-lg bg-primary-brand px-6 py-3.5 text-base font-bold text-slate-950 shadow-lg shadow-primary-brand/20 transition-all duration-300 hover:bg-hover-brand hover:shadow-hover-brand/30 hover:-translate-y-0.5 active:translate-y-0',
+  secondary: 'inline-flex items-center justify-center rounded-lg border border-structural-borders bg-card-bg/50 px-6 py-3.5 text-base font-bold text-text-main backdrop-blur-sm transition-all duration-300 hover:bg-elevated-surface hover:text-primary-brand hover:-translate-y-0.5 active:translate-y-0',
+};
+---
+
+<a
+  href={href}
+  class={`${variantStyles[variant]} ${className}`}
+  target={target}
+  rel={rel}
+>
+  <slot>{label}</slot>
+</a>

@@ -1,9 +1,9 @@
 ---
 // src/components/Timeline.astro
-import { getLangFromUrl, useTranslations } from '../i18n/utils';
-import TimelineCard from './TimelineCard.astro';
+import { getLangFromUrl, useTranslations } from '../../i18n/utils';
+import TimelineCard from '../molecules/TimelineCard.astro';
 import TimelineSlider from './TimelineSlider.astro';
-import siteData from '../data/site.json';
+import timelineData from '../../data/organisms/timeline.json';
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
@@ -16,7 +16,7 @@ const tagsByYear: Record<string, string[]> = {
   '2026': ['Astro', 'Tailwind CSS', 'Modern Web']
 };
 
-const events = siteData.timeline.map((event, index) => {
+const events = timelineData.map((event, index) => {
   return {
     year: event.year,
     title: t(`timeline.${index}.title` as any) || event.title,

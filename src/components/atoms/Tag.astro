@@ -1,0 +1,19 @@
+---
+// src/components/atoms/Tag.astro
+interface Props {
+  label: string;
+  variant?: 'default' | 'project';
+  class?: string;
+}
+
+const { label, variant = 'default', class: className = '' } = Astro.props;
+
+const variantStyles: Record<string, string> = {
+  default: 'badge badge-outline border-structural-borders/60 text-text-muted text-[11px] font-semibold px-2.5 py-1',
+  project: 'px-2.5 py-1 text-xs font-medium text-slate-300 bg-secondary-bg rounded-md border border-structural-borders/80 group-hover:border-primary-brand/30 transition-colors duration-300',
+};
+---
+
+<span class={`${variantStyles[variant]} ${className}`}>
+  {label}
+</span>

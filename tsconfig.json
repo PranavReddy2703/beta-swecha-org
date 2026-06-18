@@ -3,13 +3,34 @@
     "compilerOptions": {
         "jsx": "react-jsx",
         "jsxImportSource": "react",
+        "resolveJsonModule": true,
         "paths": {
             "@components/*": [
                 "./src/components/*"
             ],
+            "@atoms/*": [
+                "./src/components/atoms/*"
+            ],
+            "@molecules/*": [
+                "./src/components/molecules/*"
+            ],
+            "@organisms/*": [
+                "./src/components/organisms/*"
+            ],
             "@layouts/*": [
                 "./src/layouts/*"
+            ],
+            "@data/*": [
+                "./src/data/*"
+            ],
+            "@types/*": [
+                "./src/components/types/*"
             ]
         }
-    }
+    },
+    "exclude": [
+        "**/*.stories.ts",
+        "**/*.stories.tsx",
+        ".storybook"
+    ]
 }

@@ -1,0 +1,90 @@
+{
+  "slides": [
+    {
+      "titleKey": "news.featured.headline",
+      "descKey": "news.featured.desc",
+      "link": "https://government.economictimes.indiatimes.com/news/technology/telangana-itec-dept-announces-datathon-in-association-with-swecha-to-create-telugu-large-language-model/111597202",
+      "image": "/images/news-featured.png"
+    },
+    {
+      "titleKey": "news.card1.headline",
+      "descKey": "news.card1.desc",
+      "link": "https://government.economictimes.indiatimes.com/news/technology/telangana-itec-dept-announces-datathon-in-association-with-swecha-to-create-telugu-large-language-model/111597202",
+      "image": "/images/news-datathon.png"
+    },
+    {
+      "titleKey": "news.card3.headline",
+      "descKey": "news.card3.desc",
+      "link": "https://themachinemaker.com/news/iiit-hyderabad-and-swecha-org-host-ai-hackday-empowering-2000-students-to-build-ai-for-social-good/",
+      "image": "/images/news-hackday.png"
+    },
+    {
+      "titleKey": "news.card2.headline",
+      "descKey": "news.card2.desc",
+      "link": "https://www.thehindu.com/news/national/telangana/draft-license-for-consultation-aimed-at-safeguarding-open-source-ai-released/article70595570.ece",
+      "image": "/images/news-license.png"
+    },
+    {
+      "titleKey": "news.card4.headline",
+      "descKey": "news.card4.desc",
+      "link": "https://www.meetup.com/swechafsmi/",
+      "image": "/images/news-community.png"
+    }
+  ],
+  "cards": [
+    {
+      "titleKey": "news.card1.headline",
+      "descKey": "news.card1.desc",
+      "buttonTextKey": "news.btn.learn",
+      "link": "https://government.economictimes.indiatimes.com/news/technology/telangana-itec-dept-announces-datathon-in-association-with-swecha-to-create-telugu-large-language-model/111597202",
+      "image": "/images/news-datathon.png",
+      "gridClass": "h-full"
+    },
+    {
+      "titleKey": "news.card3.headline",
+      "descKey": "news.card3.desc",
+      "buttonTextKey": "news.btn.view",
+      "link": "https://themachinemaker.com/news/iiit-hyderabad-and-swecha-org-host-ai-hackday-empowering-2000-students-to-build-ai-for-social-good/",
+      "image": "/images/news-hackday.png"
+    },
+    {
+      "titleKey": "news.card2.headline",
+      "descKey": "news.card2.desc",
+      "buttonTextKey": "news.btn.read",
+      "link": "https://www.thehindu.com/news/national/telangana/draft-license-for-consultation-aimed-at-safeguarding-open-source-ai-released/article70595570.ece",
+      "image": "/images/news-license.png"
+    },
+    {
+      "titleKey": "news.card4.headline",
+      "descKey": "news.card4.desc",
+      "buttonTextKey": "news.btn.join",
+      "link": "https://www.meetup.com/swechafsmi/",
+      "image": "/images/news-community.png",
+      "gridClass": "h-full"
+    },
+    {
+      "titleKey": "news.card5.headline",
+      "descKey": "news.card5.desc",
+      "buttonTextKey": "news.btn.readMore",
+      "link": "https://freedommatters.in/untitled-8/",
+      "image": "/images/news-freedom.png"
+    }
+  ],
+  "latestUpdates": [
+    {
+      "titleKey": "news.update1.headline",
+      "descKey": "news.update1.desc",
+      "link": "https://www.tripurastarnews.com/viswam-ai-and-sflc-in-release-draft-license-for-consultation-aimed-at-safeguarding-open-source-aiand-community-ownership/"
+    },
+    {
+      "titleKey": "news.update2.headline",
+      "descKey": "news.update2.desc",
+      "link": "https://www.meetup.com/swechafsmi/"
+    },
+    {
+      "titleKey": "news.update3.headline",
+      "descKey": "news.update3.desc",
+      "link": "https://freedommatters.in/untitled-8/"
+    }
+  ]
+}
