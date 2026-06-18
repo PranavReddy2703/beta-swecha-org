@@ -1,4 +1,4 @@
-image: node:20
+image: node:22
 
 stages:
   - build
@@ -17,9 +17,13 @@ pages:
   stage: deploy
   script:
     - npm run build
-    - npm run build-storybook -o public/storybook
+    # Build Storybook to a directory outside public first to avoid circular copy error
+    - npm run build-storybook -- -o storybook-static
     # Assuming Astro builds to dist/, copy it to public/ for GitLab Pages
     - cp -r dist/* public/
+    # Move Storybook assets into public/storybook/
+    - mkdir -p public/storybook
+    - cp -r storybook-static/* public/storybook/
   artifacts:
     paths:
       - public
