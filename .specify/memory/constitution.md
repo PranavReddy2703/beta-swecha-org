@@ -56,10 +56,42 @@ Every release must satisfy the following budget constraints:
 
 ### Lighthouse Targets
 
-*   **Performance:** `90+`
-*   **Accessibility:** `90+` (WCAG 2.1 AA Compliant)
-*   **Best Practices:** `90+`
-*   **SEO:** `90+`
+*   **Performance:** `100`
+*   **Accessibility:** `100` (WCAG 2.1 AA Compliant)
+*   **Best Practices:** `100`
+*   **SEO:** `100`
+
+---
+
+## 5. Atomization & Contribution Workflow
+
+To ensure the Swecha platform remains scalable, maintainable, and approachable for all contributors, we strictly adhere to the principle of **atomization** across our UI, codebase, and version control workflows. 
+
+Complex systems must be broken down into their smallest, independent, and reusable units.
+
+### Atomic Architecture
+* **Modular UI Components:** We follow a component-driven architecture. Build small, single-purpose Astro or UI components (Atoms and Molecules) rather than massive, monolithic page files. Rely on the composability of `shadcn/ui` and Astro layouts to construct complex views.
+* **Single Responsibility Principle:** Every component, utility function, and API route should do exactly one thing. If a component is managing state, fetching data, and handling complex UI styling all at once, it must be atomized into smaller files.
+* **Decoupled Logic:** Keep business logic and data fetching separate from presentation components whenever possible.
+
+### Atomic Version Control
+* **Granular Tasks:** Epic features or major redesigns must be decomposed into small, actionable issues that a contributor can realistically resolve in a short timeframe.
+* **Atomic Commits:** Every Git commit must represent a single, logical change. Do not mix feature additions, bug fixes, and formatting tweaks into a single commit.
+* **Focused Pull Requests:** Pull Requests (PRs) should address one specific issue or feature. "Kitchen sink" PRs that touch unrelated parts of the codebase will be rejected to ensure thorough and efficient code reviews.
+
+---
+
+## 6. Component-Driven Development (Storybook)
+
+To enforce our atomic architecture and ensure consistency across the Electric Cyan Tech Matrix, all UI development must be driven through **Storybook**. Storybook acts as our interactive component library, documentation hub, and primary UI testing environment.
+
+### Storybook Guidelines & Rules
+
+* **Isolated Development First:** Components (Atoms, Molecules, and Organisms) must be built and tested in Storybook *before* they are integrated into Astro pages. If a component cannot render in Storybook, it is too tightly coupled to application logic and must be refactored.
+* **Mandatory Stories:** Every reusable UI component must have an accompanying `.stories.ts` (or `.tsx`) file. A PR introducing a new component will not be accepted without its corresponding story.
+* **Design System Visualization:** Storybook serves as the visual catalog for our design tokens. All colors, typography scales, and base daisyUI/shadcn components must be documented here for easy reference by designers and developers.
+* **Automated Accessibility (a11y):** The Storybook environment is configured with the `@storybook/addon-a11y` plugin. Contributors must ensure their component stories pass all automated accessibility checks (WCAG 2.1 AA) in the Storybook panel before submission, directly supporting our "Accessibility First" project principle.
+* **Interactive States:** Stories must demonstrate all relevant states of a component, including default, hover (`#33E4FF`), active, disabled, loading, and error states.
 
 ### Defect Severity Definitions
 
@@ -68,3 +100,5 @@ All identified issues must be categorized and addressed before release according
 *   **Critical:** Application crashes, broken main navigation flows, blank pages, or blocking accessibility issues. *Must be fixed immediately; blocks release.*
 *   **Major:** Feature malfunction, localization missing (raw fallback keys shown in UI), or failing lighthouse metrics. *Must be resolved before release.*
 *   **Minor:** Layout misalignment, slight color variances, and missing transition animations. *Can be deferred to post-release chores.*
+
+

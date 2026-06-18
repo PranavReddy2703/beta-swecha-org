@@ -1,0 +1,66 @@
+---
+// src/components/organisms/HeroSection.astro
+import Badge from '../atoms/Badge.astro';
+import Button from '../atoms/Button.astro';
+import FeatureCard from '../molecules/FeatureCard.astro';
+import { getLangFromUrl, useTranslations, useTranslatedPath } from '../../i18n/utils';
+import featureCardsData from '../../data/molecules/featureCards.json';
+import type { FeatureCardData } from '../types/index';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const translatePath = useTranslatedPath(lang);
+
+const typedCards = featureCardsData as FeatureCardData[];
+---
+
+<!-- Hero Section -->
+<section
+  class="relative overflow-hidden py-24 md:py-32 flex flex-col items-center justify-center min-h-[calc(100vh-4rem)] bg-canvas-base transition-colors duration-300"
+>
+  <!-- Background glow/grid decorations -->
+  <div class="absolute inset-0 pointer-events-none opacity-20">
+    <div class="absolute -top-40 left-1/4 h-[500px] w-[500px] rounded-full bg-primary-brand blur-[120px]"></div>
+    <div class="absolute bottom-10 right-1/4 h-[400px] w-[400px] rounded-full bg-secondary-accent blur-[120px]"></div>
+    <div class="absolute inset-0 bg-[linear-gradient(to_right,#273449_1px,transparent_1px),linear-gradient(to_bottom,#273449_1px,transparent_1px)] bg-[size:4rem_4rem]"></div>
+  </div>
+
+  <!-- Main Container -->
+  <div class="relative mx-auto max-w-5xl px-4 text-center sm:px-6 lg:px-8">
+    <!-- Badge element -->
+    <div class="mb-6">
+      <Badge label={t("hero.badge")} variant="hero" />
+    </div>
+
+    <!-- Core heading with gradient -->
+    <h1 class="text-4xl font-extrabold tracking-tight text-text-main sm:text-6xl md:text-7xl mb-6">
+      {t("hero.title1")}
+      <span class="block mt-2 bg-gradient-to-r from-primary-brand via-hover-brand to-secondary-accent bg-clip-text text-transparent drop-shadow-[0_2px_15px_rgba(0,212,255,0.3)]">
+        {t("hero.title2")}
+      </span>
+    </h1>
+
+    <!-- Subtitle description -->
+    <p class="mx-auto max-w-2xl text-lg text-text-muted md:text-xl mb-10 leading-relaxed">
+      {t("hero.desc")}
+    </p>
+
+    <!-- Action buttons -->
+    <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-20">
+      <Button href={translatePath("/projects")} label={t("hero.btn.explore")} variant="primary" />
+      <Button href={translatePath("/about")} label={t("hero.btn.learn")} variant="secondary" />
+    </div>
+
+    <!-- Feature cards showcasing design tokens -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-left">
+      {typedCards.map((card) => (
+        <FeatureCard
+          title={t(`card.${card.id}.title` as Parameters<typeof t>[0])}
+          description={t(`card.${card.id}.desc` as Parameters<typeof t>[0])}
+          iconSvg={card.iconSvg}
+          accentColor={card.accentColor}
+        />
+      ))}
+    </div>
+  </div>
+</section>

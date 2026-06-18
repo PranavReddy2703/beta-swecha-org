@@ -1,0 +1,79 @@
+{
+  "featured": [
+    {
+      "title": "Swecha OS 2026",
+      "description": "The next generation of our localized Linux distribution, featuring AI-assisted translation layers and an entirely new desktop environment tailored for regional users.",
+      "imageLabel": "SWECHA_OS_NEXT",
+      "image": "https://images.unsplash.com/photo-1629654297299-c8506221ca97?auto=format&fit=crop&w=1200&q=80",
+      "link": "#"
+    },
+    {
+      "title": "Chandamama Kathalu AI Archive",
+      "description": "Using optical character recognition and natural language processing to digitize, index, and make searchable thousands of classic Indian folk tales.",
+      "imageLabel": "CHANDAMAMA_ARCHIVE",
+      "image": "https://images.unsplash.com/photo-1532012197267-da84d127e765?auto=format&fit=crop&w=1200&q=80",
+      "link": "#"
+    },
+    {
+      "title": "Telugu Voice Assistant",
+      "description": "An open-source, privacy-first voice assistant trained entirely on local Telugu datasets, capable of controlling smart home devices and answering queries.",
+      "imageLabel": "VOICE_ASSIST",
+      "image": "https://images.unsplash.com/photo-1589254065878-42c9da997008?auto=format&fit=crop&w=1200&q=80",
+      "link": "#"
+    }
+  ],
+  "categories": [
+    { "title": "Operating System", "iconSvg": "<path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z\" />" },
+    { "title": "Education", "iconSvg": "<path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222\" />" },
+    { "title": "Localization", "iconSvg": "<path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129\" />" },
+    { "title": "Typography", "iconSvg": "<path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7\" /><path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z\" />" },
+    { "title": "Infrastructure", "iconSvg": "<path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z\" />" },
+    { "title": "Culture", "iconSvg": "<path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M3 21v-4m0 0V5a2 2 0 012-2h6.5l1 1H21l-3 6 3 6h-8.5l-1-1H5a2 2 0 00-2 2zm9-13.5V9\" />" },
+    { "title": "Privacy", "iconSvg": "<path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z\" />" },
+    { "title": "Community", "iconSvg": "<path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z\" />" }
+  ],
+  "projects": [
+    {
+      "title": "Swecha OS",
+      "description": "A free and open-source operating system localized for the Telugu-speaking community, designed to bridge the digital divide.",
+      "tags": ["Operating System", "Linux", "Localization"],
+      "status": "Active",
+      "link": "#"
+    },
+    {
+      "title": "Bala Swecha",
+      "description": "An educational distribution of Swecha OS bundled with learning tools, resources, and applications tailored for students and schools.",
+      "tags": ["Education", "Operating System"],
+      "status": "Active",
+      "link": "#"
+    },
+    {
+      "title": "Swecha Telugu Font",
+      "description": "A comprehensive Unicode-compliant open-source font ecosystem enabling high-quality Telugu typography on digital platforms.",
+      "tags": ["Typography", "Localization"],
+      "status": "Completed",
+      "link": "#"
+    },
+    {
+      "title": "Chandamama Kathalu",
+      "description": "Digitization and preservation of classic Indian children's literature, making cultural stories accessible online.",
+      "tags": ["Culture", "Education"],
+      "status": "Active",
+      "link": "#"
+    },
+    {
+      "title": "Community Servers",
+      "description": "Self-hosted alternative digital infrastructure providing privacy-respecting tools for the community (e.g., Matrix, Nextcloud).",
+      "tags": ["Infrastructure", "Privacy", "Community"],
+      "status": "Ongoing",
+      "link": "#"
+    },
+    {
+      "title": "Swecha Glossary",
+      "description": "A collaborative project to translate technical and scientific terminology into Telugu to aid students and professionals.",
+      "tags": ["Localization", "Community", "Education"],
+      "status": "Ongoing",
+      "link": "#"
+    }
+  ]
+}

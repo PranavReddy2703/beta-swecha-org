@@ -1,0 +1,6 @@
+[
+  { "href": "https://github.com/swecha-org", "label": "GitHub", "platform": "github" },
+  { "href": "https://gitlab.com/swecha", "label": "GitLab", "platform": "gitlab" },
+  { "href": "https://twitter.com/swechaap", "label": "X / Twitter", "platform": "twitter" },
+  { "href": "mailto:contact@swecha.org", "label": "Email", "platform": "email" }
+]

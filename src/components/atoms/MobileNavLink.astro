@@ -1,0 +1,80 @@
+---
+// src/components/atoms/MobileNavLink.astro
+interface Props {
+  href: string;
+  label: string;
+  isActive?: boolean;
+  index: number;
+}
+
+const { href, label, isActive = false, index } = Astro.props;
+---
+
+<a
+  href={href}
+  class={`mobile-nav-link ${isActive ? 'mobile-nav-link-active' : ''}`}
+  style={`--stagger-delay: ${index * 60}ms`}
+>
+  <span class="mobile-nav-indicator"></span>
+  {label}
+</a>
+
+<style>
+  .mobile-nav-link {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem 1rem;
+    margin-bottom: 0.25rem;
+    border-radius: 0.75rem;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    text-decoration: none;
+    transition: all 0.25s ease;
+    transform: translateX(-10px);
+    opacity: 0;
+    animation: slideInLink 0.35s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    animation-delay: var(--stagger-delay, 0ms);
+    animation-play-state: paused;
+  }
+
+  :global(.mobile-drawer-open) .mobile-nav-link {
+    animation-play-state: running;
+  }
+
+  @keyframes slideInLink {
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+
+  .mobile-nav-indicator {
+    width: 3px;
+    height: 0;
+    border-radius: 2px;
+    background: var(--primary-brand);
+    transition: height 0.3s ease;
+    flex-shrink: 0;
+  }
+
+  .mobile-nav-link:hover {
+    background: var(--elevated-surface);
+    color: var(--primary-brand);
+  }
+
+  .mobile-nav-link:hover .mobile-nav-indicator {
+    height: 1.25rem;
+  }
+
+  .mobile-nav-link-active {
+    color: var(--primary-brand);
+    background: color-mix(in srgb, var(--elevated-surface) 40%, transparent);
+  }
+
+  .mobile-nav-link-active .mobile-nav-indicator {
+    height: 1.25rem;
+    box-shadow: 0 0 10px rgba(0, 212, 255, 0.5);
+  }
+</style>

@@ -1,0 +1,200 @@
+---
+// src/components/organisms/Navbar.astro
+import NavLink from '../atoms/NavLink.astro';
+import LanguageSwitcher from '../molecules/LanguageSwitcher.astro';
+import ThemeToggle from '../molecules/ThemeToggle.astro';
+import HamburgerMenu from '../molecules/HamburgerMenu.astro';
+import MobileDrawer from './MobileDrawer.astro';
+import { getLangFromUrl, useTranslations, useTranslatedPath } from '../../i18n/utils';
+import { languages } from '../../i18n/ui';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const translatePath = useTranslatedPath(lang);
+
+const navItems = [
+  { name: t('nav.about'), href: translatePath('/about') },
+  { name: t('nav.projects'), href: translatePath('/projects') },
+  { name: t('nav.programs'), href: translatePath('/programs') },
+  { name: t('nav.resources'), href: translatePath('/resources') },
+  { name: t('nav.news'), href: translatePath('/news') },
+  { name: t('nav.contact'), href: translatePath('/contact') },
+];
+
+const isCurrentPage = (href: string) => {
+  const normalize = (path: string) => path.replace(/\/$/, '') || '/';
+  const normPathname = normalize(Astro.url.pathname);
+  const normHref = normalize(href);
+  if (normHref === '/') {
+    return normPathname === '/';
+  }
+  return normPathname === normHref || normPathname.startsWith(normHref + '/');
+};
+---
+
+<header id="site-header" class="navbar-header">
+  <!-- Animated gradient border at bottom -->
+  <div class="navbar-gradient-border"></div>
+
+  <div class="px-6 sm:px-10 lg:px-16">
+    <div class="navbar-inner">
+
+      <!-- Logo Container -->
+      <div class="flex-shrink-0">
+        <a href={translatePath('/')} class="group flex items-center space-x-2">
+          <span class="text-2xl font-black tracking-wider text-text-main transition duration-300 group-hover:text-primary-brand">
+            SWECHA<span class="text-primary-brand transition duration-300 group-hover:text-secondary-accent">.ORG</span>
+          </span>
+        </a>
+      </div>
+
+      <!-- Desktop Navigation Menu -->
+      <nav class="hidden md:flex items-center space-x-3 lg:space-x-5" id="desktop-nav">
+        {navItems.map((item) => (
+          <NavLink
+            href={item.href}
+            label={item.name}
+            isActive={isCurrentPage(item.href)}
+          />
+        ))}
+      </nav>
+
+      <!-- Actions Container (Language + Theme + Mobile Menu) -->
+      <div class="flex items-center space-x-2">
+        <LanguageSwitcher title={t('nav.selectLanguage')} />
+        <ThemeToggle title={t('nav.toggleTheme')} />
+        <HamburgerMenu srLabel={t('nav.openMenu')} />
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Mobile Drawer Menu -->
+  <MobileDrawer navItems={navItems} isCurrentPage={isCurrentPage} />
+</header>
+
+<script>
+  // ── Scroll-aware header ──
+  const header = document.getElementById('site-header');
+  let ticking = false;
+
+  const handleScroll = () => {
+    const scrollY = window.scrollY;
+
+    if (header) {
+      if (scrollY > 20) {
+        header.classList.add('navbar-scrolled');
+      } else {
+        header.classList.remove('navbar-scrolled');
+      }
+    }
+
+    ticking = false;
+  };
+
+  window.addEventListener('scroll', () => {
+    if (!ticking) {
+      requestAnimationFrame(handleScroll);
+      ticking = true;
+    }
+  }, { passive: true });
+
+  // ── Mobile drawer interaction logic ──
+  const toggleBtn = document.getElementById('mobile-menu-toggle');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const hamburgerLines = document.getElementById('hamburger-lines');
+
+  if (toggleBtn && mobileMenu && hamburgerLines) {
+    toggleBtn.addEventListener('click', () => {
+      const isExpanded = toggleBtn.getAttribute('aria-expanded') === 'true';
+      toggleBtn.setAttribute('aria-expanded', (!isExpanded).toString());
+
+      mobileMenu.classList.toggle('mobile-drawer-open');
+      hamburgerLines.classList.toggle('hamburger-active');
+
+      if (!isExpanded) {
+        const links = mobileMenu.querySelectorAll('.mobile-nav-link');
+        links.forEach((link) => {
+          (link as HTMLElement).style.animationPlayState = 'running';
+        });
+      }
+    });
+  }
+</script>
+
+<style>
+  .navbar-header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    width: 100%;
+    background: color-mix(in srgb, var(--secondary-bg) 80%, transparent);
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+    transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .navbar-header.navbar-scrolled {
+    background: color-mix(in srgb, var(--secondary-bg) 92%, transparent);
+    box-shadow:
+      0 1px 3px rgba(0, 0, 0, 0.12),
+      0 8px 24px rgba(0, 0, 0, 0.08);
+  }
+
+  .navbar-header.navbar-scrolled .navbar-inner {
+    height: 3.5rem;
+  }
+
+  .navbar-header.navbar-scrolled .navbar-gradient-border {
+    opacity: 1;
+  }
+
+  .navbar-gradient-border {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      var(--structural-borders) 15%,
+      var(--primary-brand) 40%,
+      var(--secondary-accent) 60%,
+      var(--structural-borders) 85%,
+      transparent 100%
+    );
+    background-size: 200% 100%;
+    opacity: 0.5;
+    animation: borderShimmer 8s ease-in-out infinite;
+    transition: opacity 0.35s ease;
+  }
+
+  @keyframes borderShimmer {
+    0%, 100% { background-position: 200% 0; }
+    50% { background-position: -200% 0; }
+  }
+
+  .navbar-inner {
+    display: flex;
+    height: 4rem;
+    align-items: center;
+    justify-content: space-between;
+    transition: height 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .navbar-header {
+    animation: navbarSlideIn 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  @keyframes navbarSlideIn {
+    from {
+      transform: translateY(-100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+</style>

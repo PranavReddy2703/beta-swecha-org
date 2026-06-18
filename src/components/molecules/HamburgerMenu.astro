@@ -1,0 +1,96 @@
+---
+// src/components/molecules/HamburgerMenu.astro
+interface Props {
+  srLabel: string;
+}
+
+const { srLabel } = Astro.props;
+---
+
+<button
+  type="button"
+  id="mobile-menu-toggle"
+  aria-controls="mobile-menu"
+  aria-expanded="false"
+  class="mobile-hamburger md:hidden"
+>
+  <span class="sr-only">{srLabel}</span>
+  <div class="hamburger-lines" id="hamburger-lines">
+    <span class="hamburger-line hamburger-line-1"></span>
+    <span class="hamburger-line hamburger-line-2"></span>
+    <span class="hamburger-line hamburger-line-3"></span>
+  </div>
+</button>
+
+<style>
+  .mobile-hamburger {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 0.5rem;
+    background: transparent !important;
+    border: none !important;
+    cursor: pointer;
+    color: var(--text-muted);
+    transition: all 0.2s ease;
+    outline: none !important;
+    box-shadow: none !important;
+    padding: 0;
+    min-height: unset;
+  }
+
+  @media (min-width: 768px) {
+    .mobile-hamburger {
+      display: none !important;
+    }
+  }
+
+  .mobile-hamburger:hover {
+    color: var(--primary-brand);
+    background: color-mix(in srgb, var(--elevated-surface) 50%, transparent) !important;
+  }
+
+  .mobile-hamburger:focus,
+  .mobile-hamburger:focus-visible {
+    outline: none !important;
+    box-shadow: none !important;
+    border: none !important;
+  }
+
+  .hamburger-lines {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    width: 20px;
+  }
+
+  .hamburger-line {
+    display: block;
+    width: 100%;
+    height: 2px;
+    border-radius: 1px;
+    background: currentColor;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transform-origin: center;
+  }
+
+  .hamburger-line-2 {
+    width: 70%;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  :global(.hamburger-active) .hamburger-line-1 {
+    transform: translateY(7px) rotate(45deg);
+  }
+
+  :global(.hamburger-active) .hamburger-line-2 {
+    opacity: 0;
+    width: 0;
+  }
+
+  :global(.hamburger-active) .hamburger-line-3 {
+    transform: translateY(-7px) rotate(-45deg);
+  }
+</style>

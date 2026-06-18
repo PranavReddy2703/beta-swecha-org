@@ -3,8 +3,8 @@
 import Layout from '@layouts/Layout.astro';
 import { getLangFromUrl, useTranslations, useTranslatedPath } from '../../i18n/utils';
 import { languages, defaultLang } from '../../i18n/ui';
-import BentoGrid from '@components/news/BentoGrid.astro';
-import UpdateCard from '@components/news/UpdateCard.astro';
+import BentoGrid from '@organisms/BentoGrid.astro';
+import UpdateCard from '@molecules/UpdateCard.astro';
 
 export function getStaticPaths() {
   return Object.keys(languages).map((lang) => {

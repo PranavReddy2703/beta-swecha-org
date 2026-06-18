@@ -3,10 +3,13 @@
 import Layout from '@layouts/Layout.astro';
 import { getLangFromUrl, useTranslations } from '../../i18n/utils';
 import { languages, defaultLang } from '../../i18n/ui';
-import ProjectsHeader from '../../components/projects/ProjectsHeader.astro';
-import FeaturedProjectsCarousel from '../../components/projects/FeaturedProjectsCarousel.astro';
-import ProjectsGrid from '../../components/projects/ProjectsGrid.astro';
-import ProjectCard from '../../components/projects/ProjectCard.astro';
+import ProjectsHeader from '@organisms/ProjectsHeader.astro';
+import FeaturedProjectsCarousel from '@organisms/FeaturedProjectsCarousel.astro';
+import ProjectsGrid from '@organisms/ProjectsGrid.astro';
+import ProjectCard from '@molecules/ProjectCard.astro';
+import FilterPill from '@atoms/FilterPill.astro';
+import projectsData from '@data/organisms/projects.json';
+import type { FeaturedProjectData, ProjectData, CategoryData } from '@types/index';
 
 export function getStaticPaths() {
   return Object.keys(languages).map((lang) => {
@@ -21,85 +24,9 @@ export function getStaticPaths() {
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
-const featuredProjects = [
-  {
-    title: "Swecha OS 2026",
-    description: "The next generation of our localized Linux distribution, featuring AI-assisted translation layers and an entirely new desktop environment tailored for regional users.",
-    imageLabel: "SWECHA_OS_NEXT",
-    image: "https://images.unsplash.com/photo-1629654297299-c8506221ca97?auto=format&fit=crop&w=1200&q=80",
-    link: "#"
-  },
-  {
-    title: "Chandamama Kathalu AI Archive",
-    description: "Using optical character recognition and natural language processing to digitize, index, and make searchable thousands of classic Indian folk tales.",
-    imageLabel: "CHANDAMAMA_ARCHIVE",
-    image: "https://images.unsplash.com/photo-1532012197267-da84d127e765?auto=format&fit=crop&w=1200&q=80",
-    link: "#"
-  },
-  {
-    title: "Telugu Voice Assistant",
-    description: "An open-source, privacy-first voice assistant trained entirely on local Telugu datasets, capable of controlling smart home devices and answering queries.",
-    imageLabel: "VOICE_ASSIST",
-    image: "https://images.unsplash.com/photo-1589254065878-42c9da997008?auto=format&fit=crop&w=1200&q=80",
-    link: "#"
-  }
-];
-
-const categories = [
-  { title: "Operating System", icon: '<svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>' },
-  { title: "Education", icon: '<svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222" /></svg>' },
-  { title: "Localization", icon: '<svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129" /></svg>' },
-  { title: "Typography", icon: '<svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z" /></svg>' },
-  { title: "Infrastructure", icon: '<svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" /></svg>' },
-  { title: "Culture", icon: '<svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 21v-4m0 0V5a2 2 0 012-2h6.5l1 1H21l-3 6 3 6h-8.5l-1-1H5a2 2 0 00-2 2zm9-13.5V9" /></svg>' },
-  { title: "Privacy", icon: '<svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" /></svg>' },
-  { title: "Community", icon: '<svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" /></svg>' }
-];
-
-const projects = [
-  {
-    title: "Swecha OS",
-    description: "A free and open-source operating system localized for the Telugu-speaking community, designed to bridge the digital divide.",
-    tags: ["Operating System", "Linux", "Localization"],
-    status: "Active" as const,
-    link: "#"
-  },
-  {
-    title: "Bala Swecha",
-    description: "An educational distribution of Swecha OS bundled with learning tools, resources, and applications tailored for students and schools.",
-    tags: ["Education", "Operating System"],
-    status: "Active" as const,
-    link: "#"
-  },
-  {
-    title: "Swecha Telugu Font",
-    description: "A comprehensive Unicode-compliant open-source font ecosystem enabling high-quality Telugu typography on digital platforms.",
-    tags: ["Typography", "Localization"],
-    status: "Completed" as const,
-    link: "#"
-  },
-  {
-    title: "Chandamama Kathalu",
-    description: "Digitization and preservation of classic Indian children's literature, making cultural stories accessible online.",
-    tags: ["Culture", "Education"],
-    status: "Active" as const,
-    link: "#"
-  },
-  {
-    title: "Community Servers",
-    description: "Self-hosted alternative digital infrastructure providing privacy-respecting tools for the community (e.g., Matrix, Nextcloud).",
-    tags: ["Infrastructure", "Privacy", "Community"],
-    status: "Ongoing" as const,
-    link: "#"
-  },
-  {
-    title: "Swecha Glossary",
-    description: "A collaborative project to translate technical and scientific terminology into Telugu to aid students and professionals.",
-    tags: ["Localization", "Community", "Education"],
-    status: "Ongoing" as const,
-    link: "#"
-  }
-];
+const featuredProjects = projectsData.featured as FeaturedProjectData[];
+const categories = projectsData.categories as CategoryData[];
+const projects = projectsData.projects as ProjectData[];
 ---
 
 <Layout title={`${t('nav.projects')} - Swecha.org`}>
@@ -119,17 +46,7 @@ const projects = [
       <!-- Filter Pills -->
       <div class="mt-6 flex flex-wrap gap-3" id="filters-container">
         {categories.map((cat) => (
-          <button 
-            type="button"
-            data-category={cat.title}
-            class="filter-pill group flex items-center gap-2 px-4 py-2 rounded-full border border-structural-borders/50 bg-card-surface/60 text-slate-400 font-medium text-sm transition-all duration-300 hover:border-primary-brand/50 hover:text-primary-brand"
-          >
-            <span class="flex-shrink-0" set:html={cat.icon}></span>
-            <span>{cat.title}</span>
-            <svg xmlns="http://www.w3.org/2000/svg" class="deselect-x w-4 h-4 ml-1 hidden opacity-60 hover:opacity-100" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-            </svg>
-          </button>
+          <FilterPill category={cat.title} iconSvg={cat.iconSvg} />
         ))}
       </div>
     </div>
@@ -160,13 +77,11 @@ const projects = [
         const xIcon = btn.querySelector('.deselect-x');
         
         if (activeFilters.has(category)) {
-          // Deselect
           activeFilters.delete(category);
           btn.classList.remove('bg-primary-brand/15', 'border-primary-brand/50', 'text-primary-brand');
           btn.classList.add('border-structural-borders/50', 'bg-card-surface/60', 'text-slate-400');
           if (xIcon) xIcon.classList.add('hidden');
         } else {
-          // Select
           activeFilters.add(category);
           btn.classList.remove('border-structural-borders/50', 'bg-card-surface/60', 'text-slate-400');
           btn.classList.add('bg-primary-brand/15', 'border-primary-brand/50', 'text-primary-brand');
@@ -179,7 +94,6 @@ const projects = [
 
     function filterCards() {
       if (activeFilters.size === 0) {
-        // Show all if no filters selected
         projectCards.forEach(card => {
           (card as HTMLElement).style.display = 'flex';
         });
@@ -190,7 +104,6 @@ const projects = [
         const tagsString = card.getAttribute('data-tags') || '';
         const tags = tagsString.split(',');
         
-        // Match if the project has AT LEAST ONE of the active filters
         const isMatch = Array.from(activeFilters).some(filter => tags.includes(filter as string));
         
         if (isMatch) {

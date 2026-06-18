@@ -1,0 +1,28 @@
+{
+  "links": [
+    {
+      "id": "about",
+      "label": "About"
+    },
+    {
+      "id": "projects",
+      "label": "Projects"
+    },
+    {
+      "id": "programs",
+      "label": "Programs"
+    },
+    {
+      "id": "resources",
+      "label": "Resources"
+    },
+    {
+      "id": "news",
+      "label": "News"
+    },
+    {
+      "id": "contact",
+      "label": "Contact Us"
+    }
+  ]
+}

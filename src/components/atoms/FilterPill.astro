@@ -1,0 +1,23 @@
+---
+// src/components/atoms/FilterPill.astro
+interface Props {
+  category: string;
+  iconSvg: string;
+}
+
+const { category, iconSvg } = Astro.props;
+---
+
+<button
+  type="button"
+  data-category={category}
+  class="filter-pill group flex items-center gap-2 px-4 py-2 rounded-full border border-structural-borders/50 bg-card-surface/60 text-slate-400 font-medium text-sm transition-all duration-300 hover:border-primary-brand/50 hover:text-primary-brand"
+>
+  <span class="flex-shrink-0">
+    <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" set:html={iconSvg} />
+  </span>
+  <span>{category}</span>
+  <svg xmlns="http://www.w3.org/2000/svg" class="deselect-x w-4 h-4 ml-1 hidden opacity-60 hover:opacity-100" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+  </svg>
+</button>
