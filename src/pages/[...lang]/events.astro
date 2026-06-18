@@ -33,12 +33,12 @@ const pastEvents = eventsData.filter(e => e.past);
 ---
 
 <Layout title={`${t('events.title')} - Swecha.org`} description="Explore events, conferences, and workshops hosted by Swecha.">
-  <div class="relative min-h-screen bg-[#080B10] text-text-main overflow-hidden pb-24">
+  <div class="relative min-h-screen text-text-main overflow-hidden pb-24 transition-colors duration-300">
     
-    <!-- Subtle Background Glows matching main site style -->
-    <div class="absolute inset-0 pointer-events-none z-0">
-      <div class="absolute top-[-10%] left-[-10%] w-[500px] h-[500px] bg-primary-brand/5 blur-[150px] rounded-full"></div>
-      <div class="absolute top-[40%] right-[-10%] w-[450px] h-[450px] bg-secondary-accent/5 blur-[130px] rounded-full"></div>
+    <!-- Background glow/grid decorations -->
+    <div class="absolute inset-0 pointer-events-none opacity-20 z-0">
+      <div class="absolute -top-40 left-1/4 h-[500px] w-[500px] rounded-full bg-primary-brand blur-[120px]"></div>
+      <div class="absolute bottom-10 right-1/4 h-[400px] w-[400px] rounded-full bg-secondary-accent blur-[120px]"></div>
     </div>
 
     <!-- Main Content Container -->
