@@ -10,18 +10,36 @@ import 'leaflet/dist/leaflet.css';
   <!-- Interactive Map Div -->
   <div id="map" class="w-full h-full z-10"></div>
 
-  <!-- Open in Maps Button (Bottom-right corner overlay) -->
-  <a 
-    href="https://www.openstreetmap.org/?mlat=17.4360775&mlon=78.3612286#map=19/17.4360775/78.3612286"
-    target="_blank"
-    rel="noopener noreferrer"
-    class="absolute bottom-4 right-4 z-[1000] flex items-center gap-1.5 text-xs font-black text-slate-950 bg-primary-brand hover:bg-hover-brand px-3.5 py-2 rounded-lg shadow-lg shadow-black/40 transition-all duration-300 hover:shadow-[0_0_12px_rgba(0,212,255,0.45)] hover:scale-[1.02] select-none"
-  >
-    <span>Open in Maps</span>
-    <svg class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-      <path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-    </svg>
-  </a>
+  <!-- Map Action Buttons (Bottom-right corner overlay) -->
+  <div class="absolute bottom-4 right-4 z-[1000] flex items-center gap-2">
+    <!-- Open in OSM Button -->
+    <a 
+      href="https://www.openstreetmap.org/?mlat=17.4360775&mlon=78.3612286#map=19/17.4360775/78.3612286"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="flex items-center gap-1.5 text-xs font-black text-text-main bg-card-surface/90 hover:bg-elevated-surface backdrop-blur-md border border-structural-borders px-3.5 py-2 rounded-lg shadow-lg shadow-black/40 transition-all duration-300 hover:shadow-[0_0_12px_rgba(255,255,255,0.1)] hover:scale-[1.02] select-none"
+    >
+      <svg class="h-3.5 w-3.5 text-primary-brand" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21"/>
+        <line x1="9" x2="9" y1="3" y2="18"/>
+        <line x1="15" x2="15" y1="6" y2="21"/>
+      </svg>
+      <span>Open in OSM</span>
+    </a>
+
+    <!-- Navigate Button -->
+    <a 
+      href="https://maps.app.goo.gl/gZhRDrBn7yVvupWY8"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="flex items-center gap-1.5 text-xs font-black text-slate-950 bg-primary-brand hover:bg-hover-brand px-3.5 py-2 rounded-lg shadow-lg shadow-black/40 transition-all duration-300 hover:shadow-[0_0_12px_rgba(0,212,255,0.45)] hover:scale-[1.02] select-none"
+    >
+      <svg class="h-3.5 w-3.5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <polygon points="3 11 22 2 13 21 11 13 3 11"/>
+      </svg>
+      <span>Navigate</span>
+    </a>
+  </div>
 </div>
 
 <script>
@@ -38,10 +56,10 @@ import 'leaflet/dist/leaflet.css';
     scrollWheelZoom: false, // Prevents scroll hijacking on the page
   });
 
-  // OpenStreetMap standard tile layer
-  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    maxZoom: 19,
-    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">OpenStreetMap</a>'
+  // CartoDB Dark Matter tile layer for a native dark theme
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+    maxZoom: 20,
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions" target="_blank" rel="noopener noreferrer">CARTO</a>'
   }).addTo(map);
 
   // Custom DivIcon representing a pulsing cyan dot with high-end glow
@@ -71,11 +89,6 @@ import 'leaflet/dist/leaflet.css';
 </script>
 
 <style is:global>
-  /* Dark mode visual filter overlay matching the Electric Cyan theme */
-  #map .leaflet-tile-pane {
-    filter: invert(100%) hue-rotate(180deg) brightness(88%) contrast(95%);
-  }
-
   /* Custom Tooltip Styling matching editorial aesthetic */
   .swecha-leaflet-tooltip {
     background-color: #111827 !important;
