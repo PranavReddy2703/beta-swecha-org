@@ -1,0 +1,22 @@
+---
+// src/components/events/HighlightCard.astro
+interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<div class="group flex items-center space-x-4 p-5 md:p-6 rounded-xl border border-structural-borders bg-card-bg/30 backdrop-blur-sm transition-all duration-300 hover:border-primary-brand/35 hover:bg-card-bg/60 hover:scale-[1.03] hover:shadow-[0_8px_25px_rgba(0,212,255,0.03)]">
+  <!-- Checkmark Graphic -->
+  <div class="flex-shrink-0 flex items-center justify-center w-8 h-8 rounded-lg bg-secondary-accent/10 text-secondary-accent border border-secondary-accent/20 group-hover:bg-secondary-accent group-hover:text-slate-950 group-hover:border-secondary-accent transition-all duration-300">
+    <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+    </svg>
+  </div>
+  
+  <!-- Highlight Title -->
+  <span class="text-base md:text-lg font-bold text-text-main group-hover:text-primary-brand transition-colors duration-200">
+    {title}
+  </span>
+</div>
