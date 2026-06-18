@@ -14,11 +14,7 @@ const paragraphs = [
 ---
 
 <section id="about" class="py-20 min-h-[calc(100vh-4rem)] flex flex-col justify-center border-t border-structural-borders/30 relative transition-colors duration-300">
-  <!-- Background glow decorations -->
-  <div class="absolute inset-0 pointer-events-none opacity-20">
-    <div class="absolute -top-40 left-1/4 h-[500px] w-[500px] rounded-full bg-primary-brand blur-[120px]"></div>
-    <div class="absolute bottom-10 right-1/4 h-[400px] w-[400px] rounded-full bg-secondary-accent blur-[120px]"></div>
-  </div>
+
 
   <div class="container mx-auto px-4 max-w-7xl relative z-10">
     <!-- Content Block with random ambient outline glow -->
@@ -30,7 +26,7 @@ const paragraphs = [
             style={`animation-delay: ${index * 150 + 150}ms;`}
           >
             <span class="block hover-lift">
-              {p}
+              <Fragment set:html={p} />
             </span>
           </p>
         ))}

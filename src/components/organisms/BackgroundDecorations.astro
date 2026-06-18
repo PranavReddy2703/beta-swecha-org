@@ -1,286 +1,514 @@
 ---
 // src/components/BackgroundDecorations.astro
+// Procedural bird flight simulation with natural physics
 ---
 
-<div class="fixed inset-0 pointer-events-none overflow-hidden z-10 select-none">
-  <!-- Subtle, elegant ambient birds flying in V-formation and gliding across the screen -->
-  <div class="absolute inset-0 birds-wrapper transition-opacity duration-300">
-    
-    <!-- Flock 1: V-Formation (Three Birds) -->
-    <div class="absolute flock-container-1">
-      <!-- Leader -->
-      <div class="absolute bird-leader">
-        <svg class="bird" viewBox="0 0 100 100" fill="currentColor">
-          <path class="bird-path-1" d="M 10 32 Q 30 24 50 32 Q 70 24 90 32 Q 70 28 50 32 Q 30 28 10 32 Z" />
-        </svg>
-      </div>
-      <!-- Follower Left -->
-      <div class="absolute bird-follower-l">
-        <svg class="bird" viewBox="0 0 100 100" fill="currentColor">
-          <path class="bird-path-2" d="M 10 32 Q 30 24 50 32 Q 70 24 90 32 Q 70 28 50 32 Q 30 28 10 32 Z" />
-        </svg>
-      </div>
-      <!-- Follower Right -->
-      <div class="absolute bird-follower-r">
-        <svg class="bird" viewBox="0 0 100 100" fill="currentColor">
-          <path class="bird-path-3" d="M 10 32 Q 30 24 50 32 Q 70 24 90 32 Q 70 28 50 32 Q 30 28 10 32 Z" />
-        </svg>
-      </div>
-    </div>
-
-    <!-- Lone Bird: Active flight, climbs and dives -->
-    <div class="absolute bird-lone-container">
-      <svg class="bird" viewBox="0 0 100 100" fill="currentColor">
-        <path class="bird-path-lone" d="M 10 32 Q 30 24 50 32 Q 70 24 90 32 Q 70 28 50 32 Q 30 28 10 32 Z" />
-      </svg>
-    </div>
-
-    <!-- Glider: High altitude, slow and serene glide -->
-    <div class="absolute bird-glider-container">
-      <svg class="bird" viewBox="0 0 100 100" fill="currentColor">
-        <path class="bird-path-glider" d="M 10 32 Q 30 24 50 32 Q 70 24 90 32 Q 70 28 50 32 Q 30 28 10 32 Z" />
-      </svg>
-    </div>
-
-  </div>
+<div id="birds-canvas" class="fixed inset-0 pointer-events-none overflow-hidden z-10 select-none" aria-hidden="true">
+  <div id="birds-wrapper"></div>
 </div>
 
 <style>
-  /* Explicit wrapper opacity for perfect visibility on both light and dark themes */
-  .birds-wrapper {
-    opacity: 0.75; /* Clearly visible light-mode opacity */
+  #birds-wrapper {
+    position: absolute;
+    inset: 0;
+    opacity: 0.75;
     transition: opacity 0.3s ease;
   }
 
-  :global(html[data-theme="dark"]) .birds-wrapper {
-    opacity: 0.55; /* Clearly visible dark-mode opacity */
+  :global(html[data-theme="dark"]) #birds-wrapper {
+    opacity: 0.55;
   }
 
-  .bird {
-    width: 32px;
-    height: 32px;
-    transition: color 0.3s ease;
+  :global(html[data-theme="light"]) #birds-wrapper {
+    opacity: 0.7;
   }
 
-  /* Color identity for the birds using theme-responsive brand colors */
-  .flock-container-1 .bird {
-    color: var(--primary-brand);
-  }
-  
-  .bird-lone-container .bird {
-    color: var(--secondary-accent);
-  }
-  
-  .bird-glider-container .bird {
-    color: var(--primary-brand);
-  }
-
-  /* --- Flock 1 Layout (Leader-Follower spacing - wider for organic feel) --- */
-  .flock-container-1 {
-    width: 220px;
-    height: 180px;
-    will-change: left, transform;
-    animation: fly-flock-1 45s infinite linear;
-    animation-delay: -5s; /* Spaced out initial delay */
-  }
-
-  .bird-leader {
-    top: 50px;
+  /* All bird-entity styles must be :global since elements are created by JS */
+  :global(.bird-entity) {
+    position: absolute;
+    top: 0;
     left: 0;
-    transform: scale(0.9);
+    will-change: transform, opacity;
   }
 
-  .bird-follower-l {
-    top: 120px;
-    left: 90px;
-    transform: scale(0.75);
+  :global(.bird-entity svg) {
+    display: block;
   }
 
-  .bird-follower-r {
-    top: -10px;
-    left: 110px;
-    transform: scale(0.72);
+  /* Background layer gets subtle blur for depth */
+  :global(.bird-entity[data-layer="bg"]) {
+    filter: blur(0.4px);
   }
 
-  /* --- Lone Bird & Glider Layout --- */
-  .bird-lone-container {
-    width: 32px;
-    height: 32px;
-    will-change: left, transform;
-    animation: fly-lone-1 32s infinite linear;
-    animation-delay: -22s; /* Spaced out initial delay */
-  }
-
-  .bird-glider-container {
-    width: 32px;
-    height: 32px;
-    will-change: left, transform;
-    animation: fly-glider-1 60s infinite linear;
-    animation-delay: -45s; /* Spaced out initial delay */
-  }
-
-  /* --- Flapping Paths Animations --- */
-  .bird-path-1 {
-    animation: flap-cycle-1 4.5s infinite ease-in-out;
-  }
-  .bird-path-2 {
-    animation: flap-cycle-2 4.1s infinite ease-in-out;
-    animation-delay: 0.3s; /* offset flap slightly in formation */
-  }
-  .bird-path-3 {
-    animation: flap-cycle-3 4.3s infinite ease-in-out;
-    animation-delay: 0.6s; /* offset flap slightly in formation */
-  }
-  .bird-path-lone {
-    animation: flap-cycle-1 3.5s infinite ease-in-out; /* faster wings */
-  }
-  .bird-path-glider {
-    animation: flap-cycle-glider 7s infinite ease-in-out; /* slow glide and rare beat */
-  }
-
-  /* --- Trajectory & Flight Path Keyframes (Altitudes separated) --- */
-  
-  /* Flock 1: majestic drift across top (8vh to 14vh) */
-  @keyframes fly-flock-1 {
-    0% {
-      left: 105%;
-      transform: translateY(8vh);
-      opacity: 0;
-    }
-    3% {
-      opacity: 1;
-    }
-    57% {
-      opacity: 1;
-    }
-    60% {
-      left: -25%;
-      transform: translateY(14vh);
-      opacity: 0;
-    }
-    60.01%, 100% {
-      left: 105%;
-      transform: translateY(8vh);
-      opacity: 0;
-    }
-  }
-
-  /* Lone Bird: dynamic climb and dive across lower section (65vh to 78vh) */
-  @keyframes fly-lone-1 {
-    0%, 15% {
-      left: 105%;
-      transform: translateY(70vh);
-      opacity: 0;
-    }
-    18% {
-      opacity: 1;
-    }
-    35% {
-      transform: translateY(65vh) rotate(-8deg); /* climb */
-    }
-    55% {
-      transform: translateY(78vh) rotate(6deg); /* dive */
-    }
-    72% {
-      opacity: 1;
-    }
-    75% {
-      left: -15%;
-      transform: translateY(72vh);
-      opacity: 0;
-    }
-    75.01%, 100% {
-      left: 105%;
-      transform: translateY(70vh);
-      opacity: 0;
-    }
-  }
-
-  /* Glider Bird: slow, high-altitude passage, mid-level altitude (30vh to 35vh) */
-  @keyframes fly-glider-1 {
-    0%, 30% {
-      left: 105%;
-      transform: translateY(30vh);
-      opacity: 0;
-    }
-    33% {
-      opacity: 1;
-    }
-    87% {
-      opacity: 1;
-    }
-    90% {
-      left: -15%;
-      transform: translateY(35vh);
-      opacity: 0;
-    }
-    90.01%, 100% {
-      left: 105%;
-      transform: translateY(30vh);
-      opacity: 0;
-    }
-  }
-
-  /* --- Flapping Cycle Keyframes (Path Morphing) --- */
-  
-  /* Cycle 1 (Leader / Lone): Flaps for 40% of duration, then glides */
-  @keyframes flap-cycle-1 {
-    0%, 10%, 20%, 30%, 40% {
-      d: path("M 10 32 Q 30 24 50 32 Q 70 24 90 32 Q 70 28 50 32 Q 30 28 10 32 Z"); /* glide */
-    }
-    5%, 25% {
-      d: path("M 10 42 Q 30 12 50 35 Q 70 12 90 42 Q 70 28 50 35 Q 30 28 10 42 Z"); /* wings up */
-    }
-    15%, 35% {
-      d: path("M 10 18 Q 30 34 50 35 Q 70 34 90 18 Q 70 28 50 35 Q 30 28 10 18 Z"); /* wings down */
-    }
-    45%, 100% {
-      d: path("M 10 32 Q 30 24 50 32 Q 70 24 90 32 Q 70 28 50 32 Q 30 28 10 32 Z"); /* glide */
-    }
-  }
-
-  /* Cycle 2 (Follower L): Slightly different rhythm */
-  @keyframes flap-cycle-2 {
-    0%, 8%, 16%, 24%, 32%, 40% {
-      d: path("M 10 32 Q 30 24 50 32 Q 70 24 90 32 Q 70 28 50 32 Q 30 28 10 32 Z");
-    }
-    4%, 20% {
-      d: path("M 10 42 Q 30 12 50 35 Q 70 12 90 42 Q 70 28 50 35 Q 30 28 10 42 Z");
-    }
-    12%, 28% {
-      d: path("M 10 18 Q 30 34 50 35 Q 70 34 90 18 Q 70 28 50 35 Q 30 28 10 18 Z");
-    }
-    41%, 100% {
-      d: path("M 10 32 Q 30 24 50 32 Q 70 24 90 32 Q 70 28 50 32 Q 30 28 10 32 Z");
-    }
-  }
-
-  /* Cycle 3 (Follower R): Another rhythm variation */
-  @keyframes flap-cycle-3 {
-    0%, 12%, 24%, 36% {
-      d: path("M 10 32 Q 30 24 50 32 Q 70 24 90 32 Q 70 28 50 32 Q 30 28 10 32 Z");
-    }
-    6%, 30% {
-      d: path("M 10 42 Q 30 12 50 35 Q 70 12 90 42 Q 70 28 50 35 Q 30 28 10 42 Z");
-    }
-    18% {
-      d: path("M 10 18 Q 30 34 50 35 Q 70 34 90 18 Q 70 28 50 35 Q 30 28 10 18 Z");
-    }
-    37%, 100% {
-      d: path("M 10 32 Q 30 24 50 32 Q 70 24 90 32 Q 70 28 50 32 Q 30 28 10 32 Z");
-    }
-  }
-
-  /* Glider Cycle: Mostly glide, very rare single beat */
-  @keyframes flap-cycle-glider {
-    0%, 10%, 100% {
-      d: path("M 10 32 Q 30 24 50 32 Q 70 24 90 32 Q 70 28 50 32 Q 30 28 10 32 Z");
-    }
-    3% {
-      d: path("M 10 42 Q 30 12 50 35 Q 70 12 90 42 Q 70 28 50 35 Q 30 28 10 42 Z");
-    }
-    7% {
-      d: path("M 10 18 Q 30 34 50 35 Q 70 34 90 18 Q 70 28 50 35 Q 30 28 10 18 Z");
+  @media (prefers-reduced-motion: reduce) {
+    :global(.bird-entity) {
+      display: none !important;
     }
   }
 </style>
+
+<script>
+  // @ts-nocheck
+  // ─── Procedural Bird Flight System ───────────────────────────────
+  (function () {
+    'use strict';
+
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    // ─── SVG Path Data (inlined to avoid Astro symbol/use issues) ──
+    const POSES = {
+      glide: 'M0 10 Q8 4 18 3 Q28 2 36 6 Q38 7 40 8 Q42 7 44 6 Q52 2 62 3 Q72 4 80 10 Q72 8 62 7 Q52 6 44 8.5 Q42 11 40 12 Q38 11 36 8.5 Q28 6 18 7 Q8 8 0 10 Z',
+      mid:   'M0 10 Q10 7 20 6 Q30 5.5 36 7 Q38 8 40 9 Q42 8 44 7 Q50 5.5 60 6 Q70 7 80 10 Q70 9 60 8.5 Q50 8 44 9.5 Q42 12 40 13 Q38 12 36 9.5 Q30 8 20 8.5 Q10 9 0 10 Z',
+      down:  'M0 13 Q10 12 20 11.5 Q30 10.5 36 9.5 Q38 9 40 8 Q42 9 44 9.5 Q50 10.5 60 11.5 Q70 12 80 13 Q70 14.5 60 13.5 Q50 12.5 44 11 Q42 12 40 12 Q38 12 36 11 Q30 12.5 20 13.5 Q10 14.5 0 13 Z',
+      up:    'M0 7 Q10 5 20 3.5 Q30 2.5 36 5 Q38 6.5 40 8 Q42 6.5 44 5 Q50 2.5 60 3.5 Q70 5 80 7 Q70 9 60 6 Q50 5 44 8 Q42 11 40 12 Q38 11 36 8 Q30 5 20 6 Q10 9 0 7 Z',
+    };
+
+    // ─── Config ────────────────────────────────────────────────────
+    const CFG = {
+      layers: {
+        bg:  { scale: [0.22, 0.4],  speed: [0.012, 0.022], opacity: [0.3, 0.5],  count: 2, yRange: [0.05, 0.3] },
+        mid: { scale: [0.55, 1.0],  speed: [0.022, 0.04],  opacity: [0.45, 0.65], count: 2, yRange: [0.1, 0.55] },
+        fg:  { scale: [0.9, 2.0],   speed: [0.035, 0.06],  opacity: [0.45, 0.7],  count: 1, yRange: [0.15, 0.7] },
+      },
+      baseSize: 16,
+      flapCycleDur: [500, 1500],
+      glideDur: [1000, 3000],
+      flapBurst: [3, 6],
+      maxBank: 14,
+      maxPitch: 10,
+      diagonalChance: 0.35,
+      diagonalAngle: [10, 35],
+      windFreq: 0.0004,
+      windAmp: 18,
+      vertOscAmp: [6, 22],
+      vertOscFreq: [0.00025, 0.0007],
+      spawnInterval: [5000, 10000],
+      flockChance: 0,
+      flockSize: [3, 5],
+      maxBirds: 12,
+    };
+
+    // ─── Utilities ─────────────────────────────────────────────────
+    const rand = (a, b) => Math.random() * (b - a) + a;
+    const randInt = (a, b) => Math.floor(rand(a, b + 1));
+    const lerp = (a, b, t) => a + (b - a) * t;
+    const clamp = (v, lo, hi) => Math.min(Math.max(v, lo), hi);
+    const noise = (t, f) =>
+      Math.sin(t * f) * 0.5 +
+      Math.sin(t * f * 1.73 + 1.3) * 0.3 +
+      Math.sin(t * f * 0.61 + 2.7) * 0.2;
+
+    // ─── Blue→Green gradient colors per bird (randomized stops) ───
+    let gradId = 0;
+    function makeSVG(w, h) {
+      const ns = 'http://www.w3.org/2000/svg';
+      const svg = document.createElementNS(ns, 'svg');
+      svg.setAttribute('width', String(w));
+      svg.setAttribute('height', String(h));
+      svg.setAttribute('viewBox', '0 0 80 20');
+      svg.setAttribute('xmlns', ns);
+
+      // Unique gradient per bird with slight hue variation
+      const id = 'bg' + (gradId++);
+      const defs = document.createElementNS(ns, 'defs');
+      const lg = document.createElementNS(ns, 'linearGradient');
+      lg.setAttribute('id', id);
+      lg.setAttribute('x1', '0%'); lg.setAttribute('y1', '0%');
+      lg.setAttribute('x2', '100%'); lg.setAttribute('y2', '0%');
+
+      // Randomize the blue and green hues slightly for variety
+      const hueBlue = 190 + Math.round(rand(-15, 15));  // ~175-205 (cyan-blue)
+      const hueGreen = 155 + Math.round(rand(-15, 15));  // ~140-170 (teal-green)
+      const s1 = document.createElementNS(ns, 'stop');
+      s1.setAttribute('offset', '0%');
+      s1.setAttribute('stop-color', `hsl(${hueBlue}, 85%, 55%)`);
+      const s2 = document.createElementNS(ns, 'stop');
+      s2.setAttribute('offset', '100%');
+      s2.setAttribute('stop-color', `hsl(${hueGreen}, 70%, 50%)`);
+      lg.appendChild(s1); lg.appendChild(s2);
+      defs.appendChild(lg);
+      svg.appendChild(defs);
+
+      const path = document.createElementNS(ns, 'path');
+      path.setAttribute('d', POSES.glide);
+      path.setAttribute('fill', `url(#${id})`);
+      svg.appendChild(path);
+      return { svg, path };
+    }
+
+    // ─── Wing Animator ─────────────────────────────────────────────
+    class Wings {
+      constructor() {
+        this.mode = 'glide'; // 'glide' | 'flap'
+        this.glideTimer = rand(...CFG.glideDur);
+        this.flapTimer = 0;
+        this.phase = 0;
+        this.cycleDur = rand(...CFG.flapCycleDur);
+        this.remaining = 0;
+        this.pose = 'glide';
+      }
+
+      tick(dt, climbing) {
+        if (this.mode === 'glide') {
+          this.pose = 'glide';
+          if (climbing) {
+            // Climbing → start flapping immediately
+            this.mode = 'flap';
+            this.remaining = randInt(...(this.flapBurstRange || CFG.flapBurst));
+            this.phase = 0;
+            this.flapTimer = 0;
+            this.cycleDur = rand(...(this.flapCycleRange || CFG.flapCycleDur));
+          } else {
+            // Level or descending → mostly glide, with random flap bursts
+            this.glideTimer -= dt;
+            if (this.glideTimer <= 0) {
+              this.mode = 'flap';
+              this.remaining = randInt(2, 4);
+              this.phase = 0;
+              this.flapTimer = 0;
+              this.cycleDur = rand(...(this.flapCycleRange || CFG.flapCycleDur));
+              this.glideTimer = rand(...(this.glideDurRange || CFG.glideDur)); // reset for next random burst
+            }
+          }
+        } else {
+          // Currently flapping
+          this.flapTimer += dt;
+          const step = this.cycleDur / 4;
+          if (this.flapTimer >= step) {
+            this.flapTimer -= step;
+            this.phase++;
+            if (this.phase >= 4) {
+              this.phase = 0;
+              this.remaining--;
+              if (this.remaining <= 0) {
+                this.mode = 'glide';
+                // If climbing, short glide pause before flapping again
+                // If descending/level, long glide
+                this.glideTimer = climbing
+                  ? rand(200, 600)
+                  : rand(...(this.glideDurRange || CFG.glideDur));
+                this.pose = 'glide';
+                return;
+              }
+            }
+          }
+          this.pose = ['mid', 'up', 'mid', 'down'][this.phase];
+        }
+      }
+    }
+
+    // ─── Bird ──────────────────────────────────────────────────────
+    class Bird {
+      constructor(layer, followerOf, offset) {
+        const cfg = CFG.layers[layer];
+        this.layer = layer;
+        this.follower = !!followerOf;
+        this.leader = followerOf || null;
+        this.fOffset = offset || { x: 0, y: 0 };
+
+        this.scale = rand(...cfg.scale);
+        this.size = CFG.baseSize * this.scale;
+        this.speed = rand(...cfg.speed); // fraction of vw per frame@60fps
+        this.baseOpacity = rand(...cfg.opacity);
+
+        this.vOscAmp = rand(...CFG.vertOscAmp) * this.scale;
+        this.vOscFreq = rand(...CFG.vertOscFreq);
+        this.windPhase = rand(0, Math.PI * 2);
+        this.t0 = performance.now();
+
+        this.dir = this.follower ? this.leader.dir : (Math.random() > 0.5 ? 1 : -1);
+
+        const vw = innerWidth;
+        const vh = innerHeight;
+
+        // Diagonal flight: some birds fly at an angle across the screen
+        this.diagonal = !this.follower && Math.random() < CFG.diagonalChance;
+        this.diagSpeed = 0; // vertical px per frame component
+
+        if (!this.follower) {
+          this.x = this.dir === 1
+            ? vw + rand(30, 160)
+            : -this.size * 3 - rand(30, 160);
+          this.baseY = vh * rand(...cfg.yRange);
+          this.curveAmp = rand(-35, 35) * this.scale;
+          this.curveFreq = rand(0.00008, 0.0003);
+
+          if (this.diagonal) {
+            // Pick an angle and direction (descending or ascending)
+            const angle = rand(...CFG.diagonalAngle) * (Math.random() > 0.5 ? 1 : -1);
+            const rad = angle * Math.PI / 180;
+            this.diagSpeed = Math.tan(rad) * this.speed * vw / 60;
+            // Adjust start Y to enter from edges properly
+            if (angle > 0) {
+              this.baseY = vh * rand(0.02, 0.25); // start high, fly down
+            } else {
+              this.baseY = vh * rand(0.55, 0.85); // start low, fly up
+            }
+            this.y = this.baseY;
+          }
+        } else {
+          this.x = this.leader.x + this.fOffset.x * this.leader.scale;
+          this.baseY = this.leader.baseY;
+          this.curveAmp = 0;
+          this.curveFreq = 0;
+        }
+
+        this.y = this.baseY;
+        this.prevX = this.x;
+        this.prevY = this.y;
+        this.bank = 0;
+        this.pitch = 0;
+        this.alive = true;
+        this.lastPose = 'glide';
+
+        this.wings = new Wings();
+        // Diagonal birds flap much more — working harder to climb/dive
+        if (this.diagonal) {
+          this.wings.glideTimer = rand(600, 1500);
+          this.wings.glideDurRange = [800, 2000];   // shorter glides
+          this.wings.flapCycleRange = [400, 1000];   // faster flaps
+          this.wings.flapBurstRange = [3, 6];        // more flaps per burst
+        }
+        // Stagger follower wing timing
+        if (this.follower) {
+          this.wings.glideTimer = rand(400, 2500);
+        }
+
+        // DOM
+        const w = Math.round(this.size * 2.8);
+        const h = Math.round(this.size);
+        const { svg, path } = makeSVG(w, h);
+        this.pathEl = path;
+
+        this.el = document.createElement('div');
+        this.el.className = 'bird-entity';
+        this.el.dataset.layer = layer;
+        this.el.appendChild(svg);
+      }
+
+      tick(dt, now) {
+        if (!this.alive) return;
+        const elapsed = now - this.t0;
+
+        if (this.follower && this.leader) {
+          if (!this.leader.alive) { this.alive = false; return; }
+          const tx = this.leader.x + this.fOffset.x * this.leader.scale;
+          const ty = this.leader.y + this.fOffset.y * this.leader.scale;
+          const s = 0.03 + noise(elapsed, 0.0002) * 0.012;
+          this.x = lerp(this.x, tx + noise(elapsed + 500, 0.0003) * 6, s);
+          this.y = lerp(this.y, ty + noise(elapsed + 1000, 0.0004) * 5, s);
+        } else {
+          const vw = innerWidth;
+          const speedPx = this.speed * vw / 60; // convert to px/frame
+          const speedVar = 1 + noise(elapsed, 0.00015) * 0.22;
+          const frameDt = dt / 16.67;
+          this.x += speedPx * -this.dir * speedVar * frameDt;
+
+          // Diagonal drift: continuously shift baseY
+          if (this.diagonal) {
+            this.baseY += this.diagSpeed * speedVar * frameDt;
+          }
+
+          const vOsc = noise(elapsed, this.vOscFreq) * this.vOscAmp;
+          const wind = noise(elapsed + this.windPhase * 2500, CFG.windFreq) * CFG.windAmp * this.scale;
+          const curve = Math.sin(elapsed * this.curveFreq) * this.curveAmp;
+          this.y = this.baseY + vOsc + wind + curve;
+        }
+
+        // Banking & pitch
+        const dx = this.x - this.prevX;
+        const dy = this.y - this.prevY;
+        this.prevX = this.x;
+        this.prevY = this.y;
+        this.bank = lerp(this.bank, clamp(dx * 0.25, -CFG.maxBank, CFG.maxBank), 0.06);
+        this.pitch = lerp(this.pitch, clamp(-dy * 0.35, -CFG.maxPitch, CFG.maxPitch), 0.06);
+
+        // Wings: flap when climbing, glide when descending or level
+        const climbing = dy < -0.3; // negative dy = moving upward on screen
+        this.wings.tick(dt, climbing);
+        const pose = this.wings.pose;
+        if (pose !== this.lastPose) {
+          this.pathEl.setAttribute('d', POSES[pose]);
+          this.lastPose = pose;
+        }
+
+        // Opacity with atmospheric flicker & edge fade
+        const flicker = 1 + noise(elapsed, 0.0005) * 0.08;
+        let opacity = clamp(this.baseOpacity * flicker, 0.12, 0.9);
+
+        const vw = innerWidth;
+        const edgeZone = 100;
+        if (this.dir === 1) {
+          if (this.x > vw - edgeZone) opacity *= clamp((vw - this.x) / edgeZone, 0, 1);
+          if (this.x < 0) opacity *= clamp((this.x + edgeZone) / edgeZone, 0, 1);
+        } else {
+          if (this.x < edgeZone) opacity *= clamp(this.x / edgeZone, 0, 1);
+          if (this.x > vw) opacity *= clamp((vw + edgeZone - this.x) / edgeZone, 0, 1);
+        }
+
+        // Apply GPU transform
+        const sx = this.dir === 1 ? 1 : -1;
+        const rot = (this.pitch + this.bank * 0.5).toFixed(1);
+        this.el.style.transform = `translate3d(${this.x.toFixed(1)}px,${this.y.toFixed(1)}px,0) scaleX(${sx}) rotate(${rot}deg)`;
+        this.el.style.opacity = opacity.toFixed(3);
+
+        // Off-screen check (horizontal + vertical for diagonal birds)
+        const margin = this.size * 3 + 150;
+        if (this.dir === 1 && this.x < -margin) this.alive = false;
+        if (this.dir === -1 && this.x > vw + margin) this.alive = false;
+        const vh = innerHeight;
+        if (this.y < -margin || this.y > vh + margin) this.alive = false;
+      }
+
+      remove() {
+        this.el.remove();
+      }
+    }
+
+    // ─── Flock Manager ─────────────────────────────────────────────
+    class Flock {
+      constructor(container) {
+        this.container = container;
+        this.birds = [];
+        this.lastSpawn = 0;
+        this.nextDelay = rand(...CFG.spawnInterval);
+        this.lastT = 0;
+        this.running = true;
+        this._raf = null;
+
+        // Seed a few birds already mid-flight
+        this._seedInitial();
+      }
+
+      _seedInitial() {
+        const vw = innerWidth;
+        for (const layer of ['bg', 'mid', 'fg']) {
+          const n = CFG.layers[layer].count + 1;
+          for (let i = 0; i < n; i++) {
+            const b = new Bird(layer);
+            b.x = rand(vw * 0.1, vw * 0.9);
+            b.t0 = performance.now() - rand(5000, 18000);
+            this._add(b);
+          }
+        }
+      }
+
+      _add(b) {
+        this.birds.push(b);
+        this.container.appendChild(b.el);
+      }
+
+      _spawnSingle(layer) {
+        const b = new Bird(layer || ['bg', 'mid', 'fg'][randInt(0, 2)]);
+        this._add(b);
+        return b;
+      }
+
+      _spawnFlock() {
+        const r = Math.random();
+        const layer = r < 0.4 ? 'bg' : r < 0.8 ? 'mid' : 'fg';
+        const leader = this._spawnSingle(layer);
+        const size = randInt(...CFG.flockSize);
+
+        for (let i = 1; i < size; i++) {
+          const side = i % 2 === 0 ? 1 : -1;
+          const rank = Math.ceil(i / 2);
+          const ox = (rank * 38 + rand(-10, 10)) * leader.dir;
+          const oy = (rank * 24 + rand(-8, 8)) * side;
+
+          const f = new Bird(layer, leader, { x: ox, y: oy });
+          f.scale = leader.scale * rand(0.78, 0.95);
+          f.baseOpacity = leader.baseOpacity * rand(0.82, 1.0);
+          f.size = CFG.baseSize * f.scale;
+
+          // Resize SVG
+          const w = Math.round(f.size * 2.8);
+          const h = Math.round(f.size);
+          const svg = f.el.querySelector('svg');
+          svg.setAttribute('width', String(w));
+          svg.setAttribute('height', String(h));
+
+          this._add(f);
+        }
+      }
+
+      loop(t) {
+        if (!this.running) return;
+
+        const dt = this.lastT ? Math.min(t - this.lastT, 50) : 16;
+        this.lastT = t;
+
+        // Update birds
+        for (let i = this.birds.length - 1; i >= 0; i--) {
+          this.birds[i].tick(dt, t);
+          if (!this.birds[i].alive) {
+            this.birds[i].remove();
+            this.birds.splice(i, 1);
+          }
+        }
+
+        // Periodic spawn
+        if (!this.lastSpawn) this.lastSpawn = t;
+        if (t - this.lastSpawn > this.nextDelay && this.birds.length < CFG.maxBirds) {
+          this.lastSpawn = t;
+          this.nextDelay = rand(...CFG.spawnInterval);
+
+          if (Math.random() < CFG.flockChance) {
+            this._spawnFlock();
+          } else {
+            this._spawnSingle();
+          }
+        }
+
+        this._raf = requestAnimationFrame(t2 => this.loop(t2));
+      }
+
+      start() {
+        this._raf = requestAnimationFrame(t => this.loop(t));
+      }
+
+      stop() {
+        this.running = false;
+        if (this._raf) cancelAnimationFrame(this._raf);
+      }
+
+      resume() {
+        if (!this.running) {
+          this.running = true;
+          this.lastT = 0;
+          this.start();
+        }
+      }
+    }
+
+    // ─── Boot ──────────────────────────────────────────────────────
+    const wrapper = document.getElementById('birds-wrapper');
+    if (!wrapper) return;
+
+    const flock = new Flock(wrapper);
+    flock.start();
+
+    // Pause when tab is hidden
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) {
+        flock.stop();
+      } else {
+        flock.resume();
+      }
+    });
+
+    // Adjust speeds on resize
+    let resizeTimer;
+    addEventListener('resize', () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => {
+        flock.birds.forEach(b => {
+          if (!b.follower) {
+            const cfg = CFG.layers[b.layer];
+            b.speed = rand(...cfg.speed);
+          }
+        });
+      }, 300);
+    });
+  })();
+</script>
