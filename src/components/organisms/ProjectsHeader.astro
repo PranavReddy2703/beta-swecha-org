@@ -9,11 +9,16 @@ const { title, description } = Astro.props;
 ---
 
 <header
-  class="relative overflow-hidden border-b border-structural-borders/30 pt-24 pb-16 md:pt-32 md:pb-20"
+  class="relative overflow-hidden border-b border-structural-borders/20 pt-10 pb-5 md:pt-12 md:pb-6"
 >
 
   <div class="container mx-auto px-4 relative z-10 text-center max-w-3xl">
-    <p class="text-lg md:text-xl text-slate-300 leading-relaxed">
+    <h1 class="text-3xl md:text-4xl lg:text-5xl font-black mb-4 tracking-tight">
+      <span class="bg-gradient-to-r from-primary-brand via-hover-brand to-secondary-accent bg-clip-text text-transparent drop-shadow-[0_2px_10px_rgba(0,212,255,0.25)]">
+        {title}
+      </span>
+    </h1>
+    <p class="text-sm md:text-base text-slate-300 leading-relaxed max-w-2xl mx-auto">
       {description}
     </p>
   </div>

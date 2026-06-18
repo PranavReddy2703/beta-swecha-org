@@ -9,7 +9,7 @@ import ProjectsGrid from '@organisms/ProjectsGrid.astro';
 import ProjectCard from '@molecules/ProjectCard.astro';
 import FilterPill from '@atoms/FilterPill.astro';
 import projectsData from '@data/organisms/projects.json';
-import type { FeaturedProjectData, ProjectData, CategoryData } from '@types/index';
+import type { FeaturedProjectData, ProjectData, CategoryData } from '@components/types/index';
 
 export function getStaticPaths() {
   return Object.keys(languages).map((lang) => {

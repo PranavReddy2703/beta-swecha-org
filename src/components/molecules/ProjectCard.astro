@@ -21,7 +21,7 @@ const statusColors = {
 const statusClass = statusColors[status] || statusColors.Active;
 ---
 
-<a href={link} data-tags={tagsString} class="project-card group relative flex flex-col h-full bg-card-surface border border-structural-borders rounded-2xl p-6 md:p-8 transition-all duration-300 hover:bg-elevated-surface hover:-translate-y-1 hover:border-primary-brand/50 hover:shadow-[0_10px_40px_-10px_rgba(0,212,255,0.15)] overflow-hidden">
+<a href={link} data-tags={tagsString} class="project-card group relative flex flex-col h-full bg-card-bg/40 backdrop-blur-xl border border-structural-borders rounded-2xl p-6 md:p-8 transition-all duration-300 hover:bg-elevated-surface/90 hover:-translate-y-1 hover:border-primary-brand/50 hover:shadow-[0_10px_40px_-10px_rgba(0,212,255,0.15)] overflow-hidden">
   
   <!-- Hover Glow Effect -->
   <div class="absolute inset-0 bg-gradient-to-br from-primary-brand/0 to-primary-brand/0 group-hover:from-primary-brand/5 group-hover:to-transparent transition-colors duration-500 pointer-events-none"></div>
