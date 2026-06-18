@@ -50,6 +50,12 @@ const {
     </style>
   </head>
   <body class="min-h-screen bg-canvas-base text-text-main antialiased flex flex-col transition-colors duration-300">
+    <!-- Global Ambient Background Glows -->
+    <div class="fixed inset-0 pointer-events-none overflow-hidden z-0 select-none opacity-10 dark:opacity-20 transition-opacity duration-300">
+      <div class="absolute -top-40 left-1/4 h-[600px] w-[600px] rounded-full bg-primary-brand blur-[150px]"></div>
+      <div class="absolute bottom-10 right-1/4 h-[500px] w-[500px] rounded-full bg-secondary-accent blur-[150px]"></div>
+    </div>
+
     <!-- Background Decor (Birds) -->
     <BackgroundDecorations />
 

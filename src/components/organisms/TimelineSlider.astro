@@ -45,12 +45,10 @@ const getNodeColors = (idx: number) => {
 
       return (
         <li class="flex-1 relative">
-          {index > 0 && (
-            <hr 
-              class="timeline-line-prev h-[4px] bg-[#141f26]/70 border-none transition-all duration-500 ease-in-out relative z-[1]" 
-              style={prevLineStyle}
-            />
-          )}
+          <hr 
+            class={`timeline-line-prev h-[4px] border-none transition-all duration-500 ease-in-out relative z-[1] ${index === 0 ? 'opacity-0 pointer-events-none timeline-line-dummy' : 'bg-[#141f26]/70'}`}
+            style={index > 0 ? prevLineStyle : 'opacity: 0 !important; pointer-events: none;'}
+          />
           
           <button 
             class="timeline-middle timeline-node relative flex flex-col items-center group z-10 focus:outline-none cursor-pointer"
@@ -102,12 +100,10 @@ const getNodeColors = (idx: number) => {
             </span>
           </div>
           
-          {index < N - 1 && (
-            <hr 
-              class="timeline-line-next h-[4px] bg-[#141f26]/70 border-none transition-all duration-500 ease-in-out relative z-[1]" 
-              style={lineStyle}
-            />
-          )}
+          <hr 
+            class={`timeline-line-next h-[4px] border-none transition-all duration-500 ease-in-out relative z-[1] ${index === N - 1 ? 'opacity-0 pointer-events-none timeline-line-dummy' : 'bg-[#141f26]/70'}`}
+            style={index < N - 1 ? lineStyle : 'opacity: 0 !important; pointer-events: none;'}
+          />
         </li>
       );
     })}
@@ -128,7 +124,7 @@ const getNodeColors = (idx: number) => {
     transform: translateY(-50%) !important;
     top: 50% !important;
     z-index: 0 !important;
-    opacity: 1 !important;
+    opacity: 1;
   }
   
   .timeline-line-next-extend {
@@ -138,7 +134,7 @@ const getNodeColors = (idx: number) => {
     transform: translateY(-50%) !important;
     top: 50% !important;
     z-index: 0 !important;
-    opacity: 1 !important;
+    opacity: 1;
   }
 
   /* Circular Glow behind each milestone node */
@@ -159,9 +155,6 @@ const getNodeColors = (idx: number) => {
     margin: 0 !important;
     padding: 0 !important;
     border-radius: 0 !important;
-    width: calc(100% + 16px) !important;
-    position: relative !important;
-    left: -8px !important;
   }
 
   .timeline-end {

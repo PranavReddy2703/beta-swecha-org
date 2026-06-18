@@ -83,7 +83,7 @@ const en = {
   "contact.cta.btn.email": "Email Us",
   "contact.cta.btn.projects": "Explore Projects",
   "contact.cta.btn.join": "Join Community",
-
+  "timeline.title": "Our Journey",
   "timeline.0.title": timelineData[0].title,
   "timeline.0.description": timelineData[0].description,
   "timeline.1.title": timelineData[1].title,

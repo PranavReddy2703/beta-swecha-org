@@ -11,9 +11,9 @@ interface Props {
 const { year, title, description, previewImage, tags = ["Community", "FOSS", "Localization"] } = Astro.props;
 ---
 
-<div class="w-full min-h-[630px] md:min-h-[450px] bg-card-bg/40 border border-structural-borders/40 hover:border-primary-brand/30 backdrop-blur-md rounded-2xl p-8 sm:p-12 shadow-xl transition-all duration-500 hover:border-primary-brand/40 cursor-default select-none grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
+<div class="w-full min-h-[630px] md:min-h-[400px] bg-card-bg/40 border border-structural-borders/40 hover:border-primary-brand/30 backdrop-blur-md rounded-2xl p-8 sm:p-8 shadow-xl transition-all duration-500 hover:border-primary-brand/40 cursor-default select-none grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
   <!-- Left Column: Project/Event Preview -->
-  <div class="md:col-span-5 w-full h-72 md:h-96 rounded-xl border border-structural-borders/40 bg-[#080B10]/80 overflow-hidden relative group/preview flex flex-col justify-center items-center text-center">
+  <div class="md:col-span-5 w-full h-72 md:h-80 rounded-xl border border-structural-borders/40 bg-[#080B10]/80 overflow-hidden relative group/preview flex flex-col justify-center items-center text-center">
     {previewImage ? (
       <img 
         src={previewImage} 

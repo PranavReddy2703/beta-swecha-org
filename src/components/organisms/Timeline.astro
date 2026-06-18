@@ -27,18 +27,14 @@ const events = timelineData.map((event, index) => {
 });
 ---
 
-<section id="timeline-section" class="py-6 md:py-10 min-h-[calc(100vh-4rem)] md:h-[calc(100vh-4rem)] flex flex-col justify-center relative transition-colors duration-300 overflow-hidden">
-  <!-- Background glow decorations -->
-  <div class="absolute inset-0 pointer-events-none opacity-20">
-    <div class="absolute -top-40 right-1/4 h-[500px] w-[500px] rounded-full bg-secondary-accent blur-[120px]"></div>
-    <div class="absolute bottom-10 left-1/4 h-[400px] w-[400px] rounded-full bg-primary-brand blur-[120px]"></div>
-  </div>
+<section id="timeline-section" class="py-6 md:py-8 min-h-[calc(100vh-4rem)] md:h-[calc(100vh-4rem)] flex flex-col justify-center relative transition-colors duration-300 overflow-hidden">
+
 
   <div class="container mx-auto px-4 max-w-7xl h-full relative z-10 flex flex-col justify-between items-center gap-4">
     <!-- Section Title -->
     <div class="text-center">
       <h2 class="text-3xl font-extrabold tracking-tight text-text-main sm:text-4xl mb-3 animate-glow-text">
-        {lang === 'te' ? 'మన ప్రయాణం' : lang === 'hi' ? 'हमारी यात्रा' : 'Our Journey'}
+        {t('timeline.title')}
       </h2>
       <div class="h-1 w-20 bg-primary-brand mx-auto rounded-full"></div>
     </div>
@@ -57,7 +53,7 @@ const events = timelineData.map((event, index) => {
       </button>
 
       <!-- Cards Container -->
-      <div class="relative flex-1 max-w-[420px] sm:max-w-[720px] md:max-w-[1020px] lg:max-w-[1200px] min-h-[660px] md:min-h-[450px] overflow-visible flex items-center">
+      <div class="relative flex-1 max-w-[420px] sm:max-w-[720px] md:max-w-[1020px] lg:max-w-[1200px] min-h-[660px] md:min-h-[400px] overflow-visible flex items-center">
         {events.map((event, index) => (
           <div 
             class="timeline-card absolute inset-0 opacity-0 scale-95 pointer-events-none transition-all duration-500 ease-in-out transform flex items-center justify-center" 
@@ -156,7 +152,7 @@ const events = timelineData.map((event, index) => {
         // Query theme colors dynamically from the HTML attributes
         const shadowColor = node ? (node.getAttribute('data-shadow') || 'rgba(0, 212, 255, 0.15)') : 'rgba(0, 212, 255, 0.15)';
 
-        if (prevHr) {
+        if (prevHr && !prevHr.classList.contains('timeline-line-dummy')) {
           if (idx <= activeIndex) {
             prevHr.style.opacity = '1.0';
             prevHr.style.boxShadow = `0 0 8px ${shadowColor}`;
@@ -166,7 +162,7 @@ const events = timelineData.map((event, index) => {
           }
         }
 
-        if (nextHr) {
+        if (nextHr && !nextHr.classList.contains('timeline-line-dummy')) {
           if (idx < activeIndex) {
             nextHr.style.opacity = '1.0';
             nextHr.style.boxShadow = `0 0 8px ${shadowColor}`;
@@ -195,6 +191,11 @@ const events = timelineData.map((event, index) => {
         // Toggle Circular background gradient glow around nodes
         if (glow) {
           glow.style.setProperty('--node-glow', glowVal);
+          if (idx === activeIndex) {
+            glow.style.opacity = '1.0';
+          } else {
+            glow.style.opacity = '0.3'; // Dimmed glow for inactive nodes
+          }
         }
 
         // Toggle Pulse Ring (only active milestone pulses)
@@ -215,24 +216,20 @@ const events = timelineData.map((event, index) => {
           
           if (idx === activeIndex) {
             dot.style.boxShadow = `0 0 0 1.5px ${colorVal}, 0 0 10px ${shadowVal}`;
-            dot.className = `node-dot h-5 w-5 rounded-full border-[3px] transition-all duration-500 transform z-10 scale-115`;
+            dot.className = `node-dot h-5 w-5 rounded-full border-[3px] transition-all duration-500 transform z-10 scale-115 opacity-100`;
           } else {
             dot.style.boxShadow = 'none';
-            dot.className = `node-dot h-5 w-5 rounded-full border-[3px] transition-all duration-500 transform z-10 scale-100 opacity-80`; // Inactive nodes slightly lower opacity for a subtle look
+            dot.className = `node-dot h-5 w-5 rounded-full border-[3px] transition-all duration-500 transform z-10 scale-100 opacity-40`; // Inactive nodes dimmed to 40%
           }
         }
 
         // Toggle Year Label styling
         if (year) {
+          (year as HTMLElement).style.color = colorVal; // Apply theme color to all labels
           if (idx === activeIndex) {
-            (year as HTMLElement).style.color = colorVal;
-            year.className = 'node-year text-xs sm:text-sm font-black scale-105 transition-all duration-300';
-          } else if (idx < activeIndex) {
-            (year as HTMLElement).style.color = `${colorVal}b3`; // 70% opacity
-            year.className = 'node-year text-xs sm:text-sm font-semibold transition-all duration-300';
+            year.className = 'node-year text-xs sm:text-sm font-black scale-105 transition-all duration-300 opacity-100';
           } else {
-            (year as HTMLElement).style.color = '';
-            year.className = 'node-year text-xs sm:text-sm font-bold text-text-muted transition-all duration-300 opacity-40';
+            year.className = 'node-year text-xs sm:text-sm font-bold transition-all duration-300 opacity-40'; // Inactive labels dimmed to 40%
           }
         }
       });
@@ -261,9 +258,12 @@ const events = timelineData.map((event, index) => {
 
             if (leftExtend) {
               leftExtend.style.setProperty('width', `${Math.max(0, leftWidth)}px`, 'important');
+              leftExtend.style.opacity = '1.0';
             }
             if (rightExtend) {
               rightExtend.style.setProperty('width', `${Math.max(0, rightWidth)}px`, 'important');
+              // Dim the right edge screen extension when the last node is not active
+              rightExtend.style.opacity = activeIndex === cards.length - 1 ? '1.0' : '0.2';
             }
           }
         }
