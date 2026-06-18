@@ -151,9 +151,8 @@ export interface DevPageData {
   stage: string;
   returnHome: string;
   news: { desc: string };
-  programs: { desc: string };
+  initiatives: { desc: string };
   projects: { desc: string };
-  resources: { desc: string };
 }
 
 export interface SiteData {

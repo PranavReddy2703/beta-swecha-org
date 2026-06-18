@@ -101,7 +101,7 @@ const rawAddress = contactData.address.raw;
             <ContactCard 
               title={t(`contact.${channel.icon === 'Mail' ? 'email' : channel.icon === 'Phone' ? 'phone' : 'internship'}.title` as Parameters<typeof t>[0])} 
               value={t(`contact.${channel.icon === 'Mail' ? 'email' : channel.icon === 'Phone' ? 'phone' : 'internship'}.value` as Parameters<typeof t>[0])} 
-              icon={channel.icon} 
+              icon={channel.icon as 'MapPin' | 'Mail' | 'Phone' | 'GraduationCap'} 
               link={channel.link}
               index={index}
             />

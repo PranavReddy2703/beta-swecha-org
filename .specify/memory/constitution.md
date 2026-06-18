@@ -10,6 +10,7 @@ This document outlines the core principles, design guidelines, quality standards
 *   **Performance as a Feature:** Fast load times and high responsiveness directly impact user engagement, especially in regions with constrained connectivity.
 *   **Multilingual Native:** The platform represents a diverse community. All features must support multiple languages from day one.
 *   **Minimal Client-Side JavaScript:** We prioritize server-side/static generation and progressive hydration to keep the bundle size small.
+* **Reusability over Reinvention:** Before building a new component or writing a new utility function, contributors must verify that an existing solution does not already exist. UI components must be designed to be flexible, context-agnostic, and data-driven to maximize reuse across the platform.
 
 ---
 
