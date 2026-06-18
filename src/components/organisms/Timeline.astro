@@ -20,7 +20,7 @@ const events = timelineData.map((event, index) => {
   return {
     year: event.year,
     title: t(`timeline.${index}.title` as any) || event.title,
-    description: t(`timeline.${index}.description` as any) || event.desc,
+    description: t(`timeline.${index}.description` as any) || event.description,
     previewImage: `/images/timeline/${event.year}.png`,
     tags: tagsByYear[event.year] || ['Community', 'FOSS', 'Localization']
   };
