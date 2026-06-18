@@ -37,14 +37,14 @@
       "title": "Swecha OS",
       "description": "A free and open-source operating system localized for the Telugu-speaking community, designed to bridge the digital divide.",
       "tags": ["Operating System", "Linux", "Localization"],
-      "status": "Active",
+      "status": "Live",
       "link": "#"
     },
     {
       "title": "Bala Swecha",
       "description": "An educational distribution of Swecha OS bundled with learning tools, resources, and applications tailored for students and schools.",
       "tags": ["Education", "Operating System"],
-      "status": "Active",
+      "status": "Live",
       "link": "#"
     },
     {
@@ -58,21 +58,21 @@
       "title": "Chandamama Kathalu",
       "description": "Digitization and preservation of classic Indian children's literature, making cultural stories accessible online.",
       "tags": ["Culture", "Education"],
-      "status": "Active",
+      "status": "Live",
       "link": "#"
     },
     {
       "title": "Community Servers",
       "description": "Self-hosted alternative digital infrastructure providing privacy-respecting tools for the community (e.g., Matrix, Nextcloud).",
       "tags": ["Infrastructure", "Privacy", "Community"],
-      "status": "Ongoing",
+      "status": "In Development",
       "link": "#"
     },
     {
       "title": "Swecha Glossary",
       "description": "A collaborative project to translate technical and scientific terminology into Telugu to aid students and professionals.",
       "tags": ["Localization", "Community", "Education"],
-      "status": "Ongoing",
+      "status": "In Development",
       "link": "#"
     }
   ]
