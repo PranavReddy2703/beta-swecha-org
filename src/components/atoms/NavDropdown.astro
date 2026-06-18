@@ -24,14 +24,17 @@ const { label, items, isActive = false } = Astro.props;
     </svg>
   </summary>
   <ul tabindex="0" class="dropdown-content menu nav-dropdown-content">
-    {items.map(item => (
-      <li>
-        <a href={item.href} class="flex items-center text-text-muted hover:text-primary-brand hover:bg-elevated-surface transition-colors font-semibold py-2 px-3 rounded-md">
-          {item.icon && <Fragment set:html={item.icon} />}
-          {item.name}
-        </a>
-      </li>
-    ))}
+    {items.map(item => {
+      const suffix = item.href.split('/').filter(Boolean).pop() || '';
+      return (
+        <li>
+          <a href={item.href} class={`dropdown-item item-${suffix}`}>
+            {item.icon && <Fragment set:html={item.icon} />}
+            <span>{item.name}</span>
+          </a>
+        </li>
+      );
+    })}
   </ul>
 </details>
 
@@ -40,9 +43,12 @@ const { label, items, isActive = false } = Astro.props;
     position: relative;
     display: inline-flex;
     align-items: center;
-    padding: 0.5rem 0.875rem;
-    font-size: 0.875rem;
-    font-weight: 600;
+    padding: 0.5rem 1rem;
+    font-family: 'Outfit', system-ui, sans-serif;
+    font-size: 0.95rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
     color: var(--text-muted);
     text-decoration: none;
     border-radius: 0.5rem;
@@ -145,6 +151,101 @@ const { label, items, isActive = false } = Astro.props;
       opacity: 1;
       transform: translateY(0) scale(1);
     }
+  }
+
+  .dropdown-item {
+    display: flex;
+    align-items: center;
+    padding: 0.5rem 0.75rem;
+    font-family: 'Outfit', system-ui, sans-serif;
+    font-size: 0.875rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-muted);
+    text-decoration: none;
+    border-radius: 0.5rem;
+    transition: all 0.25s cubic-bezier(0.25, 1, 0.5, 1);
+  }
+
+  .dropdown-item :global(svg) {
+    transition: all 0.25s cubic-bezier(0.25, 1, 0.5, 1);
+  }
+
+  .dropdown-item:hover {
+    padding-left: 1.25rem;
+  }
+
+  .dropdown-item:hover :global(svg) {
+    transform: scale(1.1);
+  }
+
+  /* Vishwam AI: Purple / Indigo */
+  .item-vishwam-ai:hover {
+    background: linear-gradient(
+      135deg,
+      rgba(167, 139, 250, 0.12),
+      rgba(99, 102, 241, 0.06)
+    );
+    color: #a78bfa;
+    box-shadow: 
+      inset 0 0 0 1px rgba(167, 139, 250, 0.15),
+      0 4px 12px rgba(167, 139, 250, 0.08);
+  }
+  .item-vishwam-ai:hover :global(svg) {
+    color: #a78bfa !important;
+    filter: drop-shadow(0 0 6px rgba(167, 139, 250, 0.7));
+  }
+
+  /* Dev Days: Amber / Orange */
+  .item-devdays:hover {
+    background: linear-gradient(
+      135deg,
+      rgba(251, 191, 36, 0.12),
+      rgba(249, 115, 22, 0.06)
+    );
+    color: #fbbf24;
+    box-shadow: 
+      inset 0 0 0 1px rgba(251, 191, 36, 0.15),
+      0 4px 12px rgba(251, 191, 36, 0.08);
+  }
+  .item-devdays:hover :global(svg) {
+    color: #fbbf24 !important;
+    filter: drop-shadow(0 0 6px rgba(251, 191, 36, 0.7));
+  }
+
+  /* EHRs: Emerald / Mint Green */
+  .item-ehrs:hover {
+    background: linear-gradient(
+      135deg,
+      rgba(52, 211, 153, 0.12),
+      rgba(20, 184, 166, 0.06)
+    );
+    color: #34d399;
+    box-shadow: 
+      inset 0 0 0 1px rgba(52, 211, 153, 0.15),
+      0 4px 12px rgba(52, 211, 153, 0.08);
+  }
+  .item-ehrs:hover :global(svg) {
+    color: #34d399 !important;
+    filter: drop-shadow(0 0 6px rgba(52, 211, 153, 0.7));
+  }
+
+  /* More: Electric Cyan / Blue */
+  .item-more:hover {
+    background: linear-gradient(
+      135deg,
+      color-mix(in srgb, var(--primary-brand) 12%, transparent),
+      color-mix(in srgb, var(--secondary-accent) 6%, transparent)
+    );
+    color: var(--primary-brand);
+    box-shadow: 
+      inset 0 0 0 1px color-mix(in srgb, var(--primary-brand) 15%, transparent),
+      0 4px 12px rgba(0, 212, 255, 0.08);
+  }
+  .item-more:hover :global(svg) {
+    color: var(--primary-brand) !important;
+    filter: drop-shadow(0 0 6px rgba(0, 212, 255, 0.7));
   }
 </style>
 
