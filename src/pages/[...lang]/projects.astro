@@ -26,7 +26,10 @@ const t = useTranslations(lang);
 
 const featuredProjects = projectsData.featured as FeaturedProjectData[];
 const categories = projectsData.categories as CategoryData[];
-const projects = projectsData.projects as ProjectData[];
+const statusOrder = { Live: 1, 'In Development': 2, Completed: 3 };
+const projects = (projectsData.projects as ProjectData[]).sort((a, b) => {
+  return (statusOrder[a.status] || 99) - (statusOrder[b.status] || 99);
+});
 ---
 
 <Layout title={`${t('nav.projects')} - Swecha.org`}>

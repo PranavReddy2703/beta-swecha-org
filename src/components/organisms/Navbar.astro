@@ -68,15 +68,48 @@ const isCurrentPage = (href: string) => {
 
       <!-- Logo Container -->
       <div class="flex-shrink-0">
-        <a href={translatePath('/')} class="group flex items-center space-x-2">
-          <span class="text-2xl font-black tracking-wider text-text-main transition duration-300 group-hover:text-primary-brand">
-            SWECHA<span class="text-primary-brand transition duration-300 group-hover:text-secondary-accent">.ORG</span>
-          </span>
+        <a href={translatePath('/')} class="logo-link flex items-center">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 170 48" class="h-10 w-auto select-none navbar-logo-svg" fill="none" overflow="visible">
+            <defs>
+              <linearGradient id="swecha-logo-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="#00D4FF" />
+                <stop offset="50%" stop-color="#33E4FF" />
+                <stop offset="100%" stop-color="#4DFFB8" />
+              </linearGradient>
+            </defs>
+            <g class="logo-content-group" overflow="visible">
+              <!-- Swecha Text -->
+              <text 
+                x="2" 
+                y="36" 
+                font-family="'Great Vibes', 'Alex Brush', 'Brush Script MT', cursive" 
+                font-size="38" 
+                fill="url(#swecha-logo-grad)" 
+                style="letter-spacing: 0.5px;"
+              >
+                Swecha
+              </text>
+              <!-- Large Bird -->
+              <path 
+                class="logo-bird-1"
+                d="M0 10 Q8 4 18 3 Q28 2 36 6 Q38 7 40 8 Q42 7 44 6 Q52 2 62 3 Q72 4 80 10 Q72 8 62 7 Q52 6 44 8.5 Q42 11 40 12 Q38 11 36 8.5 Q28 6 18 7 Q8 8 0 10 Z" 
+                fill="url(#swecha-logo-grad)" 
+                transform="translate(108, 3) scale(0.35) rotate(-10)"
+              />
+              <!-- Small Bird -->
+              <path 
+                class="logo-bird-2"
+                d="M0 10 Q8 4 18 3 Q28 2 36 6 Q38 7 40 8 Q42 7 44 6 Q52 2 62 3 Q72 4 80 10 Q72 8 62 7 Q52 6 44 8.5 Q42 11 40 12 Q38 11 36 8.5 Q28 6 18 7 Q8 8 0 10 Z" 
+                fill="url(#swecha-logo-grad)" 
+                transform="translate(126, 12) scale(0.24) rotate(-5)"
+              />
+            </g>
+          </svg>
         </a>
       </div>
 
       <!-- Desktop Navigation Menu -->
-      <nav class="hidden md:flex items-center space-x-3 lg:space-x-5" id="desktop-nav">
+      <nav class="hidden md:flex items-center space-x-4 lg:space-x-6" id="desktop-nav">
         {navItems.map((item) => (
           item.isDropdown ? (
             <NavDropdown
@@ -177,7 +210,7 @@ const isCurrentPage = (href: string) => {
   }
 
   .navbar-header.navbar-scrolled .navbar-inner {
-    height: 3.5rem;
+    height: 4rem;
   }
 
   .navbar-header.navbar-scrolled .navbar-gradient-border {
@@ -212,7 +245,7 @@ const isCurrentPage = (href: string) => {
 
   .navbar-inner {
     display: flex;
-    height: 4rem;
+    height: 5rem;
     align-items: center;
     justify-content: space-between;
     transition: height 0.35s cubic-bezier(0.4, 0, 0.2, 1);
@@ -231,5 +264,37 @@ const isCurrentPage = (href: string) => {
       transform: translateY(0);
       opacity: 1;
     }
+  }
+
+  .logo-link {
+    cursor: pointer;
+    text-decoration: none;
+    outline: none;
+    display: flex;
+    align-items: center;
+  }
+
+  .navbar-logo-svg {
+    overflow: visible;
+  }
+
+  .logo-content-group {
+    transition: filter 0.3s ease;
+  }
+
+  .logo-bird-1, .logo-bird-2 {
+    transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+  }
+
+  .logo-link:hover .logo-content-group {
+    filter: drop-shadow(0 0 4px rgba(0, 212, 255, 0.5)) drop-shadow(0 0 10px rgba(77, 255, 184, 0.35));
+  }
+
+  .logo-link:hover .logo-bird-1 {
+    transform: translate(108px, 1px) scale(0.35) rotate(-14deg);
+  }
+
+  .logo-link:hover .logo-bird-2 {
+    transform: translate(126px, 10px) scale(0.24) rotate(-9deg);
   }
 </style>
