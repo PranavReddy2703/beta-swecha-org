@@ -1,7 +1,11 @@
 {
   "nav.about": "About",
   "nav.projects": "Projects",
-  "nav.programs": "Programs",
+  "nav.initiatives": "Initiatives",
+  "nav.initiatives.vishwamai": "VISHWAM.ai",
+  "nav.initiatives.devdays": "DevDays",
+  "nav.initiatives.ehrs": "eHRS",
+  "nav.initiatives.more": "More",
   "nav.resources": "Resources",
   "nav.news": "News",
   "nav.selectLanguage": "Select Language",
@@ -29,7 +33,7 @@
   "dev.stage": "Development Stage",
   "dev.returnHome": "Return Home",
   "news.dev.desc": "This section is currently under development. Check back soon for announcements, blogs, and community news.",
-  "programs.dev.desc": "This section is currently under development. Check back soon for the active programs and community initiatives.",
+  "initiatives.dev.desc": "This section is currently under development. Check back soon for the active initiatives.",
   "projects.dev.desc": "This section is currently under development. Check back soon for the active project listings.",
   "resources.dev.desc": "This section is currently under development. Check back soon to access our educational resource catalog and downloads."
 }

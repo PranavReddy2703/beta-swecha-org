@@ -18,7 +18,11 @@ export const defaultLang = 'en';
 const en = {
   "nav.about": navbarData.links.find(l => l.id === "about")?.label || "",
   "nav.projects": navbarData.links.find(l => l.id === "projects")?.label || "",
-  "nav.programs": navbarData.links.find(l => l.id === "programs")?.label || "",
+  "nav.initiatives": navbarData.links.find(l => l.id === "initiatives")?.label || "",
+  "nav.initiatives.vishwamai": "VISHWAM.ai",
+  "nav.initiatives.devdays": "DevDays",
+  "nav.initiatives.ehrs": "eHRS",
+  "nav.initiatives.more": "More",
   "nav.resources": navbarData.links.find(l => l.id === "resources")?.label || "",
   "nav.news": navbarData.links.find(l => l.id === "news")?.label || "",
   "nav.contact": navbarData.links.find(l => l.id === "contact")?.label || "Contact Us",
@@ -52,7 +56,7 @@ const en = {
   "dev.stage": siteData.dev.stage,
   "dev.returnHome": siteData.dev.returnHome,
   "news.dev.desc": siteData.dev.news.desc,
-  "programs.dev.desc": siteData.dev.programs.desc,
+  "initiatives.dev.desc": siteData.dev.initiatives.desc,
   "projects.dev.desc": siteData.dev.projects.desc,
   "resources.dev.desc": siteData.dev.resources.desc,
 
