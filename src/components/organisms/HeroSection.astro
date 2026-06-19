@@ -16,10 +16,10 @@ const typedCards = featureCardsData as FeatureCardData[];
 
 <!-- Hero Section -->
 <section
-  class="relative overflow-hidden py-24 md:py-32 flex flex-col items-center justify-center min-h-[calc(100vh-4rem)] bg-canvas-base transition-colors duration-300"
+  class="relative overflow-hidden py-24 md:py-32 flex flex-col items-center justify-center min-h-[calc(100vh-4rem)] bg-transparent transition-colors duration-300"
 >
   <!-- Background glow/grid decorations -->
-  <div class="absolute inset-0 pointer-events-none opacity-20">
+  <div class="absolute inset-0 pointer-events-none opacity-5 dark:opacity-20">
     <div class="absolute -top-40 left-1/4 h-[500px] w-[500px] rounded-full bg-primary-brand blur-[120px]"></div>
     <div class="absolute bottom-10 right-1/4 h-[400px] w-[400px] rounded-full bg-secondary-accent blur-[120px]"></div>
   </div>
@@ -34,7 +34,7 @@ const typedCards = featureCardsData as FeatureCardData[];
     <!-- Core heading with gradient -->
     <h1 class="text-4xl font-extrabold tracking-tight text-text-main sm:text-6xl md:text-7xl mb-6">
       {t("hero.title1")}
-      <span class="block mt-2 bg-gradient-to-r from-primary-brand via-hover-brand to-secondary-accent bg-clip-text text-transparent drop-shadow-[0_2px_15px_rgba(0,212,255,0.3)]">
+      <span class="block mt-2 bg-gradient-to-r from-primary-brand via-hover-brand to-secondary-accent bg-clip-text text-transparent drop-shadow-[0_2px_8px_rgba(255,255,255,0.55)] dark:drop-shadow-[0_2px_15px_rgba(0,212,255,0.3)]">
         {t("hero.title2")}
       </span>
     </h1>
