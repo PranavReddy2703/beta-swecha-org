@@ -84,7 +84,6 @@ const isCurrentPage = (href: string) => {
                 y="36" 
                 font-family="'Great Vibes', 'Alex Brush', 'Brush Script MT', cursive" 
                 font-size="38" 
-                fill="url(#swecha-logo-grad)" 
                 style="letter-spacing: 0.5px;"
               >
                 Swecha
@@ -93,14 +92,12 @@ const isCurrentPage = (href: string) => {
               <path 
                 class="logo-bird-1"
                 d="M0 10 Q8 4 18 3 Q28 2 36 6 Q38 7 40 8 Q42 7 44 6 Q52 2 62 3 Q72 4 80 10 Q72 8 62 7 Q52 6 44 8.5 Q42 11 40 12 Q38 11 36 8.5 Q28 6 18 7 Q8 8 0 10 Z" 
-                fill="url(#swecha-logo-grad)" 
                 transform="translate(108, 3) scale(0.35) rotate(-10)"
               />
               <!-- Small Bird -->
               <path 
                 class="logo-bird-2"
                 d="M0 10 Q8 4 18 3 Q28 2 36 6 Q38 7 40 8 Q42 7 44 6 Q52 2 62 3 Q72 4 80 10 Q72 8 62 7 Q52 6 44 8.5 Q42 11 40 12 Q38 11 36 8.5 Q28 6 18 7 Q8 8 0 10 Z" 
-                fill="url(#swecha-logo-grad)" 
                 transform="translate(126, 12) scale(0.24) rotate(-5)"
               />
             </g>
@@ -279,7 +276,8 @@ const isCurrentPage = (href: string) => {
   }
 
   .logo-content-group {
-    transition: filter 0.3s ease;
+    fill: var(--text-primary);
+    transition: fill 0.3s ease, filter 0.3s ease;
   }
 
   .logo-bird-1, .logo-bird-2 {
@@ -287,6 +285,7 @@ const isCurrentPage = (href: string) => {
   }
 
   .logo-link:hover .logo-content-group {
+    fill: url(#swecha-logo-grad);
     filter: drop-shadow(0 0 4px rgba(0, 212, 255, 0.5)) drop-shadow(0 0 10px rgba(77, 255, 184, 0.35));
   }
 
