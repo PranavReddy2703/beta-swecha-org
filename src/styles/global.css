@@ -25,6 +25,9 @@
   --structural-borders: #273449;
   --text-primary: #F8FAFC;
   --text-muted: #94A3B8;
+  --primary-btn-text: #080B10;
+  --text-primary-hover: #ffffff;
+  --text-glow-hover: rgba(0, 212, 255, 0.35);
 }
 
 /* Force dark theme overrides matching the default and light theme */
@@ -39,19 +42,25 @@ html[data-theme="dark"] {
   --structural-borders: #273449;
   --text-primary: #F8FAFC;
   --text-muted: #94A3B8;
+  --primary-btn-text: #080B10;
+  --text-primary-hover: #ffffff;
+  --text-glow-hover: rgba(0, 212, 255, 0.35);
 }
 
 html[data-theme="light"] {
-  --canvas-base: #F8FAFC;
+  --canvas-base: #60A5FA;
   --secondary-bg: #FFFFFF;
-  --card-bg: #F1F5F9;
-  --elevated-surface: #E2E8F0;
-  --primary-brand: #0088CC;
-  --hover-brand: #00A3F5;
-  --secondary-accent: #10B981;
-  --structural-borders: #E2E8F0;
-  --text-primary: #0F172A;
-  --text-muted: #475569;
+  --card-bg: #FFFFFF;
+  --elevated-surface: #E0F2FE;
+  --primary-brand: #025A9E;
+  --hover-brand: #01467C;
+  --secondary-accent: #047857;
+  --structural-borders: rgba(255, 255, 255, 0.45);
+  --text-primary: #0B1E36;
+  --text-muted: #3B4D61;
+  --primary-btn-text: #FFFFFF;
+  --text-primary-hover: var(--primary-brand);
+  --text-glow-hover: rgba(2, 132, 199, 0.25);
 }
 
 html,
@@ -62,6 +71,45 @@ body {
   margin: 0;
   padding: 0;
   transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+html[data-theme="light"] body {
+  background-image: linear-gradient(180deg, #60A5FA 0%, #8ECAFB 50%, #BAE6FD 100%);
+  background-attachment: fixed;
+  background-color: transparent;
+}
+
+html[data-theme="dark"] body {
+  background-image: none;
+}
+
+/* Glass White Cards in Light Mode */
+html[data-theme="light"] .project-card,
+html[data-theme="light"] .featured-card,
+html[data-theme="light"] .event-card-item > div,
+html[data-theme="light"] .past-event-item > div,
+html[data-theme="light"] .reveal-card,
+html[data-theme="light"] .glass-white-card {
+  background-color: rgba(255, 255, 255, 0.8) !important;
+  backdrop-filter: blur(16px) saturate(120%) !important;
+  -webkit-backdrop-filter: blur(16px) saturate(120%) !important;
+  border-color: rgba(255, 255, 255, 0.6) !important;
+  box-shadow: 
+    0 20px 40px -15px rgba(11, 30, 54, 0.15),
+    0 0 0 1px rgba(255, 255, 255, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.5) !important;
+}
+
+/* Hover effects for glass cards in light mode */
+html[data-theme="light"] .project-card:hover,
+html[data-theme="light"] .event-card-item > div:hover,
+html[data-theme="light"] .past-event-item > div:hover,
+html[data-theme="light"] .reveal-card:hover {
+  background-color: rgba(255, 255, 255, 0.9) !important;
+  border-color: rgba(2, 90, 158, 0.45) !important; /* Richer blue border on hover */
+  box-shadow: 
+    0 30px 60px -15px rgba(11, 30, 54, 0.22),
+    inset 0 1px 0 rgba(255, 255, 255, 0.6) !important;
 }
 
 /* Blue and Green Gradient Glowing Hyperlinks */
@@ -82,4 +130,16 @@ body {
 .glow-link:hover {
   filter: drop-shadow(0 0 8px rgba(0, 212, 255, 0.85)) drop-shadow(0 0 16px rgba(77, 255, 180, 0.6)) !important;
   transform: translateY(-1px) scale(1.03) !important;
+}
+
+/* Light mode overrides for glow link to keep high contrast */
+html[data-theme="light"] .glow-link {
+  background: linear-gradient(135deg, var(--primary-brand), var(--secondary-accent)) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  filter: drop-shadow(0 0 2px rgba(2, 132, 199, 0.15)) !important;
+}
+
+html[data-theme="light"] .glow-link:hover {
+  filter: drop-shadow(0 0 6px rgba(2, 132, 199, 0.4)) drop-shadow(0 0 12px rgba(5, 150, 105, 0.3)) !important;
 }

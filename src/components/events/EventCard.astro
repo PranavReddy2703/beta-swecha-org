@@ -25,7 +25,7 @@ const dateStr = event.date;
 ---
 
 <div 
-  class={`group relative overflow-hidden rounded-2xl border border-structural-borders bg-[#111827]/40 backdrop-blur-md transition-all duration-300 hover:-translate-y-1 flex flex-col h-full cursor-pointer ${isGlow ? 'active-card-green-glow' : 'hover:border-primary-brand/35 hover:shadow-[0_8px_30px_rgba(0,212,255,0.08)]'}`}
+  class={`group relative overflow-hidden rounded-2xl border border-structural-borders bg-secondary-bg/40 backdrop-blur-md transition-all duration-300 hover:-translate-y-1 flex flex-col h-full cursor-pointer ${isGlow ? 'active-card-green-glow' : 'hover:border-primary-brand/35 hover:shadow-[0_8px_30px_rgba(0,212,255,0.08)]'}`}
   onclick={`window.location.href = '${translatePath(`/events/${event.slug}`)}'`}
   data-category={event.category.toLowerCase()}
   data-past="false"

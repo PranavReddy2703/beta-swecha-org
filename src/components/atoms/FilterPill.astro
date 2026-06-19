@@ -11,7 +11,7 @@ const { category, iconSvg } = Astro.props;
 <button
   type="button"
   data-category={category}
-  class="filter-pill group flex items-center gap-2 px-4 py-2 rounded-full border border-structural-borders/50 bg-card-bg/60 text-slate-400 font-medium text-sm transition-all duration-300 hover:border-primary-brand/50 hover:text-primary-brand"
+  class="filter-pill group flex items-center gap-2 px-4 py-2 rounded-full border border-structural-borders/50 bg-card-bg/60 text-text-muted font-medium text-sm transition-all duration-300 hover:border-primary-brand/50 hover:text-primary-brand"
 >
   <span class="flex-shrink-0">
     <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" set:html={iconSvg} />
