@@ -350,9 +350,13 @@ const pastEvents = eventsData.filter(e => e.past);
 
   .filter-btn.active {
     background-color: var(--primary-brand);
-    color: #080B10;
+    color: var(--primary-btn-text);
     border-color: var(--primary-brand);
     box-shadow: 0 4px 14px rgba(0, 212, 255, 0.25);
+  }
+
+  :global(html[data-theme="light"]) .filter-btn.active {
+    box-shadow: 0 4px 14px rgba(2, 132, 199, 0.25);
   }
 
   @keyframes revealCard {

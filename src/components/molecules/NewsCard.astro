@@ -15,7 +15,7 @@ const { title, description, buttonText, link, image, index, gridClass = "" } = A
 ---
 
 <div 
-  class={`group relative overflow-hidden rounded-2xl border border-structural-borders bg-[#111827] transition-all duration-300 hover:border-primary-brand/35 hover:shadow-[0_4px_20px_rgba(0,0,0,0.3)] flex flex-col h-full select-none reveal-card cursor-pointer ${gridClass}`}
+  class={`group relative overflow-hidden rounded-2xl border border-structural-borders bg-secondary-bg transition-all duration-300 hover:border-primary-brand/35 hover:shadow-[0_4px_20px_rgba(0,0,0,0.3)] flex flex-col h-full select-none reveal-card cursor-pointer ${gridClass}`}
   style={`animation-delay: ${index * 120}ms`}
   onclick={`window.open('${link}', '_blank', 'noopener,noreferrer')`}
 >
