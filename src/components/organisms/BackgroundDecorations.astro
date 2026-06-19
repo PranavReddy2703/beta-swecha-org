@@ -20,7 +20,12 @@
   }
 
   :global(html[data-theme="light"]) #birds-wrapper {
-    opacity: 0.7;
+    opacity: 0.85;
+  }
+
+  /* Force white birds in light mode only */
+  :global(html[data-theme="light"]) :global(.bird-entity svg path) {
+    fill: #ffffff !important;
   }
 
   /* All bird-entity styles must be :global since elements are created by JS */
