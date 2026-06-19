@@ -1,19 +1,19 @@
 ---
 // src/components/Timeline.astro
-import { getLangFromUrl, useTranslations } from '../../i18n/utils';
-import TimelineCard from '../molecules/TimelineCard.astro';
-import TimelineSlider from './TimelineSlider.astro';
-import timelineData from '../../data/organisms/timeline.json';
+import { getLangFromUrl, useTranslations } from "../../i18n/utils";
+import TimelineCard from "../molecules/TimelineCard.astro";
+import TimelineSlider from "./TimelineSlider.astro";
+import timelineData from "../../data/organisms/timeline.json";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
 const tagsByYear: Record<string, string[]> = {
-  '2005': ['GNU/Linux', 'Telugu OS', 'FOSS'],
-  '2010': ['Community', 'Workshops', 'Localization'],
-  '2015': ['Digital Literacy', 'Schools', 'Computing'],
-  '2020': ['Emerging Tech', 'Python', 'Open Data'],
-  '2026': ['Astro', 'Tailwind CSS', 'Modern Web']
+  "2005": ["GNU/Linux", "Telugu OS", "FOSS"],
+  "2010": ["Community", "Workshops", "Localization"],
+  "2015": ["Digital Literacy", "Schools", "Computing"],
+  "2020": ["Emerging Tech", "Python", "Open Data"],
+  "2026": ["Astro", "Tailwind CSS", "Modern Web"],
 };
 
 const events = timelineData.map((event, index) => {
@@ -22,62 +22,91 @@ const events = timelineData.map((event, index) => {
     title: t(`timeline.${index}.title` as any) || event.title,
     description: t(`timeline.${index}.description` as any) || event.description,
     previewImage: `/images/timeline/${event.year}.png`,
-    tags: tagsByYear[event.year] || ['Community', 'FOSS', 'Localization']
+    tags: tagsByYear[event.year] || ["Community", "FOSS", "Localization"],
   };
 });
 ---
 
-<section id="timeline-section" class="py-6 md:py-8 min-h-[calc(100vh-4rem)] md:h-[calc(100vh-4rem)] flex flex-col justify-center relative transition-colors duration-300 overflow-hidden">
-
-
-  <div class="container mx-auto px-4 max-w-7xl h-full relative z-10 flex flex-col justify-between items-center gap-4">
+<section
+  id="timeline-section"
+  class="py-6 md:py-8 min-h-[calc(100vh-4rem)] md:h-[calc(100vh-4rem)] flex flex-col justify-center relative transition-colors duration-300 overflow-hidden"
+>
+  <div
+    class="container mx-auto px-4 max-w-7xl h-full relative z-10 flex flex-col justify-between items-center gap-4"
+  >
     <!-- Section Title -->
     <div class="text-center">
-      <h2 class="text-3xl font-extrabold tracking-tight text-text-main sm:text-4xl mb-3 animate-glow-text">
-        {t('timeline.title')}
+      <h2
+        class="text-3xl font-extrabold tracking-tight text-text-main sm:text-4xl mb-3 animate-glow-text"
+      >
+        {t("timeline.title")}
       </h2>
       <div class="h-1 w-20 bg-primary-brand mx-auto rounded-full"></div>
     </div>
 
     <!-- Active Card Area (One card visible at a time) -->
-    <div class="w-full max-w-7xl flex items-center justify-between gap-6 md:gap-10">
+    <div
+      class="w-full max-w-7xl flex items-center justify-between gap-6 md:gap-10"
+    >
       <!-- Left Arrow Button -->
-      <button 
-        id="prev-btn" 
+      <button
+        id="prev-btn"
         class="z-20 text-text-muted hover:text-primary-brand hover:scale-110 active:scale-95 transition-all duration-200 cursor-pointer focus:outline-none flex items-center justify-center p-2"
         aria-label="Previous event"
       >
-        <svg class="h-8 w-8 sm:h-10 sm:w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7" />
+        <svg
+          class="h-8 w-8 sm:h-10 sm:w-10"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2.5"
+            d="M15 19l-7-7 7-7"></path>
         </svg>
       </button>
 
       <!-- Cards Container -->
-      <div class="relative flex-1 max-w-[420px] sm:max-w-[720px] md:max-w-[1020px] lg:max-w-[1200px] min-h-[660px] md:min-h-[400px] overflow-visible flex items-center">
-        {events.map((event, index) => (
-          <div 
-            class="timeline-card absolute inset-0 opacity-0 scale-95 pointer-events-none transition-all duration-500 ease-in-out transform flex items-center justify-center" 
-            data-index={index}
-          >
-            <TimelineCard 
-              year={event.year} 
-              title={event.title} 
-              description={event.description} 
-              previewImage={event.previewImage}
-              tags={event.tags}
-            />
-          </div>
-        ))}
+      <div
+        class="relative flex-1 max-w-[420px] sm:max-w-[720px] md:max-w-[1020px] lg:max-w-[1200px] min-h-[660px] md:min-h-[400px] overflow-visible flex items-center"
+      >
+        {
+          events.map((event, index) => (
+            <div
+              class="timeline-card absolute inset-0 opacity-0 scale-95 pointer-events-none transition-all duration-500 ease-in-out transform flex items-center justify-center"
+              data-index={index}
+            >
+              <TimelineCard
+                year={event.year}
+                title={event.title}
+                description={event.description}
+                previewImage={event.previewImage}
+                tags={event.tags}
+              />
+            </div>
+          ))
+        }
       </div>
 
       <!-- Right Arrow Button -->
-      <button 
-        id="next-btn" 
+      <button
+        id="next-btn"
         class="z-20 text-text-muted hover:text-primary-brand hover:scale-110 active:scale-95 transition-all duration-200 cursor-pointer focus:outline-none flex items-center justify-center p-2"
         aria-label="Next event"
       >
-        <svg class="h-8 w-8 sm:h-10 sm:w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7" />
+        <svg
+          class="h-8 w-8 sm:h-10 sm:w-10"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2.5"
+            d="M9 5l7 7-7 7"></path>
         </svg>
       </button>
     </div>
@@ -117,11 +146,13 @@ const events = timelineData.map((event, index) => {
 
 <script>
   function initTimeline() {
-    const cards = document.querySelectorAll('.timeline-card');
-    const nodes = document.querySelectorAll('.timeline-node');
-    const prevBtn = document.getElementById('prev-btn');
-    const nextBtn = document.getElementById('next-btn');
-    const slidingTimeline = document.getElementById('sliding-timeline') as HTMLElement;
+    const cards = document.querySelectorAll(".timeline-card");
+    const nodes = document.querySelectorAll(".timeline-node");
+    const prevBtn = document.getElementById("prev-btn");
+    const nextBtn = document.getElementById("next-btn");
+    const slidingTimeline = document.getElementById(
+      "sliding-timeline",
+    ) as HTMLElement;
 
     if (cards.length === 0 || nodes.length === 0) return;
 
@@ -132,93 +163,111 @@ const events = timelineData.map((event, index) => {
 
       // 1. Update Cards
       cards.forEach((card, idx) => {
-        card.classList.remove('active-card', 'left-card', 'right-card');
+        card.classList.remove("active-card", "left-card", "right-card");
         if (idx === activeIndex) {
-          card.classList.add('active-card');
+          card.classList.add("active-card");
         } else if (idx < activeIndex) {
-          card.classList.add('left-card');
+          card.classList.add("left-card");
         } else {
-          card.classList.add('right-card');
+          card.classList.add("right-card");
         }
       });
 
       // 2. Update DaisyUI Timeline Lines
-      const lis = document.querySelectorAll('.timeline > li');
+      const lis = document.querySelectorAll(".timeline > li");
       lis.forEach((li, idx) => {
-        const prevHr = li.querySelector('.timeline-line-prev') as HTMLElement;
-        const nextHr = li.querySelector('.timeline-line-next') as HTMLElement;
-        const node = li.querySelector('.timeline-node') as HTMLElement;
-        
-        // Query theme colors dynamically from the HTML attributes
-        const shadowColor = node ? (node.getAttribute('data-shadow') || 'rgba(0, 212, 255, 0.15)') : 'rgba(0, 212, 255, 0.15)';
+        const prevHr = li.querySelector(".timeline-line-prev") as HTMLElement;
+        const nextHr = li.querySelector(".timeline-line-next") as HTMLElement;
+        const node = li.querySelector(".timeline-node") as HTMLElement;
 
-        if (prevHr && !prevHr.classList.contains('timeline-line-dummy')) {
+        // Check if light theme is active
+        const isLight =
+          document.documentElement.getAttribute("data-theme") === "light";
+
+        // Query theme colors dynamically from the HTML attributes
+        const shadowColor = node
+          ? isLight
+            ? node.getAttribute("data-shadow-light") || "rgba(2, 90, 158, 0.15)"
+            : node.getAttribute("data-shadow") || "rgba(0, 212, 255, 0.15)"
+          : "rgba(0, 212, 255, 0.15)";
+
+        if (prevHr && !prevHr.classList.contains("timeline-line-dummy")) {
           if (idx <= activeIndex) {
-            prevHr.style.opacity = '1.0';
+            prevHr.style.opacity = "1.0";
             prevHr.style.boxShadow = `0 0 8px ${shadowColor}`;
           } else {
-            prevHr.style.opacity = '0.2';
-            prevHr.style.boxShadow = 'none';
+            prevHr.style.opacity = "0.2";
+            prevHr.style.boxShadow = "none";
           }
         }
 
-        if (nextHr && !nextHr.classList.contains('timeline-line-dummy')) {
+        if (nextHr && !nextHr.classList.contains("timeline-line-dummy")) {
           if (idx < activeIndex) {
-            nextHr.style.opacity = '1.0';
+            nextHr.style.opacity = "1.0";
             nextHr.style.boxShadow = `0 0 8px ${shadowColor}`;
           } else {
-            nextHr.style.opacity = '0.2';
-            nextHr.style.boxShadow = 'none';
+            nextHr.style.opacity = "0.2";
+            nextHr.style.boxShadow = "none";
           }
         }
       });
 
       // 3. Update Timeline Nodes
       nodes.forEach((node, idx) => {
-        const ring = node.querySelector('.pulse-ring') as HTMLElement;
-        const dot = node.querySelector('.node-dot') as HTMLElement;
-        const glow = node.querySelector('.dot-glow') as HTMLElement;
-        
+        const ring = node.querySelector(".pulse-ring") as HTMLElement;
+        const dot = node.querySelector(".node-dot") as HTMLElement;
+        const glow = node.querySelector(".dot-glow") as HTMLElement;
+
         // Find the node year within the same li item
-        const li = node.closest('li');
-        const year = li ? li.querySelector('.node-year') : null;
-        
+        const li = node.closest("li");
+        const year = li ? li.querySelector(".node-year") : null;
+
+        // Check if light theme is active
+        const isLight =
+          document.documentElement.getAttribute("data-theme") === "light";
+
         // Query theme colors dynamically from the HTML attributes
-        const colorVal = node.getAttribute('data-color') || '#00D4FF';
-        const glowVal = node.getAttribute('data-glow') || 'rgba(0, 212, 255, 0.25)';
-        const shadowVal = node.getAttribute('data-shadow') || 'rgba(0, 212, 255, 0.15)';
+        const colorVal = isLight
+          ? node.getAttribute("data-color-light") || "#025A9E"
+          : node.getAttribute("data-color") || "#00D4FF";
+        const glowVal = isLight
+          ? node.getAttribute("data-glow-light") || "rgba(2, 90, 158, 0.25)"
+          : node.getAttribute("data-glow") || "rgba(0, 212, 255, 0.25)";
+        const shadowVal = isLight
+          ? node.getAttribute("data-shadow-light") || "rgba(2, 90, 158, 0.15)"
+          : node.getAttribute("data-shadow") || "rgba(0, 212, 255, 0.15)";
 
         // Toggle Circular background gradient glow around nodes
         if (glow) {
-          glow.style.setProperty('--node-glow', glowVal);
+          glow.style.setProperty("--node-glow", glowVal);
           if (idx === activeIndex) {
-            glow.style.opacity = '1.0';
+            glow.style.opacity = "1.0";
           } else {
-            glow.style.opacity = '0.3'; // Dimmed glow for inactive nodes
+            glow.style.opacity = "0.3"; // Dimmed glow for inactive nodes
           }
         }
 
         // Toggle Pulse Ring (only active milestone pulses)
         if (ring) {
           if (idx === activeIndex) {
-            ring.classList.add('active-pulse');
+            ring.classList.add("active-pulse");
             ring.style.borderColor = `${colorVal}50`; // ~31% opacity
             ring.style.backgroundColor = `${colorVal}08`; // ~3% opacity
           } else {
-            ring.classList.remove('active-pulse');
+            ring.classList.remove("active-pulse");
           }
         }
 
         // Toggle Dot Styling (Thick dark border, solid color core background, active has thin outline ring)
         if (dot) {
           dot.style.backgroundColor = colorVal;
-          dot.style.borderColor = '#080B10'; // Canvas Base dark border
-          
+          dot.style.borderColor = isLight ? "#FFFFFF" : "#080B10"; // Dark border for dark mode, white for light mode
+
           if (idx === activeIndex) {
             dot.style.boxShadow = `0 0 0 1.5px ${colorVal}, 0 0 10px ${shadowVal}`;
             dot.className = `node-dot h-5 w-5 rounded-full border-[3px] transition-all duration-500 transform z-10 scale-115 opacity-100`;
           } else {
-            dot.style.boxShadow = 'none';
+            dot.style.boxShadow = "none";
             dot.className = `node-dot h-5 w-5 rounded-full border-[3px] transition-all duration-500 transform z-10 scale-100 opacity-40`; // Inactive nodes dimmed to 40%
           }
         }
@@ -227,9 +276,11 @@ const events = timelineData.map((event, index) => {
         if (year) {
           (year as HTMLElement).style.color = colorVal; // Apply theme color to all labels
           if (idx === activeIndex) {
-            year.className = 'node-year text-xs sm:text-sm font-black scale-105 transition-all duration-300 opacity-100';
+            year.className =
+              "node-year text-xs sm:text-sm font-black scale-105 transition-all duration-300 opacity-100";
           } else {
-            year.className = 'node-year text-xs sm:text-sm font-bold transition-all duration-300 opacity-40'; // Inactive labels dimmed to 40%
+            year.className =
+              "node-year text-xs sm:text-sm font-bold transition-all duration-300 opacity-40"; // Inactive labels dimmed to 40%
           }
         }
       });
@@ -251,19 +302,34 @@ const events = timelineData.map((event, index) => {
             // distance from viewport left to first node center
             const leftWidth = window.innerWidth / 2 + (x_0 - activeCenter);
             // distance from last node center to viewport right
-            const rightWidth = window.innerWidth - (window.innerWidth / 2 + (x_N - activeCenter));
+            const rightWidth =
+              window.innerWidth -
+              (window.innerWidth / 2 + (x_N - activeCenter));
 
-            const leftExtend = document.querySelector('.timeline-line-prev-extend') as HTMLElement;
-            const rightExtend = document.querySelector('.timeline-line-next-extend') as HTMLElement;
+            const leftExtend = document.querySelector(
+              ".timeline-line-prev-extend",
+            ) as HTMLElement;
+            const rightExtend = document.querySelector(
+              ".timeline-line-next-extend",
+            ) as HTMLElement;
 
             if (leftExtend) {
-              leftExtend.style.setProperty('width', `${Math.max(0, leftWidth)}px`, 'important');
-              leftExtend.style.opacity = '1.0';
+              leftExtend.style.setProperty(
+                "width",
+                `${Math.max(0, leftWidth)}px`,
+                "important",
+              );
+              leftExtend.style.opacity = "1.0";
             }
             if (rightExtend) {
-              rightExtend.style.setProperty('width', `${Math.max(0, rightWidth)}px`, 'important');
+              rightExtend.style.setProperty(
+                "width",
+                `${Math.max(0, rightWidth)}px`,
+                "important",
+              );
               // Dim the right edge screen extension when the last node is not active
-              rightExtend.style.opacity = activeIndex === cards.length - 1 ? '1.0' : '0.2';
+              rightExtend.style.opacity =
+                activeIndex === cards.length - 1 ? "1.0" : "0.2";
             }
           }
         }
@@ -272,60 +338,70 @@ const events = timelineData.map((event, index) => {
       // 5. Navigation buttons boundary states
       if (prevBtn) {
         if (activeIndex === 0) {
-          prevBtn.setAttribute('disabled', 'true');
-          prevBtn.classList.add('opacity-20', 'cursor-not-allowed');
+          prevBtn.setAttribute("disabled", "true");
+          prevBtn.classList.add("opacity-20", "cursor-not-allowed");
         } else {
-          prevBtn.removeAttribute('disabled');
-          prevBtn.classList.remove('opacity-20', 'cursor-not-allowed');
+          prevBtn.removeAttribute("disabled");
+          prevBtn.classList.remove("opacity-20", "cursor-not-allowed");
         }
       }
 
       if (nextBtn) {
         if (activeIndex === cards.length - 1) {
-          nextBtn.setAttribute('disabled', 'true');
-          nextBtn.classList.add('opacity-20', 'cursor-not-allowed');
+          nextBtn.setAttribute("disabled", "true");
+          nextBtn.classList.add("opacity-20", "cursor-not-allowed");
         } else {
-          nextBtn.removeAttribute('disabled');
-          nextBtn.classList.remove('opacity-20', 'cursor-not-allowed');
+          nextBtn.removeAttribute("disabled");
+          nextBtn.classList.remove("opacity-20", "cursor-not-allowed");
         }
       }
     }
 
     // Prev / Next click triggers
-    prevBtn?.addEventListener('click', () => {
+    prevBtn?.addEventListener("click", () => {
       if (activeIndex > 0) updateTimeline(activeIndex - 1);
     });
 
-    nextBtn?.addEventListener('click', () => {
+    nextBtn?.addEventListener("click", () => {
       if (activeIndex < cards.length - 1) updateTimeline(activeIndex + 1);
     });
 
     // Node click triggers
     nodes.forEach((node, idx) => {
-      node.addEventListener('click', () => {
+      node.addEventListener("click", () => {
         updateTimeline(idx);
       });
     });
 
     // Keyboard Arrow navigation triggers
-    window.addEventListener('keydown', (e) => {
-      if (e.key === 'ArrowLeft') {
+    window.addEventListener("keydown", (e) => {
+      if (e.key === "ArrowLeft") {
         if (activeIndex > 0) updateTimeline(activeIndex - 1);
-      } else if (e.key === 'ArrowRight') {
+      } else if (e.key === "ArrowRight") {
         if (activeIndex < cards.length - 1) updateTimeline(activeIndex + 1);
       }
     });
 
     // Recalculate on window resize/zoom changes
-    window.addEventListener('resize', () => {
+    window.addEventListener("resize", () => {
       updateTimeline(activeIndex);
     });
+
+    // Listen for theme changes to recalculate colors dynamically
+    const observer = new MutationObserver((mutations) => {
+      mutations.forEach((mutation) => {
+        if (mutation.attributeName === "data-theme") {
+          updateTimeline(activeIndex);
+        }
+      });
+    });
+    observer.observe(document.documentElement, { attributes: true });
 
     // Initial load
     updateTimeline(0);
   }
 
   // Setup listener for Astro page transitions/initial load
-  document.addEventListener('DOMContentLoaded', initTimeline);
+  document.addEventListener("DOMContentLoaded", initTimeline);
   initTimeline(); // Run immediately for fast interactive load
 </script>

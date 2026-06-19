@@ -11,17 +11,28 @@ interface Props {
 const { events } = Astro.props;
 const N = events.length;
 
-// Interpolate colors dynamically from Electric Cyan (HSL 190) to Emerald Mint (HSL 155)
-const getNodeColors = (idx: number) => {
+const getNodeColors = (idx: number, isLight: boolean = false) => {
   const t = N > 1 ? idx / (N - 1) : 0;
-  const hue = Math.round(190 - t * 35);
-  const lightness = Math.round(50 + t * 15);
   
-  const color = `hsl(${hue}, 100%, ${lightness}%)`;
-  const glow = `hsla(${hue}, 100%, ${lightness}%, 0.25)`;
-  const shadow = `hsla(${hue}, 100%, ${lightness}%, 0.15)`;
-  
-  return { color, glow, shadow };
+  if (isLight) {
+    // Very Dark blues to dark emeralds for high contrast in light mode
+    const hue = Math.round(210 - t * 50);
+    const lightness = Math.round(20 + t * 5); // 20% to 25% lightness for deep visibility
+    return {
+      color: `hsl(${hue}, 100%, ${lightness}%)`,
+      glow: `hsla(${hue}, 100%, ${lightness}%, 0.4)`,
+      shadow: `hsla(${hue}, 100%, ${lightness}%, 0.3)`
+    };
+  } else {
+    // Electric Cyan to Emerald Mint for dark mode
+    const hue = Math.round(190 - t * 35);
+    const lightness = Math.round(50 + t * 15);
+    return {
+      color: `hsl(${hue}, 100%, ${lightness}%)`,
+      glow: `hsla(${hue}, 100%, ${lightness}%, 0.25)`,
+      shadow: `hsla(${hue}, 100%, ${lightness}%, 0.15)`
+    };
+  }
 };
 ---
 
@@ -32,22 +43,30 @@ const getNodeColors = (idx: number) => {
     style={`width: ${events.length * 200}px; min-width: ${events.length * 200}px;`}
   >
     {events.map((event, index) => {
-      const colors = getNodeColors(index);
-      const nextColors = index < N - 1 ? getNodeColors(index + 1) : null;
+      const colors = getNodeColors(index, false);
+      const nextColors = index < N - 1 ? getNodeColors(index + 1, false) : null;
+      const prevColors = index > 0 ? getNodeColors(index - 1, false) : null;
       
-      // Calculate dynamic linear gradients for line segments
-      const lineStyle = nextColors 
-        ? `background: linear-gradient(to right, ${colors.color}, ${nextColors.color}) !important;` 
-        : '';
-      const prevLineStyle = index > 0 
-        ? `background: linear-gradient(to right, ${getNodeColors(index - 1).color}, ${colors.color}) !important;` 
-        : '';
-
+      const colorsLight = getNodeColors(index, true);
+      const nextColorsLight = index < N - 1 ? getNodeColors(index + 1, true) : null;
+      const prevColorsLight = index > 0 ? getNodeColors(index - 1, true) : null;
+      
       return (
-        <li class="flex-1 relative">
+        <li class="flex-1 relative timeline-node-wrapper" style={`
+          --node-color-dark: ${colors.color};
+          --node-glow-dark: ${colors.glow};
+          --node-shadow-dark: ${colors.shadow};
+          --next-color-dark: ${nextColors?.color || colors.color};
+          --prev-color-dark: ${prevColors?.color || colors.color};
+
+          --node-color-light: ${colorsLight.color};
+          --node-glow-light: ${colorsLight.glow};
+          --node-shadow-light: ${colorsLight.shadow};
+          --next-color-light: ${nextColorsLight?.color || colorsLight.color};
+          --prev-color-light: ${prevColorsLight?.color || colorsLight.color};
+        `}>
           <hr 
             class={`timeline-line-prev h-[4px] border-none transition-all duration-500 ease-in-out relative z-[1] ${index === 0 ? 'opacity-0 pointer-events-none timeline-line-dummy' : 'bg-[#141f26]/70'}`}
-            style={index > 0 ? prevLineStyle : 'opacity: 0 !important; pointer-events: none;'}
           />
           
           <button 
@@ -56,6 +75,9 @@ const getNodeColors = (idx: number) => {
             data-color={colors.color}
             data-glow={colors.glow}
             data-shadow={colors.shadow}
+            data-color-light={colorsLight.color}
+            data-glow-light={colorsLight.glow}
+            data-shadow-light={colorsLight.shadow}
             aria-label={`Jump to event year ${event.year}`}
           >
             <!-- The Node Dot with pulse ring -->
@@ -79,7 +101,6 @@ const getNodeColors = (idx: number) => {
               {index === 0 && (
                 <div 
                   class="timeline-line-prev-extend h-[4px] transition-all duration-500 ease-in-out" 
-                  style={`background: linear-gradient(to right, transparent 0%, ${colors.color} 100%) !important;`}
                 />
               )}
 
@@ -87,7 +108,6 @@ const getNodeColors = (idx: number) => {
               {index === N - 1 && (
                 <div 
                   class="timeline-line-next-extend h-[4px] transition-all duration-500 ease-in-out" 
-                  style={`background: linear-gradient(to right, ${colors.color} 0%, transparent 100%) !important;`}
                 />
               )}
             </div>
@@ -102,7 +122,6 @@ const getNodeColors = (idx: number) => {
           
           <hr 
             class={`timeline-line-next h-[4px] border-none transition-all duration-500 ease-in-out relative z-[1] ${index === N - 1 ? 'opacity-0 pointer-events-none timeline-line-dummy' : 'bg-[#141f26]/70'}`}
-            style={index < N - 1 ? lineStyle : 'opacity: 0 !important; pointer-events: none;'}
           />
         </li>
       );
@@ -111,6 +130,34 @@ const getNodeColors = (idx: number) => {
 </div>
 
 <style>
+  .timeline-node-wrapper {
+    --current-node-color: var(--node-color-dark);
+    --current-node-glow: var(--node-glow-dark);
+    --current-node-shadow: var(--node-shadow-dark);
+    --line-next-bg: linear-gradient(to right, var(--node-color-dark), var(--next-color-dark));
+    --line-prev-bg: linear-gradient(to right, var(--prev-color-dark), var(--node-color-dark));
+    --extend-next-bg: linear-gradient(to right, var(--node-color-dark) 0%, transparent 100%);
+    --extend-prev-bg: linear-gradient(to right, transparent 0%, var(--node-color-dark) 100%);
+  }
+
+  :global(html[data-theme="light"]) .timeline-node-wrapper {
+    --current-node-color: var(--node-color-light);
+    --current-node-glow: var(--node-glow-light);
+    --current-node-shadow: var(--node-shadow-light);
+    --line-next-bg: linear-gradient(to right, var(--node-color-light), var(--next-color-light));
+    --line-prev-bg: linear-gradient(to right, var(--prev-color-light), var(--node-color-light));
+    --extend-next-bg: linear-gradient(to right, var(--node-color-light) 0%, transparent 100%);
+    --extend-prev-bg: linear-gradient(to right, transparent 0%, var(--node-color-light) 100%);
+  }
+
+  .timeline-line-prev:not(.timeline-line-dummy) {
+    background: var(--line-prev-bg) !important;
+  }
+  
+  .timeline-line-next:not(.timeline-line-dummy) {
+    background: var(--line-next-bg) !important;
+  }
+
   #sliding-timeline {
     position: relative;
     left: 50%;
@@ -125,6 +172,7 @@ const getNodeColors = (idx: number) => {
     top: 50% !important;
     z-index: 0 !important;
     opacity: 1;
+    background: var(--extend-prev-bg) !important;
   }
   
   .timeline-line-next-extend {
@@ -135,6 +183,7 @@ const getNodeColors = (idx: number) => {
     top: 50% !important;
     z-index: 0 !important;
     opacity: 1;
+    background: var(--extend-next-bg) !important;
   }
 
   /* Circular Glow behind each milestone node */
