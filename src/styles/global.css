@@ -86,47 +86,50 @@ html[data-theme="dark"] body {
 /* Glass White Cards in Light Mode */
 html[data-theme="light"] .project-card,
 html[data-theme="light"] .featured-card,
-html[data-theme="light"] .event-card-item > div,
-html[data-theme="light"] .past-event-item > div,
+html[data-theme="light"] .event-card-item>div,
+html[data-theme="light"] .past-event-item>div,
 html[data-theme="light"] .reveal-card,
-html[data-theme="light"] .glass-white-card {
-  background-color: rgba(255, 255, 255, 0.8) !important;
-  backdrop-filter: blur(16px) saturate(120%) !important;
-  -webkit-backdrop-filter: blur(16px) saturate(120%) !important;
-  border-color: rgba(255, 255, 255, 0.6) !important;
-  box-shadow: 
+html[data-theme="light"] .glass-white-card,
+html[data-theme="light"] .soft-glass-card {
+  background-color: rgba(224, 242, 254, 0.35) !important;
+  backdrop-filter: blur(16px) saturate(140%) !important;
+  -webkit-backdrop-filter: blur(16px) saturate(140%) !important;
+  border-color: rgba(255, 255, 255, 0.4) !important;
+  box-shadow:
     0 20px 40px -15px rgba(11, 30, 54, 0.15),
-    0 0 0 1px rgba(255, 255, 255, 0.4),
-    inset 0 1px 0 rgba(255, 255, 255, 0.5) !important;
+    0 0 0 1px rgba(255, 255, 255, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.4) !important;
 }
 
 /* Hover effects for glass cards in light mode */
 html[data-theme="light"] .project-card:hover,
-html[data-theme="light"] .event-card-item > div:hover,
-html[data-theme="light"] .past-event-item > div:hover,
+html[data-theme="light"] .event-card-item>div:hover,
+html[data-theme="light"] .past-event-item>div:hover,
 html[data-theme="light"] .reveal-card:hover {
   background-color: rgba(255, 255, 255, 0.9) !important;
-  border-color: rgba(2, 90, 158, 0.45) !important; /* Richer blue border on hover */
-  box-shadow: 
+  border-color: rgba(2, 90, 158, 0.45) !important;
+  /* Richer blue border on hover */
+  box-shadow:
     0 30px 60px -15px rgba(11, 30, 54, 0.22),
     inset 0 1px 0 rgba(255, 255, 255, 0.6) !important;
 }
 
-/* Opaque White About Card in Light Mode */
+/* Soft Glass About Card in Light Mode */
 html[data-theme="light"] .about-card {
-  background-color: #FFFFFF !important;
-  backdrop-filter: none !important;
-  -webkit-backdrop-filter: none !important;
-  border-color: rgba(255, 255, 255, 0.8) !important;
+  background-color: rgba(224, 242, 254, 0.35) !important;
+  backdrop-filter: blur(16px) saturate(140%) !important;
+  -webkit-backdrop-filter: blur(16px) saturate(140%) !important;
+  border-color: rgba(255, 255, 255, 0.4) !important;
+  box-shadow: 0 20px 40px -15px rgba(11, 30, 54, 0.1) !important;
 }
 
-/* Opaque White Header & Footer in Light Mode */
+/* Soft Sky Glass Header in Light Mode */
 html[data-theme="light"] .navbar-header,
 html[data-theme="light"] .navbar-header.navbar-scrolled {
-  background-color: #FFFFFF !important;
-  background-image: none !important;
-  backdrop-filter: none !important;
-  -webkit-backdrop-filter: none !important;
+  background-color: rgba(224, 242, 254, 0.45) !important; /* Soft sky blue */
+  backdrop-filter: blur(16px) saturate(140%) !important;
+  -webkit-backdrop-filter: blur(16px) saturate(140%) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
 }
 
 html[data-theme="light"] footer {
