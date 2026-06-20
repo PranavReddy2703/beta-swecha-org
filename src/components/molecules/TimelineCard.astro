@@ -1,5 +1,6 @@
 ---
 // src/components/TimelineCard.astro
+import Tag from '../atoms/Tag.astro';
 interface Props {
   year: string;
   title: string;
@@ -65,9 +66,7 @@ const { year, title, description, previewImage, tags = ["Community", "FOSS", "Lo
     <!-- Tech/Topic Badges (daisyui badge component) -->
     <div class="flex flex-wrap gap-2">
       {tags.map((tag) => (
-        <div class="badge badge-outline border-structural-borders/60 text-text-muted text-[11px] font-semibold px-2.5 py-1">
-          {tag}
-        </div>
+        <Tag label={tag} />
       ))}
     </div>
   </div>

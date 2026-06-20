@@ -1,5 +1,7 @@
 ---
 // src/components/TimelineSlider.astro
+import { getNodeColors } from '../../utils/timelineColors';
+
 interface Props {
   events: Array<{
     year: string;
@@ -10,30 +12,6 @@ interface Props {
 
 const { events } = Astro.props;
 const N = events.length;
-
-const getNodeColors = (idx: number, isLight: boolean = false) => {
-  const t = N > 1 ? idx / (N - 1) : 0;
-  
-  if (isLight) {
-    // Very Dark blues to dark emeralds for high contrast in light mode
-    const hue = Math.round(210 - t * 50);
-    const lightness = Math.round(20 + t * 5); // 20% to 25% lightness for deep visibility
-    return {
-      color: `hsl(${hue}, 100%, ${lightness}%)`,
-      glow: `hsla(${hue}, 100%, ${lightness}%, 0.4)`,
-      shadow: `hsla(${hue}, 100%, ${lightness}%, 0.3)`
-    };
-  } else {
-    // Electric Cyan to Emerald Mint for dark mode
-    const hue = Math.round(190 - t * 35);
-    const lightness = Math.round(50 + t * 15);
-    return {
-      color: `hsl(${hue}, 100%, ${lightness}%)`,
-      glow: `hsla(${hue}, 100%, ${lightness}%, 0.25)`,
-      shadow: `hsla(${hue}, 100%, ${lightness}%, 0.15)`
-    };
-  }
-};
 ---
 
 <div class="w-full overflow-visible py-6 relative flex justify-center mt-4">
@@ -43,13 +21,13 @@ const getNodeColors = (idx: number, isLight: boolean = false) => {
     style={`width: ${events.length * 200}px; min-width: ${events.length * 200}px;`}
   >
     {events.map((event, index) => {
-      const colors = getNodeColors(index, false);
-      const nextColors = index < N - 1 ? getNodeColors(index + 1, false) : null;
-      const prevColors = index > 0 ? getNodeColors(index - 1, false) : null;
+      const colors = getNodeColors(index, N, false);
+      const nextColors = index < N - 1 ? getNodeColors(index + 1, N, false) : null;
+      const prevColors = index > 0 ? getNodeColors(index - 1, N, false) : null;
       
-      const colorsLight = getNodeColors(index, true);
-      const nextColorsLight = index < N - 1 ? getNodeColors(index + 1, true) : null;
-      const prevColorsLight = index > 0 ? getNodeColors(index - 1, true) : null;
+      const colorsLight = getNodeColors(index, N, true);
+      const nextColorsLight = index < N - 1 ? getNodeColors(index + 1, N, true) : null;
+      const prevColorsLight = index > 0 ? getNodeColors(index - 1, N, true) : null;
       
       return (
         <li class="flex-1 relative timeline-node-wrapper" style={`
