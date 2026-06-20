@@ -51,7 +51,7 @@ const events = timelineData.map((event, index) => {
       <!-- Left Arrow Button -->
       <button
         id="prev-btn"
-        class="z-20 text-text-muted hover:text-primary-brand hover:scale-110 active:scale-95 transition-all duration-200 cursor-pointer focus:outline-none flex items-center justify-center p-2"
+        class="timeline-nav-btn z-20 text-text-muted hover:text-primary-brand hover:scale-110 active:scale-95 transition-all duration-200 cursor-pointer focus:outline-none flex items-center justify-center p-2"
         aria-label="Previous event"
       >
         <svg
@@ -93,7 +93,7 @@ const events = timelineData.map((event, index) => {
       <!-- Right Arrow Button -->
       <button
         id="next-btn"
-        class="z-20 text-text-muted hover:text-primary-brand hover:scale-110 active:scale-95 transition-all duration-200 cursor-pointer focus:outline-none flex items-center justify-center p-2"
+        class="timeline-nav-btn z-20 text-text-muted hover:text-primary-brand hover:scale-110 active:scale-95 transition-all duration-200 cursor-pointer focus:outline-none flex items-center justify-center p-2"
         aria-label="Next event"
       >
         <svg
@@ -141,6 +141,33 @@ const events = timelineData.map((event, index) => {
     transform: translateX(40px) scale(0.95) !important;
     pointer-events: none !important;
     z-index: 0 !important;
+  }
+
+  /* Premium Nav Button styles in light mode */
+  :global(html[data-theme="light"]) .timeline-nav-btn {
+    background-color: #FFFFFF !important;
+    border: 1px solid rgba(0, 0, 0, 0.08) !important;
+    color: var(--text-primary) !important;
+    border-radius: 50% !important;
+    width: 3.5rem !important;
+    height: 3.5rem !important;
+    box-shadow: 
+      0 10px 20px -5px rgba(8, 28, 54, 0.08),
+      0 0 0 1px rgba(0, 0, 0, 0.02) !important;
+  }
+
+  :global(html[data-theme="light"]) .timeline-nav-btn:hover:not([disabled]) {
+    color: var(--primary-brand) !important;
+    border-color: rgba(2, 90, 158, 0.25) !important;
+    box-shadow: 
+      0 15px 25px -5px rgba(8, 28, 54, 0.12),
+      0 0 0 1.5px rgba(2, 90, 158, 0.1) !important;
+  }
+
+  :global(html[data-theme="light"]) .timeline-nav-btn[disabled] {
+    opacity: 0.35 !important;
+    background-color: rgba(255, 255, 255, 0.6) !important;
+    box-shadow: none !important;
   }
 </style>
 
