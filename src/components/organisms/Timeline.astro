@@ -3,6 +3,8 @@
 import { getLangFromUrl, useTranslations } from "../../i18n/utils";
 import TimelineCard from "../molecules/TimelineCard.astro";
 import TimelineSlider from "./TimelineSlider.astro";
+import MobileTimelineCard from "../molecules/MobileTimelineCard.astro";
+import TimelineModal from "../molecules/TimelineModal.astro";
 import timelineData from "../../data/organisms/timeline.json";
 
 const lang = getLangFromUrl(Astro.url);
@@ -25,6 +27,29 @@ const events = timelineData.map((event, index) => {
     tags: tagsByYear[event.year] || ["Community", "FOSS", "Localization"],
   };
 });
+
+const N = events.length;
+const getNodeColors = (idx: number, isLight: boolean = false) => {
+  const t = N > 1 ? idx / (N - 1) : 0;
+  
+  if (isLight) {
+    const hue = Math.round(210 - t * 50);
+    const lightness = Math.round(20 + t * 5); 
+    return {
+      color: `hsl(${hue}, 100%, ${lightness}%)`,
+      glow: `hsla(${hue}, 100%, ${lightness}%, 0.4)`,
+      shadow: `hsla(${hue}, 100%, ${lightness}%, 0.3)`
+    };
+  } else {
+    const hue = Math.round(190 - t * 35);
+    const lightness = Math.round(50 + t * 15);
+    return {
+      color: `hsl(${hue}, 100%, ${lightness}%)`,
+      glow: `hsla(${hue}, 100%, ${lightness}%, 0.25)`,
+      shadow: `hsla(${hue}, 100%, ${lightness}%, 0.15)`
+    };
+  }
+};
 ---
 
 <section
@@ -46,7 +71,7 @@ const events = timelineData.map((event, index) => {
 
     <!-- Active Card Area (One card visible at a time) -->
     <div
-      class="w-full max-w-7xl flex items-center justify-between gap-6 md:gap-10"
+      class="w-full max-w-7xl hidden md:flex items-center justify-between gap-6 md:gap-10"
     >
       <!-- Left Arrow Button -->
       <button
@@ -112,11 +137,85 @@ const events = timelineData.map((event, index) => {
     </div>
 
     <!-- Timeline Track Slider Component -->
-    <TimelineSlider events={events} />
+    <div class="hidden md:block w-full">
+      <TimelineSlider events={events} />
+    </div>
+
+    <!-- Mobile Timeline (Vertical) -->
+    <div class="w-full flex flex-col md:hidden relative mt-4">
+      <!-- Vertical Line -->
+      <div class="absolute left-[27px] top-4 bottom-4 w-[2px] bg-structural-borders/40"></div>
+      
+      <div class="flex flex-col gap-12 w-full mobile-timeline-container relative z-10 py-8">
+        {
+          events.map((event, index) => (
+            <div class="flex flex-row items-center w-full gap-6 relative mobile-timeline-row">
+              <!-- Left: Node -->
+              <div class="relative flex flex-col items-center shrink-0 w-[56px] mobile-timeline-dot transition-all duration-500 scale-75 opacity-40 mobile-node-wrapper"
+                   style={`
+                     --node-color-dark: ${getNodeColors(index, false).color};
+                     --node-glow-dark: ${getNodeColors(index, false).glow};
+                     --node-shadow-dark: ${getNodeColors(index, false).shadow};
+                     --node-color-light: ${getNodeColors(index, true).color};
+                     --node-glow-light: ${getNodeColors(index, true).glow};
+                     --node-shadow-light: ${getNodeColors(index, true).shadow};
+                   `}>
+                <!-- The Node Dot with pulse ring -->
+                <div class="relative flex items-center justify-center h-8 w-8 dot-wrapper">
+                  <!-- Pulse Ring -->
+                  <span class="mobile-pulse-ring absolute inset-0 rounded-full border opacity-0 hidden"></span>
+                  
+                  <!-- Circular Glow around the node -->
+                  <div class="mobile-dot-glow absolute inset-[-14px] rounded-full pointer-events-none z-0 transition-all duration-500 opacity-30" 
+                       style={`background: radial-gradient(circle, var(--current-node-glow) 0%, transparent 70%);`}>
+                  </div>
+                  
+                  <!-- Core Dot -->
+                  <div class="mobile-node-dot h-5 w-5 rounded-full border-[3px] border-[#080B10] bg-transparent transition-all duration-500 transform z-10 scale-100"
+                       style={`background-color: var(--current-node-color);`}>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Right: Content -->
+              <div class="flex-1 flex flex-col py-2">
+                <MobileTimelineCard
+                  year={event.year}
+                  title={event.title}
+                  description={event.description}
+                  previewImage={event.previewImage}
+                  tags={event.tags}
+                  index={index}
+                />
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+
+    <TimelineModal />
   </div>
 </section>
 
 <style>
+  /* Mobile Timeline Node CSS Variables */
+  .mobile-node-wrapper {
+    --current-node-color: var(--node-color-dark);
+    --current-node-glow: var(--node-glow-dark);
+    --current-node-shadow: var(--node-shadow-dark);
+  }
+
+  :global(html[data-theme="light"]) .mobile-node-wrapper {
+    --current-node-color: var(--node-color-light);
+    --current-node-glow: var(--node-glow-light);
+    --current-node-shadow: var(--node-shadow-light);
+  }
+
+  :global(html[data-theme="light"]) .mobile-node-dot {
+    border-color: #FFFFFF !important;
+  }
+
   /* Slider Card States */
   .timeline-card {
     transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
@@ -428,7 +527,139 @@ const events = timelineData.map((event, index) => {
     updateTimeline(0);
   }
 
+  function initMobileTimeline() {
+    const mobileRows = document.querySelectorAll('.mobile-timeline-row');
+    const readMoreBtns = document.querySelectorAll('.read-more-btn');
+    const modal = document.getElementById('timeline-modal') as HTMLDialogElement;
+    
+    if (!mobileRows.length) return;
+
+    // Intersection Observer for mobile cards Focus State
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const row = entry.target;
+          const card = row.querySelector('.mobile-timeline-card');
+          const dot = row.querySelector('.mobile-timeline-dot');
+          
+          if (card) {
+            card.classList.add('scale-100', 'opacity-100');
+            card.classList.remove('scale-90', 'opacity-60');
+          }
+          if (dot) {
+            dot.classList.add('scale-100', 'opacity-100');
+            dot.classList.remove('scale-75', 'opacity-40');
+            
+            const coreDot = dot.querySelector('.mobile-node-dot') as HTMLElement;
+            const pulse = dot.querySelector('.mobile-pulse-ring') as HTMLElement;
+            const glow = dot.querySelector('.mobile-dot-glow') as HTMLElement;
+            
+            if (coreDot) {
+               coreDot.style.boxShadow = `0 0 0 1.5px var(--current-node-color), 0 0 10px var(--current-node-shadow)`;
+               coreDot.classList.add('scale-115');
+               coreDot.classList.remove('scale-100');
+            }
+            if (pulse) {
+               pulse.classList.add('active-pulse');
+               pulse.style.borderColor = `var(--current-node-color)`;
+               pulse.style.backgroundColor = `var(--current-node-shadow)`;
+            }
+            if (glow) glow.style.opacity = "1.0";
+          }
+          
+          // Optionally, dim others
+          mobileRows.forEach(otherRow => {
+            if (otherRow !== row) {
+              const otherCard = otherRow.querySelector('.mobile-timeline-card');
+              const otherDot = otherRow.querySelector('.mobile-timeline-dot');
+              if (otherCard) {
+                otherCard.classList.remove('scale-100', 'opacity-100');
+                otherCard.classList.add('scale-90', 'opacity-60');
+              }
+              if (otherDot) {
+                otherDot.classList.remove('scale-100', 'opacity-100');
+                otherDot.classList.add('scale-75', 'opacity-40');
+                
+                const coreDot = otherDot.querySelector('.mobile-node-dot') as HTMLElement;
+                const pulse = otherDot.querySelector('.mobile-pulse-ring') as HTMLElement;
+                const glow = otherDot.querySelector('.mobile-dot-glow') as HTMLElement;
+                
+                if (coreDot) {
+                   coreDot.style.boxShadow = "none";
+                   coreDot.classList.remove('scale-115');
+                   coreDot.classList.add('scale-100');
+                }
+                if (pulse) {
+                   pulse.classList.remove('active-pulse');
+                }
+                if (glow) glow.style.opacity = "0.3";
+              }
+            }
+          });
+        }
+      });
+    }, {
+      root: null,
+      rootMargin: '-40% 0px -40% 0px', // Trigger when row is in the middle 20% of screen
+      threshold: 0
+    });
+
+    mobileRows.forEach(row => observer.observe(row));
+
+    // Modal Interaction
+    readMoreBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const year = btn.getAttribute('data-year');
+        const title = btn.getAttribute('data-title');
+        const description = btn.getAttribute('data-description');
+        const image = btn.getAttribute('data-image');
+        const tags = JSON.parse(btn.getAttribute('data-tags') || '[]');
+
+        const modalYear = document.getElementById('modal-year');
+        const modalTitle = document.getElementById('modal-title');
+        const modalDesc = document.getElementById('modal-description');
+        const modalImage = document.getElementById('modal-image') as HTMLImageElement;
+        const modalPlaceholder = document.getElementById('modal-placeholder');
+        const modalTags = document.getElementById('modal-tags');
+
+        if (modalYear) modalYear.textContent = year;
+        if (modalTitle) modalTitle.textContent = title;
+        if (modalDesc) modalDesc.textContent = description;
+        
+        if (modalImage && modalPlaceholder) {
+          if (image) {
+            modalImage.src = image;
+            modalImage.classList.remove('hidden');
+            modalPlaceholder.classList.add('hidden');
+          } else {
+            modalImage.src = '';
+            modalImage.classList.add('hidden');
+            modalPlaceholder.classList.remove('hidden');
+          }
+        }
+
+        if (modalTags) {
+          modalTags.innerHTML = '';
+          tags.forEach((tag: string) => {
+            const badge = document.createElement('div');
+            badge.className = 'badge badge-outline border-structural-borders/60 text-text-muted text-[11px] font-semibold px-2.5 py-1';
+            badge.textContent = tag;
+            modalTags.appendChild(badge);
+          });
+        }
+
+        if (modal) {
+          modal.showModal();
+        }
+      });
+    });
+  }
+
   // Setup listener for Astro page transitions/initial load
-  document.addEventListener("DOMContentLoaded", initTimeline);
+  document.addEventListener("DOMContentLoaded", () => {
+    initTimeline();
+    initMobileTimeline();
+  });
   initTimeline(); // Run immediately for fast interactive load
+  initMobileTimeline();
 </script>
