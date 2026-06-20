@@ -195,6 +195,14 @@ const N = events.length;
   :global(html[data-theme="light"]) .mobile-node-dot {
     border-color: #FFFFFF !important;
   }
+
+  /* Light mode overrides to make Section Title white with visual depth */
+  :global(html[data-theme="light"]) .animate-glow-text {
+    color: #FFFFFF !important;
+    text-shadow: 
+      0 2px 8px rgba(11, 30, 54, 0.35),
+      0 4px 20px rgba(11, 30, 54, 0.25) !important;
+  }
 </style>
 
 <script>
