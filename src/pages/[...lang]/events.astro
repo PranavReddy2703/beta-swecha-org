@@ -83,7 +83,7 @@ const pastEvents = eventsData.filter(e => e.past);
 
           <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl" id="active-events-grid">
             {activeEvents.map((event, index) => (
-              <div class="event-card-item transition-all duration-300 reveal-card" 
+              <div class="event-card-item transition-all duration-300 reveal-card h-full" 
                    style={`animation-delay: ${index * 100}ms`}
                    data-category={event.category.toLowerCase()} 
                    data-ongoing="true"
@@ -108,7 +108,7 @@ const pastEvents = eventsData.filter(e => e.past);
 
           <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6" id="upcoming-events-grid">
             {upcomingEvents.map((event, index) => (
-              <div class="event-card-item transition-all duration-300 reveal-card" 
+              <div class="event-card-item transition-all duration-300 reveal-card h-full" 
                    style={`animation-delay: ${(index + activeEvents.length) * 100}ms`}
                    data-category={event.category.toLowerCase()} 
                    data-ongoing="false"
@@ -142,7 +142,7 @@ const pastEvents = eventsData.filter(e => e.past);
           <!-- 4-column desktop, 2-column tablet, 1-column mobile past events grid -->
           <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6" id="past-events-grid">
             {pastEvents.map((event) => (
-              <div class="past-event-item transition-all duration-300"
+              <div class="past-event-item transition-all duration-300 h-full"
                    data-category={event.category.toLowerCase()}
                    data-title={event.title.toLowerCase()}>
                 <PastEventCard event={event} />
@@ -389,40 +389,105 @@ const pastEvents = eventsData.filter(e => e.past);
     animation: revealCard 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   }
 
+  /* Make all event cards even in height */
+  .event-card-item,
+  .past-event-item {
+    display: flex !important;
+    flex-direction: column !important;
+    height: 100% !important;
+  }
+  .event-card-item > :global(div),
+  .past-event-item > :global(div) {
+    display: flex !important;
+    flex-direction: column !important;
+    height: 100% !important;
+    flex-grow: 1 !important;
+  }
+
   /* Responsive card corner styling strictly for the events page */
   @media (min-width: 1024px) {
     .event-card-item,
-    .event-card-item > div,
+    .event-card-item > :global(div),
     .past-event-item,
-    .past-event-item > div,
+    .past-event-item > :global(div),
     .reveal-card {
       border-radius: 0px !important;
     }
-    .event-card-item img,
-    .past-event-item img {
+    .event-card-item :global(img),
+    .past-event-item :global(img) {
       border-radius: 0px !important;
     }
-  }
 
-  @media (max-width: 1023px) {
-    /* Make the outer wrapper transparent so it doesn't show behind rounded corners */
-    html[data-theme="light"] .reveal-card {
-      background-color: transparent !important;
-      box-shadow: none !important;
-      border: none !important;
-    }
-    /* Force rounded corners on mobile cards */
-    .event-card-item > div,
-    .past-event-item > div {
+    /* Light mode override to keep active, upcoming, and past cards rounded on desktop */
+    :global(html[data-theme="light"] .event-card-item > div),
+    :global(html[data-theme="light"] .past-event-item > div) {
       border-radius: 1rem !important;
       overflow: hidden !important;
     }
-    .event-card-item img,
-    .past-event-item img {
+    :global(html[data-theme="light"] .event-card-item img),
+    :global(html[data-theme="light"] .past-event-item img),
+    :global(html[data-theme="light"] .event-card-item div.overflow-hidden),
+    :global(html[data-theme="light"] .past-event-item div.overflow-hidden) {
       border-top-left-radius: 1rem !important;
       border-top-right-radius: 1rem !important;
       border-bottom-left-radius: 0px !important;
       border-bottom-right-radius: 0px !important;
+    }
+
+    /* Align the active events grid with upcoming/past sections on desktop light mode */
+    :global(html[data-theme="light"] #active-events-grid) {
+      max-width: none !important;
+      grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+    }
+
+    /* Increase inactive filter button background opacity by 20% in desktop light mode */
+    :global(html[data-theme="light"] .filter-btn:not(.active)) {
+      background-color: color-mix(in srgb, var(--card-bg) 60%, transparent) !important;
+    }
+  }
+
+  /* Make the outer wrapper transparent so it doesn't show behind rounded corners in light mode */
+  :global(html[data-theme="light"] .reveal-card) {
+    background-color: transparent !important;
+    box-shadow: none !important;
+    border: none !important;
+  }
+
+  @media (max-width: 1023px) {
+    /* Force rounded corners on mobile cards */
+    .event-card-item > :global(div),
+    .past-event-item > :global(div) {
+      border-radius: 1rem !important;
+      overflow: hidden !important;
+    }
+    .event-card-item :global(img),
+    .past-event-item :global(img),
+    .event-card-item :global(div.overflow-hidden),
+    .past-event-item :global(div.overflow-hidden) {
+      border-top-left-radius: 1rem !important;
+      border-top-right-radius: 1rem !important;
+      border-bottom-left-radius: 0px !important;
+      border-bottom-right-radius: 0px !important;
+    }
+  }
+
+  /* Styling for headings and alignment on desktop only */
+  @media (min-width: 1024px) {
+    /* Make event headings white with drop-shadow depth in light mode on desktop */
+    :global(html[data-theme="light"] #active-events-section h2),
+    :global(html[data-theme="light"] #upcoming-events-section h2),
+    :global(html[data-theme="light"] #past-events-section h2) {
+      color: #ffffff !important;
+      line-height: 1.2 !important;
+      text-shadow: 0 2px 4px rgba(11, 30, 54, 0.3) !important;
+    }
+
+    /* Align horizontal divider lines to the exact vertical midpoint of heading text (both themes) */
+    #active-events-section h2 + span,
+    #upcoming-events-section h2 + span,
+    #past-events-section h2 + span {
+      position: relative !important;
+      top: -2px !important;
     }
   }
 </style>
