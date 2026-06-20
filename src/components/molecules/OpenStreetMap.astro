@@ -56,11 +56,40 @@ import 'leaflet/dist/leaflet.css';
     scrollWheelZoom: false, // Prevents scroll hijacking on the page
   });
 
-  // CartoDB Dark Matter tile layer for a native dark theme
-  L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+  // Set up both tile layers
+  const darkTiles = L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
     maxZoom: 20,
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions" target="_blank" rel="noopener noreferrer">CARTO</a>'
-  }).addTo(map);
+  });
+
+  const lightTiles = L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+    maxZoom: 20,
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions" target="_blank" rel="noopener noreferrer">CARTO</a>'
+  });
+
+  function updateTiles() {
+    const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+    if (isLight) {
+      map.removeLayer(darkTiles);
+      lightTiles.addTo(map);
+    } else {
+      map.removeLayer(lightTiles);
+      darkTiles.addTo(map);
+    }
+  }
+
+  // Initial apply
+  updateTiles();
+
+  // Listen to data-theme toggle events/attribute changes
+  const observer = new MutationObserver((mutations) => {
+    mutations.forEach((mutation) => {
+      if (mutation.attributeName === 'data-theme') {
+        updateTiles();
+      }
+    });
+  });
+  observer.observe(document.documentElement, { attributes: true });
 
   // Custom DivIcon representing a pulsing cyan dot with high-end glow
   const customMarkerIcon = L.divIcon({
@@ -182,5 +211,44 @@ import 'leaflet/dist/leaflet.css';
     color: var(--primary-brand) !important;
     font-weight: bold;
     text-decoration: none !important;
+  }
+
+  /* Light mode overrides for Leaflet elements */
+  :global(html[data-theme="light"]) .swecha-leaflet-tooltip {
+    background-color: #FFFFFF !important;
+    border: 1px solid rgba(0, 0, 0, 0.15) !important;
+    color: var(--text-primary) !important;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08) !important;
+  }
+
+  :global(html[data-theme="light"]) .swecha-leaflet-tooltip::before {
+    border-top-color: #FFFFFF !important;
+  }
+
+  :global(html[data-theme="light"]) .leaflet-container {
+    background: #E2E8F0 !important;
+  }
+
+  :global(html[data-theme="light"]) .leaflet-bar {
+    border: 1px solid rgba(0, 0, 0, 0.1) !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08) !important;
+  }
+
+  :global(html[data-theme="light"]) .leaflet-bar a {
+    background-color: #FFFFFF !important;
+    color: var(--text-muted) !important;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08) !important;
+  }
+
+  :global(html[data-theme="light"]) .leaflet-bar a:hover {
+    background-color: #F8FAFC !important;
+    color: var(--primary-brand) !important;
+  }
+
+  :global(html[data-theme="light"]) .leaflet-control-attribution {
+    background-color: rgba(255, 255, 255, 0.9) !important;
+    color: var(--text-muted) !important;
+    border-left: 1px solid rgba(0, 0, 0, 0.08) !important;
+    border-top: 1px solid rgba(0, 0, 0, 0.08) !important;
   }
 </style>
