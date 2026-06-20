@@ -44,15 +44,30 @@ const pastEvents = eventsData.filter(e => e.past);
 
       <!-- CONTROLS & FILTERING BAR -->
       <section class="flex flex-col md:flex-row md:items-center justify-between gap-6 pb-6 border-b border-structural-borders/30 scroll-reveal-section opacity-0 translate-y-4 transition-all duration-500 delay-200">
-        <!-- Filter Pills Container -->
-        <div class="flex flex-wrap gap-2.5 order-2 md:order-1" id="filter-container">
-          <button class="filter-btn active" data-filter="all">{t('events.filter.all')}</button>
-          <button class="filter-btn" data-filter="upcoming">{t('events.filter.upcoming')}</button>
-          <button class="filter-btn" data-filter="ongoing">{t('events.filter.ongoing')}</button>
-          <button class="filter-btn" data-filter="past">{t('events.filter.past')}</button>
-          <button class="filter-btn" data-filter="workshops">{t('events.filter.workshops')}</button>
-          <button class="filter-btn" data-filter="hackathons">{t('events.filter.hackathons')}</button>
-          <button class="filter-btn" data-filter="meetups">{t('events.filter.meetups')}</button>
+        
+        <!-- Filter Container Wrapper -->
+        <div class="order-2 md:order-1 w-full md:w-auto">
+          <!-- Mobile Filter Toggle -->
+          <button id="mobile-filter-toggle" class="md:hidden flex items-center justify-end w-full py-2 text-text-muted hover:text-text-main transition-colors font-medium mb-2">
+            <svg class="w-4 h-4 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" />
+            </svg>
+            Filter Events
+            <svg id="filter-toggle-icon" class="w-4 h-4 ml-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+
+          <!-- Filter Pills Container -->
+          <div class="hidden md:flex flex-wrap gap-2.5" id="filter-container">
+            <button class="filter-btn active" data-filter="all">{t('events.filter.all')}</button>
+            <button class="filter-btn" data-filter="upcoming">{t('events.filter.upcoming')}</button>
+            <button class="filter-btn" data-filter="ongoing">{t('events.filter.ongoing')}</button>
+            <button class="filter-btn" data-filter="past">{t('events.filter.past')}</button>
+            <button class="filter-btn" data-filter="workshops">{t('events.filter.workshops')}</button>
+            <button class="filter-btn" data-filter="hackathons">{t('events.filter.hackathons')}</button>
+            <button class="filter-btn" data-filter="meetups">{t('events.filter.meetups')}</button>
+          </div>
         </div>
 
         <!-- Localized Search Box -->
@@ -158,6 +173,9 @@ const pastEvents = eventsData.filter(e => e.past);
 
 <!-- Client Side Filters & Dynamic Search Script -->
 <script>
+  const mobileFilterToggle = document.getElementById('mobile-filter-toggle');
+  const filterToggleIcon = document.getElementById('filter-toggle-icon');
+
   const filterBtns = document.querySelectorAll('#filter-container .filter-btn');
   const searchInput = document.getElementById('event-search') as HTMLInputElement | null;
   const activeCards = document.querySelectorAll('.event-card-item');
@@ -297,6 +315,15 @@ const pastEvents = eventsData.filter(e => e.past);
       }
     }
 
+  }
+
+  if (mobileFilterToggle && filterToggleIcon) {
+    const filterContainer = document.getElementById('filter-container');
+    mobileFilterToggle.addEventListener('click', () => {
+      filterContainer?.classList.toggle('hidden');
+      filterContainer?.classList.toggle('flex');
+      filterToggleIcon.classList.toggle('rotate-180');
+    });
   }
 
   // Bind click listeners to filter buttons
@@ -489,5 +516,17 @@ const pastEvents = eventsData.filter(e => e.past);
       position: relative !important;
       top: -2px !important;
     }
+  }
+
+  /* Light mode override for mobile filter toggle */
+  :global(html[data-theme="light"] #mobile-filter-toggle) {
+    width: max-content !important;
+    margin-left: auto !important;
+    padding: 0.4rem 0.8rem !important;
+    background-color: color-mix(in srgb, var(--card-bg) 60%, transparent) !important;
+    border: 1px solid var(--structural-borders) !important;
+    border-radius: 0.75rem !important;
+    color: var(--text-main) !important;
+    margin-bottom: 1rem !important;
   }
 </style>
