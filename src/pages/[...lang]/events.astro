@@ -431,36 +431,8 @@ const pastEvents = eventsData.filter(e => e.past);
     flex-grow: 1 !important;
   }
 
-  /* Responsive card corner styling strictly for the events page */
+  /* Responsive grid alignment & premium contrast styling strictly for the events page */
   @media (min-width: 1024px) {
-    .event-card-item,
-    .event-card-item > :global(div),
-    .past-event-item,
-    .past-event-item > :global(div),
-    .reveal-card {
-      border-radius: 0px !important;
-    }
-    .event-card-item :global(img),
-    .past-event-item :global(img) {
-      border-radius: 0px !important;
-    }
-
-    /* Light mode override to keep active, upcoming, and past cards rounded on desktop */
-    :global(html[data-theme="light"] .event-card-item > div),
-    :global(html[data-theme="light"] .past-event-item > div) {
-      border-radius: 1rem !important;
-      overflow: hidden !important;
-    }
-    :global(html[data-theme="light"] .event-card-item img),
-    :global(html[data-theme="light"] .past-event-item img),
-    :global(html[data-theme="light"] .event-card-item div.overflow-hidden),
-    :global(html[data-theme="light"] .past-event-item div.overflow-hidden) {
-      border-top-left-radius: 1rem !important;
-      border-top-right-radius: 1rem !important;
-      border-bottom-left-radius: 0px !important;
-      border-bottom-right-radius: 0px !important;
-    }
-
     /* Align the active events grid with upcoming/past sections on desktop light mode */
     :global(html[data-theme="light"] #active-events-grid) {
       max-width: none !important;
@@ -474,28 +446,11 @@ const pastEvents = eventsData.filter(e => e.past);
   }
 
   /* Make the outer wrapper transparent so it doesn't show behind rounded corners in light mode */
-  :global(html[data-theme="light"] .reveal-card) {
+  :global(html[data-theme="light"] .reveal-card),
+  :global(html[data-theme="light"] .reveal-card:hover) {
     background-color: transparent !important;
     box-shadow: none !important;
     border: none !important;
-  }
-
-  @media (max-width: 1023px) {
-    /* Force rounded corners on mobile cards */
-    .event-card-item > :global(div),
-    .past-event-item > :global(div) {
-      border-radius: 1rem !important;
-      overflow: hidden !important;
-    }
-    .event-card-item :global(img),
-    .past-event-item :global(img),
-    .event-card-item :global(div.overflow-hidden),
-    .past-event-item :global(div.overflow-hidden) {
-      border-top-left-radius: 1rem !important;
-      border-top-right-radius: 1rem !important;
-      border-bottom-left-radius: 0px !important;
-      border-bottom-right-radius: 0px !important;
-    }
   }
 
   /* Styling for headings and alignment on desktop only */
