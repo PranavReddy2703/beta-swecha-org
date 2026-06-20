@@ -51,8 +51,7 @@ const rawAddress = contactData.address.raw;
           />
         </div>
 
-        <!-- Right Side: Unified Office Location Card -->
-        <div class="group relative overflow-hidden rounded-2xl border border-structural-borders bg-card-bg/40 p-5 md:p-6 backdrop-blur-xl transition-all duration-300 hover:border-primary-brand/30 hover:shadow-[0_0_25px_rgba(0,212,255,0.05)] flex flex-col w-full h-full order-1 lg:order-2">
+        <div class="glass-white-card group relative overflow-hidden rounded-2xl border border-structural-borders bg-card-bg/40 p-5 md:p-6 backdrop-blur-xl transition-all duration-300 hover:border-primary-brand/30 hover:shadow-[0_0_25px_rgba(0,212,255,0.05)] flex flex-col w-full h-full order-1 lg:order-2">
           
           <!-- Header with Title and Ghost Copy Button -->
           <div class="flex items-center justify-between">
@@ -87,8 +86,39 @@ const rawAddress = contactData.address.raw;
           </p>
 
           <!-- OpenStreetMap (upstream Leaflet-based interactive map) -->
-          <div class="mt-5 w-full flex-grow">
+          <div class="mt-5 w-full flex-grow flex flex-col">
             <OpenStreetMap />
+          </div>
+
+          <!-- Map Action Buttons Split Grid -->
+          <div class="grid grid-cols-2 gap-4 mt-5">
+            <!-- Open in OSM Button -->
+            <a 
+              href="https://www.openstreetmap.org/?mlat=17.4360775&mlon=78.3612286#map=19/17.4360775/78.3612286"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="w-full inline-flex items-center justify-center rounded-lg border border-primary-brand/25 bg-card-bg/30 hover:bg-card-bg/60 py-3.5 px-4 text-sm font-bold text-text-main leading-none backdrop-blur-md transition-all duration-200 hover:border-primary-brand/50 hover:text-primary-brand select-none"
+            >
+              <span>{t('contact.map.open_osm')}</span>
+              <svg class="ml-2 h-4 w-4 shrink-0 text-primary-brand transition-transform duration-300 group-hover:scale-105" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21"/>
+                <line x1="9" x2="9" y1="3" y2="18"/>
+                <line x1="15" x2="15" y1="6" y2="21"/>
+              </svg>
+            </a>
+
+            <!-- Navigate Button -->
+            <a 
+              href="https://maps.app.goo.gl/gZhRDrBn7yVvupWY8"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="shine-button w-full inline-flex items-center justify-center rounded-lg bg-primary-brand py-3.5 px-4 text-sm font-black text-[var(--primary-btn-text)] leading-none shadow-md shadow-primary-brand/10 transition-all duration-300 hover:bg-hover-brand hover:shadow-lg hover:shadow-primary-brand/20 active:scale-[0.99] focus:outline-none focus:ring-2 focus:ring-primary-brand select-none"
+            >
+              <span>{t('contact.map.navigate')}</span>
+              <svg class="ml-2 h-4 w-4 shrink-0 transform transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 translate-y-[1.5px]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="3 11 22 2 13 21 11 13 3 11"/>
+              </svg>
+            </a>
           </div>
         </div>
 
@@ -131,6 +161,35 @@ const rawAddress = contactData.address.raw;
 <style>
   .tooltip-container:hover .tooltip-text {
     opacity: 1;
+  }
+
+  /* Button shine animation settings */
+  .shine-button {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .shine-button::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -70%;
+    width: 30%;
+    height: 200%;
+    background: linear-gradient(
+      to right,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(255, 255, 255, 0.4) 50%,
+      rgba(255, 255, 255, 0) 100%
+    );
+    transform: rotate(25deg);
+    transition: none;
+    pointer-events: none;
+  }
+
+  .shine-button:hover::after {
+    left: 130%;
+    transition: left 0.7s cubic-bezier(0.16, 1, 0.3, 1);
   }
 </style>
 

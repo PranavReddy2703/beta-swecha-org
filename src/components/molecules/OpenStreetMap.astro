@@ -5,41 +5,12 @@ import 'leaflet/dist/leaflet.css';
 
 <div 
   id="osm-map-container"
-  class="group/map relative w-full h-[350px] md:h-[400px] rounded-xl border border-structural-borders/80 bg-[#0c1017] overflow-hidden transition-all duration-300 hover:border-primary-brand/35 hover:shadow-[0_0_20px_rgba(0,212,255,0.08)]"
+  class="group/map relative w-full h-[350px] md:h-full flex-grow rounded-xl border border-structural-borders/80 bg-[#0c1017] overflow-hidden transition-all duration-300 hover:border-primary-brand/35 hover:shadow-[0_0_20px_rgba(0,212,255,0.08)]"
 >
   <!-- Interactive Map Div -->
   <div id="map" class="w-full h-full z-10"></div>
 
-  <!-- Map Action Buttons (Bottom-right corner overlay) -->
-  <div class="absolute bottom-4 right-4 z-[1000] flex items-center gap-2">
-    <!-- Open in OSM Button -->
-    <a 
-      href="https://www.openstreetmap.org/?mlat=17.4360775&mlon=78.3612286#map=19/17.4360775/78.3612286"
-      target="_blank"
-      rel="noopener noreferrer"
-      class="flex items-center gap-1.5 text-xs font-black text-text-main bg-card-surface/90 hover:bg-elevated-surface backdrop-blur-md border border-structural-borders px-3.5 py-2 rounded-lg shadow-lg shadow-black/40 transition-all duration-300 hover:shadow-[0_0_12px_rgba(255,255,255,0.1)] hover:scale-[1.02] select-none"
-    >
-      <svg class="h-3.5 w-3.5 text-primary-brand" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-        <polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21"/>
-        <line x1="9" x2="9" y1="3" y2="18"/>
-        <line x1="15" x2="15" y1="6" y2="21"/>
-      </svg>
-      <span>Open in OSM</span>
-    </a>
 
-    <!-- Navigate Button -->
-    <a 
-      href="https://maps.app.goo.gl/gZhRDrBn7yVvupWY8"
-      target="_blank"
-      rel="noopener noreferrer"
-      class="flex items-center gap-1.5 text-xs font-black text-slate-950 bg-primary-brand hover:bg-hover-brand px-3.5 py-2 rounded-lg shadow-lg shadow-black/40 transition-all duration-300 hover:shadow-[0_0_12px_rgba(0,212,255,0.45)] hover:scale-[1.02] select-none"
-    >
-      <svg class="h-3.5 w-3.5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-        <polygon points="3 11 22 2 13 21 11 13 3 11"/>
-      </svg>
-      <span>Navigate</span>
-    </a>
-  </div>
 </div>
 
 <script>
@@ -96,9 +67,9 @@ import 'leaflet/dist/leaflet.css';
     className: 'swecha-leaflet-marker',
     html: `
       <div class="marker-pulse-wrapper relative flex h-7 w-7 items-center justify-center">
-        <span class="pulse-ring absolute h-7 w-7 rounded-full bg-primary-brand/35 transition-all duration-500"></span>
-        <span class="pulse-ring-outer absolute h-7 w-7 rounded-full bg-primary-brand/10 transition-all duration-500"></span>
-        <span class="core-dot relative inline-flex rounded-full h-3 w-3 bg-primary-brand border border-slate-950 shadow-[0_0_10px_var(--primary-brand)]"></span>
+        <span class="pulse-ring absolute h-7 w-7 rounded-full bg-emerald-500/35 transition-all duration-500"></span>
+        <span class="pulse-ring-outer absolute h-7 w-7 rounded-full bg-emerald-500/10 transition-all duration-500"></span>
+        <span class="core-dot relative inline-flex rounded-full h-3 w-3 bg-emerald-500 border border-slate-950 shadow-[0_0_10px_#10b981]"></span>
       </div>
     `,
     iconSize: [28, 28],
@@ -162,12 +133,12 @@ import 'leaflet/dist/leaflet.css';
   /* Active/Hover animation: Accelerate and expand pulse when map card is hovered */
   #osm-map-container:hover .pulse-ring {
     animation-duration: 1.2s;
-    background-color: rgba(0, 212, 255, 0.5);
+    background-color: rgba(16, 185, 129, 0.5);
   }
 
   #osm-map-container:hover .pulse-ring-outer {
     animation-duration: 1.2s;
-    background-color: rgba(0, 212, 255, 0.2);
+    background-color: rgba(16, 185, 129, 0.2);
   }
 
   /* Clean leaflet pane default styling adjustments */
@@ -214,38 +185,38 @@ import 'leaflet/dist/leaflet.css';
   }
 
   /* Light mode overrides for Leaflet elements */
-  :global(html[data-theme="light"]) .swecha-leaflet-tooltip {
+  html[data-theme="light"] .swecha-leaflet-tooltip {
     background-color: #FFFFFF !important;
     border: 1px solid rgba(0, 0, 0, 0.15) !important;
     color: var(--text-primary) !important;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08) !important;
   }
 
-  :global(html[data-theme="light"]) .swecha-leaflet-tooltip::before {
+  html[data-theme="light"] .swecha-leaflet-tooltip::before {
     border-top-color: #FFFFFF !important;
   }
 
-  :global(html[data-theme="light"]) .leaflet-container {
+  html[data-theme="light"] .leaflet-container {
     background: #E2E8F0 !important;
   }
 
-  :global(html[data-theme="light"]) .leaflet-bar {
+  html[data-theme="light"] .leaflet-bar {
     border: 1px solid rgba(0, 0, 0, 0.1) !important;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08) !important;
   }
 
-  :global(html[data-theme="light"]) .leaflet-bar a {
+  html[data-theme="light"] .leaflet-bar a {
     background-color: #FFFFFF !important;
     color: var(--text-muted) !important;
     border-bottom: 1px solid rgba(0, 0, 0, 0.08) !important;
   }
 
-  :global(html[data-theme="light"]) .leaflet-bar a:hover {
+  html[data-theme="light"] .leaflet-bar a:hover {
     background-color: #F8FAFC !important;
     color: var(--primary-brand) !important;
   }
 
-  :global(html[data-theme="light"]) .leaflet-control-attribution {
+  html[data-theme="light"] .leaflet-control-attribution {
     background-color: rgba(255, 255, 255, 0.9) !important;
     color: var(--text-muted) !important;
     border-left: 1px solid rgba(0, 0, 0, 0.08) !important;

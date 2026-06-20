@@ -70,6 +70,8 @@ const en = {
   "contact.internship.title": "Internship Queries",
   "contact.internship.value": "internships@swecha.org",
   "contact.map.title": "Office Location",
+  "contact.map.navigate": "Open in Google Maps",
+  "contact.map.open_osm": "Open in OSM",
   "contact.location.directions": "Get Directions",
   "contact.location.open_maps": "Open Google Maps",
   "contact.location.copy": "Copy Address",

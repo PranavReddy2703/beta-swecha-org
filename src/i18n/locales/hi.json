@@ -47,6 +47,8 @@
   "contact.internship.title": "इंटर्नशिप प्रश्न",
   "contact.internship.value": "internships@swecha.org",
   "contact.map.title": "कार्यालय स्थान",
+  "contact.map.navigate": "गूगल मैप्स में खोलें",
+  "contact.map.open_osm": "OSM में खोलें",
   "contact.location.directions": "दिशा-निर्देश प्राप्त करें",
   "contact.location.open_maps": "गूगल मैप्स खोलें",
   "contact.location.copy": "पता कॉपी करें",
