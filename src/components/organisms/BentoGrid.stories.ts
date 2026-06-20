@@ -5,8 +5,23 @@ const meta: Meta<typeof BentoGrid> = {
   title: 'Organisms/BentoGrid',
   component: BentoGrid,
   tags: ['autodocs'],
+  parameters: {
+    docs: {
+      description: {
+        component: 'Bento grid layout for displaying news items. Requires an i18n translation function `t` as a prop.',
+      },
+    },
+    layout: 'padded',
+  },
+  decorators: [
+    (Story) => `
+      <div style="max-width: 1248px; margin: 0 auto; padding: 24px;">
+        ${Story()}
+      </div>
+    `,
+  ],
   argTypes: {
-    t: { control: 'none' },
+    t: { control: 'object', description: 'Translation function mock' },
   },
 };
 
@@ -16,25 +31,25 @@ type Story = StoryObj<typeof BentoGrid>;
 
 const mockT = (key: string) => {
   const translations: Record<string, string> = {
-    'news.featured.headline': 'Telangana ITEC Dept announces Datathon in association with Swecha to create Telugu LLM',
-    'news.featured.desc': 'A collaborative effort to curate Telugu data and build state-of-the-art language models.',
-    'news.featured.category': 'FEATURED STORY',
+    'news.featured.category': 'Top Story',
+    'news.featured.headline': 'Swecha Hosted A Multi-Location AI Hackday',
+    'news.featured.desc': 'We hosted a massive AI hackday across multiple colleges.',
     'news.btn.explore': 'Explore',
+    'news.card1.headline': 'Datathon 2024',
+    'news.card1.desc': 'Building datasets for local languages.',
     'news.btn.learn': 'Learn More',
-    'news.btn.view': 'View Details',
-    'news.btn.read': 'Read Article',
-    'news.btn.join': 'Join Meetup',
+    'news.card2.headline': 'Open AI License',
+    'news.card2.desc': 'Releasing an open-source AI license draft.',
+    'news.btn.read': 'Read',
+    'news.card3.headline': 'AI for Social Good',
+    'news.card3.desc': 'Empowering students to build AI for good.',
+    'news.btn.view': 'View',
+    'news.card4.headline': 'Community Meetups',
+    'news.card4.desc': 'Join our weekend hacking sessions.',
+    'news.btn.join': 'Join Us',
+    'news.card5.headline': 'Digital Freedom',
+    'news.card5.desc': 'Promoting digital rights and awareness.',
     'news.btn.readMore': 'Read More',
-    'news.card1.headline': 'ITEC Dept Datathon with Swecha',
-    'news.card1.desc': 'Creating open source resources for regional languages.',
-    'news.card2.headline': 'Safeguarding Open Source AI license released',
-    'news.card2.desc': 'A draft license aimed at safeguarding open-source AI.',
-    'news.card3.headline': 'AI Hackday with IIIT Hyderabad',
-    'news.card3.desc': 'IIIT Hyderabad and Swecha hosted AI Hackday empowering 2000 students.',
-    'news.card4.headline': 'Join Swecha Community Meetups',
-    'news.card4.desc': 'Engage with open-source enthusiasts in Telangana.',
-    'news.card5.headline': 'Digital Freedom Matters',
-    'news.card5.desc': 'Discussing digital freedom and open source software.',
   };
   return translations[key] || key;
 };

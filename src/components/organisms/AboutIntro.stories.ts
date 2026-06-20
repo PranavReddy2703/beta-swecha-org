@@ -5,6 +5,14 @@ const meta: Meta<typeof AboutIntro> = {
   title: 'Organisms/AboutIntro',
   component: AboutIntro,
   tags: ['autodocs'],
+  parameters: {
+    docs: {
+      description: {
+        component: 'Introduction section for the About page. Features staggered text animations and a random ambient outline glow. Relies on i18n for text content.',
+      },
+    },
+    layout: 'fullscreen',
+  },
 };
 
 export default meta;

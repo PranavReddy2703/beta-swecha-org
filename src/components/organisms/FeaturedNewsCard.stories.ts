@@ -5,10 +5,24 @@ const meta: Meta<typeof FeaturedNewsCard> = {
   title: 'Organisms/FeaturedNewsCard',
   component: FeaturedNewsCard,
   tags: ['autodocs'],
+  parameters: {
+    docs: {
+      description: {
+        component: 'Large featured card in the Bento grid with an integrated automatic carousel of slides. Used for major news stories.',
+      },
+    },
+    layout: 'padded',
+  },
+  decorators: [
+    (Story) => `
+      <div style="max-width: 1000px; padding: 24px;">
+        ${Story()}
+      </div>
+    `,
+  ],
   argTypes: {
     category: { control: 'text' },
     buttonText: { control: 'text' },
-    slides: { control: 'object' },
     index: { control: 'number' },
   },
 };
@@ -19,28 +33,22 @@ type Story = StoryObj<typeof FeaturedNewsCard>;
 
 export const Default: Story = {
   args: {
-    category: 'FEATURED',
-    buttonText: 'Read Story',
+    category: 'Top Story',
+    buttonText: 'Read More',
     index: 0,
     slides: [
       {
-        title: "Building India's Open AI Future",
-        description: "Swecha is helping shape India's open and community-driven AI ecosystem with localized language models and community datasets.",
-        link: "#",
-        image: "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=800&auto=format&fit=crop&q=80"
+        title: 'Swecha DevDays 2024 Huge Success',
+        description: 'Over 2000 participants from across 50 colleges gathered for our annual technical festival celebrating open source.',
+        link: '#',
+        image: 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?q=80&w=800&auto=format&fit=crop',
       },
       {
-        title: "Telangana Launches Datathon for Telugu LLM",
-        description: "A statewide community data collection drive and hackathon aimed at building the largest open dataset for the Telugu language.",
-        link: "#",
-        image: "https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?w=800&auto=format&fit=crop&q=80"
+        title: 'New GLUG Formed at CVR College',
+        description: 'Expanding our footprint to foster local engineering talent with a brand new GNU/Linux User Group.',
+        link: '#',
+        image: 'https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?q=80&w=800&auto=format&fit=crop',
       },
-      {
-        title: "VISWAM.AI Releases Draft Open AI License",
-        description: "A draft licensing framework promoting responsible, transparent, and community-owned AI models for public interest.",
-        link: "#",
-        image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800&auto=format&fit=crop&q=80"
-      }
     ],
   },
 };

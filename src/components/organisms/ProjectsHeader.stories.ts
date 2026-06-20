@@ -5,6 +5,14 @@ const meta: Meta<typeof ProjectsHeader> = {
   title: 'Organisms/ProjectsHeader',
   component: ProjectsHeader,
   tags: ['autodocs'],
+  parameters: {
+    docs: {
+      description: {
+        component: 'Header section for the Projects page.',
+      },
+    },
+    layout: 'fullscreen',
+  },
   argTypes: {
     title: { control: 'text' },
     description: { control: 'text' },
@@ -17,7 +25,7 @@ type Story = StoryObj<typeof ProjectsHeader>;
 
 export const Default: Story = {
   args: {
-    title: 'Our Projects',
-    description: 'Explore the various open source initiatives, tools, and platforms built by the Swecha community to empower people and promote software freedom.',
+    title: 'Swecha Projects',
+    description: 'We build technology that solves real-world problems. Discover our open-source initiatives and community-driven projects.',
   },
 };

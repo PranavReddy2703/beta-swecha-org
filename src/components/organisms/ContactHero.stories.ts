@@ -5,6 +5,14 @@ const meta: Meta<typeof ContactHero> = {
   title: 'Organisms/ContactHero',
   component: ContactHero,
   tags: ['autodocs'],
+  parameters: {
+    docs: {
+      description: {
+        component: 'Hero section for the Contact page with animated underline.',
+      },
+    },
+    layout: 'fullscreen',
+  },
   argTypes: {
     title: { control: 'text' },
     subtitle: { control: 'text' },
@@ -17,7 +25,7 @@ type Story = StoryObj<typeof ContactHero>;
 
 export const Default: Story = {
   args: {
-    title: 'Connect with Swecha',
-    subtitle: 'Have a question, feedback, or want to collaborate? Reach out to us through any of the channels below or fill out the contact form.',
+    title: 'Get in Touch',
+    subtitle: 'Whether you want to contribute, partner, or just say hello—we are all ears.',
   },
 };

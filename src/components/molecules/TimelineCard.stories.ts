@@ -5,13 +5,20 @@ const meta: Meta<typeof TimelineCard> = {
   title: 'Molecules/TimelineCard',
   component: TimelineCard,
   tags: ['autodocs'],
+  parameters: {
+    docs: {
+      description: {
+        component: 'Wide card used in the history timeline. Shows an image on the left and a description on the right with a year badge.',
+      },
+    },
+    layout: 'padded',
+  },
   argTypes: {
-    year: { control: 'text' },
-    title: { control: 'text' },
-    description: { control: 'text' },
-    tags: { control: 'object' },
-    previewImage: { control: 'text' },
-    index: { control: 'number' },
+    year: { control: 'text', description: 'Year or date string' },
+    title: { control: 'text', description: 'Event title' },
+    description: { control: 'text', description: 'Event description' },
+    previewImage: { control: 'text', description: 'URL for the image' },
+    tags: { control: 'object', description: 'Array of tag strings' },
   },
 };
 
@@ -19,23 +26,24 @@ export default meta;
 
 type Story = StoryObj<typeof TimelineCard>;
 
-export const Default: Story = {
-  args: {
-    year: '2024',
-    title: 'Launch of Viswam AI',
-    description: 'Swecha announced the draft license for Viswam AI, promoting open-source AI development.',
-    tags: ['AI', 'Open Source'],
-    index: 0,
-  },
-};
-
 export const WithImage: Story = {
   args: {
     year: '2005',
-    title: 'Swecha OS Released',
-    description: 'The first localized Telugu OS was released to the public.',
-    tags: ['OS', 'History'],
-    previewImage: 'https://placehold.co/400x300/222/00d4ff?text=Swecha+OS',
-    index: 1,
+    title: 'The Inception',
+    description: 'Swecha started as a project to provide a Telugu operating system. It quickly grew into a vibrant community movement promoting free software.',
+    previewImage: 'https://images.unsplash.com/photo-1517048676732-d65bc937f952?q=80&w=800&auto=format&fit=crop',
+    tags: ['Community', 'OS Development'],
+  },
+};
+
+export const WithoutImage: Story = {
+  args: {
+    year: '2010',
+    title: 'Expanding Horizons',
+    description: 'We started our state-wide campaigns to bring engineering students into the open source fold, conducting workshops across 50+ colleges.',
+    tags: ['Workshops', 'Education'],
+  },
+  parameters: {
+    docs: { description: { story: 'Fallback view with a glowing gradient placeholder when no image is provided.' } },
   },
 };

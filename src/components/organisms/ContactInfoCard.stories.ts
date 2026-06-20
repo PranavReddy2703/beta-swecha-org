@@ -5,6 +5,21 @@ const meta: Meta<typeof ContactInfoCard> = {
   title: 'Organisms/ContactInfoCard',
   component: ContactInfoCard,
   tags: ['autodocs'],
+  parameters: {
+    docs: {
+      description: {
+        component: 'Card to display contact methods (Address, Email, Phone, etc.). Supports varied icons and optional links.',
+      },
+    },
+    layout: 'centered',
+  },
+  decorators: [
+    (Story) => `
+      <div style="width: 300px; padding: 24px;">
+        ${Story()}
+      </div>
+    `,
+  ],
   argTypes: {
     title: { control: 'text' },
     content: { control: 'text' },
@@ -20,34 +35,34 @@ export default meta;
 
 type Story = StoryObj<typeof ContactInfoCard>;
 
-export const OfficeLocation: Story = {
+export const MapPin: Story = {
   args: {
-    title: 'Our Office',
-    content: 'Swecha, Gachibowli,\nHyderabad, Telangana, India',
+    title: 'Headquarters',
+    content: 'Swecha Office, Gachibowli,\nHyderabad, Telangana\n500032',
     icon: 'MapPin',
     link: 'https://maps.google.com/?q=Swecha+Gachibowli+Hyderabad',
   },
 };
 
-export const GeneralEmail: Story = {
+export const Mail: Story = {
   args: {
-    title: 'General Inquiries',
+    title: 'General Queries',
     content: 'reachus@swecha.net',
     icon: 'Mail',
     link: 'mailto:reachus@swecha.net',
   },
 };
 
-export const OfficePhone: Story = {
+export const Phone: Story = {
   args: {
-    title: 'Phone Support',
-    content: '+91 89775 03615',
+    title: 'Phone',
+    content: '+91 8977503615',
     icon: 'Phone',
     link: 'tel:+918977503615',
   },
 };
 
-export const Internships: Story = {
+export const Internship: Story = {
   args: {
     title: 'Internships',
     content: 'internships@swecha.org',
