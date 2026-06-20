@@ -14,12 +14,39 @@ const { title, description } = Astro.props;
 
   <div class="container mx-auto px-4 relative z-10 text-center max-w-3xl">
     <h1 class="text-3xl md:text-4xl lg:text-5xl font-black mb-4 tracking-tight">
-      <span class="brand-gradient-text bg-gradient-to-r from-primary-brand via-hover-brand to-secondary-accent bg-clip-text text-transparent drop-shadow-[0_2px_10px_rgba(0,212,255,0.25)]">
+      <span class="projects-header-title">
         {title}
       </span>
     </h1>
-    <p class="text-sm md:text-base text-slate-300 leading-relaxed max-w-2xl mx-auto">
+    <p class="projects-header-desc text-sm md:text-base text-text-muted leading-relaxed max-w-2xl mx-auto">
       {description}
     </p>
   </div>
 </header>
+
+<style>
+  .projects-header-title {
+    color: #FFFFFF !important;
+    -webkit-text-fill-color: #FFFFFF !important;
+    background: none !important;
+    text-shadow: 
+      0 2px 10px rgba(0, 212, 255, 0.4),
+      0 4px 20px rgba(0, 0, 0, 0.6) !important;
+  }
+
+  /* Light mode overrides to make text white with visual depth on the blue gradient background */
+  :global(html[data-theme="light"] .projects-header-title) {
+    color: #FFFFFF !important;
+    -webkit-text-fill-color: #FFFFFF !important;
+    text-shadow: 
+      0 2px 8px rgba(11, 30, 54, 0.35),
+      0 4px 20px rgba(11, 30, 54, 0.25) !important;
+  }
+
+  :global(html[data-theme="light"] .projects-header-desc) {
+    color: rgba(255, 255, 255, 0.95) !important;
+    text-shadow: 
+      0 2px 6px rgba(11, 30, 54, 0.3),
+      0 4px 15px rgba(11, 30, 54, 0.2) !important;
+  }
+</style>

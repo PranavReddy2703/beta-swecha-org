@@ -43,8 +43,8 @@ const projects = (projectsData.projects as ProjectData[]).sort((a, b) => {
   <!-- All Projects Section -->
   <section class="py-12">
     <div class="container mx-auto px-4 mb-8">
-      <h2 class="text-2xl font-bold text-text-main mb-2">All Projects</h2>
-      <p class="text-text-muted">Browse through our entire ecosystem of tools and platforms.</p>
+      <h2 class="all-projects-title text-2xl font-bold text-text-main mb-2">All Projects</h2>
+      <p class="all-projects-desc text-text-muted">Browse through our entire ecosystem of tools and platforms.</p>
       
       <!-- Filter Pills -->
       <div class="mt-6 flex flex-wrap gap-3" id="filters-container">
@@ -67,6 +67,23 @@ const projects = (projectsData.projects as ProjectData[]).sort((a, b) => {
     </ProjectsGrid>
   </section>
 </Layout>
+
+<style>
+  /* Light mode overrides to make All Projects section heading and description white with visual depth */
+  :global(html[data-theme="light"] .all-projects-title) {
+    color: #FFFFFF !important;
+    text-shadow: 
+      0 2px 8px rgba(11, 30, 54, 0.35),
+      0 4px 20px rgba(11, 30, 54, 0.25) !important;
+  }
+
+  :global(html[data-theme="light"] .all-projects-desc) {
+    color: rgba(255, 255, 255, 0.95) !important;
+    text-shadow: 
+      0 2px 6px rgba(11, 30, 54, 0.3),
+      0 4px 15px rgba(11, 30, 54, 0.2) !important;
+  }
+</style>
 
 <script>
   document.addEventListener('DOMContentLoaded', () => {

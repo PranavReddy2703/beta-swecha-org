@@ -176,14 +176,17 @@ html[data-theme="light"] .mobile-lang-btn {
 }
 
 /* Brand gradient text solid blue override in light mode */
-html[data-theme="light"] .brand-gradient-text {
-  background: none !important;
-  color: var(--primary-brand) !important;
-  -webkit-text-fill-color: var(--primary-brand) !important;
+@utility brand-gradient-text {
+  :where(html[data-theme="light"]) & {
+    background: none !important;
+    color: var(--primary-brand) !important;
+    -webkit-text-fill-color: var(--primary-brand) !important;
+    filter: none !important;
+  }
 }
 
 /* Blue and Green Gradient Glowing Hyperlinks */
-.glow-link {
+@utility glow-link {
   position: relative;
   z-index: 10;
   cursor: pointer !important;
@@ -195,25 +198,24 @@ html[data-theme="light"] .brand-gradient-text {
   display: inline-block;
   filter: drop-shadow(0 0 2px rgba(0, 212, 255, 0.5));
   transition: filter 0.3s cubic-bezier(0.25, 1, 0.5, 1), transform 0.3s cubic-bezier(0.25, 1, 0.5, 1);
-}
 
-.glow-link:hover {
-  filter: drop-shadow(0 0 8px rgba(0, 212, 255, 0.85)) drop-shadow(0 0 16px rgba(77, 255, 180, 0.6)) !important;
-  transform: translateY(-1px) scale(1.03) !important;
-}
+  &:hover {
+    filter: drop-shadow(0 0 8px rgba(0, 212, 255, 0.85)) drop-shadow(0 0 16px rgba(77, 255, 180, 0.6)) !important;
+    transform: translateY(-1px) scale(1.03) !important;
+  }
 
-/* Light mode overrides for glow link to keep high contrast (solid blue) */
-html[data-theme="light"] .glow-link {
-  background: none !important;
-  color: var(--primary-brand) !important;
-  -webkit-text-fill-color: var(--primary-brand) !important;
-  filter: drop-shadow(0 0 2px rgba(2, 132, 199, 0.15)) !important;
-}
+  :where(html[data-theme="light"]) & {
+    background: none !important;
+    color: var(--primary-brand) !important;
+    -webkit-text-fill-color: var(--primary-brand) !important;
+    filter: drop-shadow(0 0 2px rgba(2, 132, 199, 0.15)) !important;
 
-html[data-theme="light"] .glow-link:hover {
-  color: var(--primary-brand) !important;
-  -webkit-text-fill-color: var(--primary-brand) !important;
-  filter: drop-shadow(0 0 6px rgba(2, 132, 199, 0.4)) !important;
+    &:hover {
+      color: var(--primary-brand) !important;
+      -webkit-text-fill-color: var(--primary-brand) !important;
+      filter: drop-shadow(0 0 6px rgba(2, 132, 199, 0.4)) !important;
+    }
+  }
 }
 
 /* Premium Badge styling inside Glass White Cards in Light Mode */
@@ -412,4 +414,121 @@ html[data-theme="light"] .animate-random-glow {
 .animate-seq-3 {
   animation: seq-fade 1.5s infinite;
   animation-delay: 0.4s;
+}
+
+/* Light mode overrides for Navbar elements */
+@utility logo-link {
+  :where(html[data-theme="light"]) &:hover .logo-content-group {
+    fill: var(--primary-brand) !important;
+    filter: drop-shadow(0 0 5px rgba(2, 90, 158, 0.3)) !important;
+  }
+}
+
+@utility nav-link {
+  :where(html[data-theme="light"]) &::before {
+    background: rgba(186, 230, 253, 0.6) !important; /* Premium Ice Blue hover */
+  }
+}
+
+@utility nav-link-indicator {
+  :where(html[data-theme="light"]) & {
+    background: var(--primary-brand) !important; /* Solid Brand Blue line */
+    box-shadow: 0 0 6px rgba(2, 90, 158, 0.3) !important;
+  }
+}
+
+/* Light mode action buttons (Language switcher & Theme toggle) overrides */
+@utility action-btn {
+  :where(html[data-theme="light"]) & {
+    background: color-mix(in srgb, var(--primary-brand) 6%, transparent) !important;
+    border: 1px solid color-mix(in srgb, var(--primary-brand) 15%, transparent) !important;
+    color: var(--text-muted) !important;
+
+    &:hover {
+      background: color-mix(in srgb, var(--primary-brand) 12%, transparent) !important;
+      border-color: var(--primary-brand) !important;
+      color: var(--primary-brand) !important;
+      box-shadow: 0 4px 12px rgba(2, 90, 158, 0.15) !important;
+    }
+  }
+}
+
+/* Light mode dropdowns (Language switcher dropdown) overrides */
+@utility lang-dropdown {
+  :where(html[data-theme="light"]) & {
+    background: #FFFFFF !important;
+    border: 1px solid rgba(15, 23, 42, 0.08) !important;
+    box-shadow:
+      0 10px 30px rgba(11, 30, 54, 0.08),
+      0 0 0 1px rgba(2, 90, 158, 0.08) !important;
+  }
+}
+
+@utility nav-dropdown-content {
+  :where(html[data-theme="light"]) & {
+    background: #FFFFFF !important;
+    border: 1px solid rgba(15, 23, 42, 0.08) !important;
+    box-shadow:
+      0 10px 30px rgba(11, 30, 54, 0.08),
+      0 0 0 1px rgba(2, 90, 158, 0.08) !important;
+  }
+}
+
+@utility lang-option-active {
+  :where(html[data-theme="light"]) & {
+    background: rgba(2, 90, 158, 0.08) !important;
+    color: var(--primary-brand) !important;
+
+    .lang-dot {
+      background: var(--primary-brand) !important;
+      box-shadow: 0 0 8px rgba(2, 90, 158, 0.5) !important;
+    }
+  }
+}
+
+@utility lang-option {
+  :where(html[data-theme="light"]) & {
+    &:hover {
+      background: rgba(2, 90, 158, 0.08) !important;
+      color: var(--primary-brand) !important;
+
+      .lang-dot {
+        background: var(--primary-brand) !important;
+        box-shadow: 0 0 8px rgba(2, 90, 158, 0.5) !important;
+      }
+    }
+  }
+}
+
+/* Light mode contrast adjustments for initiatives dropdown item hover state */
+@utility item-vishwam-ai {
+  :where(html[data-theme="light"]) &:hover {
+    background: rgba(124, 58, 237, 0.08) !important;
+    color: #7c3aed !important;
+    box-shadow: inset 0 0 0 1px rgba(124, 58, 237, 0.12) !important;
+  }
+}
+
+@utility item-devdays {
+  :where(html[data-theme="light"]) &:hover {
+    background: rgba(217, 119, 6, 0.08) !important;
+    color: #d97706 !important;
+    box-shadow: inset 0 0 0 1px rgba(217, 119, 6, 0.12) !important;
+  }
+}
+
+@utility item-ehrs {
+  :where(html[data-theme="light"]) &:hover {
+    background: rgba(5, 150, 105, 0.08) !important;
+    color: #059669 !important;
+    box-shadow: inset 0 0 0 1px rgba(5, 150, 105, 0.12) !important;
+  }
+}
+
+@utility item-more {
+  :where(html[data-theme="light"]) &:hover {
+    background: rgba(2, 90, 158, 0.08) !important;
+    color: var(--primary-brand) !important;
+    box-shadow: inset 0 0 0 1px rgba(2, 90, 158, 0.12) !important;
+  }
 }
