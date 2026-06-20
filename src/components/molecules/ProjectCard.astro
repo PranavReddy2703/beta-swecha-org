@@ -13,10 +13,10 @@ const tagsString = tags.join(",");
 
 // Determine status color
 const statusColors = {
-  Live:
-    "text-secondary-accent bg-secondary-accent/10 border-secondary-accent/20",
+  Live: "text-secondary-accent bg-secondary-accent/10 border-secondary-accent/20",
   Completed: "text-primary-brand bg-primary-brand/10 border-primary-brand/20",
-  "In Development": "text-amber-600 bg-amber-600/10 border-amber-600/20 dark:text-yellow-400 dark:bg-yellow-400/10 dark:border-yellow-400/20",
+  "In Development":
+    "text-amber-600 bg-amber-600/10 border-amber-600/20 dark:text-yellow-400 dark:bg-yellow-400/10 dark:border-yellow-400/20",
 };
 
 const statusClass = statusColors[status] || statusColors.Live;
@@ -36,7 +36,8 @@ const statusClass = statusColors[status] || statusColors.Live;
   <!-- Header: Status and External Icon -->
   <div class="flex justify-between items-start mb-6">
     <span
-      class={`inline-flex items-center gap-1.5 px-3 py-1 text-[10px] sm:text-xs font-bold uppercase tracking-wider rounded-full border ${statusClass}`}
+      data-status={status}
+      class={`status-badge inline-flex items-center gap-1.5 px-3 py-1 text-[10px] sm:text-xs font-bold uppercase tracking-wider rounded-full border ${statusClass}`}
     >
       {
         status === "Completed" ? (
@@ -97,10 +98,44 @@ const statusClass = statusColors[status] || statusColors.Live;
   >
     {
       tags.map((tag) => (
-        <span class="px-2.5 py-1 text-xs font-medium text-text-muted bg-secondary-bg rounded-md border border-structural-borders/80 group-hover:border-primary-brand/30 transition-colors duration-300">
+        <span class="project-tag px-2.5 py-1 text-xs font-medium text-text-muted bg-secondary-bg rounded-md border border-structural-borders/80 group-hover:border-primary-brand/30 transition-colors duration-300">
           {tag}
         </span>
       ))
     }
   </div>
 </a>
+
+<style>
+  /* Light mode overrides for status badges to make them brighter and more vibrant */
+  :global(html[data-theme="light"]) .status-badge[data-status="Live"] {
+    background-color: #ecfdf5 !important;
+    color: #059669 !important;
+    border-color: #a7f3d0 !important;
+  }
+
+  :global(html[data-theme="light"]) .status-badge[data-status="Completed"] {
+    background-color: #f0f9ff !important;
+    color: #0284c7 !important;
+    border-color: #bae6fd !important;
+  }
+
+  :global(html[data-theme="light"])
+    .status-badge[data-status="In Development"] {
+    background-color: #fef3c7 !important;
+    color: #d97706 !important;
+    border-color: #fde68a !important;
+  }
+
+  /* Light mode overrides to make project category tags blue */
+  :global(html[data-theme="light"]) .project-card .project-tag {
+    background-color: rgba(2, 90, 158, 0.08) !important;
+    color: #025a9e !important;
+    border-color: rgba(2, 90, 158, 0.15) !important;
+  }
+
+  :global(html[data-theme="light"]) .project-card:hover .project-tag {
+    background-color: rgba(2, 90, 158, 0.12) !important;
+    border-color: rgba(2, 90, 158, 0.25) !important;
+  }
+</style>
