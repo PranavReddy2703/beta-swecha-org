@@ -3,7 +3,11 @@
 // Procedural bird flight simulation with natural physics
 ---
 
-<div id="birds-canvas" class="fixed inset-0 pointer-events-none overflow-hidden z-10 select-none" aria-hidden="true">
+<div
+  id="birds-canvas"
+  class="fixed inset-0 pointer-events-none overflow-hidden z-10 select-none"
+  aria-hidden="true"
+>
   <div id="birds-wrapper"></div>
 </div>
 
@@ -56,24 +60,43 @@
   // @ts-nocheck
   // ─── Procedural Bird Flight System ───────────────────────────────
   (function () {
-    'use strict';
+    "use strict";
 
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
     // ─── SVG Path Data (inlined to avoid Astro symbol/use issues) ──
     const POSES = {
-      glide: 'M0 10 Q8 4 18 3 Q28 2 36 6 Q38 7 40 8 Q42 7 44 6 Q52 2 62 3 Q72 4 80 10 Q72 8 62 7 Q52 6 44 8.5 Q42 11 40 12 Q38 11 36 8.5 Q28 6 18 7 Q8 8 0 10 Z',
-      mid:   'M0 10 Q10 7 20 6 Q30 5.5 36 7 Q38 8 40 9 Q42 8 44 7 Q50 5.5 60 6 Q70 7 80 10 Q70 9 60 8.5 Q50 8 44 9.5 Q42 12 40 13 Q38 12 36 9.5 Q30 8 20 8.5 Q10 9 0 10 Z',
-      down:  'M0 13 Q10 12 20 11.5 Q30 10.5 36 9.5 Q38 9 40 8 Q42 9 44 9.5 Q50 10.5 60 11.5 Q70 12 80 13 Q70 14.5 60 13.5 Q50 12.5 44 11 Q42 12 40 12 Q38 12 36 11 Q30 12.5 20 13.5 Q10 14.5 0 13 Z',
-      up:    'M0 7 Q10 5 20 3.5 Q30 2.5 36 5 Q38 6.5 40 8 Q42 6.5 44 5 Q50 2.5 60 3.5 Q70 5 80 7 Q70 9 60 6 Q50 5 44 8 Q42 11 40 12 Q38 11 36 8 Q30 5 20 6 Q10 9 0 7 Z',
+      glide:
+        "M0 10 Q8 4 18 3 Q28 2 36 6 Q38 7 40 8 Q42 7 44 6 Q52 2 62 3 Q72 4 80 10 Q72 8 62 7 Q52 6 44 8.5 Q42 11 40 12 Q38 11 36 8.5 Q28 6 18 7 Q8 8 0 10 Z",
+      mid: "M0 10 Q10 7 20 6 Q30 5.5 36 7 Q38 8 40 9 Q42 8 44 7 Q50 5.5 60 6 Q70 7 80 10 Q70 9 60 8.5 Q50 8 44 9.5 Q42 12 40 13 Q38 12 36 9.5 Q30 8 20 8.5 Q10 9 0 10 Z",
+      down: "M0 13 Q10 12 20 11.5 Q30 10.5 36 9.5 Q38 9 40 8 Q42 9 44 9.5 Q50 10.5 60 11.5 Q70 12 80 13 Q70 14.5 60 13.5 Q50 12.5 44 11 Q42 12 40 12 Q38 12 36 11 Q30 12.5 20 13.5 Q10 14.5 0 13 Z",
+      up: "M0 7 Q10 5 20 3.5 Q30 2.5 36 5 Q38 6.5 40 8 Q42 6.5 44 5 Q50 2.5 60 3.5 Q70 5 80 7 Q70 9 60 6 Q50 5 44 8 Q42 11 40 12 Q38 11 36 8 Q30 5 20 6 Q10 9 0 7 Z",
     };
 
     // ─── Config ────────────────────────────────────────────────────
     const CFG = {
       layers: {
-        bg:  { scale: [0.22, 0.4],  speed: [0.012, 0.022], opacity: [0.3, 0.5],  count: 2, yRange: [0.05, 0.3] },
-        mid: { scale: [0.55, 1.0],  speed: [0.022, 0.04],  opacity: [0.45, 0.65], count: 2, yRange: [0.1, 0.55] },
-        fg:  { scale: [0.9, 2.0],   speed: [0.035, 0.06],  opacity: [0.45, 0.7],  count: 1, yRange: [0.15, 0.7] },
+        bg: {
+          scale: [0.22, 0.4],
+          speed: [0.012, 0.022],
+          opacity: [0.3, 0.5],
+          count: 3,
+          yRange: [0.05, 0.3],
+        },
+        mid: {
+          scale: [0.55, 1.0],
+          speed: [0.022, 0.04],
+          opacity: [0.45, 0.65],
+          count: 2,
+          yRange: [0.1, 0.55],
+        },
+        fg: {
+          scale: [0.9, 2.0],
+          speed: [0.035, 0.06],
+          opacity: [0.45, 0.7],
+          count: 1,
+          yRange: [0.15, 0.7],
+        },
       },
       baseSize: 16,
       flapCycleDur: [500, 1500],
@@ -90,7 +113,7 @@
       spawnInterval: [5000, 10000],
       flockChance: 0,
       flockSize: [3, 5],
-      maxBirds: 12,
+      maxBirds: 13,
     };
 
     // ─── Utilities ─────────────────────────────────────────────────
@@ -106,37 +129,40 @@
     // ─── Blue→Green gradient colors per bird (randomized stops) ───
     let gradId = 0;
     function makeSVG(w, h) {
-      const ns = 'http://www.w3.org/2000/svg';
-      const svg = document.createElementNS(ns, 'svg');
-      svg.setAttribute('width', String(w));
-      svg.setAttribute('height', String(h));
-      svg.setAttribute('viewBox', '0 0 80 20');
-      svg.setAttribute('xmlns', ns);
+      const ns = "http://www.w3.org/2000/svg";
+      const svg = document.createElementNS(ns, "svg");
+      svg.setAttribute("width", String(w));
+      svg.setAttribute("height", String(h));
+      svg.setAttribute("viewBox", "0 0 80 20");
+      svg.setAttribute("xmlns", ns);
 
       // Unique gradient per bird with slight hue variation
-      const id = 'bg' + (gradId++);
-      const defs = document.createElementNS(ns, 'defs');
-      const lg = document.createElementNS(ns, 'linearGradient');
-      lg.setAttribute('id', id);
-      lg.setAttribute('x1', '0%'); lg.setAttribute('y1', '0%');
-      lg.setAttribute('x2', '100%'); lg.setAttribute('y2', '0%');
+      const id = "bg" + gradId++;
+      const defs = document.createElementNS(ns, "defs");
+      const lg = document.createElementNS(ns, "linearGradient");
+      lg.setAttribute("id", id);
+      lg.setAttribute("x1", "0%");
+      lg.setAttribute("y1", "0%");
+      lg.setAttribute("x2", "100%");
+      lg.setAttribute("y2", "0%");
 
       // Randomize the blue and green hues slightly for variety
-      const hueBlue = 190 + Math.round(rand(-15, 15));  // ~175-205 (cyan-blue)
-      const hueGreen = 155 + Math.round(rand(-15, 15));  // ~140-170 (teal-green)
-      const s1 = document.createElementNS(ns, 'stop');
-      s1.setAttribute('offset', '0%');
-      s1.setAttribute('stop-color', `hsl(${hueBlue}, 85%, 55%)`);
-      const s2 = document.createElementNS(ns, 'stop');
-      s2.setAttribute('offset', '100%');
-      s2.setAttribute('stop-color', `hsl(${hueGreen}, 70%, 50%)`);
-      lg.appendChild(s1); lg.appendChild(s2);
+      const hueBlue = 190 + Math.round(rand(-15, 15)); // ~175-205 (cyan-blue)
+      const hueGreen = 155 + Math.round(rand(-15, 15)); // ~140-170 (teal-green)
+      const s1 = document.createElementNS(ns, "stop");
+      s1.setAttribute("offset", "0%");
+      s1.setAttribute("stop-color", `hsl(${hueBlue}, 85%, 55%)`);
+      const s2 = document.createElementNS(ns, "stop");
+      s2.setAttribute("offset", "100%");
+      s2.setAttribute("stop-color", `hsl(${hueGreen}, 70%, 50%)`);
+      lg.appendChild(s1);
+      lg.appendChild(s2);
       defs.appendChild(lg);
       svg.appendChild(defs);
 
-      const path = document.createElementNS(ns, 'path');
-      path.setAttribute('d', POSES.glide);
-      path.setAttribute('fill', `url(#${id})`);
+      const path = document.createElementNS(ns, "path");
+      path.setAttribute("d", POSES.glide);
+      path.setAttribute("fill", `url(#${id})`);
       svg.appendChild(path);
       return { svg, path };
     }
@@ -144,21 +170,21 @@
     // ─── Wing Animator ─────────────────────────────────────────────
     class Wings {
       constructor() {
-        this.mode = 'glide'; // 'glide' | 'flap'
+        this.mode = "glide"; // 'glide' | 'flap'
         this.glideTimer = rand(...CFG.glideDur);
         this.flapTimer = 0;
         this.phase = 0;
         this.cycleDur = rand(...CFG.flapCycleDur);
         this.remaining = 0;
-        this.pose = 'glide';
+        this.pose = "glide";
       }
 
       tick(dt, climbing) {
-        if (this.mode === 'glide') {
-          this.pose = 'glide';
+        if (this.mode === "glide") {
+          this.pose = "glide";
           if (climbing) {
             // Climbing → start flapping immediately
-            this.mode = 'flap';
+            this.mode = "flap";
             this.remaining = randInt(...(this.flapBurstRange || CFG.flapBurst));
             this.phase = 0;
             this.flapTimer = 0;
@@ -167,11 +193,13 @@
             // Level or descending → mostly glide, with random flap bursts
             this.glideTimer -= dt;
             if (this.glideTimer <= 0) {
-              this.mode = 'flap';
+              this.mode = "flap";
               this.remaining = randInt(2, 4);
               this.phase = 0;
               this.flapTimer = 0;
-              this.cycleDur = rand(...(this.flapCycleRange || CFG.flapCycleDur));
+              this.cycleDur = rand(
+                ...(this.flapCycleRange || CFG.flapCycleDur),
+              );
               this.glideTimer = rand(...(this.glideDurRange || CFG.glideDur)); // reset for next random burst
             }
           }
@@ -186,18 +214,18 @@
               this.phase = 0;
               this.remaining--;
               if (this.remaining <= 0) {
-                this.mode = 'glide';
+                this.mode = "glide";
                 // If climbing, short glide pause before flapping again
                 // If descending/level, long glide
                 this.glideTimer = climbing
                   ? rand(200, 600)
                   : rand(...(this.glideDurRange || CFG.glideDur));
-                this.pose = 'glide';
+                this.pose = "glide";
                 return;
               }
             }
           }
-          this.pose = ['mid', 'up', 'mid', 'down'][this.phase];
+          this.pose = ["mid", "up", "mid", "down"][this.phase];
         }
       }
     }
@@ -221,7 +249,11 @@
         this.windPhase = rand(0, Math.PI * 2);
         this.t0 = performance.now();
 
-        this.dir = this.follower ? this.leader.dir : (Math.random() > 0.5 ? 1 : -1);
+        this.dir = this.follower
+          ? this.leader.dir
+          : Math.random() > 0.5
+            ? 1
+            : -1;
 
         const vw = innerWidth;
         const vh = innerHeight;
@@ -231,18 +263,20 @@
         this.diagSpeed = 0; // vertical px per frame component
 
         if (!this.follower) {
-          this.x = this.dir === 1
-            ? vw + rand(30, 160)
-            : -this.size * 3 - rand(30, 160);
+          this.x =
+            this.dir === 1
+              ? vw + rand(30, 160)
+              : -this.size * 3 - rand(30, 160);
           this.baseY = vh * rand(...cfg.yRange);
           this.curveAmp = rand(-35, 35) * this.scale;
           this.curveFreq = rand(0.00008, 0.0003);
 
           if (this.diagonal) {
             // Pick an angle and direction (descending or ascending)
-            const angle = rand(...CFG.diagonalAngle) * (Math.random() > 0.5 ? 1 : -1);
-            const rad = angle * Math.PI / 180;
-            this.diagSpeed = Math.tan(rad) * this.speed * vw / 60;
+            const angle =
+              rand(...CFG.diagonalAngle) * (Math.random() > 0.5 ? 1 : -1);
+            const rad = (angle * Math.PI) / 180;
+            this.diagSpeed = (Math.tan(rad) * this.speed * vw) / 60;
             // Adjust start Y to enter from edges properly
             if (angle > 0) {
               this.baseY = vh * rand(0.02, 0.25); // start high, fly down
@@ -264,15 +298,15 @@
         this.bank = 0;
         this.pitch = 0;
         this.alive = true;
-        this.lastPose = 'glide';
+        this.lastPose = "glide";
 
         this.wings = new Wings();
         // Diagonal birds flap much more — working harder to climb/dive
         if (this.diagonal) {
           this.wings.glideTimer = rand(600, 1500);
-          this.wings.glideDurRange = [800, 2000];   // shorter glides
-          this.wings.flapCycleRange = [400, 1000];   // faster flaps
-          this.wings.flapBurstRange = [3, 6];        // more flaps per burst
+          this.wings.glideDurRange = [800, 2000]; // shorter glides
+          this.wings.flapCycleRange = [400, 1000]; // faster flaps
+          this.wings.flapBurstRange = [3, 6]; // more flaps per burst
         }
         // Stagger follower wing timing
         if (this.follower) {
@@ -285,8 +319,8 @@
         const { svg, path } = makeSVG(w, h);
         this.pathEl = path;
 
-        this.el = document.createElement('div');
-        this.el.className = 'bird-entity';
+        this.el = document.createElement("div");
+        this.el.className = "bird-entity";
         this.el.dataset.layer = layer;
         this.el.appendChild(svg);
       }
@@ -296,7 +330,10 @@
         const elapsed = now - this.t0;
 
         if (this.follower && this.leader) {
-          if (!this.leader.alive) { this.alive = false; return; }
+          if (!this.leader.alive) {
+            this.alive = false;
+            return;
+          }
           const tx = this.leader.x + this.fOffset.x * this.leader.scale;
           const ty = this.leader.y + this.fOffset.y * this.leader.scale;
           const s = 0.03 + noise(elapsed, 0.0002) * 0.012;
@@ -304,7 +341,7 @@
           this.y = lerp(this.y, ty + noise(elapsed + 1000, 0.0004) * 5, s);
         } else {
           const vw = innerWidth;
-          const speedPx = this.speed * vw / 60; // convert to px/frame
+          const speedPx = (this.speed * vw) / 60; // convert to px/frame
           const speedVar = 1 + noise(elapsed, 0.00015) * 0.22;
           const frameDt = dt / 16.67;
           this.x += speedPx * -this.dir * speedVar * frameDt;
@@ -315,7 +352,10 @@
           }
 
           const vOsc = noise(elapsed, this.vOscFreq) * this.vOscAmp;
-          const wind = noise(elapsed + this.windPhase * 2500, CFG.windFreq) * CFG.windAmp * this.scale;
+          const wind =
+            noise(elapsed + this.windPhase * 2500, CFG.windFreq) *
+            CFG.windAmp *
+            this.scale;
           const curve = Math.sin(elapsed * this.curveFreq) * this.curveAmp;
           this.y = this.baseY + vOsc + wind + curve;
         }
@@ -325,15 +365,23 @@
         const dy = this.y - this.prevY;
         this.prevX = this.x;
         this.prevY = this.y;
-        this.bank = lerp(this.bank, clamp(dx * 0.25, -CFG.maxBank, CFG.maxBank), 0.06);
-        this.pitch = lerp(this.pitch, clamp(-dy * 0.35, -CFG.maxPitch, CFG.maxPitch), 0.06);
+        this.bank = lerp(
+          this.bank,
+          clamp(dx * 0.25, -CFG.maxBank, CFG.maxBank),
+          0.06,
+        );
+        this.pitch = lerp(
+          this.pitch,
+          clamp(-dy * 0.35, -CFG.maxPitch, CFG.maxPitch),
+          0.06,
+        );
 
         // Wings: flap when climbing, glide when descending or level
         const climbing = dy < -0.3; // negative dy = moving upward on screen
         this.wings.tick(dt, climbing);
         const pose = this.wings.pose;
         if (pose !== this.lastPose) {
-          this.pathEl.setAttribute('d', POSES[pose]);
+          this.pathEl.setAttribute("d", POSES[pose]);
           this.lastPose = pose;
         }
 
@@ -344,11 +392,14 @@
         const vw = innerWidth;
         const edgeZone = 100;
         if (this.dir === 1) {
-          if (this.x > vw - edgeZone) opacity *= clamp((vw - this.x) / edgeZone, 0, 1);
-          if (this.x < 0) opacity *= clamp((this.x + edgeZone) / edgeZone, 0, 1);
+          if (this.x > vw - edgeZone)
+            opacity *= clamp((vw - this.x) / edgeZone, 0, 1);
+          if (this.x < 0)
+            opacity *= clamp((this.x + edgeZone) / edgeZone, 0, 1);
         } else {
           if (this.x < edgeZone) opacity *= clamp(this.x / edgeZone, 0, 1);
-          if (this.x > vw) opacity *= clamp((vw + edgeZone - this.x) / edgeZone, 0, 1);
+          if (this.x > vw)
+            opacity *= clamp((vw + edgeZone - this.x) / edgeZone, 0, 1);
         }
 
         // Apply GPU transform
@@ -387,7 +438,7 @@
 
       _seedInitial() {
         const vw = innerWidth;
-        for (const layer of ['bg', 'mid', 'fg']) {
+        for (const layer of ["bg", "mid", "fg"]) {
           const n = CFG.layers[layer].count + 1;
           for (let i = 0; i < n; i++) {
             const b = new Bird(layer);
@@ -404,14 +455,14 @@
       }
 
       _spawnSingle(layer) {
-        const b = new Bird(layer || ['bg', 'mid', 'fg'][randInt(0, 2)]);
+        const b = new Bird(layer || ["bg", "mid", "fg"][randInt(0, 2)]);
         this._add(b);
         return b;
       }
 
       _spawnFlock() {
         const r = Math.random();
-        const layer = r < 0.4 ? 'bg' : r < 0.8 ? 'mid' : 'fg';
+        const layer = r < 0.4 ? "bg" : r < 0.8 ? "mid" : "fg";
         const leader = this._spawnSingle(layer);
         const size = randInt(...CFG.flockSize);
 
@@ -429,9 +480,9 @@
           // Resize SVG
           const w = Math.round(f.size * 2.8);
           const h = Math.round(f.size);
-          const svg = f.el.querySelector('svg');
-          svg.setAttribute('width', String(w));
-          svg.setAttribute('height', String(h));
+          const svg = f.el.querySelector("svg");
+          svg.setAttribute("width", String(w));
+          svg.setAttribute("height", String(h));
 
           this._add(f);
         }
@@ -454,7 +505,10 @@
 
         // Periodic spawn
         if (!this.lastSpawn) this.lastSpawn = t;
-        if (t - this.lastSpawn > this.nextDelay && this.birds.length < CFG.maxBirds) {
+        if (
+          t - this.lastSpawn > this.nextDelay &&
+          this.birds.length < CFG.maxBirds
+        ) {
           this.lastSpawn = t;
           this.nextDelay = rand(...CFG.spawnInterval);
 
@@ -465,11 +519,11 @@
           }
         }
 
-        this._raf = requestAnimationFrame(t2 => this.loop(t2));
+        this._raf = requestAnimationFrame((t2) => this.loop(t2));
       }
 
       start() {
-        this._raf = requestAnimationFrame(t => this.loop(t));
+        this._raf = requestAnimationFrame((t) => this.loop(t));
       }
 
       stop() {
@@ -487,14 +541,14 @@
     }
 
     // ─── Boot ──────────────────────────────────────────────────────
-    const wrapper = document.getElementById('birds-wrapper');
+    const wrapper = document.getElementById("birds-wrapper");
     if (!wrapper) return;
 
     const flock = new Flock(wrapper);
     flock.start();
 
     // Pause when tab is hidden
-    document.addEventListener('visibilitychange', () => {
+    document.addEventListener("visibilitychange", () => {
       if (document.hidden) {
         flock.stop();
       } else {
@@ -504,10 +558,10 @@
 
     // Adjust speeds on resize
     let resizeTimer;
-    addEventListener('resize', () => {
+    addEventListener("resize", () => {
       clearTimeout(resizeTimer);
       resizeTimer = setTimeout(() => {
-        flock.birds.forEach(b => {
+        flock.birds.forEach((b) => {
           if (!b.follower) {
             const cfg = CFG.layers[b.layer];
             b.speed = rand(...cfg.speed);
