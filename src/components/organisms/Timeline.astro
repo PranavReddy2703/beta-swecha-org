@@ -1,6 +1,7 @@
 ---
 // src/components/Timeline.astro
 import { getLangFromUrl, useTranslations } from "../../i18n/utils";
+import { getNodeColors } from "../../utils/timelineColors";
 import TimelineCard from "../molecules/TimelineCard.astro";
 import TimelineSlider from "./TimelineSlider.astro";
 import MobileTimelineCard from "../molecules/MobileTimelineCard.astro";
@@ -29,27 +30,6 @@ const events = timelineData.map((event, index) => {
 });
 
 const N = events.length;
-const getNodeColors = (idx: number, isLight: boolean = false) => {
-  const t = N > 1 ? idx / (N - 1) : 0;
-  
-  if (isLight) {
-    const hue = Math.round(210 - t * 50);
-    const lightness = Math.round(20 + t * 5); 
-    return {
-      color: `hsl(${hue}, 100%, ${lightness}%)`,
-      glow: `hsla(${hue}, 100%, ${lightness}%, 0.4)`,
-      shadow: `hsla(${hue}, 100%, ${lightness}%, 0.3)`
-    };
-  } else {
-    const hue = Math.round(190 - t * 35);
-    const lightness = Math.round(50 + t * 15);
-    return {
-      color: `hsl(${hue}, 100%, ${lightness}%)`,
-      glow: `hsla(${hue}, 100%, ${lightness}%, 0.25)`,
-      shadow: `hsla(${hue}, 100%, ${lightness}%, 0.15)`
-    };
-  }
-};
 ---
 
 <section
@@ -153,12 +133,12 @@ const getNodeColors = (idx: number, isLight: boolean = false) => {
               <!-- Left: Node -->
               <div class="relative flex flex-col items-center shrink-0 w-[56px] mobile-timeline-dot transition-all duration-500 scale-75 opacity-40 mobile-node-wrapper"
                    style={`
-                     --node-color-dark: ${getNodeColors(index, false).color};
-                     --node-glow-dark: ${getNodeColors(index, false).glow};
-                     --node-shadow-dark: ${getNodeColors(index, false).shadow};
-                     --node-color-light: ${getNodeColors(index, true).color};
-                     --node-glow-light: ${getNodeColors(index, true).glow};
-                     --node-shadow-light: ${getNodeColors(index, true).shadow};
+                     --node-color-dark: ${getNodeColors(index, N, false).color};
+                     --node-glow-dark: ${getNodeColors(index, N, false).glow};
+                     --node-shadow-dark: ${getNodeColors(index, N, false).shadow};
+                     --node-color-light: ${getNodeColors(index, N, true).color};
+                     --node-glow-light: ${getNodeColors(index, N, true).glow};
+                     --node-shadow-light: ${getNodeColors(index, N, true).shadow};
                    `}>
                 <!-- The Node Dot with pulse ring -->
                 <div class="relative flex items-center justify-center h-8 w-8 dot-wrapper">
@@ -199,7 +179,7 @@ const getNodeColors = (idx: number, isLight: boolean = false) => {
 </section>
 
 <style>
-  /* Mobile Timeline Node CSS Variables */
+  /* Mobile Timeline Node CSS Variables — must stay scoped for :global() Astro syntax */
   .mobile-node-wrapper {
     --current-node-color: var(--node-color-dark);
     --current-node-glow: var(--node-glow-dark);
@@ -214,59 +194,6 @@ const getNodeColors = (idx: number, isLight: boolean = false) => {
 
   :global(html[data-theme="light"]) .mobile-node-dot {
     border-color: #FFFFFF !important;
-  }
-
-  /* Slider Card States */
-  .timeline-card {
-    transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
-  }
-
-  .active-card {
-    opacity: 1 !important;
-    transform: translateX(0) scale(1) !important;
-    pointer-events: auto !important;
-    z-index: 10 !important;
-  }
-
-  .left-card {
-    opacity: 0 !important;
-    transform: translateX(-40px) scale(0.95) !important;
-    pointer-events: none !important;
-    z-index: 0 !important;
-  }
-
-  .right-card {
-    opacity: 0 !important;
-    transform: translateX(40px) scale(0.95) !important;
-    pointer-events: none !important;
-    z-index: 0 !important;
-  }
-
-  /* Premium Nav Button styles in light mode */
-  :global(html[data-theme="light"]) .timeline-nav-btn {
-    background-color: #FFFFFF !important;
-    border: 1px solid rgba(0, 0, 0, 0.08) !important;
-    color: var(--text-primary) !important;
-    border-radius: 50% !important;
-    width: 3.5rem !important;
-    height: 3.5rem !important;
-    box-shadow: 
-      0 10px 20px -5px rgba(8, 28, 54, 0.08),
-      0 0 0 1px rgba(0, 0, 0, 0.02) !important;
-  }
-
-  :global(html[data-theme="light"]) .timeline-nav-btn:hover:not([disabled]) {
-    color: var(--primary-brand) !important;
-    border-color: rgba(2, 90, 158, 0.25) !important;
-    box-shadow: 
-      0 15px 25px -5px rgba(8, 28, 54, 0.12),
-      0 0 0 1.5px rgba(2, 90, 158, 0.1) !important;
-  }
-
-  :global(html[data-theme="light"]) .timeline-nav-btn[disabled] {
-    opacity: 0.35 !important;
-    background-color: rgba(255, 255, 255, 0.6) !important;
-    box-shadow: none !important;
   }
 </style>
 

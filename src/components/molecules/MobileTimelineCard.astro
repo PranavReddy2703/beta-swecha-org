@@ -1,5 +1,6 @@
 ---
 // src/components/molecules/MobileTimelineCard.astro
+import Tag from '../atoms/Tag.astro';
 interface Props {
   year: string;
   title: string;
@@ -67,12 +68,10 @@ const {
     <h3 class="text-lg font-black text-text-main mb-1">
       {title}
     </h3>
-    <div class="flex flex-wrap gap-1.5 mt-2">
+    <div class="flex flex-wrap gap-1.5 mt-2 pr-12">
       {
         tags.map((tag) => (
-          <div class="badge badge-outline border-structural-borders/60 text-text-muted text-[10px] font-semibold px-2 py-0.5 whitespace-nowrap">
-            {tag}
-          </div>
+          <Tag label={tag} class="text-[10px] px-2 py-0.5 whitespace-nowrap" />
         ))
       }
     </div>

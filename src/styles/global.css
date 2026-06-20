@@ -223,3 +223,193 @@ html[data-theme="light"] .glass-white-card .badge {
   color: #025A9E !important;
   font-weight: 700 !important;
 }
+
+/* ========================================================================
+   Timeline Component Styles (migrated from component <style> blocks)
+   ======================================================================== */
+
+/* Modal Backdrop — blur + dark overlay (from TimelineModal.astro) */
+.modal-backdrop {
+  background-color: rgba(8, 11, 16, 0.6) !important;
+  backdrop-filter: blur(8px) !important;
+  -webkit-backdrop-filter: blur(8px) !important;
+}
+
+dialog#timeline-modal::backdrop {
+  background-color: rgba(8, 11, 16, 0.6) !important;
+  backdrop-filter: blur(8px) !important;
+  -webkit-backdrop-filter: blur(8px) !important;
+}
+
+/* Timeline Card States (from Timeline.astro) */
+.timeline-card {
+  transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.active-card {
+  opacity: 1 !important;
+  transform: translateX(0) scale(1) !important;
+  pointer-events: auto !important;
+  z-index: 10 !important;
+}
+
+.left-card {
+  opacity: 0 !important;
+  transform: translateX(-40px) scale(0.95) !important;
+  pointer-events: none !important;
+  z-index: 0 !important;
+}
+
+.right-card {
+  opacity: 0 !important;
+  transform: translateX(40px) scale(0.95) !important;
+  pointer-events: none !important;
+  z-index: 0 !important;
+}
+
+/* Premium Nav Button in Light Mode (from Timeline.astro) */
+html[data-theme="light"] .timeline-nav-btn {
+  background-color: #FFFFFF !important;
+  border: 1px solid rgba(0, 0, 0, 0.08) !important;
+  color: var(--text-primary) !important;
+  border-radius: 50% !important;
+  width: 3.5rem !important;
+  height: 3.5rem !important;
+  box-shadow:
+    0 10px 20px -5px rgba(8, 28, 54, 0.08),
+    0 0 0 1px rgba(0, 0, 0, 0.02) !important;
+}
+
+html[data-theme="light"] .timeline-nav-btn:hover:not([disabled]) {
+  color: var(--primary-brand) !important;
+  border-color: rgba(2, 90, 158, 0.25) !important;
+  box-shadow:
+    0 15px 25px -5px rgba(8, 28, 54, 0.12),
+    0 0 0 1.5px rgba(2, 90, 158, 0.1) !important;
+}
+
+html[data-theme="light"] .timeline-nav-btn[disabled] {
+  opacity: 0.35 !important;
+  background-color: rgba(255, 255, 255, 0.6) !important;
+  box-shadow: none !important;
+}
+
+/* ========================================================================
+   AboutIntro Animations (migrated from AboutIntro.astro)
+   ======================================================================== */
+
+/* Fade-in-up entrance animation */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Random ambient glow — dark mode (Cyan/Mint) */
+@keyframes randomGlow {
+  0%, 100% {
+    box-shadow: 0 0 20px 2px rgba(0, 212, 255, 0.12), inset 0 0 12px 1px rgba(0, 212, 255, 0.04);
+    border-color: rgba(0, 212, 255, 0.2);
+  }
+  25% {
+    box-shadow: 0 0 35px 5px rgba(0, 212, 255, 0.35), inset 0 0 16px 2px rgba(0, 212, 255, 0.1);
+    border-color: rgba(0, 212, 255, 0.45);
+  }
+  50% {
+    box-shadow: 0 0 25px 3px rgba(77, 255, 180, 0.22), inset 0 0 12px 1px rgba(77, 255, 180, 0.08);
+    border-color: rgba(77, 255, 180, 0.3);
+  }
+  75% {
+    box-shadow: 0 0 40px 6px rgba(0, 212, 255, 0.42), inset 0 0 20px 3px rgba(0, 212, 255, 0.15);
+    border-color: rgba(0, 212, 255, 0.5);
+  }
+}
+
+/* Random ambient glow — light mode (Sky blue/Emerald) */
+@keyframes randomGlowLight {
+  0%, 100% {
+    box-shadow: 0 20px 40px -15px rgba(8, 28, 54, 0.15), 0 0 20px 2px rgba(2, 132, 199, 0.08);
+    border-color: rgba(2, 132, 199, 0.15);
+  }
+  25% {
+    box-shadow: 0 25px 45px -12px rgba(8, 28, 54, 0.2), 0 0 35px 5px rgba(2, 132, 199, 0.2);
+    border-color: rgba(2, 132, 199, 0.35);
+  }
+  50% {
+    box-shadow: 0 20px 40px -15px rgba(8, 28, 54, 0.15), 0 0 25px 3px rgba(5, 150, 105, 0.12);
+    border-color: rgba(5, 150, 105, 0.25);
+  }
+  75% {
+    box-shadow: 0 28px 50px -10px rgba(8, 28, 54, 0.22), 0 0 40px 6px rgba(2, 132, 199, 0.25);
+    border-color: rgba(2, 132, 199, 0.4);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.6s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+.animate-random-glow {
+  animation: randomGlow 10s infinite ease-in-out;
+}
+
+html[data-theme="light"] .animate-random-glow {
+  animation: randomGlowLight 10s infinite ease-in-out;
+}
+
+/* Hover lift on text paragraphs */
+.hover-lift {
+  transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), color 0.3s ease, text-shadow 0.3s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-4px) scale(1.008);
+  color: var(--text-primary-hover);
+  text-shadow: 0 0 12px var(--text-glow-hover);
+}
+
+/* Mobile active highlight triggered by Intersection Observer */
+.mobile-active-highlight {
+  transform: translateY(-4px) scale(1.008);
+  color: var(--text-primary-hover);
+  text-shadow: 0 0 12px var(--text-glow-hover);
+}
+
+/* ========================================================================
+   Sequential Scroll Indicator (migrated from about.astro)
+   ======================================================================== */
+
+@keyframes seq-fade {
+  0% {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+}
+
+.animate-seq-1 {
+  animation: seq-fade 1.5s infinite;
+  animation-delay: 0s;
+}
+
+.animate-seq-2 {
+  animation: seq-fade 1.5s infinite;
+  animation-delay: 0.2s;
+}
+
+.animate-seq-3 {
+  animation: seq-fade 1.5s infinite;
+  animation-delay: 0.4s;
+}
