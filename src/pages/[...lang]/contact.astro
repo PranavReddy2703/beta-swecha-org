@@ -39,7 +39,7 @@ const rawAddress = contactData.address.raw;
       <section class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch scroll-reveal-section opacity-0 translate-y-8 transition-all duration-700 ease-out">
         
         <!-- Left Side: Contact Form -->
-        <div class="w-full h-full">
+        <div class="w-full h-full order-2 lg:order-1">
           <ContactForm 
             title={t('contact.form.title')} 
             subtitle={t('contact.form.subtitle')}
@@ -52,7 +52,7 @@ const rawAddress = contactData.address.raw;
         </div>
 
         <!-- Right Side: Unified Office Location Card -->
-        <div class="group relative overflow-hidden rounded-2xl border border-structural-borders bg-card-bg/40 p-5 md:p-6 backdrop-blur-xl transition-all duration-300 hover:border-primary-brand/30 hover:shadow-[0_0_25px_rgba(0,212,255,0.05)] flex flex-col w-full h-full">
+        <div class="group relative overflow-hidden rounded-2xl border border-structural-borders bg-card-bg/40 p-5 md:p-6 backdrop-blur-xl transition-all duration-300 hover:border-primary-brand/30 hover:shadow-[0_0_25px_rgba(0,212,255,0.05)] flex flex-col w-full h-full order-1 lg:order-2">
           
           <!-- Header with Title and Ghost Copy Button -->
           <div class="flex items-center justify-between">

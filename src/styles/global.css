@@ -79,6 +79,13 @@ html[data-theme="light"] body {
   background-color: transparent;
 }
 
+@media (max-width: 1023px) {
+  html[data-theme="light"] body {
+    background-attachment: scroll !important;
+  }
+}
+
+
 html[data-theme="dark"] body {
   background-image: none;
 }
