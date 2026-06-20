@@ -45,7 +45,7 @@ const pastEvents = eventsData.filter(e => e.past);
       <!-- CONTROLS & FILTERING BAR -->
       <section class="flex flex-col md:flex-row md:items-center justify-between gap-6 pb-6 border-b border-structural-borders/30 scroll-reveal-section opacity-0 translate-y-4 transition-all duration-500 delay-200">
         <!-- Filter Pills Container -->
-        <div class="flex flex-wrap gap-2.5" id="filter-container">
+        <div class="flex flex-wrap gap-2.5 order-2 md:order-1" id="filter-container">
           <button class="filter-btn active" data-filter="all">{t('events.filter.all')}</button>
           <button class="filter-btn" data-filter="upcoming">{t('events.filter.upcoming')}</button>
           <button class="filter-btn" data-filter="ongoing">{t('events.filter.ongoing')}</button>
@@ -56,7 +56,7 @@ const pastEvents = eventsData.filter(e => e.past);
         </div>
 
         <!-- Localized Search Box -->
-        <div class="relative w-full md:max-w-xs">
+        <div class="relative w-full md:max-w-xs order-1 md:order-2">
           <span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-text-muted">
             <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
               <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
@@ -328,7 +328,6 @@ const pastEvents = eventsData.filter(e => e.past);
 </script>
 
 <style>
-  /* Filter Buttons Styling */
   .filter-btn {
     flex-shrink: 0;
     font-size: 0.825rem;
@@ -340,6 +339,21 @@ const pastEvents = eventsData.filter(e => e.past);
     color: var(--text-muted);
     cursor: pointer;
     transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+  }
+
+  @media (max-width: 767px) {
+    #filter-container {
+      width: 100% !important;
+    }
+    .filter-btn {
+      font-size: 0.725rem !important;
+      padding: 0.35rem 0.8rem !important;
+      flex-grow: 1 !important;
+      text-align: center !important;
+    }
+    .filter-btn:not(.active) {
+      background-color: color-mix(in srgb, var(--card-bg) 60%, transparent) !important;
+    }
   }
 
   .filter-btn:hover {
@@ -373,5 +387,42 @@ const pastEvents = eventsData.filter(e => e.past);
   .reveal-card {
     opacity: 0;
     animation: revealCard 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  /* Responsive card corner styling strictly for the events page */
+  @media (min-width: 1024px) {
+    .event-card-item,
+    .event-card-item > div,
+    .past-event-item,
+    .past-event-item > div,
+    .reveal-card {
+      border-radius: 0px !important;
+    }
+    .event-card-item img,
+    .past-event-item img {
+      border-radius: 0px !important;
+    }
+  }
+
+  @media (max-width: 1023px) {
+    /* Make the outer wrapper transparent so it doesn't show behind rounded corners */
+    html[data-theme="light"] .reveal-card {
+      background-color: transparent !important;
+      box-shadow: none !important;
+      border: none !important;
+    }
+    /* Force rounded corners on mobile cards */
+    .event-card-item > div,
+    .past-event-item > div {
+      border-radius: 1rem !important;
+      overflow: hidden !important;
+    }
+    .event-card-item img,
+    .past-event-item img {
+      border-top-left-radius: 1rem !important;
+      border-top-right-radius: 1rem !important;
+      border-bottom-left-radius: 0px !important;
+      border-bottom-right-radius: 0px !important;
+    }
   }
 </style>
