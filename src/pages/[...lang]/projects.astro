@@ -46,8 +46,19 @@ const projects = (projectsData.projects as ProjectData[]).sort((a, b) => {
       <h2 class="all-projects-title text-2xl font-bold text-text-main mb-2">All Projects</h2>
       <p class="all-projects-desc text-text-muted">Browse through our entire ecosystem of tools and platforms.</p>
       
+      <!-- Mobile Filter Toggle -->
+      <button id="mobile-filter-toggle" class="md:hidden flex items-center justify-end w-full py-2 mt-4 text-text-muted hover:text-text-main transition-colors font-medium">
+        <svg class="w-4 h-4 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" />
+        </svg>
+        Filter Projects
+        <svg id="filter-toggle-icon" class="w-4 h-4 ml-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+        </svg>
+      </button>
+
       <!-- Filter Pills -->
-      <div class="mt-6 flex flex-wrap gap-3" id="filters-container">
+      <div class="hidden md:flex flex-wrap gap-3 mt-4 md:mt-6" id="filters-container">
         {categories.map((cat) => (
           <FilterPill category={cat.title} iconSvg={cat.iconSvg} />
         ))}
@@ -83,10 +94,34 @@ const projects = (projectsData.projects as ProjectData[]).sort((a, b) => {
       0 2px 6px rgba(11, 30, 54, 0.3),
       0 4px 15px rgba(11, 30, 54, 0.2) !important;
   }
+
+  /* Light mode override for mobile filter toggle */
+  :global(html[data-theme="light"] #mobile-filter-toggle) {
+    width: max-content !important;
+    margin-left: auto !important;
+    padding: 0.4rem 0.8rem !important;
+    background-color: color-mix(in srgb, var(--card-bg) 60%, transparent) !important;
+    border: 1px solid var(--structural-borders) !important;
+    border-radius: 0.75rem !important;
+    color: var(--text-main) !important;
+    margin-bottom: 0.5rem !important;
+  }
 </style>
 
 <script>
   document.addEventListener('DOMContentLoaded', () => {
+    const mobileFilterToggle = document.getElementById('mobile-filter-toggle');
+    const filtersContainer = document.getElementById('filters-container');
+    const filterToggleIcon = document.getElementById('filter-toggle-icon');
+
+    if (mobileFilterToggle && filtersContainer && filterToggleIcon) {
+      mobileFilterToggle.addEventListener('click', () => {
+        filtersContainer.classList.toggle('hidden');
+        filtersContainer.classList.toggle('flex');
+        filterToggleIcon.classList.toggle('rotate-180');
+      });
+    }
+
     const filterBtns = document.querySelectorAll('.filter-pill');
     const projectCards = document.querySelectorAll('.project-card');
     let activeFilters = new Set();
