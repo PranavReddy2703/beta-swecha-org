@@ -55,10 +55,10 @@ const latestUpdates = [
       <!-- LATEST UPDATES SECTION -->
       <section class="space-y-5 scroll-reveal-section opacity-0 translate-y-6 transition-all duration-500 ease-out">
         <div class="flex items-center space-x-3">
-          <h2 class="text-lg md:text-xl font-bold text-text-main select-none">
+          <h2 class="latest-updates-title text-lg md:text-xl font-bold text-text-main select-none">
             {t('news.latest.title')}
           </h2>
-          <span class="h-[1px] flex-grow bg-gradient-to-r from-structural-borders via-structural-borders/30 to-transparent"></span>
+          <span class="latest-updates-line h-[1px] flex-grow bg-gradient-to-r from-structural-borders via-structural-borders/30 to-transparent"></span>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
@@ -76,6 +76,21 @@ const latestUpdates = [
     </div>
   </div>
 </Layout>
+
+<style>
+  /* Light mode overrides to make Latest Updates section heading white with visual depth */
+  :global(html[data-theme="light"] .latest-updates-title) {
+    color: #FFFFFF !important;
+    text-shadow: 
+      0 2px 8px rgba(11, 30, 54, 0.35),
+      0 4px 20px rgba(11, 30, 54, 0.25) !important;
+  }
+
+  /* Light mode override for the fading line next to Latest Updates to be white */
+  :global(html[data-theme="light"] .latest-updates-line) {
+    background: linear-gradient(to right, rgba(255, 255, 255, 0.6) 0%, rgba(255, 255, 255, 0.15) 50%, transparent 100%) !important;
+  }
+</style>
 
 <script>
   // Scroll Reveal triggers for clean entry animation
