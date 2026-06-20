@@ -1,10 +1,10 @@
 ---
 // src/pages/[...lang]/about.astro
-import Layout from '@layouts/Layout.astro';
-import AboutIntro from '@organisms/AboutIntro.astro';
-import Timeline from '@organisms/Timeline.astro';
-import { getLangFromUrl, useTranslations } from '../../i18n/utils';
-import { languages, defaultLang } from '../../i18n/ui';
+import Layout from "@layouts/Layout.astro";
+import AboutIntro from "@organisms/AboutIntro.astro";
+import Timeline from "@organisms/Timeline.astro";
+import { getLangFromUrl, useTranslations } from "../../i18n/utils";
+import { languages, defaultLang } from "../../i18n/ui";
 
 export function getStaticPaths() {
   return Object.keys(languages).map((lang) => {
@@ -20,9 +20,92 @@ const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 ---
 
-<Layout title={`${t('about.title')} - Swecha.org`}>
+<Layout title={`${t("about.title")} - Swecha.org`}>
   <div class="relative overflow-hidden w-full flex flex-col">
     <AboutIntro />
+
+    <!-- Scroll indicator -->
+    <div
+      class="w-full flex justify-center pb-12 hidden md:flex relative z-20 -mt-24"
+    >
+      <div
+        class="flex flex-col items-center gap-1 opacity-70 hover:opacity-100 transition-opacity cursor-pointer"
+        onclick="window.scrollBy({top: window.innerHeight * 0.7, behavior: 'smooth'})"
+      >
+        <div class="flex flex-col -space-y-3 mb-3">
+          <svg
+            class="h-6 w-6 text-primary-brand animate-seq-1"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="3"
+              d="M19 9l-7 7-7-7"></path>
+          </svg>
+          <svg
+            class="h-6 w-6 text-primary-brand animate-seq-2"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="3"
+              d="M19 9l-7 7-7-7"></path>
+          </svg>
+          <svg
+            class="h-6 w-6 text-primary-brand animate-seq-3"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="3"
+              d="M19 9l-7 7-7-7"></path>
+          </svg>
+        </div>
+        <span
+          class="text-[10px] font-extrabold uppercase tracking-widest text-text-muted"
+          >Scroll to explore our journey</span
+        >
+      </div>
+    </div>
+
     <Timeline />
   </div>
 </Layout>
+
+<style>
+  @keyframes seq-fade {
+    0% {
+      opacity: 0;
+      transform: translateY(-5px);
+    }
+    50% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    100% {
+      opacity: 0;
+      transform: translateY(5px);
+    }
+  }
+  .animate-seq-1 {
+    animation: seq-fade 1.5s infinite;
+    animation-delay: 0s;
+  }
+  .animate-seq-2 {
+    animation: seq-fade 1.5s infinite;
+    animation-delay: 0.2s;
+  }
+  .animate-seq-3 {
+    animation: seq-fade 1.5s infinite;
+    animation-delay: 0.4s;
+  }
+</style>

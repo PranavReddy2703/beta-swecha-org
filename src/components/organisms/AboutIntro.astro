@@ -22,10 +22,10 @@ const paragraphs = [
       <div class="space-y-6 text-center text-text-main/90 leading-relaxed font-medium tracking-wide">
         {paragraphs.map((p, index) => (
           <p 
-            class="text-base sm:text-lg opacity-0 translate-y-3 animate-fade-in-up cursor-default"
+            class="text-base sm:text-lg opacity-0 translate-y-3 animate-fade-in-up cursor-default about-paragraph"
             style={`animation-delay: ${index * 150 + 150}ms;`}
           >
-            <span class="block hover-lift">
+            <span class="block hover-lift transition-all duration-500">
               <Fragment set:html={p} />
             </span>
           </p>
@@ -110,4 +110,49 @@ const paragraphs = [
     color: var(--text-primary-hover);
     text-shadow: 0 0 12px var(--text-glow-hover);
   }
+
+  /* Mobile active highlight triggered by Intersection Observer */
+  .mobile-active-highlight {
+    transform: translateY(-4px) scale(1.008);
+    color: var(--text-primary-hover);
+    text-shadow: 0 0 12px var(--text-glow-hover);
+  }
 </style>
+
+<script>
+  function initMobileHighlight() {
+    // Enable auto-highlighting on scroll for touch devices / mobile screens
+    if (window.matchMedia('(max-width: 768px)').matches) {
+      const paragraphs = document.querySelectorAll('.about-paragraph span.hover-lift');
+      
+      // Clear any existing observers to avoid duplicates on HMR
+      if (window.aboutIntroObserver) {
+        window.aboutIntroObserver.disconnect();
+      }
+      
+      const observerOptions = {
+        root: null,
+        rootMargin: '-35% 0px -35% 0px', // Triggers when paragraph is in the middle 30% of screen
+        threshold: 0
+      };
+      
+      window.aboutIntroObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('mobile-active-highlight');
+          } else {
+            entry.target.classList.remove('mobile-active-highlight');
+          }
+        });
+      }, observerOptions);
+      
+      paragraphs.forEach(p => window.aboutIntroObserver.observe(p));
+    }
+  }
+
+  // Run immediately
+  initMobileHighlight();
+  
+  // Run on ViewTransitions page load
+  document.addEventListener('astro:page-load', initMobileHighlight);
+</script>
