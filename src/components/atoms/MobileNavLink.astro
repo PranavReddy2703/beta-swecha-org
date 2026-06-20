@@ -5,15 +5,16 @@ interface Props {
   label: string;
   isActive?: boolean;
   index: number;
+  isSubLink?: boolean;
 }
 
-const { href, label, isActive = false, index } = Astro.props;
+const { href, label, isActive = false, index, isSubLink = false } = Astro.props;
 ---
 
 <a
   href={href}
-  class={`mobile-nav-link ${isActive ? 'mobile-nav-link-active' : ''}`}
-  style={`--stagger-delay: ${index * 60}ms`}
+  class={`mobile-nav-link ${isActive ? 'mobile-nav-link-active' : ''} ${isSubLink ? 'mobile-sub-link' : ''}`}
+  style={isSubLink ? '' : `--stagger-delay: ${index * 60}ms`}
 >
   <span class="mobile-nav-indicator"></span>
   {label}
@@ -39,7 +40,17 @@ const { href, label, isActive = false, index } = Astro.props;
     animation-play-state: paused;
   }
 
-  :global(.mobile-drawer-open) .mobile-nav-link {
+  .mobile-sub-link {
+    animation: none;
+    opacity: 1;
+    transform: none;
+    font-size: 0.95rem;
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    margin-bottom: 0;
+  }
+
+  :global(.mobile-drawer-open) .mobile-nav-link:not(.mobile-sub-link) {
     animation-play-state: running;
   }
 
