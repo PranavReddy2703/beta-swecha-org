@@ -67,9 +67,9 @@ import 'leaflet/dist/leaflet.css';
     className: 'swecha-leaflet-marker',
     html: `
       <div class="marker-pulse-wrapper relative flex h-7 w-7 items-center justify-center">
-        <span class="pulse-ring absolute h-7 w-7 rounded-full bg-emerald-500/35 transition-all duration-500"></span>
-        <span class="pulse-ring-outer absolute h-7 w-7 rounded-full bg-emerald-500/10 transition-all duration-500"></span>
-        <span class="core-dot relative inline-flex rounded-full h-3 w-3 bg-emerald-500 border border-slate-950 shadow-[0_0_10px_#10b981]"></span>
+        <span class="pulse-ring absolute h-7 w-7 rounded-full transition-all duration-500"></span>
+        <span class="pulse-ring-outer absolute h-7 w-7 rounded-full transition-all duration-500"></span>
+        <span class="core-dot relative inline-flex rounded-full h-3 w-3 border border-slate-950"></span>
       </div>
     `,
     iconSize: [28, 28],
@@ -112,11 +112,18 @@ import 'leaflet/dist/leaflet.css';
   /* Marker animations */
   .pulse-ring {
     animation: markerPing 1.8s cubic-bezier(0, 0, 0.2, 1) infinite;
+    background-color: rgba(0, 212, 255, 0.35);
   }
 
   .pulse-ring-outer {
     animation: markerPing 1.8s cubic-bezier(0, 0, 0.2, 1) infinite;
     animation-delay: 0.6s;
+    background-color: rgba(0, 212, 255, 0.1);
+  }
+
+  .core-dot {
+    background-color: #00D4FF;
+    box-shadow: 0 0 10px #00D4FF;
   }
 
   @keyframes markerPing {
@@ -133,12 +140,12 @@ import 'leaflet/dist/leaflet.css';
   /* Active/Hover animation: Accelerate and expand pulse when map card is hovered */
   #osm-map-container:hover .pulse-ring {
     animation-duration: 1.2s;
-    background-color: rgba(16, 185, 129, 0.5);
+    background-color: rgba(0, 212, 255, 0.5);
   }
 
   #osm-map-container:hover .pulse-ring-outer {
     animation-duration: 1.2s;
-    background-color: rgba(16, 185, 129, 0.2);
+    background-color: rgba(0, 212, 255, 0.2);
   }
 
   /* Clean leaflet pane default styling adjustments */
@@ -185,6 +192,27 @@ import 'leaflet/dist/leaflet.css';
   }
 
   /* Light mode overrides for Leaflet elements */
+  html[data-theme="light"] .pulse-ring {
+    background-color: rgba(16, 185, 129, 0.35) !important;
+  }
+
+  html[data-theme="light"] .pulse-ring-outer {
+    background-color: rgba(16, 185, 129, 0.1) !important;
+  }
+
+  html[data-theme="light"] .core-dot {
+    background-color: #10b981 !important;
+    box-shadow: 0 0 10px #10b981 !important;
+  }
+
+  html[data-theme="light"] #osm-map-container:hover .pulse-ring {
+    background-color: rgba(16, 185, 129, 0.5) !important;
+  }
+
+  html[data-theme="light"] #osm-map-container:hover .pulse-ring-outer {
+    background-color: rgba(16, 185, 129, 0.2) !important;
+  }
+
   html[data-theme="light"] .swecha-leaflet-tooltip {
     background-color: #FFFFFF !important;
     border: 1px solid rgba(0, 0, 0, 0.15) !important;
