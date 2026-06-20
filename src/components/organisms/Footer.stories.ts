@@ -5,6 +5,14 @@ const meta: Meta<typeof Footer> = {
   title: 'Organisms/Footer',
   component: Footer,
   tags: ['autodocs'],
+  parameters: {
+    docs: {
+      description: {
+        component: 'Site-wide footer component containing copyright info and social media icons. Automatically dynamically updates the year.',
+      },
+    },
+    layout: 'fullscreen',
+  },
 };
 
 export default meta;

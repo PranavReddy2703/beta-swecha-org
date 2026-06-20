@@ -5,9 +5,16 @@ const meta: Meta<typeof MobileDrawer> = {
   title: 'Organisms/MobileDrawer',
   component: MobileDrawer,
   tags: ['autodocs'],
+  parameters: {
+    docs: {
+      description: {
+        component: 'Mobile navigation drawer containing links and a language switcher. Needs to be toggled open to be visible.',
+      },
+    },
+    layout: 'padded',
+  },
   argTypes: {
     navItems: { control: 'object' },
-    isCurrentPage: { control: 'none' },
   },
 };
 
@@ -15,27 +22,33 @@ export default meta;
 
 type Story = StoryObj<typeof MobileDrawer>;
 
-const mockNavItems = [
-  { name: 'About', href: '/about' },
-  { name: 'Projects', href: '/projects' },
-  {
-    name: 'Initiatives',
-    href: '/initiatives',
-    isDropdown: true,
-    children: [
-      { name: 'Vishwam AI', href: '/initiatives/vishwam-ai' },
-      { name: 'Devdays', href: '/initiatives/devdays' },
-      { name: 'EHRS', href: '/initiatives/ehrs' },
-    ],
-  },
-  { name: 'Resources', href: '/resources' },
-  { name: 'News', href: '/news' },
-  { name: 'Contact', href: '/contact' },
-];
-
 export const Default: Story = {
   args: {
-    navItems: mockNavItems,
-    isCurrentPage: (href: string) => href === '/about',
+    navItems: [
+      { name: 'Home', href: '/' },
+      { name: 'About', href: '/about' },
+      { name: 'Projects', href: '/projects' },
+      { name: 'Events', href: '/events' },
+      { name: 'Contact', href: '/contact' },
+    ],
+    isCurrentPage: (href: string) => href === '/',
   },
+  decorators: [
+    (Story) => `
+      <div style="width: 320px; border: 1px solid var(--structural-borders); border-radius: 8px;">
+        <!-- Force open state for demonstration by adding the class -->
+        <div id="demo-wrapper">
+          ${Story()}
+        </div>
+        <script>
+          setTimeout(() => {
+            const drawer = document.querySelector('.mobile-drawer');
+            if (drawer) {
+              drawer.classList.add('mobile-drawer-open');
+            }
+          }, 100);
+        </script>
+      </div>
+    `,
+  ],
 };
