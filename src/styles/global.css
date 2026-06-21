@@ -96,6 +96,7 @@ html[data-theme="light"] .featured-card,
 html[data-theme="light"] .event-card-item > div,
 html[data-theme="light"] .past-event-item > div,
 html[data-theme="light"] .reveal-card,
+html[data-theme="light"] .news-filter-card,
 html[data-theme="light"] .glass-white-card {
   background-color: rgba(255, 255, 255, 0.95) !important;
   backdrop-filter: none !important;

@@ -15,7 +15,7 @@
         "hi": "3 मिनट"
       },
       "publication": "Economic Times",
-      "publicationLogo": "ET",
+      "publicationLogo": "/images/logos/economic_times.svg",
       "category": {
         "en": "AI Initiative",
         "te": "AI కార్యక్రమం",
@@ -59,7 +59,7 @@
         "hi": "4 मिनट"
       },
       "publication": "The Machine Maker",
-      "publicationLogo": "MM",
+      "publicationLogo": "/images/logos/the_machine_maker.svg",
       "category": {
         "en": "Event Coverage",
         "te": "ఈవెంట్ కవరేజ్",
@@ -103,7 +103,7 @@
         "hi": "5 मिनट"
       },
       "publication": "The Hindu",
-      "publicationLogo": "TH",
+      "publicationLogo": "/images/logos/the_hindu.svg",
       "category": {
         "en": "Press Release",
         "te": "పత్రికా ప్రకటన",
@@ -147,7 +147,7 @@
         "hi": "3 मिनट"
       },
       "publication": "Tripura Star News",
-      "publicationLogo": "TS",
+      "publicationLogo": "/images/logos/tripura_star_news.svg",
       "category": {
         "en": "News",
         "te": "వార్తలు",
@@ -191,7 +191,7 @@
         "hi": "2 मिनट"
       },
       "publication": "Meetup",
-      "publicationLogo": "MU",
+      "publicationLogo": "/images/logos/meetup.svg",
       "category": {
         "en": "Community Update",
         "te": "కమ్యూనిటీ అప్‌డేట్",
@@ -235,7 +235,7 @@
         "hi": "6 मिनट"
       },
       "publication": "Freedom Matters",
-      "publicationLogo": "FM",
+      "publicationLogo": "/images/logos/freedom_matters.svg",
       "category": {
         "en": "Blog",
         "te": "బ్లాగ్",
@@ -279,7 +279,7 @@
         "hi": "4 मिनट"
       },
       "publication": "Telangana Today",
-      "publicationLogo": "TT",
+      "publicationLogo": "/images/logos/telangana_today.svg",
       "category": {
         "en": "AI Initiative",
         "te": "AI కార్యక్రమం",
@@ -323,7 +323,7 @@
         "hi": "3 मिनट"
       },
       "publication": "Times of India",
-      "publicationLogo": "TOI",
+      "publicationLogo": "/images/logos/times_of_india.svg",
       "category": {
         "en": "Conferences & Events",
         "te": "కాన్ఫరెన్స్ & ఈవెంట్‌లు",
@@ -367,7 +367,7 @@
         "hi": "4 मिनट"
       },
       "publication": "The Hindu",
-      "publicationLogo": "TH",
+      "publicationLogo": "/images/logos/the_hindu.svg",
       "category": {
         "en": "Conferences & Events",
         "te": "కాన్ఫరెన్స్ & ఈవెంట్‌లు",
@@ -411,7 +411,7 @@
         "hi": "5 मिनट"
       },
       "publication": "Indian Express",
-      "publicationLogo": "IE",
+      "publicationLogo": "/images/logos/indian_express.svg",
       "category": {
         "en": "Community Initiatives",
         "te": "కమ్యూనిటీ కార్యక్రమాలు",

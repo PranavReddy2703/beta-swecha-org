@@ -11,6 +11,7 @@ const { lang, t, uniquePublications } = Astro.props;
 // Localized UI Labels
 const labels = {
   search: lang === 'te' ? "వ్యాసాల కోసం వెతకండి..." : lang === 'hi' ? "लेख खोजें..." : "Search articles...",
+  searchLabel: lang === 'te' ? "శోధన" : lang === 'hi' ? "खोजें" : "Search",
   category: lang === 'te' ? "వర్గం" : lang === 'hi' ? "श्रेणी" : "Category",
   year: lang === 'te' ? "సంవత్సరం" : lang === 'hi' ? "वर्ष" : "Year",
   publication: lang === 'te' ? "ప్రచురణ" : lang === 'hi' ? "प्रकाशन" : "Publication",
@@ -33,22 +34,25 @@ const categories = [
 const years = ["All", "2026", "2025", "2024"];
 ---
 
-<div class="space-y-4 bg-secondary-bg/20 backdrop-blur-md rounded-2xl border border-structural-borders/60 p-4 shadow-sm select-none">
+<div class="news-filter-card space-y-5 bg-secondary-bg/20 backdrop-blur-md rounded-2xl border border-structural-borders/60 p-5 md:p-6 shadow-sm select-none">
   <!-- Search Bar + Dropdowns Control Row -->
   <div class="flex flex-col lg:flex-row gap-4">
     <!-- Search Input -->
-    <div class="relative flex-grow">
-      <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-text-muted/60">
-        <svg class="h-4.5 w-4.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-        </svg>
+    <div class="flex flex-col flex-grow">
+      <label for="search-input" class="text-[10px] font-bold text-text-muted uppercase tracking-wider mb-1.5">{labels.searchLabel}</label>
+      <div class="relative">
+        <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-text-muted/60">
+          <svg class="h-4.5 w-4.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+          </svg>
+        </div>
+        <input 
+          type="text" 
+          id="search-input"
+          placeholder={labels.search}
+          class="w-full pl-10.5 pr-4 h-11 rounded-xl border border-structural-borders bg-card-bg/20 text-sm text-text-main placeholder-text-muted/50 focus:outline-none focus:border-primary-brand/50 focus:ring-1 focus:ring-primary-brand/35 transition-all duration-200"
+        />
       </div>
-      <input 
-        type="text" 
-        id="search-input"
-        placeholder={labels.search}
-        class="w-full pl-10.5 pr-4 py-2.5 rounded-xl border border-structural-borders bg-card-bg/20 text-sm text-text-main placeholder-text-muted/50 focus:outline-none focus:border-primary-brand/50 focus:ring-1 focus:ring-primary-brand/35 transition-all duration-200"
-      />
     </div>
 
     <!-- Dropdowns Grid -->
@@ -58,7 +62,7 @@ const years = ["All", "2026", "2025", "2024"];
         <label for="year-select" class="text-[10px] font-bold text-text-muted uppercase tracking-wider mb-1.5">{labels.year}</label>
         <select 
           id="year-select"
-          class="px-3 py-2 rounded-xl border border-structural-borders bg-card-bg/35 text-xs text-text-main font-semibold focus:outline-none focus:border-primary-brand/50 cursor-pointer transition-colors duration-200"
+          class="px-3.5 h-11 rounded-xl border border-structural-borders bg-card-bg/35 text-sm text-text-main font-semibold focus:outline-none focus:border-primary-brand/50 cursor-pointer transition-colors duration-200"
         >
           <option value="all">{labels.all}</option>
           {years.filter(y => y !== "All").map(year => (
@@ -72,7 +76,7 @@ const years = ["All", "2026", "2025", "2024"];
         <label for="pub-select" class="text-[10px] font-bold text-text-muted uppercase tracking-wider mb-1.5">{labels.publication}</label>
         <select 
           id="pub-select"
-          class="px-3 py-2 rounded-xl border border-structural-borders bg-card-bg/35 text-xs text-text-main font-semibold focus:outline-none focus:border-primary-brand/50 cursor-pointer transition-colors duration-200 max-w-full truncate"
+          class="px-3.5 h-11 rounded-xl border border-structural-borders bg-card-bg/35 text-sm text-text-main font-semibold focus:outline-none focus:border-primary-brand/50 cursor-pointer transition-colors duration-200 max-w-full truncate"
         >
           <option value="all">{labels.all}</option>
           {uniquePublications.map(pub => (
@@ -86,7 +90,7 @@ const years = ["All", "2026", "2025", "2024"];
         <label for="sort-select" class="text-[10px] font-bold text-text-muted uppercase tracking-wider mb-1.5">{labels.sort}</label>
         <select 
           id="sort-select"
-          class="px-3 py-2 rounded-xl border border-structural-borders bg-card-bg/35 text-xs text-text-main font-semibold focus:outline-none focus:border-primary-brand/50 cursor-pointer transition-colors duration-200"
+          class="px-3.5 h-11 rounded-xl border border-structural-borders bg-card-bg/35 text-sm text-text-main font-semibold focus:outline-none focus:border-primary-brand/50 cursor-pointer transition-colors duration-200"
         >
           <option value="latest">{labels.latest}</option>
           <option value="oldest">{labels.oldest}</option>
@@ -103,7 +107,7 @@ const years = ["All", "2026", "2025", "2024"];
         data-category={cat.id}
         class={`category-pill px-4 py-1.5 rounded-full text-xs font-bold whitespace-nowrap transition-all duration-200 cursor-pointer border ${
           idx === 0
-            ? 'bg-primary-brand border-primary-brand text-white shadow-sm shadow-primary-brand/20'
+            ? 'bg-primary-brand border-primary-brand text-[var(--primary-btn-text)] shadow-sm shadow-primary-brand/20'
             : 'bg-card-bg/25 border-structural-borders text-text-muted hover:text-text-main hover:border-text-muted/30'
         }`}
       >
@@ -124,5 +128,22 @@ const years = ["All", "2026", "2025", "2024"];
   ::-webkit-scrollbar-thumb {
     background: rgba(var(--structural-borders), 0.15);
     border-radius: 99px;
+  }
+
+  /* Category Filter Pills Light Mode Overrides for visibility */
+  :global(html[data-theme="light"]) .category-pill:not(.bg-primary-brand) {
+    background-color: rgba(15, 23, 42, 0.04) !important;
+    border-color: rgba(11, 30, 54, 0.15) !important;
+    color: #3B4D61 !important;
+  }
+  :global(html[data-theme="light"]) .category-pill:not(.bg-primary-brand):hover {
+    background-color: rgba(15, 23, 42, 0.08) !important;
+    border-color: rgba(2, 90, 158, 0.45) !important;
+    color: #025A9E !important;
+  }
+  :global(html[data-theme="light"]) .category-pill.bg-primary-brand {
+    background-color: var(--primary-brand) !important;
+    border-color: var(--primary-brand) !important;
+    color: var(--primary-btn-text) !important;
   }
 </style>
