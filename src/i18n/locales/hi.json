@@ -4,7 +4,7 @@
   "nav.initiatives": "कार्यक्रम",
   "nav.initiatives.vishwamai": "VISHWAM.ai",
   "nav.initiatives.devdays": "DevDays",
-  "nav.initiatives.publichealth": "सार्वजनिक स्वास्थ्य पहल",
+  "nav.initiatives.publichealth": "सार्वजनिक स्वास्थ्य",
   "nav.initiatives.more": "More",
   "nav.events": "इवेंट्स",
   "nav.news": "समाचार",
@@ -76,7 +76,6 @@
   "timeline.3.description": "कृत्रिम बुद्धिमत्ता (AI) और डेटा साइंस के क्षेत्रों में प्रशिक्षण कार्यक्रम शुरू किए गए।",
   "timeline.4.title": "आधुनिक प्लेटफॉर्म",
   "timeline.4.description": "एस्ट्रो और डीकपल्ड आर्किটেक्चर के साथ स्वेच्छा.ऑर्ग वेबसाइट का पुनर्गठन शुरू हुआ।",
-
   "news.title": "समाचार और अपडेट",
   "news.subtitle": "स्वेच्छा की ओर से नवीनतम घोषणाएं, सामुदायिक पहल, एआई विकास, ओपन-सोर्स परियोजनाएं, कार्यक्रम और तकनीकी अपडेट।",
   "news.btn.explore": "पहल देखें",
@@ -86,37 +85,28 @@
   "news.btn.join": "मीटअप में शामिल हों",
   "news.btn.readMore": "और पढ़ें",
   "news.latest.title": "नवीनतम अपडेट",
-
   "news.featured.category": "प्रस्तुत कहानी",
   "news.featured.headline": "भारत के ओपन एआई भविष्य का निर्माण",
   "news.featured.desc": "स्वेच्छा भारत के लिए एक समावेशी, पारदर्शी और समुदाय-संचालित एआई पारिस्थितिकी तंत्र को आकार देने में मदद कर रही है।",
-
   "news.card1.category": "डेटाथॉन",
   "news.card1.headline": "तेलुगु एलएलएम के लिए तेलंगाना ने डेटाथॉन लॉन्च किया",
   "news.card1.desc": "तेलुगु लार्ज लैंग्वेज मॉडल के निर्माण के लिए राज्यव्यापी डेटा संग्रह की पहल।",
-
   "news.card2.category": "ओपन सोर्स एआई",
   "news.card2.headline": "VISWAM.AI ने ड्राफ्ट ओपन एआई लाइसेंस जारी किया",
   "news.card2.desc": "जिम्मेदार और समुदाय के स्वामित्व वाले एआई को बढ़ावा देने वाला ड्राफ्ट फ्रेमवर्क।",
-
   "news.card3.category": "एआई हैक-डे",
   "news.card3.headline": "एआई हैक-डे ने 2,000 छात्रों को किया सशक्त",
   "news.card3.desc": "सामाजिक प्रभाव के लिए एआई समाधान बनाने हेतु 2,000 से अधिक छात्र एक साथ आए।",
-
   "news.card4.category": "समुदाय",
   "news.card4.headline": "स्वेच्छा ओपन सोर्स समुदाय में शामिल हों",
   "news.card4.desc": "भारत भर के डेवलपर्स, शिक्षकों और योगदानकर्ताओं से जुड़ें।",
-
   "news.card5.category": "डिजिटल स्वतंत्रता",
   "news.card5.headline": "मुक्त प्रौद्योगिकी के माध्यम से डिजिटल स्वतंत्रता को बढ़ावा देना",
   "news.card5.desc": "मुक्त तकनीक, डिजिटल अधिकार और मुफ्त सॉफ्टवेयर को बढ़ावा देना।",
-
   "news.update1.headline": "एआई में विश्वास और सुरक्षा को समझना",
   "news.update1.desc": "जिम्मेदार एआई शासन और पारदर्शिता।",
-
   "news.update2.headline": "ओपन सोर्स फेलोशिप प्रोग्राम",
   "news.update2.desc": "मेंटरशिप-आधारित योगदानकर्ता कार्यक्रम।",
-
   "news.update3.headline": "ग्रामीण प्रौद्योगिकी पहल",
   "news.update3.desc": "डिजिटल साक्षरता और प्रौद्योगिकी तक पहुंच का विस्तार।",
   "event.badge": "एआई गवर्नेंस इवेंट",
@@ -167,19 +157,15 @@
   "events.upcoming.title": "आगामी कार्यक्रम",
   "events.past.title": "विगत कार्यक्रम",
   "events.empty": "आपकी खोज या फ़िल्टर से मेल खाने वाला कोई कार्यक्रम नहीं है।",
-
   "nav.donations": "दान",
-
   "donations.badge": "मुक्त सॉफ्टवेयर का समर्थन करें",
   "donations.title": "स्वेच्छा का समर्थन करें",
   "donations.title2": "डिजिटल स्वतंत्रता को सशक्त बनाएं",
   "donations.subtitle": "आपका योगदान स्वेच्छा को डिजिटल विभाजन को पाटने, मुफ्त सॉफ्टवेयर समाधान बनाने और ओपन-सोर्स तकनीक और डिजिटल साक्षरता के साथ भारत भर के समुदायों को सशक्त बनाने में मदद करता है।",
-
   "donations.impact.students": "प्रशिक्षित छात्र",
   "donations.impact.workshops": "आयोजित कार्यशालाएं",
   "donations.impact.projects": "FOSS परियोजनाएं",
   "donations.impact.years": "प्रभाव के वर्ष",
-
   "donations.why.title": "स्वेच्छा को दान क्यों दें?",
   "donations.why.desc": "स्वेच्छा मुफ्त सॉफ्टवेयर समाधान प्रदान करने और डिजिटल विभाजन को पाटने के लिए समर्पित एक समुदाय-संचालित संगठन है। प्रत्येक दान सीधे डिजिटल समावेशन, शिक्षा और समुदाय-संचालित ओपन सोर्स विकास के हमारे मिशन का समर्थन करता है।",
   "donations.why.education.title": "डिजिटल शिक्षा",
@@ -188,31 +174,24 @@
   "donations.why.foss.desc": "तेलुगु-स्थानीयकृत मुफ्त सॉफ्टवेयर, स्वेच्छा OS और VISHWAM.ai जैसी AI पहलों के विकास का समर्थन करें।",
   "donations.why.community.title": "समुदाय निर्माण",
   "donations.why.community.desc": "डेवलपर्स और छात्रों को एक साथ लाने वाली कार्यशालाओं, हैकाथॉन, DevDays और समुदाय मीटअप को सक्षम करें।",
-
   "donations.methods.title": "दान कैसे करें",
   "donations.methods.subtitle": "स्वेच्छा में योगदान देने के लिए अपनी पसंदीदा विधि चुनें।",
-
   "donations.method.bank.title": "बैंक ट्रांसफर (NEFT/RTGS)",
   "donations.method.bank.desc": "स्वेच्छा के आधिकारिक खाते में सीधे बैंक ट्रांसफर करें।",
   "donations.method.upi.title": "UPI भुगतान",
   "donations.method.upi.desc": "किसी भी UPI-सक्षम ऐप के माध्यम से तत्काल भुगतान।",
   "donations.method.cheque.title": "चेक / डिमांड ड्राफ्ट",
   "donations.method.cheque.desc": "स्वेच्छा के पंजीकृत पते पर चेक या DD भेजें।",
-
   "donations.bank.name": "बैंक का नाम",
   "donations.bank.account": "खाता संख्या",
   "donations.bank.ifsc": "IFSC कोड",
   "donations.bank.branch": "शाखा",
-
   "donations.upi.id": "UPI ID",
   "donations.upi.scan": "भुगतान करने के लिए किसी भी UPI ऐप में QR कोड स्कैन करें",
-
   "donations.cheque.payee": "के नाम से देय",
   "donations.cheque.address": "भेजने का पता",
-
   "donations.tax.title": "80G के तहत कर छूट",
   "donations.tax.desc": "स्वेच्छा को दिए गए दान आयकर अधिनियम की धारा 80G के तहत कर छूट के पात्र हैं। सभी दान के लिए रसीद जारी की जाएगी। अपने कर छूट प्रमाणपत्र के लिए reachus@swecha.net पर हमसे संपर्क करें।",
-
   "donations.cta.title": "हर योगदान मायने रखता है",
   "donations.cta.desc": "बड़ा हो या छोटा, आपका दान मुफ्त सॉफ्टवेयर और डिजिटल साक्षरता के साथ समुदायों को सशक्त बनाने में वास्तविक अंतर लाता है।",
   "donations.cta.btn.email": "अभी दान करें",
