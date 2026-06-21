@@ -1,0 +1,64 @@
+---
+// src/components/news/PublicationGroups.astro
+interface Article {
+  publication: string;
+  publicationLogo?: string;
+}
+
+interface Props {
+  articles: Article[];
+  lang: string;
+}
+
+const { articles, lang } = Astro.props;
+
+// Count articles per publication
+const pubCounts = articles.reduce((acc, article) => {
+  const pub = article.publication;
+  acc[pub] = (acc[pub] || 0) + 1;
+  return acc;
+}, {} as Record<string, number>);
+
+const publications = Object.keys(pubCounts).map(pub => {
+  const logo = articles.find(a => a.publication === pub)?.publicationLogo || pub.slice(0, 2).toUpperCase();
+  return {
+    name: pub,
+    logo,
+    count: pubCounts[pub]
+  };
+});
+
+const sectionTitle = lang === 'te' ? "ప్రచురణల వారీగా శోధించండి" : lang === 'hi' ? "प्रकाशनों द्वारा फ़िल्टर करें" : "Filter by Publisher";
+---
+
+<div class="space-y-4 select-none">
+  <div class="flex items-center space-x-3">
+    <h2 class="text-sm font-black text-text-main uppercase tracking-widest">
+      {sectionTitle}
+    </h2>
+    <span class="h-[1px] flex-grow bg-gradient-to-r from-structural-borders via-structural-borders/30 to-transparent"></span>
+  </div>
+
+  <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-3">
+    {publications.map((pub) => (
+      <button
+        type="button"
+        data-pub-filter={pub.name.toLowerCase()}
+        class="pub-group-btn group flex items-center justify-between gap-3 p-3 rounded-xl border border-structural-borders bg-secondary-bg/25 hover:bg-secondary-bg/55 hover:border-primary-brand/35 transition-all duration-200 cursor-pointer shadow-sm text-left"
+      >
+        <div class="flex items-center gap-2.5 min-w-0">
+          <span class="flex items-center justify-center w-7 h-7 rounded-lg bg-gradient-to-br from-primary-brand to-secondary-accent text-[9px] font-black text-slate-950 select-none shadow-sm group-hover:scale-105 transition-transform duration-300">
+            {pub.logo}
+          </span>
+          <span class="text-xs font-bold text-text-main truncate group-hover:text-primary-brand transition-colors duration-200">
+            {pub.name}
+          </span>
+        </div>
+
+        <span class="inline-flex items-center justify-center min-w-5 h-5 px-1.5 rounded-full bg-structural-borders/50 text-[10px] font-bold text-text-muted group-hover:bg-primary-brand/20 group-hover:text-primary-brand transition-all duration-200">
+          {pub.count}
+        </span>
+      </button>
+    ))}
+  </div>
+</div>

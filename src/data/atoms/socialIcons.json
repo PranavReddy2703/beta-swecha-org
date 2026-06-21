@@ -1,6 +1,9 @@
 [
-  { "href": "https://github.com/swecha-org", "label": "GitHub", "platform": "github" },
+  { "href": "https://www.linkedin.com/company/swechafsmi", "label": "LinkedIn", "platform": "linkedin" },
+  { "href": "https://huggingface.co/swechafsmi", "label": "Hugging Face", "platform": "huggingface" },
   { "href": "https://gitlab.com/swecha", "label": "GitLab", "platform": "gitlab" },
-  { "href": "https://twitter.com/swechaap", "label": "X / Twitter", "platform": "twitter" },
-  { "href": "mailto:contact@swecha.org", "label": "Email", "platform": "email" }
+  { "href": "https://x.com/SwechaFSMI", "label": "X / Twitter", "platform": "twitter" },
+  { "href": "https://www.facebook.com/swechafsmi", "label": "Facebook", "platform": "facebook" },
+  { "href": "https://www.instagram.com/swechafsmi/", "label": "Instagram", "platform": "instagram" },
+  { "href": "https://youtube.com/@swechafsmi?si=cnCLsasA9mu6vXkl", "label": "YouTube", "platform": "youtube" }
 ]
