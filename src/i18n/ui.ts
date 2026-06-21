@@ -233,6 +233,7 @@ const en = {
   "donations.method.cheque.desc": "Send a cheque or DD payable to Swecha at our registered address.",
 
   "donations.bank.name": "Bank Name",
+  "donations.bank.accountName": "Account Name",
   "donations.bank.account": "Account No.",
   "donations.bank.ifsc": "IFSC Code",
   "donations.bank.branch": "Branch",

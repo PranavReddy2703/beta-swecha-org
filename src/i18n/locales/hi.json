@@ -200,6 +200,7 @@
   "donations.method.cheque.desc": "स्वेच्छा के पंजीकृत पते पर चेक या DD भेजें।",
 
   "donations.bank.name": "बैंक का नाम",
+  "donations.bank.accountName": "खाताधारक का नाम",
   "donations.bank.account": "खाता संख्या",
   "donations.bank.ifsc": "IFSC कोड",
   "donations.bank.branch": "शाखा",
