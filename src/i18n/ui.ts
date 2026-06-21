@@ -22,7 +22,7 @@ const en = {
   "nav.initiatives.vishwamai": "VISHWAM.ai",
   "nav.initiatives.devdays": "DevDays",
   "nav.initiatives.publichealth": "People's Health",
-  "nav.initiatives.more": "More",
+  "nav.initiatives.code4change": "Code4Change",
   "nav.events": navbarData.links.find(l => l.id === "events")?.label || "",
   "nav.news": navbarData.links.find(l => l.id === "news")?.label || "",
   "nav.donations": navbarData.links.find(l => l.id === "donations")?.label || "Donations",

@@ -582,7 +582,7 @@ html[data-theme="light"] .animate-random-glow {
   }
 }
 
-@utility item-more {
+@utility item-code4change {
   :where(html[data-theme="light"]) &:hover {
     background: rgba(2, 90, 158, 0.08) !important;
     color: var(--primary-brand) !important;

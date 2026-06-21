@@ -34,7 +34,7 @@ export const Default: Story = {
       { name: 'Vishwam AI', href: '/initiatives/vishwam-ai', icon: starIcon },
       { name: 'DevDays', href: '/initiatives/devdays', icon: calendarIcon },
       { name: "People's Health", href: '/initiatives/peoples-health', icon: starIcon },
-      { name: 'More', href: '/initiatives/more', icon: starIcon },
+      { name: 'Code4Change', href: '/initiatives/code4change', icon: starIcon },
     ],
   },
 };

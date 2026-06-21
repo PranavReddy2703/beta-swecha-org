@@ -1,0 +1,165 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import { getLangFromUrl, useTranslations, useTranslatedPath } from '../../../i18n/utils';
+import { languages, defaultLang } from '../../../i18n/ui';
+
+export function getStaticPaths() {
+  return Object.keys(languages).map((lang) => {
+    return {
+      params: {
+        lang: lang === defaultLang ? undefined : lang,
+      },
+    };
+  });
+}
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const translatePath = useTranslatedPath(lang);
+---
+
+<Layout title={`Tech for Social Good - Swecha.org`}>
+  <div class="pt-32 pb-24 px-6 sm:px-10 lg:px-16 container mx-auto">
+    <div class="max-w-4xl mx-auto">
+      
+      <!-- Badge/Tagline -->
+      <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary-brand/10 border border-primary-brand/20 text-primary-brand text-sm font-semibold tracking-wider uppercase mb-8">
+        <span class="relative flex h-2 w-2">
+          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary-brand opacity-75"></span>
+          <span class="relative inline-flex rounded-full h-2 w-2 bg-primary-brand"></span>
+        </span>
+        Code4Change
+      </div>
+
+      <!-- Main Heading -->
+      <h1 class="text-4xl md:text-6xl font-black text-white mb-6 tracking-tight leading-tight">
+        Tech for Social Good
+      </h1>
+      
+      <!-- Subheading -->
+      <h2 class="text-xl md:text-2xl font-bold text-white/90 mb-6 tracking-wide leading-snug">
+        Empowering Students to Build Solutions for Society
+      </h2>
+
+      <!-- Description -->
+      <p class="text-lg md:text-xl text-white/90 mb-16 leading-relaxed">
+        Code4Change is a unique initiative by Swecha that brings together students, developers, and mentors to build open-source software solutions for public systems, non-profits, and local communities. We bridge the gap between classroom education and real-world engineering to create social impact.
+      </p>
+
+      <!-- Impact & Achievements Section -->
+      <div class="mt-20">
+        <h2 class="text-3xl font-black text-white mb-8 tracking-tight flex items-center gap-3">
+          <svg class="w-8 h-8 text-primary-brand" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+          Our Impact & Achievements
+        </h2>
+        <p class="text-lg text-white/80 mb-12 max-w-2xl leading-relaxed">
+          Through collaborative coding bootcamps, community engagement, and institutional partnerships, Code4Change has delivered real value to society while training future-ready engineers.
+        </p>
+
+        <!-- Achievements Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <!-- Card 1 -->
+          <div class="glass-card glass-white-card border border-structural-borders p-8 rounded-2xl bg-card-bg/20 backdrop-blur-xl transition-all duration-500 hover:bg-card-bg/40 hover:-translate-y-1 hover:border-primary-brand/35 hover:shadow-[0_20px_40px_rgba(0,0,0,0.3)] flex flex-col justify-between">
+            <div>
+              <span class="text-4xl font-black bg-gradient-to-r from-primary-brand to-secondary-accent bg-clip-text text-transparent mb-4 block">10,000+</span>
+              <h3 class="text-xl font-bold text-text-main mb-3">Students Trained</h3>
+              <p class="text-text-muted leading-relaxed">
+                Empowered engineering students across the region with core skills in open-source development, collaborative Git workflows, and real-world system architecture.
+              </p>
+            </div>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="glass-card glass-white-card border border-structural-borders p-8 rounded-2xl bg-card-bg/20 backdrop-blur-xl transition-all duration-500 hover:bg-card-bg/40 hover:-translate-y-1 hover:border-primary-brand/35 hover:shadow-[0_20px_40px_rgba(0,0,0,0.3)] flex flex-col justify-between">
+            <div>
+              <span class="text-4xl font-black bg-gradient-to-r from-primary-brand to-secondary-accent bg-clip-text text-transparent mb-4 block">100+</span>
+              <h3 class="text-xl font-bold text-text-main mb-3">Projects Deployed</h3>
+              <p class="text-text-muted leading-relaxed">
+                Successfully designed, developed, and deployed software solutions for public utilities, municipal bodies, government schools, and non-profit organizations.
+              </p>
+            </div>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="glass-card glass-white-card border border-structural-borders p-8 rounded-2xl bg-card-bg/20 backdrop-blur-xl transition-all duration-500 hover:bg-card-bg/40 hover:-translate-y-1 hover:border-primary-brand/35 hover:shadow-[0_20px_40px_rgba(0,0,0,0.3)] flex flex-col justify-between">
+            <div>
+              <span class="text-4xl font-black bg-gradient-to-r from-primary-brand to-secondary-accent bg-clip-text text-transparent mb-4 block">Public Tech</span>
+              <h3 class="text-xl font-bold text-text-main mb-3">Systems Digitization</h3>
+              <p class="text-text-muted leading-relaxed">
+                Collaborated with local administration to build operational tools, agriculture support systems, and localized resource planning platforms.
+              </p>
+            </div>
+          </div>
+
+          <!-- Card 4 -->
+          <div class="glass-card glass-white-card border border-structural-borders p-8 rounded-2xl bg-card-bg/20 backdrop-blur-xl transition-all duration-500 hover:bg-card-bg/40 hover:-translate-y-1 hover:border-primary-brand/35 hover:shadow-[0_20px_40px_rgba(0,0,0,0.3)] flex flex-col justify-between">
+            <div>
+              <span class="text-4xl font-black bg-gradient-to-r from-primary-brand to-secondary-accent bg-clip-text text-transparent mb-4 block">Crisis Relief</span>
+              <h3 class="text-xl font-bold text-text-main mb-3">Support Software</h3>
+              <p class="text-text-muted leading-relaxed">
+                Created rapid-response coordination platforms, tracking systems, and relief logistics platforms during critical public emergency situations.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Redirect to Projects Page -->
+      <div class="mt-24 text-center">
+        <a href={translatePath('/projects')} class="group redirect-btn inline-flex items-center justify-center gap-3 rounded-xl bg-primary-brand py-4 px-8 text-base font-black text-[var(--primary-btn-text)] leading-none transition-all duration-300 hover:bg-hover-brand hover:scale-105 active:scale-95 select-none cursor-pointer">
+          Explore Swecha Projects
+          <svg class="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+          </svg>
+        </a>
+      </div>
+
+    </div>
+  </div>
+</Layout>
+
+<style>
+  .redirect-btn {
+    position: relative;
+    overflow: hidden;
+    animation: button-pulse 3s infinite;
+  }
+
+  .redirect-btn::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -75%;
+    width: 35%;
+    height: 200%;
+    background: linear-gradient(
+      to right,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(255, 255, 255, 0.4) 50%,
+      rgba(255, 255, 255, 0) 100%
+    );
+    transform: rotate(25deg);
+    transition: none;
+    pointer-events: none;
+  }
+
+  .redirect-btn:hover::after {
+    left: 130%;
+    transition: left 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  @keyframes button-pulse {
+    0% {
+      box-shadow: 0 10px 20px -5px color-mix(in srgb, var(--primary-brand) 30%, transparent), 0 0 0 0px color-mix(in srgb, var(--primary-brand) 30%, transparent);
+    }
+    50% {
+      box-shadow: 0 15px 25px -3px color-mix(in srgb, var(--primary-brand) 50%, transparent), 0 0 0 10px color-mix(in srgb, var(--primary-brand) 0%, transparent);
+    }
+    100% {
+      box-shadow: 0 10px 20px -5px color-mix(in srgb, var(--primary-brand) 30%, transparent), 0 0 0 0px color-mix(in srgb, var(--primary-brand) 30%, transparent);
+    }
+  }
+</style>
+
