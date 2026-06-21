@@ -33,7 +33,7 @@ export const Default: Story = {
     items: [
       { name: 'Vishwam AI', href: '/initiatives/vishwam-ai', icon: starIcon },
       { name: 'DevDays', href: '/initiatives/devdays', icon: calendarIcon },
-      { name: 'EHRS', href: '/initiatives/ehrs', icon: starIcon },
+      { name: 'Public Health Initiatives', href: '/initiatives/public-health', icon: starIcon },
       { name: 'More', href: '/initiatives/more', icon: starIcon },
     ],
   },

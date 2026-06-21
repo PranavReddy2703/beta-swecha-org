@@ -544,7 +544,7 @@ html[data-theme="light"] .animate-random-glow {
   }
 }
 
-@utility item-ehrs {
+@utility item-public-health {
   :where(html[data-theme="light"]) &:hover {
     background: rgba(5, 150, 105, 0.08) !important;
     color: #059669 !important;

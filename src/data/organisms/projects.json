@@ -20,6 +20,13 @@
       "imageLabel": "VOICE_ASSIST",
       "image": "https://images.unsplash.com/photo-1589254065878-42c9da997008?auto=format&fit=crop&w=1200&q=80",
       "link": "#"
+    },
+    {
+      "title": "eHRS",
+      "description": "An Electronic Health Record System aimed at providing accessible, secure, and open-source healthcare technology solutions for public health systems.",
+      "imageLabel": "EHRS",
+      "image": "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1200&q=80",
+      "link": "#"
     }
   ],
   "categories": [
@@ -118,6 +125,16 @@
         "Education"
       ],
       "status": "In Development",
+      "link": "#"
+    },
+    {
+      "title": "eHRS",
+      "description": "An Electronic Health Record System aimed at providing accessible, secure, and open-source healthcare technology solutions.",
+      "tags": [
+        "Infrastructure",
+        "Community"
+      ],
+      "status": "Completed",
       "link": "#"
     }
   ]
