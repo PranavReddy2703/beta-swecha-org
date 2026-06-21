@@ -1,0 +1,12 @@
+
+
+echo "🔍 Running pre-push checks..."
+
+echo "🛡️ Auditing dependencies for high vulnerabilities..."
+npm audit --omit=dev --audit-level=high
+
+echo "🧹 Checking for dead code and unused files (knip)..."
+npm run knip
+
+echo "🔎 Running strict type checking..."
+npm run typecheck

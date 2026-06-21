@@ -1,0 +1,8 @@
+
+
+echo "🔍 Running pre-commit checks..."
+echo "🛡️ Scanning for secrets..."
+npx secretlint --maskSecrets "**/*"
+
+echo "💅 Formatting and linting staged files..."
+npx lint-staged

@@ -1,10 +1,12 @@
 ---
 // src/components/projects/ProjectCard.astro
+import type { ProjectStatus } from "../types/index";
+
 interface Props {
   title: string;
   description: string;
   tags: string[];
-  status: "Live" | "Completed" | "In Development";
+  status: ProjectStatus;
   link?: string;
 }
 
@@ -12,14 +14,15 @@ const { title, description, tags, status, link = "#" } = Astro.props;
 const tagsString = tags.join(",");
 
 // Determine status color
-const statusColors = {
-  Live: "text-secondary-accent bg-secondary-accent/10 border-secondary-accent/20",
+const statusColors: Record<string, string> = {
+  Active:
+    "text-secondary-accent bg-secondary-accent/10 border-secondary-accent/20",
   Completed: "text-primary-brand bg-primary-brand/10 border-primary-brand/20",
-  "In Development":
+  Ongoing:
     "text-amber-600 bg-amber-600/10 border-amber-600/20 dark:text-yellow-400 dark:bg-yellow-400/10 dark:border-yellow-400/20",
 };
 
-const statusClass = statusColors[status] || statusColors.Live;
+const statusClass = statusColors[status] || statusColors.Active;
 ---
 
 <a
@@ -108,7 +111,7 @@ const statusClass = statusColors[status] || statusColors.Live;
 
 <style>
   /* Light mode overrides for status badges to make them brighter and more vibrant */
-  :global(html[data-theme="light"]) .status-badge[data-status="Live"] {
+  :global(html[data-theme="light"]) .status-badge[data-status="Active"] {
     background-color: #ecfdf5 !important;
     color: #059669 !important;
     border-color: #a7f3d0 !important;
@@ -120,8 +123,7 @@ const statusClass = statusColors[status] || statusColors.Live;
     border-color: #bae6fd !important;
   }
 
-  :global(html[data-theme="light"])
-    .status-badge[data-status="In Development"] {
+  :global(html[data-theme="light"]) .status-badge[data-status="Ongoing"] {
     background-color: #fef3c7 !important;
     color: #d97706 !important;
     border-color: #fde68a !important;

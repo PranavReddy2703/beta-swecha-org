@@ -1,15 +1,19 @@
 ---
 // src/pages/[...lang]/projects.astro
-import Layout from '@layouts/Layout.astro';
-import { getLangFromUrl, useTranslations } from '../../i18n/utils';
-import { languages, defaultLang } from '../../i18n/ui';
-import ProjectsHeader from '@organisms/ProjectsHeader.astro';
-import FeaturedProjectsCarousel from '@organisms/FeaturedProjectsCarousel.astro';
-import ProjectsGrid from '@organisms/ProjectsGrid.astro';
-import ProjectCard from '@molecules/ProjectCard.astro';
-import FilterPill from '@atoms/FilterPill.astro';
-import projectsData from '@data/organisms/projects.json';
-import type { FeaturedProjectData, ProjectData, CategoryData } from '@components/types/index';
+import Layout from "@layouts/Layout.astro";
+import { getLangFromUrl, useTranslations } from "../../i18n/utils";
+import { languages, defaultLang } from "../../i18n/ui";
+import ProjectsHeader from "@organisms/ProjectsHeader.astro";
+import FeaturedProjectsCarousel from "@organisms/FeaturedProjectsCarousel.astro";
+import ProjectsGrid from "@organisms/ProjectsGrid.astro";
+import ProjectCard from "@molecules/ProjectCard.astro";
+import FilterPill from "@atoms/FilterPill.astro";
+import projectsData from "@data/organisms/projects.json";
+import type {
+  FeaturedProjectData,
+  ProjectData,
+  CategoryData,
+} from "@components/types/index";
 
 export function getStaticPaths() {
   return Object.keys(languages).map((lang) => {
@@ -26,15 +30,19 @@ const t = useTranslations(lang);
 
 const featuredProjects = projectsData.featured as FeaturedProjectData[];
 const categories = projectsData.categories as CategoryData[];
-const statusOrder = { Live: 1, 'In Development': 2, Completed: 3 };
+const statusOrder: Record<string, number> = {
+  Active: 1,
+  Ongoing: 2,
+  Completed: 3,
+};
 const projects = (projectsData.projects as ProjectData[]).sort((a, b) => {
   return (statusOrder[a.status] || 99) - (statusOrder[b.status] || 99);
 });
 ---
 
-<Layout title={`${t('nav.projects')} - Swecha.org`}>
-  <ProjectsHeader 
-    title={t('nav.projects')}
+<Layout title={`${t("nav.projects")} - Swecha.org`}>
+  <ProjectsHeader
+    title={t("nav.projects")}
     description="Discover the tools, platforms, and initiatives built by the Swecha community to empower people with free software and localized technology."
   />
 
@@ -43,38 +51,72 @@ const projects = (projectsData.projects as ProjectData[]).sort((a, b) => {
   <!-- All Projects Section -->
   <section class="py-12">
     <div class="container mx-auto px-4 mb-8">
-      <h2 class="all-projects-title text-2xl font-bold text-text-main mb-2">All Projects</h2>
-      <p class="all-projects-desc text-text-muted">Browse through our entire ecosystem of tools and platforms.</p>
-      
+      <h2 class="all-projects-title text-2xl font-bold text-text-main mb-2">
+        All Projects
+      </h2>
+      <p class="all-projects-desc text-text-muted">
+        Browse through our entire ecosystem of tools and platforms.
+      </p>
+
       <!-- Mobile Filter Toggle -->
-      <button id="mobile-filter-toggle" class="md:hidden flex items-center justify-end w-full py-2 mt-4 text-text-muted hover:text-text-main transition-colors font-medium">
-        <svg class="w-4 h-4 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" />
+      <button
+        id="mobile-filter-toggle"
+        class="md:hidden flex items-center justify-end w-full py-2 mt-4 text-text-muted hover:text-text-main transition-colors font-medium"
+      >
+        <svg
+          class="w-4 h-4 mr-1.5"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"
+          ></path>
         </svg>
         Filter Projects
-        <svg id="filter-toggle-icon" class="w-4 h-4 ml-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+        <svg
+          id="filter-toggle-icon"
+          class="w-4 h-4 ml-1 transition-transform"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M19 9l-7 7-7-7"></path>
         </svg>
       </button>
 
       <!-- Filter Pills -->
-      <div class="hidden md:flex flex-wrap gap-3 mt-4 md:mt-6" id="filters-container">
-        {categories.map((cat) => (
-          <FilterPill category={cat.title} iconSvg={cat.iconSvg} />
-        ))}
+      <div
+        class="hidden md:flex flex-wrap gap-3 mt-4 md:mt-6"
+        id="filters-container"
+      >
+        {
+          categories.map((cat) => (
+            <FilterPill category={cat.title} iconSvg={cat.iconSvg} />
+          ))
+        }
       </div>
     </div>
 
     <ProjectsGrid>
-      {projects.map((project) => (
-        <ProjectCard 
-          title={project.title}
-          description={project.description}
-          tags={project.tags}
-          status={project.status}
-          link={project.link}
-        />
-      ))}
+      {
+        projects.map((project) => (
+          <ProjectCard
+            title={project.title}
+            description={project.description}
+            tags={project.tags}
+            status={project.status}
+            link={project.link}
+          />
+        ))
+      }
     </ProjectsGrid>
   </section>
 </Layout>
@@ -92,14 +134,14 @@ const projects = (projectsData.projects as ProjectData[]).sort((a, b) => {
   :global(html[data-theme="light"]) .all-projects-title {
     -webkit-text-fill-color: #FFFFFF !important;
     color: #FFFFFF !important;
-    text-shadow: 
+    text-shadow:
       0 2px 8px rgba(11, 30, 54, 0.35),
       0 4px 20px rgba(11, 30, 54, 0.25) !important;
   }
 
   :global(html[data-theme="light"]) .all-projects-desc {
     color: rgba(255, 255, 255, 0.95) !important;
-    text-shadow: 
+    text-shadow:
       0 2px 6px rgba(11, 30, 54, 0.3),
       0 4px 15px rgba(11, 30, 54, 0.2) !important;
   }
@@ -109,7 +151,11 @@ const projects = (projectsData.projects as ProjectData[]).sort((a, b) => {
     width: max-content !important;
     margin-left: auto !important;
     padding: 0.4rem 0.8rem !important;
-    background-color: color-mix(in srgb, var(--card-bg) 60%, transparent) !important;
+    background-color: color-mix(
+      in srgb,
+      var(--card-bg) 60%,
+      transparent
+    ) !important;
     border: 1px solid var(--structural-borders) !important;
     border-radius: 0.75rem !important;
     color: var(--text-main) !important;
@@ -118,62 +164,80 @@ const projects = (projectsData.projects as ProjectData[]).sort((a, b) => {
 </style>
 
 <script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const mobileFilterToggle = document.getElementById('mobile-filter-toggle');
-    const filtersContainer = document.getElementById('filters-container');
-    const filterToggleIcon = document.getElementById('filter-toggle-icon');
+  document.addEventListener("DOMContentLoaded", () => {
+    const mobileFilterToggle = document.getElementById("mobile-filter-toggle");
+    const filtersContainer = document.getElementById("filters-container");
+    const filterToggleIcon = document.getElementById("filter-toggle-icon");
 
     if (mobileFilterToggle && filtersContainer && filterToggleIcon) {
-      mobileFilterToggle.addEventListener('click', () => {
-        filtersContainer.classList.toggle('hidden');
-        filtersContainer.classList.toggle('flex');
-        filterToggleIcon.classList.toggle('rotate-180');
+      mobileFilterToggle.addEventListener("click", () => {
+        filtersContainer.classList.toggle("hidden");
+        filtersContainer.classList.toggle("flex");
+        filterToggleIcon.classList.toggle("rotate-180");
       });
     }
 
-    const filterBtns = document.querySelectorAll('.filter-pill');
-    const projectCards = document.querySelectorAll('.project-card');
+    const filterBtns = document.querySelectorAll(".filter-pill");
+    const projectCards = document.querySelectorAll(".project-card");
     let activeFilters = new Set();
 
-    filterBtns.forEach(btn => {
-      btn.addEventListener('click', () => {
-        const category = btn.getAttribute('data-category');
-        const xIcon = btn.querySelector('.deselect-x');
-        
+    filterBtns.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const category = btn.getAttribute("data-category");
+        const xIcon = btn.querySelector(".deselect-x");
+
         if (activeFilters.has(category)) {
           activeFilters.delete(category);
-          btn.classList.remove('bg-primary-brand/15', 'border-primary-brand/50', 'text-primary-brand');
-          btn.classList.add('border-structural-borders/50', 'bg-card-bg/60', 'text-text-muted');
-          if (xIcon) xIcon.classList.add('hidden');
+          btn.classList.remove(
+            "bg-primary-brand/15",
+            "border-primary-brand/50",
+            "text-primary-brand",
+          );
+          btn.classList.add(
+            "border-structural-borders/50",
+            "bg-card-bg/60",
+            "text-text-muted",
+          );
+          if (xIcon) xIcon.classList.add("hidden");
         } else {
           activeFilters.add(category);
-          btn.classList.remove('border-structural-borders/50', 'bg-card-bg/60', 'text-text-muted');
-          btn.classList.add('bg-primary-brand/15', 'border-primary-brand/50', 'text-primary-brand');
-          if (xIcon) xIcon.classList.remove('hidden');
+          btn.classList.remove(
+            "border-structural-borders/50",
+            "bg-card-bg/60",
+            "text-text-muted",
+          );
+          btn.classList.add(
+            "bg-primary-brand/15",
+            "border-primary-brand/50",
+            "text-primary-brand",
+          );
+          if (xIcon) xIcon.classList.remove("hidden");
         }
-        
+
         filterCards();
       });
     });
 
     function filterCards() {
       if (activeFilters.size === 0) {
-        projectCards.forEach(card => {
-          (card as HTMLElement).style.display = 'flex';
+        projectCards.forEach((card) => {
+          (card as HTMLElement).style.display = "flex";
         });
         return;
       }
 
-      projectCards.forEach(card => {
-        const tagsString = card.getAttribute('data-tags') || '';
-        const tags = tagsString.split(',');
-        
-        const isMatch = Array.from(activeFilters).some(filter => tags.includes(filter as string));
-        
+      projectCards.forEach((card) => {
+        const tagsString = card.getAttribute("data-tags") || "";
+        const tags = tagsString.split(",");
+
+        const isMatch = Array.from(activeFilters).some((filter) =>
+          tags.includes(filter as string),
+        );
+
         if (isMatch) {
-          (card as HTMLElement).style.display = 'flex';
+          (card as HTMLElement).style.display = "flex";
         } else {
-          (card as HTMLElement).style.display = 'none';
+          (card as HTMLElement).style.display = "none";
         }
       });
     }

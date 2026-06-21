@@ -1,0 +1,28 @@
+{
+  "ignore": [
+    "src/components/molecules/EventTimelineCard.astro",
+    "src/components/types/index.ts",
+    "src/i18n/ui.ts"
+  ],
+  "ignoreExportsUsedInFile": true,
+  "ignoreDependencies": [
+    "@lhci/cli",
+    "@secretlint/secretlint-rule-preset-recommend",
+    "@storybook/builder-vite",
+    "astro-eslint-parser",
+    "react",
+    "@components/*",
+    "@atoms/*",
+    "@molecules/*",
+    "@organisms/*",
+    "@layouts/*",
+    "@data/*"
+  ],
+  "astro": {
+    "entry": [
+      "src/pages/**/*.astro",
+      "src/content/**/*.md",
+      "src/content/**/*.mdx"
+    ]
+  }
+}
