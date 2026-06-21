@@ -36,9 +36,9 @@ const badgeClasses = getCategoryStyles(event.category);
 <div class={`group flex flex-col w-full md:max-w-[460px] rounded-2xl border border-structural-borders/85 bg-card-bg/25 backdrop-blur-sm overflow-hidden hover:border-primary-brand/35 hover:-translate-y-1 hover:shadow-[0_12px_30px_rgba(0,212,255,0.03)] transition-all duration-300 glass-white-card ${className}`}>
   <!-- Cover Image with scale transition -->
   <div class="relative h-44 sm:h-48 overflow-hidden">
-    <img 
-      src={event.image} 
-      alt={event.title} 
+    <img
+      src={event.image}
+      alt={event.title}
       class="w-full h-full object-cover group-hover:scale-103 transition-transform duration-500"
     />
     <!-- Category Badge -->
@@ -72,10 +72,10 @@ const badgeClasses = getCategoryStyles(event.category);
         </svg>
         {event.venue}
       </span>
-      
+
       <!-- Link with arrow shift hover -->
-      <a 
-        href={translatePath(`/events/${event.slug}`)} 
+      <a
+        href={translatePath(`/events/${event.slug}`)}
         class="inline-flex items-center gap-1 text-primary-brand hover:text-hover-brand transition-all cursor-pointer font-bold"
       >
         View Event

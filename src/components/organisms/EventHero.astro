@@ -18,17 +18,17 @@ const translatePath = useTranslatedPath(lang);
 
   <!-- Hero Content and Banner Wrapper -->
   <div class="relative w-full h-[65vh] min-h-[500px] md:h-[75vh] flex items-center justify-center">
-    
+
     <!-- Background Image with Overlay -->
     <div class="absolute inset-0 z-0">
-      <img 
-        src="/images/event-banner.png" 
-        alt="Trust and Safety in AI Conference Banner" 
+      <img
+        src="/images/event-banner.png"
+        alt="Trust and Safety in AI Conference Banner"
         class="w-full h-full object-cover object-center scale-105 filter brightness-75 contrast-105 transition-all duration-1000 ease-out hover:scale-100"
       />
       <!-- Tech Matrix Grid Overlay -->
       <div class="absolute inset-0 bg-[linear-gradient(to_right,#273449_1px,transparent_1px),linear-gradient(to_bottom,#273449_1px,transparent_1px)] bg-[size:4rem_4rem] opacity-[0.08] mix-blend-overlay"></div>
-      
+
       <!-- Multi-stage Dark Overlays -->
       <div class="absolute inset-0 bg-gradient-to-b from-canvas-base/30 via-canvas-base/75 to-canvas-base z-10"></div>
       <div class="absolute inset-0 bg-gradient-to-r from-canvas-base via-transparent to-canvas-base opacity-90 z-10"></div>
@@ -36,7 +36,7 @@ const translatePath = useTranslatedPath(lang);
 
     <!-- Immersive Content Area -->
     <div class="relative z-20 max-w-5xl mx-auto px-4 text-center sm:px-6 lg:px-8 space-y-6 md:space-y-8 animate-fade-in">
-      
+
       <!-- Event Category Badge -->
       <div class="inline-flex justify-center transition-all duration-300 hover:scale-105">
         <Badge label={t('event.badge')} variant="hero" />
@@ -59,16 +59,16 @@ const translatePath = useTranslatedPath(lang);
 
       <!-- Primary CTA Actions -->
       <div class="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
-        <Button 
-          href="#register-section" 
-          label={t('event.btn.register')} 
-          variant="primary" 
+        <Button
+          href="#register-section"
+          label={t('event.btn.register')}
+          variant="primary"
           class="w-full sm:w-auto px-8 py-4 shadow-[0_0_30px_rgba(0,212,255,0.25)] hover:shadow-[0_0_40px_rgba(0,212,255,0.4)]"
         />
-        <Button 
-          href="#about-section" 
-          label={t('event.btn.readMore')} 
-          variant="secondary" 
+        <Button
+          href="#about-section"
+          label={t('event.btn.readMore')}
+          variant="secondary"
           class="w-full sm:w-auto px-8 py-4 hover:border-secondary-accent/40"
         />
       </div>

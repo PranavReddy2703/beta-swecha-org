@@ -5,8 +5,9 @@ import { getLangFromUrl, useTranslations, useTranslatedPath } from '../../i18n/u
 import { languages, defaultLang } from '../../i18n/ui';
 import eventsData from '../../data/events.json';
 
-import EventCard from '@components/events/EventCard.astro';
-import PastEventCard from '@components/events/PastEventCard.astro';
+import EventCard from '@components/molecules/EventCard.astro';
+import PastEventCard from '@components/molecules/PastEventCard.astro';
+import FeaturedEvent from '@components/molecules/FeaturedEvent.astro';
 
 export function getStaticPaths() {
   return Object.keys(languages).map((lang) => {

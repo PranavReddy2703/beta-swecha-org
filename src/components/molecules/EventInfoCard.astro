@@ -27,7 +27,7 @@ const icons: Record<Props['icon'], string> = {
 ---
 
 <div class="glass-white-card group relative rounded-2xl border border-structural-borders bg-card-bg/40 p-6 md:p-8 backdrop-blur-md transition-all duration-300 hover:border-primary-brand/30 hover:-translate-y-1 hover:shadow-[0_8px_30px_rgb(0,212,255,0.05)] overflow-hidden">
-  
+
   <!-- Corner radial gradient glow on hover -->
   <div class="absolute -right-10 -top-10 w-24 h-24 bg-gradient-to-br from-primary-brand/10 to-transparent blur-xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
 
@@ -36,7 +36,7 @@ const icons: Record<Props['icon'], string> = {
     <div class="flex-shrink-0 flex items-center justify-center w-12 h-12 rounded-xl bg-primary-brand/10 text-primary-brand border border-primary-brand/20 group-hover:bg-primary-brand group-hover:text-slate-950 group-hover:border-primary-brand transition-all duration-300">
       <Fragment set:html={icons[icon]} />
     </div>
-    
+
     <!-- Info details -->
     <div class="flex-grow space-y-1">
       <span class="text-xs font-semibold tracking-wider text-text-muted uppercase block">
