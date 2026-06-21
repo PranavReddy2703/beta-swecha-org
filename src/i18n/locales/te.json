@@ -200,6 +200,7 @@
   "donations.method.cheque.desc": "స్వేచ్ఛ నమోదిత చిరునామాకు చెక్ లేదా DD పంపండి.",
 
   "donations.bank.name": "బ్యాంక్ పేరు",
+  "donations.bank.accountName": "ఖాతాదారుని పేరు",
   "donations.bank.account": "ఖాతా నం.",
   "donations.bank.ifsc": "IFSC కోడ్",
   "donations.bank.branch": "శాఖ",
