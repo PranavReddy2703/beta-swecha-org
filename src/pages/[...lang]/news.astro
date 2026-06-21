@@ -63,7 +63,7 @@ const fellowshipDesc = lang === 'te' ? "యువ విద్యార్థు
           <!-- Featured Story Container (Hidden if search/filter active) -->
           <div id="featured-story-section" class="scroll-reveal-section opacity-0 translate-y-6 transition-all duration-500 ease-out">
             <div class="flex items-center space-x-3 mb-4 select-none">
-              <h2 class="text-xs font-black text-text-main uppercase tracking-widest">
+              <h2 class="news-section-header text-xs font-black text-text-main uppercase tracking-widest">
                 {lang === 'te' ? "ప్రధాన వార్త" : lang === 'hi' ? "मुख्य समाचार" : "Top Story"}
               </h2>
               <span class="h-[1px] flex-grow bg-gradient-to-r from-structural-borders via-structural-borders/30 to-transparent"></span>
@@ -74,7 +74,7 @@ const fellowshipDesc = lang === 'te' ? "యువ విద్యార్థు
           <!-- Filtered Results Grid -->
           <div class="space-y-4">
             <div class="flex items-center space-x-3 mb-4 select-none">
-              <h2 id="grid-header-title" class="text-xs font-black text-text-main uppercase tracking-widest">
+              <h2 id="grid-header-title" class="news-section-header text-xs font-black text-text-main uppercase tracking-widest">
                 {lang === 'te' ? "అన్ని కథనాలు" : lang === 'hi' ? "सभी लेख" : "All Stories"}
               </h2>
               <span class="h-[1px] flex-grow bg-gradient-to-r from-structural-borders via-structural-borders/30 to-transparent"></span>
@@ -107,7 +107,7 @@ const fellowshipDesc = lang === 'te' ? "యువ విద్యార్థు
         <div class="lg:col-span-1 space-y-8 lg:sticky lg:top-24 lg:self-start">
           
           <!-- Picks for you block -->
-          <div class="bg-gradient-to-br from-primary-brand/10 to-secondary-accent/10 border border-primary-brand/20 rounded-2xl p-5 space-y-4 shadow-sm hover:border-primary-brand/35 transition-all duration-300 group select-none">
+          <div class="picks-for-you-card bg-gradient-to-br from-primary-brand/10 to-secondary-accent/10 border border-primary-brand/20 rounded-2xl p-5 space-y-4 shadow-sm hover:border-primary-brand/35 transition-all duration-300 group select-none">
             <div class="flex items-center gap-2">
               <span class="w-2 h-2 rounded-full bg-primary-brand animate-pulse"></span>
               <h3 class="text-xs font-black text-text-main uppercase tracking-widest">{picksLabel}</h3>
