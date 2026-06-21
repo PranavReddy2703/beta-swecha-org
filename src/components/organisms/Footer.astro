@@ -13,9 +13,15 @@ const copyrightText = footerData.copyrightTemplate.replace(
 ---
 
 <footer
-  class="w-full border-t border-structural-borders bg-secondary-bg/30 backdrop-blur-md py-5 transition-colors duration-300"
+  id="site-footer-sticky"
+  class="fixed bottom-0 left-0 right-0 z-40 w-full border-t border-structural-borders bg-secondary-bg/30 backdrop-blur-md py-5 footer-minimized"
 >
-  <div class="px-6 sm:px-16 lg:px-24">
+  <!-- Mini label visible only when collapsed/minimized -->
+  <span class="minimized-footer-label">
+    Swecha
+  </span>
+
+  <div class="px-6 sm:px-16 lg:px-24 footer-content">
     <div
       class="flex flex-col-reverse sm:flex-row items-center justify-between gap-4"
     >
@@ -36,3 +42,88 @@ const copyrightText = footerData.copyrightTemplate.replace(
     </div>
   </div>
 </footer>
+
+<script>
+  function setupStickyFooterReveal() {
+    const footer = document.getElementById('site-footer-sticky');
+    if (!footer) return;
+
+    const handleScroll = () => {
+      const threshold = 15;
+      const isAtBottom = (window.innerHeight + window.scrollY) >= (document.documentElement.scrollHeight - threshold);
+      
+      if (isAtBottom) {
+        footer.classList.remove('footer-minimized');
+      } else {
+        footer.classList.add('footer-minimized');
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener('resize', handleScroll);
+    
+    // Initial check
+    handleScroll();
+  }
+
+  // Support Astro View Transitions (DOMContentLoaded & astro:page-load)
+  document.addEventListener('DOMContentLoaded', setupStickyFooterReveal);
+  document.addEventListener('astro:page-load', setupStickyFooterReveal);
+  setupStickyFooterReveal();
+</script>
+
+<style>
+  #site-footer-sticky {
+    transition: padding 0.4s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.3s ease, border-color 0.3s ease;
+  }
+
+  .footer-minimized {
+    padding-top: 6px !important;
+    padding-bottom: 6px !important;
+    background-color: #080B10 !important;
+    border-top: 1px solid var(--structural-borders) !important;
+  }
+
+  :global(html[data-theme="light"]) .footer-minimized {
+    background-color: #FFFFFF !important;
+    border-top-color: rgba(0, 0, 0, 0.08) !important;
+  }
+
+  .footer-content {
+    transition: opacity 0.35s ease, transform 0.35s ease;
+  }
+
+  .footer-minimized .footer-content {
+    opacity: 0 !important;
+    transform: translateY(10px) !important;
+    pointer-events: none !important;
+  }
+
+  .minimized-footer-label {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) translateZ(0);
+    backface-visibility: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    opacity: 0;
+    pointer-events: none;
+    color: #FFFFFF !important;
+    font-weight: 900;
+    letter-spacing: 0.18em;
+    font-size: 11px;
+    line-height: 1;
+    text-transform: uppercase;
+    transition: opacity 0.35s ease;
+    z-index: 50;
+  }
+
+  :global(html[data-theme="light"]) .minimized-footer-label {
+    color: #0B1E36 !important;
+  }
+
+  .footer-minimized .minimized-footer-label {
+    opacity: 1 !important;
+  }
+</style>

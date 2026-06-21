@@ -80,15 +80,24 @@ const projects = (projectsData.projects as ProjectData[]).sort((a, b) => {
 </Layout>
 
 <style>
+  .all-projects-title {
+    background: linear-gradient(135deg, #00D4FF, #4DFFB8) !important;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    text-shadow: none !important;
+    width: fit-content;
+  }
+
   /* Light mode overrides to make All Projects section heading and description white with visual depth */
-  :global(html[data-theme="light"] .all-projects-title) {
+  :global(html[data-theme="light"]) .all-projects-title {
+    -webkit-text-fill-color: #FFFFFF !important;
     color: #FFFFFF !important;
     text-shadow: 
       0 2px 8px rgba(11, 30, 54, 0.35),
       0 4px 20px rgba(11, 30, 54, 0.25) !important;
   }
 
-  :global(html[data-theme="light"] .all-projects-desc) {
+  :global(html[data-theme="light"]) .all-projects-desc {
     color: rgba(255, 255, 255, 0.95) !important;
     text-shadow: 
       0 2px 6px rgba(11, 30, 54, 0.3),

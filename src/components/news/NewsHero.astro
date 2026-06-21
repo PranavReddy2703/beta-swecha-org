@@ -6,79 +6,36 @@ interface Props {
 }
 
 const { t, lang } = Astro.props;
-
-// Date localization formatting helper
-const getFormattedDate = () => {
-  const dateOptions: Intl.DateTimeFormatOptions = { 
-    weekday: 'long', 
-    year: 'numeric', 
-    month: 'long', 
-    day: 'numeric' 
-  };
-  
-  const localeMap: Record<string, string> = {
-    en: 'en-US',
-    te: 'te-IN',
-    hi: 'hi-IN'
-  };
-  
-  return new Date().toLocaleDateString(localeMap[lang] || 'en-US', dateOptions);
-};
-
-const briefingLabel = lang === 'te' ? "మీ బ్రీఫింగ్" : lang === 'hi' ? "आपका ब्रीफिंग" : "Your briefing";
-const weatherCondition = lang === 'te' ? "పాక్షికంగా మేఘావృతం" : lang === 'hi' ? "आंशिक रूप से बादल छाए हैं" : "Partly Cloudy";
-const locationLabel = lang === 'te' ? "హైదరాబాద్" : lang === 'hi' ? "हैदराबाद" : "Hyderabad";
 ---
 
-<div class="pt-4">
-  <!-- Top Subheader Layout -->
-  <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-6 border-b border-structural-borders/40 pb-6">
-    <div class="space-y-2.5 max-w-2xl">
-      <h1 class="news-hero-title text-3xl md:text-4xl lg:text-5xl font-black text-text-main tracking-tight leading-none">
-        {t('news.title')}
-      </h1>
-      <p class="news-hero-subtitle text-sm md:text-base text-text-muted leading-relaxed font-medium">
-        {t('news.subtitle')}
-      </p>
-    </div>
-
-    <!-- Google News Inspired Briefing / Weather Widget -->
-    <div class="flex items-center gap-4 bg-secondary-bg/50 backdrop-blur-md rounded-2xl border border-structural-borders/80 p-4 shrink-0 shadow-lg select-none group hover:border-primary-brand/30 transition-all duration-300">
-      <div class="space-y-0.5">
-        <span class="text-[10px] uppercase font-bold tracking-widest text-primary-brand">
-          {briefingLabel}
-        </span>
-        <div class="text-xs text-text-muted font-semibold">
-          {getFormattedDate()}
-        </div>
-      </div>
-      
-      <div class="w-[1px] h-10 bg-structural-borders/40"></div>
-
-      <div class="flex items-center gap-3">
-        <!-- Weather Graphic -->
-        <div class="relative w-9 h-9">
-          <!-- Sun -->
-          <div class="absolute top-1 left-1 w-5 h-5 bg-amber-500 rounded-full group-hover:scale-105 transition-transform duration-500"></div>
-          <!-- Cloud -->
-          <div class="absolute bottom-0 right-0 w-6 h-4.5 bg-slate-400/90 rounded-full border border-slate-300/40"></div>
-        </div>
-        
-        <div class="leading-none">
-          <div class="text-lg font-black text-text-main">29°C</div>
-          <div class="text-[10px] text-text-muted font-bold tracking-wide mt-0.5">
-             {locationLabel} • {weatherCondition}
-          </div>
-        </div>
-      </div>
-    </div>
+<div class="pt-0">
+  <!-- Centered Headings Layout -->
+  <div class="flex flex-col items-center text-center gap-3 border-b border-structural-borders/40 pb-6">
+    <h1 class="news-hero-title text-3xl md:text-4xl lg:text-5xl font-black text-text-main tracking-tight leading-none">
+      {t('news.title')}
+    </h1>
+    <p class="news-hero-subtitle text-sm md:text-base text-text-muted leading-relaxed font-medium max-w-2xl">
+      {t('news.subtitle')}
+    </p>
   </div>
 </div>
 
 <style>
+  .news-hero-title {
+    background: linear-gradient(135deg, #00D4FF, #4DFFB8) !important;
+    background-clip: text !important;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    text-shadow: none !important;
+    width: fit-content;
+    display: inline-block;
+  }
+
   /* Light mode styles for the news hero headings to ensure readability and depth */
   :global(html[data-theme="light"]) .news-hero-title {
     color: #ffffff !important;
+    -webkit-text-fill-color: #ffffff !important;
+    background: none !important;
     text-shadow: 0 2px 4px rgba(11, 30, 54, 0.3) !important;
   }
   :global(html[data-theme="light"]) .news-hero-subtitle {

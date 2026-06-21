@@ -26,24 +26,23 @@ const { title, description } = Astro.props;
 
 <style>
   .projects-header-title {
-    color: #FFFFFF !important;
-    -webkit-text-fill-color: #FFFFFF !important;
-    background: none !important;
-    text-shadow: 
-      0 2px 10px rgba(0, 212, 255, 0.4),
-      0 4px 20px rgba(0, 0, 0, 0.6) !important;
+    background: linear-gradient(135deg, #00D4FF, #4DFFB8) !important;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    text-shadow: none !important;
   }
 
   /* Light mode overrides to make text white with visual depth on the blue gradient background */
-  :global(html[data-theme="light"] .projects-header-title) {
+  :global(html[data-theme="light"]) .projects-header-title {
     color: #FFFFFF !important;
     -webkit-text-fill-color: #FFFFFF !important;
+    background: none !important;
     text-shadow: 
       0 2px 8px rgba(11, 30, 54, 0.35),
       0 4px 20px rgba(11, 30, 54, 0.25) !important;
   }
 
-  :global(html[data-theme="light"] .projects-header-desc) {
+  :global(html[data-theme="light"]) .projects-header-desc {
     color: rgba(255, 255, 255, 0.95) !important;
     text-shadow: 
       0 2px 6px rgba(11, 30, 54, 0.3),

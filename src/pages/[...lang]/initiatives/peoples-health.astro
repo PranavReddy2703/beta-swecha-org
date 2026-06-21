@@ -33,10 +33,10 @@ const t = useTranslations(lang);
           People's Health
         </div>
         
-        <h1 class="text-3xl md:text-4xl lg:text-5xl font-black text-white tracking-tight leading-tight">
+        <h1 class="ph-title text-3xl md:text-4xl lg:text-5xl font-black text-white tracking-tight leading-tight">
           People's Health Initiative
         </h1>
-        <p class="text-sm sm:text-base text-text-muted max-w-2xl mx-auto leading-relaxed">
+        <p class="ph-desc text-sm sm:text-base text-text-muted max-w-2xl mx-auto leading-relaxed">
           A collaborative social initiative driven by volunteers from Swecha, ForIT, doctors, and citizens addressing the healthcare needs of underserved communities.
         </p>
         
@@ -58,7 +58,7 @@ const t = useTranslations(lang);
       <!-- Section: Solidarity With Women Suffering From Anaemia (High impact, compact redesign) -->
       <section class="space-y-4">
         <div class="flex items-center justify-between border-b border-structural-borders/40 pb-2">
-          <h2 class="text-lg sm:text-xl font-extrabold text-white tracking-tight flex items-center gap-2">
+          <h2 class="ph-section-title text-lg sm:text-xl font-extrabold text-white tracking-tight flex items-center gap-2">
             <svg class="w-5 h-5 text-secondary-accent animate-pulse" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
               <path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
             </svg>
@@ -85,7 +85,7 @@ const t = useTranslations(lang);
                     <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
                   </svg>
                 </div>
-                <blockquote class="relative z-10 text-xs sm:text-sm font-medium italic text-white/90 pl-6 leading-relaxed">
+                <blockquote class="ph-blockquote relative z-10 text-xs sm:text-sm font-medium italic text-white/90 pl-6 leading-relaxed">
                   "I pledge to support a woman overcome anaemia by donating a minimum of Rs.600 for her tests and medication!"
                 </blockquote>
               </div>
@@ -213,7 +213,7 @@ const t = useTranslations(lang);
       <!-- Key Impact Areas (2x2 Grid replacing the vertical timeline to pack content tightly) -->
       <section class="space-y-4">
         <div class="flex items-center justify-between border-b border-structural-borders/40 pb-2">
-          <h2 class="text-lg sm:text-xl font-extrabold text-white tracking-tight flex items-center gap-2">
+          <h2 class="ph-section-title text-lg sm:text-xl font-extrabold text-white tracking-tight flex items-center gap-2">
             <svg class="w-5 h-5 text-primary-brand" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
@@ -303,7 +303,7 @@ const t = useTranslations(lang);
         <div class="absolute -right-20 -top-20 h-40 w-40 rounded-full bg-primary-brand/5 blur-3xl pointer-events-none"></div>
         
         <div class="max-w-2xl mx-auto space-y-2">
-          <h2 class="text-xl sm:text-2xl font-black text-white tracking-tight">
+          <h2 class="ph-cta-title text-xl sm:text-2xl font-black text-white tracking-tight">
             Help Us Bridge the Healthcare Gap
           </h2>
           <p class="text-xs sm:text-sm text-text-muted leading-relaxed">
@@ -332,3 +332,59 @@ const t = useTranslations(lang);
     </div>
   </div>
 </Layout>
+
+<style>
+  /* Dark/default mode styles: blue-green gradient for main titles */
+  .ph-title,
+  .ph-section-title {
+    background: linear-gradient(135deg, #00D4FF, #4DFFB8) !important;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    text-shadow: none !important;
+  }
+
+  .ph-title {
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .ph-section-title {
+    width: fit-content;
+  }
+
+  /* Light mode overrides to make text white with visual depth on the blue gradient background */
+  :global(html[data-theme="light"]) .ph-title {
+    color: #FFFFFF !important;
+    -webkit-text-fill-color: #FFFFFF !important;
+    background: none !important;
+    text-shadow: 
+      0 2px 8px rgba(11, 30, 54, 0.35),
+      0 4px 20px rgba(11, 30, 54, 0.25) !important;
+  }
+
+  :global(html[data-theme="light"]) .ph-desc {
+    color: rgba(255, 255, 255, 0.95) !important;
+    text-shadow: 
+      0 2px 6px rgba(11, 30, 54, 0.3),
+      0 4px 15px rgba(11, 30, 54, 0.2) !important;
+  }
+
+  :global(html[data-theme="light"]) .ph-section-title {
+    color: #FFFFFF !important;
+    -webkit-text-fill-color: #FFFFFF !important;
+    background: none !important;
+    text-shadow: 
+      0 2px 8px rgba(11, 30, 54, 0.35),
+      0 4px 20px rgba(11, 30, 54, 0.25) !important;
+  }
+
+  /* Light mode fixes for elements inside white cards */
+  :global(html[data-theme="light"]) .ph-blockquote {
+    color: var(--text-primary) !important;
+  }
+
+  :global(html[data-theme="light"]) .ph-cta-title {
+    color: var(--text-primary) !important;
+  }
+</style>

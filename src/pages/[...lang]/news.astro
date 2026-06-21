@@ -27,9 +27,6 @@ const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 const translatePath = useTranslatedPath(lang);
 
-// Get unique publications for dropdown
-const uniquePublications = [...new Set(newsData.articles.map((a: any) => a.publication))];
-
 // Extract featured article and regular articles
 const featuredArticle = newsData.articles.find(a => a.featured) || newsData.articles[0];
 const regularArticles = newsData.articles.filter(a => a.id !== featuredArticle.id);
@@ -41,8 +38,8 @@ const fellowshipDesc = lang === 'te' ? "యువ విద్యార్థు
 ---
 
 <Layout title={`${t('news.title')} - Swecha.org`} description={t('news.subtitle')}>
-  <div class="relative min-h-[calc(100vh-4rem)] text-text-main transition-colors duration-300 pt-6 pb-20 overflow-hidden">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-12">
+  <div class="relative min-h-[calc(100vh-4rem)] text-text-main transition-colors duration-300 pt-3 md:pt-4 pb-16 md:pb-24 overflow-hidden">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-8 md:space-y-12">
       
       <!-- HERO & BRIEFING SECTION -->
       <section class="scroll-reveal-section opacity-0 translate-y-6 transition-all duration-500 ease-out">
@@ -51,19 +48,19 @@ const fellowshipDesc = lang === 'te' ? "యువ విద్యార్థు
 
       <!-- FILTER CONTROLS BAR -->
       <section class="scroll-reveal-section opacity-0 translate-y-6 transition-all duration-500 ease-out">
-        <NewsFilter lang={lang} t={t} uniquePublications={uniquePublications} />
+        <NewsFilter lang={lang} t={t} articles={newsData.articles} />
       </section>
 
       <!-- MAIN LAYOUT GRID (Google News Style columns) -->
-      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-10">
         
         <!-- LEFT COLUMN (2/3 width) - Articles list & grid -->
-        <div class="lg:col-span-2 space-y-8">
+        <div class="lg:col-span-2 space-y-12 md:space-y-16">
           
           <!-- Featured Story Container (Hidden if search/filter active) -->
           <div id="featured-story-section" class="scroll-reveal-section opacity-0 translate-y-6 transition-all duration-500 ease-out">
             <div class="flex items-center space-x-3 mb-4 select-none">
-              <h2 class="news-section-header text-xs font-black text-text-main uppercase tracking-widest">
+              <h2 class="news-section-header text-sm font-black text-text-main uppercase tracking-widest">
                 {lang === 'te' ? "ప్రధాన వార్త" : lang === 'hi' ? "मुख्य समाचार" : "Top Story"}
               </h2>
               <span class="h-[1px] flex-grow bg-gradient-to-r from-structural-borders via-structural-borders/30 to-transparent"></span>
@@ -74,7 +71,7 @@ const fellowshipDesc = lang === 'te' ? "యువ విద్యార్థు
           <!-- Filtered Results Grid -->
           <div class="space-y-4">
             <div class="flex items-center space-x-3 mb-4 select-none">
-              <h2 id="grid-header-title" class="news-section-header text-xs font-black text-text-main uppercase tracking-widest">
+              <h2 id="grid-header-title" class="news-section-header text-sm font-black text-text-main uppercase tracking-widest">
                 {lang === 'te' ? "అన్ని కథనాలు" : lang === 'hi' ? "सभी लेख" : "All Stories"}
               </h2>
               <span class="h-[1px] flex-grow bg-gradient-to-r from-structural-borders via-structural-borders/30 to-transparent"></span>
@@ -104,7 +101,7 @@ const fellowshipDesc = lang === 'te' ? "యువ విద్యార్థు
         </div>
 
         <!-- RIGHT COLUMN (1/3 width) - Weather/Picks & Milestones -->
-        <div class="lg:col-span-1 space-y-8 lg:sticky lg:top-24 lg:self-start">
+        <div class="lg:col-span-1 space-y-8 lg:sticky lg:top-24 lg:self-start lg:pt-8">
           
           <!-- Picks for you block -->
           <div class="picks-for-you-card bg-gradient-to-br from-primary-brand/10 to-secondary-accent/10 border border-primary-brand/20 rounded-2xl p-5 space-y-4 shadow-sm hover:border-primary-brand/35 transition-all duration-300 group select-none">
@@ -126,10 +123,10 @@ const fellowshipDesc = lang === 'te' ? "యువ విద్యార్థు
               href="https://www.meetup.com/swechafsmi/"
               target="_blank"
               rel="noopener noreferrer"
-              class="inline-flex items-center gap-1 text-[10px] font-black text-primary-brand group-hover:text-secondary-accent transition-colors duration-200"
+              class="inline-flex items-center gap-1.5 text-[11px] font-black text-primary-brand group-hover:text-secondary-accent transition-colors duration-200"
             >
-              {lang === 'te' ? "కమ్యూనిటీతో కలవండి" : lang === 'hi' ? "समुदाय से जुड़ें" : "Join community hub"}
-              <svg class="h-3 w-3 transform transition-transform duration-300 group-hover:translate-x-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+              <span>{lang === 'te' ? "కమ్యూనిటీతో కలవండి" : lang === 'hi' ? "समुदाय से जुड़ें" : "Join community hub"}</span>
+              <svg class="h-3.5 w-3.5 shrink-0 transform transition-transform duration-300 group-hover:translate-x-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
               </svg>
             </a>
@@ -141,10 +138,7 @@ const fellowshipDesc = lang === 'te' ? "యువ విద్యార్థు
         </div>
       </div>
 
-      <!-- BOTTOM SECTION - Grouped publications list -->
-      <section class="scroll-reveal-section opacity-0 translate-y-6 transition-all duration-500 ease-out pt-6">
-        <PublicationGroups articles={newsData.articles} lang={lang} />
-      </section>
+
 
     </div>
   </div>
@@ -246,6 +240,15 @@ const fellowshipDesc = lang === 'te' ? "యువ విద్యార్థు
 
       // Render cards in the DOM grid
       renderGrid(filteredList);
+
+      // Sync active visual styles on publisher pills
+      pubGroupBtns.forEach(b => {
+        if (b.getAttribute('data-pub-filter') === activePub) {
+          b.classList.add('active-pub-pill');
+        } else {
+          b.classList.remove('active-pub-pill');
+        }
+      });
     }
 
     function renderGrid(list) {
@@ -445,10 +448,12 @@ const fellowshipDesc = lang === 'te' ? "యువ విద్యార్థు
       applyFilters();
     });
 
-    pubSelect.addEventListener('change', (e) => {
-      activePub = e.target.value.toLowerCase();
-      applyFilters();
-    });
+    if (pubSelect) {
+      pubSelect.addEventListener('change', (e) => {
+        activePub = e.target.value.toLowerCase();
+        applyFilters();
+      });
+    }
 
     sortSelect.addEventListener('change', (e) => {
       activeSort = e.target.value;
@@ -460,14 +465,21 @@ const fellowshipDesc = lang === 'te' ? "యువ విద్యార్థు
       btn.addEventListener('click', () => {
         const clickedPub = btn.getAttribute('data-pub-filter');
         
-        // Match selection value in dropdown
-        for (let i = 0; i < pubSelect.options.length; i++) {
-          if (pubSelect.options[i].value.toLowerCase() === clickedPub) {
-            pubSelect.selectedIndex = i;
-            break;
+        // Toggle filter: if already active, clear it (set to 'all')
+        if (activePub === clickedPub) {
+          activePub = 'all';
+          if (pubSelect) pubSelect.selectedIndex = 0;
+        } else {
+          activePub = clickedPub;
+          if (pubSelect) {
+            for (let i = 0; i < pubSelect.options.length; i++) {
+              if (pubSelect.options[i].value.toLowerCase() === clickedPub) {
+                pubSelect.selectedIndex = i;
+                break;
+              }
+            }
           }
         }
-        activePub = clickedPub;
         applyFilters();
 
         // Scroll filter controls section into view smoothly

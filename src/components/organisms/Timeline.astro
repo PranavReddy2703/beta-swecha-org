@@ -34,19 +34,18 @@ const N = events.length;
 
 <section
   id="timeline-section"
-  class="py-6 md:py-8 min-h-[calc(100vh-4rem)] md:h-[calc(100vh-4rem)] flex flex-col justify-center relative transition-colors duration-300 overflow-hidden"
+  class="pt-6 pb-12 md:pt-8 md:pb-16 scroll-mt-20 relative transition-colors duration-300 overflow-hidden"
 >
   <div
-    class="container mx-auto px-4 max-w-7xl h-full relative z-10 flex flex-col justify-between items-center gap-4"
+    class="container mx-auto px-4 max-w-7xl relative z-10 flex flex-col items-center gap-8"
   >
     <!-- Section Title -->
     <div class="text-center">
       <h2
-        class="text-3xl font-extrabold tracking-tight text-text-main sm:text-4xl mb-3 animate-glow-text"
+        class="text-3xl font-extrabold tracking-tight text-text-main sm:text-4xl animate-glow-text"
       >
         {t("timeline.title")}
       </h2>
-      <div class="h-1 w-20 bg-primary-brand mx-auto rounded-full"></div>
     </div>
 
     <!-- Active Card Area (One card visible at a time) -->
@@ -196,9 +195,19 @@ const N = events.length;
     border-color: #FFFFFF !important;
   }
 
+  .animate-glow-text {
+    background: linear-gradient(135deg, #00D4FF, #4DFFB8) !important;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    text-shadow: none !important;
+    display: inline-block;
+  }
+
   /* Light mode overrides to make Section Title white with visual depth */
   :global(html[data-theme="light"]) .animate-glow-text {
+    background: none !important;
     color: #FFFFFF !important;
+    -webkit-text-fill-color: #FFFFFF !important;
     text-shadow: 
       0 2px 8px rgba(11, 30, 54, 0.35),
       0 4px 20px rgba(11, 30, 54, 0.25) !important;
