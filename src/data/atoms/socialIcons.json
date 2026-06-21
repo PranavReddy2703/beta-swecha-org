@@ -1,7 +1,7 @@
 [
   { "href": "https://www.linkedin.com/company/swechafsmi", "label": "LinkedIn", "platform": "linkedin" },
   { "href": "https://huggingface.co/swechafsmi", "label": "Hugging Face", "platform": "huggingface" },
-  { "href": "https://gitlab.com/swecha", "label": "GitLab", "platform": "gitlab" },
+  { "href": "https://code.swecha.org/corpus", "label": "GitLab", "platform": "gitlab" },
   { "href": "https://x.com/SwechaFSMI", "label": "X / Twitter", "platform": "twitter" },
   { "href": "https://www.facebook.com/swechafsmi", "label": "Facebook", "platform": "facebook" },
   { "href": "https://www.instagram.com/swechafsmi/", "label": "Instagram", "platform": "instagram" },
