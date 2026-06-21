@@ -25,6 +25,7 @@ const en = {
   "nav.initiatives.more": "More",
   "nav.events": navbarData.links.find(l => l.id === "events")?.label || "",
   "nav.news": navbarData.links.find(l => l.id === "news")?.label || "",
+  "nav.donations": navbarData.links.find(l => l.id === "donations")?.label || "Donations",
   "nav.contact": navbarData.links.find(l => l.id === "contact")?.label || "Contact Us",
   "nav.selectLanguage": siteData.layout.selectLanguage,
   "nav.toggleTheme": siteData.layout.toggleTheme,
@@ -199,7 +200,56 @@ const en = {
   "events.active.title": "Active Events",
   "events.upcoming.title": "Upcoming Events",
   "events.past.title": "Past Events",
-  "events.empty": "No events match your search or filter."
+  "events.empty": "No events match your search or filter.",
+
+  // ── Donations Page ──
+  "donations.badge": "SUPPORT FREE SOFTWARE",
+  "donations.title": "Support Swecha",
+  "donations.title2": "Empower Digital Freedom",
+  "donations.subtitle": "Your contribution helps Swecha bridge the digital divide, build free software solutions, and empower communities across India with open-source technology and digital literacy.",
+
+  "donations.impact.students": "Students Trained",
+  "donations.impact.workshops": "Workshops Conducted",
+  "donations.impact.projects": "FOSS Projects",
+  "donations.impact.years": "Years of Impact",
+
+  "donations.why.title": "Why Donate to Swecha?",
+  "donations.why.desc": "Swecha is a community-driven organization dedicated to providing free software solutions and bridging the digital divide. Every donation directly supports our mission of digital inclusion, education, and community-driven open-source development.",
+  "donations.why.education.title": "Digital Education",
+  "donations.why.education.desc": "Fund digital literacy programs in government schools and rural communities across Telangana.",
+  "donations.why.foss.title": "Free Software Development",
+  "donations.why.foss.desc": "Support development of Telugu-localized free software, Swecha OS, and AI initiatives like VISHWAM.ai.",
+  "donations.why.community.title": "Community Building",
+  "donations.why.community.desc": "Enable workshops, hackathons, DevDays, and community meetups that bring together developers and students.",
+
+  "donations.methods.title": "How to Donate",
+  "donations.methods.subtitle": "Choose your preferred method to make a contribution to Swecha.",
+
+  "donations.method.bank.title": "Bank Transfer (NEFT/RTGS)",
+  "donations.method.bank.desc": "Make a direct bank transfer to Swecha's official account.",
+  "donations.method.upi.title": "UPI Payment",
+  "donations.method.upi.desc": "Instant payment via any UPI-enabled app.",
+  "donations.method.cheque.title": "Cheque / Demand Draft",
+  "donations.method.cheque.desc": "Send a cheque or DD payable to Swecha at our registered address.",
+
+  "donations.bank.name": "Bank Name",
+  "donations.bank.account": "Account No.",
+  "donations.bank.ifsc": "IFSC Code",
+  "donations.bank.branch": "Branch",
+
+  "donations.upi.id": "UPI ID",
+  "donations.upi.scan": "Scan QR code in any UPI app to pay",
+
+  "donations.cheque.payee": "Payable To",
+  "donations.cheque.address": "Send To",
+
+  "donations.tax.title": "Tax Exemption under 80G",
+  "donations.tax.desc": "Donations to Swecha are eligible for tax exemption under Section 80G of the Income Tax Act. A receipt will be issued for all donations. Please contact us at reachus@swecha.net for your tax exemption certificate.",
+
+  "donations.cta.title": "Every Contribution Counts",
+  "donations.cta.desc": "Whether big or small, your donation makes a real difference in empowering communities with free software and digital literacy.",
+  "donations.cta.btn.email": "Donate Now",
+  "donations.cta.btn.contact": "Contact Us"
 };
 
 export const ui = {
