@@ -358,6 +358,24 @@ const impactStats = [
   html[data-theme="light"] .card-top-gradient-cheque {
     background: linear-gradient(90deg, #C7D2FE, #A5B4FC) !important; /* Soft indigo/purple */
   }
+
+  /* Heading gradient in dark mode only */
+  #donations-hero h1 {
+    background: linear-gradient(135deg, #00D4FF, #4DFFB8) !important;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    text-shadow: none !important;
+    display: inline-block;
+    width: fit-content;
+  }
+
+  /* Reset in light mode to white with text shadow */
+  :global(html[data-theme="light"]) #donations-hero h1 {
+    color: #FFFFFF !important;
+    -webkit-text-fill-color: #FFFFFF !important;
+    background: none !important;
+    text-shadow: 0 4px 12px rgba(11, 30, 54, 0.22) !important;
+  }
 </style>
 
 <script>
