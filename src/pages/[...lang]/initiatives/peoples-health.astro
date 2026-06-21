@@ -18,21 +18,317 @@ const t = useTranslations(lang);
 ---
 
 <Layout title={`People's Health Initiative - Swecha.org`}>
-  <div class="pt-32 pb-16 px-6 sm:px-10 lg:px-16 container mx-auto">
-    <div class="max-w-4xl">
-      <h1 class="text-4xl md:text-6xl font-black text-text-main mb-6 tracking-tight">
-        People's Health Initiative
-      </h1>
-      <p class="text-xl text-text-muted mb-12 leading-relaxed">
-        People's Health initiative aimed at providing accessible and open-source healthcare technology solutions.
-      </p>
+  <!-- Main container with reduced top padding to eliminate excessive negative space -->
+  <div class="pt-20 pb-16 px-4 sm:px-6 lg:px-8 container mx-auto">
+    <div class="max-w-6xl mx-auto space-y-8">
       
-      <div class="bg-secondary-bg border border-structural-borders p-8 rounded-2xl shadow-xl">
-        <h2 class="text-2xl font-bold text-text-main mb-4">Under Development</h2>
-        <p class="text-text-muted">
-          This section is currently under development. More details about People's Health Initiative deployment and features will be available soon.
+      <!-- Hero Header Section with minimal vertical padding -->
+      <section class="text-center max-w-3xl mx-auto space-y-3">
+        <!-- Badge -->
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary-brand/10 border border-primary-brand/20 text-primary-brand text-xs font-semibold uppercase tracking-wider">
+          <span class="relative flex h-2 w-2">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary-brand opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-2 w-2 bg-primary-brand"></span>
+          </span>
+          People's Health
+        </div>
+        
+        <h1 class="text-3xl md:text-4xl lg:text-5xl font-black text-white tracking-tight leading-tight">
+          People's Health Initiative
+        </h1>
+        <p class="text-sm sm:text-base text-text-muted max-w-2xl mx-auto leading-relaxed">
+          A collaborative social initiative driven by volunteers from Swecha, ForIT, doctors, and citizens addressing the healthcare needs of underserved communities.
         </p>
-      </div>
+        
+        <div class="pt-2">
+          <a
+            href="https://peoples-health.in"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-2 rounded-xl border border-structural-borders bg-card-bg/60 hover:bg-card-bg/85 py-2.5 px-6 text-xs font-bold text-text-main backdrop-blur-md transition-all duration-200 hover:border-primary-brand/40 hover:text-primary-brand active:scale-[0.98]"
+          >
+            Visit peoples-health.in
+            <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+            </svg>
+          </a>
+        </div>
+      </section>
+
+      <!-- Section: Solidarity With Women Suffering From Anaemia (High impact, compact redesign) -->
+      <section class="space-y-4">
+        <div class="flex items-center justify-between border-b border-structural-borders/40 pb-2">
+          <h2 class="text-lg sm:text-xl font-extrabold text-white tracking-tight flex items-center gap-2">
+            <svg class="w-5 h-5 text-secondary-accent animate-pulse" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+            </svg>
+            Solidarity With Women Suffering From Anaemia
+          </h2>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+          
+          <!-- Left Column: Pledge and Medication Support (Span 7) -->
+          <div class="lg:col-span-7 space-y-4 flex flex-col justify-between glass-white-card rounded-2xl border border-structural-borders bg-card-bg/25 p-6 backdrop-blur-xl hover:border-primary-brand/20 transition-all duration-300">
+            <div class="space-y-3">
+              <p class="text-sm text-text-muted leading-relaxed">
+                One in every two women in India suffers from Anaemia. Continuing the initiative we took on this International Women's Day, let us take a pledge and stand together to eliminate this major public health crisis.
+              </p>
+              <p class="text-sm font-semibold text-text-main leading-relaxed">
+                With <span class="text-primary-brand font-extrabold text-base">₹600 rupees</span>, we can support one woman with anaemia tests and the required supplementary medicines for three months to fight anaemia.
+              </p>
+
+              <!-- Interactive Pledge Box -->
+              <div class="relative overflow-hidden rounded-xl border border-secondary-accent/20 bg-secondary-accent/5 p-4 mt-2">
+                <div class="absolute -left-6 -top-6 text-secondary-accent/10 opacity-30 select-none pointer-events-none">
+                  <svg class="w-20 h-20" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
+                  </svg>
+                </div>
+                <blockquote class="relative z-10 text-xs sm:text-sm font-medium italic text-white/90 pl-6 leading-relaxed">
+                  "I pledge to support a woman overcome anaemia by donating a minimum of Rs.600 for her tests and medication!"
+                </blockquote>
+              </div>
+            </div>
+
+            <!-- Pledge & Donate Buttons -->
+            <div class="flex flex-wrap gap-3 pt-4 border-t border-structural-borders/30">
+              <a
+                href="/donate"
+                class="shine-button inline-flex items-center justify-center rounded-xl bg-primary-brand py-2.5 px-6 text-xs font-black text-[var(--primary-btn-text)] leading-none shadow-md shadow-primary-brand/15 hover:bg-hover-brand hover:shadow-lg hover:shadow-primary-brand/25 transition-all duration-300 active:scale-[0.98]"
+              >
+                Donate Now
+              </a>
+              <a
+                href="https://www.peoples-health.in/form/volunteer-signup-form"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex items-center justify-center rounded-xl border border-structural-borders bg-card-bg/60 hover:bg-card-bg/85 py-2.5 px-6 text-xs font-bold text-text-main leading-none backdrop-blur-md transition-all duration-200 hover:border-primary-brand/40 hover:text-primary-brand active:scale-[0.98]"
+              >
+                Signup as Volunteer
+              </a>
+            </div>
+          </div>
+
+          <!-- Right Column: Enroll & Camp Glimpses (Span 5) -->
+          <div class="lg:col-span-5 space-y-4 flex flex-col justify-between glass-white-card rounded-2xl border border-structural-borders bg-card-bg/25 p-6 backdrop-blur-xl hover:border-primary-brand/20 transition-all duration-300">
+            <div class="space-y-4">
+              <!-- Enroll Block -->
+              <div class="space-y-2">
+                <h4 class="text-sm font-bold text-text-main flex items-center gap-1.5">
+                  <span class="w-1.5 h-3 rounded-full bg-secondary-accent"></span>
+                  Enroll a Woman
+                </h4>
+                <p class="text-xs text-text-muted leading-relaxed">
+                  Help us identify and test women at risk. Sign up a woman in need to receive free testing and essential medication support.
+                </p>
+                <a
+                  href="https://www.peoples-health.in/form/sign-up-women-you-know"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="inline-flex w-full items-center justify-center rounded-xl border border-secondary-accent/30 bg-secondary-accent/10 hover:bg-secondary-accent/20 py-2.5 px-4 text-xs font-bold text-secondary-accent leading-none transition-all duration-200 active:scale-[0.98]"
+                >
+                  Enroll a Woman for Testing
+                </a>
+              </div>
+
+              <!-- Camp Glimpses Block -->
+              <div class="space-y-2.5 pt-2 border-t border-structural-borders/30">
+                <h4 class="text-sm font-bold text-text-main flex items-center gap-1.5">
+                  <span class="w-1.5 h-3 rounded-full bg-primary-brand"></span>
+                  Camp Glimpses
+                </h4>
+                <p class="text-xs text-text-muted leading-relaxed">
+                  Have a look at our ground initiatives and monthly outreach camps in action.
+                </p>
+                
+                <div class="grid grid-cols-1 gap-2">
+                  <!-- First Camp Glimpse -->
+                  <a
+                    href="https://www.peoples-health.in/why-fight-anaemia"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="group/link flex items-center gap-3 p-2 rounded-lg bg-card-bg/40 border border-structural-borders hover:border-primary-brand/30 transition-all duration-200"
+                  >
+                    <div class="w-8 h-8 rounded bg-primary-brand/10 flex items-center justify-center text-primary-brand shrink-0 group-hover/link:scale-105 transition-transform">
+                      <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                      </svg>
+                    </div>
+                    <div class="min-w-0 flex-1">
+                      <p class="text-xs font-bold text-text-main truncate group-hover/link:text-primary-brand transition-colors">First Anaemia Camp</p>
+                      <span class="text-[10px] text-text-muted flex items-center gap-1">Click to view documentation</span>
+                    </div>
+                  </a>
+
+                  <!-- April Camp Glimpse -->
+                  <a
+                    href="https://www.peoples-health.in/why-fight-anaemia"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="group/link flex items-center gap-3 p-2 rounded-lg bg-card-bg/40 border border-structural-borders hover:border-primary-brand/30 transition-all duration-200"
+                  >
+                    <div class="w-8 h-8 rounded bg-primary-brand/10 flex items-center justify-center text-primary-brand shrink-0 group-hover/link:scale-105 transition-transform">
+                      <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                      </svg>
+                    </div>
+                    <div class="min-w-0 flex-1">
+                      <p class="text-xs font-bold text-text-main truncate group-hover/link:text-primary-brand transition-colors">April Month Anaemia Camp</p>
+                      <span class="text-[10px] text-text-muted flex items-center gap-1">Click to view documentation</span>
+                    </div>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- Unified About Us Panel (Removes negative space by packing content in a single premium card) -->
+      <section class="glass-white-card border border-structural-borders bg-card-bg/25 backdrop-blur-xl rounded-2xl p-6 hover:border-primary-brand/20 transition-all duration-300">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 divide-y md:divide-y-0 md:divide-x divide-structural-borders/60">
+          <div class="pb-6 md:pb-0 md:pr-6 space-y-2">
+            <h3 class="text-base sm:text-lg font-bold text-text-main flex items-center gap-2">
+              <span class="h-4 w-1 rounded-full bg-primary-brand"></span>
+              Who We Are
+            </h3>
+            <p class="text-xs sm:text-sm text-text-muted leading-relaxed">
+              People's Health is an initiative of volunteers working in various organizations that include Swecha, Forum of IT Professionals (ForIT), doctors, individuals, intellectuals and service minded concerning citizens.
+            </p>
+          </div>
+          <div class="pt-6 md:pt-0 md:pl-6 space-y-2">
+            <h3 class="text-base sm:text-lg font-bold text-text-main flex items-center gap-2">
+              <span class="h-4 w-1 rounded-full bg-secondary-accent"></span>
+              Our Foundation & Objective
+            </h3>
+            <p class="text-xs sm:text-sm text-text-muted leading-relaxed">
+              Swecha and ForIT are Not for Profit organizations with the objective of promoting the Free Software Movement and providing support for IT employees. They have extended their work as non-profits to address the healthcare needs of the poor, who often face barriers to primary health care.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Key Impact Areas (2x2 Grid replacing the vertical timeline to pack content tightly) -->
+      <section class="space-y-4">
+        <div class="flex items-center justify-between border-b border-structural-borders/40 pb-2">
+          <h2 class="text-lg sm:text-xl font-extrabold text-white tracking-tight flex items-center gap-2">
+            <svg class="w-5 h-5 text-primary-brand" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            Our Work & Impact
+          </h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <!-- Card 1: COVID-19 Help-Line -->
+          <div class="group/pillar glass-white-card relative overflow-hidden rounded-2xl border border-structural-borders bg-card-bg/20 p-5 backdrop-blur-xl transition-all duration-300 hover:border-primary-brand/35 hover:-translate-y-0.5 hover:shadow-md hover:shadow-primary-brand/5">
+            <div class="flex items-start gap-3">
+              <div class="w-9 h-9 rounded-xl bg-primary-brand/10 flex items-center justify-center text-primary-brand shrink-0 transition-transform duration-300 group-hover/pillar:scale-110 group-hover/pillar:rotate-6">
+                <svg class="w-4.5 h-4.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.94.725l.548 2.2a1 1 0 01-.321.988l-1.305.98a10.582 10.582 0 004.872 4.872l.98-1.305a1 1 0 01.988-.321l2.2.548a1 1 0 01.725.94V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                </svg>
+              </div>
+              <div class="space-y-1">
+                <span class="text-[10px] font-black tracking-wider uppercase text-primary-brand">First wave COVID-19</span>
+                <h3 class="text-sm sm:text-base font-bold text-text-main transition-colors group-hover/pillar:text-primary-brand">Medical Help-Line</h3>
+                <p class="text-xs text-text-muted leading-relaxed">
+                  The first medical help-line during COVID-19 was an initiative of volunteers coming together. More than 56,000 people were treated, supplied with medicines, and extended other critical services.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 2: COVID isolation centre -->
+          <div class="group/pillar glass-white-card relative overflow-hidden rounded-2xl border border-structural-borders bg-card-bg/20 p-5 backdrop-blur-xl transition-all duration-300 hover:border-secondary-accent/35 hover:-translate-y-0.5 hover:shadow-md hover:shadow-secondary-accent/5">
+            <div class="flex items-start gap-3">
+              <div class="w-9 h-9 rounded-xl bg-secondary-accent/10 flex items-center justify-center text-secondary-accent shrink-0 transition-transform duration-300 group-hover/pillar:scale-110 group-hover/pillar:-rotate-6">
+                <svg class="w-4.5 h-4.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                </svg>
+              </div>
+              <div class="space-y-1">
+                <span class="text-[10px] font-black tracking-wider uppercase text-secondary-accent">Second wave COVID-19</span>
+                <h3 class="text-sm sm:text-base font-bold text-text-main transition-colors group-hover/pillar:text-secondary-accent">300-Bed Isolation Centre</h3>
+                <p class="text-xs text-text-muted leading-relaxed">
+                  Established and operated a 300-bedded Covid isolation centre during the height of the second COVID wave to support patients and ease hospital backlogs.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 3: Medical Camps -->
+          <div class="group/pillar glass-white-card relative overflow-hidden rounded-2xl border border-structural-borders bg-card-bg/20 p-5 backdrop-blur-xl transition-all duration-300 hover:border-primary-brand/35 hover:-translate-y-0.5 hover:shadow-md hover:shadow-primary-brand/5">
+            <div class="flex items-start gap-3">
+              <div class="w-9 h-9 rounded-xl bg-primary-brand/10 flex items-center justify-center text-primary-brand shrink-0 transition-transform duration-300 group-hover/pillar:scale-110 group-hover/pillar:rotate-6">
+                <svg class="w-4.5 h-4.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                </svg>
+              </div>
+              <div class="space-y-1">
+                <span class="text-[10px] font-black tracking-wider uppercase text-primary-brand">Ongoing Care</span>
+                <h3 class="text-sm sm:text-base font-bold text-text-main transition-colors group-hover/pillar:text-primary-brand">Primary Medical Camps</h3>
+                <p class="text-xs text-text-muted leading-relaxed">
+                  At the forefront of conducting medical camps, facilitating the treatment of 500-1000 members every month from slums, working poor, labourers, and senior citizens with no family support in Hyderabad.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 4: Speciality Care -->
+          <div class="group/pillar glass-white-card relative overflow-hidden rounded-2xl border border-structural-borders bg-card-bg/20 p-5 backdrop-blur-xl transition-all duration-300 hover:border-secondary-accent/35 hover:-translate-y-0.5 hover:shadow-md hover:shadow-secondary-accent/5">
+            <div class="flex items-start gap-3">
+              <div class="w-9 h-9 rounded-xl bg-secondary-accent/10 flex items-center justify-center text-secondary-accent shrink-0 transition-transform duration-300 group-hover/pillar:scale-110 group-hover/pillar:-rotate-6">
+                <svg class="w-4.5 h-4.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                </svg>
+              </div>
+              <div class="space-y-1">
+                <span class="text-[10px] font-black tracking-wider uppercase text-secondary-accent">Vision & Speciality</span>
+                <h3 class="text-sm sm:text-base font-bold text-text-main transition-colors group-hover/pillar:text-secondary-accent">Secondary & Vision Support</h3>
+                <p class="text-xs text-text-muted leading-relaxed">
+                  Facilitated many cataract operations to solve vision problems and provided support for secondary and tertiary care, with doctors volunteering to help cure major ailments.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Get Involved Call To Action Card (Closes the page nicely with minimal spacing) -->
+      <section class="glass-white-card relative overflow-hidden rounded-2xl border border-structural-borders bg-gradient-to-r from-primary-brand/10 to-secondary-accent/10 p-6 text-center space-y-4 hover:border-primary-brand/30 transition-all duration-300">
+        <div class="absolute -right-20 -top-20 h-40 w-40 rounded-full bg-primary-brand/5 blur-3xl pointer-events-none"></div>
+        
+        <div class="max-w-2xl mx-auto space-y-2">
+          <h2 class="text-xl sm:text-2xl font-black text-white tracking-tight">
+            Help Us Bridge the Healthcare Gap
+          </h2>
+          <p class="text-xs sm:text-sm text-text-muted leading-relaxed">
+            Support People's Health Initiative by volunteering at our camps, managing logistics, or contributing to provide medicine and care to the marginalized.
+          </p>
+        </div>
+
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2">
+          <a
+            href="https://ehrs.peoples-health.in/register"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="shine-button inline-flex items-center justify-center rounded-xl bg-primary-brand py-2.5 px-6 text-xs font-black text-[var(--primary-btn-text)] leading-none shadow-md shadow-primary-brand/15 hover:bg-hover-brand hover:shadow-lg hover:shadow-primary-brand/25 transition-all duration-300 active:scale-[0.98]"
+          >
+            Volunteer Registration
+          </a>
+          <a
+            href="/contact"
+            class="inline-flex items-center justify-center rounded-xl border border-structural-borders bg-card-bg/60 hover:bg-card-bg/85 py-2.5 px-6 text-xs font-bold text-text-main leading-none backdrop-blur-md transition-all duration-200 hover:border-primary-brand/40 hover:text-primary-brand"
+          >
+            Contact the Team
+          </a>
+        </div>
+      </section>
+
     </div>
   </div>
 </Layout>
