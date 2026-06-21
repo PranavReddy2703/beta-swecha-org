@@ -21,7 +21,7 @@ const en = {
   "nav.initiatives": navbarData.links.find(l => l.id === "initiatives")?.label || "",
   "nav.initiatives.vishwamai": "VISHWAM.ai",
   "nav.initiatives.devdays": "DevDays",
-  "nav.initiatives.publichealth": "Public Health Initiatives",
+  "nav.initiatives.publichealth": "Public Health",
   "nav.initiatives.more": "More",
   "nav.events": navbarData.links.find(l => l.id === "events")?.label || "",
   "nav.news": navbarData.links.find(l => l.id === "news")?.label || "",
