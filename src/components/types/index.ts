@@ -11,7 +11,16 @@ export interface NavLinkItem {
 export interface SocialIconData {
   href: string;
   label: string;
-  platform: 'github' | 'gitlab' | 'twitter' | 'email';
+  platform:
+    | "github"
+    | "gitlab"
+    | "twitter"
+    | "email"
+    | "instagram"
+    | "youtube"
+    | "linkedin"
+    | "facebook"
+    | "huggingface";
 }
 
 export type BadgeVariant = 'hero' | 'status' | 'tag' | 'featured';

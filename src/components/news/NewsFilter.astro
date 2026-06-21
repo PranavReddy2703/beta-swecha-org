@@ -1,0 +1,128 @@
+---
+// src/components/news/NewsFilter.astro
+interface Props {
+  lang: string;
+  t: any;
+  uniquePublications: string[];
+}
+
+const { lang, t, uniquePublications } = Astro.props;
+
+// Localized UI Labels
+const labels = {
+  search: lang === 'te' ? "వ్యాసాల కోసం వెతకండి..." : lang === 'hi' ? "लेख खोजें..." : "Search articles...",
+  category: lang === 'te' ? "వర్గం" : lang === 'hi' ? "श्रेणी" : "Category",
+  year: lang === 'te' ? "సంవత్సరం" : lang === 'hi' ? "वर्ष" : "Year",
+  publication: lang === 'te' ? "ప్రచురణ" : lang === 'hi' ? "प्रकाशन" : "Publication",
+  sort: lang === 'te' ? "క్రమబద్ధీకరించు" : lang === 'hi' ? "क्रमबद्ध करें" : "Sort By",
+  all: lang === 'te' ? "అన్నీ" : lang === 'hi' ? "सभी" : "All",
+  latest: lang === 'te' ? "తాజాది" : lang === 'hi' ? "नवीनतम" : "Latest",
+  oldest: lang === 'te' ? "పాతది" : lang === 'hi' ? "पुराना" : "Oldest"
+};
+
+const categories = [
+  { id: "all", label: labels.all },
+  { id: "ai-initiative", label: lang === 'te' ? "AI కార్యక్రమాలు" : lang === 'hi' ? "एआई पहल" : "AI Initiative" },
+  { id: "event-coverage", label: lang === 'te' ? "ఈవెంట్ కవరేజ్" : lang === 'hi' ? "इवेंट कवरेज" : "Event Coverage" },
+  { id: "press-release", label: lang === 'te' ? "పత్రికా ప్రకటనలు" : lang === 'hi' ? "प्रेस विज्ञप्ति" : "Press Release" },
+  { id: "community", label: lang === 'te' ? "కమ్యూనిటీ" : lang === 'hi' ? "समुदाय" : "Community Update" },
+  { id: "blog", label: lang === 'te' ? "బ్లాగులు" : lang === 'hi' ? "ब्लॉग" : "Blog" },
+  { id: "news", label: lang === 'te' ? "వార్తలు" : lang === 'hi' ? "समाचार" : "News" }
+];
+
+const years = ["All", "2026", "2025", "2024"];
+---
+
+<div class="space-y-4 bg-secondary-bg/20 backdrop-blur-md rounded-2xl border border-structural-borders/60 p-4 shadow-sm select-none">
+  <!-- Search Bar + Dropdowns Control Row -->
+  <div class="flex flex-col lg:flex-row gap-4">
+    <!-- Search Input -->
+    <div class="relative flex-grow">
+      <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-text-muted/60">
+        <svg class="h-4.5 w-4.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+        </svg>
+      </div>
+      <input 
+        type="text" 
+        id="search-input"
+        placeholder={labels.search}
+        class="w-full pl-10.5 pr-4 py-2.5 rounded-xl border border-structural-borders bg-card-bg/20 text-sm text-text-main placeholder-text-muted/50 focus:outline-none focus:border-primary-brand/50 focus:ring-1 focus:ring-primary-brand/35 transition-all duration-200"
+      />
+    </div>
+
+    <!-- Dropdowns Grid -->
+    <div class="grid grid-cols-3 gap-3 shrink-0 lg:w-[480px]">
+      <!-- Year Select -->
+      <div class="flex flex-col">
+        <label for="year-select" class="text-[10px] font-bold text-text-muted uppercase tracking-wider mb-1.5">{labels.year}</label>
+        <select 
+          id="year-select"
+          class="px-3 py-2 rounded-xl border border-structural-borders bg-card-bg/35 text-xs text-text-main font-semibold focus:outline-none focus:border-primary-brand/50 cursor-pointer transition-colors duration-200"
+        >
+          <option value="all">{labels.all}</option>
+          {years.filter(y => y !== "All").map(year => (
+            <option value={year}>{year}</option>
+          ))}
+        </select>
+      </div>
+
+      <!-- Publication Select -->
+      <div class="flex flex-col">
+        <label for="pub-select" class="text-[10px] font-bold text-text-muted uppercase tracking-wider mb-1.5">{labels.publication}</label>
+        <select 
+          id="pub-select"
+          class="px-3 py-2 rounded-xl border border-structural-borders bg-card-bg/35 text-xs text-text-main font-semibold focus:outline-none focus:border-primary-brand/50 cursor-pointer transition-colors duration-200 max-w-full truncate"
+        >
+          <option value="all">{labels.all}</option>
+          {uniquePublications.map(pub => (
+            <option value={pub}>{pub}</option>
+          ))}
+        </select>
+      </div>
+
+      <!-- Sort Select -->
+      <div class="flex flex-col">
+        <label for="sort-select" class="text-[10px] font-bold text-text-muted uppercase tracking-wider mb-1.5">{labels.sort}</label>
+        <select 
+          id="sort-select"
+          class="px-3 py-2 rounded-xl border border-structural-borders bg-card-bg/35 text-xs text-text-main font-semibold focus:outline-none focus:border-primary-brand/50 cursor-pointer transition-colors duration-200"
+        >
+          <option value="latest">{labels.latest}</option>
+          <option value="oldest">{labels.oldest}</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <!-- Horizontal Scrollable Category Filter Pills -->
+  <div class="flex items-center gap-2 overflow-x-auto pb-1.5 scrollbar-thin scrollbar-thumb-structural-borders/30 scroll-smooth">
+    {categories.map((cat, idx) => (
+      <button
+        type="button"
+        data-category={cat.id}
+        class={`category-pill px-4 py-1.5 rounded-full text-xs font-bold whitespace-nowrap transition-all duration-200 cursor-pointer border ${
+          idx === 0
+            ? 'bg-primary-brand border-primary-brand text-white shadow-sm shadow-primary-brand/20'
+            : 'bg-card-bg/25 border-structural-borders text-text-muted hover:text-text-main hover:border-text-muted/30'
+        }`}
+      >
+        {cat.label}
+      </button>
+    ))}
+  </div>
+</div>
+
+<style>
+  /* Custom scrollbar tuning for filter pills */
+  ::-webkit-scrollbar {
+    height: 4px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: rgba(var(--structural-borders), 0.15);
+    border-radius: 99px;
+  }
+</style>
