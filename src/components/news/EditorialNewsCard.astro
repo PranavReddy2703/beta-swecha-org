@@ -53,9 +53,13 @@ const pubLogo = article.publicationLogo || article.publication.slice(0, 2).toUpp
       <div class="space-y-3">
         <!-- Publication Header -->
         <div class="flex items-center gap-2.5">
-          <span class="flex items-center justify-center w-6.5 h-6.5 rounded-md bg-gradient-to-br from-primary-brand to-secondary-accent text-[10px] font-black text-slate-950 select-none shadow-sm">
-            {pubLogo}
-          </span>
+          {pubLogo.startsWith('/') ? (
+            <img src={pubLogo} alt={article.publication} class="w-6.5 h-6.5 object-cover rounded-md shadow-sm shrink-0" />
+          ) : (
+            <span class="flex items-center justify-center w-6.5 h-6.5 rounded-md bg-gradient-to-br from-primary-brand to-secondary-accent text-[10px] font-black text-slate-950 select-none shadow-sm shrink-0">
+              {pubLogo}
+            </span>
+          )}
           <span class="text-xs font-bold text-text-main tracking-wide">
             {article.publication}
           </span>
@@ -114,9 +118,13 @@ const pubLogo = article.publicationLogo || article.publication.slice(0, 2).toUpp
       <div class="space-y-2">
         <!-- Publisher Metadata -->
         <div class="flex items-center gap-2 max-w-full">
-          <span class="flex items-center justify-center w-5 h-5 rounded bg-gradient-to-br from-primary-brand/80 to-secondary-accent/80 text-[8px] font-black text-slate-950 select-none shadow-sm shrink-0">
-            {pubLogo}
-          </span>
+          {pubLogo.startsWith('/') ? (
+            <img src={pubLogo} alt={article.publication} class="w-5 h-5 object-cover rounded shadow-sm shrink-0" />
+          ) : (
+            <span class="flex items-center justify-center w-5 h-5 rounded bg-gradient-to-br from-primary-brand/80 to-secondary-accent/80 text-[8px] font-black text-slate-950 select-none shadow-sm shrink-0">
+              {pubLogo}
+            </span>
+          )}
           <span class="text-[10px] font-bold text-text-main truncate shrink-0 max-w-[120px]">
             {article.publication}
           </span>

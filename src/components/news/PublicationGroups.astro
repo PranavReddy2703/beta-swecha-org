@@ -47,9 +47,13 @@ const sectionTitle = lang === 'te' ? "ప్రచురణల వారీగ�
         class="pub-group-btn group flex items-center justify-between gap-3 p-3 rounded-xl border border-structural-borders bg-secondary-bg/25 hover:bg-secondary-bg/55 hover:border-primary-brand/35 transition-all duration-200 cursor-pointer shadow-sm text-left"
       >
         <div class="flex items-center gap-2.5 min-w-0">
-          <span class="flex items-center justify-center w-7 h-7 rounded-lg bg-gradient-to-br from-primary-brand to-secondary-accent text-[9px] font-black text-slate-950 select-none shadow-sm group-hover:scale-105 transition-transform duration-300">
-            {pub.logo}
-          </span>
+          {pub.logo.startsWith('/') ? (
+            <img src={pub.logo} alt={pub.name} class="w-7 h-7 object-cover rounded-lg shadow-sm group-hover:scale-105 transition-transform duration-300 shrink-0" />
+          ) : (
+            <span class="flex items-center justify-center w-7 h-7 rounded-lg bg-gradient-to-br from-primary-brand to-secondary-accent text-[9px] font-black text-slate-950 select-none shadow-sm group-hover:scale-105 transition-transform duration-300 shrink-0">
+              {pub.logo}
+            </span>
+          )}
           <span class="text-xs font-bold text-text-main truncate group-hover:text-primary-brand transition-colors duration-200">
             {pub.name}
           </span>

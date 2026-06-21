@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100">
+  <rect width="100" height="100" rx="20" fill="#012245"/>
+  <text x="50%" y="58%" font-family="'Times New Roman', Times, serif" font-weight="900" font-size="46" fill="#ffffff" text-anchor="middle" dominant-baseline="middle">TH</text>
+  <path d="M30,70 Q50,80 70,70" stroke="#d4af37" stroke-width="3" fill="none"/>
+</svg>
