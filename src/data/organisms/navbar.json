@@ -21,6 +21,10 @@
       "label": "News"
     },
     {
+      "id": "donations",
+      "label": "Donations"
+    },
+    {
       "id": "contact",
       "label": "Contact Us"
     }

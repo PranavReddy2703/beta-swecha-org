@@ -166,5 +166,55 @@
   "events.active.title": "सक्रिय कार्यक्रम",
   "events.upcoming.title": "आगामी कार्यक्रम",
   "events.past.title": "विगत कार्यक्रम",
-  "events.empty": "आपकी खोज या फ़िल्टर से मेल खाने वाला कोई कार्यक्रम नहीं है।"
+  "events.empty": "आपकी खोज या फ़िल्टर से मेल खाने वाला कोई कार्यक्रम नहीं है।",
+
+  "nav.donations": "दान",
+
+  "donations.badge": "मुक्त सॉफ्टवेयर का समर्थन करें",
+  "donations.title": "स्वेच्छा का समर्थन करें",
+  "donations.title2": "डिजिटल स्वतंत्रता को सशक्त बनाएं",
+  "donations.subtitle": "आपका योगदान स्वेच्छा को डिजिटल विभाजन को पाटने, मुफ्त सॉफ्टवेयर समाधान बनाने और ओपन-सोर्स तकनीक और डिजिटल साक्षरता के साथ भारत भर के समुदायों को सशक्त बनाने में मदद करता है।",
+
+  "donations.impact.students": "प्रशिक्षित छात्र",
+  "donations.impact.workshops": "आयोजित कार्यशालाएं",
+  "donations.impact.projects": "FOSS परियोजनाएं",
+  "donations.impact.years": "प्रभाव के वर्ष",
+
+  "donations.why.title": "स्वेच्छा को दान क्यों दें?",
+  "donations.why.desc": "स्वेच्छा मुफ्त सॉफ्टवेयर समाधान प्रदान करने और डिजिटल विभाजन को पाटने के लिए समर्पित एक समुदाय-संचालित संगठन है। प्रत्येक दान सीधे डिजिटल समावेशन, शिक्षा और समुदाय-संचालित ओपन सोर्स विकास के हमारे मिशन का समर्थन करता है।",
+  "donations.why.education.title": "डिजिटल शिक्षा",
+  "donations.why.education.desc": "तेलंगाना भर के सरकारी स्कूलों और ग्रामीण समुदायों में डिजिटल साक्षरता कार्यक्रमों को वित्त पोषित करें।",
+  "donations.why.foss.title": "मुक्त सॉफ्टवेयर विकास",
+  "donations.why.foss.desc": "तेलुगु-स्थानीयकृत मुफ्त सॉफ्टवेयर, स्वेच्छा OS और VISHWAM.ai जैसी AI पहलों के विकास का समर्थन करें।",
+  "donations.why.community.title": "समुदाय निर्माण",
+  "donations.why.community.desc": "डेवलपर्स और छात्रों को एक साथ लाने वाली कार्यशालाओं, हैकाथॉन, DevDays और समुदाय मीटअप को सक्षम करें।",
+
+  "donations.methods.title": "दान कैसे करें",
+  "donations.methods.subtitle": "स्वेच्छा में योगदान देने के लिए अपनी पसंदीदा विधि चुनें।",
+
+  "donations.method.bank.title": "बैंक ट्रांसफर (NEFT/RTGS)",
+  "donations.method.bank.desc": "स्वेच्छा के आधिकारिक खाते में सीधे बैंक ट्रांसफर करें।",
+  "donations.method.upi.title": "UPI भुगतान",
+  "donations.method.upi.desc": "किसी भी UPI-सक्षम ऐप के माध्यम से तत्काल भुगतान।",
+  "donations.method.cheque.title": "चेक / डिमांड ड्राफ्ट",
+  "donations.method.cheque.desc": "स्वेच्छा के पंजीकृत पते पर चेक या DD भेजें।",
+
+  "donations.bank.name": "बैंक का नाम",
+  "donations.bank.account": "खाता संख्या",
+  "donations.bank.ifsc": "IFSC कोड",
+  "donations.bank.branch": "शाखा",
+
+  "donations.upi.id": "UPI ID",
+  "donations.upi.scan": "भुगतान करने के लिए किसी भी UPI ऐप में QR कोड स्कैन करें",
+
+  "donations.cheque.payee": "के नाम से देय",
+  "donations.cheque.address": "भेजने का पता",
+
+  "donations.tax.title": "80G के तहत कर छूट",
+  "donations.tax.desc": "स्वेच्छा को दिए गए दान आयकर अधिनियम की धारा 80G के तहत कर छूट के पात्र हैं। सभी दान के लिए रसीद जारी की जाएगी। अपने कर छूट प्रमाणपत्र के लिए reachus@swecha.net पर हमसे संपर्क करें।",
+
+  "donations.cta.title": "हर योगदान मायने रखता है",
+  "donations.cta.desc": "बड़ा हो या छोटा, आपका दान मुफ्त सॉफ्टवेयर और डिजिटल साक्षरता के साथ समुदायों को सशक्त बनाने में वास्तविक अंतर लाता है।",
+  "donations.cta.btn.email": "अभी दान करें",
+  "donations.cta.btn.contact": "संपर्क करें"
 }
