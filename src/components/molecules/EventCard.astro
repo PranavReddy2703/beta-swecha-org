@@ -24,7 +24,7 @@ const translatePath = useTranslatedPath(lang);
 const dateStr = event.date;
 ---
 
-<div 
+<div
   class={`group relative overflow-hidden rounded-2xl border border-structural-borders bg-secondary-bg/40 backdrop-blur-md transition-all duration-300 hover:-translate-y-1 flex flex-col h-full cursor-pointer ${isGlow ? 'active-card-green-glow' : 'hover:border-primary-brand/35 hover:shadow-[0_8px_30px_rgba(0,212,255,0.08)]'}`}
   onclick={`window.location.href = '${translatePath(`/events/${event.slug}`)}'`}
   data-category={event.category.toLowerCase()}
@@ -35,8 +35,8 @@ const dateStr = event.date;
 >
   <!-- Cover Image with overflow hidden container -->
   <div class="relative w-full h-48 sm:h-52 overflow-hidden bg-slate-950">
-    <img 
-      src={event.image} 
+    <img
+      src={event.image}
       alt={event.title}
       class="h-full w-full object-cover object-center transition-transform duration-500 ease-out group-hover:scale-105"
     />
@@ -74,7 +74,7 @@ const dateStr = event.date;
 
     <!-- Action Button (View Details) -->
     <div class="pt-2 border-t border-structural-borders/20 flex items-center justify-between">
-      <a 
+      <a
         href={translatePath(`/events/${event.slug}`)}
         class={`inline-flex items-center gap-1.5 text-xs font-bold transition-colors duration-200 ${isGlow ? 'text-secondary-accent hover:text-[#33ffc2]' : 'text-primary-brand hover:text-hover-brand'}`}
         onclick="event.stopPropagation();"
@@ -93,7 +93,7 @@ const dateStr = event.date;
   /* Premium border glow effect (active by default, intensifies on hover) matching FeaturedNewsCard style but strictly green */
   .active-card-green-glow {
     border-color: color-mix(in srgb, var(--secondary-accent) 30%, transparent) !important;
-    box-shadow: 
+    box-shadow:
       0 10px 30px -10px rgba(0, 0, 0, 0.7),
       0 0 20px -5px color-mix(in srgb, var(--secondary-accent) 10%, transparent),
       0 0 35px -15px color-mix(in srgb, var(--secondary-accent) 8%, transparent) !important;
@@ -101,7 +101,7 @@ const dateStr = event.date;
 
   .active-card-green-glow:hover {
     border-color: color-mix(in srgb, var(--secondary-accent) 55%, transparent) !important;
-    box-shadow: 
+    box-shadow:
       0 10px 30px -10px rgba(0, 0, 0, 0.7),
       0 0 30px -5px color-mix(in srgb, var(--secondary-accent) 22%, transparent),
       0 0 50px -10px color-mix(in srgb, var(--secondary-accent) 16%, transparent) !important;

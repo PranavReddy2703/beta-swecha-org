@@ -1,7 +1,7 @@
 ---
 // src/components/events/EventTimeline.astro
-import TimelineCard from './TimelineCard.astro';
-import TimelineConnector from './TimelineConnector.astro';
+import EventTimelineCard from '@components/molecules/EventTimelineCard.astro';
+import TimelineConnector from '@components/atoms/TimelineConnector.astro';
 
 interface Props {
   events: Array<{
@@ -13,6 +13,7 @@ interface Props {
     venue: string;
     category: string;
     past: boolean;
+    alignment: 'left' | 'right';
   }>;
 }
 
@@ -20,19 +21,19 @@ const { events } = Astro.props;
 ---
 
 <div class="relative w-full max-w-5xl mx-auto py-16 mt-16" id="timeline-container">
-  
+
   <!-- Snake Head Graphic (Futuristic outline, cyan glow eyes) -->
   <div class="absolute left-1/2 top-0 -translate-x-1/2 -translate-y-[85%] z-20 pointer-events-none select-none text-center flex flex-col items-center">
     <svg class="w-14 h-14 text-primary-brand drop-shadow-[0_0_12px_rgba(0,212,255,0.45)]" viewBox="0 0 100 100" fill="none">
-      <path 
-        d="M 50,8 L 82,42 L 66,78 L 50,92 L 34,78 L 18,42 Z" 
-        stroke="currentColor" 
-        stroke-width="3.5" 
+      <path
+        d="M 50,8 L 82,42 L 66,78 L 50,92 L 34,78 L 18,42 Z"
+        stroke="currentColor"
+        stroke-width="3.5"
         stroke-linejoin="round"
       />
       <path d="M 50,22 L 50,70" stroke="currentColor" stroke-width="1.5" stroke-dasharray="3 3" opacity="0.7" />
       <path d="M 32,54 L 68,54" stroke="currentColor" stroke-width="1.5" opacity="0.5" />
-      
+
       <!-- Glowing Emerald Eyes -->
       <polygon points="32,44 38,44 35,49" fill="#4DFFB8" class="animate-pulse" />
       <polygon points="68,44 62,44 65,49" fill="#4DFFB8" class="animate-pulse" />
@@ -43,32 +44,32 @@ const { events } = Astro.props;
   <!-- Dynamic SVG Winding Snake Body -->
   <svg class="absolute inset-0 w-full h-full pointer-events-none z-0 overflow-visible" id="snake-svg">
     <!-- Winding Glow Underlay -->
-    <path 
-      id="snake-path-bg" 
-      fill="none" 
-      stroke="url(#snake-track-grad)" 
-      stroke-width="6" 
+    <path
+      id="snake-path-bg"
+      fill="none"
+      stroke="url(#snake-track-grad)"
+      stroke-width="6"
       stroke-linecap="round"
       opacity="0.12"
       class="transition-all duration-300"
     />
-    
+
     <!-- Scroll-illuminated Active path -->
-    <path 
-      id="snake-path" 
-      fill="none" 
-      stroke="url(#snake-active-grad)" 
-      stroke-width="3.5" 
+    <path
+      id="snake-path"
+      fill="none"
+      stroke="url(#snake-active-grad)"
+      stroke-width="3.5"
       stroke-linecap="round"
       class="transition-all duration-150"
     />
 
     <!-- Infinite Travelling Neon Energy Pulse -->
-    <path 
-      id="snake-pulse" 
-      fill="none" 
-      stroke="url(#pulse-gradient)" 
-      stroke-width="4" 
+    <path
+      id="snake-pulse"
+      fill="none"
+      stroke="url(#pulse-gradient)"
+      stroke-width="4"
       stroke-linecap="round"
       stroke-dasharray="140 750"
       class="pulse-animation"
@@ -100,9 +101,9 @@ const { events } = Astro.props;
   <!-- Timeline Nodes -->
   <div class="space-y-12 md:space-y-0 relative z-10" id="timeline-nodes-container">
     {events.map((event, index) => {
-      const isLeft = index % 2 === 0;
+      const isLeft = event.alignment === 'left';
       return (
-        <div 
+        <div
           class="timeline-row relative w-full flex flex-col md:block py-6 md:py-16"
           data-category={event.category.toLowerCase()}
           data-past={event.past ? 'true' : 'false'}
@@ -113,14 +114,10 @@ const { events } = Astro.props;
           <TimelineConnector isLeft={isLeft} index={index} />
 
           <!-- Timeline Card Wrapper (Desktop aligned left/right, Mobile staggered left/right slightly) -->
-          <div 
-            class={`timeline-card-wrapper w-full md:w-[460px] flex transition-all duration-500 ease-in-out ${isLeft ? 'pl-12 md:pl-0 pr-4 md:pr-0 md:ml-[20%]' : 'pl-16 md:pl-0 pr-4 md:pr-0 md:ml-[60%]'}`}
-            data-left-classes="md:ml-[20%] pl-12 pr-4"
-            data-right-classes="md:ml-[60%] pl-16 pr-4"
-          >
-            <TimelineCard 
-              event={event} 
-              class="timeline-card-reveal opacity-0 translate-y-8 transition-all duration-700 ease-out" 
+          <div class={`relative w-full md:w-1/2 flex justify-center ${event.alignment === 'right' ? 'md:justify-start' : 'md:justify-end'}`}>
+            <EventTimelineCard
+              event={event}
+              class="timeline-card-reveal opacity-0 translate-y-8 transition-all duration-700 ease-out"
             />
           </div>
 
@@ -147,7 +144,7 @@ const { events } = Astro.props;
 
   function drawSnake() {
     const dots = document.querySelectorAll('.timeline-row:not([style*="display: none"]) .timeline-dot');
-    
+
     if (!container || !pathBg || !pathActive || !pathPulse || dots.length === 0) return;
 
     const containerRect = container.getBoundingClientRect();
@@ -201,7 +198,7 @@ const { events } = Astro.props;
     const lastX = lastDotRect.left + lastDotRect.width / 2 - containerRect.left;
     const lastY = lastDotRect.top + lastDotRect.height / 2 - containerRect.top;
     const tailY = containerRect.height;
-    
+
     d += ` C ${lastX},${lastY + 45} ${centerX},${lastY + 45} ${centerX},${tailY}`;
 
     // Apply paths
@@ -251,7 +248,7 @@ const { events } = Astro.props;
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         const row = entry.target as HTMLElement;
-        
+
         const cards = row.querySelectorAll('.timeline-card-reveal');
         cards.forEach(card => {
           card.classList.remove('opacity-0', 'translate-y-8');
