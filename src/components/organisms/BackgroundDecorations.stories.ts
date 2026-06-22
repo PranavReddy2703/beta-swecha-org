@@ -1,17 +1,18 @@
-import type { Meta, StoryObj } from '@storybook-astro/framework';
-import BackgroundDecorations from './BackgroundDecorations.astro';
+import type { Meta, StoryObj } from "@storybook-astro/framework";
+import BackgroundDecorations from "./BackgroundDecorations.astro";
 
 const meta: Meta<typeof BackgroundDecorations> = {
-  title: 'Organisms/BackgroundDecorations',
+  title: "Organisms/BackgroundDecorations",
   component: BackgroundDecorations,
-  tags: ['autodocs'],
+  tags: ["autodocs"],
   parameters: {
     docs: {
       description: {
-        component: 'Procedural bird flight simulation with natural physics. Used as a dynamic background layer on the home page.',
+        component:
+          "Procedural bird flight simulation with natural physics. Used as a dynamic background layer on the home page.",
       },
     },
-    layout: 'fullscreen',
+    layout: "fullscreen",
   },
   decorators: [
     (Story) => `

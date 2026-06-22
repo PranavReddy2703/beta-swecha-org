@@ -2,22 +2,31 @@
 // src/components/news/CategoryBadge.astro
 interface Props {
   text: string;
-  variant?: 'cyan' | 'green';
+  variant?: "cyan" | "green";
 }
 
-const { text, variant = 'cyan' } = Astro.props;
+const { text, variant = "cyan" } = Astro.props;
 ---
 
-<span class={`inline-flex items-center gap-1 rounded-md border px-2.5 py-0.5 text-[10px] font-bold tracking-wider uppercase select-none ${
-  variant === 'green'
-    ? 'border-secondary-accent/25 bg-secondary-accent/10 text-secondary-accent'
-    : 'border-primary-brand/25 bg-primary-brand/10 text-primary-brand'
-}`}>
+<span
+  class={`inline-flex items-center gap-1 rounded-md border px-2.5 py-0.5 text-[10px] font-bold tracking-wider uppercase select-none ${
+    variant === "green"
+      ? "border-secondary-accent/25 bg-secondary-accent/10 text-secondary-accent"
+      : "border-primary-brand/25 bg-primary-brand/10 text-primary-brand"
+  }`}
+>
   <!-- Solid Star Icon -->
-  <svg class={`h-3 w-3 flex-shrink-0 ${
-    variant === 'green' ? 'fill-secondary-accent text-secondary-accent' : 'fill-primary-brand text-primary-brand'
-  }`} viewBox="0 0 24 24">
-    <path d="M12 .587l3.668 7.431 8.2 1.191-5.934 5.787 1.4 8.168L12 18.896l-7.334 3.857 1.4-8.168L.132 9.209l8.2-1.191L12 .587z"/>
+  <svg
+    class={`h-3 w-3 flex-shrink-0 ${
+      variant === "green"
+        ? "fill-secondary-accent text-secondary-accent"
+        : "fill-primary-brand text-primary-brand"
+    }`}
+    viewBox="0 0 24 24"
+  >
+    <path
+      d="M12 .587l3.668 7.431 8.2 1.191-5.934 5.787 1.4 8.168L12 18.896l-7.334 3.857 1.4-8.168L.132 9.209l8.2-1.191L12 .587z"
+    ></path>
   </svg>
   {text}
 </span>

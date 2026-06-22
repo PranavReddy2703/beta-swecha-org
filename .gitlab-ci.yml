@@ -1,27 +1,65 @@
 image: node:22
 
 stages:
+  - setup
+  - quality
+  - typecheck
   - build
+  - test
   - deploy
 
 cache:
+  key: ${CI_COMMIT_REF_SLUG}
   paths:
     - node_modules/
+    - .npm/
 
-install:
-  stage: build
+install_dependencies:
+  stage: setup
   script:
     - npm ci
 
-pages:
-  stage: deploy
+lint_and_audit:
+  stage: quality
+  needs: ["install_dependencies"]
+  script:
+    - npm run format:check
+    - npx secretlint "**/*"
+    - npm audit --omit=dev --audit-level=high
+
+typecheck_and_deadcode:
+  stage: typecheck
+  needs: ["install_dependencies"]
+  script:
+    - npm run typecheck
+    - npm run knip
+
+build_assets:
+  stage: build
+  needs: ["install_dependencies", "lint_and_audit", "typecheck_and_deadcode"]
   script:
     - npm run build
-    # Build Storybook to a directory outside public first to avoid circular copy error
     - npm run build-storybook -- -o storybook-static
-    # Assuming Astro builds to dist/, copy it to public/ for GitLab Pages
+  artifacts:
+    paths:
+      - dist/
+      - storybook-static/
+    expire_in: 1 day
+
+lighthouse_ci:
+  stage: test
+  needs: ["build_assets"]
+  before_script:
+    - apt-get update && apt-get install -y chromium
+    - export CHROME_PATH=/usr/bin/chromium
+  script:
+    - npx lhci autorun
+
+pages:
+  stage: deploy
+  needs: ["build_assets", "lighthouse_ci"]
+  script:
     - cp -r dist/* public/
-    # Move Storybook assets into public/storybook/
     - mkdir -p public/storybook
     - cp -r storybook-static/* public/storybook/
   artifacts:

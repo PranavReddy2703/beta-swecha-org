@@ -1,12 +1,9 @@
 {
   "badge": "System Active: Electric Cyan Matrix",
-  "heading": [
-    "Modern Presentation Layer for",
-    "swecha.org"
-  ],
+  "heading": ["Modern Presentation Layer for", "swecha.org"],
   "subheading": "A high-performance, decoupled frontend architecture engineered with Astro, Tailwind CSS, and daisyUI. Designed for optimal load speeds, structural localization stability, and visual premium interfaces.",
   "buttons": {
     "explore": "Explore Projects",
-    "learn": "Learn More"
+    "learn": "Learn More About Swecha"
   }
 }

@@ -1,17 +1,17 @@
-import type { Meta, StoryObj } from '@storybook-astro/framework';
-import IndexPage from './index.astro';
+import type { Meta, StoryObj } from "@storybook-astro/framework";
+import IndexPage from "./index.astro";
 
 const meta: Meta<typeof IndexPage> = {
-  title: 'Pages/Home',
+  title: "Pages/Home",
   component: IndexPage,
-  tags: ['autodocs'],
+  tags: ["autodocs"],
   parameters: {
     docs: {
       description: {
-        component: 'The main landing page (Home) of the Swecha website.',
+        component: "The main landing page (Home) of the Swecha website.",
       },
     },
-    layout: 'fullscreen',
+    layout: "fullscreen",
   },
 };
 

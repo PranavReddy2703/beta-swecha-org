@@ -10,16 +10,34 @@ interface Props {
   sendButtonText: string;
 }
 
-const { title, subtitle, nameLabel, emailLabel, subjectLabel, messageLabel, sendButtonText } = Astro.props;
+const {
+  title,
+  subtitle,
+  nameLabel,
+  emailLabel,
+  subjectLabel,
+  messageLabel,
+  sendButtonText,
+} = Astro.props;
 ---
 
-<div class="glass-white-card group relative overflow-hidden rounded-2xl border border-structural-borders bg-card-bg/40 p-5 md:p-6 backdrop-blur-xl transition-all duration-300 hover:border-primary-brand/30 hover:shadow-[0_0_25px_rgba(0,212,255,0.05)] select-none h-full flex flex-col">
+<div
+  class="glass-white-card group relative overflow-hidden rounded-2xl border border-structural-borders bg-card-bg/40 p-5 md:p-6 backdrop-blur-xl transition-all duration-300 hover:border-primary-brand/30 hover:shadow-[0_0_25px_rgba(0,212,255,0.05)] select-none h-full flex flex-col"
+>
   <!-- Interactive backglow decoration -->
-  <div class="absolute -right-20 -bottom-20 h-40 w-40 rounded-full bg-secondary-accent/5 blur-3xl group-hover:bg-secondary-accent/8 transition-all duration-500"></div>
-  <div class="absolute -left-20 -top-20 h-40 w-40 rounded-full bg-primary-brand/5 blur-3xl group-hover:bg-primary-brand/8 transition-all duration-500"></div>
+  <div
+    class="absolute -right-20 -bottom-20 h-40 w-40 rounded-full bg-secondary-accent/5 blur-3xl group-hover:bg-secondary-accent/8 transition-all duration-500"
+  >
+  </div>
+  <div
+    class="absolute -left-20 -top-20 h-40 w-40 rounded-full bg-primary-brand/5 blur-3xl group-hover:bg-primary-brand/8 transition-all duration-500"
+  >
+  </div>
 
   <div class="mb-5 relative z-10">
-    <h3 class="text-xl md:text-2xl font-extrabold text-text-main group-hover:text-primary-brand transition-colors duration-300">
+    <h3
+      class="text-xl md:text-2xl font-extrabold text-text-main group-hover:text-primary-brand transition-colors duration-300"
+    >
       {title}
     </h3>
     <p class="text-xs text-text-muted mt-1.5">
@@ -28,17 +46,32 @@ const { title, subtitle, nameLabel, emailLabel, subjectLabel, messageLabel, send
   </div>
 
   <!-- Success Message Container -->
-  <div id="rebuilt-form-success" class="hidden flex-col items-center justify-center py-10 text-center relative z-10 transition-all duration-500 animate-fade-in flex-grow">
-    <div class="p-3.5 rounded-full bg-secondary-accent/10 text-secondary-accent border border-secondary-accent/20 mb-4 shadow-[0_0_15px_rgba(77,255,184,0.1)]">
-      <svg class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-        <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+  <div
+    id="rebuilt-form-success"
+    class="hidden flex-col items-center justify-center py-10 text-center relative z-10 transition-all duration-500 animate-fade-in flex-grow"
+  >
+    <div
+      class="p-3.5 rounded-full bg-secondary-accent/10 text-secondary-accent border border-secondary-accent/20 mb-4 shadow-[0_0_15px_rgba(77,255,184,0.1)]"
+    >
+      <svg
+        class="h-10 w-10"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+        stroke-width="2.5"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
       </svg>
     </div>
     <h4 class="text-xl font-black text-text-main mb-2">Message Sent!</h4>
     <p class="text-xs text-text-muted max-w-sm mb-6 leading-relaxed">
-      Your transmission has been broadcasted successfully. A Swecha community coordinator will establish contact shortly.
+      Your transmission has been broadcasted successfully. A Swecha community
+      coordinator will establish contact shortly.
     </p>
-    <button 
+    <button
       id="rebuilt-reset-form"
       type="button"
       class="inline-flex items-center justify-center rounded-lg border border-structural-borders bg-card-bg/60 px-4 py-2.5 text-xs font-bold text-text-main backdrop-blur-md transition-all duration-200 hover:border-primary-brand/40 hover:text-primary-brand hover:bg-elevated-surface"
@@ -48,17 +81,28 @@ const { title, subtitle, nameLabel, emailLabel, subjectLabel, messageLabel, send
   </div>
 
   <!-- Main Form stacked vertically -->
-  <form id="rebuilt-contact-form" data-collapsed-text={title} data-expanded-text={sendButtonText} class="space-y-4 relative z-10 transition-all duration-300">
-    
-    <div id="rebuilt-form-fields-container" class="space-y-4 transition-all duration-500 ease-in-out lg:max-h-none lg:opacity-100 lg:overflow-visible">
+  <form
+    id="rebuilt-contact-form"
+    data-collapsed-text={title}
+    data-expanded-text={sendButtonText}
+    class="space-y-4 relative z-10 transition-all duration-300"
+  >
+    <div
+      id="rebuilt-form-fields-container"
+      class="space-y-4 transition-all duration-500 ease-in-out lg:max-h-none lg:opacity-100 lg:overflow-visible"
+    >
       <!-- Name Field -->
       <div class="space-y-1.5">
-        <label for="input-name" class="block text-xs font-semibold text-text-main">{nameLabel} <span class="text-primary-brand">*</span></label>
-        <input 
-          type="text" 
-          id="input-name" 
-          name="name" 
-          required 
+        <label
+          for="input-name"
+          class="block text-xs font-semibold text-text-main"
+          >{nameLabel} <span class="text-primary-brand">*</span></label
+        >
+        <input
+          type="text"
+          id="input-name"
+          name="name"
+          required
           placeholder="First & last name"
           class="w-full rounded-lg border border-structural-borders/80 bg-canvas-base/80 px-3.5 py-2.5 text-sm text-text-main placeholder-text-muted/40 focus:border-primary-brand focus:ring-1 focus:ring-primary-brand focus:shadow-[0_0_10px_rgba(0,212,255,0.25)] focus:outline-none transition-all duration-200"
         />
@@ -66,12 +110,16 @@ const { title, subtitle, nameLabel, emailLabel, subjectLabel, messageLabel, send
 
       <!-- Email Field -->
       <div class="space-y-1.5">
-        <label for="input-email" class="block text-xs font-semibold text-text-main">{emailLabel} <span class="text-primary-brand">*</span></label>
-        <input 
-          type="email" 
-          id="input-email" 
-          name="email" 
-          required 
+        <label
+          for="input-email"
+          class="block text-xs font-semibold text-text-main"
+          >{emailLabel} <span class="text-primary-brand">*</span></label
+        >
+        <input
+          type="email"
+          id="input-email"
+          name="email"
+          required
           placeholder="yourname@domain.com"
           class="w-full rounded-lg border border-structural-borders/80 bg-canvas-base/80 px-3.5 py-2.5 text-sm text-text-main placeholder-text-muted/40 focus:border-primary-brand focus:ring-1 focus:ring-primary-brand focus:shadow-[0_0_10px_rgba(0,212,255,0.25)] focus:outline-none transition-all duration-200"
         />
@@ -79,12 +127,16 @@ const { title, subtitle, nameLabel, emailLabel, subjectLabel, messageLabel, send
 
       <!-- Subject Field -->
       <div class="space-y-1.5">
-        <label for="input-subject" class="block text-xs font-semibold text-text-main">{subjectLabel} <span class="text-primary-brand">*</span></label>
-        <input 
-          type="text" 
-          id="input-subject" 
-          name="subject" 
-          required 
+        <label
+          for="input-subject"
+          class="block text-xs font-semibold text-text-main"
+          >{subjectLabel} <span class="text-primary-brand">*</span></label
+        >
+        <input
+          type="text"
+          id="input-subject"
+          name="subject"
+          required
           placeholder="What is this transmission regarding?"
           class="w-full rounded-lg border border-structural-borders/80 bg-canvas-base/80 px-3.5 py-2.5 text-sm text-text-main placeholder-text-muted/40 focus:border-primary-brand focus:ring-1 focus:ring-primary-brand focus:shadow-[0_0_10px_rgba(0,212,255,0.25)] focus:outline-none transition-all duration-200"
         />
@@ -92,11 +144,15 @@ const { title, subtitle, nameLabel, emailLabel, subjectLabel, messageLabel, send
 
       <!-- Message Field -->
       <div class="space-y-1.5">
-        <label for="input-message" class="block text-xs font-semibold text-text-main">{messageLabel} <span class="text-primary-brand">*</span></label>
-        <textarea 
-          id="input-message" 
-          name="message" 
-          required 
+        <label
+          for="input-message"
+          class="block text-xs font-semibold text-text-main"
+          >{messageLabel} <span class="text-primary-brand">*</span></label
+        >
+        <textarea
+          id="input-message"
+          name="message"
+          required
           rows="4"
           placeholder="Write your transmission details..."
           class="w-full rounded-lg border border-structural-borders/80 bg-canvas-base/80 px-3.5 py-2.5 text-sm text-text-main placeholder-text-muted/40 focus:border-primary-brand focus:ring-1 focus:ring-primary-brand focus:shadow-[0_0_10px_rgba(0,212,255,0.25)] focus:outline-none transition-all duration-200 resize-y min-h-[100px]"
@@ -106,14 +162,24 @@ const { title, subtitle, nameLabel, emailLabel, subjectLabel, messageLabel, send
 
     <!-- Submit Button with Shine Effect & PaperPlane -->
     <div class="pt-2">
-      <button 
-        type="submit" 
+      <button
+        type="submit"
         id="rebuilt-submit-btn"
         class="shine-button w-full inline-flex items-center justify-center rounded-lg bg-primary-brand py-3.5 px-6 text-sm font-black text-[var(--primary-btn-text)] leading-none shadow-md shadow-primary-brand/10 transition-all duration-300 hover:bg-hover-brand hover:shadow-lg hover:shadow-primary-brand/20 active:scale-[0.99] focus:outline-none focus:ring-2 focus:ring-primary-brand"
       >
         <span id="submit-btn-text">{sendButtonText}</span>
-        <svg class="ml-2 h-4 w-4 shrink-0 transform transition-transform duration-300 group-hover:scale-110 translate-y-[1px]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+        <svg
+          class="ml-2 h-4 w-4 shrink-0 transform transition-transform duration-300 group-hover:scale-110 translate-y-[1px]"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          stroke-width="2.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path
+            d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"
+          ></path>
         </svg>
       </button>
     </div>
@@ -126,9 +192,9 @@ const { title, subtitle, nameLabel, emailLabel, subjectLabel, messageLabel, send
     position: relative;
     overflow: hidden;
   }
-  
+
   .shine-button::after {
-    content: '';
+    content: "";
     position: absolute;
     top: -50%;
     left: -70%;
@@ -152,8 +218,14 @@ const { title, subtitle, nameLabel, emailLabel, subjectLabel, messageLabel, send
 
   /* Fade-in transitions */
   @keyframes fadeIn {
-    from { opacity: 0; transform: scale(0.97); }
-    to { opacity: 1; transform: scale(1); }
+    from {
+      opacity: 0;
+      transform: scale(0.97);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
   }
   .animate-fade-in {
     animation: fadeIn 0.4s ease-out forwards;
@@ -178,37 +250,42 @@ const { title, subtitle, nameLabel, emailLabel, subjectLabel, messageLabel, send
       margin-bottom: 1.5rem !important;
     }
     #rebuilt-form-fields-container {
-      transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1), 
-                  opacity 0.4s ease-in-out, 
-                  margin 0.5s cubic-bezier(0.4, 0, 0.2, 1), 
-                  padding 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+      transition:
+        max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+        opacity 0.4s ease-in-out,
+        margin 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+        padding 0.5s cubic-bezier(0.4, 0, 0.2, 1);
     }
   }
 </style>
 
 <script>
-  const form = document.getElementById('rebuilt-contact-form') as HTMLFormElement | null;
-  const successContainer = document.getElementById('rebuilt-form-success');
-  const resetBtn = document.getElementById('rebuilt-reset-form');
-  const submitBtn = document.getElementById('rebuilt-submit-btn') as HTMLButtonElement | null;
-  const submitBtnText = document.getElementById('submit-btn-text');
+  const form = document.getElementById(
+    "rebuilt-contact-form",
+  ) as HTMLFormElement | null;
+  const successContainer = document.getElementById("rebuilt-form-success");
+  const resetBtn = document.getElementById("rebuilt-reset-form");
+  const submitBtn = document.getElementById(
+    "rebuilt-submit-btn",
+  ) as HTMLButtonElement | null;
+  const submitBtnText = document.getElementById("submit-btn-text");
 
   if (form && successContainer && resetBtn && submitBtn && submitBtnText) {
-    const collapsedText = form.getAttribute('data-collapsed-text') || '';
-    const expandedText = form.getAttribute('data-expanded-text') || '';
+    const collapsedText = form.getAttribute("data-collapsed-text") || "";
+    const expandedText = form.getAttribute("data-expanded-text") || "";
 
     const checkIsMobile = () => window.innerWidth < 1024;
 
     const initFormState = () => {
       if (checkIsMobile()) {
-        form.classList.remove('mobile-expanded');
-        form.classList.add('mobile-collapsed');
+        form.classList.remove("mobile-expanded");
+        form.classList.add("mobile-collapsed");
         submitBtnText.textContent = collapsedText;
-        submitBtn.type = 'button';
+        submitBtn.type = "button";
       } else {
-        form.classList.remove('mobile-collapsed', 'mobile-expanded');
+        form.classList.remove("mobile-collapsed", "mobile-expanded");
         submitBtnText.textContent = expandedText;
-        submitBtn.type = 'submit';
+        submitBtn.type = "submit";
       }
     };
 
@@ -216,34 +293,36 @@ const { title, subtitle, nameLabel, emailLabel, subjectLabel, messageLabel, send
     initFormState();
 
     // Listen for resize changes
-    window.addEventListener('resize', () => {
-      if (!form.classList.contains('mobile-expanded')) {
+    window.addEventListener("resize", () => {
+      if (!form.classList.contains("mobile-expanded")) {
         initFormState();
       }
     });
 
     // Expand logic when button is clicked in collapsed mobile state
-    submitBtn.addEventListener('click', (e) => {
-      if (submitBtn.type === 'button') {
+    submitBtn.addEventListener("click", (e) => {
+      if (submitBtn.type === "button") {
         e.preventDefault();
-        form.classList.remove('mobile-collapsed');
-        form.classList.add('mobile-expanded');
+        form.classList.remove("mobile-collapsed");
+        form.classList.add("mobile-expanded");
         submitBtnText.textContent = expandedText;
-        submitBtn.type = 'submit';
+        submitBtn.type = "submit";
 
         // Focus the first field
-        const nameInput = document.getElementById('input-name') as HTMLInputElement | null;
+        const nameInput = document.getElementById(
+          "input-name",
+        ) as HTMLInputElement | null;
         if (nameInput) {
           nameInput.focus();
         }
       }
     });
 
-    form.addEventListener('submit', (e) => {
+    form.addEventListener("submit", (e) => {
       e.preventDefault();
 
       // Double safety check
-      if (checkIsMobile() && form.classList.contains('mobile-collapsed')) {
+      if (checkIsMobile() && form.classList.contains("mobile-collapsed")) {
         return;
       }
 
@@ -257,7 +336,7 @@ const { title, subtitle, nameLabel, emailLabel, subjectLabel, messageLabel, send
         </svg> Sending...`;
 
       // Measure and lock the card height to prevent it from shrinking during transitions
-      const card = form.closest('.group') as HTMLElement | null;
+      const card = form.closest(".group") as HTMLElement | null;
       if (card) {
         const rect = card.getBoundingClientRect();
         card.style.minHeight = `${rect.height}px`;
@@ -269,20 +348,20 @@ const { title, subtitle, nameLabel, emailLabel, subjectLabel, messageLabel, send
         submitBtn.disabled = false;
         submitBtn.innerHTML = originalContent;
 
-        form.classList.add('hidden');
-        successContainer.classList.remove('hidden');
-        successContainer.classList.add('flex');
+        form.classList.add("hidden");
+        successContainer.classList.remove("hidden");
+        successContainer.classList.add("flex");
       }, 700);
     });
 
-    resetBtn.addEventListener('click', () => {
-      const card = form.closest('.group') as HTMLElement | null;
+    resetBtn.addEventListener("click", () => {
+      const card = form.closest(".group") as HTMLElement | null;
       if (card) {
-        card.style.minHeight = '';
+        card.style.minHeight = "";
       }
-      successContainer.classList.add('hidden');
-      successContainer.classList.remove('flex');
-      form.classList.remove('hidden');
+      successContainer.classList.add("hidden");
+      successContainer.classList.remove("flex");
+      form.classList.remove("hidden");
       initFormState();
     });
   }

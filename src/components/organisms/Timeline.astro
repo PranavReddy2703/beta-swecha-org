@@ -7,6 +7,7 @@ import TimelineSlider from "./TimelineSlider.astro";
 import MobileTimelineCard from "../molecules/MobileTimelineCard.astro";
 import TimelineModal from "../molecules/TimelineModal.astro";
 import timelineData from "../../data/organisms/timeline.json";
+import type { ImageMetadata } from "astro";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
@@ -19,12 +20,23 @@ const tagsByYear: Record<string, string[]> = {
   "2026": ["Astro", "Tailwind CSS", "Modern Web"],
 };
 
+const imageImports = import.meta.glob<{ default: ImageMetadata }>(
+  "/src/assets/timeline/*.webp",
+  { eager: true },
+);
+
 const events = timelineData.map((event, index) => {
+  const imagePath = `/src/assets/timeline/${event.year}.webp`;
+  const importedImage = imageImports[imagePath];
+
   return {
     year: event.year,
     title: t(`timeline.${index}.title` as any) || event.title,
     description: t(`timeline.${index}.description` as any) || event.description,
-    previewImage: `/images/timeline/${event.year}.png`,
+    previewImage: importedImage ? importedImage.default : undefined,
+    previewImageUrl: importedImage
+      ? importedImage.default.src
+      : `/images/timeline/${event.year}.webp`,
     tags: tagsByYear[event.year] || ["Community", "FOSS", "Localization"],
   };
 });
@@ -88,6 +100,7 @@ const N = events.length;
                 description={event.description}
                 previewImage={event.previewImage}
                 tags={event.tags}
+                index={index}
               />
             </div>
           ))
@@ -123,46 +136,56 @@ const N = events.length;
     <!-- Mobile Timeline (Vertical) -->
     <div class="w-full flex flex-col md:hidden relative mt-4">
       <!-- Vertical Line -->
-      <div class="absolute left-[27px] top-4 bottom-4 w-[2px] bg-structural-borders/40"></div>
-      
-      <div class="flex flex-col gap-12 w-full mobile-timeline-container relative z-10 py-8">
+      <div
+        class="absolute left-[27px] top-4 bottom-4 w-[2px] bg-structural-borders/40"
+      >
+      </div>
+
+      <div
+        class="flex flex-col gap-12 w-full mobile-timeline-container relative z-10 py-8"
+      >
         {
           events.map((event, index) => (
             <div class="flex flex-row items-center w-full gap-6 relative mobile-timeline-row">
-              <!-- Left: Node -->
-              <div class="relative flex flex-col items-center shrink-0 w-[56px] mobile-timeline-dot transition-all duration-500 scale-75 opacity-40 mobile-node-wrapper"
-                   style={`
+              {/* Left: Node */}
+              <div
+                class="relative flex flex-col items-center shrink-0 w-[56px] mobile-timeline-dot transition-all duration-500 scale-75 opacity-40 mobile-node-wrapper"
+                style={`
                      --node-color-dark: ${getNodeColors(index, N, false).color};
                      --node-glow-dark: ${getNodeColors(index, N, false).glow};
                      --node-shadow-dark: ${getNodeColors(index, N, false).shadow};
                      --node-color-light: ${getNodeColors(index, N, true).color};
                      --node-glow-light: ${getNodeColors(index, N, true).glow};
                      --node-shadow-light: ${getNodeColors(index, N, true).shadow};
-                   `}>
-                <!-- The Node Dot with pulse ring -->
+                   `}
+              >
+                {/* The Node Dot with pulse ring */}
                 <div class="relative flex items-center justify-center h-8 w-8 dot-wrapper">
-                  <!-- Pulse Ring -->
-                  <span class="mobile-pulse-ring absolute inset-0 rounded-full border opacity-0 hidden"></span>
-                  
-                  <!-- Circular Glow around the node -->
-                  <div class="mobile-dot-glow absolute inset-[-14px] rounded-full pointer-events-none z-0 transition-all duration-500 opacity-30" 
-                       style={`background: radial-gradient(circle, var(--current-node-glow) 0%, transparent 70%);`}>
-                  </div>
-                  
-                  <!-- Core Dot -->
-                  <div class="mobile-node-dot h-5 w-5 rounded-full border-[3px] border-[#080B10] bg-transparent transition-all duration-500 transform z-10 scale-100"
-                       style={`background-color: var(--current-node-color);`}>
-                  </div>
+                  {/* Pulse Ring */}
+                  <span class="mobile-pulse-ring absolute inset-0 rounded-full border opacity-0 hidden" />
+
+                  {/* Circular Glow around the node */}
+                  <div
+                    class="mobile-dot-glow absolute inset-[-14px] rounded-full pointer-events-none z-0 transition-all duration-500 opacity-30"
+                    style={`background: radial-gradient(circle, var(--current-node-glow) 0%, transparent 70%);`}
+                  />
+
+                  {/* Core Dot */}
+                  <div
+                    class="mobile-node-dot h-5 w-5 rounded-full border-[3px] border-[#080B10] bg-transparent transition-all duration-500 transform z-10 scale-100"
+                    style={`background-color: var(--current-node-color);`}
+                  />
                 </div>
               </div>
-              
-              <!-- Right: Content -->
+
+              {/* Right: Content */}
               <div class="flex-1 flex flex-col py-2">
                 <MobileTimelineCard
                   year={event.year}
                   title={event.title}
                   description={event.description}
                   previewImage={event.previewImage}
+                  previewImageUrl={event.previewImageUrl}
                   tags={event.tags}
                   index={index}
                 />
@@ -192,11 +215,11 @@ const N = events.length;
   }
 
   :global(html[data-theme="light"]) .mobile-node-dot {
-    border-color: #FFFFFF !important;
+    border-color: #ffffff !important;
   }
 
   .animate-glow-text {
-    background: linear-gradient(135deg, #00D4FF, #4DFFB8) !important;
+    background: linear-gradient(135deg, #00d4ff, #4dffb8) !important;
     -webkit-background-clip: text !important;
     -webkit-text-fill-color: transparent !important;
     text-shadow: none !important;
@@ -206,29 +229,29 @@ const N = events.length;
   /* Light mode overrides to make Section Title white with visual depth */
   :global(html[data-theme="light"]) .animate-glow-text {
     background: none !important;
-    color: #FFFFFF !important;
-    -webkit-text-fill-color: #FFFFFF !important;
-    text-shadow: 
+    color: #ffffff !important;
+    -webkit-text-fill-color: #ffffff !important;
+    text-shadow:
       0 2px 8px rgba(11, 30, 54, 0.35),
       0 4px 20px rgba(11, 30, 54, 0.25) !important;
   }
 </style>
 
-<script>
+<script is:inline>
   function initTimeline() {
     const cards = document.querySelectorAll(".timeline-card");
     const nodes = document.querySelectorAll(".timeline-node");
     const prevBtn = document.getElementById("prev-btn");
     const nextBtn = document.getElementById("next-btn");
-    const slidingTimeline = document.getElementById(
-      "sliding-timeline",
-    ) as HTMLElement;
+    /** @type {HTMLElement | null} */
+    const slidingTimeline = document.getElementById("sliding-timeline");
 
     if (cards.length === 0 || nodes.length === 0) return;
 
     let activeIndex = 0;
 
-    function updateTimeline(index: number) {
+    /** @param {number} index */
+    function updateTimeline(index) {
       activeIndex = index;
 
       // 1. Update Cards
@@ -246,9 +269,12 @@ const N = events.length;
       // 2. Update DaisyUI Timeline Lines
       const lis = document.querySelectorAll(".timeline > li");
       lis.forEach((li, idx) => {
-        const prevHr = li.querySelector(".timeline-line-prev") as HTMLElement;
-        const nextHr = li.querySelector(".timeline-line-next") as HTMLElement;
-        const node = li.querySelector(".timeline-node") as HTMLElement;
+        /** @type {HTMLElement | null} */
+        const prevHr = li.querySelector(".timeline-line-prev");
+        /** @type {HTMLElement | null} */
+        const nextHr = li.querySelector(".timeline-line-next");
+        /** @type {HTMLElement | null} */
+        const node = li.querySelector(".timeline-node");
 
         // Check if light theme is active
         const isLight =
@@ -284,9 +310,12 @@ const N = events.length;
 
       // 3. Update Timeline Nodes
       nodes.forEach((node, idx) => {
-        const ring = node.querySelector(".pulse-ring") as HTMLElement;
-        const dot = node.querySelector(".node-dot") as HTMLElement;
-        const glow = node.querySelector(".dot-glow") as HTMLElement;
+        /** @type {HTMLElement | null} */
+        const ring = node.querySelector(".pulse-ring");
+        /** @type {HTMLElement | null} */
+        const dot = node.querySelector(".node-dot");
+        /** @type {HTMLElement | null} */
+        const glow = node.querySelector(".dot-glow");
 
         // Find the node year within the same li item
         const li = node.closest("li");
@@ -344,7 +373,7 @@ const N = events.length;
 
         // Toggle Year Label styling
         if (year) {
-          (year as HTMLElement).style.color = colorVal; // Apply theme color to all labels
+          /** @type {HTMLElement} */ (year).style.color = colorVal; // Apply theme color to all labels
           if (idx === activeIndex) {
             year.className =
               "node-year text-xs sm:text-sm font-black scale-105 transition-all duration-300 opacity-100";
@@ -357,14 +386,17 @@ const N = events.length;
 
       // 4. Centering Slide Offset Logic and Dynamic Edge Extension Widths
       if (slidingTimeline) {
-        const activeLi = lis[activeIndex] as HTMLElement;
+        /** @type {HTMLElement} */
+        const activeLi = lis[activeIndex];
         if (activeLi) {
           const activeCenter = activeLi.offsetLeft + activeLi.offsetWidth / 2;
           slidingTimeline.style.transform = `translateX(-${activeCenter}px)`;
 
           // Dynamically compute exact widths for the left/right extension lines so they end exactly at the viewport borders
-          const firstLi = lis[0] as HTMLElement;
-          const lastLi = lis[lis.length - 1] as HTMLElement;
+          /** @type {HTMLElement} */
+          const firstLi = lis[0];
+          /** @type {HTMLElement} */
+          const lastLi = lis[lis.length - 1];
           if (firstLi && lastLi) {
             const x_0 = firstLi.offsetLeft + firstLi.offsetWidth / 2;
             const x_N = lastLi.offsetLeft + lastLi.offsetWidth / 2;
@@ -376,12 +408,14 @@ const N = events.length;
               window.innerWidth -
               (window.innerWidth / 2 + (x_N - activeCenter));
 
+            /** @type {HTMLElement | null} */
             const leftExtend = document.querySelector(
               ".timeline-line-prev-extend",
-            ) as HTMLElement;
+            );
+            /** @type {HTMLElement | null} */
             const rightExtend = document.querySelector(
               ".timeline-line-next-extend",
-            ) as HTMLElement;
+            );
 
             if (leftExtend) {
               leftExtend.style.setProperty(
@@ -472,121 +506,136 @@ const N = events.length;
   }
 
   function initMobileTimeline() {
-    const mobileRows = document.querySelectorAll('.mobile-timeline-row');
-    const readMoreBtns = document.querySelectorAll('.read-more-btn');
-    const modal = document.getElementById('timeline-modal') as HTMLDialogElement;
-    
+    const mobileRows = document.querySelectorAll(".mobile-timeline-row");
+    const readMoreBtns = document.querySelectorAll(".read-more-btn");
+    /** @type {HTMLDialogElement | null} */
+    const modal = document.getElementById("timeline-modal");
+
     if (!mobileRows.length) return;
 
     // Intersection Observer for mobile cards Focus State
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const row = entry.target;
-          const card = row.querySelector('.mobile-timeline-card');
-          const dot = row.querySelector('.mobile-timeline-dot');
-          
-          if (card) {
-            card.classList.add('scale-100', 'opacity-100');
-            card.classList.remove('scale-90', 'opacity-60');
-          }
-          if (dot) {
-            dot.classList.add('scale-100', 'opacity-100');
-            dot.classList.remove('scale-75', 'opacity-40');
-            
-            const coreDot = dot.querySelector('.mobile-node-dot') as HTMLElement;
-            const pulse = dot.querySelector('.mobile-pulse-ring') as HTMLElement;
-            const glow = dot.querySelector('.mobile-dot-glow') as HTMLElement;
-            
-            if (coreDot) {
-               coreDot.style.boxShadow = `0 0 0 1.5px var(--current-node-color), 0 0 10px var(--current-node-shadow)`;
-               coreDot.classList.add('scale-115');
-               coreDot.classList.remove('scale-100');
-            }
-            if (pulse) {
-               pulse.classList.add('active-pulse');
-               pulse.style.borderColor = `var(--current-node-color)`;
-               pulse.style.backgroundColor = `var(--current-node-shadow)`;
-            }
-            if (glow) glow.style.opacity = "1.0";
-          }
-          
-          // Optionally, dim others
-          mobileRows.forEach(otherRow => {
-            if (otherRow !== row) {
-              const otherCard = otherRow.querySelector('.mobile-timeline-card');
-              const otherDot = otherRow.querySelector('.mobile-timeline-dot');
-              if (otherCard) {
-                otherCard.classList.remove('scale-100', 'opacity-100');
-                otherCard.classList.add('scale-90', 'opacity-60');
-              }
-              if (otherDot) {
-                otherDot.classList.remove('scale-100', 'opacity-100');
-                otherDot.classList.add('scale-75', 'opacity-40');
-                
-                const coreDot = otherDot.querySelector('.mobile-node-dot') as HTMLElement;
-                const pulse = otherDot.querySelector('.mobile-pulse-ring') as HTMLElement;
-                const glow = otherDot.querySelector('.mobile-dot-glow') as HTMLElement;
-                
-                if (coreDot) {
-                   coreDot.style.boxShadow = "none";
-                   coreDot.classList.remove('scale-115');
-                   coreDot.classList.add('scale-100');
-                }
-                if (pulse) {
-                   pulse.classList.remove('active-pulse');
-                }
-                if (glow) glow.style.opacity = "0.3";
-              }
-            }
-          });
-        }
-      });
-    }, {
-      root: null,
-      rootMargin: '-40% 0px -40% 0px', // Trigger when row is in the middle 20% of screen
-      threshold: 0
-    });
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const row = entry.target;
+            const card = row.querySelector(".mobile-timeline-card");
+            const dot = row.querySelector(".mobile-timeline-dot");
 
-    mobileRows.forEach(row => observer.observe(row));
+            if (card) {
+              card.classList.add("scale-100", "opacity-100");
+              card.classList.remove("scale-90", "opacity-60");
+            }
+            if (dot) {
+              dot.classList.add("scale-100", "opacity-100");
+              dot.classList.remove("scale-75", "opacity-40");
+
+              /** @type {HTMLElement | null} */
+              const coreDot = dot.querySelector(".mobile-node-dot");
+              /** @type {HTMLElement | null} */
+              const pulse = dot.querySelector(".mobile-pulse-ring");
+              /** @type {HTMLElement | null} */
+              const glow = dot.querySelector(".mobile-dot-glow");
+
+              if (coreDot) {
+                coreDot.style.boxShadow = `0 0 0 1.5px var(--current-node-color), 0 0 10px var(--current-node-shadow)`;
+                coreDot.classList.add("scale-115");
+                coreDot.classList.remove("scale-100");
+              }
+              if (pulse) {
+                pulse.classList.add("active-pulse");
+                pulse.style.borderColor = `var(--current-node-color)`;
+                pulse.style.backgroundColor = `var(--current-node-shadow)`;
+              }
+              if (glow) glow.style.opacity = "1.0";
+            }
+
+            // Optionally, dim others
+            mobileRows.forEach((otherRow) => {
+              if (otherRow !== row) {
+                const otherCard = otherRow.querySelector(
+                  ".mobile-timeline-card",
+                );
+                const otherDot = otherRow.querySelector(".mobile-timeline-dot");
+                if (otherCard) {
+                  otherCard.classList.remove("scale-100", "opacity-100");
+                  otherCard.classList.add("scale-90", "opacity-60");
+                }
+                if (otherDot) {
+                  otherDot.classList.remove("scale-100", "opacity-100");
+                  otherDot.classList.add("scale-75", "opacity-40");
+
+                  /** @type {HTMLElement | null} */
+                  const coreDot = otherDot.querySelector(".mobile-node-dot");
+                  /** @type {HTMLElement | null} */
+                  const pulse = otherDot.querySelector(".mobile-pulse-ring");
+                  /** @type {HTMLElement | null} */
+                  const glow = otherDot.querySelector(".mobile-dot-glow");
+
+                  if (coreDot) {
+                    coreDot.style.boxShadow = "none";
+                    coreDot.classList.remove("scale-115");
+                    coreDot.classList.add("scale-100");
+                  }
+                  if (pulse) {
+                    pulse.classList.remove("active-pulse");
+                  }
+                  if (glow) glow.style.opacity = "0.3";
+                }
+              }
+            });
+          }
+        });
+      },
+      {
+        root: null,
+        rootMargin: "-40% 0px -40% 0px", // Trigger when row is in the middle 20% of screen
+        threshold: 0,
+      },
+    );
+
+    mobileRows.forEach((row) => observer.observe(row));
 
     // Modal Interaction
-    readMoreBtns.forEach(btn => {
-      btn.addEventListener('click', () => {
-        const year = btn.getAttribute('data-year');
-        const title = btn.getAttribute('data-title');
-        const description = btn.getAttribute('data-description');
-        const image = btn.getAttribute('data-image');
-        const tags = JSON.parse(btn.getAttribute('data-tags') || '[]');
+    readMoreBtns.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const year = btn.getAttribute("data-year");
+        const title = btn.getAttribute("data-title");
+        const description = btn.getAttribute("data-description");
+        const image = btn.getAttribute("data-image");
+        const tags = JSON.parse(btn.getAttribute("data-tags") || "[]");
 
-        const modalYear = document.getElementById('modal-year');
-        const modalTitle = document.getElementById('modal-title');
-        const modalDesc = document.getElementById('modal-description');
-        const modalImage = document.getElementById('modal-image') as HTMLImageElement;
-        const modalPlaceholder = document.getElementById('modal-placeholder');
-        const modalTags = document.getElementById('modal-tags');
+        const modalYear = document.getElementById("modal-year");
+        const modalTitle = document.getElementById("modal-title");
+        const modalDesc = document.getElementById("modal-description");
+        /** @type {HTMLImageElement | null} */
+        const modalImage = document.getElementById("modal-image");
+        const modalPlaceholder = document.getElementById("modal-placeholder");
+        const modalTags = document.getElementById("modal-tags");
 
         if (modalYear) modalYear.textContent = year;
         if (modalTitle) modalTitle.textContent = title;
         if (modalDesc) modalDesc.textContent = description;
-        
+
         if (modalImage && modalPlaceholder) {
           if (image) {
             modalImage.src = image;
-            modalImage.classList.remove('hidden');
-            modalPlaceholder.classList.add('hidden');
+            modalImage.classList.remove("hidden");
+            modalPlaceholder.classList.add("hidden");
           } else {
-            modalImage.src = '';
-            modalImage.classList.add('hidden');
-            modalPlaceholder.classList.remove('hidden');
+            modalImage.src = "";
+            modalImage.classList.add("hidden");
+            modalPlaceholder.classList.remove("hidden");
           }
         }
 
         if (modalTags) {
-          modalTags.innerHTML = '';
-          tags.forEach((tag: string) => {
-            const badge = document.createElement('div');
-            badge.className = 'badge badge-outline border-structural-borders/60 text-text-muted text-[11px] font-semibold px-2.5 py-1';
+          modalTags.innerHTML = "";
+          /** @param {string} tag */
+          tags.forEach((tag) => {
+            const badge = document.createElement("div");
+            badge.className =
+              "badge badge-outline border-structural-borders/60 text-text-muted text-[11px] font-semibold px-2.5 py-1";
             badge.textContent = tag;
             modalTags.appendChild(badge);
           });

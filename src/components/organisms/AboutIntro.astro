@@ -1,76 +1,80 @@
 ---
 // src/components/AboutSection.astro
-import { getLangFromUrl, useTranslations } from '../../i18n/utils';
+import { getLangFromUrl, useTranslations } from "../../i18n/utils";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
-const paragraphs = [
-  t('about.p1'),
-  t('about.p2'),
-  t('about.p3'),
-  t('about.p4')
-];
+const paragraphs = [t("about.p1"), t("about.p2"), t("about.p3"), t("about.p4")];
 ---
 
-<section id="about" class="py-8 w-full flex flex-col justify-center border-t border-structural-borders/30 relative transition-colors duration-300">
-
-
+<section
+  id="about"
+  class="py-8 w-full flex flex-col justify-center border-t border-structural-borders/30 relative transition-colors duration-300"
+>
   <div class="container mx-auto px-4 max-w-7xl relative z-10">
     <!-- Content Block with random ambient outline glow -->
-    <div class="about-card relative bg-card-bg/15 border border-structural-borders/30 backdrop-blur-md rounded-xl p-8 sm:p-12 shadow-xl hover:border-primary-brand/35 transition-all duration-500 max-w-7xl mx-auto w-full animate-random-glow">
-      <div class="space-y-6 text-center text-text-main/90 leading-relaxed font-medium tracking-wide">
-        {paragraphs.map((p, index) => (
-          <p 
-            class="text-base sm:text-lg opacity-0 translate-y-3 animate-fade-in-up cursor-default about-paragraph"
-            style={`animation-delay: ${index * 150 + 150}ms;`}
-          >
-            <span class="block hover-lift transition-all duration-500">
-              <Fragment set:html={p} />
-            </span>
-          </p>
-        ))}
+    <div
+      class="about-card relative bg-card-bg/15 border border-structural-borders/30 backdrop-blur-md rounded-xl p-8 sm:p-12 shadow-xl hover:border-primary-brand/35 transition-all duration-500 max-w-7xl mx-auto w-full animate-random-glow"
+    >
+      <div
+        class="space-y-6 text-center text-text-main/90 leading-relaxed font-medium tracking-wide"
+      >
+        {
+          paragraphs.map((p, index) => (
+            <p
+              class={`text-base sm:text-lg cursor-default about-paragraph ${index > 0 ? "opacity-0 translate-y-3 animate-fade-in-up" : ""}`}
+              style={
+                index > 0 ? `animation-delay: ${index * 150 + 150}ms;` : ""
+              }
+            >
+              <span class="block hover-lift transition-all duration-500">
+                <Fragment set:html={p} />
+              </span>
+            </p>
+          ))
+        }
       </div>
     </div>
   </div>
 </section>
 
-
-
-<script>
+<script is:inline>
   function initMobileHighlight() {
     // Enable auto-highlighting on scroll for touch devices / mobile screens
-    if (window.matchMedia('(max-width: 768px)').matches) {
-      const paragraphs = document.querySelectorAll('.about-paragraph span.hover-lift');
-      
+    if (window.matchMedia("(max-width: 768px)").matches) {
+      const paragraphs = document.querySelectorAll(
+        ".about-paragraph span.hover-lift",
+      );
+
       // Clear any existing observers to avoid duplicates on HMR
       if (window.aboutIntroObserver) {
         window.aboutIntroObserver.disconnect();
       }
-      
+
       const observerOptions = {
         root: null,
-        rootMargin: '-35% 0px -35% 0px', // Triggers when paragraph is in the middle 30% of screen
-        threshold: 0
+        rootMargin: "-35% 0px -35% 0px", // Triggers when paragraph is in the middle 30% of screen
+        threshold: 0,
       };
-      
+
       window.aboutIntroObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
+        entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            entry.target.classList.add('mobile-active-highlight');
+            entry.target.classList.add("mobile-active-highlight");
           } else {
-            entry.target.classList.remove('mobile-active-highlight');
+            entry.target.classList.remove("mobile-active-highlight");
           }
         });
       }, observerOptions);
-      
-      paragraphs.forEach(p => window.aboutIntroObserver.observe(p));
+
+      paragraphs.forEach((p) => window.aboutIntroObserver.observe(p));
     }
   }
 
   // Run immediately
   initMobileHighlight();
-  
+
   // Run on ViewTransitions page load
-  document.addEventListener('astro:page-load', initMobileHighlight);
+  document.addEventListener("astro:page-load", initMobileHighlight);
 </script>

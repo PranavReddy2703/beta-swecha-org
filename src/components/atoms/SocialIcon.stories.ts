@@ -1,24 +1,28 @@
-import type { Meta, StoryObj } from '@storybook-astro/framework';
-import SocialIcon from './SocialIcon.astro';
+import type { Meta, StoryObj } from "@storybook-astro/framework";
+import SocialIcon from "./SocialIcon.astro";
 
 const meta: Meta<typeof SocialIcon> = {
-  title: 'Atoms/SocialIcon',
+  title: "Atoms/SocialIcon",
   component: SocialIcon,
-  tags: ['autodocs'],
+  tags: ["autodocs"],
   parameters: {
     docs: {
       description: {
-        component: 'Social media icon link used in the footer. Supports GitHub, GitLab, Twitter/X, and Email with platform-specific SVG icons.',
+        component:
+          "Social media icon link used in the footer. Supports GitHub, GitLab, Twitter/X, and Email with platform-specific SVG icons.",
       },
     },
   },
   argTypes: {
-    href: { control: 'text', description: 'Link URL' },
-    label: { control: 'text', description: 'Accessible label for screen readers' },
+    href: { control: "text", description: "Link URL" },
+    label: {
+      control: "text",
+      description: "Accessible label for screen readers",
+    },
     platform: {
-      control: 'select',
-      options: ['github', 'gitlab', 'twitter', 'email'],
-      description: 'Social media platform',
+      control: "select",
+      options: ["github", "gitlab", "twitter", "email"],
+      description: "Social media platform",
     },
   },
 };
@@ -28,19 +32,35 @@ export default meta;
 type Story = StoryObj<typeof SocialIcon>;
 
 export const GitHub: Story = {
-  args: { href: 'https://github.com/nicedayy', label: 'GitHub', platform: 'github' },
+  args: {
+    href: "https://github.com/nicedayy",
+    label: "GitHub",
+    platform: "github",
+  },
 };
 
 export const GitLab: Story = {
-  args: { href: 'https://code.swecha.org', label: 'GitLab', platform: 'gitlab' },
+  args: {
+    href: "https://code.swecha.org",
+    label: "GitLab",
+    platform: "gitlab",
+  },
 };
 
 export const Twitter: Story = {
-  args: { href: 'https://twitter.com/nicedayy', label: 'Twitter / X', platform: 'twitter' },
+  args: {
+    href: "https://twitter.com/nicedayy",
+    label: "Twitter / X",
+    platform: "twitter",
+  },
 };
 
 export const Email: Story = {
-  args: { href: 'mailto:reachus@swecha.org', label: 'Email', platform: 'email' },
+  args: {
+    href: "mailto:reachus@swecha.org",
+    label: "Email",
+    platform: "email",
+  },
 };
 
 export const AllPlatforms: Story = {
@@ -61,6 +81,10 @@ export const AllPlatforms: Story = {
     </div>
   `,
   parameters: {
-    docs: { description: { story: 'All social icons side by side as they appear in the footer.' } },
+    docs: {
+      description: {
+        story: "All social icons side by side as they appear in the footer.",
+      },
+    },
   },
 };

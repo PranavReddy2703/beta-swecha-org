@@ -1,17 +1,18 @@
-import type { Meta, StoryObj } from '@storybook-astro/framework';
-import ContactCard from './ContactCard.astro';
+import type { Meta, StoryObj } from "@storybook-astro/framework";
+import ContactCard from "./ContactCard.astro";
 
 const meta: Meta<typeof ContactCard> = {
-  title: 'Molecules/ContactCard',
+  title: "Molecules/ContactCard",
   component: ContactCard,
-  tags: ['autodocs'],
+  tags: ["autodocs"],
   parameters: {
     docs: {
       description: {
-        component: 'Contact information card with hover effects and icons. Can be an anchor tag if a link is provided, or a div if not.',
+        component:
+          "Contact information card with hover effects and icons. Can be an anchor tag if a link is provided, or a div if not.",
       },
     },
-    layout: 'padded',
+    layout: "padded",
   },
   decorators: [
     (Story) => `
@@ -21,15 +22,21 @@ const meta: Meta<typeof ContactCard> = {
     `,
   ],
   argTypes: {
-    title: { control: 'text', description: 'Label for the contact method' },
-    value: { control: 'text', description: 'The contact value (email, phone, address)' },
-    icon: {
-      control: 'select',
-      options: ['MapPin', 'Mail', 'Phone', 'GraduationCap'],
-      description: 'Icon to display',
+    title: { control: "text", description: "Label for the contact method" },
+    value: {
+      control: "text",
+      description: "The contact value (email, phone, address)",
     },
-    link: { control: 'text', description: 'Optional href for the card' },
-    index: { control: { type: 'range', min: 0, max: 5, step: 1 }, description: 'Animation stagger index' },
+    icon: {
+      control: "select",
+      options: ["MapPin", "Mail", "Phone", "GraduationCap"],
+      description: "Icon to display",
+    },
+    link: { control: "text", description: "Optional href for the card" },
+    index: {
+      control: { type: "range", min: 0, max: 5, step: 1 },
+      description: "Animation stagger index",
+    },
   },
 };
 
@@ -39,30 +46,30 @@ type Story = StoryObj<typeof ContactCard>;
 
 export const Email: Story = {
   args: {
-    title: 'Email Us',
-    value: 'reachus@swecha.org',
-    icon: 'Mail',
-    link: 'mailto:reachus@swecha.org',
+    title: "Email Us",
+    value: "reachus@swecha.org",
+    icon: "Mail",
+    link: "mailto:reachus@swecha.org",
     index: 0,
   },
 };
 
 export const Phone: Story = {
   args: {
-    title: 'Call Us',
-    value: '+91 99999 99999',
-    icon: 'Phone',
-    link: 'tel:+919999999999',
+    title: "Call Us",
+    value: "+91 99999 99999",
+    icon: "Phone",
+    link: "tel:+919999999999",
     index: 1,
   },
 };
 
 export const Location: Story = {
   args: {
-    title: 'Visit Us',
-    value: 'Swecha Headquarters, Hyderabad',
-    icon: 'MapPin',
-    link: 'https://maps.google.com',
+    title: "Visit Us",
+    value: "Swecha Headquarters, Hyderabad",
+    icon: "MapPin",
+    link: "https://maps.google.com",
     index: 2,
   },
 };

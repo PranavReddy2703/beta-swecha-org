@@ -1,17 +1,18 @@
-import type { Meta, StoryObj } from '@storybook-astro/framework';
-import ProjectCard from './ProjectCard.astro';
+import type { Meta, StoryObj } from "@storybook-astro/framework";
+import ProjectCard from "./ProjectCard.astro";
 
 const meta: Meta<typeof ProjectCard> = {
-  title: 'Molecules/ProjectCard',
+  title: "Molecules/ProjectCard",
   component: ProjectCard,
-  tags: ['autodocs'],
+  tags: ["autodocs"],
   parameters: {
     docs: {
       description: {
-        component: 'Grid-based project card. Displays title, description, a list of technology tags, and a status indicator (Live, Completed, or In Development) which affects the color of the badge.',
+        component:
+          "Grid-based project card. Displays title, description, a list of technology tags, and a status indicator (Live, Completed, or In Development) which affects the color of the badge.",
       },
     },
-    layout: 'centered',
+    layout: "centered",
   },
   decorators: [
     (Story) => `
@@ -21,15 +22,15 @@ const meta: Meta<typeof ProjectCard> = {
     `,
   ],
   argTypes: {
-    title: { control: 'text', description: 'Project title' },
-    description: { control: 'text', description: 'Project description' },
-    tags: { control: 'object', description: 'Array of tag strings' },
+    title: { control: "text", description: "Project title" },
+    description: { control: "text", description: "Project description" },
+    tags: { control: "object", description: "Array of tag strings" },
     status: {
-      control: 'select',
-      options: ['Live', 'Completed', 'In Development'],
-      description: 'Project status affecting the badge color',
+      control: "select",
+      options: ["Live", "Completed", "In Development"],
+      description: "Project status affecting the badge color",
     },
-    link: { control: 'text', description: 'Destination URL' },
+    link: { control: "text", description: "Destination URL" },
   },
 };
 
@@ -39,31 +40,34 @@ type Story = StoryObj<typeof ProjectCard>;
 
 export const LiveStatus: Story = {
   args: {
-    title: 'Bala Swecha',
-    description: 'An educational operating system designed for school children, loaded with learning tools and localized content.',
-    tags: ['Education', 'Linux', 'Kids'],
-    status: 'Live',
-    link: '#',
+    title: "Bala Swecha",
+    description:
+      "An educational operating system designed for school children, loaded with learning tools and localized content.",
+    tags: ["Education", "Linux", "Kids"],
+    status: "Live",
+    link: "#",
   },
 };
 
 export const CompletedStatus: Story = {
   args: {
-    title: 'EHRS',
-    description: 'Electronic Health Record System deployed during the pandemic for local hospitals.',
-    tags: ['Healthcare', 'Web', 'React'],
-    status: 'Completed',
-    link: '#',
+    title: "EHRS",
+    description:
+      "Electronic Health Record System deployed during the pandemic for local hospitals.",
+    tags: ["Healthcare", "Web", "React"],
+    status: "Completed",
+    link: "#",
   },
 };
 
 export const InDevelopmentStatus: Story = {
   args: {
-    title: 'Vishwam AI',
-    description: 'Training an open-source large language model specialized in Telugu and other local languages.',
-    tags: ['AI/ML', 'Python', 'NLP'],
-    status: 'In Development',
-    link: '#',
+    title: "Vishwam AI",
+    description:
+      "Training an open-source large language model specialized in Telugu and other local languages.",
+    tags: ["AI/ML", "Python", "NLP"],
+    status: "In Development",
+    link: "#",
   },
 };
 
@@ -112,6 +116,10 @@ export const ProjectGrid: Story = {
     </div>
   `,
   parameters: {
-    docs: { description: { story: 'Example of how project cards look when placed in a CSS grid.' } },
+    docs: {
+      description: {
+        story: "Example of how project cards look when placed in a CSS grid.",
+      },
+    },
   },
 };

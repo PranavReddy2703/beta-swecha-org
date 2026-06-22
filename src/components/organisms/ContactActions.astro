@@ -7,66 +7,116 @@ interface Props {
   directionsLabel: string;
 }
 
-const { emailLabel, phoneLabel, internshipLabel, directionsLabel } = Astro.props;
+const { emailLabel, phoneLabel, internshipLabel, directionsLabel } =
+  Astro.props;
 ---
 
-<div class="relative w-full py-8 border-y border-structural-borders/30 my-12 bg-secondary-bg/25 backdrop-blur-sm">
+<div
+  class="relative w-full py-8 border-y border-structural-borders/30 my-12 bg-secondary-bg/25 backdrop-blur-sm"
+>
   <!-- Glow decor behind action strip -->
   <div class="absolute inset-0 pointer-events-none opacity-10">
-    <div class="absolute top-1/2 left-1/4 -translate-y-1/2 h-20 w-[400px] bg-primary-brand/30 blur-2xl"></div>
+    <div
+      class="absolute top-1/2 left-1/4 -translate-y-1/2 h-20 w-[400px] bg-primary-brand/30 blur-2xl"
+    >
+    </div>
   </div>
 
   <div class="max-w-6xl mx-auto px-4 relative z-10">
     <div class="flex flex-wrap items-center justify-center gap-4 sm:gap-6">
-      
       <!-- Action 1: Email Us -->
-      <a 
-        href="mailto:reachus@swecha.net" 
+      <a
+        href="mailto:reachus@swecha.net"
         class="group inline-flex items-center space-x-2.5 rounded-full border border-structural-borders/80 bg-card-bg/40 px-6 py-3 text-sm font-semibold text-text-main backdrop-blur-md transition-all duration-300 hover:border-primary-brand/50 hover:bg-card-bg/60 hover:scale-[1.02] hover:shadow-[0_0_15px_rgba(0,212,255,0.12)] active:scale-[0.98] focus:outline-none focus:ring-1 focus:ring-primary-brand"
       >
-        <svg class="h-4.5 w-4.5 text-primary-brand transform transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:scale-105" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+        <svg
+          class="h-4.5 w-4.5 text-primary-brand transform transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:scale-105"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          stroke-width="2"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+          ></path>
         </svg>
         <span>{emailLabel}</span>
       </a>
 
       <!-- Action 2: Call Office -->
-      <a 
-        href="tel:+918977503615" 
+      <a
+        href="tel:+918977503615"
         class="group inline-flex items-center space-x-2.5 rounded-full border border-structural-borders/80 bg-card-bg/40 px-6 py-3 text-sm font-semibold text-text-main backdrop-blur-md transition-all duration-300 hover:border-primary-brand/50 hover:bg-card-bg/60 hover:scale-[1.02] hover:shadow-[0_0_15px_rgba(0,212,255,0.12)] active:scale-[0.98] focus:outline-none focus:ring-1 focus:ring-primary-brand"
       >
-        <svg class="h-4.5 w-4.5 text-primary-brand transform transition-transform duration-300 group-hover:rotate-12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+        <svg
+          class="h-4.5 w-4.5 text-primary-brand transform transition-transform duration-300 group-hover:rotate-12"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          stroke-width="2"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"
+          ></path>
         </svg>
         <span>{phoneLabel}</span>
       </a>
 
       <!-- Action 3: Internship Queries -->
-      <a 
-        href="mailto:internships@swecha.org" 
+      <a
+        href="mailto:internships@swecha.org"
         class="group inline-flex items-center space-x-2.5 rounded-full border border-structural-borders/80 bg-card-bg/40 px-6 py-3 text-sm font-semibold text-text-main backdrop-blur-md transition-all duration-300 hover:border-primary-brand/50 hover:bg-card-bg/60 hover:scale-[1.02] hover:shadow-[0_0_15px_rgba(0,212,255,0.12)] active:scale-[0.98] focus:outline-none focus:ring-1 focus:ring-primary-brand"
       >
-        <svg class="h-4.5 w-4.5 text-primary-brand transform transition-transform duration-300 group-hover:scale-105" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M12 14l9-5-9-5-9 5 9 5z" />
-          <path stroke-linecap="round" stroke-linejoin="round" d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z" />
+        <svg
+          class="h-4.5 w-4.5 text-primary-brand transform transition-transform duration-300 group-hover:scale-105"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          stroke-width="2"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M12 14l9-5-9-5-9 5 9 5z"></path>
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"
+          ></path>
         </svg>
         <span>{internshipLabel}</span>
       </a>
 
       <!-- Action 4: Get Directions -->
-      <a 
-        href="https://maps.google.com/?q=Swecha+Gachibowli+Hyderabad" 
-        target="_blank" 
-        rel="noopener noreferrer" 
+      <a
+        href="https://maps.google.com/?q=Swecha+Gachibowli+Hyderabad"
+        target="_blank"
+        rel="noopener noreferrer"
         class="group inline-flex items-center space-x-2.5 rounded-full border border-structural-borders/80 bg-card-bg/40 px-6 py-3 text-sm font-semibold text-text-main backdrop-blur-md transition-all duration-300 hover:border-primary-brand/50 hover:bg-card-bg/60 hover:scale-[1.02] hover:shadow-[0_0_15px_rgba(0,212,255,0.12)] active:scale-[0.98] focus:outline-none focus:ring-1 focus:ring-primary-brand"
       >
-        <svg class="h-4.5 w-4.5 text-primary-brand transform transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-          <path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+        <svg
+          class="h-4.5 w-4.5 text-primary-brand transform transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          stroke-width="2"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+          ></path>
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
         </svg>
         <span>{directionsLabel}</span>
       </a>
-
     </div>
   </div>
 </div>

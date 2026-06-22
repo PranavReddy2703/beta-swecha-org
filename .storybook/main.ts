@@ -1,19 +1,16 @@
-import type { StorybookConfig } from '@storybook-astro/framework';
+import type { StorybookConfig } from "@storybook-astro/framework";
 
 const config: StorybookConfig = {
-  stories: ['../src/**/*.stories.@(js|jsx|mjs|ts|tsx)'],
-  addons: [
-    '@storybook/addon-a11y',
-    '@storybook/addon-themes',
-  ],
+  stories: ["../src/**/*.stories.@(js|jsx|mjs|ts|tsx)"],
+  addons: ["@storybook/addon-a11y", "@storybook/addon-themes"],
   framework: {
-    name: '@storybook-astro/framework',
+    name: "@storybook-astro/framework",
     options: {},
   },
   docs: {
-    autodocs: 'tag',
+    autodocs: "tag",
   },
-  staticDirs: ['../public'],
+  staticDirs: ["../public"],
 };
 
 export default config;

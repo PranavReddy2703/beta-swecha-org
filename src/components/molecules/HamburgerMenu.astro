@@ -49,7 +49,11 @@ const { srLabel } = Astro.props;
 
   .mobile-hamburger:hover {
     color: var(--primary-brand);
-    background: color-mix(in srgb, var(--elevated-surface) 50%, transparent) !important;
+    background: color-mix(
+      in srgb,
+      var(--elevated-surface) 50%,
+      transparent
+    ) !important;
   }
 
   .mobile-hamburger:focus,

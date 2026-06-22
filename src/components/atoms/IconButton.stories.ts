@@ -1,22 +1,26 @@
-import type { Meta, StoryObj } from '@storybook-astro/framework';
-import IconButton from './IconButton.astro';
+import type { Meta, StoryObj } from "@storybook-astro/framework";
+import IconButton from "./IconButton.astro";
 
 const meta: Meta<typeof IconButton> = {
-  title: 'Atoms/IconButton',
+  title: "Atoms/IconButton",
   component: IconButton,
-  tags: ['autodocs'],
+  tags: ["autodocs"],
   parameters: {
     docs: {
       description: {
-        component: 'Circular icon button with radial gradient hover glow. Used for toolbar actions (theme toggle, language switcher, hamburger menu).',
+        component:
+          "Circular icon button with radial gradient hover glow. Used for toolbar actions (theme toggle, language switcher, hamburger menu).",
       },
     },
   },
   argTypes: {
-    id: { control: 'text', description: 'Button ID for JS targeting' },
-    title: { control: 'text', description: 'Tooltip text' },
-    ariaLabel: { control: 'text', description: 'Accessible label for screen readers' },
-    class: { control: 'text', description: 'Additional CSS classes' },
+    id: { control: "text", description: "Button ID for JS targeting" },
+    title: { control: "text", description: "Tooltip text" },
+    ariaLabel: {
+      control: "text",
+      description: "Accessible label for screen readers",
+    },
+    class: { control: "text", description: "Additional CSS classes" },
   },
 };
 
@@ -26,8 +30,8 @@ type Story = StoryObj<typeof IconButton>;
 
 export const Default: Story = {
   args: {
-    title: 'Settings',
-    ariaLabel: 'Open settings',
+    title: "Settings",
+    ariaLabel: "Open settings",
   },
   render: (args) => `
     <button class="action-btn" title="${args.title}" aria-label="${args.ariaLabel}" style="
@@ -45,7 +49,10 @@ export const Default: Story = {
 };
 
 export const ThemeToggle: Story = {
-  args: { title: 'Toggle theme', ariaLabel: 'Switch between dark and light mode' },
+  args: {
+    title: "Toggle theme",
+    ariaLabel: "Switch between dark and light mode",
+  },
   render: (args) => `
     <button class="action-btn" title="${args.title}" aria-label="${args.ariaLabel}" style="
       display: inline-flex; align-items: center; justify-content: center;
@@ -72,6 +79,10 @@ export const ButtonGroup: Story = {
     </div>
   `,
   parameters: {
-    docs: { description: { story: 'Navbar action button group as it appears in the toolbar.' } },
+    docs: {
+      description: {
+        story: "Navbar action button group as it appears in the toolbar.",
+      },
+    },
   },
 };

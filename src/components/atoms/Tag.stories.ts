@@ -1,26 +1,27 @@
-import type { Meta, StoryObj } from '@storybook-astro/framework';
-import Tag from './Tag.astro';
+import type { Meta, StoryObj } from "@storybook-astro/framework";
+import Tag from "./Tag.astro";
 
 const meta: Meta<typeof Tag> = {
-  title: 'Atoms/Tag',
+  title: "Atoms/Tag",
   component: Tag,
-  tags: ['autodocs'],
+  tags: ["autodocs"],
   parameters: {
     docs: {
       description: {
-        component: 'Small tag pill for categorizing projects or news. Supports default and project-specific variants.',
+        component:
+          "Small tag pill for categorizing projects or news. Supports default and project-specific variants.",
       },
     },
   },
   argTypes: {
-    label: { control: 'text', description: 'Tag label text' },
+    label: { control: "text", description: "Tag label text" },
     variant: {
-      control: 'select',
-      options: ['default', 'project'],
-      description: 'Visual variant of the tag',
-      table: { defaultValue: { summary: 'default' } },
+      control: "select",
+      options: ["default", "project"],
+      description: "Visual variant of the tag",
+      table: { defaultValue: { summary: "default" } },
     },
-    class: { control: 'text', description: 'Additional CSS classes' },
+    class: { control: "text", description: "Additional CSS classes" },
   },
 };
 
@@ -29,11 +30,11 @@ export default meta;
 type Story = StoryObj<typeof Tag>;
 
 export const Default: Story = {
-  args: { label: 'Tech', variant: 'default' },
+  args: { label: "Tech", variant: "default" },
 };
 
 export const ProjectVariant: Story = {
-  args: { label: 'Web', variant: 'project' },
+  args: { label: "Web", variant: "project" },
 };
 
 export const TagGroup: Story = {
@@ -45,7 +46,7 @@ export const TagGroup: Story = {
     </div>
   `,
   parameters: {
-    docs: { description: { story: 'Group of default tags.' } },
+    docs: { description: { story: "Group of default tags." } },
   },
 };
 
@@ -57,6 +58,6 @@ export const ProjectTagGroup: Story = {
     </div>
   `,
   parameters: {
-    docs: { description: { story: 'Group of project tags.' } },
+    docs: { description: { story: "Group of project tags." } },
   },
 };

@@ -72,14 +72,22 @@ const { title, description, imageLabel, image, link = "#" } = Astro.props;
 <style>
   /* Light mode overrides to make the featured badge tag ice blue inside the card */
   :global(html[data-theme="light"] .featured-badge) {
-    background-color: #E0F2FE !important; /* Light Ice Blue (Tailwind sky-100) */
-    color: #025A9E !important; /* Contrast brand blue */
+    background-color: #e0f2fe !important; /* Light Ice Blue (Tailwind sky-100) */
+    color: #025a9e !important; /* Contrast brand blue */
     box-shadow: 0 0 15px rgba(224, 242, 254, 0.6) !important;
   }
 
   /* Ice blue title hover color in light mode */
-  :global(html[data-theme="light"] .featured-project-card:hover .featured-project-card-title),
-  :global(html[data-theme="light"] .featured-project-card:hover .group-hover\/card\:text-secondary-accent) {
-    color: #E0F2FE !important;
+  :global(
+    html[data-theme="light"]
+      .featured-project-card:hover
+      .featured-project-card-title
+  ),
+  :global(
+    html[data-theme="light"]
+      .featured-project-card:hover
+      .group-hover\/card\:text-secondary-accent
+  ) {
+    color: #e0f2fe !important;
   }
 </style>

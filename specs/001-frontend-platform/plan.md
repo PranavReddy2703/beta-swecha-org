@@ -34,14 +34,14 @@ src/
 
 ## 2. Technology Stack & Dependencies
 
-| Layer | Technology | Purpose |
-| :--- | :--- | :--- |
-| **Framework** | Astro | High-performance static site generation |
-| **Styling** | Tailwind CSS | Utility-first styling architecture |
-| **Component Library** | daisyUI | Base UI styles (buttons, inputs, menus) |
-| **Interactive UI** | shadcn/ui (React) | Accessible complex primitives (combobox, select) |
-| **Language** | TypeScript | Strong typing and safety |
-| **Runtime** | Node.js 22 | Modern JS execution environment |
+| Layer                 | Technology        | Purpose                                          |
+| :-------------------- | :---------------- | :----------------------------------------------- |
+| **Framework**         | Astro             | High-performance static site generation          |
+| **Styling**           | Tailwind CSS      | Utility-first styling architecture               |
+| **Component Library** | daisyUI           | Base UI styles (buttons, inputs, menus)          |
+| **Interactive UI**    | shadcn/ui (React) | Accessible complex primitives (combobox, select) |
+| **Language**          | TypeScript        | Strong typing and safety                         |
+| **Runtime**           | Node.js 22        | Modern JS execution environment                  |
 
 ---
 
@@ -49,11 +49,11 @@ src/
 
 To achieve a Lighthouse score of `90+`, client hydration is used only when interaction is required.
 
-*   **Static Elements (SSG):** Hero sections, text, cards, layouts, icons, and menus.
-*   **Hydrated Elements (Astro Islands):**
-    *   `LanguageSwitcher` (`client:visible` or `client:idle`)
-    *   `ProjectSearch` and `Filters` (`client:visible`)
-    *   `ResourceDownloader` (`client:idle`)
+- **Static Elements (SSG):** Hero sections, text, cards, layouts, icons, and menus.
+- **Hydrated Elements (Astro Islands):**
+  - `LanguageSwitcher` (`client:visible` or `client:idle`)
+  - `ProjectSearch` and `Filters` (`client:visible`)
+  - `ResourceDownloader` (`client:idle`)
 
 ---
 
@@ -61,24 +61,27 @@ To achieve a Lighthouse score of `90+`, client hydration is used only when inter
 
 Astro's native i18n routing strategy is used to localize the site.
 
-*   **URL Prefix Routing:**
-    *   `/` (Default: English)
-    *   `/te/` (Telugu)
-    *   `/hi/` (Hindi)
-*   **Data Structures:** Translation keys are stored under `src/i18n/locales/{en|te|hi}.json`.
-*   **Routing Fallback:** If a requested route/page is missing a locale translation, the router redirects to the English version.
+- **URL Prefix Routing:**
+  - `/` (Default: English)
+  - `/te/` (Telugu)
+  - `/hi/` (Hindi)
+- **Data Structures:** Translation keys are stored under `src/i18n/locales/{en|te|hi}.json`.
+- **Routing Fallback:** If a requested route/page is missing a locale translation, the router redirects to the English version.
 
 ---
 
 ## 5. Security & Build Validation
 
 ### Security Configurations
-*   **Environment Variables:** All secrets and API keys are stored in `.env` and loaded using Astro's built-in env handler. Sensitive configurations are never exposed to the browser.
-*   **Content Security Policy (CSP):** The server header will implement strict CSP policies.
-*   **XSS Protection:** Astro automatically escapes HTML tags rendered in curly braces.
+
+- **Environment Variables:** All secrets and API keys are stored in `.env` and loaded using Astro's built-in env handler. Sensitive configurations are never exposed to the browser.
+- **Content Security Policy (CSP):** The server header will implement strict CSP policies.
+- **XSS Protection:** Astro automatically escapes HTML tags rendered in curly braces.
 
 ### CI/CD Pipeline
+
 On push to GitLab, the runner triggers validation scripts:
+
 1.  **Linter check:** `npm run lint` (ESLint)
 2.  **Type check:** `npm run check` (TypeScript compilation validation)
 3.  **Tests run:** `npm run test` (Unit and E2E tests check)

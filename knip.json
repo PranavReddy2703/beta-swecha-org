@@ -1,0 +1,26 @@
+{
+  "paths": {
+    "@components/*": ["./src/components/*"],
+    "@atoms/*": ["./src/components/atoms/*"],
+    "@molecules/*": ["./src/components/molecules/*"],
+    "@organisms/*": ["./src/components/organisms/*"],
+    "@layouts/*": ["./src/layouts/*"],
+    "@data/*": ["./src/data/*"]
+  },
+  "ignore": ["src/components/types/index.ts", "src/i18n/ui.ts"],
+  "ignoreExportsUsedInFile": true,
+  "ignoreDependencies": [
+    "@lhci/cli",
+    "@secretlint/secretlint-rule-preset-recommend",
+    "@storybook/builder-vite",
+    "astro-eslint-parser",
+    "react"
+  ],
+  "astro": {
+    "entry": [
+      "src/pages/**/*.astro",
+      "src/content/**/*.md",
+      "src/content/**/*.mdx"
+    ]
+  }
+}

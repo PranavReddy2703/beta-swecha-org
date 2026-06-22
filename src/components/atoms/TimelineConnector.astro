@@ -6,44 +6,51 @@ interface Props {
 }
 
 const { isLeft, index } = Astro.props;
-const formattedIndex = String(index + 1).padStart(2, '0');
+const formattedIndex = String(index + 1).padStart(2, "0");
 ---
 
 <!-- Desktop Timeline Connector Block -->
 <div class="absolute inset-0 pointer-events-none z-10 hidden md:block">
-  {isLeft ? (
-    /* Card is on left: Dot is at 15% width, Card left edge is at 20% width.
+  {
+    isLeft ? (
+      /* Card is on left: Dot is at 15% width, Card left edge is at 20% width.
        Connector line runs from 15% to 20%. Number label sits left of the dot. */
-    <div class="absolute left-[8%] top-1/2 -translate-y-1/2 flex items-center justify-start w-[12%] left-connector">
-      <!-- Milestone Number (e.g., 01) -->
-      <span class="text-2xl font-black text-primary-brand font-mono mr-3 select-none tracking-tighter timeline-number">
-        {formattedIndex}
-      </span>
-      <!-- Milestone Dot -->
-      <div class="w-3.5 h-3.5 rounded-full bg-[#080B10] border-2 border-primary-brand z-20 shadow-[0_0_8px_rgba(0,212,255,0.4)] timeline-dot transition-all duration-300"></div>
-      <!-- Connection Pin Line (15% to 20% width) -->
-      <div class="h-[1.5px] flex-grow bg-gradient-to-r from-primary-brand/40 to-structural-borders/60 border-t border-dashed border-primary-brand/30 z-10 timeline-connector-line"></div>
-    </div>
-  ) : (
-    /* Card is on right: Dot is at 55% width, Card left edge is at 60% width.
+      <div class="absolute left-[8%] top-1/2 -translate-y-1/2 flex items-center justify-start w-[12%] left-connector">
+        {/* Milestone Number (e.g., 01) */}
+        <span class="text-2xl font-black text-primary-brand font-mono mr-3 select-none tracking-tighter timeline-number">
+          {formattedIndex}
+        </span>
+        {/* Milestone Dot */}
+        <div class="w-3.5 h-3.5 rounded-full bg-[#080B10] border-2 border-primary-brand z-20 shadow-[0_0_8px_rgba(0,212,255,0.4)] timeline-dot transition-all duration-300" />
+        {/* Connection Pin Line (15% to 20% width) */}
+        <div class="h-[1.5px] flex-grow bg-gradient-to-r from-primary-brand/40 to-structural-borders/60 border-t border-dashed border-primary-brand/30 z-10 timeline-connector-line" />
+      </div>
+    ) : (
+      /* Card is on right: Dot is at 55% width, Card left edge is at 60% width.
        Connector line runs from 55% to 60%. Number label sits left of the dot. */
-    <div class="absolute left-[48%] top-1/2 -translate-y-1/2 flex items-center justify-start w-[12%] right-connector">
-      <!-- Milestone Number (e.g., 02) -->
-      <span class="text-2xl font-black text-primary-brand font-mono mr-3 select-none tracking-tighter timeline-number">
-        {formattedIndex}
-      </span>
-      <!-- Milestone Dot -->
-      <div class="w-3.5 h-3.5 rounded-full bg-[#080B10] border-2 border-primary-brand z-20 shadow-[0_0_8px_rgba(0,212,255,0.4)] timeline-dot transition-all duration-300"></div>
-      <!-- Connection Pin Line (55% to 60% width) -->
-      <div class="h-[1.5px] flex-grow bg-gradient-to-r from-primary-brand/40 to-structural-borders/60 border-t border-dashed border-primary-brand/30 z-10 timeline-connector-line"></div>
-    </div>
-  )}
+      <div class="absolute left-[48%] top-1/2 -translate-y-1/2 flex items-center justify-start w-[12%] right-connector">
+        {/* Milestone Number (e.g., 02) */}
+        <span class="text-2xl font-black text-primary-brand font-mono mr-3 select-none tracking-tighter timeline-number">
+          {formattedIndex}
+        </span>
+        {/* Milestone Dot */}
+        <div class="w-3.5 h-3.5 rounded-full bg-[#080B10] border-2 border-primary-brand z-20 shadow-[0_0_8px_rgba(0,212,255,0.4)] timeline-dot transition-all duration-300" />
+        {/* Connection Pin Line (55% to 60% width) */}
+        <div class="h-[1.5px] flex-grow bg-gradient-to-r from-primary-brand/40 to-structural-borders/60 border-t border-dashed border-primary-brand/30 z-10 timeline-connector-line" />
+      </div>
+    )
+  }
 </div>
 
 <!-- Mobile Timeline Connector (Left aligned, with milestone number) -->
-<div class="absolute left-4 top-12 -translate-y-1/2 md:hidden z-20 flex items-center space-x-2">
+<div
+  class="absolute left-4 top-12 -translate-y-1/2 md:hidden z-20 flex items-center space-x-2"
+>
   <span class="text-xs font-black text-primary-brand font-mono timeline-number">
     {formattedIndex}
   </span>
-  <div class="w-3 h-3 rounded-full bg-[#080B10] border-2 border-primary-brand shadow-[0_0_6px_rgba(0,212,255,0.4)] timeline-dot"></div>
+  <div
+    class="w-3 h-3 rounded-full bg-[#080B10] border-2 border-primary-brand shadow-[0_0_6px_rgba(0,212,255,0.4)] timeline-dot"
+  >
+  </div>
 </div>

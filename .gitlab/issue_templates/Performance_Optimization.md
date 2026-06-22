@@ -6,9 +6,9 @@ Describe the identified performance issue in detail (e.g., layout shift on initi
 
 ## Target Optimization Metrics
 
-- **Core Web Vital Target:** *(Lighthouse Score / CLS / LCP / Total Blocking Time)*
-- **Current Metric:** 
-- **Target Baseline:** 
+- **Core Web Vital Target:** _(Lighthouse Score / CLS / LCP / Total Blocking Time)_
+- **Current Metric:**
+- **Target Baseline:**
 
 ---
 

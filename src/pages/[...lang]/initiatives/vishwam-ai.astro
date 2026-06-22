@@ -51,7 +51,9 @@ const t = useTranslations(lang);
       </h2>
 
       <!-- Description -->
-      <p class="vishwam-desc text-lg md:text-xl text-white/90 mb-16 leading-relaxed">
+      <p
+        class="vishwam-desc text-lg md:text-xl text-white/90 mb-16 leading-relaxed"
+      >
         A group of open source enthusiasts, community builders, technologists
         and researchers working towards tech for social good. We bring together
         expertise from research institutions, industry partners, and community
@@ -221,7 +223,7 @@ const t = useTranslations(lang);
   /* Dark/default mode styles: blue-green gradient for main titles */
   .vishwam-title,
   .vishwam-section-title {
-    background: linear-gradient(135deg, #00D4FF, #4DFFB8) !important;
+    background: linear-gradient(135deg, #00d4ff, #4dffb8) !important;
     -webkit-background-clip: text !important;
     -webkit-text-fill-color: transparent !important;
     text-shadow: none !important;
@@ -229,33 +231,33 @@ const t = useTranslations(lang);
 
   /* Light mode overrides to make text white with visual depth on the blue gradient background */
   :global(html[data-theme="light"]) .vishwam-title {
-    color: #FFFFFF !important;
-    -webkit-text-fill-color: #FFFFFF !important;
+    color: #ffffff !important;
+    -webkit-text-fill-color: #ffffff !important;
     background: none !important;
-    text-shadow: 
+    text-shadow:
       0 2px 8px rgba(11, 30, 54, 0.35),
       0 4px 20px rgba(11, 30, 54, 0.25) !important;
   }
 
   :global(html[data-theme="light"]) .vishwam-subtitle {
     color: rgba(255, 255, 255, 0.95) !important;
-    text-shadow: 
+    text-shadow:
       0 2px 6px rgba(11, 30, 54, 0.3),
       0 4px 15px rgba(11, 30, 54, 0.2) !important;
   }
 
   :global(html[data-theme="light"]) .vishwam-desc {
     color: rgba(255, 255, 255, 0.95) !important;
-    text-shadow: 
+    text-shadow:
       0 2px 6px rgba(11, 30, 54, 0.3),
       0 4px 15px rgba(11, 30, 54, 0.2) !important;
   }
 
   :global(html[data-theme="light"]) .vishwam-section-title {
-    color: #FFFFFF !important;
-    -webkit-text-fill-color: #FFFFFF !important;
+    color: #ffffff !important;
+    -webkit-text-fill-color: #ffffff !important;
     background: none !important;
-    text-shadow: 
+    text-shadow:
       0 2px 8px rgba(11, 30, 54, 0.35),
       0 4px 20px rgba(11, 30, 54, 0.25) !important;
   }

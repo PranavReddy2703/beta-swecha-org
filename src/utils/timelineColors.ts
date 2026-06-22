@@ -14,7 +14,11 @@ export interface NodeColors {
  * @param total - Total number of nodes
  * @param isLight - Whether to return light-mode colors (deep blues/emeralds) or dark-mode colors (electric cyans/mints)
  */
-export function getNodeColors(idx: number, total: number, isLight: boolean = false): NodeColors {
+export function getNodeColors(
+  idx: number,
+  total: number,
+  isLight: boolean = false,
+): NodeColors {
   const t = total > 1 ? idx / (total - 1) : 0;
 
   if (isLight) {

@@ -1,9 +1,9 @@
 ---
 // src/components/molecules/LanguageSwitcher.astro
-import IconButton from '../atoms/IconButton.astro';
-import LangOption from '../atoms/LangOption.astro';
-import { getLangFromUrl } from '../../i18n/utils';
-import { languages, defaultLang } from '../../i18n/ui';
+import IconButton from "../atoms/IconButton.astro";
+import LangOption from "../atoms/LangOption.astro";
+import { getLangFromUrl } from "../../i18n/utils";
+import { languages, defaultLang } from "../../i18n/ui";
 
 interface Props {
   title: string;
@@ -19,11 +19,11 @@ const languagesList = Object.entries(languages).map(([code, name]) => ({
 }));
 
 const getPathnameWithoutLang = (pathname: string) => {
-  const parts = pathname.split('/');
+  const parts = pathname.split("/");
   if (parts[1] && parts[1] in languages) {
     parts.splice(1, 1);
   }
-  return parts.join('/') || '/';
+  return parts.join("/") || "/";
 };
 
 const cleanPath = getPathnameWithoutLang(Astro.url.pathname);
@@ -31,23 +31,36 @@ const cleanPath = getPathnameWithoutLang(Astro.url.pathname);
 
 <div class="dropdown dropdown-end">
   <IconButton id="lang-toggle" title={title}>
-    <svg class="h-5 w-5 action-btn-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5c-.313 1.565-.95 3.107-1.859 4.5M11.25 10.5a9 9 0 01-4.8 3.59" />
+    <svg
+      class="h-5 w-5 action-btn-icon"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+    >
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="1.8"
+        d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5c-.313 1.565-.95 3.107-1.859 4.5M11.25 10.5a9 9 0 01-4.8 3.59"
+      ></path>
     </svg>
   </IconButton>
   <ul tabindex="0" class="dropdown-content menu lang-dropdown">
-    {languagesList.map((langOption) => {
-      const targetHref = langOption.code === defaultLang
-        ? cleanPath
-        : `/${langOption.code}${cleanPath === '/' ? '' : cleanPath}`;
-      return (
-        <LangOption
-          href={targetHref}
-          name={langOption.name}
-          isActive={lang === langOption.code}
-        />
-      );
-    })}
+    {
+      languagesList.map((langOption) => {
+        const targetHref =
+          langOption.code === defaultLang
+            ? cleanPath
+            : `/${langOption.code}${cleanPath === "/" ? "" : cleanPath}`;
+        return (
+          <LangOption
+            href={targetHref}
+            name={langOption.name}
+            isActive={lang === langOption.code}
+          />
+        );
+      })
+    }
   </ul>
 </div>
 

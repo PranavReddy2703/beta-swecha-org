@@ -11,8 +11,8 @@ const { href, label, isActive = false } = Astro.props;
 
 <a
   href={href}
-  class={`nav-link ${isActive ? 'nav-link-active' : ''}`}
-  data-active={isActive ? 'true' : 'false'}
+  class={`nav-link ${isActive ? "nav-link-active" : ""}`}
+  data-active={isActive ? "true" : "false"}
 >
   <span class="nav-link-text">{label}</span>
   <span class="nav-link-indicator"></span>
@@ -24,7 +24,7 @@ const { href, label, isActive = false } = Astro.props;
     display: inline-flex;
     align-items: center;
     padding: 0.5rem 1rem;
-    font-family: 'Outfit', system-ui, sans-serif;
+    font-family: "Outfit", system-ui, sans-serif;
     font-size: 0.95rem;
     font-weight: 500;
     text-transform: uppercase;
@@ -42,7 +42,7 @@ const { href, label, isActive = false } = Astro.props;
   }
 
   .nav-link::before {
-    content: '';
+    content: "";
     position: absolute;
     inset: 4px;
     border-radius: 0.375rem;
@@ -72,7 +72,11 @@ const { href, label, isActive = false } = Astro.props;
     width: 0;
     height: 2px;
     border-radius: 1px;
-    background: linear-gradient(90deg, var(--primary-brand), var(--secondary-accent));
+    background: linear-gradient(
+      90deg,
+      var(--primary-brand),
+      var(--secondary-accent)
+    );
     transform: translateX(-50%);
     transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     box-shadow: 0 0 8px rgba(0, 212, 255, 0.4);

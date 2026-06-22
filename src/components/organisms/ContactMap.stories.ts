@@ -1,20 +1,21 @@
-import type { Meta, StoryObj } from '@storybook-astro/framework';
-import ContactMap from './ContactMap.astro';
+import type { Meta, StoryObj } from "@storybook-astro/framework";
+import ContactMap from "./ContactMap.astro";
 
 const meta: Meta<typeof ContactMap> = {
-  title: 'Organisms/ContactMap',
+  title: "Organisms/ContactMap",
   component: ContactMap,
-  tags: ['autodocs'],
+  tags: ["autodocs"],
   parameters: {
     docs: {
       description: {
-        component: 'Interactive Google map component for the Contact page, featuring custom monochrome/invert filters and hover reveals.',
+        component:
+          "Interactive Google map component for the Contact page, featuring custom monochrome/invert filters and hover reveals.",
       },
     },
-    layout: 'padded',
+    layout: "padded",
   },
   argTypes: {
-    title: { control: 'text' },
+    title: { control: "text" },
   },
 };
 
@@ -24,7 +25,7 @@ type Story = StoryObj<typeof ContactMap>;
 
 export const Default: Story = {
   args: {
-    title: 'Coordinates established',
+    title: "Coordinates established",
   },
   decorators: [
     (Story) => `

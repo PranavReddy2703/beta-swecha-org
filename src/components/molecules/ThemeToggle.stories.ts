@@ -1,20 +1,21 @@
-import type { Meta, StoryObj } from '@storybook-astro/framework';
-import ThemeToggle from './ThemeToggle.astro';
+import type { Meta, StoryObj } from "@storybook-astro/framework";
+import ThemeToggle from "./ThemeToggle.astro";
 
 const meta: Meta<typeof ThemeToggle> = {
-  title: 'Molecules/ThemeToggle',
+  title: "Molecules/ThemeToggle",
   component: ThemeToggle,
-  tags: ['autodocs'],
+  tags: ["autodocs"],
   parameters: {
     docs: {
       description: {
-        component: 'Interactive button to toggle between Light and Dark mode. Includes a spinning animation and icon swap (Sun/Moon).',
+        component:
+          "Interactive button to toggle between Light and Dark mode. Includes a spinning animation and icon swap (Sun/Moon).",
       },
     },
-    layout: 'centered',
+    layout: "centered",
   },
   argTypes: {
-    title: { control: 'text', description: 'Accessible title for the button' },
+    title: { control: "text", description: "Accessible title for the button" },
   },
 };
 
@@ -24,6 +25,6 @@ type Story = StoryObj<typeof ThemeToggle>;
 
 export const Default: Story = {
   args: {
-    title: 'Toggle Theme',
+    title: "Toggle Theme",
   },
 };

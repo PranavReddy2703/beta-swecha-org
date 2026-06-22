@@ -1,20 +1,21 @@
-import type { Meta, StoryObj } from '@storybook-astro/framework';
-import GlowLink from './GlowLink.astro';
+import type { Meta, StoryObj } from "@storybook-astro/framework";
+import GlowLink from "./GlowLink.astro";
 
 const meta: Meta<typeof GlowLink> = {
-  title: 'Atoms/GlowLink',
+  title: "Atoms/GlowLink",
   component: GlowLink,
-  tags: ['autodocs'],
+  tags: ["autodocs"],
   parameters: {
     docs: {
       description: {
-        component: 'Gradient-colored hyperlink with a neon glow effect on hover. Uses the brand cyan-to-emerald gradient and a drop-shadow glow.',
+        component:
+          "Gradient-colored hyperlink with a neon glow effect on hover. Uses the brand cyan-to-emerald gradient and a drop-shadow glow.",
       },
     },
   },
   argTypes: {
-    href: { control: 'text', description: 'Link destination URL' },
-    class: { control: 'text', description: 'Additional CSS classes' },
+    href: { control: "text", description: "Link destination URL" },
+    class: { control: "text", description: "Additional CSS classes" },
   },
 };
 
@@ -23,7 +24,7 @@ export default meta;
 type Story = StoryObj<typeof GlowLink>;
 
 export const Default: Story = {
-  args: { href: '#' },
+  args: { href: "#" },
   render: (args) => `<a href="${args.href}" class="glow-link" style="
     background: linear-gradient(135deg, #00D4FF, #4DFFB8) !important;
     -webkit-background-clip: text !important;
@@ -51,6 +52,11 @@ export const InParagraph: Story = {
     </p>
   `,
   parameters: {
-    docs: { description: { story: 'GlowLink used inline within a paragraph of text, as seen on the About page.' } },
+    docs: {
+      description: {
+        story:
+          "GlowLink used inline within a paragraph of text, as seen on the About page.",
+      },
+    },
   },
 };

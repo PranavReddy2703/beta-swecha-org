@@ -1,6 +1,7 @@
 # Data Model: Swecha.org Frontend Platform
 
 ## 1. i18n Translation Dictionary Schema
+
 Dictionary translation structure stored in `src/i18n/locales/{en|te|hi}.json`. All translation JSON files must implement the following structure:
 
 ```json
@@ -28,9 +29,11 @@ Dictionary translation structure stored in `src/i18n/locales/{en|te|hi}.json`. A
 ---
 
 ## 2. API Data Contracts
+
 Data structures for content fetched from backend/CMS APIs.
 
 ### Project Interface
+
 ```typescript
 export interface Project {
   id: string;
@@ -40,7 +43,7 @@ export interface Project {
   logoUrl?: string;
   repositoryUrl?: string;
   demoUrl?: string;
-  category: 'web' | 'mobile' | 'ai' | 'hardware';
+  category: "web" | "mobile" | "ai" | "hardware";
   tags: string[];
   contributorsCount: number;
   featured: boolean;
@@ -48,6 +51,7 @@ export interface Project {
 ```
 
 ### Program Interface
+
 ```typescript
 export interface Program {
   id: string;

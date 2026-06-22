@@ -1,24 +1,25 @@
-import type { Meta, StoryObj } from '@storybook-astro/framework';
-import CategoryBadge from './CategoryBadge.astro';
+import type { Meta, StoryObj } from "@storybook-astro/framework";
+import CategoryBadge from "./CategoryBadge.astro";
 
 const meta: Meta<typeof CategoryBadge> = {
-  title: 'Atoms/CategoryBadge',
+  title: "Atoms/CategoryBadge",
   component: CategoryBadge,
-  tags: ['autodocs'],
+  tags: ["autodocs"],
   parameters: {
     docs: {
       description: {
-        component: 'Compact category badge with a star icon. Used in news cards and content sections. Supports cyan (primary) and green (secondary) variants.',
+        component:
+          "Compact category badge with a star icon. Used in news cards and content sections. Supports cyan (primary) and green (secondary) variants.",
       },
     },
   },
   argTypes: {
-    text: { control: 'text', description: 'Badge label text' },
+    text: { control: "text", description: "Badge label text" },
     variant: {
-      control: 'select',
-      options: ['cyan', 'green'],
-      description: 'Color variant',
-      table: { defaultValue: { summary: 'cyan' } },
+      control: "select",
+      options: ["cyan", "green"],
+      description: "Color variant",
+      table: { defaultValue: { summary: "cyan" } },
     },
   },
 };
@@ -28,11 +29,11 @@ export default meta;
 type Story = StoryObj<typeof CategoryBadge>;
 
 export const Cyan: Story = {
-  args: { text: 'Technology', variant: 'cyan' },
+  args: { text: "Technology", variant: "cyan" },
 };
 
 export const Green: Story = {
-  args: { text: 'Community', variant: 'green' },
+  args: { text: "Community", variant: "green" },
 };
 
 export const BothVariants: Story = {

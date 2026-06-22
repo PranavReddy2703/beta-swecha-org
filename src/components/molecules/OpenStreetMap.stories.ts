@@ -1,17 +1,18 @@
-import type { Meta, StoryObj } from '@storybook-astro/framework';
-import OpenStreetMap from './OpenStreetMap.astro';
+import type { Meta, StoryObj } from "@storybook-astro/framework";
+import OpenStreetMap from "./OpenStreetMap.astro";
 
 const meta: Meta<typeof OpenStreetMap> = {
-  title: 'Molecules/OpenStreetMap',
+  title: "Molecules/OpenStreetMap",
   component: OpenStreetMap,
-  tags: ['autodocs'],
+  tags: ["autodocs"],
   parameters: {
     docs: {
       description: {
-        component: 'Interactive Leaflet map component with custom dark mode tiles, pulsing cyan marker, and deep-linked action buttons for navigation. Warning: Due to Leaflet\'s reliance on the window object, this might not render fully interactively in the Docs view without a browser environment, but works in the Canvas.',
+        component:
+          "Interactive Leaflet map component with custom dark mode tiles, pulsing cyan marker, and deep-linked action buttons for navigation. Warning: Due to Leaflet's reliance on the window object, this might not render fully interactively in the Docs view without a browser environment, but works in the Canvas.",
       },
     },
-    layout: 'padded',
+    layout: "padded",
   },
 };
 

@@ -1,17 +1,18 @@
-import type { Meta, StoryObj } from '@storybook-astro/framework';
-import TimelineConnector from './TimelineConnector.astro';
+import type { Meta, StoryObj } from "@storybook-astro/framework";
+import TimelineConnector from "./TimelineConnector.astro";
 
 const meta: Meta<typeof TimelineConnector> = {
-  title: 'Events/TimelineConnector',
+  title: "Events/TimelineConnector",
   component: TimelineConnector,
-  tags: ['autodocs'],
+  tags: ["autodocs"],
   parameters: {
     docs: {
       description: {
-        component: 'Visual connector lines and dots used in the EventTimeline to connect cards to the central timeline spine. (Note: Primarily visible in desktop views)',
+        component:
+          "Visual connector lines and dots used in the EventTimeline to connect cards to the central timeline spine. (Note: Primarily visible in desktop views)",
       },
     },
-    layout: 'padded',
+    layout: "padded",
   },
   decorators: [
     (Story) => `
@@ -23,8 +24,8 @@ const meta: Meta<typeof TimelineConnector> = {
     `,
   ],
   argTypes: {
-    isLeft: { control: 'boolean' },
-    index: { control: 'number' },
+    isLeft: { control: "boolean" },
+    index: { control: "number" },
   },
 };
 

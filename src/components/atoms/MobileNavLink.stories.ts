@@ -1,22 +1,29 @@
-import type { Meta, StoryObj } from '@storybook-astro/framework';
-import MobileNavLink from './MobileNavLink.astro';
+import type { Meta, StoryObj } from "@storybook-astro/framework";
+import MobileNavLink from "./MobileNavLink.astro";
 
 const meta: Meta<typeof MobileNavLink> = {
-  title: 'Atoms/MobileNavLink',
+  title: "Atoms/MobileNavLink",
   component: MobileNavLink,
-  tags: ['autodocs'],
+  tags: ["autodocs"],
   parameters: {
     docs: {
       description: {
-        component: 'Mobile navigation link with staggered slide-in animation and a vertical indicator bar. Used inside the mobile drawer menu.',
+        component:
+          "Mobile navigation link with staggered slide-in animation and a vertical indicator bar. Used inside the mobile drawer menu.",
       },
     },
   },
   argTypes: {
-    href: { control: 'text', description: 'Navigation target URL' },
-    label: { control: 'text', description: 'Link label text' },
-    isActive: { control: 'boolean', description: 'Whether this page is currently active' },
-    index: { control: { type: 'range', min: 0, max: 10, step: 1 }, description: 'Item index for staggered animation delay' },
+    href: { control: "text", description: "Navigation target URL" },
+    label: { control: "text", description: "Link label text" },
+    isActive: {
+      control: "boolean",
+      description: "Whether this page is currently active",
+    },
+    index: {
+      control: { type: "range", min: 0, max: 10, step: 1 },
+      description: "Item index for staggered animation delay",
+    },
   },
 };
 
@@ -25,11 +32,11 @@ export default meta;
 type Story = StoryObj<typeof MobileNavLink>;
 
 export const Default: Story = {
-  args: { href: '/about', label: 'About', isActive: false, index: 0 },
+  args: { href: "/about", label: "About", isActive: false, index: 0 },
 };
 
 export const Active: Story = {
-  args: { href: '/projects', label: 'Projects', isActive: true, index: 1 },
+  args: { href: "/projects", label: "Projects", isActive: true, index: 1 },
 };
 
 export const NavigationStack: Story = {
@@ -50,6 +57,10 @@ export const NavigationStack: Story = {
     </div>
   `,
   parameters: {
-    docs: { description: { story: 'Stack of mobile nav links as displayed in the mobile drawer.' } },
+    docs: {
+      description: {
+        story: "Stack of mobile nav links as displayed in the mobile drawer.",
+      },
+    },
   },
 };

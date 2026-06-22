@@ -1,6 +1,6 @@
 ---
 // src/components/contact/ContactCTA.astro
-import { getLangFromUrl, useTranslatedPath } from '../../i18n/utils';
+import { getLangFromUrl, useTranslatedPath } from "../../i18n/utils";
 
 interface Props {
   title: string;
@@ -15,47 +15,87 @@ const lang = getLangFromUrl(Astro.url);
 const translatePath = useTranslatedPath(lang);
 ---
 
-<section class="relative overflow-hidden py-20 md:py-28 border border-structural-borders/80 rounded-2xl mesh-gradient-bg text-center max-w-6xl mx-auto px-6 md:px-12 group transition-all duration-500 hover:border-primary-brand/25 shadow-2xl mt-12 select-none">
+<section
+  class="relative overflow-hidden py-20 md:py-28 border border-structural-borders/80 rounded-2xl mesh-gradient-bg text-center max-w-6xl mx-auto px-6 md:px-12 group transition-all duration-500 hover:border-primary-brand/25 shadow-2xl mt-12 select-none"
+>
   <!-- Glowing back accent -->
   <div class="absolute inset-0 pointer-events-none opacity-20">
-    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-[450px] w-[450px] rounded-full bg-primary-brand/20 blur-[110px] group-hover:bg-primary-brand/30 transition-colors duration-500"></div>
+    <div
+      class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-[450px] w-[450px] rounded-full bg-primary-brand/20 blur-[110px] group-hover:bg-primary-brand/30 transition-colors duration-500"
+    >
+    </div>
   </div>
 
   <!-- Animated Particles -->
-  <div class="absolute inset-0 pointer-events-none overflow-hidden z-0 opacity-40">
-    <div class="cta-particle particle-1 absolute h-1 w-1 rounded-full bg-primary-brand/60 blur-[0.5px]"></div>
-    <div class="cta-particle particle-2 absolute h-2 w-2 rounded-full bg-secondary-accent/40 blur-[1px]"></div>
-    <div class="cta-particle particle-3 absolute h-1.5 w-1.5 rounded-full bg-primary-brand/50 blur-[0.5px]"></div>
+  <div
+    class="absolute inset-0 pointer-events-none overflow-hidden z-0 opacity-40"
+  >
+    <div
+      class="cta-particle particle-1 absolute h-1 w-1 rounded-full bg-primary-brand/60 blur-[0.5px]"
+    >
+    </div>
+    <div
+      class="cta-particle particle-2 absolute h-2 w-2 rounded-full bg-secondary-accent/40 blur-[1px]"
+    >
+    </div>
+    <div
+      class="cta-particle particle-3 absolute h-1.5 w-1.5 rounded-full bg-primary-brand/50 blur-[0.5px]"
+    >
+    </div>
   </div>
 
   <div class="relative z-10 max-w-2xl mx-auto">
-    <h3 class="text-3xl font-black text-text-main sm:text-4xl md:text-5xl mb-6 tracking-tight group-hover:text-primary-brand transition-colors duration-300">
+    <h3
+      class="text-3xl font-black text-text-main sm:text-4xl md:text-5xl mb-6 tracking-tight group-hover:text-primary-brand transition-colors duration-300"
+    >
       {title}
     </h3>
-    <div class="h-1 w-20 bg-gradient-to-r from-primary-brand to-secondary-accent mx-auto mb-8 rounded-full transition-all duration-300 group-hover:w-32"></div>
+    <div
+      class="h-1 w-20 bg-gradient-to-r from-primary-brand to-secondary-accent mx-auto mb-8 rounded-full transition-all duration-300 group-hover:w-32"
+    >
+    </div>
     <p class="text-base text-text-muted md:text-lg leading-relaxed mb-10">
       {description}
     </p>
 
     <!-- Interactive Buttons -->
     <div class="flex flex-col sm:flex-row items-center justify-center gap-5">
-      <a 
-        href={translatePath('/projects')} 
+      <a
+        href={translatePath("/projects")}
         class="shine-cta w-full sm:w-auto inline-flex items-center justify-center rounded-lg bg-primary-brand px-7 py-4 text-sm font-black text-slate-950 shadow-lg shadow-primary-brand/10 transition-all duration-300 hover:bg-hover-brand hover:shadow-hover-brand/25 hover:-translate-y-0.5 active:translate-y-0 focus:outline-none focus:ring-2 focus:ring-primary-brand"
       >
-        <svg class="mr-2 h-4.5 w-4.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+        <svg
+          class="mr-2 h-4.5 w-4.5"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          stroke-width="2.5"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
         </svg>
         <span>{projectsButtonText}</span>
       </a>
-      <a 
-        href="https://swecha.org" 
-        target="_blank" 
-        rel="noopener noreferrer" 
+      <a
+        href="https://swecha.org"
+        target="_blank"
+        rel="noopener noreferrer"
         class="w-full sm:w-auto inline-flex items-center justify-center rounded-lg border border-structural-borders bg-card-bg/60 px-7 py-4 text-sm font-bold text-text-main backdrop-blur-md transition-all duration-300 hover:bg-elevated-surface hover:text-primary-brand hover:border-primary-brand/30 hover:-translate-y-0.5 active:translate-y-0 focus:outline-none focus:ring-2 focus:ring-primary-brand"
       >
-        <svg class="mr-2 h-4.5 w-4.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" />
+        <svg
+          class="mr-2 h-4.5 w-4.5"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          stroke-width="2.5"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"
+          ></path>
         </svg>
         <span>{joinButtonText}</span>
       </a>
@@ -66,24 +106,48 @@ const translatePath = useTranslatedPath(lang);
 <style>
   /* Animated mesh gradient styling */
   .mesh-gradient-bg {
-    background: radial-gradient(circle at 10% 20%, rgba(0, 212, 255, 0.07) 0%, transparent 45%),
-                radial-gradient(circle at 90% 80%, rgba(77, 255, 184, 0.07) 0%, transparent 45%),
-                #111827;
+    background:
+      radial-gradient(
+        circle at 10% 20%,
+        rgba(0, 212, 255, 0.07) 0%,
+        transparent 45%
+      ),
+      radial-gradient(
+        circle at 90% 80%,
+        rgba(77, 255, 184, 0.07) 0%,
+        transparent 45%
+      ),
+      #111827;
     background-size: 150% 150%;
     animation: meshGradientShift 18s ease infinite;
   }
 
   @keyframes meshGradientShift {
-    0%, 100% { background-position: 0% 50% }
-    50% { background-position: 100% 50% }
+    0%,
+    100% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
   }
 
   /* Floating cta particles */
   @keyframes ctaParticleFloat {
-    0% { transform: translateY(110%) translateX(0); opacity: 0; }
-    15% { opacity: 0.7; }
-    85% { opacity: 0.7; }
-    100% { transform: translateY(-10%) translateX(30px); opacity: 0; }
+    0% {
+      transform: translateY(110%) translateX(0);
+      opacity: 0;
+    }
+    15% {
+      opacity: 0.7;
+    }
+    85% {
+      opacity: 0.7;
+    }
+    100% {
+      transform: translateY(-10%) translateX(30px);
+      opacity: 0;
+    }
   }
 
   .cta-particle {
@@ -113,7 +177,7 @@ const translatePath = useTranslatedPath(lang);
     overflow: hidden;
   }
   .shine-cta::after {
-    content: '';
+    content: "";
     position: absolute;
     top: -50%;
     left: -70%;

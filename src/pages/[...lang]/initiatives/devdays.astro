@@ -1,7 +1,7 @@
 ---
-import Layout from '../../../layouts/Layout.astro';
-import { getLangFromUrl, useTranslations } from '../../../i18n/utils';
-import { languages, defaultLang } from '../../../i18n/ui';
+import Layout from "../../../layouts/Layout.astro";
+import { getLangFromUrl, useTranslations } from "../../../i18n/utils";
+import { languages, defaultLang } from "../../../i18n/ui";
 
 export function getStaticPaths() {
   return Object.keys(languages).map((lang) => {
@@ -20,17 +20,25 @@ const t = useTranslations(lang);
 <Layout title={`DevDays - Swecha.org`}>
   <div class="pt-32 pb-16 px-6 sm:px-10 lg:px-16 container mx-auto">
     <div class="max-w-4xl">
-      <h1 class="devdays-title text-4xl md:text-6xl font-black text-text-main mb-6 tracking-tight">
+      <h1
+        class="devdays-title text-4xl md:text-6xl font-black text-text-main mb-6 tracking-tight"
+      >
         DevDays
       </h1>
       <p class="devdays-desc text-xl text-text-muted mb-12 leading-relaxed">
-        A platform for developers, open-source contributors, and technology enthusiasts to collaborate, learn, and build together.
+        A platform for developers, open-source contributors, and technology
+        enthusiasts to collaborate, learn, and build together.
       </p>
-      
-      <div class="bg-secondary-bg border border-structural-borders p-8 rounded-2xl shadow-xl">
-        <h2 class="text-2xl font-bold text-text-main mb-4">Under Development</h2>
+
+      <div
+        class="bg-secondary-bg border border-structural-borders p-8 rounded-2xl shadow-xl"
+      >
+        <h2 class="text-2xl font-bold text-text-main mb-4">
+          Under Development
+        </h2>
         <p class="text-text-muted">
-          We are preparing exciting resources and schedules for upcoming DevDays events. Check back soon!
+          We are preparing exciting resources and schedules for upcoming DevDays
+          events. Check back soon!
         </p>
       </div>
     </div>
@@ -40,7 +48,7 @@ const t = useTranslations(lang);
 <style>
   /* Dark/default mode styles: blue-green gradient for main titles */
   .devdays-title {
-    background: linear-gradient(135deg, #00D4FF, #4DFFB8) !important;
+    background: linear-gradient(135deg, #00d4ff, #4dffb8) !important;
     -webkit-background-clip: text !important;
     -webkit-text-fill-color: transparent !important;
     text-shadow: none !important;
@@ -49,17 +57,17 @@ const t = useTranslations(lang);
 
   /* Light mode overrides to make text white with visual depth on the blue gradient background */
   :global(html[data-theme="light"]) .devdays-title {
-    color: #FFFFFF !important;
-    -webkit-text-fill-color: #FFFFFF !important;
+    color: #ffffff !important;
+    -webkit-text-fill-color: #ffffff !important;
     background: none !important;
-    text-shadow: 
+    text-shadow:
       0 2px 8px rgba(11, 30, 54, 0.35),
       0 4px 20px rgba(11, 30, 54, 0.25) !important;
   }
 
   :global(html[data-theme="light"]) .devdays-desc {
     color: rgba(255, 255, 255, 0.95) !important;
-    text-shadow: 
+    text-shadow:
       0 2px 6px rgba(11, 30, 54, 0.3),
       0 4px 15px rgba(11, 30, 54, 0.2) !important;
   }

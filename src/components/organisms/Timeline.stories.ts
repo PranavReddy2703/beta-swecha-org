@@ -1,17 +1,18 @@
-import type { Meta, StoryObj } from '@storybook-astro/framework';
-import Timeline from './Timeline.astro';
+import type { Meta, StoryObj } from "@storybook-astro/framework";
+import Timeline from "./Timeline.astro";
 
 const meta: Meta<typeof Timeline> = {
-  title: 'Organisms/Timeline',
+  title: "Organisms/Timeline",
   component: Timeline,
-  tags: ['autodocs'],
+  tags: ["autodocs"],
   parameters: {
     docs: {
       description: {
-        component: 'Full Timeline section for the About page. Features an interactive slider and vertical scrolling card sequence.',
+        component:
+          "Full Timeline section for the About page. Features an interactive slider and vertical scrolling card sequence.",
       },
     },
-    layout: 'fullscreen',
+    layout: "fullscreen",
   },
 };
 

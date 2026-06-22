@@ -1,17 +1,18 @@
-import type { Meta, StoryObj } from '@storybook-astro/framework';
-import FeatureCard from './FeatureCard.astro';
+import type { Meta, StoryObj } from "@storybook-astro/framework";
+import FeatureCard from "./FeatureCard.astro";
 
 const meta: Meta<typeof FeatureCard> = {
-  title: 'Molecules/FeatureCard',
+  title: "Molecules/FeatureCard",
   component: FeatureCard,
-  tags: ['autodocs'],
+  tags: ["autodocs"],
   parameters: {
     docs: {
       description: {
-        component: 'Bento grid feature card showing an icon, title, and description. Used in the About section to highlight key capabilities.',
+        component:
+          "Bento grid feature card showing an icon, title, and description. Used in the About section to highlight key capabilities.",
       },
     },
-    layout: 'centered',
+    layout: "centered",
   },
   decorators: [
     (Story) => `
@@ -21,13 +22,13 @@ const meta: Meta<typeof FeatureCard> = {
     `,
   ],
   argTypes: {
-    title: { control: 'text', description: 'Feature title' },
-    description: { control: 'text', description: 'Feature description' },
-    iconSvg: { control: 'text', description: 'SVG markup for the icon' },
+    title: { control: "text", description: "Feature title" },
+    description: { control: "text", description: "Feature description" },
+    iconSvg: { control: "text", description: "SVG markup for the icon" },
     accentColor: {
-      control: 'select',
-      options: ['primary', 'secondary'],
-      description: 'Color theme for the icon and hover state',
+      control: "select",
+      options: ["primary", "secondary"],
+      description: "Color theme for the icon and hover state",
     },
   },
 };
@@ -36,24 +37,28 @@ export default meta;
 
 type Story = StoryObj<typeof FeatureCard>;
 
-const codeIcon = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />';
-const globeIcon = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />';
+const codeIcon =
+  '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />';
+const globeIcon =
+  '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />';
 
 export const PrimaryVariant: Story = {
   args: {
-    title: 'Open Source',
-    description: 'We believe in free software and open knowledge sharing for the benefit of everyone.',
+    title: "Open Source",
+    description:
+      "We believe in free software and open knowledge sharing for the benefit of everyone.",
     iconSvg: codeIcon,
-    accentColor: 'primary',
+    accentColor: "primary",
   },
 };
 
 export const SecondaryVariant: Story = {
   args: {
-    title: 'Global Community',
-    description: 'Connecting developers, students, and professionals across the globe.',
+    title: "Global Community",
+    description:
+      "Connecting developers, students, and professionals across the globe.",
     iconSvg: globeIcon,
-    accentColor: 'secondary',
+    accentColor: "secondary",
   },
 };
 
@@ -84,6 +89,10 @@ export const CardGrid: Story = {
     </div>
   `,
   parameters: {
-    docs: { description: { story: 'Example of how multiple feature cards align in a grid.' } },
+    docs: {
+      description: {
+        story: "Example of how multiple feature cards align in a grid.",
+      },
+    },
   },
 };

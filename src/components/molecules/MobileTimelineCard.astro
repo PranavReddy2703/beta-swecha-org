@@ -1,11 +1,13 @@
 ---
 // src/components/molecules/MobileTimelineCard.astro
-import Tag from '../atoms/Tag.astro';
+import Tag from "../atoms/Tag.astro";
+import { Image } from "astro:assets";
 interface Props {
   year: string;
   title: string;
   description: string;
-  previewImage?: string;
+  previewImage?: any;
+  previewImageUrl?: string;
   tags?: string[];
   index: number;
 }
@@ -15,6 +17,7 @@ const {
   title,
   description,
   previewImage,
+  previewImageUrl,
   tags = ["Community", "FOSS", "Localization"],
   index,
 } = Astro.props;
@@ -30,9 +33,17 @@ const {
   >
     {
       previewImage ? (
-        <img
+        <Image
           src={previewImage}
           alt={title}
+          width={800}
+          height={600}
+          quality={50}
+          widths={[256, 512, 800]}
+          sizes="(max-width: 768px) 85px, 800px"
+          loading={index === 0 ? "eager" : "lazy"}
+          fetchpriority={index === 0 ? "high" : "auto"}
+          decoding="async"
           class="w-full h-full object-cover"
         />
       ) : (
@@ -83,7 +94,7 @@ const {
     data-year={year}
     data-title={title}
     data-description={description}
-    data-image={previewImage || ""}
+    data-image={previewImageUrl || ""}
     data-tags={JSON.stringify(tags)}
   >
     Read More

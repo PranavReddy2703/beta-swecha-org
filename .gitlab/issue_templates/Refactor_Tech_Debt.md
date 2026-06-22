@@ -6,7 +6,7 @@ Explain why this structural optimization is necessary. Describe the technical de
 
 ## Scope of Modification
 
-- **Target Modules / Files:** 
+- **Target Modules / Files:**
 - **Dependency Impact:** Are any dependencies being updated, replaced, or removed as part of this change? [ Yes / No ] — if yes, specify below.
 
 ---

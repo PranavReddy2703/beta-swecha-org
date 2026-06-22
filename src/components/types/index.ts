@@ -23,11 +23,11 @@ export interface SocialIconData {
     | "huggingface";
 }
 
-export type BadgeVariant = 'hero' | 'status' | 'tag' | 'featured';
+export type BadgeVariant = "hero" | "status" | "tag" | "featured";
 
-export type ButtonVariant = 'primary' | 'secondary';
+export type ButtonVariant = "primary" | "secondary";
 
-export type ProjectStatus = 'Active' | 'Completed' | 'Ongoing';
+export type ProjectStatus = "Active" | "Completed" | "Ongoing";
 
 // ─── Molecule Types ────────────────────────────────────────────
 
@@ -36,13 +36,13 @@ export interface FeatureCardData {
   title: string;
   description: string;
   iconSvg: string;
-  accentColor: 'primary' | 'secondary';
+  accentColor: "primary" | "secondary";
 }
 
 export interface ContactCardData {
   title: string;
   value: string;
-  icon: 'MapPin' | 'Mail' | 'Phone' | 'GraduationCap';
+  icon: "MapPin" | "Mail" | "Phone" | "GraduationCap";
   link?: string;
 }
 
@@ -75,7 +75,7 @@ export interface TimelineMilestone {
   previewImage?: string;
 }
 
-export type CategoryBadgeVariant = 'cyan' | 'green';
+export type CategoryBadgeVariant = "cyan" | "green";
 
 export interface NewsSlideData {
   titleKey: string;
@@ -118,7 +118,7 @@ export interface FooterData {
 export interface ContactChannelData {
   title: string;
   value: string;
-  icon: 'MapPin' | 'Mail' | 'Phone' | 'GraduationCap';
+  icon: "MapPin" | "Mail" | "Phone" | "GraduationCap";
   link?: string;
 }
 
