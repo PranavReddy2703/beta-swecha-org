@@ -9,8 +9,21 @@ const typedIcons = socialIconsData as SocialIconData[];
 
 <div id="social-island" class="social-island-container closed">
   <!-- Trigger Handle -->
-  <button id="social-island-toggle" class="social-island-toggle" aria-label="Toggle Social Media Panel">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="toggle-icon">
+  <button
+    id="social-island-toggle"
+    class="social-island-toggle"
+    aria-label="Toggle Social Media Panel"
+  >
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2.5"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      class="toggle-icon"
+    >
       <polyline points="15 18 9 12 15 6"></polyline>
     </svg>
     <span class="toggle-text">Socials</span>
@@ -20,8 +33,21 @@ const typedIcons = socialIconsData as SocialIconData[];
   <div class="social-island-panel">
     <div class="social-island-list">
       <!-- Close Button inside panel -->
-      <button id="social-island-close" class="social-close-btn" aria-label="Close Social Media Panel">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="close-icon">
+      <button
+        id="social-island-close"
+        class="social-close-btn"
+        aria-label="Close Social Media Panel"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="close-icon"
+        >
           <polyline points="9 18 15 12 9 6"></polyline>
         </svg>
       </button>
@@ -38,9 +64,7 @@ const typedIcons = socialIconsData as SocialIconData[];
               platform={icon.platform}
             />
             {/* Custom Premium Tooltip */}
-            <span class="social-tooltip">
-              {icon.label}
-            </span>
+            <span class="social-tooltip">{icon.label}</span>
           </div>
         ))
       }
@@ -331,7 +355,9 @@ const typedIcons = socialIconsData as SocialIconData[];
   .social-item-wrapper :global(.footer-icon) {
     color: var(--text-muted);
     opacity: 0.75;
-    transition: color 0.3s ease, opacity 0.3s ease;
+    transition:
+      color 0.3s ease,
+      opacity 0.3s ease;
   }
 
   .social-item-wrapper:hover :global(.footer-icon) {
