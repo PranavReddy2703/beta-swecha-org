@@ -17,7 +17,6 @@
     "react",
     "lint-staged"
   ],
-  "ignoreBinaries": ["lint-staged"],
   "astro": {
     "entry": [
       "src/pages/**/*.astro",

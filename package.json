@@ -6,7 +6,7 @@
     "typecheck": "astro check && tsc --noEmit",
     "lint": "eslint .",
     "format:check": "prettier --check .",
-    "knip": "knip",
+    "knip": "knip --exclude binaries",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "prepare": "husky"
