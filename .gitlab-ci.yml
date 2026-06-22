@@ -8,6 +8,9 @@ stages:
   - test
   - deploy
 
+variables:
+  GIT_CLEAN_FLAGS: "-ffdx -e node_modules/"
+
 cache:
   key: ${CI_COMMIT_REF_SLUG}
   paths:
@@ -18,10 +21,6 @@ install_dependencies:
   stage: setup
   script:
     - npm ci
-  artifacts:
-    paths:
-      - node_modules/
-    expire_in: 1 hour
 
 lint_and_audit:
   stage: quality
