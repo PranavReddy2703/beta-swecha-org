@@ -19,6 +19,8 @@
     "**/*.stories.tsx",
     ".storybook",
     "dist",
-    "storybook-static"
+    "storybook-static",
+    "builds",
+    "cache"
   ]
 }
