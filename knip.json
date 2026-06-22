@@ -14,7 +14,8 @@
     "@secretlint/secretlint-rule-preset-recommend",
     "@storybook/builder-vite",
     "astro-eslint-parser",
-    "react"
+    "react",
+    "lint-staged"
   ],
   "astro": {
     "entry": [

@@ -8,6 +8,9 @@ stages:
   - test
   - deploy
 
+variables:
+  GIT_CLEAN_FLAGS: "-ffdx -e node_modules/"
+
 cache:
   key: ${CI_COMMIT_REF_SLUG}
   paths:

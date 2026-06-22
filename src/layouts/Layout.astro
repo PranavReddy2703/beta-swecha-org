@@ -3,6 +3,7 @@
 import Navbar from "@organisms/Navbar.astro";
 import BackgroundDecorations from "@organisms/BackgroundDecorations.astro";
 import Footer from "@organisms/Footer.astro";
+import SocialIsland from "@organisms/SocialIsland.astro";
 import "../styles/global.css";
 import { getLangFromUrl, useTranslations } from "../i18n/utils";
 
@@ -111,6 +112,9 @@ const {
     <main id="main-content" class="flex-grow pb-20">
       <slot />
     </main>
+
+    <!-- Social Media Island -->
+    <SocialIsland />
 
     <!-- Footer Component -->
     <Footer />

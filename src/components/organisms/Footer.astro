@@ -1,11 +1,7 @@
 ---
 // src/components/organisms/Footer.astro
-import SocialIcon from "../atoms/SocialIcon.astro";
-import socialIconsData from "../../data/atoms/socialIcons.json";
 import footerData from "../../data/organisms/footer.json";
-import type { SocialIconData } from "../types/index";
 
-const typedIcons = socialIconsData as SocialIconData[];
 const copyrightText = footerData.copyrightTemplate.replace(
   "{year}",
   new Date().getFullYear().toString(),
@@ -20,22 +16,9 @@ const copyrightText = footerData.copyrightTemplate.replace(
   <span class="minimized-footer-label"> Swecha </span>
 
   <div class="px-6 sm:px-16 lg:px-24 footer-content">
-    <div
-      class="flex flex-col-reverse sm:flex-row items-center justify-between gap-4"
-    >
-      <div class="text-xs text-text-muted/60 text-center sm:text-left">
+    <div class="flex items-center justify-center">
+      <div class="text-xs text-text-muted/60 text-center">
         {copyrightText}
-      </div>
-      <div class="flex items-center gap-4">
-        {
-          typedIcons.map((icon) => (
-            <SocialIcon
-              href={icon.href}
-              label={icon.label}
-              platform={icon.platform}
-            />
-          ))
-        }
       </div>
     </div>
   </div>
