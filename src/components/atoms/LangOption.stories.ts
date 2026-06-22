@@ -1,21 +1,25 @@
-import type { Meta, StoryObj } from '@storybook-astro/framework';
-import LangOption from './LangOption.astro';
+import type { Meta, StoryObj } from "@storybook-astro/framework";
+import LangOption from "./LangOption.astro";
 
 const meta: Meta<typeof LangOption> = {
-  title: 'Atoms/LangOption',
+  title: "Atoms/LangOption",
   component: LangOption,
-  tags: ['autodocs'],
+  tags: ["autodocs"],
   parameters: {
     docs: {
       description: {
-        component: 'Individual language option in the language switcher dropdown. Features a colored dot indicator and slide-in hover effect.',
+        component:
+          "Individual language option in the language switcher dropdown. Features a colored dot indicator and slide-in hover effect.",
       },
     },
   },
   argTypes: {
-    href: { control: 'text', description: 'Link to the page in this language' },
-    name: { control: 'text', description: 'Language display name' },
-    isActive: { control: 'boolean', description: 'Whether this language is currently selected' },
+    href: { control: "text", description: "Link to the page in this language" },
+    name: { control: "text", description: "Language display name" },
+    isActive: {
+      control: "boolean",
+      description: "Whether this language is currently selected",
+    },
   },
 };
 
@@ -24,11 +28,11 @@ export default meta;
 type Story = StoryObj<typeof LangOption>;
 
 export const Default: Story = {
-  args: { href: '/en', name: 'English', isActive: false },
+  args: { href: "/en", name: "English", isActive: false },
 };
 
 export const Active: Story = {
-  args: { href: '/te', name: 'తెలుగు', isActive: true },
+  args: { href: "/te", name: "తెలుగు", isActive: true },
 };
 
 export const LanguageList: Story = {
@@ -39,6 +43,10 @@ export const LanguageList: Story = {
     </ul>
   `,
   parameters: {
-    docs: { description: { story: 'Full language dropdown showing active and default states.' } },
+    docs: {
+      description: {
+        story: "Full language dropdown showing active and default states.",
+      },
+    },
   },
 };

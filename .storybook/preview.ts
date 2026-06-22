@@ -1,6 +1,6 @@
-import type { Preview } from '@storybook-astro/framework';
-import { withThemeByDataAttribute } from '@storybook/addon-themes';
-import '../src/styles/global.css';
+import type { Preview } from "@storybook-astro/framework";
+import { withThemeByDataAttribute } from "@storybook/addon-themes";
+import "../src/styles/global.css";
 
 const preview: Preview = {
   parameters: {
@@ -10,7 +10,7 @@ const preview: Preview = {
         date: /Date$/i,
       },
       expanded: true,
-      sort: 'requiredFirst',
+      sort: "requiredFirst",
     },
     backgrounds: {
       disable: true, // We use theme switching instead
@@ -18,20 +18,20 @@ const preview: Preview = {
     viewport: {
       options: {
         mobile: {
-          name: 'Mobile',
-          styles: { width: '375px', height: '812px' },
+          name: "Mobile",
+          styles: { width: "375px", height: "812px" },
         },
         tablet: {
-          name: 'Tablet',
-          styles: { width: '768px', height: '1024px' },
+          name: "Tablet",
+          styles: { width: "768px", height: "1024px" },
         },
         desktop: {
-          name: 'Desktop',
-          styles: { width: '1280px', height: '900px' },
+          name: "Desktop",
+          styles: { width: "1280px", height: "900px" },
         },
         wide: {
-          name: 'Wide',
-          styles: { width: '1536px', height: '960px' },
+          name: "Wide",
+          styles: { width: "1536px", height: "960px" },
         },
       },
     },
@@ -42,9 +42,9 @@ const preview: Preview = {
       // WCAG 2.1 AA compliance
       config: {
         rules: [
-          { id: 'color-contrast', enabled: true },
-          { id: 'label', enabled: true },
-          { id: 'image-alt', enabled: true },
+          { id: "color-contrast", enabled: true },
+          { id: "label", enabled: true },
+          { id: "image-alt", enabled: true },
         ],
       },
     },
@@ -53,22 +53,22 @@ const preview: Preview = {
     // Theme switching via data-attribute on <html>
     withThemeByDataAttribute({
       themes: {
-        dark: 'dark',
-        light: 'light',
+        dark: "dark",
+        light: "light",
       },
-      defaultTheme: 'dark',
-      attributeName: 'data-theme',
+      defaultTheme: "dark",
+      attributeName: "data-theme",
     }),
   ],
   globalTypes: {
     theme: {
-      description: 'Toggle between dark and light mode',
+      description: "Toggle between dark and light mode",
       toolbar: {
-        title: 'Theme',
-        icon: 'paintbrush',
+        title: "Theme",
+        icon: "paintbrush",
         items: [
-          { value: 'dark', title: 'Dark Mode', icon: 'moon' },
-          { value: 'light', title: 'Light Mode', icon: 'sun' },
+          { value: "dark", title: "Dark Mode", icon: "moon" },
+          { value: "light", title: "Light Mode", icon: "sun" },
         ],
         dynamicTitle: true,
       },

@@ -1,6 +1,6 @@
 ---
 // src/components/organisms/MobileDrawer.astro
-import MobileNavLink from '../atoms/MobileNavLink.astro';
+import MobileNavLink from "../atoms/MobileNavLink.astro";
 
 interface NavItem {
   name: string;
@@ -19,43 +19,64 @@ const { navItems, isCurrentPage } = Astro.props;
 
 <div id="mobile-menu" class="mobile-drawer md:hidden">
   <div class="mobile-drawer-inner">
-    {navItems.map((item, index) => (
-      item.isDropdown && item.children ? (
-        <div class="mobile-nav-group mb-2">
-          <div class="relative mobile-dropdown-btn group cursor-pointer" aria-expanded="false">
-            <div class="pointer-events-none">
-              <MobileNavLink
-                href="#"
-                label={item.name}
-                isActive={isCurrentPage(item.href)}
-                index={index}
-              />
+    {
+      navItems.map((item, index) =>
+        item.isDropdown && item.children ? (
+          <div class="mobile-nav-group mb-2">
+            <div
+              class="relative mobile-dropdown-btn group cursor-pointer"
+              role="button"
+              tabindex="0"
+              aria-expanded="false"
+            >
+              <div class="pointer-events-none">
+                <MobileNavLink
+                  href="#"
+                  label={item.name}
+                  isActive={isCurrentPage(item.href)}
+                  index={index}
+                />
+              </div>
+              <div class="absolute right-2 top-1/2 -translate-y-1/2 p-3 text-text-muted group-hover:text-text-main">
+                <svg
+                  class="w-5 h-5 transition-transform duration-300 mobile-chevron"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="m6 9 6 6 6-6" />
+                </svg>
+              </div>
             </div>
-            <div class="absolute right-2 top-1/2 -translate-y-1/2 p-3 text-text-muted group-hover:text-text-main">
-              <svg class="w-5 h-5 transition-transform duration-300 mobile-chevron" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+            <div
+              class="mobile-dropdown-content flex flex-col pl-3 border-l-2 ml-5 mt-1 overflow-hidden transition-all duration-300"
+              style="border-color: rgba(148, 163, 184, 0.4); max-height: 0; opacity: 0; margin-bottom: 0;"
+            >
+              {item.children.map((child, childIndex) => (
+                <MobileNavLink
+                  href={child.href}
+                  label={child.name}
+                  isActive={isCurrentPage(child.href)}
+                  index={0}
+                  isSubLink={true}
+                />
+              ))}
             </div>
           </div>
-          <div class="mobile-dropdown-content flex flex-col pl-3 border-l-2 ml-5 mt-1 overflow-hidden transition-all duration-300" style="border-color: rgba(148, 163, 184, 0.4); max-height: 0; opacity: 0; margin-bottom: 0;">
-            {item.children.map((child, childIndex) => (
-              <MobileNavLink
-                href={child.href}
-                label={child.name}
-                isActive={isCurrentPage(child.href)}
-                index={0}
-                isSubLink={true}
-              />
-            ))}
-          </div>
-        </div>
-      ) : (
-        <MobileNavLink
-          href={item.href}
-          label={item.name}
-          isActive={isCurrentPage(item.href)}
-          index={index}
-        />
+        ) : (
+          <MobileNavLink
+            href={item.href}
+            label={item.name}
+            isActive={isCurrentPage(item.href)}
+            index={index}
+          />
+        ),
       )
-    ))}
+    }
   </div>
 </div>
 
@@ -82,37 +103,37 @@ const { navItems, isCurrentPage } = Astro.props;
 
 <script>
   const setupMobileDropdowns = () => {
-    const dropdownBtns = document.querySelectorAll('.mobile-dropdown-btn');
-    dropdownBtns.forEach(btn => {
+    const dropdownBtns = document.querySelectorAll(".mobile-dropdown-btn");
+    dropdownBtns.forEach((btn) => {
       // Remove any existing listeners by cloning (defensive)
       const clone = btn.cloneNode(true) as HTMLElement;
       if (btn.parentNode) {
         btn.parentNode.replaceChild(clone, btn);
       }
-      
-      clone.addEventListener('click', (e) => {
+
+      clone.addEventListener("click", (e) => {
         e.preventDefault();
         e.stopPropagation();
-        
+
         const content = clone.nextElementSibling as HTMLElement;
-        const isExpanded = clone.getAttribute('aria-expanded') === 'true';
-        const chevron = clone.querySelector('.mobile-chevron') as HTMLElement;
-        
+        const isExpanded = clone.getAttribute("aria-expanded") === "true";
+        const chevron = clone.querySelector(".mobile-chevron") as HTMLElement;
+
         if (isExpanded) {
-          clone.setAttribute('aria-expanded', 'false');
-          if (chevron) chevron.style.transform = 'rotate(0deg)';
+          clone.setAttribute("aria-expanded", "false");
+          if (chevron) chevron.style.transform = "rotate(0deg)";
           if (content) {
-            content.style.maxHeight = '0';
-            content.style.opacity = '0';
-            content.style.marginBottom = '0';
+            content.style.maxHeight = "0";
+            content.style.opacity = "0";
+            content.style.marginBottom = "0";
           }
         } else {
-          clone.setAttribute('aria-expanded', 'true');
-          if (chevron) chevron.style.transform = 'rotate(180deg)';
+          clone.setAttribute("aria-expanded", "true");
+          if (chevron) chevron.style.transform = "rotate(180deg)";
           if (content) {
-            content.style.maxHeight = '500px';
-            content.style.opacity = '1';
-            content.style.marginBottom = '0.5rem';
+            content.style.maxHeight = "500px";
+            content.style.opacity = "1";
+            content.style.marginBottom = "0.5rem";
           }
         }
       });
@@ -121,5 +142,5 @@ const { navItems, isCurrentPage } = Astro.props;
 
   // Run on initial load and any subsequent view transitions
   setupMobileDropdowns();
-  document.addEventListener('astro:after-swap', setupMobileDropdowns);
+  document.addEventListener("astro:after-swap", setupMobileDropdowns);
 </script>

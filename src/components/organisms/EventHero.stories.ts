@@ -1,17 +1,18 @@
-import type { Meta, StoryObj } from '@storybook-astro/framework';
-import EventHero from './EventHero.astro';
+import type { Meta, StoryObj } from "@storybook-astro/framework";
+import EventHero from "./EventHero.astro";
 
 const meta: Meta<typeof EventHero> = {
-  title: 'Events/EventHero',
+  title: "Events/EventHero",
   component: EventHero,
-  tags: ['autodocs'],
+  tags: ["autodocs"],
   parameters: {
     docs: {
       description: {
-        component: 'Hero section for the Events index page. Features neon ambient glows and a prominent image banner.',
+        component:
+          "Hero section for the Events index page. Features neon ambient glows and a prominent image banner.",
       },
     },
-    layout: 'fullscreen',
+    layout: "fullscreen",
   },
 };
 

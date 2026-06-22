@@ -1,20 +1,21 @@
-import type { Meta, StoryObj } from '@storybook-astro/framework';
-import MobileDrawer from './MobileDrawer.astro';
+import type { Meta, StoryObj } from "@storybook-astro/framework";
+import MobileDrawer from "./MobileDrawer.astro";
 
 const meta: Meta<typeof MobileDrawer> = {
-  title: 'Organisms/MobileDrawer',
+  title: "Organisms/MobileDrawer",
   component: MobileDrawer,
-  tags: ['autodocs'],
+  tags: ["autodocs"],
   parameters: {
     docs: {
       description: {
-        component: 'Mobile navigation drawer containing links and a language switcher. Needs to be toggled open to be visible.',
+        component:
+          "Mobile navigation drawer containing links and a language switcher. Needs to be toggled open to be visible.",
       },
     },
-    layout: 'padded',
+    layout: "padded",
   },
   argTypes: {
-    navItems: { control: 'object' },
+    navItems: { control: "object" },
   },
 };
 
@@ -25,13 +26,13 @@ type Story = StoryObj<typeof MobileDrawer>;
 export const Default: Story = {
   args: {
     navItems: [
-      { name: 'Home', href: '/' },
-      { name: 'About', href: '/about' },
-      { name: 'Projects', href: '/projects' },
-      { name: 'Events', href: '/events' },
-      { name: 'Contact', href: '/contact' },
+      { name: "Home", href: "/" },
+      { name: "About", href: "/about" },
+      { name: "Projects", href: "/projects" },
+      { name: "Events", href: "/events" },
+      { name: "Contact", href: "/contact" },
     ],
-    isCurrentPage: (href: string) => href === '/',
+    isCurrentPage: (href: string) => href === "/",
   },
   decorators: [
     (Story) => `

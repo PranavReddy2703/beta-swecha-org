@@ -1,20 +1,21 @@
-import type { Meta, StoryObj } from '@storybook-astro/framework';
-import HamburgerMenu from './HamburgerMenu.astro';
+import type { Meta, StoryObj } from "@storybook-astro/framework";
+import HamburgerMenu from "./HamburgerMenu.astro";
 
 const meta: Meta<typeof HamburgerMenu> = {
-  title: 'Molecules/HamburgerMenu',
+  title: "Molecules/HamburgerMenu",
   component: HamburgerMenu,
-  tags: ['autodocs'],
+  tags: ["autodocs"],
   parameters: {
     docs: {
       description: {
-        component: 'Animated hamburger menu toggle button for mobile navigation. Uses a CSS transition to morph into an "X" when active.',
+        component:
+          'Animated hamburger menu toggle button for mobile navigation. Uses a CSS transition to morph into an "X" when active.',
       },
     },
-    layout: 'centered',
+    layout: "centered",
   },
   argTypes: {
-    srLabel: { control: 'text', description: 'Screen reader accessible label' },
+    srLabel: { control: "text", description: "Screen reader accessible label" },
   },
 };
 
@@ -23,7 +24,7 @@ export default meta;
 type Story = StoryObj<typeof HamburgerMenu>;
 
 export const Default: Story = {
-  args: { srLabel: 'Toggle navigation menu' },
+  args: { srLabel: "Toggle navigation menu" },
 };
 
 export const ActiveState: Story = {
@@ -37,6 +38,6 @@ export const ActiveState: Story = {
     </button>
   `,
   parameters: {
-    docs: { description: { story: 'Menu in the opened (active) state.' } },
+    docs: { description: { story: "Menu in the opened (active) state." } },
   },
 };

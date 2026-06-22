@@ -1,29 +1,41 @@
 ---
 // src/components/molecules/FeatureCard.astro
-import type { FeatureCardData } from '../types/index';
+import type { FeatureCardData } from "../types/index";
 
 interface Props {
   title: string;
   description: string;
   iconSvg: string;
-  accentColor?: FeatureCardData['accentColor'];
+  accentColor?: FeatureCardData["accentColor"];
 }
 
-const { title, description, iconSvg, accentColor = 'primary' } = Astro.props;
+const { title, description, iconSvg, accentColor = "primary" } = Astro.props;
 
-const iconColor = accentColor === 'secondary' ? 'text-secondary-accent' : 'text-primary-brand';
-const hoverColor = accentColor === 'secondary' ? 'group-hover:text-secondary-accent' : 'group-hover:text-primary-brand';
+const iconColor =
+  accentColor === "secondary" ? "text-secondary-accent" : "text-primary-brand";
+const hoverColor =
+  accentColor === "secondary"
+    ? "group-hover:text-secondary-accent"
+    : "group-hover:text-primary-brand";
 ---
 
 <div
   class="group glass-white-card relative rounded-xl border border-structural-borders bg-card-bg/60 p-6 backdrop-blur-sm transition-all duration-300 hover:border-primary-brand/40 hover:-translate-y-1"
 >
   <div class={`mb-4 ${iconColor}`}>
-    <svg class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" set:html={iconSvg} />
+    <svg
+      class="h-8 w-8"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+      set:html={iconSvg}
+    />
   </div>
-  <h3 class={`text-lg font-bold text-text-main ${hoverColor} transition duration-200 mb-2`}>
+  <h2
+    class={`text-lg font-bold text-text-main ${hoverColor} transition duration-200 mb-2`}
+  >
     {title}
-  </h3>
+  </h2>
   <p class="text-sm text-text-muted leading-relaxed">
     {description}
   </p>

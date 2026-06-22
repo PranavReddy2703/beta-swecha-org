@@ -2,48 +2,97 @@
 // src/components/molecules/TimelineModal.astro
 ---
 
-<dialog id="timeline-modal" class="modal modal-bottom sm:modal-middle bg-transparent backdrop:backdrop-blur-md backdrop:bg-[#080B10]/60">
-  <div class="modal-box bg-card-bg border border-structural-borders/40 shadow-2xl rounded-t-2xl sm:rounded-2xl p-0 overflow-hidden text-left relative flex flex-col max-h-[90vh]">
+<dialog
+  id="timeline-modal"
+  class="modal modal-bottom sm:modal-middle bg-transparent backdrop:backdrop-blur-md backdrop:bg-[#080B10]/60"
+>
+  <div
+    class="modal-box bg-card-bg border border-structural-borders/40 shadow-2xl rounded-t-2xl sm:rounded-2xl p-0 overflow-hidden text-left relative flex flex-col max-h-[90vh]"
+  >
     <!-- Close button -->
     <form method="dialog" class="absolute top-4 right-4 z-20">
-      <button class="btn btn-sm btn-circle btn-ghost bg-black/40 text-white hover:bg-black/60 border-none outline-none" aria-label="Close">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+      <button
+        class="btn btn-sm btn-circle btn-ghost bg-black/40 text-white hover:bg-black/60 border-none outline-none"
+        aria-label="Close"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-5 w-5"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          ><path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M6 18L18 6M6 6l12 12"></path></svg
+        >
       </button>
     </form>
 
     <!-- Modal Image -->
-    <div class="w-full h-48 sm:h-64 bg-[#080B10] relative flex items-center justify-center shrink-0">
-      <img id="modal-image" src="" alt="Modal Preview" class="w-full h-full object-cover hidden" />
-      <div id="modal-placeholder" class="absolute inset-0 bg-gradient-to-tr from-primary-brand/10 to-secondary-accent/10 flex flex-col items-center justify-center">
-        <span class="text-xs font-black tracking-widest text-[#a855f7] uppercase mb-2">PROJECT PREVIEW</span>
+    <div
+      class="w-full h-48 sm:h-64 bg-[#080B10] relative flex items-center justify-center shrink-0"
+    >
+      <img
+        id="modal-image"
+        src=""
+        alt="Modal Preview"
+        loading="lazy"
+        class="w-full h-full object-cover hidden"
+      />
+      <div
+        id="modal-placeholder"
+        class="absolute inset-0 bg-gradient-to-tr from-primary-brand/10 to-secondary-accent/10 flex flex-col items-center justify-center"
+      >
+        <span
+          class="text-xs font-black tracking-widest text-[#a855f7] uppercase mb-2"
+          >PROJECT PREVIEW</span
+        >
       </div>
-      <div class="absolute inset-0 bg-gradient-to-t from-card-bg to-transparent pointer-events-none"></div>
+      <div
+        class="absolute inset-0 bg-gradient-to-t from-card-bg to-transparent pointer-events-none"
+      >
+      </div>
     </div>
 
     <!-- Modal Content -->
     <div class="p-6 sm:p-8 overflow-y-auto flex-grow flex flex-col gap-4">
       <div>
         <div class="flex items-center gap-2 mb-2">
-          <span class="text-[11px] font-extrabold tracking-wider text-primary-brand uppercase">FEATURED MILESTONE</span>
+          <span
+            class="text-[11px] font-extrabold tracking-wider text-primary-brand uppercase"
+            >FEATURED MILESTONE</span
+          >
           <span class="text-xs text-text-muted/40">•</span>
-          <span id="modal-year" class="text-xs font-bold text-secondary-accent tracking-wide"></span>
+          <span
+            id="modal-year"
+            class="text-xs font-bold text-secondary-accent tracking-wide"
+          ></span>
         </div>
-        <h3 id="modal-title" class="text-2xl font-black text-text-main mb-4"></h3>
-        <p id="modal-description" class="text-[16px] text-text-muted leading-relaxed"></p>
+        <h3 id="modal-title" class="text-2xl font-black text-text-main mb-4">
+        </h3>
+        <p
+          id="modal-description"
+          class="text-[16px] text-text-muted leading-relaxed"
+        >
+        </p>
       </div>
 
       <div class="mt-4">
-        <h4 class="text-xs font-bold text-text-muted uppercase tracking-wider mb-3">Tags & Technologies</h4>
+        <h4
+          class="text-xs font-bold text-text-muted uppercase tracking-wider mb-3"
+        >
+          Tags & Technologies
+        </h4>
         <div id="modal-tags" class="flex flex-wrap gap-2">
           <!-- Tags injected via JS -->
         </div>
       </div>
     </div>
   </div>
-  
+
   <form method="dialog" class="modal-backdrop">
     <button>close</button>
   </form>
 </dialog>
-
-

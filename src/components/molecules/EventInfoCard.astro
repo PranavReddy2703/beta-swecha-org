@@ -1,7 +1,7 @@
 ---
 // src/components/events/EventInfoCard.astro
 interface Props {
-  icon: 'date' | 'time' | 'venue' | 'mode';
+  icon: "date" | "time" | "venue" | "mode";
   label: string;
   value: string;
 }
@@ -9,7 +9,7 @@ interface Props {
 const { icon, label, value } = Astro.props;
 
 // SVG Icons mapping for maximum performance and clean resolution
-const icons: Record<Props['icon'], string> = {
+const icons: Record<Props["icon"], string> = {
   date: `<svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
     <path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 002-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
   </svg>`,
@@ -22,27 +22,37 @@ const icons: Record<Props['icon'], string> = {
   </svg>`,
   mode: `<svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
     <path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-  </svg>`
+  </svg>`,
 };
 ---
 
-<div class="glass-white-card group relative rounded-2xl border border-structural-borders bg-card-bg/40 p-6 md:p-8 backdrop-blur-md transition-all duration-300 hover:border-primary-brand/30 hover:-translate-y-1 hover:shadow-[0_8px_30px_rgb(0,212,255,0.05)] overflow-hidden">
-
+<div
+  class="glass-white-card group relative rounded-2xl border border-structural-borders bg-card-bg/40 p-6 md:p-8 backdrop-blur-md transition-all duration-300 hover:border-primary-brand/30 hover:-translate-y-1 hover:shadow-[0_8px_30px_rgb(0,212,255,0.05)] overflow-hidden"
+>
   <!-- Corner radial gradient glow on hover -->
-  <div class="absolute -right-10 -top-10 w-24 h-24 bg-gradient-to-br from-primary-brand/10 to-transparent blur-xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
+  <div
+    class="absolute -right-10 -top-10 w-24 h-24 bg-gradient-to-br from-primary-brand/10 to-transparent blur-xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
+  >
+  </div>
 
   <!-- Icon Container with brand colored circles -->
   <div class="flex items-center space-x-4">
-    <div class="flex-shrink-0 flex items-center justify-center w-12 h-12 rounded-xl bg-primary-brand/10 text-primary-brand border border-primary-brand/20 group-hover:bg-primary-brand group-hover:text-slate-950 group-hover:border-primary-brand transition-all duration-300">
+    <div
+      class="flex-shrink-0 flex items-center justify-center w-12 h-12 rounded-xl bg-primary-brand/10 text-primary-brand border border-primary-brand/20 group-hover:bg-primary-brand group-hover:text-slate-950 group-hover:border-primary-brand transition-all duration-300"
+    >
       <Fragment set:html={icons[icon]} />
     </div>
 
     <!-- Info details -->
     <div class="flex-grow space-y-1">
-      <span class="text-xs font-semibold tracking-wider text-text-muted uppercase block">
+      <span
+        class="text-xs font-semibold tracking-wider text-text-muted uppercase block"
+      >
         {label}
       </span>
-      <span class="text-base md:text-lg font-bold text-text-main group-hover:text-primary-brand transition-colors duration-200 block">
+      <span
+        class="text-base md:text-lg font-bold text-text-main group-hover:text-primary-brand transition-colors duration-200 block"
+      >
         {value}
       </span>
     </div>

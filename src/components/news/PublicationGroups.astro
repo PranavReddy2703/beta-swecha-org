@@ -13,43 +13,54 @@ interface Props {
 const { articles, lang } = Astro.props;
 
 // Count articles per publication
-const pubCounts = articles.reduce((acc, article) => {
-  const pub = article.publication;
-  acc[pub] = (acc[pub] || 0) + 1;
-  return acc;
-}, {} as Record<string, number>);
+const pubCounts = articles.reduce(
+  (acc, article) => {
+    const pub = article.publication;
+    acc[pub] = (acc[pub] || 0) + 1;
+    return acc;
+  },
+  {} as Record<string, number>,
+);
 
-const publications = Object.keys(pubCounts).map(pub => {
-  const logo = articles.find(a => a.publication === pub)?.publicationLogo || pub.slice(0, 2).toUpperCase();
+const publications = Object.keys(pubCounts).map((pub) => {
+  const logo =
+    articles.find((a) => a.publication === pub)?.publicationLogo ||
+    pub.slice(0, 2).toUpperCase();
   return {
     name: pub,
     logo,
-    count: pubCounts[pub]
+    count: pubCounts[pub],
   };
 });
 ---
 
 <div class="flex flex-wrap gap-1.5 pt-0.5 select-none">
-  {publications.map((pub) => (
-    <button
-      type="button"
-      data-pub-filter={pub.name.toLowerCase()}
-      class="pub-group-btn group flex items-center gap-1.5 p-1 px-2.5 rounded-lg border border-structural-borders bg-secondary-bg/25 hover:bg-secondary-bg/55 hover:border-primary-brand/35 transition-all duration-200 cursor-pointer shadow-sm text-left"
-    >
-      {pub.logo.startsWith('/') ? (
-        <img src={pub.logo} alt={pub.name} class="w-4.5 h-4.5 object-cover rounded shadow-sm group-hover:scale-105 transition-transform duration-300 shrink-0" />
-      ) : (
-        <span class="flex items-center justify-center w-4.5 h-4.5 rounded bg-gradient-to-br from-primary-brand to-secondary-accent text-[7px] font-black text-slate-950 select-none shadow-sm group-hover:scale-105 transition-transform duration-300 shrink-0">
-          {pub.logo}
+  {
+    publications.map((pub) => (
+      <button
+        type="button"
+        data-pub-filter={pub.name.toLowerCase()}
+        class="pub-group-btn group flex items-center gap-1.5 p-1 px-2.5 rounded-lg border border-structural-borders bg-secondary-bg/25 hover:bg-secondary-bg/55 hover:border-primary-brand/35 transition-all duration-200 cursor-pointer shadow-sm text-left"
+      >
+        {pub.logo.startsWith("/") ? (
+          <img
+            src={pub.logo}
+            alt={pub.name}
+            class="w-4.5 h-4.5 object-cover rounded shadow-sm group-hover:scale-105 transition-transform duration-300 shrink-0"
+          />
+        ) : (
+          <span class="flex items-center justify-center w-4.5 h-4.5 rounded bg-gradient-to-br from-primary-brand to-secondary-accent text-[7px] font-black text-slate-950 select-none shadow-sm group-hover:scale-105 transition-transform duration-300 shrink-0">
+            {pub.logo}
+          </span>
+        )}
+        <span class="text-[10px] font-extrabold text-text-main group-hover:text-primary-brand transition-colors duration-200">
+          {pub.name}
         </span>
-      )}
-      <span class="text-[10px] font-extrabold text-text-main group-hover:text-primary-brand transition-colors duration-200">
-        {pub.name}
-      </span>
 
-      <span class="inline-flex items-center justify-center min-w-3.5 h-3.5 px-1 rounded-full bg-structural-borders/50 text-[8px] font-bold text-text-muted group-hover:bg-primary-brand/20 group-hover:text-primary-brand transition-all duration-200">
-        {pub.count}
-      </span>
-    </button>
-  ))}
+        <span class="inline-flex items-center justify-center min-w-3.5 h-3.5 px-1 rounded-full bg-structural-borders/50 text-[8px] font-bold text-text-muted group-hover:bg-primary-brand/20 group-hover:text-primary-brand transition-all duration-200">
+          {pub.count}
+        </span>
+      </button>
+    ))
+  }
 </div>

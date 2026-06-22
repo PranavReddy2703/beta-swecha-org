@@ -5,6 +5,6 @@ export default [
   {
     rules: {
       // override/add rules settings here
-    }
-  }
+    },
+  },
 ];

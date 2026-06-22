@@ -14,7 +14,7 @@
   "hero.title2": "swecha.org",
   "hero.desc": "A high-performance, decoupled frontend architecture engineered with Astro, Tailwind CSS, and daisyUI. Designed for optimal load speeds, structural localization stability, and visual premium interfaces.",
   "hero.btn.explore": "Explore Projects",
-  "hero.btn.learn": "Learn More",
+  "hero.btn.learn": "Learn More About Swecha",
   "card.island.title": "Island Architecture",
   "card.island.desc": "Zero client-side JavaScript by default, hydrating interactive blocks only when needed for peak performance.",
   "card.i18n.title": "Multilingual Routing",

@@ -23,9 +23,23 @@ const t = useTranslations(lang);
   >
     <div class="max-w-4xl">
       <div class="mb-10 inline-block">
-        <a href={lang === defaultLang ? '/about' : `/${lang}/about`} class="btn btn-circle btn-ghost text-text-muted hover:text-primary-brand hover:bg-structural-borders/30" aria-label="Return to About">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+        <a
+          href={lang === defaultLang ? "/about" : `/${lang}/about`}
+          class="btn btn-circle btn-ghost text-text-muted hover:text-primary-brand hover:bg-structural-borders/30"
+          aria-label="Return to About"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-6 w-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
           </svg>
         </a>
       </div>

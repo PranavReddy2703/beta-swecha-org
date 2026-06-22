@@ -1,17 +1,18 @@
-import type { Meta, StoryObj } from '@storybook-astro/framework';
-import UpdateCard from './UpdateCard.astro';
+import type { Meta, StoryObj } from "@storybook-astro/framework";
+import UpdateCard from "./UpdateCard.astro";
 
 const meta: Meta<typeof UpdateCard> = {
-  title: 'Molecules/UpdateCard',
+  title: "Molecules/UpdateCard",
   component: UpdateCard,
-  tags: ['autodocs'],
+  tags: ["autodocs"],
   parameters: {
     docs: {
       description: {
-        component: 'Small, compact news update card used in the sidebar list. Shows title, description, and an arrow indicator.',
+        component:
+          "Small, compact news update card used in the sidebar list. Shows title, description, and an arrow indicator.",
       },
     },
-    layout: 'centered',
+    layout: "centered",
   },
   decorators: [
     (Story) => `
@@ -21,10 +22,13 @@ const meta: Meta<typeof UpdateCard> = {
     `,
   ],
   argTypes: {
-    title: { control: 'text', description: 'Update headline' },
-    description: { control: 'text', description: 'Brief preview text' },
-    link: { control: 'text', description: 'Destination URL' },
-    index: { control: { type: 'range', min: 0, max: 10, step: 1 }, description: 'Animation stagger index' },
+    title: { control: "text", description: "Update headline" },
+    description: { control: "text", description: "Brief preview text" },
+    link: { control: "text", description: "Destination URL" },
+    index: {
+      control: { type: "range", min: 0, max: 10, step: 1 },
+      description: "Animation stagger index",
+    },
   },
 };
 
@@ -34,9 +38,10 @@ type Story = StoryObj<typeof UpdateCard>;
 
 export const Default: Story = {
   args: {
-    title: 'New GLUG Formed at CVR College',
-    description: 'Over 100 students joined the newly inaugurated GNU/Linux User Group.',
-    link: '#',
+    title: "New GLUG Formed at CVR College",
+    description:
+      "Over 100 students joined the newly inaugurated GNU/Linux User Group.",
+    link: "#",
     index: 0,
   },
 };
@@ -69,6 +74,10 @@ export const UpdatesList: Story = {
     </div>
   `,
   parameters: {
-    docs: { description: { story: 'Example of how update cards stack vertically in a sidebar.' } },
+    docs: {
+      description: {
+        story: "Example of how update cards stack vertically in a sidebar.",
+      },
+    },
   },
 };

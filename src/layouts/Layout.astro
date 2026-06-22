@@ -1,10 +1,10 @@
 ---
 // src/layouts/Layout.astro
-import Navbar from '@organisms/Navbar.astro';
-import BackgroundDecorations from '@organisms/BackgroundDecorations.astro';
-import Footer from '@organisms/Footer.astro';
-import '../styles/global.css';
-import { getLangFromUrl, useTranslations } from '../i18n/utils';
+import Navbar from "@organisms/Navbar.astro";
+import BackgroundDecorations from "@organisms/BackgroundDecorations.astro";
+import Footer from "@organisms/Footer.astro";
+import "../styles/global.css";
+import { getLangFromUrl, useTranslations } from "../i18n/utils";
 
 interface Props {
   title?: string;
@@ -14,46 +14,77 @@ interface Props {
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
-const { 
-  title = t('layout.defaultTitle'), 
-  description = t('layout.defaultDesc') 
+const {
+  title = t("layout.defaultTitle"),
+  description = t("layout.defaultDesc"),
 } = Astro.props;
 ---
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang={lang} class="scroll-smooth" data-theme="dark">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <title>{title}</title>
     <meta name="description" content={description} />
-    
+
     <!-- Inline script to set the theme before render to prevent FOUC -->
     <script is:inline>
-      const savedTheme = localStorage.getItem('theme') || 'dark';
-      document.documentElement.setAttribute('data-theme', savedTheme);
+      const savedTheme = localStorage.getItem("theme") || "dark";
+      document.documentElement.setAttribute("data-theme", savedTheme);
     </script>
-    
+
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Great+Vibes&family=Alex+Brush&display=swap" rel="stylesheet" />
-    
+    <link
+      rel="preload"
+      as="style"
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Great+Vibes&family=Alex+Brush&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Great+Vibes&family=Alex+Brush&display=swap"
+      media="print"
+      onload="this.media='all'"
+    />
+    <noscript>
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Great+Vibes&family=Alex+Brush&display=swap"
+      />
+    </noscript>
+
     <style>
       body {
-        font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+        font-family: "Plus Jakarta Sans", system-ui, sans-serif;
       }
-      h1, h2, h3, h4, h5, h6 {
-        font-family: 'Outfit', system-ui, sans-serif;
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        font-family: "Outfit", system-ui, sans-serif;
       }
     </style>
   </head>
-  <body class="min-h-screen bg-canvas-base text-text-main antialiased flex flex-col transition-colors duration-300">
+  <body
+    class="min-h-screen bg-canvas-base text-text-main antialiased flex flex-col transition-colors duration-300"
+  >
     <!-- Global Ambient Background Glows -->
-    <div class="fixed inset-0 pointer-events-none overflow-hidden z-0 select-none opacity-10 dark:opacity-20 transition-opacity duration-300">
-      <div class="absolute -top-40 left-1/4 h-[600px] w-[600px] rounded-full bg-primary-brand blur-[150px]"></div>
-      <div class="absolute bottom-10 right-1/4 h-[500px] w-[500px] rounded-full bg-secondary-accent blur-[150px]"></div>
+    <div
+      class="fixed inset-0 pointer-events-none overflow-hidden z-0 select-none opacity-10 dark:opacity-20 transition-opacity duration-300"
+    >
+      <div
+        class="absolute -top-40 left-1/4 h-[600px] w-[600px] rounded-full bg-primary-brand blur-[150px]"
+      >
+      </div>
+      <div
+        class="absolute bottom-10 right-1/4 h-[500px] w-[500px] rounded-full bg-secondary-accent blur-[150px]"
+      >
+      </div>
     </div>
 
     <!-- Background Decor (Birds) -->
@@ -61,7 +92,7 @@ const {
 
     <!-- Navbar Component -->
     <Navbar />
-    
+
     <!-- Main Content Slot -->
     <main id="main-content" class="flex-grow pb-20">
       <slot />

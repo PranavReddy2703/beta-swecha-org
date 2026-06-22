@@ -1,17 +1,18 @@
-import type { Meta, StoryObj } from '@storybook-astro/framework';
-import ContactForm from './ContactForm.astro';
+import type { Meta, StoryObj } from "@storybook-astro/framework";
+import ContactForm from "./ContactForm.astro";
 
 const meta: Meta<typeof ContactForm> = {
-  title: 'Organisms/ContactForm',
+  title: "Organisms/ContactForm",
   component: ContactForm,
-  tags: ['autodocs'],
+  tags: ["autodocs"],
   parameters: {
     docs: {
       description: {
-        component: 'Contact form with client-side validation and simulated success state.',
+        component:
+          "Contact form with client-side validation and simulated success state.",
       },
     },
-    layout: 'centered',
+    layout: "centered",
   },
   decorators: [
     (Story) => `
@@ -21,13 +22,13 @@ const meta: Meta<typeof ContactForm> = {
     `,
   ],
   argTypes: {
-    title: { control: 'text' },
-    subtitle: { control: 'text' },
-    nameLabel: { control: 'text' },
-    emailLabel: { control: 'text' },
-    subjectLabel: { control: 'text' },
-    messageLabel: { control: 'text' },
-    sendButtonText: { control: 'text' },
+    title: { control: "text" },
+    subtitle: { control: "text" },
+    nameLabel: { control: "text" },
+    emailLabel: { control: "text" },
+    subjectLabel: { control: "text" },
+    messageLabel: { control: "text" },
+    sendButtonText: { control: "text" },
   },
 };
 
@@ -37,12 +38,12 @@ type Story = StoryObj<typeof ContactForm>;
 
 export const Default: Story = {
   args: {
-    title: 'Establish Contact',
-    subtitle: 'Transmit a message directly to Swecha central.',
-    nameLabel: 'Full Name',
-    emailLabel: 'Email Address',
-    subjectLabel: 'Subject',
-    messageLabel: 'Message',
-    sendButtonText: 'Transmit Message',
+    title: "Establish Contact",
+    subtitle: "Transmit a message directly to Swecha central.",
+    nameLabel: "Full Name",
+    emailLabel: "Email Address",
+    subjectLabel: "Subject",
+    messageLabel: "Message",
+    sendButtonText: "Transmit Message",
   },
 };

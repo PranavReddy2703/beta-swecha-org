@@ -1,17 +1,18 @@
-import type { Meta, StoryObj } from '@storybook-astro/framework';
-import AboutPage from './about.astro';
+import type { Meta, StoryObj } from "@storybook-astro/framework";
+import AboutPage from "./about.astro";
 
 const meta: Meta<typeof AboutPage> = {
-  title: 'Pages/About',
+  title: "Pages/About",
   component: AboutPage,
-  tags: ['autodocs'],
+  tags: ["autodocs"],
   parameters: {
     docs: {
       description: {
-        component: 'The About page of the Swecha website. Contains history, mission, and timeline.',
+        component:
+          "The About page of the Swecha website. Contains history, mission, and timeline.",
       },
     },
-    layout: 'fullscreen',
+    layout: "fullscreen",
   },
 };
 

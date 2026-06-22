@@ -1,8 +1,8 @@
 ---
 // src/pages/[...lang]/index.astro
-import Layout from '@layouts/Layout.astro';
-import HeroSection from '@organisms/HeroSection.astro';
-import { languages, defaultLang } from '../../i18n/ui';
+import Layout from "@layouts/Layout.astro";
+import HeroSection from "@organisms/HeroSection.astro";
+import { languages, defaultLang } from "../../i18n/ui";
 
 export function getStaticPaths() {
   return Object.keys(languages).map((lang) => {

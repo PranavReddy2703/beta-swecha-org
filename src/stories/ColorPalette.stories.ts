@@ -1,51 +1,123 @@
-import type { Meta, StoryObj } from '@storybook-astro/framework';
+import type { Meta, StoryObj } from "@storybook-astro/framework";
 
 // A pure HTML component rendered via Storybook's render function
 const meta: Meta = {
-  title: 'Design System/Color Palette',
-  tags: ['autodocs'],
+  title: "Design System/Color Palette",
+  tags: ["autodocs"],
   parameters: {
     docs: {
       description: {
         component:
-          'Interactive color palette showcasing all CSS custom properties used across the Swecha design system. Toggle between Dark and Light themes using the toolbar to see how each token adapts.',
+          "Interactive color palette showcasing all CSS custom properties used across the Swecha design system. Toggle between Dark and Light themes using the toolbar to see how each token adapts.",
       },
     },
-    layout: 'fullscreen',
+    layout: "fullscreen",
   },
   argTypes: {
-    canvasBase: { control: 'color', name: '--canvas-base', description: 'Page background' },
-    secondaryBg: { control: 'color', name: '--secondary-bg', description: 'Elevated surface background' },
-    cardBg: { control: 'color', name: '--card-bg', description: 'Card background' },
-    elevatedSurface: { control: 'color', name: '--elevated-surface', description: 'Elevated interactive surface' },
-    primaryBrand: { control: 'color', name: '--primary-brand', description: 'Primary action color (CTA, links)' },
-    hoverBrand: { control: 'color', name: '--hover-brand', description: 'Hover state of primary brand' },
-    secondaryAccent: { control: 'color', name: '--secondary-accent', description: 'Secondary accent (success, highlights)' },
-    structuralBorders: { control: 'color', name: '--structural-borders', description: 'Dividers & borders' },
-    textPrimary: { control: 'color', name: '--text-primary', description: 'Primary text color' },
-    textMuted: { control: 'color', name: '--text-muted', description: 'Muted / secondary text' },
-    primaryBtnText: { control: 'color', name: '--primary-btn-text', description: 'Text on primary buttons' },
+    canvasBase: {
+      control: "color",
+      name: "--canvas-base",
+      description: "Page background",
+    },
+    secondaryBg: {
+      control: "color",
+      name: "--secondary-bg",
+      description: "Elevated surface background",
+    },
+    cardBg: {
+      control: "color",
+      name: "--card-bg",
+      description: "Card background",
+    },
+    elevatedSurface: {
+      control: "color",
+      name: "--elevated-surface",
+      description: "Elevated interactive surface",
+    },
+    primaryBrand: {
+      control: "color",
+      name: "--primary-brand",
+      description: "Primary action color (CTA, links)",
+    },
+    hoverBrand: {
+      control: "color",
+      name: "--hover-brand",
+      description: "Hover state of primary brand",
+    },
+    secondaryAccent: {
+      control: "color",
+      name: "--secondary-accent",
+      description: "Secondary accent (success, highlights)",
+    },
+    structuralBorders: {
+      control: "color",
+      name: "--structural-borders",
+      description: "Dividers & borders",
+    },
+    textPrimary: {
+      control: "color",
+      name: "--text-primary",
+      description: "Primary text color",
+    },
+    textMuted: {
+      control: "color",
+      name: "--text-muted",
+      description: "Muted / secondary text",
+    },
+    primaryBtnText: {
+      control: "color",
+      name: "--primary-btn-text",
+      description: "Text on primary buttons",
+    },
   },
   render: (args) => {
     const tokens = [
-      { name: '--canvas-base', label: 'Canvas Base', value: args.canvasBase },
-      { name: '--secondary-bg', label: 'Secondary BG', value: args.secondaryBg },
-      { name: '--card-bg', label: 'Card BG', value: args.cardBg },
-      { name: '--elevated-surface', label: 'Elevated Surface', value: args.elevatedSurface },
-      { name: '--primary-brand', label: 'Primary Brand', value: args.primaryBrand },
-      { name: '--hover-brand', label: 'Hover Brand', value: args.hoverBrand },
-      { name: '--secondary-accent', label: 'Secondary Accent', value: args.secondaryAccent },
-      { name: '--structural-borders', label: 'Structural Borders', value: args.structuralBorders },
-      { name: '--text-primary', label: 'Text Primary', value: args.textPrimary },
-      { name: '--text-muted', label: 'Text Muted', value: args.textMuted },
-      { name: '--primary-btn-text', label: 'Primary Btn Text', value: args.primaryBtnText },
+      { name: "--canvas-base", label: "Canvas Base", value: args.canvasBase },
+      {
+        name: "--secondary-bg",
+        label: "Secondary BG",
+        value: args.secondaryBg,
+      },
+      { name: "--card-bg", label: "Card BG", value: args.cardBg },
+      {
+        name: "--elevated-surface",
+        label: "Elevated Surface",
+        value: args.elevatedSurface,
+      },
+      {
+        name: "--primary-brand",
+        label: "Primary Brand",
+        value: args.primaryBrand,
+      },
+      { name: "--hover-brand", label: "Hover Brand", value: args.hoverBrand },
+      {
+        name: "--secondary-accent",
+        label: "Secondary Accent",
+        value: args.secondaryAccent,
+      },
+      {
+        name: "--structural-borders",
+        label: "Structural Borders",
+        value: args.structuralBorders,
+      },
+      {
+        name: "--text-primary",
+        label: "Text Primary",
+        value: args.textPrimary,
+      },
+      { name: "--text-muted", label: "Text Muted", value: args.textMuted },
+      {
+        name: "--primary-btn-text",
+        label: "Primary Btn Text",
+        value: args.primaryBtnText,
+      },
     ];
 
     // Build inline style overrides
     const overrides = tokens
       .filter((t) => t.value)
       .map((t) => `${t.name}: ${t.value}`)
-      .join('; ');
+      .join("; ");
 
     const swatches = tokens
       .map(
@@ -65,9 +137,9 @@ const meta: Meta = {
           <code style="font-size: 11px; color: var(--text-muted); font-family: monospace; text-align: center;">${t.name}</code>
           <span style="font-size: 10px; color: var(--text-primary); opacity: 0.6;">${t.label}</span>
         </div>
-      `
+      `,
       )
-      .join('');
+      .join("");
 
     return `
       <div style="${overrides}; padding: 40px; background: var(--canvas-base); min-height: 100vh; transition: all 0.3s ease;">
@@ -124,21 +196,21 @@ type Story = StoryObj;
 export const DarkTheme: Story = {
   args: {},
   parameters: {
-    themes: { themeOverride: 'dark' },
+    themes: { themeOverride: "dark" },
   },
 };
 
 export const LightTheme: Story = {
   args: {},
   parameters: {
-    themes: { themeOverride: 'light' },
+    themes: { themeOverride: "light" },
   },
 };
 
 export const CustomOverrides: Story = {
   args: {
-    primaryBrand: '#FF6B6B',
-    secondaryAccent: '#FFD93D',
-    hoverBrand: '#EE5A24',
+    primaryBrand: "#FF6B6B",
+    secondaryAccent: "#FFD93D",
+    hoverBrand: "#EE5A24",
   },
 };

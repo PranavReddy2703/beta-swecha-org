@@ -1,47 +1,98 @@
-import type { Meta, StoryObj } from '@storybook-astro/framework';
+import type { Meta, StoryObj } from "@storybook-astro/framework";
 
 const meta: Meta = {
-  title: 'Design System/Typography',
-  tags: ['autodocs'],
+  title: "Design System/Typography",
+  tags: ["autodocs"],
   parameters: {
     docs: {
       description: {
         component:
-          'Typography system showcasing heading hierarchy, body text, and utility styles. Uses Inter for body and Outfit for headings as per the design constitution.',
+          "Typography system showcasing heading hierarchy, body text, and utility styles. Uses Inter for body and Outfit for headings as per the design constitution.",
       },
     },
-    layout: 'fullscreen',
+    layout: "fullscreen",
   },
   argTypes: {
-    headingColor: { control: 'color', name: 'Heading Color', description: 'Color for all headings' },
-    bodyColor: { control: 'color', name: 'Body Text Color', description: 'Color for body paragraphs' },
-    mutedColor: { control: 'color', name: 'Muted Text Color', description: 'Color for muted / secondary text' },
-    accentColor: { control: 'color', name: 'Accent / Link Color', description: 'Color for links and accents' },
+    headingColor: {
+      control: "color",
+      name: "Heading Color",
+      description: "Color for all headings",
+    },
+    bodyColor: {
+      control: "color",
+      name: "Body Text Color",
+      description: "Color for body paragraphs",
+    },
+    mutedColor: {
+      control: "color",
+      name: "Muted Text Color",
+      description: "Color for muted / secondary text",
+    },
+    accentColor: {
+      control: "color",
+      name: "Accent / Link Color",
+      description: "Color for links and accents",
+    },
     fontFamily: {
-      control: 'select',
-      options: ["'Outfit', system-ui, sans-serif", "'Inter', system-ui, sans-serif", "'Roboto', sans-serif", "system-ui, sans-serif"],
-      name: 'Font Family',
+      control: "select",
+      options: [
+        "'Outfit', system-ui, sans-serif",
+        "'Inter', system-ui, sans-serif",
+        "'Roboto', sans-serif",
+        "system-ui, sans-serif",
+      ],
+      name: "Font Family",
     },
     baseFontSize: {
-      control: { type: 'range', min: 12, max: 24, step: 1 },
-      name: 'Base Font Size (px)',
+      control: { type: "range", min: 12, max: 24, step: 1 },
+      name: "Base Font Size (px)",
     },
   },
   render: (args) => {
-    const headingColor = args.headingColor || 'var(--text-primary)';
-    const bodyColor = args.bodyColor || 'var(--text-primary)';
-    const mutedColor = args.mutedColor || 'var(--text-muted)';
-    const accentColor = args.accentColor || 'var(--primary-brand)';
+    const headingColor = args.headingColor || "var(--text-primary)";
+    const bodyColor = args.bodyColor || "var(--text-primary)";
+    const mutedColor = args.mutedColor || "var(--text-muted)";
+    const accentColor = args.accentColor || "var(--primary-brand)";
     const fontFamily = args.fontFamily || "'Outfit', system-ui, sans-serif";
     const baseFontSize = args.baseFontSize || 16;
 
     const headings = [
-      { tag: 'h1', size: `${baseFontSize * 3}px`, weight: 800, label: 'H1 — Page Title' },
-      { tag: 'h2', size: `${baseFontSize * 2.25}px`, weight: 800, label: 'H2 — Section Heading' },
-      { tag: 'h3', size: `${baseFontSize * 1.75}px`, weight: 700, label: 'H3 — Subsection' },
-      { tag: 'h4', size: `${baseFontSize * 1.375}px`, weight: 700, label: 'H4 — Card Title' },
-      { tag: 'h5', size: `${baseFontSize * 1.125}px`, weight: 600, label: 'H5 — Label' },
-      { tag: 'h6', size: `${baseFontSize}px`, weight: 600, label: 'H6 — Small Label' },
+      {
+        tag: "h1",
+        size: `${baseFontSize * 3}px`,
+        weight: 800,
+        label: "H1 — Page Title",
+      },
+      {
+        tag: "h2",
+        size: `${baseFontSize * 2.25}px`,
+        weight: 800,
+        label: "H2 — Section Heading",
+      },
+      {
+        tag: "h3",
+        size: `${baseFontSize * 1.75}px`,
+        weight: 700,
+        label: "H3 — Subsection",
+      },
+      {
+        tag: "h4",
+        size: `${baseFontSize * 1.375}px`,
+        weight: 700,
+        label: "H4 — Card Title",
+      },
+      {
+        tag: "h5",
+        size: `${baseFontSize * 1.125}px`,
+        weight: 600,
+        label: "H5 — Label",
+      },
+      {
+        tag: "h6",
+        size: `${baseFontSize}px`,
+        weight: 600,
+        label: "H6 — Small Label",
+      },
     ];
 
     const headingRows = headings
@@ -55,9 +106,9 @@ const meta: Meta = {
             <code style="font-size: 11px; color: ${mutedColor}; font-family: monospace; white-space: nowrap;">${h.size} / ${h.weight}</code>
           </div>
         </div>
-      `
+      `,
       )
-      .join('');
+      .join("");
 
     return `
       <div style="padding: 40px; background: var(--canvas-base); min-height: 100vh;">
@@ -139,9 +190,9 @@ export const CompactScale: Story = {
 export const CustomColors: Story = {
   args: {
     baseFontSize: 16,
-    headingColor: '#FF6B6B',
-    bodyColor: '#E2E8F0',
-    mutedColor: '#718096',
-    accentColor: '#48BB78',
+    headingColor: "#FF6B6B",
+    bodyColor: "#E2E8F0",
+    mutedColor: "#718096",
+    accentColor: "#48BB78",
   },
 };

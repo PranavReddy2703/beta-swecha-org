@@ -1,26 +1,24 @@
 ---
 // src/components/contact/OpenStreetMap.astro
-import 'leaflet/dist/leaflet.css';
+import "leaflet/dist/leaflet.css";
 ---
 
-<div 
+<div
   id="osm-map-container"
   class="group/map relative w-full h-[350px] md:h-full flex-grow rounded-xl border border-structural-borders/80 bg-[#0c1017] overflow-hidden transition-all duration-300 hover:border-primary-brand/35 hover:shadow-[0_0_20px_rgba(0,212,255,0.08)]"
 >
   <!-- Interactive Map Div -->
   <div id="map" class="w-full h-full z-10"></div>
-
-
 </div>
 
 <script>
-  import L from 'leaflet';
+  import L from "leaflet";
 
   // Coordinate for Swecha Office (near CGG Gachibowli)
   const officeCoords: [number, number] = [17.4360775, 78.3612286];
 
   // Initialize the map, centering on coordinates
-  const map = L.map('map', {
+  const map = L.map("map", {
     center: officeCoords,
     zoom: 17,
     zoomControl: true,
@@ -28,18 +26,27 @@ import 'leaflet/dist/leaflet.css';
   });
 
   // Set up both tile layers
-  const darkTiles = L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
-    maxZoom: 20,
-    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions" target="_blank" rel="noopener noreferrer">CARTO</a>'
-  });
+  const darkTiles = L.tileLayer(
+    "https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png",
+    {
+      maxZoom: 20,
+      attribution:
+        '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions" target="_blank" rel="noopener noreferrer">CARTO</a>',
+    },
+  );
 
-  const lightTiles = L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
-    maxZoom: 20,
-    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions" target="_blank" rel="noopener noreferrer">CARTO</a>'
-  });
+  const lightTiles = L.tileLayer(
+    "https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png",
+    {
+      maxZoom: 20,
+      attribution:
+        '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions" target="_blank" rel="noopener noreferrer">CARTO</a>',
+    },
+  );
 
   function updateTiles() {
-    const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+    const isLight =
+      document.documentElement.getAttribute("data-theme") === "light";
     if (isLight) {
       map.removeLayer(darkTiles);
       lightTiles.addTo(map);
@@ -55,7 +62,7 @@ import 'leaflet/dist/leaflet.css';
   // Listen to data-theme toggle events/attribute changes
   const observer = new MutationObserver((mutations) => {
     mutations.forEach((mutation) => {
-      if (mutation.attributeName === 'data-theme') {
+      if (mutation.attributeName === "data-theme") {
         updateTiles();
       }
     });
@@ -64,7 +71,7 @@ import 'leaflet/dist/leaflet.css';
 
   // Custom DivIcon representing a pulsing cyan dot with high-end glow
   const customMarkerIcon = L.divIcon({
-    className: 'swecha-leaflet-marker',
+    className: "swecha-leaflet-marker",
     html: `
       <div class="marker-pulse-wrapper relative flex h-7 w-7 items-center justify-center">
         <span class="pulse-ring absolute h-7 w-7 rounded-full transition-all duration-500"></span>
@@ -73,19 +80,21 @@ import 'leaflet/dist/leaflet.css';
       </div>
     `,
     iconSize: [28, 28],
-    iconAnchor: [14, 14]
+    iconAnchor: [14, 14],
   });
 
   // Create marker and add to map
   const marker = L.marker(officeCoords, { icon: customMarkerIcon }).addTo(map);
 
   // Bind a tooltip displaying "Swecha Office"
-  marker.bindTooltip("Swecha Office", {
-    permanent: true,
-    direction: 'top',
-    className: 'swecha-leaflet-tooltip',
-    offset: [0, -14]
-  }).openTooltip();
+  marker
+    .bindTooltip("Swecha Office", {
+      permanent: true,
+      direction: "top",
+      className: "swecha-leaflet-tooltip",
+      offset: [0, -14],
+    })
+    .openTooltip();
 </script>
 
 <style is:global>
@@ -122,8 +131,8 @@ import 'leaflet/dist/leaflet.css';
   }
 
   .core-dot {
-    background-color: #00D4FF;
-    box-shadow: 0 0 10px #00D4FF;
+    background-color: #00d4ff;
+    box-shadow: 0 0 10px #00d4ff;
   }
 
   @keyframes markerPing {
@@ -150,7 +159,7 @@ import 'leaflet/dist/leaflet.css';
 
   /* Clean leaflet pane default styling adjustments */
   .leaflet-container {
-    background: #080B10 !important;
+    background: #080b10 !important;
     font-family: inherit !important;
   }
 
@@ -214,18 +223,18 @@ import 'leaflet/dist/leaflet.css';
   }
 
   html[data-theme="light"] .swecha-leaflet-tooltip {
-    background-color: #FFFFFF !important;
+    background-color: #ffffff !important;
     border: 1px solid rgba(0, 0, 0, 0.15) !important;
     color: var(--text-primary) !important;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08) !important;
   }
 
   html[data-theme="light"] .swecha-leaflet-tooltip::before {
-    border-top-color: #FFFFFF !important;
+    border-top-color: #ffffff !important;
   }
 
   html[data-theme="light"] .leaflet-container {
-    background: #E2E8F0 !important;
+    background: #e2e8f0 !important;
   }
 
   html[data-theme="light"] .leaflet-bar {
@@ -234,13 +243,13 @@ import 'leaflet/dist/leaflet.css';
   }
 
   html[data-theme="light"] .leaflet-bar a {
-    background-color: #FFFFFF !important;
+    background-color: #ffffff !important;
     color: var(--text-muted) !important;
     border-bottom: 1px solid rgba(0, 0, 0, 0.08) !important;
   }
 
   html[data-theme="light"] .leaflet-bar a:hover {
-    background-color: #F8FAFC !important;
+    background-color: #f8fafc !important;
     color: var(--primary-brand) !important;
   }
 

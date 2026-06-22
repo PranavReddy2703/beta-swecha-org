@@ -10,10 +10,7 @@ const { href, name, isActive = false } = Astro.props;
 ---
 
 <li>
-  <a
-    href={href}
-    class={`lang-option ${isActive ? 'lang-option-active' : ''}`}
-  >
+  <a href={href} class={`lang-option ${isActive ? "lang-option-active" : ""}`}>
     <span class="lang-dot"></span>
     {name}
   </a>

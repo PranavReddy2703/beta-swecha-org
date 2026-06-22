@@ -1,17 +1,18 @@
-import type { Meta, StoryObj } from '@storybook-astro/framework';
-import EventsPage from './events.astro';
+import type { Meta, StoryObj } from "@storybook-astro/framework";
+import EventsPage from "./events.astro";
 
 const meta: Meta<typeof EventsPage> = {
-  title: 'Pages/Events',
+  title: "Pages/Events",
   component: EventsPage,
-  tags: ['autodocs'],
+  tags: ["autodocs"],
   parameters: {
     docs: {
       description: {
-        component: 'The Events index page. Lists upcoming and past events with a timeline layout.',
+        component:
+          "The Events index page. Lists upcoming and past events with a timeline layout.",
       },
     },
-    layout: 'fullscreen',
+    layout: "fullscreen",
   },
 };
 

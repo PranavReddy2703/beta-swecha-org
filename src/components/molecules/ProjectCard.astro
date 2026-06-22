@@ -10,7 +10,7 @@ interface Props {
   link?: string;
 }
 
-const { title, description, tags, status, link = "#" } = Astro.props;
+const { title, description, tags = [], status, link = "#" } = Astro.props;
 const tagsString = tags.join(",");
 
 // Determine status color

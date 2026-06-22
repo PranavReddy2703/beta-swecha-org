@@ -1,21 +1,25 @@
-import type { Meta, StoryObj } from '@storybook-astro/framework';
-import NavLink from './NavLink.astro';
+import type { Meta, StoryObj } from "@storybook-astro/framework";
+import NavLink from "./NavLink.astro";
 
 const meta: Meta<typeof NavLink> = {
-  title: 'Atoms/NavLink',
+  title: "Atoms/NavLink",
   component: NavLink,
-  tags: ['autodocs'],
+  tags: ["autodocs"],
   parameters: {
     docs: {
       description: {
-        component: 'Desktop navigation link with animated underline indicator and hover background. Uses the brand gradient for the active indicator.',
+        component:
+          "Desktop navigation link with animated underline indicator and hover background. Uses the brand gradient for the active indicator.",
       },
     },
   },
   argTypes: {
-    href: { control: 'text', description: 'Navigation target URL' },
-    label: { control: 'text', description: 'Link display text' },
-    isActive: { control: 'boolean', description: 'Whether this page is currently active' },
+    href: { control: "text", description: "Navigation target URL" },
+    label: { control: "text", description: "Link display text" },
+    isActive: {
+      control: "boolean",
+      description: "Whether this page is currently active",
+    },
   },
 };
 
@@ -24,13 +28,18 @@ export default meta;
 type Story = StoryObj<typeof NavLink>;
 
 export const Default: Story = {
-  args: { href: '/about', label: 'About', isActive: false },
+  args: { href: "/about", label: "About", isActive: false },
 };
 
 export const Active: Story = {
-  args: { href: '/projects', label: 'Projects', isActive: true },
+  args: { href: "/projects", label: "Projects", isActive: true },
   parameters: {
-    docs: { description: { story: 'Active state shows a wider underline indicator and brand-colored text.' } },
+    docs: {
+      description: {
+        story:
+          "Active state shows a wider underline indicator and brand-colored text.",
+      },
+    },
   },
 };
 
@@ -52,6 +61,11 @@ export const NavigationBar: Story = {
     </nav>
   `,
   parameters: {
-    docs: { description: { story: 'Full desktop navigation bar showing one active link and three default links.' } },
+    docs: {
+      description: {
+        story:
+          "Full desktop navigation bar showing one active link and three default links.",
+      },
+    },
   },
 };

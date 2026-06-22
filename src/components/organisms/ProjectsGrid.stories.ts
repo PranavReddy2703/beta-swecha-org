@@ -1,17 +1,18 @@
-import type { Meta, StoryObj } from '@storybook-astro/framework';
-import ProjectsGrid from './ProjectsGrid.astro';
+import type { Meta, StoryObj } from "@storybook-astro/framework";
+import ProjectsGrid from "./ProjectsGrid.astro";
 
 const meta: Meta<typeof ProjectsGrid> = {
-  title: 'Organisms/ProjectsGrid',
+  title: "Organisms/ProjectsGrid",
   component: ProjectsGrid,
-  tags: ['autodocs'],
+  tags: ["autodocs"],
   parameters: {
     docs: {
       description: {
-        component: 'Container for ProjectCards on the Projects page. Provides responsive grid layout.',
+        component:
+          "Container for ProjectCards on the Projects page. Provides responsive grid layout.",
       },
     },
-    layout: 'fullscreen',
+    layout: "fullscreen",
   },
 };
 

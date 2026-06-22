@@ -1,17 +1,18 @@
-import type { Meta, StoryObj } from '@storybook-astro/framework';
-import Footer from './Footer.astro';
+import type { Meta, StoryObj } from "@storybook-astro/framework";
+import Footer from "./Footer.astro";
 
 const meta: Meta<typeof Footer> = {
-  title: 'Organisms/Footer',
+  title: "Organisms/Footer",
   component: Footer,
-  tags: ['autodocs'],
+  tags: ["autodocs"],
   parameters: {
     docs: {
       description: {
-        component: 'Site-wide footer component containing copyright info and social media icons. Automatically dynamically updates the year.',
+        component:
+          "Site-wide footer component containing copyright info and social media icons. Automatically dynamically updates the year.",
       },
     },
-    layout: 'fullscreen',
+    layout: "fullscreen",
   },
 };
 
