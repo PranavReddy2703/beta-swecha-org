@@ -11,7 +11,7 @@ interface Props {
 const { label, variant = "tag", class: className = "" } = Astro.props;
 
 const variantStyles: Record<BadgeVariant, string> = {
-  hero: "inline-flex items-center gap-1.5 rounded-full border border-secondary-accent/30 bg-secondary-accent/10 px-3 py-1 text-xs font-semibold tracking-wider text-secondary-accent uppercase animate-pulse",
+  hero: "inline-flex items-center gap-1.5 rounded-full border border-secondary-accent/50 bg-[#080b10] px-3 py-1 text-xs font-extrabold tracking-wider text-secondary-accent uppercase animate-pulse",
   status:
     "inline-flex items-center gap-1.5 px-3 py-1 text-[10px] sm:text-xs font-bold uppercase tracking-wider rounded-full border",
   tag: "badge badge-outline border-structural-borders/60 text-text-muted text-[11px] font-semibold px-2.5 py-1",

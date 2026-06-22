@@ -1,12 +1,14 @@
 ---
 // src/components/TimelineCard.astro
 import Tag from "../atoms/Tag.astro";
+import { Image } from "astro:assets";
 interface Props {
   year: string;
   title: string;
   description: string;
-  previewImage?: string;
+  previewImage?: any;
   tags?: string[];
+  index: number;
 }
 
 const {
@@ -15,6 +17,7 @@ const {
   description,
   previewImage,
   tags = ["Community", "FOSS", "Localization"],
+  index,
 } = Astro.props;
 ---
 
@@ -35,12 +38,16 @@ const {
             portrait photo (e.g. 9:16), you MUST change these numbers to match that ratio (e.g. 600/1066), 
             otherwise Lighthouse will flag a Cumulative Layout Shift (CLS) violation.
           */}
-          <img
+          <Image
             src={previewImage}
             alt={title}
-            width="800"
-            height="600"
-            loading="lazy"
+            width={800}
+            height={600}
+            quality={50}
+            widths={[256, 512, 800]}
+            sizes="(max-width: 768px) 85px, 800px"
+            loading={index === 0 ? "eager" : "lazy"}
+            fetchpriority={index === 0 ? "high" : "auto"}
             decoding="async"
             class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover/preview:scale-105"
           />

@@ -23,8 +23,10 @@ const paragraphs = [t("about.p1"), t("about.p2"), t("about.p3"), t("about.p4")];
         {
           paragraphs.map((p, index) => (
             <p
-              class="text-base sm:text-lg opacity-0 translate-y-3 animate-fade-in-up cursor-default about-paragraph"
-              style={`animation-delay: ${index * 150 + 150}ms;`}
+              class={`text-base sm:text-lg cursor-default about-paragraph ${index > 0 ? "opacity-0 translate-y-3 animate-fade-in-up" : ""}`}
+              style={
+                index > 0 ? `animation-delay: ${index * 150 + 150}ms;` : ""
+              }
             >
               <span class="block hover-lift transition-all duration-500">
                 <Fragment set:html={p} />
@@ -37,7 +39,7 @@ const paragraphs = [t("about.p1"), t("about.p2"), t("about.p3"), t("about.p4")];
   </div>
 </section>
 
-<script>
+<script is:inline>
   function initMobileHighlight() {
     // Enable auto-highlighting on scroll for touch devices / mobile screens
     if (window.matchMedia("(max-width: 768px)").matches) {
