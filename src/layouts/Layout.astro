@@ -27,6 +27,8 @@ const {
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <meta name="theme-color" content="#080B10" />
     <title>{title}</title>
     <meta name="description" content={description} />
 
@@ -35,6 +37,9 @@ const {
       const savedTheme = localStorage.getItem("theme") || "dark";
       document.documentElement.setAttribute("data-theme", savedTheme);
     </script>
+
+    <!-- PWA Registration -->
+    <script src="/src/pwa.ts"></script>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />

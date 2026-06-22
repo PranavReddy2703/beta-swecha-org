@@ -33,7 +33,8 @@
           {
             "minScore": 0.9
           }
-        ]
+        ],
+        "network-dependency-tree-insight": "off"
       }
     }
   }
