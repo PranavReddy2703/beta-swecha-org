@@ -7,14 +7,20 @@
     "@layouts/*": ["./src/layouts/*"],
     "@data/*": ["./src/data/*"]
   },
-  "ignore": ["src/components/types/index.ts", "src/i18n/ui.ts"],
+  "ignore": [
+    "src/components/types/index.ts",
+    "src/i18n/ui.ts",
+    "builds/**",
+    "cache/**"
+  ],
   "ignoreExportsUsedInFile": true,
   "ignoreDependencies": [
     "@lhci/cli",
     "@secretlint/secretlint-rule-preset-recommend",
     "@storybook/builder-vite",
     "astro-eslint-parser",
-    "react"
+    "react",
+    "lint-staged"
   ],
   "astro": {
     "entry": [
