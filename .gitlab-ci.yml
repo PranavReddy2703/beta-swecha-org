@@ -49,6 +49,9 @@ build_assets:
 lighthouse_ci:
   stage: test
   needs: ["build_assets"]
+  before_script:
+    - apt-get update && apt-get install -y chromium
+    - export CHROME_PATH=/usr/bin/chromium
   script:
     - npx lhci autorun
 
