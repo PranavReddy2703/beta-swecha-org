@@ -7,12 +7,7 @@
     "@layouts/*": ["./src/layouts/*"],
     "@data/*": ["./src/data/*"]
   },
-  "ignore": [
-    "src/components/types/index.ts",
-    "src/i18n/ui.ts",
-    "builds/**",
-    "cache/**"
-  ],
+  "ignore": ["src/components/types/index.ts", "src/i18n/ui.ts"],
   "ignoreExportsUsedInFile": true,
   "ignoreDependencies": [
     "@lhci/cli",
@@ -22,6 +17,7 @@
     "react",
     "lint-staged"
   ],
+  "ignoreBinaries": ["lint-staged"],
   "astro": {
     "entry": [
       "src/pages/**/*.astro",
