@@ -18,6 +18,10 @@ install_dependencies:
   stage: setup
   script:
     - npm ci
+  artifacts:
+    paths:
+      - node_modules/
+    expire_in: 1 hour
 
 lint_and_audit:
   stage: quality
