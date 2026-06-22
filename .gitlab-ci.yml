@@ -1,46 +1,45 @@
 image: node:22
 
+variables:
+  FF_USE_FASTZIP: "true"
+  CACHE_COMPRESSION_LEVEL: "fastest"
+  ARTIFACT_COMPRESSION_LEVEL: "fastest"
+  npm_config_cache: "$CI_PROJECT_DIR/.npm"
+  # Prevent git clean from crashing on Windows long paths inside .npm/ cache and permission issues on build artifacts
+  GIT_CLEAN_FLAGS: -ffdx -e .npm/ -e dist/ -e storybook-static/
+
 stages:
-  - setup
   - quality
   - typecheck
   - build
   - test
   - deploy
 
-variables:
-  GIT_CLEAN_FLAGS: "-ffdx -e node_modules/"
-
 cache:
   key: ${CI_COMMIT_REF_SLUG}
   paths:
-    - node_modules/
     - .npm/
-
-install_dependencies:
-  stage: setup
-  script:
-    - npm ci
 
 lint_and_audit:
   stage: quality
-  needs: ["install_dependencies"]
   script:
+    - npm ci --prefer-offline --no-audit
     - npm run format:check
     - npx secretlint "**/*"
     - npm audit --omit=dev --audit-level=high
 
 typecheck_and_deadcode:
   stage: typecheck
-  needs: ["install_dependencies"]
   script:
+    - npm ci --prefer-offline --no-audit
     - npm run typecheck
     - npm run knip
 
 build_assets:
   stage: build
-  needs: ["install_dependencies", "lint_and_audit", "typecheck_and_deadcode"]
+  needs: ["lint_and_audit", "typecheck_and_deadcode"]
   script:
+    - npm ci --prefer-offline --no-audit
     - npm run build
     - npm run build-storybook -- -o storybook-static
   artifacts:
@@ -56,6 +55,7 @@ lighthouse_ci:
     - apt-get update && apt-get install -y chromium
     - export CHROME_PATH=/usr/bin/chromium
   script:
+    - npm ci --prefer-offline --no-audit
     - npx lhci autorun
 
 pages:

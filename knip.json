@@ -7,7 +7,12 @@
     "@layouts/*": ["./src/layouts/*"],
     "@data/*": ["./src/data/*"]
   },
-  "ignore": ["src/components/types/index.ts", "src/i18n/ui.ts"],
+  "ignore": [
+    "src/components/types/index.ts",
+    "src/i18n/ui.ts",
+    "src/pwa.ts",
+    "src/mock-pwa.ts"
+  ],
   "ignoreExportsUsedInFile": true,
   "ignoreDependencies": [
     "@lhci/cli",
@@ -15,6 +20,7 @@
     "@storybook/builder-vite",
     "astro-eslint-parser",
     "react",
+    "workbox-window",
     "lint-staged"
   ],
   "astro": {
