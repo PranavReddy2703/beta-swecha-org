@@ -1,0 +1,375 @@
+---
+// src/components/organisms/SocialIsland.astro
+import SocialIcon from "../atoms/SocialIcon.astro";
+import socialIconsData from "../../data/atoms/socialIcons.json";
+import type { SocialIconData } from "../types/index";
+
+const typedIcons = socialIconsData as SocialIconData[];
+---
+
+<div id="social-island" class="social-island-container closed">
+  <!-- Trigger Handle -->
+  <button id="social-island-toggle" class="social-island-toggle" aria-label="Toggle Social Media Panel">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="toggle-icon">
+      <polyline points="15 18 9 12 15 6"></polyline>
+    </svg>
+    <span class="toggle-text">Socials</span>
+  </button>
+
+  <!-- Content Panel -->
+  <div class="social-island-panel">
+    <div class="social-island-list">
+      <!-- Close Button inside panel -->
+      <button id="social-island-close" class="social-close-btn" aria-label="Close Social Media Panel">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="close-icon">
+          <polyline points="9 18 15 12 9 6"></polyline>
+        </svg>
+      </button>
+
+      <!-- Subtle separator -->
+      <div class="social-divider"></div>
+
+      {
+        typedIcons.map((icon) => (
+          <div class="social-item-wrapper group relative">
+            <SocialIcon
+              href={icon.href}
+              label={icon.label}
+              platform={icon.platform}
+            />
+            <!-- Custom Premium Tooltip -->
+            <span class="social-tooltip">
+              {icon.label}
+            </span>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</div>
+
+<script>
+  function setupSocialIsland() {
+    const island = document.getElementById("social-island");
+    const toggleBtn = document.getElementById("social-island-toggle");
+    const closeBtn = document.getElementById("social-island-close");
+    if (!island || !toggleBtn || !closeBtn) return;
+
+    let isExpanded = false;
+
+    // Toggle click function
+    const toggleIsland = (e: MouseEvent) => {
+      e.stopPropagation();
+      isExpanded = !isExpanded;
+      if (isExpanded) {
+        island.classList.remove("closed");
+        island.classList.add("open");
+      } else {
+        island.classList.remove("open");
+        island.classList.add("closed");
+      }
+    };
+
+    // Close click function
+    const closeIsland = (e: MouseEvent) => {
+      e.stopPropagation();
+      isExpanded = false;
+      island.classList.remove("open");
+      island.classList.add("closed");
+    };
+
+    toggleBtn.addEventListener("click", toggleIsland);
+    closeBtn.addEventListener("click", closeIsland);
+
+    // Close when clicking outside
+    const handleOutsideClick = (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      if (isExpanded && !island.contains(target)) {
+        isExpanded = false;
+        island.classList.remove("open");
+        island.classList.add("closed");
+      }
+    };
+
+    // Support keyboard ESC to close
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape" && isExpanded) {
+        isExpanded = false;
+        island.classList.remove("open");
+        island.classList.add("closed");
+      }
+    };
+
+    document.addEventListener("click", handleOutsideClick);
+    document.addEventListener("keydown", handleKeyDown);
+
+    // Clean up event listeners on page change/unload to avoid memory leaks
+    const cleanup = () => {
+      toggleBtn.removeEventListener("click", toggleIsland);
+      closeBtn.removeEventListener("click", closeIsland);
+      document.removeEventListener("click", handleOutsideClick);
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+
+    // Astro page-swap lifecycle hook for cleanup
+    document.addEventListener("astro:before-swap", cleanup, { once: true });
+  }
+
+  // Setup after DOM load
+  document.addEventListener("DOMContentLoaded", setupSocialIsland);
+  document.addEventListener("astro:page-load", setupSocialIsland);
+  setupSocialIsland();
+</script>
+
+<style>
+  /* Social Island Styles */
+  .social-island-container {
+    position: fixed;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%) translateX(100%);
+    z-index: 99;
+    display: flex;
+    align-items: center;
+    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  /* When closed, translate to hide content panel, leaving only the toggle tab visible */
+  .social-island-container.closed {
+    /* 34px is the exact width of the toggle tab (32px border-box + borders) */
+    transform: translateY(-50%) translateX(calc(100% - 33px));
+  }
+
+  /* When open, fully reveal the content panel */
+  .social-island-container.open {
+    transform: translateY(-50%) translateX(0);
+  }
+
+  /* Desktop Peek Hover Effect when closed */
+  @media (hover: hover) {
+    .social-island-container.closed:hover {
+      transform: translateY(-50%) translateX(calc(100% - 45px)); /* Slide out slightly to peak */
+    }
+  }
+
+  /* Toggle Handle button */
+  .social-island-toggle {
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 32px;
+    padding: 16px 0;
+    border: 1px solid var(--structural-borders);
+    border-right: none;
+    border-radius: 12px 0 0 12px;
+    background: rgba(17, 24, 39, 0.6);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    color: var(--text-muted);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    outline: none;
+    box-shadow: -4px 0 16px rgba(0, 0, 0, 0.25);
+  }
+
+  :global(html[data-theme="light"]) .social-island-toggle {
+    background: rgba(255, 255, 255, 0.65);
+    border-color: rgba(0, 0, 0, 0.1);
+    box-shadow: -4px 0 16px rgba(11, 30, 54, 0.08);
+  }
+
+  .social-island-toggle:hover {
+    color: var(--primary-brand);
+    background: rgba(17, 24, 39, 0.85);
+  }
+
+  :global(html[data-theme="light"]) .social-island-toggle:hover {
+    background: rgba(255, 255, 255, 0.9);
+  }
+
+  .toggle-icon {
+    width: 14px;
+    height: 14px;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  /* Flip arrow when open */
+  .social-island-container.open .toggle-icon {
+    transform: rotate(180deg);
+  }
+
+  /* Vertical text for visual alignment */
+  .toggle-text {
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    user-select: none;
+  }
+
+  /* Smoothly fade out the toggle tab when panel is open */
+  .social-island-container.open .social-island-toggle {
+    opacity: 0;
+    pointer-events: none;
+    transform: translateX(10px);
+  }
+
+  /* Content Panel */
+  .social-island-panel {
+    padding: 16px 12px;
+    border: 1px solid var(--structural-borders);
+    border-right: none;
+    border-radius: 16px 0 0 16px;
+    background: rgba(17, 24, 39, 0.6);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    box-shadow: -8px 0 32px rgba(0, 0, 0, 0.35);
+  }
+
+  :global(html[data-theme="light"]) .social-island-panel {
+    background: rgba(255, 255, 255, 0.65);
+    border-color: rgba(0, 0, 0, 0.1);
+    box-shadow: -8px 0 32px rgba(11, 30, 54, 0.1);
+  }
+
+  .social-island-list {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    align-items: center;
+  }
+
+  /* Close Button inside panel */
+  .social-close-btn {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: var(--text-muted);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    outline: none;
+  }
+
+  :global(html[data-theme="light"]) .social-close-btn {
+    background: rgba(0, 0, 0, 0.04);
+    border-color: rgba(0, 0, 0, 0.08);
+  }
+
+  .social-close-btn:hover {
+    background: rgba(0, 212, 255, 0.12);
+    border-color: var(--primary-brand);
+    color: var(--primary-brand);
+    transform: scale(1.08);
+  }
+
+  :global(html[data-theme="light"]) .social-close-btn:hover {
+    background: rgba(2, 90, 158, 0.08);
+    border-color: var(--primary-brand);
+    color: var(--primary-brand);
+  }
+
+  .social-close-btn:hover .close-icon {
+    transform: translateX(2px);
+  }
+
+  .close-icon {
+    width: 14px;
+    height: 14px;
+    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  /* Divider */
+  .social-divider {
+    width: 20px;
+    height: 1px;
+    background: var(--structural-borders);
+    opacity: 0.5;
+    margin: 2px 0;
+  }
+
+  /* Icon styling wrappers with glass effects */
+  .social-item-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  :global(html[data-theme="light"]) .social-item-wrapper {
+    background: rgba(0, 0, 0, 0.02);
+    border-color: rgba(0, 0, 0, 0.06);
+  }
+
+  .social-item-wrapper:hover {
+    background: rgba(0, 212, 255, 0.12);
+    border-color: var(--primary-brand);
+    transform: scale(1.12) translateY(-2px);
+    box-shadow: 0 4px 14px rgba(0, 212, 255, 0.3);
+  }
+
+  :global(html[data-theme="light"]) .social-item-wrapper:hover {
+    background: rgba(2, 90, 158, 0.08);
+    border-color: var(--primary-brand);
+    box-shadow: 0 4px 14px rgba(2, 132, 199, 0.18);
+  }
+
+  /* Deep style override inside island for the atom footer icon */
+  .social-item-wrapper :global(.footer-icon) {
+    color: var(--text-muted);
+    opacity: 0.75;
+    transition: color 0.3s ease, opacity 0.3s ease;
+  }
+
+  .social-item-wrapper:hover :global(.footer-icon) {
+    color: var(--primary-brand);
+    opacity: 1;
+  }
+
+  /* Beautiful floating tooltip */
+  .social-tooltip {
+    position: absolute;
+    right: 100%;
+    margin-right: 14px;
+    top: 50%;
+    transform: translateY(-50%) translateX(10px);
+    padding: 6px 12px;
+    border-radius: 8px;
+    background: #0b0f19;
+    border: 1px solid var(--structural-borders);
+    color: var(--text-primary);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  :global(html[data-theme="light"]) .social-tooltip {
+    background: #ffffff;
+    border-color: rgba(0, 0, 0, 0.1);
+    color: var(--text-primary);
+    box-shadow: 0 8px 24px rgba(11, 30, 54, 0.1);
+  }
+
+  .social-item-wrapper:hover .social-tooltip {
+    opacity: 1;
+    transform: translateY(-50%) translateX(0);
+  }
+</style>
