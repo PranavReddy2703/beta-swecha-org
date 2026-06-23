@@ -25,6 +25,7 @@ lint_and_audit:
   script:
     - npm ci --prefer-offline --no-audit
     - npm run format:check
+    - npm run i18n:check
     - npx secretlint "**/*"
     - npm audit --omit=dev --audit-level=high
 
