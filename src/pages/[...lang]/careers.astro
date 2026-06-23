@@ -44,7 +44,7 @@ const lang = getLangFromUrl(Astro.url);
     >
       <!-- HERO / BANNER SECTION -->
       <section
-        class="relative overflow-hidden rounded-3xl border border-structural-borders/40 bg-card-bg/20 backdrop-blur-md p-8 md:p-12 shadow-2xl text-center scroll-reveal-section opacity-0 translate-y-4 transition-all duration-700 ease-out animate-fade-in"
+        class="glass-white-card relative overflow-hidden rounded-3xl border border-structural-borders/40 bg-card-bg/20 backdrop-blur-md p-8 md:p-12 shadow-2xl text-center scroll-reveal-section opacity-0 translate-y-4 transition-all duration-700 ease-out animate-fade-in"
       >
         <div class="max-w-3xl mx-auto space-y-6">
           <!-- Badge -->
@@ -60,7 +60,7 @@ const lang = getLangFromUrl(Astro.url);
               AI Creators Program
             </h1>
             <p
-              class="text-xl sm:text-2xl font-bold tracking-wide text-secondary-accent drop-shadow-[0_0_15px_rgba(77,255,180,0.3)]"
+              class="careers-hero-subtitle text-xl sm:text-2xl font-bold tracking-wide"
             >
               A 15-Day Immersive Internship
             </p>
@@ -72,8 +72,9 @@ const lang = getLangFromUrl(Astro.url);
           >
             Hey there, future changemakers! Passionate about AI, language, and
             preserving cultural heritage? Swecha is conducting the <strong
-              class="text-primary-brand">Summer of AI</strong
-            > internship in collaboration with <strong class="text-white"
+              class="text-primary-brand font-extrabold">Summer of AI</strong
+            > internship in collaboration with <strong
+              class="careers-hero-bold-highlight font-extrabold"
               >IIIT Hyderabad, Ozonetel, and TASK</strong
             >. The largest crowdsourced AI effort for preserving Telugu culture.
           </p>
@@ -85,153 +86,185 @@ const lang = getLangFromUrl(Astro.url);
               variant="primary"
               class="careers-apply-trigger-btn"
             />
-            <Button href="#details" label="Learn More" variant="secondary" />
+            <Button
+              href="#details"
+              label="Learn More"
+              variant="secondary"
+              class="careers-learn-more-btn"
+            />
           </div>
         </div>
       </section>
 
-      <!-- DETAILS SECTION -->
-      <section
-        id="details"
-        class="space-y-8 scroll-reveal-section opacity-0 translate-y-8 transition-all duration-700 ease-out"
+      <!-- PROGRAM HIGHLIGHTS DIALOG MODAL -->
+      <dialog
+        id="careers-highlights-modal"
+        class="modal bg-transparent backdrop:backdrop-blur-md backdrop:bg-[#080B10]/70"
       >
-        <div class="flex items-center space-x-4">
-          <h2 class="text-2xl md:text-3xl font-black text-white">
-            Program Highlights
-          </h2>
-          <span
-            class="h-[1px] flex-grow bg-gradient-to-r from-structural-borders via-structural-borders/30 to-transparent"
-          ></span>
+        <div
+          class="modal-box bg-card-bg border border-structural-borders/40 shadow-2xl rounded-3xl p-8 md:p-10 max-w-5xl w-11/12 overflow-y-auto max-h-[90vh] text-left relative flex flex-col"
+        >
+          <!-- Close button -->
+          <form method="dialog" class="absolute top-5 right-5 z-20">
+            <button
+              class="flex items-center justify-center w-8 h-8 rounded-full bg-structural-borders/35 text-text-muted hover:text-text-main hover:bg-structural-borders/70 transition-all duration-200 cursor-pointer border-none outline-none"
+              aria-label="Close"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-4 w-4"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                stroke-width="2.5"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M18 6L6 18M6 6l12 12"></path>
+              </svg>
+            </button>
+          </form>
+
+          <div class="mb-8 text-center">
+            <h3 class="text-2xl md:text-3xl font-extrabold text-text-main">
+              Program Highlights
+            </h3>
+            <p class="text-xs text-text-muted mt-2">
+              Discover the core tracks and immersive learning paths in the
+              Summer of AI.
+            </p>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <!-- Card 1: Advanced Telugu LLM -->
+            <div
+              class="glass-white-card group relative overflow-hidden rounded-2xl border border-structural-borders/60 bg-card-bg/25 p-6 md:p-8 backdrop-blur-md transition-all duration-300 hover:border-primary-brand/35 hover:-translate-y-1 hover:shadow-lg hover:shadow-primary-brand/5 flex flex-col h-full justify-between"
+            >
+              <!-- Glow background -->
+              <div
+                class="absolute -right-10 -bottom-10 w-24 h-24 rounded-full bg-primary-brand/10 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+              >
+              </div>
+
+              <div class="space-y-4 relative z-10">
+                <div
+                  class="p-3 w-12 h-12 rounded-xl bg-primary-brand/10 text-primary-brand flex items-center justify-center group-hover:scale-110 group-hover:rotate-3 transition-transform duration-300"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="h-6 w-6"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                    ></path>
+                  </svg>
+                </div>
+                <h3
+                  class="text-xl font-bold text-text-main group-hover:text-primary-brand transition-colors duration-300"
+                >
+                  Advanced Telugu LLM
+                </h3>
+                <p class="text-sm text-text-muted leading-relaxed font-medium">
+                  Build an advanced Telugu Language Model (LLM) from the ground
+                  up. Contribute to creating the largest open, community-owned
+                  representation of Telugu culture in AI.
+                </p>
+              </div>
+            </div>
+
+            <!-- Card 2: Llama Integration -->
+            <div
+              class="glass-white-card group relative overflow-hidden rounded-2xl border border-structural-borders/60 bg-card-bg/25 p-6 md:p-8 backdrop-blur-md transition-all duration-300 hover:border-secondary-accent/35 hover:-translate-y-1 hover:shadow-lg hover:shadow-secondary-accent/5 flex flex-col h-full justify-between"
+            >
+              <!-- Glow background -->
+              <div
+                class="absolute -right-10 -bottom-10 w-24 h-24 rounded-full bg-secondary-accent/10 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+              >
+              </div>
+
+              <div class="space-y-4 relative z-10">
+                <div
+                  class="p-3 w-12 h-12 rounded-xl bg-secondary-accent/10 text-secondary-accent flex items-center justify-center group-hover:scale-110 group-hover:rotate-3 transition-transform duration-300"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="h-6 w-6"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"
+                    ></path>
+                  </svg>
+                </div>
+                <h3
+                  class="text-xl font-bold text-text-main group-hover:text-secondary-accent transition-colors duration-300"
+                >
+                  Meta's Llama Projects
+                </h3>
+                <p class="text-sm text-text-muted leading-relaxed font-medium">
+                  Work directly with Facebook (Meta)'s cutting-edge Llama
+                  models. Build industry-grade fine-tuning pipelines and
+                  hands-on LLM projects.
+                </p>
+              </div>
+            </div>
+
+            <!-- Card 3: TTS & Voice Avatar -->
+            <div
+              class="glass-white-card group relative overflow-hidden rounded-2xl border border-structural-borders/60 bg-card-bg/25 p-6 md:p-8 backdrop-blur-md transition-all duration-300 hover:border-primary-brand/35 hover:-translate-y-1 hover:shadow-lg hover:shadow-primary-brand/5 flex flex-col h-full justify-between"
+            >
+              <!-- Glow background -->
+              <div
+                class="absolute -right-10 -bottom-10 w-24 h-24 rounded-full bg-primary-brand/10 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+              >
+              </div>
+
+              <div class="space-y-4 relative z-10">
+                <div
+                  class="p-3 w-12 h-12 rounded-xl bg-primary-brand/10 text-primary-brand flex items-center justify-center group-hover:scale-110 group-hover:rotate-3 transition-transform duration-300"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="h-6 w-6"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"
+                    ></path>
+                  </svg>
+                </div>
+                <h3
+                  class="text-xl font-bold text-text-main group-hover:text-primary-brand transition-colors duration-300"
+                >
+                  Voice Avatars & TTS
+                </h3>
+                <p class="text-sm text-text-muted leading-relaxed font-medium">
+                  Build your own Text-to-Speech (TTS) models and generate your
+                  customized digital Voice Avatar. Experience state-of-the-art
+                  synthetic speech generation.
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <!-- Card 1: Advanced Telugu LLM -->
-          <div
-            class="glass-white-card group relative overflow-hidden rounded-2xl border border-structural-borders/60 bg-card-bg/25 p-6 md:p-8 backdrop-blur-md transition-all duration-300 hover:border-primary-brand/35 hover:-translate-y-1 hover:shadow-lg hover:shadow-primary-brand/5 flex flex-col h-full justify-between"
-          >
-            <!-- Glow background -->
-            <div
-              class="absolute -right-10 -bottom-10 w-24 h-24 rounded-full bg-primary-brand/10 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
-            >
-            </div>
-
-            <div class="space-y-4 relative z-10">
-              <div
-                class="p-3 w-12 h-12 rounded-xl bg-primary-brand/10 text-primary-brand flex items-center justify-center group-hover:scale-110 group-hover:rotate-3 transition-transform duration-300"
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  class="h-6 w-6"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  stroke-width="2"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
-                  ></path>
-                </svg>
-              </div>
-              <h3
-                class="text-xl font-bold text-text-main group-hover:text-primary-brand transition-colors duration-300"
-              >
-                Advanced Telugu LLM
-              </h3>
-              <p class="text-sm text-text-muted leading-relaxed font-medium">
-                Build an advanced Telugu Language Model (LLM) from the ground
-                up. Contribute to creating the largest open, community-owned
-                representation of Telugu culture in AI.
-              </p>
-            </div>
-          </div>
-
-          <!-- Card 2: Llama Integration -->
-          <div
-            class="glass-white-card group relative overflow-hidden rounded-2xl border border-structural-borders/60 bg-card-bg/25 p-6 md:p-8 backdrop-blur-md transition-all duration-300 hover:border-secondary-accent/35 hover:-translate-y-1 hover:shadow-lg hover:shadow-secondary-accent/5 flex flex-col h-full justify-between"
-          >
-            <!-- Glow background -->
-            <div
-              class="absolute -right-10 -bottom-10 w-24 h-24 rounded-full bg-secondary-accent/10 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
-            >
-            </div>
-
-            <div class="space-y-4 relative z-10">
-              <div
-                class="p-3 w-12 h-12 rounded-xl bg-secondary-accent/10 text-secondary-accent flex items-center justify-center group-hover:scale-110 group-hover:rotate-3 transition-transform duration-300"
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  class="h-6 w-6"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  stroke-width="2"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"
-                  ></path>
-                </svg>
-              </div>
-              <h3
-                class="text-xl font-bold text-text-main group-hover:text-secondary-accent transition-colors duration-300"
-              >
-                Meta's Llama Projects
-              </h3>
-              <p class="text-sm text-text-muted leading-relaxed font-medium">
-                Work directly with Facebook (Meta)'s cutting-edge Llama models.
-                Build industry-grade fine-tuning pipelines and hands-on LLM
-                projects.
-              </p>
-            </div>
-          </div>
-
-          <!-- Card 3: TTS & Voice Avatar -->
-          <div
-            class="glass-white-card group relative overflow-hidden rounded-2xl border border-structural-borders/60 bg-card-bg/25 p-6 md:p-8 backdrop-blur-md transition-all duration-300 hover:border-primary-brand/35 hover:-translate-y-1 hover:shadow-lg hover:shadow-primary-brand/5 flex flex-col h-full justify-between"
-          >
-            <!-- Glow background -->
-            <div
-              class="absolute -right-10 -bottom-10 w-24 h-24 rounded-full bg-primary-brand/10 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
-            >
-            </div>
-
-            <div class="space-y-4 relative z-10">
-              <div
-                class="p-3 w-12 h-12 rounded-xl bg-primary-brand/10 text-primary-brand flex items-center justify-center group-hover:scale-110 group-hover:rotate-3 transition-transform duration-300"
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  class="h-6 w-6"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  stroke-width="2"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"
-                  ></path>
-                </svg>
-              </div>
-              <h3
-                class="text-xl font-bold text-text-main group-hover:text-primary-brand transition-colors duration-300"
-              >
-                Voice Avatars & TTS
-              </h3>
-              <p class="text-sm text-text-muted leading-relaxed font-medium">
-                Build your own Text-to-Speech (TTS) models and generate your
-                customized digital Voice Avatar. Experience state-of-the-art
-                synthetic speech generation.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
+      </dialog>
 
       <!-- APPLICATION FORM DIALOG MODAL -->
       <dialog
@@ -476,6 +509,19 @@ const lang = getLangFromUrl(Astro.url);
     });
   }
 
+  // Highlights Modal Dialog trigger
+  const learnMoreTrigger = document.querySelector(".careers-learn-more-btn");
+  const highlightsModal = document.getElementById(
+    "careers-highlights-modal",
+  ) as HTMLDialogElement | null;
+
+  if (learnMoreTrigger && highlightsModal) {
+    learnMoreTrigger.addEventListener("click", (e) => {
+      e.preventDefault();
+      highlightsModal.showModal();
+    });
+  }
+
   // Scroll reveal setup
   const revealObserver = new IntersectionObserver(
     (entries) => {
@@ -540,9 +586,9 @@ const lang = getLangFromUrl(Astro.url);
     animation: fadeIn 0.4s ease-out forwards;
   }
 
-  /* Specific typography overrides for headings in light mode */
-  :global(html[data-theme="light"]) h1,
-  :global(html[data-theme="light"]) h2,
+  /* Specific typography overrides for headings in light mode (only when outside white cards/modals) */
+  :global(html[data-theme="light"]) h1:not(.glass-white-card h1),
+  :global(html[data-theme="light"]) h2:not(.glass-white-card h2),
   :global(html[data-theme="light"])
     h3:not(.modal h3):not(.glass-white-card h3) {
     color: #ffffff !important;
@@ -550,9 +596,46 @@ const lang = getLangFromUrl(Astro.url);
   }
 
   /* Glass Card Typography overrides for light mode */
+  :global(html[data-theme="light"]) .glass-white-card h1,
+  :global(html[data-theme="light"]) .glass-white-card h2,
   :global(html[data-theme="light"]) .glass-white-card h3 {
     color: var(--text-primary) !important;
     text-shadow: none !important;
+  }
+
+  /* Hero custom elements for theme compatibility */
+  .careers-hero-bold-highlight {
+    color: #ffffff;
+  }
+  .careers-hero-subtitle {
+    color: var(--secondary-accent);
+    filter: drop-shadow(0 0 15px rgba(77, 255, 180, 0.3));
+  }
+
+  :global(html[data-theme="light"]) .careers-hero-bold-highlight {
+    color: var(--text-primary) !important;
+  }
+  :global(html[data-theme="light"]) .careers-hero-subtitle {
+    color: var(--primary-brand) !important;
+    filter: none !important;
+  }
+
+  /* Button style overrides for visual alignment and contrast */
+  :global(.careers-apply-trigger-btn) {
+    border: 1px solid transparent !important;
+  }
+  :global(.careers-learn-more-btn) {
+    border: 1px solid var(--structural-borders) !important;
+  }
+  :global(html[data-theme="light"]) :global(.careers-learn-more-btn) {
+    border-color: rgba(11, 30, 54, 0.15) !important;
+    background-color: rgba(255, 255, 255, 0.9) !important;
+    color: var(--text-primary) !important;
+  }
+  :global(html[data-theme="light"]) :global(.careers-learn-more-btn):hover {
+    border-color: var(--primary-brand) !important;
+    color: var(--primary-brand) !important;
+    background-color: #ffffff !important;
   }
 
   /* Modal Typography overrides for light mode */
