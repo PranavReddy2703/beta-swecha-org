@@ -1,99 +1,436 @@
 ---
 // src/components/organisms/HeroSection.astro
-import Badge from "../atoms/Badge.astro";
-import Button from "../atoms/Button.astro";
-import FeatureCard from "../molecules/FeatureCard.astro";
 import {
   getLangFromUrl,
   useTranslations,
   useTranslatedPath,
 } from "../../i18n/utils";
-import featureCardsData from "../../data/molecules/featureCards.json";
-import type { FeatureCardData } from "../types/index";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 const translatePath = useTranslatedPath(lang);
-
-const typedCards = featureCardsData as FeatureCardData[];
 ---
 
-<!-- Hero Section -->{
-  /*
-  @CRITICAL: This component requests an above-the-fold 'fetchpriority="high"' override.
-  NEVER render more than one instance of this component on a single page, and never copy 
-  its fetchpriority attributes to secondary components.
-*/
-}
+<!-- Hero Section -->
 <section
-  class="relative overflow-hidden py-24 md:py-32 flex flex-col items-center justify-center min-h-[calc(100vh-4rem)] bg-transparent transition-colors duration-300"
+  class="hero-section relative overflow-hidden py-16 md:py-24 lg:py-32 flex flex-col items-center justify-center min-h-[calc(100vh-4.5rem)] bg-transparent transition-colors duration-300"
 >
-  <!-- Background glow/grid decorations -->
-  <div class="absolute inset-0 pointer-events-none opacity-5 dark:opacity-20">
-    <div
-      class="absolute -top-40 left-1/4 h-[500px] w-[500px] rounded-full bg-primary-brand blur-[120px]"
-    >
-    </div>
-    <div
-      class="absolute bottom-10 right-1/4 h-[400px] w-[400px] rounded-full bg-secondary-accent blur-[120px]"
-    >
-    </div>
-  </div>
-
   <!-- Main Container -->
-  <div class="relative mx-auto max-w-5xl px-4 text-center sm:px-6 lg:px-8">
-    <!-- Badge element -->
-    <div class="mb-6">
-      <Badge label={t("hero.badge")} variant="hero" />
-    </div>
+  <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 z-10 w-full">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+      <!-- Left Column: Copy, Actions, & Stats -->
+      <div class="lg:col-span-7 flex flex-col text-left">
+        <!-- Dynamic Tagline/Badge -->
+        <div
+          class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-primary-brand/10 border border-primary-brand/20 text-primary-brand text-xs font-black tracking-widest uppercase mb-6 w-fit"
+        >
+          <span class="relative flex h-2 w-2">
+            <span
+              class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary-brand opacity-75"
+            ></span>
+            <span
+              class="relative inline-flex rounded-full h-2 w-2 bg-primary-brand"
+            ></span>
+          </span>
+          {t("hero.badge")}
+        </div>
 
-    <!-- Core heading with gradient -->
-    <h1
-      class="text-4xl font-extrabold tracking-tight text-text-main sm:text-6xl md:text-7xl mb-6"
-    >
-      {t("hero.title1")}
-      <span
-        class="brand-gradient-text block mt-2 bg-gradient-to-r from-primary-brand via-hover-brand to-secondary-accent bg-clip-text text-transparent drop-shadow-[0_2px_8px_rgba(255,255,255,0.55)] dark:drop-shadow-[0_2px_15px_rgba(0,212,255,0.3)]"
-      >
-        {t("hero.title2")}
-      </span>
-    </h1>
+        <!-- Headline with premium typography -->
+        <h1
+          class="hero-title text-4xl sm:text-5xl md:text-6xl font-black text-text-main tracking-tight mb-6"
+        >
+          {t("hero.title1")}
+          <span
+            class="brand-gradient-text block mt-2 bg-gradient-to-r from-primary-brand via-hover-brand to-secondary-accent bg-clip-text text-transparent drop-shadow-[0_2px_8px_rgba(255,255,255,0.55)] dark:drop-shadow-[0_2px_15px_rgba(0,212,255,0.3)]"
+          >
+            {t("hero.title2")}
+          </span>
+        </h1>
 
-    <!-- Subtitle description -->
-    <p
-      class="mx-auto max-w-2xl text-lg text-text-muted md:text-xl mb-10 leading-relaxed"
-    >
-      {t("hero.desc")}
-    </p>
+        <!-- Subtitle description -->
+        <p
+          class="hero-desc text-base sm:text-lg text-text-muted mb-10 leading-relaxed max-w-2xl"
+        >
+          {t("hero.desc")}
+        </p>
 
-    <!-- Action buttons -->
-    <div
-      class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-20"
-    >
-      <Button
-        href={translatePath("/projects")}
-        label={t("hero.btn.explore")}
-        variant="primary"
-      />
-      <Button
-        href={translatePath("/about")}
-        label={t("hero.btn.learn")}
-        variant="secondary"
-      />
-    </div>
+        <!-- Action buttons -->
+        <div class="flex flex-wrap items-center gap-4 mb-12">
+          <a
+            href={translatePath("/projects")}
+            class="hero-primary-btn px-6 py-3.5 rounded-xl bg-primary-brand text-[var(--primary-btn-text)] font-black text-sm tracking-wide shadow-md shadow-primary-brand/10 hover:bg-hover-brand hover:scale-105 active:scale-95 transition-all duration-300"
+          >
+            {t("hero.btn.explore")}
+          </a>
+          <a
+            href={translatePath("/about")}
+            class="hero-secondary-btn px-6 py-3.5 rounded-xl border border-structural-borders bg-card-bg/30 text-text-main font-bold text-sm tracking-wide backdrop-blur hover:border-primary-brand/35 hover:scale-105 active:scale-95 transition-all duration-300"
+          >
+            {t("hero.btn.learn")}
+          </a>
+        </div>
 
-    <!-- Feature cards showcasing design tokens -->
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-left">
-      {
-        typedCards.map((card) => (
-          <FeatureCard
-            title={t(`card.${card.id}.title` as Parameters<typeof t>[0])}
-            description={t(`card.${card.id}.desc` as Parameters<typeof t>[0])}
-            iconSvg={card.iconSvg}
-            accentColor={card.accentColor}
-          />
-        ))
-      }
+        <!-- Impact Statistics Grid -->
+        <div
+          class="grid grid-cols-2 sm:grid-cols-4 gap-6 pt-8 border-t border-structural-borders/30"
+        >
+          <div class="stats-item flex flex-col">
+            <span
+              class="stats-val text-3xl md:text-4xl font-black bg-gradient-to-r from-primary-brand to-secondary-accent bg-clip-text text-transparent"
+            >
+              {t("hero.stats.students.val")}
+            </span>
+            <span
+              class="stats-lbl text-[10px] font-extrabold text-text-muted mt-1 uppercase tracking-wider"
+            >
+              {t("hero.stats.students.lbl")}
+            </span>
+          </div>
+          <div class="stats-item flex flex-col">
+            <span
+              class="stats-val text-3xl md:text-4xl font-black bg-gradient-to-r from-primary-brand to-secondary-accent bg-clip-text text-transparent"
+            >
+              {t("hero.stats.workshops.val")}
+            </span>
+            <span
+              class="stats-lbl text-[10px] font-extrabold text-text-muted mt-1 uppercase tracking-wider"
+            >
+              {t("hero.stats.workshops.lbl")}
+            </span>
+          </div>
+          <div class="stats-item flex flex-col">
+            <span
+              class="stats-val text-3xl md:text-4xl font-black bg-gradient-to-r from-primary-brand to-secondary-accent bg-clip-text text-transparent"
+            >
+              {t("hero.stats.projects.val")}
+            </span>
+            <span
+              class="stats-lbl text-[10px] font-extrabold text-text-muted mt-1 uppercase tracking-wider"
+            >
+              {t("hero.stats.projects.lbl")}
+            </span>
+          </div>
+          <div class="stats-item flex flex-col">
+            <span
+              class="stats-val text-3xl md:text-4xl font-black bg-gradient-to-r from-primary-brand to-secondary-accent bg-clip-text text-transparent"
+            >
+              {t("hero.stats.years.val")}
+            </span>
+            <span
+              class="stats-lbl text-[10px] font-extrabold text-text-muted mt-1 uppercase tracking-wider"
+            >
+              {t("hero.stats.years.lbl")}
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Column: Interactive Pillars visualizer -->
+      <div class="lg:col-span-5 flex flex-col justify-center w-full">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full">
+          <!-- Pillar Card: VISHWAM.ai -->
+          <a
+            href={translatePath("/initiatives/vishwam-ai")}
+            class="pillar-card glass-card glass-white-card group relative flex flex-col justify-between p-5 rounded-2xl border border-structural-borders bg-card-bg/25 backdrop-blur-xl transition-all duration-500 hover:-translate-y-1 hover:border-primary-brand/35 hover:shadow-xl hover:shadow-primary-brand/5"
+          >
+            <div class="flex flex-col gap-3">
+              <div
+                class="w-10 h-10 rounded-xl bg-violet-600/10 text-violet-400 flex items-center justify-center group-hover:scale-110 transition-transform duration-300"
+              >
+                <svg
+                  class="w-5 h-5"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"
+                  ></path>
+                </svg>
+              </div>
+              <div class="space-y-1">
+                <h2
+                  class="text-base font-bold text-text-main group-hover:text-primary-brand transition-colors"
+                >
+                  {t("hero.pillar.vishwam.title")}
+                </h2>
+                <p class="text-xs text-text-muted leading-relaxed">
+                  {t("hero.pillar.vishwam.desc")}
+                </p>
+              </div>
+            </div>
+            <div
+              class="flex items-center gap-1 text-[10px] font-bold text-primary-brand uppercase tracking-wider pt-6 mt-auto"
+            >
+              Explore
+              <svg
+                class="w-3 h-3 transition-transform duration-300 group-hover:translate-x-1"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                stroke-width="2.5"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M9 5l7 7-7 7"></path>
+              </svg>
+            </div>
+          </a>
+
+          <!-- Pillar Card: Swecha OS -->
+          <a
+            href={translatePath("/about/swecha-os")}
+            class="pillar-card glass-card glass-white-card group relative flex flex-col justify-between p-5 rounded-2xl border border-structural-borders bg-card-bg/25 backdrop-blur-xl transition-all duration-500 hover:-translate-y-1 hover:border-primary-brand/35 hover:shadow-xl hover:shadow-primary-brand/5"
+          >
+            <div class="flex flex-col gap-3">
+              <div
+                class="w-10 h-10 rounded-xl bg-primary-brand/10 text-primary-brand flex items-center justify-center group-hover:scale-110 transition-transform duration-300"
+              >
+                <svg
+                  class="w-5 h-5"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                  ></path>
+                </svg>
+              </div>
+              <div class="space-y-1">
+                <h2
+                  class="text-base font-bold text-text-main group-hover:text-primary-brand transition-colors"
+                >
+                  {t("hero.pillar.os.title")}
+                </h2>
+                <p class="text-xs text-text-muted leading-relaxed">
+                  {t("hero.pillar.os.desc")}
+                </p>
+              </div>
+            </div>
+            <div
+              class="flex items-center gap-1 text-[10px] font-bold text-primary-brand uppercase tracking-wider pt-6 mt-auto"
+            >
+              Explore
+              <svg
+                class="w-3 h-3 transition-transform duration-300 group-hover:translate-x-1"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                stroke-width="2.5"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M9 5l7 7-7 7"></path>
+              </svg>
+            </div>
+          </a>
+
+          <!-- Pillar Card: Code4Change -->
+          <a
+            href={translatePath("/initiatives/code4change")}
+            class="pillar-card glass-card glass-white-card group relative flex flex-col justify-between p-5 rounded-2xl border border-structural-borders bg-card-bg/25 backdrop-blur-xl transition-all duration-500 hover:-translate-y-1 hover:border-primary-brand/35 hover:shadow-xl hover:shadow-primary-brand/5"
+          >
+            <div class="flex flex-col gap-3">
+              <div
+                class="w-10 h-10 rounded-xl bg-amber-500/10 text-amber-500 flex items-center justify-center group-hover:scale-110 transition-transform duration-300"
+              >
+                <svg
+                  class="w-5 h-5"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
+                </svg>
+              </div>
+              <div class="space-y-1">
+                <h2
+                  class="text-base font-bold text-text-main group-hover:text-primary-brand transition-colors"
+                >
+                  {t("hero.pillar.code4change.title")}
+                </h2>
+                <p class="text-xs text-text-muted leading-relaxed">
+                  {t("hero.pillar.code4change.desc")}
+                </p>
+              </div>
+            </div>
+            <div
+              class="flex items-center gap-1 text-[10px] font-bold text-primary-brand uppercase tracking-wider pt-6 mt-auto"
+            >
+              Explore
+              <svg
+                class="w-3 h-3 transition-transform duration-300 group-hover:translate-x-1"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                stroke-width="2.5"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M9 5l7 7-7 7"></path>
+              </svg>
+            </div>
+          </a>
+
+          <!-- Pillar Card: People's Health -->
+          <a
+            href={translatePath("/initiatives/peoples-health")}
+            class="pillar-card glass-card glass-white-card group relative flex flex-col justify-between p-5 rounded-2xl border border-structural-borders bg-card-bg/25 backdrop-blur-xl transition-all duration-500 hover:-translate-y-1 hover:border-primary-brand/35 hover:shadow-xl hover:shadow-primary-brand/5"
+          >
+            <div class="flex flex-col gap-3">
+              <div
+                class="w-10 h-10 rounded-xl bg-emerald-500/10 text-emerald-500 flex items-center justify-center group-hover:scale-110 transition-transform duration-300"
+              >
+                <svg
+                  class="w-5 h-5"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
+                  ></path>
+                </svg>
+              </div>
+              <div class="space-y-1">
+                <h2
+                  class="text-base font-bold text-text-main group-hover:text-primary-brand transition-colors"
+                >
+                  {t("hero.pillar.health.title")}
+                </h2>
+                <p class="text-xs text-text-muted leading-relaxed">
+                  {t("hero.pillar.health.desc")}
+                </p>
+              </div>
+            </div>
+            <div
+              class="flex items-center gap-1 text-[10px] font-bold text-primary-brand uppercase tracking-wider pt-6 mt-auto"
+            >
+              Explore
+              <svg
+                class="w-3 h-3 transition-transform duration-300 group-hover:translate-x-1"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                stroke-width="2.5"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M9 5l7 7-7 7"></path>
+              </svg>
+            </div>
+          </a>
+        </div>
+      </div>
     </div>
   </div>
 </section>
+
+<style>
+  /* Section-specific ambient glows in dark mode */
+  .hero-section {
+    background-image:
+      radial-gradient(
+        circle at 25% 10%,
+        rgba(0, 212, 255, 0.08) 0%,
+        transparent 60%
+      ),
+      radial-gradient(
+        circle at 75% 90%,
+        rgba(77, 255, 184, 0.08) 0%,
+        transparent 60%
+      );
+  }
+
+  /* Section-specific ambient glows in light mode */
+  :global(html[data-theme="light"]) .hero-section {
+    background-image:
+      radial-gradient(
+        circle at 25% 10%,
+        rgba(2, 90, 158, 0.03) 0%,
+        transparent 60%
+      ),
+      radial-gradient(
+        circle at 75% 90%,
+        rgba(59, 130, 246, 0.03) 0%,
+        transparent 60%
+      );
+  }
+
+  .hero-title {
+    line-height: 1.1;
+  }
+
+  /* Default dark mode header drop shadow glow */
+  .brand-gradient-text {
+    filter: drop-shadow(0 2px 10px rgba(0, 212, 255, 0.15));
+  }
+
+  /* Stats grid val */
+  .stats-val {
+    filter: drop-shadow(0 2px 8px rgba(0, 212, 255, 0.2));
+  }
+
+  /* Light mode overrides to make text white with visual depth on the blue gradient background */
+  :global(html[data-theme="light"]) .hero-title {
+    color: #ffffff !important;
+    text-shadow:
+      0 2px 8px rgba(11, 30, 54, 0.35),
+      0 4px 20px rgba(11, 30, 54, 0.25) !important;
+  }
+
+  :global(html[data-theme="light"]) .brand-gradient-text {
+    background: none !important;
+    -webkit-text-fill-color: #ffffff !important;
+    color: #ffffff !important;
+    text-shadow:
+      0 2px 8px rgba(11, 30, 54, 0.35),
+      0 4px 20px rgba(11, 30, 54, 0.25) !important;
+    filter: none !important;
+  }
+
+  :global(html[data-theme="light"]) .hero-desc {
+    color: rgba(255, 255, 255, 0.95) !important;
+    text-shadow:
+      0 2px 6px rgba(11, 30, 54, 0.3),
+      0 4px 15px rgba(11, 30, 54, 0.2) !important;
+  }
+
+  :global(html[data-theme="light"]) .stats-lbl {
+    color: rgba(255, 255, 255, 0.85) !important;
+    text-shadow: 0 1px 2px rgba(11, 30, 54, 0.15) !important;
+  }
+
+  :global(html[data-theme="light"]) .hero-secondary-btn {
+    background-color: rgba(255, 255, 255, 0.85) !important;
+    border-color: rgba(255, 255, 255, 0.9) !important;
+    color: #0b1e36 !important;
+    box-shadow:
+      0 12px 24px -10px rgba(8, 28, 54, 0.1),
+      inset 0 1px 0 rgba(255, 255, 255, 0.5) !important;
+  }
+
+  :global(html[data-theme="light"]) .hero-secondary-btn:hover {
+    background-color: #ffffff !important;
+    border-color: var(--primary-brand) !important;
+    color: var(--primary-brand) !important;
+  }
+</style>
