@@ -1,4 +1,5 @@
 ---
+// src/pages/[...lang]/about/swecha.astro
 import Layout from "../../../layouts/Layout.astro";
 import { getLangFromUrl, useTranslations } from "../../../i18n/utils";
 import { languages, defaultLang } from "../../../i18n/ui";
@@ -15,57 +16,365 @@ export function getStaticPaths() {
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
+
+const content: Record<
+  string,
+  {
+    title: string;
+    subtitle: string;
+    p1: string;
+    p2: string;
+    p3: string;
+    ctaTitle: string;
+    ctaDesc: string;
+    ctaButton: string;
+  }
+> = {
+  en: {
+    title: "Swecha",
+    subtitle:
+      "A vibrant community of software users, students, academicians, and professionals determined to provide quality software built on the Free Software development model.",
+    p1: "Swecha is a constituent organization of the Free Software Movement of India (FSMI). It is a community driven by the belief that technology and knowledge must be free and accessible to all. Swecha works to build democratic technical infrastructure, ensuring that digital rights, data sovereignty, and software freedom are protected at all levels of society.",
+    p2: "Through massive community mobilization, Swecha has trained thousands of engineering students, researchers, and volunteers. Our initiatives range from localizing desktop environments (GNU/Linux) and operating systems to constructing crowdsourced Indic speech and text datasets (like the Telugu Voice LLM datathons) under the Viswam.AI research project. We believe in technology that addresses community challenges, from agricultural voice assistants for rural farmers to offline electronic health records for village councils.",
+    p3: "We promote community ownership of data and public code. By keeping AI weights, source files, and development models open, we prevent corporate hoarding and empower local innovators. Our movement continues to grow through monthly contributor meetups, local college assemblies, and collaborative development cycles.",
+    ctaTitle: "Visit Original Portal",
+    ctaDesc:
+      "To explore more about Swecha's organization structure, deep history, active projects, and how to get officially registered as a member, visit the original main portal.",
+    ctaButton: "Go to Swecha.org",
+  },
+  te: {
+    title: "స్వేచ్ఛ",
+    subtitle:
+      "ఉచిత సాఫ్ట్‌వేర్ అభివృద్ధి నమూనా ఆధారంగా నిర్మించబడిన నాణ్యమైన సాఫ్ట్‌వేర్‌ను అందించడానికి నిశ్చయించుకున్న సాఫ్ట్‌వేర్ వినియోగదారులు, విద్యార్థులు, విద్యావేత్తలు మరియు నిపుణుల యొక్క శక్తివంతమైన సంఘం.",
+    p1: "స్వేచ్ఛ అనేది ఫ్రీ సాఫ్ట్‌వేర్ మూవ్‌మెంట్ ఆఫ్ ఇండియా (FSMI) లో ఒక భాగస్వామ్య సంస్థ. సాంకేతికత మరియు విజ్ఞానం అందరికీ ఉచితంగా మరియు అందుబాటులో ఉండాలనే నమ్మకంతో నడిచే సంఘం ఇది. డిజిటల్ హక్కులు, డేటా సార్వభౌమాధికారం మరియు సాఫ్ట్‌వేర్ స్వేచ్ఛ సమాజంలోని అన్ని స్థాయిలలో రక్షించబడేలా ప్రజాస్వామ్య సాంకేతిక మౌలిక సదుపాయాలను నిర్మించడానికి స్వేచ్ఛ కృషి చేస్తుంది.",
+    p2: "భారీ కమ్యూనిటీ సమీకరణ ద్వారా, స్వేచ్ఛ వేలాది మంది ఇంజనీరింగ్ విద్యార్థులు, పరిశోధకులు మరియు వాలంటీర్లకు శిక్షణ ఇచ్చింది. డెస్క్‌టాప్ వాతావరణాలు (GNU/Linux) మరియు ఆపరేటింగ్ సిస్టమ్‌లను స్థానికీకరించడం నుండి విస్వమ్.AI పరిశోధన ప్రాజెక్ట్ కింద క్రౌడ్‌సోర్స్డ్ భారతీయ భాషా ప్రసంగ మరియు వచన డేటాసెట్‌లను (తెలుగు వాయిస్ LLM డేటాథాన్‌ల వంటివి) నిర్మించడం వరకు మా కార్యక్రమాలు విస్తరించి ఉన్నాయి. గ్రామీణ రైతుల కోసం వ్యవసాయ వాయిస్ అసిస్టెంట్ల నుండి గ్రామ పంచాయతీల కోసం ఆఫ్‌లైన్ ఎలక్ట్రానిక్ హెల్త్ రికార్డుల వరకు కమ్యూనిటీ సవాళ్లను పరిష్కరించే సాంకేతికతను మేము విశ్వసిస్తాము.",
+    p3: "మేము డేటా మరియు పబ్లిక్ కోడ్ యొక్క కమ్యూనిటీ యాజమాన్యాన్ని ప్రోత్సహిస్తాము. AI వెయిట్స్, సోర్స్ ఫైళ్లు మరియు డెవలప్‌మెంట్ మోడల్‌లను అందరికీ అందుబాటులో ఉంచడం ద్వారా, మేము కార్పొరేట్ ఏకఛత్రాధిపత్యాన్ని నిరోధిస్తాము మరియు స్థానిక ఆవిష్కర్తలకు సాధికారత ఇస్తాము. నెలవారీ కంట్రిబ్యూటర్ మీటప్‌లు, స్థానిక కాలేజీ అసెంబ్లీలు మరియు సహకార అభివృద్ధి చక్రాల ద్వారా మా ఉద్యమం నిరంతరం పెరుగుతోంది.",
+    ctaTitle: "అసలు పోర్టల్‌ను సందర్శించండి",
+    ctaDesc:
+      "స్వేచ్ఛ యొక్క సంస్థాగత నిర్మాణం, లోతైన చరిత్ర, క్రియాశీల ప్రాజెక్ట్‌లు మరియు అధికారిక సభ్యునిగా ఎలా నమోదు చేసుకోవాలో తెలుసుకోవడానికి, దయచేసి అసలు ప్రధాన వెబ్‌సైట్‌ను సందర్శించండి.",
+    ctaButton: "Swecha.org కి వెళ్ళండి",
+  },
+  hi: {
+    title: "स्वेच्छा",
+    subtitle:
+      "मुफ्त सॉफ्टवेयर विकास मॉडल पर निर्मित गुणवत्तापूर्ण सॉफ्टवेयर प्रदान करने के लिए प्रतिबद्ध सॉफ्टवेयर उपयोगकर्ताओं, छात्रों, शिक्षाविदों और पेशेवरों का एक जीवंत समुदाय।",
+    p1: "स्वेच्छा फ्री सॉफ्टवेयर मूवमेंट ऑफ इंडिया (FSMI) का एक घटक संगठन है। यह एक ऐसा समुदाय है जो इस विश्वास से प्रेरित है कि तकनीक और ज्ञान सभी के लिए मुफ्त और सुलभ होना चाहिए। स्वेच्छा लोकतांत्रिक तकनीकी बुनियादी ढांचे के निर्माण के लिए काम करता है, जिससे डिजिटल अधिकार, डेटा संप्रभुता और सॉफ्टवेयर स्वतंत्रता समाज के सभी स्तरों पर सुरक्षित रहे।",
+    p2: "बड़े पैमाने पर सामुदायिक लामबंदी के माध्यम से, स्वेच्छा ने हजारों इंजीनियरिंग छात्रों, शोधकर्ताओं और स्वयंसेवकों को प्रशिक्षित किया है। हमारी पहल डेस्कटॉप वातावरण (GNU/Linux) और ऑपरेटिंग सिस्टम के स्थानीयकरण से लेकर विस्वम.एआई अनुसंधान परियोजना के तहत क्राउडसोर्स किए गए भारतीय भाषा भाषण और पाठ डेटासेट (जैसे तेलुगु वॉयस एलएलएम डेटाथॉन) के निर्माण तक फैली हुई है। हम ऐसी तकनीक में विश्वास करते हैं जो सामुदायिक चुनौतियों का समाधान करती है, जैसे ग्रामीण किसानों के लिए कृषि वॉयस असिस्टेंट से लेकर ग्राम पंचायतों के लिए ऑफ़लाइन इलेक्ट्रॉनिक स्वास्थ्य रिकॉर्ड।",
+    p3: "हम डेटा और सार्वजनिक कोड के सामुदायिक स्वामित्व को बढ़ावा देते हैं। एआई वेट, सोर्स फाइलों और विकास मॉडलों को खुला रखकर, हम कॉर्पोरेट जमाखोरी को रोकते हैं और स्थानीय नवप्रवर्तकों को सशक्त बनाते हैं। हमारा आंदोलन मासिक योगदानकर्ता बैठकों, स्थानीय कॉलेज असेंबलियों और सहयोगी विकास चक्रों के माध्यम से लगातार बढ़ रहा है।",
+    ctaTitle: "मूल पोर्टल पर जाएं",
+    ctaDesc:
+      "स्वेच्छा के संगठनात्मक ढांचे, इतिहास, सक्रिय परियोजनाओं और आधिकारिक सदस्य के रूप में पंजीकरण कैसे करें, इसके बारे में अधिक जानने के लिए मूल मुख्य पोर्टल पर जाएं।",
+    ctaButton: "Swecha.org पर जाएं",
+  },
+};
+
+const activeContent = content[lang] || content[defaultLang];
 ---
 
-<Layout title={`Swecha - Swecha.org`}>
+<Layout title={`${activeContent.title} - Swecha.org`}>
   <div
-    class="pt-32 pb-16 px-6 sm:px-10 lg:px-16 container mx-auto min-h-[calc(100vh-4rem)]"
+    class="pt-32 pb-16 px-4 sm:px-6 lg:px-8 container mx-auto max-w-7xl min-h-[calc(100vh-4rem)]"
   >
-    <div class="max-w-4xl">
-      <div class="mb-10 inline-block">
-        <a
-          href={lang === defaultLang ? "/about" : `/${lang}/about`}
-          class="btn btn-circle btn-ghost text-text-muted hover:text-primary-brand hover:bg-structural-borders/30"
-          aria-label="Return to About"
+    <!-- Back Button -->
+    <div class="mb-8 relative z-10">
+      <a
+        href={lang === defaultLang ? "/about" : `/${lang}/about`}
+        class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-secondary-bg/85 border border-structural-borders/80 text-text-muted hover:text-primary-brand hover:border-primary-brand/50 transition-all duration-300 shadow-sm"
+        aria-label="Return to About"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-4 w-4"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          stroke-width="2.5"
         >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            class="h-6 w-6"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
-          </svg>
-        </a>
-      </div>
-      <h1
-        class="text-4xl md:text-6xl font-black text-text-main mb-6 tracking-tight"
-      >
-        <span class="text-primary-brand">Swecha</span>
-      </h1>
-      <p class="text-xl text-text-muted mb-12 leading-relaxed">
-        A vibrant community of software users, students, academicians and
-        professionals determined to provide quality software built on the Free
-        Software development model.
-      </p>
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+        </svg>
+        <span
+          >{lang === "te" ? "వెనుకకు" : lang === "hi" ? "पीछे" : "Back"}</span
+        >
+      </a>
+    </div>
 
-      <div
-        class="bg-secondary-bg border border-structural-borders p-8 rounded-2xl shadow-xl"
+    <!-- Title and Subtitle -->
+    <div class="max-w-3xl mb-12">
+      <h1
+        class="text-4xl md:text-5xl lg:text-6xl font-black text-text-main mb-6 tracking-tight"
       >
-        <h2 class="text-2xl font-bold text-text-main mb-4">
-          Under Development
-        </h2>
-        <p class="text-text-muted">
-          This section is currently being updated. Check back soon for detailed
-          information about the community, organization structure, and how to
-          get involved.
+        <span class="text-primary-brand">{activeContent.title}</span>
+      </h1>
+      <p class="text-lg md:text-xl swecha-description-text leading-relaxed">
+        {activeContent.subtitle}
+      </p>
+    </div>
+
+    <!-- Two-Column Layout Grid -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
+      <!-- Left Column - Info (7 cols) -->
+      <div
+        class="lg:col-span-7 space-y-6 swecha-description-text leading-relaxed font-medium"
+      >
+        <p class="text-base md:text-lg">
+          {activeContent.p1}
         </p>
+        <p class="text-base md:text-lg">
+          {activeContent.p2}
+        </p>
+        <p class="text-base md:text-lg">
+          {activeContent.p3}
+        </p>
+      </div>
+
+      <!-- Right Column - Visual Mockup & CTA (5 cols) -->
+      <div class="lg:col-span-5 space-y-6">
+        <div
+          class="group relative overflow-hidden rounded-2xl border border-structural-borders bg-slate-950/40 p-3 shadow-lg transition-all duration-500 hover:border-primary-brand/45 hover:shadow-2xl"
+        >
+          <!-- Glassmorphic glow background -->
+          <div
+            class="absolute -top-12 -left-12 w-40 h-40 bg-primary-brand/10 rounded-full blur-[80px] pointer-events-none group-hover:bg-primary-brand/15 transition-all duration-700"
+          >
+          </div>
+          <div
+            class="absolute -bottom-16 -right-16 w-40 h-40 bg-secondary-accent/5 rounded-full blur-[80px] pointer-events-none"
+          >
+          </div>
+
+          <!-- Screenshot wrapper -->
+          <div
+            class="overflow-hidden rounded-xl bg-slate-950 aspect-[16/10] relative z-10 border border-structural-borders/40"
+          >
+            <img
+              src="/images/swecha-community.png"
+              alt="Swecha Tech Community"
+              class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
+            />
+          </div>
+        </div>
+
+        <p class="text-xs text-text-muted/80 text-center font-mono italic">
+          {
+            lang === "te"
+              ? "స్వేచ్ఛ ఓపెన్ సోర్స్ కమ్యూనిటీ ల్యాబ్ మరియు డెవలప్‌మెంట్ ఆక్టివిటీస్"
+              : lang === "hi"
+                ? "स्वेच्छा ओपन सोर्स कम्युनिटी लैब और विकास गतिविधियाँ"
+                : "Swecha open-source community collaboration and developer activities."
+          }
+        </p>
+
+        <!-- Redirect to Swecha.org CTA Card -->
+        <div
+          class="p-6 md:p-8 rounded-2xl border border-primary-brand/20 bg-secondary-bg/40 backdrop-blur-md hover:border-primary-brand/40 transition-all duration-300 shadow-sm space-y-4"
+        >
+          <h3 class="text-xl font-bold text-text-main flex items-center gap-2">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-5 w-5 text-primary-brand"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              stroke-width="2.5"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+              ></path>
+            </svg>
+            {activeContent.ctaTitle}
+          </h3>
+          <p class="text-sm text-text-muted">
+            {activeContent.ctaDesc}
+          </p>
+          <div class="pt-2">
+            <a
+              href="https://www.swecha.org/"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center gap-2 rounded-lg bg-gradient-to-r from-primary-brand to-[#0f6cbd] px-5 py-2.5 text-xs font-black text-white hover:opacity-90 transition-all duration-300 shadow-[0_0_15px_rgba(2,90,158,0.2)] hover:scale-[1.02]"
+            >
+              <span>{activeContent.ctaButton}</span>
+              <svg
+                class="h-4 w-4"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                stroke-width="2.5"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Vision / Core Pillars Section -->
+    <div class="mt-16 pt-12 border-t border-structural-borders/30 relative">
+      <h2
+        class="text-2xl font-bold text-text-main mb-8 flex items-center gap-2.5"
+      >
+        <span
+          class="w-1.5 h-6 bg-secondary-accent rounded-full shadow-[0_0_8px_rgba(77,255,184,0.6)]"
+        ></span>
+        {
+          lang === "te"
+            ? "మా ప్రధాన విలువలు"
+            : lang === "hi"
+              ? "हमारे मुख्य मूल्य"
+              : "Our Core Pillars"
+        }
+      </h2>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <!-- Pillar 1 -->
+        <div
+          class="p-6 rounded-2xl border border-structural-borders bg-secondary-bg/20 backdrop-blur-sm space-y-3 hover:border-primary-brand/30 transition-all duration-300"
+        >
+          <div
+            class="w-10 h-10 rounded-xl bg-primary-brand/10 border border-primary-brand/20 flex items-center justify-center text-primary-brand"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-5 w-5"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
+              ></path>
+            </svg>
+          </div>
+          <h3 class="text-lg font-bold text-text-main">
+            {
+              lang === "te"
+                ? "డిజిటల్ సార్వభౌమాధికారం"
+                : lang === "hi"
+                  ? "डिजिटल संप्रभुता"
+                  : "Digital Sovereignty"
+            }
+          </h3>
+          <p class="text-sm text-text-muted leading-relaxed">
+            {
+              lang === "te"
+                ? "వినియోగదారుల హక్కులు, గోప్యతను కాపాడుతూ సాంకేతికతపై కమ్యూనిటీలకు పూర్తి యాజమాన్యం మరియు నియంత్రణను కల్పించడం."
+                : lang === "hi"
+                  ? "उपयोगकर्ताओं के अधिकारों और गोपनीयता की रक्षा करते हुए प्रौद्योगिकी पर समुदायों को पूर्ण स्वामित्व और नियंत्रण प्रदान करना।"
+                  : "Empowering communities with full ownership and control over technology, safeguarding user rights and privacy."
+            }
+          </p>
+        </div>
+
+        <!-- Pillar 2 -->
+        <div
+          class="p-6 rounded-2xl border border-structural-borders bg-secondary-bg/20 backdrop-blur-sm space-y-3 hover:border-primary-brand/30 transition-all duration-300"
+        >
+          <div
+            class="w-10 h-10 rounded-xl bg-secondary-accent/10 border border-secondary-accent/20 flex items-center justify-center text-secondary-accent"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-5 w-5"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5c-.313 1.565-.956 3.197-1.9 4.5A14.686 14.686 0 0111.554 5h1.197z"
+              ></path>
+            </svg>
+          </div>
+          <h3 class="text-lg font-bold text-text-main">
+            {
+              lang === "te"
+                ? "భాషా స్థానికీకరణ"
+                : lang === "hi"
+                  ? "भाषाई स्थानीयकरण"
+                  : "Language Localization"
+            }
+          </h3>
+          <p class="text-sm text-text-muted leading-relaxed">
+            {
+              lang === "te"
+                ? "డిజిటల్ విభజనను అధిగమించడానికి మరియు ప్రాంతీయ భాషల్లో సాంకేతిక ప్రాప్యతను పెంచడానికి సాఫ్ట్‌వేర్‌లను అనువదించడం."
+                : lang === "hi"
+                  ? "डिजिटल विभाजन को पाटने और क्षेत्रीय भाषाओं में तकनीकी पहुंच बढ़ाने के लिए सॉफ्टवेयर का स्थानीयकरण करना।"
+                  : "Bridging the digital divide by localizing software interfaces, TTS engines, and regional Indic language databases."
+            }
+          </p>
+        </div>
+
+        <!-- Pillar 3 -->
+        <div
+          class="p-6 rounded-2xl border border-structural-borders bg-secondary-bg/20 backdrop-blur-sm space-y-3 hover:border-primary-brand/30 transition-all duration-300"
+        >
+          <div
+            class="w-10 h-10 rounded-xl bg-primary-brand/10 border border-primary-brand/20 flex items-center justify-center text-primary-brand"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-5 w-5"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
+              ></path>
+            </svg>
+          </div>
+          <h3 class="text-lg font-bold text-text-main">
+            {
+              lang === "te"
+                ? "ఓపెన్ ఇన్నోవేషన్"
+                : lang === "hi"
+                  ? "ओपन इनोवेशन"
+                  : "Open Innovation"
+            }
+          </h3>
+          <p class="text-sm text-text-muted leading-relaxed">
+            {
+              lang === "te"
+                ? "సాఫ్ట్‌వేర్ కోడ్, మోడల్ వెయిట్స్‌ని అందరికీ అందుబాటులో ఉంచుతూ కమ్యూనిటీ ఆధారిత అభివృద్ధిని ప్రోత్సహించడం."
+                : lang === "hi"
+                  ? "सॉफ्टवेयर कोड और मॉडल वेट को सभी के लिए खुला रखकर समुदाय-आधारित विकास और सहयोग को बढ़ावा देना।"
+                  : "Fostering community collaboration by keeping source code, data formats, and AI weights open for public development."
+            }
+          </p>
+        </div>
       </div>
     </div>
   </div>
 </Layout>
+
+<style>
+  .swecha-description-text,
+  .swecha-description-text p {
+    color: #ffffff !important;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.45);
+  }
+
+  :global(html[data-theme="light"]) .swecha-description-text,
+  :global(html[data-theme="light"]) .swecha-description-text p {
+    color: #1e293b !important;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  }
+</style>

@@ -29,6 +29,8 @@ const en = {
   "nav.news": navbarData.links.find((l) => l.id === "news")?.label || "",
   "nav.donations":
     navbarData.links.find((l) => l.id === "donations")?.label || "Donations",
+  "nav.careers":
+    navbarData.links.find((l) => l.id === "careers")?.label || "Careers",
   "nav.contact":
     navbarData.links.find((l) => l.id === "contact")?.label || "Contact Us",
   "nav.selectLanguage": siteData.layout.selectLanguage,
