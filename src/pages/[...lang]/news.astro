@@ -8,6 +8,7 @@ import {
 } from "../../i18n/utils";
 import { languages, defaultLang } from "../../i18n/ui";
 import newsData from "../../data/organisms/news.json";
+import featuredNews from "../../data/organisms/featured-news.json";
 
 // Import New Redesigned Components
 import NewsHero from "@components/news/NewsHero.astro";
@@ -33,9 +34,7 @@ const t = useTranslations(lang);
 const translatePath = useTranslatedPath(lang);
 
 // Extract featured articles and regular articles
-const featuredArticles = newsData.articles.filter((a) => (a as any).featured);
-const displayFeatured =
-  featuredArticles.length > 0 ? featuredArticles : [newsData.articles[0]];
+const displayFeatured = featuredNews;
 const featuredIds = new Set(displayFeatured.map((a) => a.id));
 const regularArticles = newsData.articles.filter((a) => !featuredIds.has(a.id));
 
