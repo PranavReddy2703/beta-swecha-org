@@ -1,18 +1,43 @@
-image: node:22
+image: node:22-slim  # ← smaller image, faster pull
 
 variables:
   FF_USE_FASTZIP: "true"
   ARTIFACT_COMPRESSION_LEVEL: "fastest"
+  CACHE_COMPRESSION_LEVEL: "fastest"  # ← also cache this
+  npm_config_cache: "$CI_PROJECT_DIR/.npm"  # ← deterministic cache path
+
+# ── Reusable cache template ──────────────────────────────────────────
+.npm_cache: &npm_cache
+  cache:
+    key:
+      files:
+        - package-lock.json       # ← cache busts only when deps change
+    paths:
+      - .npm/
+    policy: pull                  # jobs only read cache; seeder writes it
+
+# ── Seed the cache once ──────────────────────────────────────────────
+install_deps:
+  stage: .pre                     # runs before all stages
+  script:
+    - npm ci --prefer-offline --no-audit
+  cache:
+    key:
+      files:
+        - package-lock.json
+    paths:
+      - .npm/
+    policy: push                  # this job writes the cache
 
 stages:
-  - quality
-  - typecheck
+  - quality                       # lint + typecheck run IN PARALLEL here
   - build
   - test
   - deploy
 
 lint_and_audit:
   stage: quality
+  <<: *npm_cache
   script:
     - npm ci --prefer-offline --no-audit
     - npm run format:check
@@ -21,7 +46,8 @@ lint_and_audit:
     - npm audit --omit=dev --audit-level=high
 
 typecheck_and_deadcode:
-  stage: typecheck
+  stage: quality                  # ← same stage = parallel execution
+  <<: *npm_cache
   script:
     - npm ci --prefer-offline --no-audit
     - npm run typecheck
@@ -30,6 +56,7 @@ typecheck_and_deadcode:
 build_app:
   stage: build
   needs: ["lint_and_audit", "typecheck_and_deadcode"]
+  <<: *npm_cache
   variables:
     NODE_OPTIONS: "--max_old_space_size=4096"
   script:
@@ -43,6 +70,7 @@ build_app:
 build_storybook:
   stage: build
   needs: ["lint_and_audit", "typecheck_and_deadcode"]
+  <<: *npm_cache
   variables:
     NODE_OPTIONS: "--max_old_space_size=4096"
   script:
@@ -55,10 +83,9 @@ build_storybook:
 
 lighthouse_ci:
   stage: test
+  image: ghcr.io/puppeteer/puppeteer:latest  # ← Chromium pre-installed
   needs: ["build_app"]
-  before_script:
-    - apt-get update && apt-get install -y chromium
-    - export CHROME_PATH=/usr/bin/chromium
+  <<: *npm_cache
   script:
     - npm ci --prefer-offline --no-audit
     - npx lhci autorun
