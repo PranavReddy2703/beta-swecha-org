@@ -1,0 +1,858 @@
+---
+// src/pages/[...lang]/careers.astro
+import Layout from "@layouts/Layout.astro";
+import Badge from "@components/atoms/Badge.astro";
+import Button from "@components/atoms/Button.astro";
+import { getLangFromUrl } from "../../i18n/utils";
+import { languages, defaultLang } from "../../i18n/ui";
+
+export function getStaticPaths() {
+  return Object.keys(languages).map((lang) => {
+    return {
+      params: {
+        lang: lang === defaultLang ? undefined : lang,
+      },
+    };
+  });
+}
+
+const lang = getLangFromUrl(Astro.url);
+---
+
+<Layout
+  title={`Careers & Internships - Swecha.org`}
+  description="Join Swecha in building India's open AI future. Apply for the Summer of AI Creators Program."
+>
+  <div
+    class="relative min-h-screen text-text-main overflow-hidden pb-24 transition-colors duration-300"
+  >
+    <!-- Background Ambient Glows -->
+    <div class="absolute inset-0 pointer-events-none z-0 overflow-hidden">
+      <div
+        class="absolute top-1/4 left-1/4 w-[600px] h-[400px] bg-primary-brand/10 blur-[130px] rounded-full"
+      >
+      </div>
+      <div
+        class="absolute bottom-1/4 right-1/4 w-[500px] h-[350px] bg-secondary-accent/5 blur-[120px] rounded-full"
+      >
+      </div>
+    </div>
+
+    <!-- MAIN PAGE CONTAINER -->
+    <div
+      class="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 space-y-16"
+    >
+      <!-- HERO / BANNER SECTION -->
+      <section
+        class="glass-white-card relative overflow-hidden rounded-3xl border border-structural-borders/40 bg-card-bg/20 backdrop-blur-md p-8 md:p-12 shadow-2xl text-center scroll-reveal-section opacity-0 translate-y-4 transition-all duration-700 ease-out animate-fade-in"
+      >
+        <div class="max-w-3xl mx-auto space-y-6">
+          <!-- Badge -->
+          <div class="inline-flex">
+            <Badge label="Summer of AI" variant="hero" />
+          </div>
+
+          <!-- Titles -->
+          <div class="space-y-3">
+            <h1
+              class="text-4xl sm:text-5xl md:text-6xl font-black tracking-tight text-white leading-tight"
+            >
+              AI Creators Program
+            </h1>
+            <p
+              class="careers-hero-subtitle text-xl sm:text-2xl font-bold tracking-wide"
+            >
+              A 15-Day Immersive Internship
+            </p>
+          </div>
+
+          <!-- Intro text -->
+          <p
+            class="text-base sm:text-lg text-text-muted leading-relaxed font-medium"
+          >
+            Hey there, future changemakers! Passionate about AI, language, and
+            preserving cultural heritage? Swecha is conducting the <strong
+              class="text-primary-brand font-extrabold">Summer of AI</strong
+            > internship in collaboration with <strong
+              class="careers-hero-bold-highlight font-extrabold"
+              >IIIT Hyderabad, Ozonetel, and TASK</strong
+            >. The largest crowdsourced AI effort for preserving Telugu culture.
+          </p>
+
+          <div class="flex flex-wrap items-center justify-center gap-4">
+            <Button
+              href="#"
+              label="Apply Now"
+              variant="primary"
+              class="careers-apply-trigger-btn"
+            />
+            <Button
+              href="#details"
+              label="Learn More"
+              variant="secondary"
+              class="careers-learn-more-btn"
+            />
+          </div>
+        </div>
+      </section>
+
+      <!-- PROGRAM HIGHLIGHTS DIALOG MODAL -->
+      <dialog
+        id="careers-highlights-modal"
+        class="modal bg-transparent backdrop:backdrop-blur-md backdrop:bg-[#080B10]/70"
+      >
+        <div
+          class="modal-box bg-card-bg border border-structural-borders/40 shadow-2xl rounded-3xl p-8 md:p-10 max-w-5xl w-11/12 overflow-y-auto max-h-[90vh] text-left relative flex flex-col"
+        >
+          <!-- Close button -->
+          <form method="dialog" class="absolute top-5 right-5 z-20">
+            <button
+              class="flex items-center justify-center w-8 h-8 rounded-full bg-structural-borders/35 text-text-muted hover:text-text-main hover:bg-structural-borders/70 transition-all duration-200 cursor-pointer border-none outline-none"
+              aria-label="Close"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-4 w-4"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                stroke-width="2.5"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M18 6L6 18M6 6l12 12"></path>
+              </svg>
+            </button>
+          </form>
+
+          <div class="mb-8 text-center">
+            <h3 class="text-2xl md:text-3xl font-extrabold text-text-main">
+              Program Highlights
+            </h3>
+            <p class="text-xs text-text-muted mt-2">
+              Discover the core tracks and immersive learning paths in the
+              Summer of AI.
+            </p>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <!-- Card 1: Advanced Telugu LLM -->
+            <div
+              class="glass-white-card group relative overflow-hidden rounded-2xl border border-structural-borders/60 bg-card-bg/25 p-6 md:p-8 backdrop-blur-md transition-all duration-300 hover:border-primary-brand/35 hover:-translate-y-1 hover:shadow-lg hover:shadow-primary-brand/5 flex flex-col h-full justify-between"
+            >
+              <!-- Glow background -->
+              <div
+                class="absolute -right-10 -bottom-10 w-24 h-24 rounded-full bg-primary-brand/10 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+              >
+              </div>
+
+              <div class="space-y-4 relative z-10">
+                <div
+                  class="p-3 w-12 h-12 rounded-xl bg-primary-brand/10 text-primary-brand flex items-center justify-center group-hover:scale-110 group-hover:rotate-3 transition-transform duration-300"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="h-6 w-6"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                    ></path>
+                  </svg>
+                </div>
+                <h3
+                  class="text-xl font-bold text-text-main group-hover:text-primary-brand transition-colors duration-300"
+                >
+                  Advanced Telugu LLM
+                </h3>
+                <p class="text-sm text-text-muted leading-relaxed font-medium">
+                  Build an advanced Telugu Language Model (LLM) from the ground
+                  up. Contribute to creating the largest open, community-owned
+                  representation of Telugu culture in AI.
+                </p>
+              </div>
+            </div>
+
+            <!-- Card 2: Llama Integration -->
+            <div
+              class="glass-white-card group relative overflow-hidden rounded-2xl border border-structural-borders/60 bg-card-bg/25 p-6 md:p-8 backdrop-blur-md transition-all duration-300 hover:border-secondary-accent/35 hover:-translate-y-1 hover:shadow-lg hover:shadow-secondary-accent/5 flex flex-col h-full justify-between"
+            >
+              <!-- Glow background -->
+              <div
+                class="absolute -right-10 -bottom-10 w-24 h-24 rounded-full bg-secondary-accent/10 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+              >
+              </div>
+
+              <div class="space-y-4 relative z-10">
+                <div
+                  class="p-3 w-12 h-12 rounded-xl bg-secondary-accent/10 text-secondary-accent flex items-center justify-center group-hover:scale-110 group-hover:rotate-3 transition-transform duration-300"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="h-6 w-6"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"
+                    ></path>
+                  </svg>
+                </div>
+                <h3
+                  class="text-xl font-bold text-text-main group-hover:text-secondary-accent transition-colors duration-300"
+                >
+                  Meta's Llama Projects
+                </h3>
+                <p class="text-sm text-text-muted leading-relaxed font-medium">
+                  Work directly with Facebook (Meta)'s cutting-edge Llama
+                  models. Build industry-grade fine-tuning pipelines and
+                  hands-on LLM projects.
+                </p>
+              </div>
+            </div>
+
+            <!-- Card 3: TTS & Voice Avatar -->
+            <div
+              class="glass-white-card group relative overflow-hidden rounded-2xl border border-structural-borders/60 bg-card-bg/25 p-6 md:p-8 backdrop-blur-md transition-all duration-300 hover:border-primary-brand/35 hover:-translate-y-1 hover:shadow-lg hover:shadow-primary-brand/5 flex flex-col h-full justify-between"
+            >
+              <!-- Glow background -->
+              <div
+                class="absolute -right-10 -bottom-10 w-24 h-24 rounded-full bg-primary-brand/10 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+              >
+              </div>
+
+              <div class="space-y-4 relative z-10">
+                <div
+                  class="p-3 w-12 h-12 rounded-xl bg-primary-brand/10 text-primary-brand flex items-center justify-center group-hover:scale-110 group-hover:rotate-3 transition-transform duration-300"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="h-6 w-6"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"
+                    ></path>
+                  </svg>
+                </div>
+                <h3
+                  class="text-xl font-bold text-text-main group-hover:text-primary-brand transition-colors duration-300"
+                >
+                  Voice Avatars & TTS
+                </h3>
+                <p class="text-sm text-text-muted leading-relaxed font-medium">
+                  Build your own Text-to-Speech (TTS) models and generate your
+                  customized digital Voice Avatar. Experience state-of-the-art
+                  synthetic speech generation.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </dialog>
+
+      <!-- APPLICATION FORM DIALOG MODAL -->
+      <dialog
+        id="careers-apply-modal"
+        class="modal bg-transparent backdrop:backdrop-blur-md backdrop:bg-[#080B10]/70"
+      >
+        <div
+          class="modal-box bg-card-bg border border-structural-borders/40 shadow-2xl rounded-3xl p-8 md:p-10 max-w-xl w-11/12 overflow-y-auto max-h-[90vh] text-left relative flex flex-col"
+        >
+          <!-- Close button -->
+          <form method="dialog" class="absolute top-5 right-5 z-20">
+            <button
+              class="flex items-center justify-center w-8 h-8 rounded-full bg-structural-borders/35 text-text-muted hover:text-text-main hover:bg-structural-borders/70 transition-all duration-200 cursor-pointer border-none outline-none"
+              aria-label="Close"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-4 w-4"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                stroke-width="2.5"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M18 6L6 18M6 6l12 12"></path>
+              </svg>
+            </button>
+          </form>
+
+          <div class="mb-6 text-center">
+            <h3 class="text-2xl md:text-3xl font-extrabold text-text-main">
+              Apply for Internship
+            </h3>
+            <p class="text-xs text-text-muted mt-2">
+              Submit your expression of interest to join the Summer of AI
+              Creators Program.
+            </p>
+          </div>
+
+          <!-- Success Message Container -->
+          <div
+            id="careers-form-success"
+            class="hidden flex-col items-center justify-center py-8 text-center transition-all duration-500 animate-fade-in"
+          >
+            <div
+              class="p-3.5 rounded-full bg-secondary-accent/10 text-secondary-accent border border-secondary-accent/20 mb-4 shadow-[0_0_15px_rgba(77,255,184,0.1)]"
+            >
+              <svg
+                class="h-10 w-10"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                stroke-width="2.5"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+              </svg>
+            </div>
+            <h4 class="text-xl font-black text-text-main mb-2">
+              Application Received!
+            </h4>
+            <p class="text-xs text-text-muted max-w-sm mb-6 leading-relaxed">
+              Thank you for applying. A Swecha program coordinator will reach
+              out to you with details regarding the batch schedule and
+              selection.
+            </p>
+          </div>
+
+          <!-- Apply Form -->
+          <form id="careers-apply-form" class="space-y-5">
+            <!-- Full Name -->
+            <div class="space-y-1.5">
+              <label
+                for="careers-name"
+                class="block text-xs font-semibold text-text-main"
+                >Full Name <span class="text-primary-brand">*</span></label
+              >
+              <input
+                type="text"
+                id="careers-name"
+                name="name"
+                required
+                placeholder="First & last name"
+                class="w-full rounded-lg border border-structural-borders/85 bg-canvas-base/70 px-4 py-3 text-sm text-text-main placeholder-text-muted/40 focus:border-primary-brand focus:ring-1 focus:ring-primary-brand focus:shadow-[0_0_10px_rgba(0,212,255,0.25)] focus:outline-none transition-all duration-200"
+              />
+            </div>
+
+            <!-- Email Address -->
+            <div class="space-y-1.5">
+              <label
+                for="careers-email"
+                class="block text-xs font-semibold text-text-main"
+                >Email Address <span class="text-primary-brand">*</span></label
+              >
+              <input
+                type="email"
+                id="careers-email"
+                name="email"
+                required
+                placeholder="yourname@domain.com"
+                class="w-full rounded-lg border border-structural-borders/85 bg-canvas-base/70 px-4 py-3 text-sm text-text-main placeholder-text-muted/40 focus:border-primary-brand focus:ring-1 focus:ring-primary-brand focus:shadow-[0_0_10px_rgba(0,212,255,0.25)] focus:outline-none transition-all duration-200"
+              />
+            </div>
+
+            <!-- Phone Number -->
+            <div class="space-y-1.5">
+              <label
+                for="careers-phone"
+                class="block text-xs font-semibold text-text-main"
+                >Phone Number <span class="text-primary-brand">*</span></label
+              >
+              <input
+                type="tel"
+                id="careers-phone"
+                name="phone"
+                required
+                placeholder="+91 XXXXX XXXXX"
+                class="w-full rounded-lg border border-structural-borders/85 bg-canvas-base/70 px-4 py-3 text-sm text-text-main placeholder-text-muted/40 focus:border-primary-brand focus:ring-1 focus:ring-primary-brand focus:shadow-[0_0_10px_rgba(0,212,255,0.25)] focus:outline-none transition-all duration-200"
+              />
+            </div>
+
+            <!-- College/Institution Name -->
+            <div class="space-y-1.5">
+              <label
+                for="careers-college"
+                class="block text-xs font-semibold text-text-main"
+                >College / Organization <span class="text-primary-brand">*</span
+                ></label
+              >
+              <input
+                type="text"
+                id="careers-college"
+                name="college"
+                required
+                placeholder="Your college or institution name"
+                class="w-full rounded-lg border border-structural-borders/85 bg-canvas-base/70 px-4 py-3 text-sm text-text-main placeholder-text-muted/40 focus:border-primary-brand focus:ring-1 focus:ring-primary-brand focus:shadow-[0_0_10px_rgba(0,212,255,0.25)] focus:outline-none transition-all duration-200"
+              />
+            </div>
+
+            <!-- Resume Upload -->
+            <div class="space-y-1.5">
+              <label class="block text-xs font-semibold text-text-main"
+                >Upload Resume <span class="text-primary-brand">*</span></label
+              >
+
+              <!-- Hidden Native Input -->
+              <input
+                type="file"
+                id="careers-resume"
+                name="resume"
+                required
+                accept=".pdf,.doc,.docx"
+                class="hidden"
+              />
+
+              <!-- Custom Upload Area -->
+              <div
+                id="careers-upload-area"
+                class="w-full border-2 border-dashed border-structural-borders/85 rounded-lg p-5 flex flex-col items-center justify-center cursor-pointer transition-all duration-200"
+              >
+                <!-- Upload Prompt -->
+                <div
+                  id="careers-upload-prompt"
+                  class="flex flex-col items-center space-y-1 text-center"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="h-8 w-8 text-text-muted/60"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"
+                    ></path>
+                  </svg>
+                  <span class="text-xs font-bold text-text-main"
+                    >Click or Drag to Upload</span
+                  >
+                  <span class="text-[10px] text-text-muted"
+                    >PDF, DOC, DOCX (Max 5MB)</span
+                  >
+                </div>
+
+                <!-- File Selected State (Hidden initially) -->
+                <div
+                  id="careers-upload-file-info"
+                  class="hidden w-full items-center justify-between bg-card-bg/40 px-3 py-2 rounded-lg border border-structural-borders/50"
+                >
+                  <div class="flex items-center space-x-2.5 min-w-0">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="h-5 w-5 text-primary-brand shrink-0"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      stroke-width="2"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                      ></path>
+                    </svg>
+                    <span
+                      id="careers-upload-file-name"
+                      class="text-xs text-text-main font-semibold truncate"
+                    ></span>
+                  </div>
+                  <button
+                    type="button"
+                    id="careers-upload-remove-btn"
+                    class="text-text-muted hover:text-red-400 p-1 rounded-full hover:bg-red-400/10 transition-colors"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="h-4 w-4"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      stroke-width="2.5"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
+                      ></path>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Why do you want to join? -->
+            <div class="space-y-1.5">
+              <label
+                for="careers-why"
+                class="block text-xs font-semibold text-text-main"
+                >Why are you interested in this program?</label
+              >
+              <textarea
+                id="careers-why"
+                name="why"
+                rows="3"
+                placeholder="Tell us briefly why you want to build Telugu LLM or speech avatars..."
+                class="w-full rounded-lg border border-structural-borders/85 bg-canvas-base/70 px-4 py-3 text-sm text-text-main placeholder-text-muted/40 focus:border-primary-brand focus:ring-1 focus:ring-primary-brand focus:shadow-[0_0_10px_rgba(0,212,255,0.25)] focus:outline-none transition-all duration-200 resize-y min-h-[80px]"
+              ></textarea>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="pt-2">
+              <button
+                type="submit"
+                id="careers-submit-btn"
+                class="shine-button w-full inline-flex items-center justify-center rounded-lg bg-primary-brand py-4 px-6 text-sm font-black text-[var(--primary-btn-text)] leading-none shadow-md shadow-primary-brand/10 transition-all duration-300 hover:bg-hover-brand hover:shadow-lg hover:shadow-primary-brand/20 active:scale-[0.99] cursor-pointer"
+              >
+                <span>Submit Application</span>
+                <svg
+                  class="ml-2 h-4 w-4 shrink-0 transform transition-transform duration-300 translate-y-[0.5px]"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  stroke-width="2.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <polygon points="3 11 22 2 13 21 11 13 3 11"></polygon>
+                </svg>
+              </button>
+            </div>
+          </form>
+        </div>
+        <form method="dialog" class="modal-backdrop">
+          <button>close</button>
+        </form>
+      </dialog>
+    </div>
+  </div>
+</Layout>
+
+<script>
+  // Simple form submission latency simulation
+  const form = document.getElementById(
+    "careers-apply-form",
+  ) as HTMLFormElement | null;
+  const successMessage = document.getElementById("careers-form-success");
+  const submitBtn = document.getElementById(
+    "careers-submit-btn",
+  ) as HTMLButtonElement | null;
+
+  // File Upload Elements
+  const fileInput = document.getElementById(
+    "careers-resume",
+  ) as HTMLInputElement | null;
+  const uploadArea = document.getElementById("careers-upload-area");
+  const uploadPrompt = document.getElementById("careers-upload-prompt");
+  const fileInfo = document.getElementById("careers-upload-file-info");
+  const fileNameSpan = document.getElementById("careers-upload-file-name");
+  const removeBtn = document.getElementById("careers-upload-remove-btn");
+
+  if (form && successMessage && submitBtn) {
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+
+      // Submit loading animation
+      const originalText = submitBtn.innerHTML;
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = `
+        <svg class="animate-spin h-4 w-4 mr-2 text-canvas-base inline-block" fill="none" viewBox="0 0 24 24">
+          <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+          <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+        </svg> Submitting...`;
+
+      setTimeout(() => {
+        form.reset();
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = originalText;
+
+        // Reset file input states if any
+        if (fileInput && fileInfo && uploadPrompt) {
+          fileInput.value = "";
+          fileInfo.classList.add("hidden");
+          fileInfo.classList.remove("flex");
+          uploadPrompt.classList.remove("hidden");
+          fileInput.required = true;
+        }
+
+        form.classList.add("hidden");
+        successMessage.classList.remove("hidden");
+        successMessage.classList.add("flex");
+      }, 800);
+    });
+  }
+
+  // Modal dialog trigger
+  const applyTrigger = document.querySelector(".careers-apply-trigger-btn");
+  const applyModal = document.getElementById(
+    "careers-apply-modal",
+  ) as HTMLDialogElement | null;
+
+  if (applyTrigger && applyModal) {
+    applyTrigger.addEventListener("click", (e) => {
+      e.preventDefault();
+      // Ensure form is visible in case it was hidden from a previous success submission
+      if (form) form.classList.remove("hidden");
+      if (successMessage) {
+        successMessage.classList.add("hidden");
+        successMessage.classList.remove("flex");
+      }
+      applyModal.showModal();
+    });
+  }
+
+  // Highlights Modal Dialog trigger
+  const learnMoreTrigger = document.querySelector(".careers-learn-more-btn");
+  const highlightsModal = document.getElementById(
+    "careers-highlights-modal",
+  ) as HTMLDialogElement | null;
+
+  if (learnMoreTrigger && highlightsModal) {
+    learnMoreTrigger.addEventListener("click", (e) => {
+      e.preventDefault();
+      highlightsModal.showModal();
+    });
+  }
+
+  // File Upload Logic
+  if (
+    fileInput &&
+    uploadArea &&
+    uploadPrompt &&
+    fileInfo &&
+    fileNameSpan &&
+    removeBtn
+  ) {
+    // Click custom area to open file dialog
+    uploadArea.addEventListener("click", (e) => {
+      if (
+        e.target instanceof Element &&
+        e.target.closest("#careers-upload-remove-btn")
+      ) {
+        return;
+      }
+      fileInput.click();
+    });
+
+    // Handle drag and drop states
+    uploadArea.addEventListener("dragover", (e) => {
+      e.preventDefault();
+      uploadArea.classList.add("border-primary-brand", "bg-canvas-base");
+    });
+
+    uploadArea.addEventListener("dragleave", () => {
+      uploadArea.classList.remove("border-primary-brand", "bg-canvas-base");
+    });
+
+    uploadArea.addEventListener("drop", (e) => {
+      e.preventDefault();
+      uploadArea.classList.remove("border-primary-brand", "bg-canvas-base");
+
+      if (e.dataTransfer && e.dataTransfer.files.length > 0) {
+        const file = e.dataTransfer.files[0];
+        const extension = file.name.split(".").pop()?.toLowerCase();
+        if (extension && ["pdf", "doc", "docx"].includes(extension)) {
+          fileInput.files = e.dataTransfer.files;
+          updateFileInfo(file.name);
+        } else {
+          alert("Please upload a PDF, DOC, or DOCX file.");
+        }
+      }
+    });
+
+    // Handle file selection
+    fileInput.addEventListener("change", () => {
+      if (fileInput.files && fileInput.files.length > 0) {
+        updateFileInfo(fileInput.files[0].name);
+      }
+    });
+
+    // Handle remove file
+    removeBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      fileInput.value = "";
+      fileInfo.classList.add("hidden");
+      fileInfo.classList.remove("flex");
+      uploadPrompt.classList.remove("hidden");
+      fileInput.required = true;
+    });
+
+    function updateFileInfo(name: string) {
+      fileNameSpan!.textContent = name;
+      uploadPrompt!.classList.add("hidden");
+      fileInfo!.classList.remove("hidden");
+      fileInfo!.classList.add("flex");
+      fileInput!.required = false;
+    }
+  }
+
+  // Scroll reveal setup
+  const revealObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.remove("opacity-0", "translate-y-8");
+          entry.target.classList.add("opacity-100", "translate-y-0");
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.05 },
+  );
+
+  document.querySelectorAll(".scroll-reveal-section").forEach((s) => {
+    revealObserver.observe(s);
+  });
+</script>
+
+<style>
+  /* Button shine animation settings */
+  .shine-button {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .shine-button::after {
+    content: "";
+    position: absolute;
+    top: -50%;
+    left: -70%;
+    width: 30%;
+    height: 200%;
+    background: linear-gradient(
+      to right,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(255, 255, 255, 0.4) 50%,
+      rgba(255, 255, 255, 0) 100%
+    );
+    transform: rotate(25deg);
+    transition: none;
+    pointer-events: none;
+  }
+
+  .shine-button:hover::after {
+    left: 130%;
+    transition: left 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: scale(0.97);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  .animate-fade-in {
+    animation: fadeIn 0.4s ease-out forwards;
+  }
+
+  /* Specific typography overrides for headings in light mode (only when outside white cards/modals) */
+  :global(html[data-theme="light"]) h1:not(.glass-white-card h1),
+  :global(html[data-theme="light"]) h2:not(.glass-white-card h2),
+  :global(html[data-theme="light"])
+    h3:not(.modal h3):not(.glass-white-card h3) {
+    color: #ffffff !important;
+    text-shadow: 0 2px 4px rgba(11, 30, 54, 0.3) !important;
+  }
+
+  /* Glass Card Typography overrides for light mode */
+  :global(html[data-theme="light"]) .glass-white-card h1,
+  :global(html[data-theme="light"]) .glass-white-card h2,
+  :global(html[data-theme="light"]) .glass-white-card h3 {
+    color: var(--text-primary) !important;
+    text-shadow: none !important;
+  }
+
+  /* Hero custom elements for theme compatibility */
+  .careers-hero-bold-highlight {
+    color: #ffffff;
+  }
+  .careers-hero-subtitle {
+    color: var(--secondary-accent);
+    filter: drop-shadow(0 0 15px rgba(77, 255, 180, 0.3));
+  }
+
+  :global(html[data-theme="light"]) .careers-hero-bold-highlight {
+    color: var(--text-primary) !important;
+  }
+  :global(html[data-theme="light"]) .careers-hero-subtitle {
+    color: var(--primary-brand) !important;
+    filter: none !important;
+  }
+
+  /* Button style overrides for visual alignment and contrast */
+  :global(.careers-apply-trigger-btn) {
+    border: 1px solid transparent !important;
+  }
+  :global(.careers-learn-more-btn) {
+    border: 1px solid var(--structural-borders) !important;
+  }
+  :global(html[data-theme="light"]) :global(.careers-learn-more-btn) {
+    border-color: rgba(11, 30, 54, 0.15) !important;
+    background-color: rgba(255, 255, 255, 0.9) !important;
+    color: var(--text-primary) !important;
+  }
+  :global(html[data-theme="light"]) :global(.careers-learn-more-btn):hover {
+    border-color: var(--primary-brand) !important;
+    color: var(--primary-brand) !important;
+    background-color: #ffffff !important;
+  }
+
+  /* Modal Typography overrides for light mode */
+  :global(html[data-theme="light"]) .modal h3 {
+    color: var(--text-primary) !important;
+    text-shadow: none !important;
+  }
+  :global(html[data-theme="light"]) .modal label {
+    color: var(--text-primary) !important;
+  }
+  :global(html[data-theme="light"]) .modal p {
+    color: var(--text-muted) !important;
+  }
+
+  /* Resume upload area design rules */
+  #careers-upload-area {
+    background-color: rgba(8, 11, 16, 0.7);
+  }
+  #careers-upload-area:hover {
+    background-color: rgba(8, 11, 16, 0.9);
+    border-color: var(--primary-brand) !important;
+  }
+  :global(html[data-theme="light"]) #careers-upload-area {
+    background-color: #ffffff !important;
+    border-color: rgba(11, 30, 54, 0.15) !important;
+  }
+  :global(html[data-theme="light"]) #careers-upload-area:hover {
+    background-color: #f8fafc !important;
+    border-color: var(--primary-brand) !important;
+  }
+</style>

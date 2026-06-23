@@ -4,5 +4,8 @@ echo "🔍 Running pre-commit checks..."
 echo "🛡️ Scanning for secrets..."
 npx secretlint --maskSecrets "**/*"
 
+echo "🌐 Verifying i18n translations..."
+npm run i18n:check
+
 echo "💅 Formatting and linting staged files..."
 npx lint-staged

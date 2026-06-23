@@ -25,6 +25,10 @@
       "label": "Donate"
     },
     {
+      "id": "careers",
+      "label": "Careers"
+    },
+    {
       "id": "contact",
       "label": "Contact Us"
     }
