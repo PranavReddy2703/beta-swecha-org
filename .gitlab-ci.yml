@@ -1,12 +1,7 @@
-# Use our custom pre-baked image for all jobs by default
-image: $CI_REGISTRY_IMAGE/ci:latest
+image: node:22-slim
 
 default:
   interruptible: true
-  before_script:
-    # Instantly link the baked-in node_modules from the image into the project workspace
-    # This bypasses the GitLab volume mount issue and git clean wipes!
-    - ln -s /opt/app/node_modules ./node_modules || true
 
 workflow:
   rules:
@@ -16,77 +11,64 @@ workflow:
 variables:
   FF_USE_FASTZIP: "true"
   ARTIFACT_COMPRESSION_LEVEL: "fastest"
+  npm_config_cache: "$CI_PROJECT_DIR/.npm"
+
+.npm_cache: &npm_cache
+  cache:
+    key:
+      prefix: v4
+      files:
+        - package-lock.json
+    paths:
+      - .npm/
+    policy: pull-push
 
 stages:
-  - .pre
-  - quality
-  - build
-  - test
+  - build_and_test
+  - test_lighthouse
   - deploy
 
-# ── Build Custom Image ───────────────────────────────────────────────
-build_ci_image:
-  stage: .pre
-  image:
-    name: gcr.io/kaniko-project/executor:debug
-    entrypoint: [""]
-  rules:
-    - changes:
-        - package-lock.json
-        - Dockerfile.ci
+# ── Single Serial Job ────────────────────────────────────────────────
+# All checks and builds run serially here to completely eliminate 
+# cross-runner cache issues and avoid running npm ci multiple times.
+validate_and_build:
+  stage: build_and_test
+  <<: *npm_cache
+  variables:
+    # Fixes the Out-Of-Memory crashes from earlier
+    NODE_OPTIONS: "--max_old_space_size=4096"
   script:
-    - echo "{\"auths\":{\"$CI_REGISTRY\":{\"username\":\"$CI_REGISTRY_USER\",\"password\":\"$CI_REGISTRY_PASSWORD\"}}}" > /kaniko/.docker/config.json
-    - /kaniko/executor --context $CI_PROJECT_DIR --dockerfile $CI_PROJECT_DIR/Dockerfile.ci --destination $CI_REGISTRY_IMAGE/ci:latest --cache=true
-
-# ── Pipeline Jobs (No npm ci needed!) ────────────────────────────────
-lint_and_audit:
-  stage: quality
-  script:
+    - npm ci --prefer-offline --no-audit
+    
+    # 1. Quality & Security
     - npm run format:check
     - npm run i18n:check
     - npx secretlint "**/*"
     - npm audit --omit=dev --audit-level=high
-
-typecheck_and_deadcode:
-  stage: quality
-  script:
+    
+    # 2. Typecheck & Dead code
     - npm run typecheck
     - npm run knip
-
-build_app:
-  stage: build
-  needs: ["lint_and_audit", "typecheck_and_deadcode"]
-  variables:
-    NODE_OPTIONS: "--max_old_space_size=4096"
-  script:
+    
+    # 3. Build Apps
     - npm run build
-  artifacts:
-    paths:
-      - dist/
-    expire_in: 1 day
-
-build_storybook:
-  stage: build
-  needs: ["lint_and_audit", "typecheck_and_deadcode"]
-  variables:
-    NODE_OPTIONS: "--max_old_space_size=4096"
-  script:
     - npm run build-storybook -- -o public/storybook
   artifacts:
     paths:
+      - dist/
       - public/storybook/
     expire_in: 1 day
 
 lighthouse_ci:
-  stage: test
+  stage: test_lighthouse
+  needs: ["validate_and_build"]
   image: ghcr.io/puppeteer/puppeteer:latest
-  needs: ["build_app"]
   script:
     - npx --yes @lhci/cli autorun
 
 pages:
   stage: deploy
-  needs: ["build_app", "build_storybook", "lighthouse_ci"]
+  needs: ["validate_and_build", "lighthouse_ci"]
   script:
     - mkdir -p public
     - cp -a dist/. public/
