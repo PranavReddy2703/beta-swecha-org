@@ -61,12 +61,14 @@ validate_and_build:
 
 lighthouse_ci:
   stage: test_lighthouse
-  needs: ["validate_and_build"]
-  image: ghcr.io/puppeteer/puppeteer:latest
+  needs:
+    - job: validate_and_build
+      artifacts: true
+  image: registry.gitlab.com/gitlab-ci-utils/lighthouse:latest
   variables:
-    CHROME_PATH: "/usr/bin/google-chrome-stable"
+    CHROME_FLAGS: "--headless --no-sandbox --disable-dev-shm-usage"
   script:
-    - npx --yes @lhci/cli autorun
+    - lhci autorun
 
 pages:
   stage: deploy
