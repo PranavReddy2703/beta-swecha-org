@@ -25,37 +25,24 @@ const translatePath = useTranslatedPath(lang);
 <Layout title={`Tech for Social Good - Swecha.org`}>
   <div class="pt-32 pb-24 px-6 sm:px-10 lg:px-16 container mx-auto">
     <div class="max-w-4xl mx-auto">
-      <!-- Badge/Tagline -->
-      <div
-        class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary-brand/10 border border-primary-brand/20 text-primary-brand text-sm font-semibold tracking-wider uppercase mb-8"
-      >
-        <span class="relative flex h-2 w-2">
-          <span
-            class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary-brand opacity-75"
-          ></span>
-          <span
-            class="relative inline-flex rounded-full h-2 w-2 bg-primary-brand"
-          ></span>
-        </span>
-        Code4Change
-      </div>
-
       <!-- Main Heading -->
       <h1
-        class="text-4xl md:text-6xl font-black text-white mb-6 tracking-tight leading-tight"
+        class="c4c-title text-4xl md:text-6xl font-black text-white mb-6 tracking-tight leading-tight text-center mx-auto"
       >
         Tech for Social Good
       </h1>
 
       <!-- Subheading -->
       <h2
-        class="text-xl md:text-2xl font-bold text-white/90 mb-6 tracking-wide leading-snug"
+        class="c4c-subtitle text-xl md:text-2xl font-bold text-white/90 mb-6 tracking-wide leading-snug text-center mx-auto"
       >
         Empowering Students to Build Solutions for Society
       </h2>
 
       <!-- Description -->
-      <p class="text-lg md:text-xl text-white/90 mb-16 leading-relaxed">
+      <p
+        class="c4c-desc text-lg md:text-xl text-white/90 mb-16 leading-relaxed text-center mx-auto"
+      >
         Code4Change is a unique initiative by Swecha that brings together
         students, developers, and mentors to build open-source software
         solutions for public systems, non-profits, and local communities. We
@@ -65,28 +52,32 @@ const translatePath = useTranslatedPath(lang);
 
       <!-- Impact & Achievements Section -->
       <div class="mt-20">
-        <h2
-          class="text-3xl font-black text-white mb-8 tracking-tight flex items-center gap-3"
+        <div
+          class="glass-card glass-white-card border border-structural-borders p-8 rounded-2xl bg-card-bg/20 backdrop-blur-xl mb-12 text-center mx-auto max-w-3xl"
         >
-          <svg
-            class="w-8 h-8 text-primary-brand"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            stroke-width="2"
+          <h2
+            class="c4c-section-title text-3xl font-black text-white mb-6 tracking-tight flex items-center justify-center gap-3 text-center mx-auto"
           >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-          </svg>
-          Our Impact & Achievements
-        </h2>
-        <p class="text-lg text-white/80 mb-12 max-w-2xl leading-relaxed">
-          Through collaborative coding bootcamps, community engagement, and
-          institutional partnerships, Code4Change has delivered real value to
-          society while training future-ready engineers.
-        </p>
+            <svg
+              class="w-8 h-8 text-primary-brand"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+            Our Impact & Achievements
+          </h2>
+          <p class="c4c-section-desc text-lg text-white/80 leading-relaxed">
+            Through collaborative coding bootcamps, community engagement, and
+            institutional partnerships, Code4Change has delivered real value to
+            society while training future-ready engineers.
+          </p>
+        </div>
 
         <!-- Achievements Grid -->
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -95,6 +86,24 @@ const translatePath = useTranslatedPath(lang);
             class="glass-card glass-white-card border border-structural-borders p-8 rounded-2xl bg-card-bg/20 backdrop-blur-xl transition-all duration-500 hover:bg-card-bg/40 hover:-translate-y-1 hover:border-primary-brand/35 hover:shadow-[0_20px_40px_rgba(0,0,0,0.3)] flex flex-col justify-between"
           >
             <div>
+              <div
+                class="w-12 h-12 rounded-xl bg-primary-brand/10 border border-primary-brand/20 flex items-center justify-center text-primary-brand mb-6"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  ><path
+                    d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.91a2 2 0 0 0 1.66 0z"
+                  ></path><path d="M6 12v5c0 2 2 3 6 3s6-1 6-3v-5"></path></svg
+                >
+              </div>
               <span
                 class="text-4xl font-black bg-gradient-to-r from-primary-brand to-secondary-accent bg-clip-text text-transparent mb-4 block"
                 >10,000+</span
@@ -115,6 +124,25 @@ const translatePath = useTranslatedPath(lang);
             class="glass-card glass-white-card border border-structural-borders p-8 rounded-2xl bg-card-bg/20 backdrop-blur-xl transition-all duration-500 hover:bg-card-bg/40 hover:-translate-y-1 hover:border-primary-brand/35 hover:shadow-[0_20px_40px_rgba(0,0,0,0.3)] flex flex-col justify-between"
           >
             <div>
+              <div
+                class="w-12 h-12 rounded-xl bg-secondary-accent/10 border border-secondary-accent/20 flex items-center justify-center text-secondary-accent mb-6"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  ><path
+                    d="M4.5 16.5c-1.5 1.26-2.5 3.19-2.5 5.5h20c0-2.31-1-4.24-2.5-5.5"
+                  ></path><path d="M12 2v16"></path><path d="m16 6-4-4-4 4"
+                  ></path></svg
+                >
+              </div>
               <span
                 class="text-4xl font-black bg-gradient-to-r from-primary-brand to-secondary-accent bg-clip-text text-transparent mb-4 block"
                 >100+</span
@@ -135,6 +163,27 @@ const translatePath = useTranslatedPath(lang);
             class="glass-card glass-white-card border border-structural-borders p-8 rounded-2xl bg-card-bg/20 backdrop-blur-xl transition-all duration-500 hover:bg-card-bg/40 hover:-translate-y-1 hover:border-primary-brand/35 hover:shadow-[0_20px_40px_rgba(0,0,0,0.3)] flex flex-col justify-between"
           >
             <div>
+              <div
+                class="w-12 h-12 rounded-xl bg-primary-brand/10 border border-primary-brand/20 flex items-center justify-center text-primary-brand mb-6"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  ><rect width="20" height="14" x="2" y="3" rx="2"></rect><line
+                    x1="8"
+                    x2="16"
+                    y1="21"
+                    y2="21"></line><line x1="12" x2="12" y1="17" y2="21"
+                  ></line></svg
+                >
+              </div>
               <span
                 class="text-4xl font-black bg-gradient-to-r from-primary-brand to-secondary-accent bg-clip-text text-transparent mb-4 block"
                 >Public Tech</span
@@ -155,6 +204,24 @@ const translatePath = useTranslatedPath(lang);
             class="glass-card glass-white-card border border-structural-borders p-8 rounded-2xl bg-card-bg/20 backdrop-blur-xl transition-all duration-500 hover:bg-card-bg/40 hover:-translate-y-1 hover:border-primary-brand/35 hover:shadow-[0_20px_40px_rgba(0,0,0,0.3)] flex flex-col justify-between"
           >
             <div>
+              <div
+                class="w-12 h-12 rounded-xl bg-secondary-accent/10 border border-secondary-accent/20 flex items-center justify-center text-secondary-accent mb-6"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  ><path
+                    d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"
+                  ></path></svg
+                >
+              </div>
               <span
                 class="text-4xl font-black bg-gradient-to-r from-primary-brand to-secondary-accent bg-clip-text text-transparent mb-4 block"
                 >Crisis Relief</span
@@ -246,5 +313,50 @@ const translatePath = useTranslatedPath(lang);
           color-mix(in srgb, var(--primary-brand) 30%, transparent),
         0 0 0 0px color-mix(in srgb, var(--primary-brand) 30%, transparent);
     }
+  }
+
+  /* Dark/default mode styles: blue-green gradient for main titles */
+  .c4c-title,
+  .c4c-section-title {
+    background: linear-gradient(135deg, #00d4ff, #4dffb8) !important;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    text-shadow: none !important;
+  }
+
+  /* Light mode overrides to make text white with visual depth on the blue gradient background */
+  :global(html[data-theme="light"]) .c4c-title {
+    color: #ffffff !important;
+    -webkit-text-fill-color: #ffffff !important;
+    background: none !important;
+    text-shadow:
+      0 2px 8px rgba(11, 30, 54, 0.35),
+      0 4px 20px rgba(11, 30, 54, 0.25) !important;
+  }
+
+  :global(html[data-theme="light"]) .c4c-subtitle {
+    color: rgba(255, 255, 255, 0.95) !important;
+    text-shadow:
+      0 2px 6px rgba(11, 30, 54, 0.3),
+      0 4px 15px rgba(11, 30, 54, 0.2) !important;
+  }
+
+  :global(html[data-theme="light"]) .c4c-desc {
+    color: rgba(255, 255, 255, 0.95) !important;
+    text-shadow:
+      0 2px 6px rgba(11, 30, 54, 0.3),
+      0 4px 15px rgba(11, 30, 54, 0.2) !important;
+  }
+
+  :global(html[data-theme="light"]) .c4c-section-title {
+    color: #0b1e36 !important;
+    -webkit-text-fill-color: #0b1e36 !important;
+    background: none !important;
+    text-shadow: none !important;
+  }
+
+  :global(html[data-theme="light"]) .c4c-section-desc {
+    color: #3b4d61 !important;
+    text-shadow: none !important;
   }
 </style>

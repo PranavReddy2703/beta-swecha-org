@@ -25,6 +25,11 @@ const en = {
     navbarData.links.find((l) => l.id === "projects")?.label || "",
   "nav.initiatives":
     navbarData.links.find((l) => l.id === "initiatives")?.label || "",
+  "nav.initiatives.vishwamai": "VISHWAM.ai",
+  "nav.initiatives.devdays": "DevDays",
+  "nav.initiatives.publichealth": "People's Health",
+  "nav.initiatives.code4change": "Code4Change",
+  "nav.initiatives.voluntarycomputing": "Voluntary Computing",
   "nav.events": navbarData.links.find((l) => l.id === "events")?.label || "",
   "nav.news": navbarData.links.find((l) => l.id === "news")?.label || "",
   "nav.donations":
