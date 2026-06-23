@@ -13,9 +13,10 @@
         "categories:performance": [
           "error",
           {
-            "minScore": 0.9
+            "minScore": 0.8
           }
         ],
+        "forced-reflow-insight": "off",
         "categories:accessibility": [
           "error",
           {

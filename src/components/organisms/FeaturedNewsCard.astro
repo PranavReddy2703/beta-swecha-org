@@ -60,7 +60,7 @@ const { category, buttonText, slides, index } = Astro.props;
               <h2 class="featured-news-title text-xl md:text-2xl lg:text-3xl font-black text-text-main group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-[var(--text-primary-hover)] group-hover:to-secondary-accent transition-all duration-300 leading-tight tracking-tight">
                 {slide.title}
               </h2>
-              <p class="text-xs md:text-sm text-text-muted leading-relaxed font-medium">
+              <p class="text-xs md:text-sm text-text-muted leading-relaxed font-medium line-clamp-3 md:line-clamp-4">
                 {slide.description}
               </p>
             </div>

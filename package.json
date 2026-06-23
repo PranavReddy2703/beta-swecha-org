@@ -1,6 +1,7 @@
 {
   "scripts": {
     "dev": "astro dev",
+    "fetch-news": "node scripts/fetch-news-metadata.js",
     "build": "astro build",
     "preview": "astro preview",
     "typecheck": "astro check && tsc --noEmit",
@@ -9,6 +10,7 @@
     "knip": "knip --exclude binaries",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
+    "i18n:check": "node scripts/check-i18n.js",
     "prepare": "husky"
   },
   "devDependencies": {
@@ -23,9 +25,11 @@
     "@vite-pwa/astro": "^1.2.0",
     "astro": "^6.4.7",
     "astro-eslint-parser": "^1.4.0",
+    "cheerio": "^1.2.0",
     "daisyui": "^5.5.23",
     "eslint": "^10.5.0",
     "eslint-plugin-astro": "^1.7.0",
+    "google-translate-api-x": "^10.7.3",
     "husky": "^9.1.7",
     "knip": "^6.17.1",
     "lint-staged": "^16.4.0",

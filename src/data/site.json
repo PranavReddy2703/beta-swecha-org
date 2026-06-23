@@ -32,5 +32,10 @@
     "projects": {
       "desc": "This section is currently under development. Check back soon for the active project listings."
     }
+  },
+  "statusOrder": {
+    "Active": 1,
+    "Ongoing": 2,
+    "Completed": 3
   }
 }

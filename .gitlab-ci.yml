@@ -1,47 +1,58 @@
-image: node:22
+image: node:22-slim
+
+default:
+  interruptible: true
+
+workflow:
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+    - if: $CI_COMMIT_BRANCH
 
 variables:
   FF_USE_FASTZIP: "true"
-  CACHE_COMPRESSION_LEVEL: "fastest"
   ARTIFACT_COMPRESSION_LEVEL: "fastest"
   npm_config_cache: "$CI_PROJECT_DIR/.npm"
-  # Prevent git clean from crashing on Windows long paths inside .npm/ cache and permission issues on build artifacts
-  GIT_CLEAN_FLAGS: -ffdx -e .npm/ -e dist/ -e storybook-static/
+
+.npm_cache: &npm_cache
+  cache:
+    key:
+      prefix: v4
+      files:
+        - package-lock.json
+    paths:
+      - .npm/
+    policy: pull-push
 
 stages:
-  - quality
-  - typecheck
-  - build
-  - test
+  - build_and_test
+  - test_lighthouse
   - deploy
 
-cache:
-  key: ${CI_COMMIT_REF_SLUG}
-  paths:
-    - .npm/
-
-lint_and_audit:
-  stage: quality
+# ── Single Serial Job ────────────────────────────────────────────────
+# All checks and builds run serially here to completely eliminate
+# cross-runner cache issues and avoid running npm ci multiple times.
+validate_and_build:
+  stage: build_and_test
+  <<: *npm_cache
+  variables:
+    # Fixes the Out-Of-Memory crashes from earlier
+    NODE_OPTIONS: "--max_old_space_size=4096"
   script:
     - npm ci --prefer-offline --no-audit
+
+    # 1. Quality & Security
     - npm run format:check
+    - npm run i18n:check
     - npx secretlint "**/*"
     - npm audit --omit=dev --audit-level=high
 
-typecheck_and_deadcode:
-  stage: typecheck
-  script:
-    - npm ci --prefer-offline --no-audit
+    # 2. Typecheck & Dead code
     - npm run typecheck
     - npm run knip
 
-build_assets:
-  stage: build
-  needs: ["lint_and_audit", "typecheck_and_deadcode"]
-  script:
-    - npm ci --prefer-offline --no-audit
+    # 3. Build Apps
     - npm run build
-    - npm run build-storybook -- -o storybook-static
+    - npm run build-storybook
   artifacts:
     paths:
       - dist/
@@ -49,24 +60,27 @@ build_assets:
     expire_in: 1 day
 
 lighthouse_ci:
-  stage: test
-  needs: ["build_assets"]
-  before_script:
-    - apt-get update && apt-get install -y chromium
-    - export CHROME_PATH=/usr/bin/chromium
+  stage: test_lighthouse
+  needs:
+    - job: validate_and_build
+      artifacts: true
+  image: registry.gitlab.com/gitlab-ci-utils/lighthouse:latest
+  variables:
+    CHROME_FLAGS: "--headless --no-sandbox --disable-dev-shm-usage"
   script:
-    - npm ci --prefer-offline --no-audit
-    - npx lhci autorun
+    - lhci autorun
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
 
 pages:
   stage: deploy
-  needs: ["build_assets", "lighthouse_ci"]
+  needs: ["validate_and_build", "lighthouse_ci"]
   script:
-    - cp -r dist/* public/
-    - mkdir -p public/storybook
-    - cp -r storybook-static/* public/storybook/
+    - mkdir -p public public/storybook
+    - cp -a dist/. public/
+    - cp -a storybook-static/. public/storybook/
   artifacts:
     paths:
       - public
   rules:
-    - if: $CI_COMMIT_BRANCH == "main"
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH

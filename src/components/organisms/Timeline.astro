@@ -12,14 +12,6 @@ import type { ImageMetadata } from "astro";
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
-const tagsByYear: Record<string, string[]> = {
-  "2005": ["GNU/Linux", "Telugu OS", "FOSS"],
-  "2010": ["Community", "Workshops", "Localization"],
-  "2015": ["Digital Literacy", "Schools", "Computing"],
-  "2020": ["Emerging Tech", "Python", "Open Data"],
-  "2026": ["Astro", "Tailwind CSS", "Modern Web"],
-};
-
 const imageImports = import.meta.glob<{ default: ImageMetadata }>(
   "/src/assets/timeline/*.webp",
   { eager: true },
@@ -37,7 +29,7 @@ const events = timelineData.map((event, index) => {
     previewImageUrl: importedImage
       ? importedImage.default.src
       : `/images/timeline/${event.year}.webp`,
-    tags: tagsByYear[event.year] || ["Community", "FOSS", "Localization"],
+    tags: event.tags || ["Community", "FOSS", "Localization"],
   };
 });
 
