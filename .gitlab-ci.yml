@@ -1,7 +1,12 @@
-image: node:22-slim  # ← smaller image, faster pull
+# Use our custom pre-baked image for all jobs by default
+image: $CI_REGISTRY_IMAGE/ci:latest
 
 default:
   interruptible: true
+  before_script:
+    # Instantly link the baked-in node_modules from the image into the project workspace
+    # This bypasses the GitLab volume mount issue and git clean wipes!
+    - ln -s /opt/app/node_modules ./node_modules || true
 
 workflow:
   rules:
@@ -11,45 +16,31 @@ workflow:
 variables:
   FF_USE_FASTZIP: "true"
   ARTIFACT_COMPRESSION_LEVEL: "fastest"
-  CACHE_COMPRESSION_LEVEL: "fastest"  # ← also cache this
-  npm_config_cache: "$CI_PROJECT_DIR/.npm"  # ← deterministic cache path
-
-# ── Reusable cache template ──────────────────────────────────────────
-.npm_cache: &npm_cache
-  cache:
-    key:
-      prefix: v2
-      files:
-        - package-lock.json       # ← cache busts only when deps change
-    paths:
-      - .npm/
-      - node_modules/
-    policy: pull                  # jobs only read cache; seeder writes it
-
-# ── Seed the cache once ──────────────────────────────────────────────
-install_deps:
-  stage: .pre                     # runs before all stages
-  script:
-    - npm ci --prefer-offline --no-audit
-  cache:
-    key:
-      prefix: v2
-      files:
-        - package-lock.json
-    paths:
-      - .npm/
-      - node_modules/
-    policy: push                  # this job writes the cache
 
 stages:
-  - quality                       # lint + typecheck run IN PARALLEL here
+  - .pre
+  - quality
   - build
   - test
   - deploy
 
+# ── Build Custom Image ───────────────────────────────────────────────
+build_ci_image:
+  stage: .pre
+  image:
+    name: gcr.io/kaniko-project/executor:debug
+    entrypoint: [""]
+  rules:
+    - changes:
+        - package-lock.json
+        - Dockerfile.ci
+  script:
+    - echo "{\"auths\":{\"$CI_REGISTRY\":{\"username\":\"$CI_REGISTRY_USER\",\"password\":\"$CI_REGISTRY_PASSWORD\"}}}" > /kaniko/.docker/config.json
+    - /kaniko/executor --context $CI_PROJECT_DIR --dockerfile $CI_PROJECT_DIR/Dockerfile.ci --destination $CI_REGISTRY_IMAGE/ci:latest --cache=true
+
+# ── Pipeline Jobs (No npm ci needed!) ────────────────────────────────
 lint_and_audit:
   stage: quality
-  <<: *npm_cache
   script:
     - npm run format:check
     - npm run i18n:check
@@ -57,8 +48,7 @@ lint_and_audit:
     - npm audit --omit=dev --audit-level=high
 
 typecheck_and_deadcode:
-  stage: quality                  # ← same stage = parallel execution
-  <<: *npm_cache
+  stage: quality
   script:
     - npm run typecheck
     - npm run knip
@@ -66,7 +56,6 @@ typecheck_and_deadcode:
 build_app:
   stage: build
   needs: ["lint_and_audit", "typecheck_and_deadcode"]
-  <<: *npm_cache
   variables:
     NODE_OPTIONS: "--max_old_space_size=4096"
   script:
@@ -79,7 +68,6 @@ build_app:
 build_storybook:
   stage: build
   needs: ["lint_and_audit", "typecheck_and_deadcode"]
-  <<: *npm_cache
   variables:
     NODE_OPTIONS: "--max_old_space_size=4096"
   script:
@@ -91,7 +79,7 @@ build_storybook:
 
 lighthouse_ci:
   stage: test
-  image: ghcr.io/puppeteer/puppeteer:latest  # ← Chromium pre-installed
+  image: ghcr.io/puppeteer/puppeteer:latest
   needs: ["build_app"]
   script:
     - npx --yes @lhci/cli autorun
