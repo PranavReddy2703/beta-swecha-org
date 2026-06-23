@@ -551,16 +551,16 @@ const { events, mentors } = devdaysData;
     -webkit-backdrop-filter: blur(12px) !important;
   }
 
-  /* Dark mode: no blur, just dark overlay */
+  /* Dark mode: make the background blurry when modal is opened */
   :global(html:not([data-theme="light"])) #mentor-modal::backdrop {
     background-color: rgba(8, 11, 16, 0.6) !important;
-    backdrop-filter: none !important;
-    -webkit-backdrop-filter: none !important;
+    backdrop-filter: blur(12px) !important;
+    -webkit-backdrop-filter: blur(12px) !important;
   }
   :global(html:not([data-theme="light"])) #mentor-modal .modal-backdrop {
     background-color: rgba(8, 11, 16, 0.6) !important;
-    backdrop-filter: none !important;
-    -webkit-backdrop-filter: none !important;
+    backdrop-filter: blur(12px) !important;
+    -webkit-backdrop-filter: blur(12px) !important;
   }
 </style>
 
