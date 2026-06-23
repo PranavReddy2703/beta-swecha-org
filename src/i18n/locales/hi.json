@@ -213,5 +213,20 @@
   "donations.cta.title": "हर योगदान मायने रखता है",
   "donations.cta.desc": "बड़ा हो या छोटा, आपका दान मुफ्त सॉफ्टवेयर और डिजिटल साक्षरता के साथ समुदायों को सशक्त बनाने में वास्तविक अंतर लाता है।",
   "donations.cta.btn.email": "अभी दान करें",
-  "donations.cta.btn.contact": "संपर्क करें"
+  "donations.cta.btn.contact": "संपर्क करें",
+  "news.picksLabel": "आपके लिए चुनिंदा",
+  "news.fellowshipTitle": "स्वेच्छा ओपन सोर्स फेलोशिप",
+  "news.fellowshipDesc": "युवा छात्रों को मुफ्त सॉफ्टवेयर विकास मॉडल पर प्रशिक्षित करने वाला प्रमुख कार्यक्रम।",
+  "news.joinCommunity": "समुदाय से जुड़ें",
+  "news.topStory": "मुख्य समाचार",
+  "news.allStories": "सभी लेख",
+  "news.searchResults": "फ़िल्टर किए गए परिणाम",
+  "news.noArticles": "कोई लेख नहीं मिला",
+  "news.adjustSearch": "कृपया अपना खोज शब्द या फ़िल्टर बदलें।",
+  "projects.allTitle": "सभी प्रोजेक्ट्स",
+  "projects.allDesc": "हमारे उपकरण और प्लेटफॉर्म के पूरे पारिस्थितिकी तंत्र को ब्राउज़ करें।",
+  "projects.filterBtn": "प्रोजेक्ट्स फ़िल्टर करें",
+  "projects.status": "स्थिति",
+  "projects.featuredBadge": "विशेष रुप से प्रदर्शित",
+  "events.filterBtn": "इवेंट्स फ़िल्टर करें"
 }

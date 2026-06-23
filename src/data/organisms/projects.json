@@ -1,35 +1,9 @@
 {
-  "featured": [
-    {
-      "title": "Swecha OS 2026",
-      "description": "The next generation of our localized Linux distribution, featuring AI-assisted translation layers and an entirely new desktop environment tailored for regional users.",
-      "imageLabel": "SWECHA_OS_NEXT",
-      "image": "https://images.unsplash.com/photo-1629654297299-c8506221ca97?auto=format&fit=crop&w=1200&q=80",
-      "link": "#"
-    },
-    {
-      "title": "Chandamama Kathalu AI Archive",
-      "description": "Using optical character recognition and natural language processing to digitize, index, and make searchable thousands of classic Indian folk tales.",
-      "imageLabel": "CHANDAMAMA_ARCHIVE",
-      "image": "https://images.unsplash.com/photo-1532012197267-da84d127e765?auto=format&fit=crop&w=1200&q=80",
-      "link": "#"
-    },
-    {
-      "title": "Telugu Voice Assistant",
-      "description": "An open-source, privacy-first voice assistant trained entirely on local Telugu datasets, capable of controlling smart home devices and answering queries.",
-      "imageLabel": "VOICE_ASSIST",
-      "image": "https://images.unsplash.com/photo-1589254065878-42c9da997008?auto=format&fit=crop&w=1200&q=80",
-      "link": "#"
-    },
-    {
-      "title": "eHRS",
-      "description": "An Electronic Health Record System aimed at providing accessible, secure, and open-source healthcare technology solutions for public health systems.",
-      "imageLabel": "EHRS",
-      "image": "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1200&q=80",
-      "link": "#"
-    }
-  ],
   "categories": [
+    {
+      "title": "Flagship",
+      "iconSvg": "<path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z\" />"
+    },
     {
       "title": "Operating System",
       "iconSvg": "<path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z\" />"
@@ -67,7 +41,7 @@
     {
       "title": "Swecha OS",
       "description": "A free and open-source operating system localized for the Telugu-speaking community, designed to bridge the digital divide.",
-      "tags": ["Operating System", "Linux", "Localization"],
+      "tags": ["Operating System", "Linux", "Localization", "Flagship"],
       "status": "Live",
       "link": "#"
     },
@@ -88,7 +62,7 @@
     {
       "title": "Chandamama Kathalu",
       "description": "Digitization and preservation of classic Indian children's literature, making cultural stories accessible online.",
-      "tags": ["Culture", "Education"],
+      "tags": ["Culture", "Education", "Flagship"],
       "status": "Live",
       "link": "#"
     },
@@ -109,7 +83,7 @@
     {
       "title": "eHRS",
       "description": "An Electronic Health Record System aimed at providing accessible, secure, and open-source healthcare technology solutions.",
-      "tags": ["Infrastructure", "Community"],
+      "tags": ["Infrastructure", "Community", "Flagship"],
       "status": "Completed",
       "link": "#"
     }

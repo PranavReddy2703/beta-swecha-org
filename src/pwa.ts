@@ -27,6 +27,8 @@ function createUpdatePopup(updateSW: (reloadPage?: boolean) => Promise<void>) {
     "bg-transparent border border-structural-borders/50 text-text-muted px-4 py-1.5 rounded-lg text-sm font-medium hover:text-text-main transition-colors";
   dismissBtn.textContent = "Dismiss";
   dismissBtn.onclick = () => {
+    // Save preference to not bother for a while
+    sessionStorage.setItem("pwa-update-dismissed", "true");
     popup.classList.remove("translate-y-0", "opacity-100");
     popup.classList.add("-translate-y-24", "opacity-0");
     setTimeout(() => popup.remove(), 500);
@@ -58,7 +60,10 @@ function createUpdatePopup(updateSW: (reloadPage?: boolean) => Promise<void>) {
 if (typeof window !== "undefined") {
   const updateSW = registerSW({
     onNeedRefresh() {
-      createUpdatePopup(updateSW);
+      // Don't show if user dismissed it this session
+      if (!sessionStorage.getItem("pwa-update-dismissed")) {
+        createUpdatePopup(updateSW);
+      }
     },
     onOfflineReady() {
       console.log("App is ready to work offline.");
@@ -75,8 +80,15 @@ if (typeof window !== "undefined") {
 let deferredPrompt: any;
 
 function createInstallPopup() {
-  // Don't show if already showing
+  // Don't show if already showing or if dismissed previously
   if (document.getElementById("pwa-install-popup")) return;
+  const dismissedAt = localStorage.getItem("pwa-install-dismissed");
+  if (dismissedAt) {
+    const oneDayInMs = 24 * 60 * 60 * 1000;
+    if (Date.now() - parseInt(dismissedAt, 10) < oneDayInMs) {
+      return;
+    }
+  }
 
   const popup = document.createElement("div");
   popup.className =
@@ -112,6 +124,7 @@ function createInstallPopup() {
     "bg-transparent border border-structural-borders/50 text-text-muted px-4 py-1.5 rounded-lg text-sm font-medium hover:text-text-main transition-colors";
   dismissBtn.textContent = "Later";
   dismissBtn.onclick = () => {
+    localStorage.setItem("pwa-install-dismissed", Date.now().toString());
     popup.classList.remove("translate-y-0", "opacity-100");
     popup.classList.add("-translate-y-24", "opacity-0");
     setTimeout(() => popup.remove(), 500);

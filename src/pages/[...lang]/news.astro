@@ -388,9 +388,23 @@ const fellowshipDesc =
       // Sync active visual styles on publisher pills
       pubGroupBtns.forEach((b) => {
         if (b.getAttribute("data-pub-filter") === activePub) {
-          b.classList.add("active-pub-pill");
+          b.classList.add(
+            "border-primary-brand",
+            "bg-primary-brand/15",
+            "shadow-primary-brand/20",
+            "ring-1",
+            "ring-primary-brand/50",
+          );
+          b.classList.remove("border-structural-borders", "bg-secondary-bg/25");
         } else {
-          b.classList.remove("active-pub-pill");
+          b.classList.remove(
+            "border-primary-brand",
+            "bg-primary-brand/15",
+            "shadow-primary-brand/20",
+            "ring-1",
+            "ring-primary-brand/50",
+          );
+          b.classList.add("border-structural-borders", "bg-secondary-bg/25");
         }
       });
     }
@@ -415,9 +429,10 @@ const fellowshipDesc =
         const categoryStr = art.category[lang] || art.category["en"];
         const logo =
           art.publicationLogo || art.publication.slice(0, 2).toUpperCase();
-        const logoHTML = logo.startsWith("/")
-          ? `<img src="${logo}" alt="${art.publication}" class="w-5 h-5 object-cover rounded shadow-sm shrink-0" />`
-          : `<span class="flex items-center justify-center w-5 h-5 rounded bg-gradient-to-br from-primary-brand/80 to-secondary-accent/80 text-[8px] font-black text-slate-950 select-none shadow-sm shrink-0">${logo}</span>`;
+        const logoHTML =
+          logo.startsWith("/") || logo.startsWith("http")
+            ? `<img src="${logo}" alt="${art.publication}" class="w-5 h-5 object-cover rounded shadow-sm shrink-0" />`
+            : `<span class="flex items-center justify-center w-5 h-5 rounded bg-gradient-to-br from-primary-brand/80 to-secondary-accent/80 text-[8px] font-black text-slate-950 select-none shadow-sm shrink-0">${logo}</span>`;
 
         const cardHTML = `
           <div 
@@ -486,7 +501,7 @@ const fellowshipDesc =
         art.publicationLogo || art.publication.slice(0, 2).toUpperCase();
 
       // Hydrate Modal Info
-      if (logo.startsWith("/")) {
+      if (logo.startsWith("/") || logo.startsWith("http")) {
         modalPubLogo.innerHTML = `<img src="${logo}" alt="${art.publication}" class="w-full h-full object-cover rounded" />`;
         modalPubLogo.className =
           "flex items-center justify-center w-6 h-6 rounded bg-transparent select-none";
@@ -529,9 +544,10 @@ const fellowshipDesc =
         const relDate = rel.date[lang] || rel.date["en"];
         const relLogo =
           rel.publicationLogo || rel.publication.slice(0, 2).toUpperCase();
-        const relLogoHTML = relLogo.startsWith("/")
-          ? `<img src="${relLogo}" alt="${rel.publication}" class="w-4 h-4 object-cover rounded shadow-sm shrink-0" />`
-          : `<span class="flex items-center justify-center w-4 h-4 rounded bg-gradient-to-br from-primary-brand/80 to-secondary-accent/80 text-[7px] font-black text-slate-950 select-none shadow-sm shrink-0">${relLogo}</span>`;
+        const relLogoHTML =
+          relLogo.startsWith("/") || relLogo.startsWith("http")
+            ? `<img src="${relLogo}" alt="${rel.publication}" class="w-4 h-4 object-cover rounded shadow-sm shrink-0" />`
+            : `<span class="flex items-center justify-center w-4 h-4 rounded bg-gradient-to-br from-primary-brand/80 to-secondary-accent/80 text-[7px] font-black text-slate-950 select-none shadow-sm shrink-0">${relLogo}</span>`;
 
         const relHTML = `
           <div 

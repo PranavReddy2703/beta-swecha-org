@@ -42,7 +42,7 @@ const publications = Object.keys(pubCounts).map((pub) => {
         data-pub-filter={pub.name.toLowerCase()}
         class="pub-group-btn group flex items-center gap-1.5 p-1 px-2.5 rounded-lg border border-structural-borders bg-secondary-bg/25 hover:bg-secondary-bg/55 hover:border-primary-brand/35 transition-all duration-200 cursor-pointer shadow-sm text-left"
       >
-        {pub.logo.startsWith("/") ? (
+        {pub.logo.startsWith("/") || pub.logo.startsWith("http") ? (
           <img
             src={pub.logo}
             alt={pub.name}
