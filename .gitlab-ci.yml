@@ -1,5 +1,13 @@
 image: node:22-slim  # ← smaller image, faster pull
 
+default:
+  interruptible: true
+
+workflow:
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+
 variables:
   FF_USE_FASTZIP: "true"
   ARTIFACT_COMPRESSION_LEVEL: "fastest"
@@ -14,6 +22,7 @@ variables:
         - package-lock.json       # ← cache busts only when deps change
     paths:
       - .npm/
+      - node_modules/
     policy: pull                  # jobs only read cache; seeder writes it
 
 # ── Seed the cache once ──────────────────────────────────────────────
@@ -27,6 +36,7 @@ install_deps:
         - package-lock.json
     paths:
       - .npm/
+      - node_modules/
     policy: push                  # this job writes the cache
 
 stages:
@@ -39,7 +49,6 @@ lint_and_audit:
   stage: quality
   <<: *npm_cache
   script:
-    - npm ci --prefer-offline --no-audit
     - npm run format:check
     - npm run i18n:check
     - npx secretlint "**/*"
@@ -49,7 +58,6 @@ typecheck_and_deadcode:
   stage: quality                  # ← same stage = parallel execution
   <<: *npm_cache
   script:
-    - npm ci --prefer-offline --no-audit
     - npm run typecheck
     - npm run knip
 
@@ -60,7 +68,6 @@ build_app:
   variables:
     NODE_OPTIONS: "--max_old_space_size=4096"
   script:
-    - npm ci --prefer-offline --no-audit
     - npm run build
   artifacts:
     paths:
@@ -74,11 +81,10 @@ build_storybook:
   variables:
     NODE_OPTIONS: "--max_old_space_size=4096"
   script:
-    - npm ci --prefer-offline --no-audit
-    - npm run build-storybook -- -o storybook-static
+    - npm run build-storybook -- -o public/storybook
   artifacts:
     paths:
-      - storybook-static/
+      - public/storybook/
     expire_in: 1 day
 
 lighthouse_ci:
@@ -87,7 +93,6 @@ lighthouse_ci:
   needs: ["build_app"]
   <<: *npm_cache
   script:
-    - npm ci --prefer-offline --no-audit
     - npx lhci autorun
 
 pages:
@@ -95,10 +100,8 @@ pages:
   needs: ["build_app", "build_storybook", "lighthouse_ci"]
   script:
     - cp -r dist/* public/
-    - mkdir -p public/storybook
-    - cp -r storybook-static/* public/storybook/
   artifacts:
     paths:
       - public
   rules:
-    - if: $CI_COMMIT_BRANCH == "main"
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
