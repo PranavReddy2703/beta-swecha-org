@@ -25,6 +25,7 @@ const en = {
   "nav.initiatives.devdays": "DevDays",
   "nav.initiatives.publichealth": "People's Health",
   "nav.initiatives.code4change": "Code4Change",
+  "nav.initiatives.voluntarycomputing": "Voluntary Computing",
   "nav.events": navbarData.links.find((l) => l.id === "events")?.label || "",
   "nav.news": navbarData.links.find((l) => l.id === "news")?.label || "",
   "nav.donations":
