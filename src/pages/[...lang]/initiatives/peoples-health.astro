@@ -89,7 +89,7 @@ const t = useTranslations(lang);
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
           <!-- Left Column: Pledge and Medication Support (Span 7) -->
           <div
-            class="lg:col-span-7 space-y-4 flex flex-col justify-between glass-white-card rounded-2xl border border-structural-borders bg-card-bg/25 p-6 backdrop-blur-xl hover:border-primary-brand/20 transition-all duration-300"
+            class="lg:col-span-7 space-y-4 flex flex-col justify-between ph-solid-card rounded-2xl border border-gray-200 bg-white p-6 hover:border-primary-brand/30 transition-all duration-300 shadow-sm"
           >
             <div class="space-y-3">
               <p class="text-sm text-text-muted leading-relaxed">
@@ -154,7 +154,7 @@ const t = useTranslations(lang);
 
           <!-- Right Column: Enroll & Camp Glimpses (Span 5) -->
           <div
-            class="lg:col-span-5 space-y-4 flex flex-col justify-between glass-white-card rounded-2xl border border-structural-borders bg-card-bg/25 p-6 backdrop-blur-xl hover:border-primary-brand/20 transition-all duration-300"
+            class="lg:col-span-5 space-y-4 flex flex-col justify-between ph-solid-card rounded-2xl border border-gray-200 bg-white p-6 hover:border-primary-brand/30 transition-all duration-300 shadow-sm"
           >
             <div class="space-y-4">
               <!-- Enroll Block -->
@@ -278,7 +278,7 @@ const t = useTranslations(lang);
 
       <!-- Unified About Us Panel (Removes negative space by packing content in a single premium card) -->
       <section
-        class="glass-white-card border border-structural-borders bg-card-bg/25 backdrop-blur-xl rounded-2xl p-6 hover:border-primary-brand/20 transition-all duration-300"
+        class="ph-solid-card border border-gray-200 bg-white rounded-2xl p-6 hover:border-primary-brand/30 transition-all duration-300 shadow-sm"
       >
         <div
           class="grid grid-cols-1 md:grid-cols-2 gap-6 divide-y md:divide-y-0 md:divide-x divide-structural-borders/60"
@@ -342,7 +342,7 @@ const t = useTranslations(lang);
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
           <!-- Card 1: COVID-19 Help-Line -->
           <div
-            class="group/pillar glass-white-card relative overflow-hidden rounded-2xl border border-structural-borders bg-card-bg/20 p-5 backdrop-blur-xl transition-all duration-300 hover:border-primary-brand/35 hover:-translate-y-0.5 hover:shadow-md hover:shadow-primary-brand/5"
+            class="group/pillar ph-solid-card relative overflow-hidden rounded-2xl border border-gray-200 bg-white p-5 transition-all duration-300 hover:border-primary-brand/35 hover:-translate-y-0.5 hover:shadow-md hover:shadow-primary-brand/5"
           >
             <div class="flex items-start gap-3">
               <div
@@ -384,7 +384,7 @@ const t = useTranslations(lang);
 
           <!-- Card 2: COVID isolation centre -->
           <div
-            class="group/pillar glass-white-card relative overflow-hidden rounded-2xl border border-structural-borders bg-card-bg/20 p-5 backdrop-blur-xl transition-all duration-300 hover:border-secondary-accent/35 hover:-translate-y-0.5 hover:shadow-md hover:shadow-secondary-accent/5"
+            class="group/pillar ph-solid-card relative overflow-hidden rounded-2xl border border-gray-200 bg-white p-5 transition-all duration-300 hover:border-secondary-accent/35 hover:-translate-y-0.5 hover:shadow-md hover:shadow-secondary-accent/5"
           >
             <div class="flex items-start gap-3">
               <div
@@ -425,7 +425,7 @@ const t = useTranslations(lang);
 
           <!-- Card 3: Medical Camps -->
           <div
-            class="group/pillar glass-white-card relative overflow-hidden rounded-2xl border border-structural-borders bg-card-bg/20 p-5 backdrop-blur-xl transition-all duration-300 hover:border-primary-brand/35 hover:-translate-y-0.5 hover:shadow-md hover:shadow-primary-brand/5"
+            class="group/pillar ph-solid-card relative overflow-hidden rounded-2xl border border-gray-200 bg-white p-5 transition-all duration-300 hover:border-primary-brand/35 hover:-translate-y-0.5 hover:shadow-md hover:shadow-primary-brand/5"
           >
             <div class="flex items-start gap-3">
               <div
@@ -471,7 +471,7 @@ const t = useTranslations(lang);
 
           <!-- Card 4: Speciality Care -->
           <div
-            class="group/pillar glass-white-card relative overflow-hidden rounded-2xl border border-structural-borders bg-card-bg/20 p-5 backdrop-blur-xl transition-all duration-300 hover:border-secondary-accent/35 hover:-translate-y-0.5 hover:shadow-md hover:shadow-secondary-accent/5"
+            class="group/pillar ph-solid-card relative overflow-hidden rounded-2xl border border-gray-200 bg-white p-5 transition-all duration-300 hover:border-secondary-accent/35 hover:-translate-y-0.5 hover:shadow-md hover:shadow-secondary-accent/5"
           >
             <div class="flex items-start gap-3">
               <div
@@ -518,7 +518,7 @@ const t = useTranslations(lang);
 
       <!-- Get Involved Call To Action Card (Closes the page nicely with minimal spacing) -->
       <section
-        class="glass-white-card relative overflow-hidden rounded-2xl border border-structural-borders bg-gradient-to-r from-primary-brand/10 to-secondary-accent/10 p-6 text-center space-y-4 hover:border-primary-brand/30 transition-all duration-300"
+        class="ph-solid-card relative overflow-hidden rounded-2xl border border-gray-200 bg-white p-6 text-center space-y-4 hover:border-primary-brand/30 transition-all duration-300 shadow-sm"
       >
         <div
           class="absolute -right-20 -top-20 h-40 w-40 rounded-full bg-primary-brand/5 blur-3xl pointer-events-none"
@@ -605,6 +605,17 @@ const t = useTranslations(lang);
     text-shadow:
       0 2px 8px rgba(11, 30, 54, 0.35),
       0 4px 20px rgba(11, 30, 54, 0.25) !important;
+  }
+
+  /* Solid white cards - dark mode gets a dark surface */
+  .ph-solid-card {
+    background-color: #ffffff;
+    border-color: #e5e7eb;
+  }
+
+  :global(html:not([data-theme="light"])) .ph-solid-card {
+    background-color: rgba(17, 24, 39, 0.6);
+    border-color: var(--structural-borders);
   }
 
   /* Light mode fixes for elements inside white cards */
