@@ -19,8 +19,7 @@ export interface SocialIconData {
     | "instagram"
     | "youtube"
     | "linkedin"
-    | "facebook"
-    | "huggingface";
+    | "facebook";
 }
 
 export type BadgeVariant = "hero" | "status" | "tag" | "featured";
