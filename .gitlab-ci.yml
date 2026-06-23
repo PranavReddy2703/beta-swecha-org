@@ -91,15 +91,15 @@ lighthouse_ci:
   stage: test
   image: ghcr.io/puppeteer/puppeteer:latest  # ← Chromium pre-installed
   needs: ["build_app"]
-  <<: *npm_cache
   script:
-    - npx lhci autorun
+    - npx --yes @lhci/cli autorun
 
 pages:
   stage: deploy
   needs: ["build_app", "build_storybook", "lighthouse_ci"]
   script:
-    - cp -r dist/* public/
+    - mkdir -p public
+    - cp -a dist/. public/
   artifacts:
     paths:
       - public

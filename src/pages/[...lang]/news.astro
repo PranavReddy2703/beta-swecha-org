@@ -33,7 +33,7 @@ const translatePath = useTranslatedPath(lang);
 
 // Extract featured article and regular articles
 const featuredArticle =
-  newsData.articles.find((a) => a.featured) || newsData.articles[0];
+  newsData.articles.find((a: any) => a.featured) || newsData.articles[0];
 const regularArticles = newsData.articles.filter(
   (a) => a.id !== featuredArticle.id,
 );
