@@ -9,7 +9,7 @@ const meta: Meta<typeof HeroSection> = {
     docs: {
       description: {
         component:
-          "The main hero section of the landing page. Features a two-column layout presenting Swecha's core mission, impact statistics, and interactive glassmorphic pillar cards for key initiatives.",
+          "The main hero section of the landing page. Features a centered layout with an animated big Swecha logo, core mission heading and description, impact statistics, and a horizontal row of interactive glassmorphic pillar cards for initiatives at the bottom.",
       },
     },
     layout: "fullscreen",
