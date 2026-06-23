@@ -37,23 +37,29 @@ const translatePath = useTranslatedPath(lang);
       <img
         src="/images/event-banner.webp"
         alt="Trust and Safety in AI Conference Banner"
-        class="w-full h-full object-cover object-center scale-105 filter brightness-75 contrast-105 transition-all duration-1000 ease-out hover:scale-100"
+        class="w-full h-full object-cover object-center scale-105 filter brightness-60 contrast-105 transition-all duration-1000 ease-out hover:scale-100"
       />
-      <!-- Tech Matrix Grid Overlay -->
+      <!-- Subtle Tech Matrix Grid Overlay -->
       <div
-        class="absolute inset-0 bg-[linear-gradient(to_right,#273449_1px,transparent_1px),linear-gradient(to_bottom,#273449_1px,transparent_1px)] bg-[size:4rem_4rem] opacity-[0.08] mix-blend-overlay"
+        class="absolute inset-0 bg-[linear-gradient(to_right,#273449_1px,transparent_1px),linear-gradient(to_bottom,#273449_1px,transparent_1px)] bg-[size:4rem_4rem] opacity-[0.06] mix-blend-overlay"
       >
       </div>
 
-      <!-- Multi-stage Dark Overlays -->
+      <!-- Base dark scrim — lets photo show through naturally -->
       <div
-        class="absolute inset-0 bg-gradient-to-b from-canvas-base/30 via-canvas-base/75 to-canvas-base z-10"
+        class="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-black/10 z-10"
       >
       </div>
+
+      <!-- Edge vignette — keeps text readable without killing the photo -->
       <div
-        class="absolute inset-0 bg-gradient-to-r from-canvas-base via-transparent to-canvas-base opacity-90 z-10"
+        class="absolute inset-0 z-10"
+        style="background: radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.55) 100%);"
       >
       </div>
+
+      <!-- Bottom fade — blends hero into the section below (theme-aware via CSS) -->
+      <div class="hero-bottom-fade absolute inset-x-0 bottom-0 h-48 z-20"></div>
     </div>
 
     <!-- Immersive Content Area -->
@@ -70,12 +76,12 @@ const translatePath = useTranslatedPath(lang);
       <!-- Main Event Title -->
       <div class="space-y-3 md:space-y-4">
         <h1
-          class="text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tight text-text-main leading-tight select-none"
+          class="text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tight text-white leading-tight select-none"
         >
           {t("event.title")}
         </h1>
         <p
-          class="brand-gradient-text text-xl sm:text-2xl md:text-3xl font-semibold tracking-wide bg-gradient-to-r from-primary-brand via-hover-brand to-secondary-accent bg-clip-text text-transparent drop-shadow-[0_0_15px_rgba(0,212,255,0.4)]"
+          class="text-xl sm:text-2xl md:text-3xl font-semibold tracking-wide text-white drop-shadow-[0_0_15px_rgba(0,212,255,0.4)]"
         >
           {t("event.subtitle")}
         </p>
@@ -83,7 +89,7 @@ const translatePath = useTranslatedPath(lang);
 
       <!-- Event Description -->
       <p
-        class="max-w-2xl mx-auto text-base sm:text-lg text-text-muted leading-relaxed font-medium md:text-xl"
+        class="max-w-2xl mx-auto text-base sm:text-lg text-white/80 leading-relaxed font-medium md:text-xl"
       >
         {t("event.description")}
       </p>
@@ -123,5 +129,25 @@ const translatePath = useTranslatedPath(lang);
 
   .animate-fade-in {
     animation: fadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  /* Bottom fade: dark mode fades into near-black page background */
+  .hero-bottom-fade {
+    background: linear-gradient(
+      to bottom,
+      transparent 0%,
+      rgba(8, 11, 16, 0.6) 50%,
+      rgba(8, 11, 16, 1) 100%
+    );
+  }
+
+  /* Bottom fade: light mode fades into the sky-blue body gradient */
+  :global(html[data-theme="light"]) .hero-bottom-fade {
+    background: linear-gradient(
+      to bottom,
+      transparent 0%,
+      rgba(96, 165, 250, 0.5) 50%,
+      rgba(96, 165, 250, 1) 100%
+    );
   }
 </style>
