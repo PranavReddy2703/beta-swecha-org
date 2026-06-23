@@ -12,7 +12,9 @@
     "src/i18n/ui.ts",
     "src/pwa.ts",
     "src/mock-pwa.ts",
-    "generate-swecha-news.js"
+    "generate-swecha-news.js",
+    "scripts/apply-local-fallbacks.js",
+    "scripts/download-news-images.js"
   ],
   "ignoreExportsUsedInFile": true,
   "ignoreDependencies": [
@@ -21,7 +23,8 @@
     "@storybook/builder-vite",
     "astro-eslint-parser",
     "react",
-    "workbox-window"
+    "workbox-window",
+    "lint-staged"
   ],
   "astro": {
     "entry": [
