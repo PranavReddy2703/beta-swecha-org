@@ -5,11 +5,6 @@
     "platform": "linkedin"
   },
   {
-    "href": "https://huggingface.co/swechafsmi",
-    "label": "Hugging Face",
-    "platform": "huggingface"
-  },
-  {
     "href": "https://code.swecha.org/corpus",
     "label": "GitLab",
     "platform": "gitlab"
