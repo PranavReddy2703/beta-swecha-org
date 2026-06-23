@@ -69,6 +69,8 @@ lighthouse_ci:
     CHROME_FLAGS: "--headless --no-sandbox --disable-dev-shm-usage"
   script:
     - lhci autorun
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
 
 pages:
   stage: deploy
