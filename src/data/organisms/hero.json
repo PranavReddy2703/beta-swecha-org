@@ -1,9 +1,33 @@
 {
-  "badge": "System Active: Electric Cyan Matrix",
-  "heading": ["Modern Presentation Layer for", "swecha.org"],
-  "subheading": "A high-performance, decoupled frontend architecture engineered with Astro, Tailwind CSS, and daisyUI. Designed for optimal load speeds, structural localization stability, and visual premium interfaces.",
+  "badge": "Technology for Society",
+  "heading": ["Democratizing Technology", "for the People"],
+  "subheading": "A vibrant community of software users, professionals, and students bridging the digital divide. Empowering society through localized operating systems, open-source AI models, and public-interest technology.",
   "buttons": {
     "explore": "Explore Projects",
-    "learn": "Learn More About Swecha"
+    "learn": "Learn Our Story"
+  },
+  "stats": {
+    "students": { "val": "50K+", "lbl": "Students Trained" },
+    "workshops": { "val": "500+", "lbl": "FOSS Workshops" },
+    "projects": { "val": "100+", "lbl": "Projects Deployed" },
+    "years": { "val": "15+", "lbl": "Years of Impact" }
+  },
+  "pillars": {
+    "vishwam": {
+      "title": "VISHWAM.ai",
+      "desc": "Pioneering localized AI, Telugu voice assistants, and open-source models for the Global South."
+    },
+    "os": {
+      "title": "Swecha OS",
+      "desc": "Bridging the digital divide with Telugu operating systems and Bala Swecha for schools."
+    },
+    "code4change": {
+      "title": "Code4Change",
+      "desc": "Empowering students and developers to build open-source solutions for public interest."
+    },
+    "health": {
+      "title": "People's Health",
+      "desc": "Bridging the healthcare gap using open Electronic Health Records (eHRS) and outreach networks."
+    }
   }
 }
