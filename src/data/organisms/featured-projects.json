@@ -3,28 +3,28 @@
     "title": "Swecha OS 2026",
     "description": "The next generation of our localized Linux distribution, featuring AI-assisted translation layers and an entirely new desktop environment tailored for regional users.",
     "imageLabel": "SWECHA_OS_NEXT",
-    "image": "https://images.unsplash.com/photo-1629654297299-c8506221ca97?auto=format&fit=crop&w=1200&q=80",
-    "link": "#"
+    "image": "https://images.unsplash.com/photo-1629654297299-c8506221ca97?auto=format&fit=crop&w=600&h=600&q=80",
+    "link": "/projects/swecha-os-2026"
   },
   {
     "title": "Chandamama Kathalu AI Archive",
     "description": "Using optical character recognition and natural language processing to digitize, index, and make searchable thousands of classic Indian folk tales.",
     "imageLabel": "CHANDAMAMA_ARCHIVE",
-    "image": "https://images.unsplash.com/photo-1532012197267-da84d127e765?auto=format&fit=crop&w=1200&q=80",
-    "link": "#"
+    "image": "https://images.unsplash.com/photo-1532012197267-da84d127e765?auto=format&fit=crop&w=600&h=600&q=80",
+    "link": "/projects/chandamama-kathalu-ai-archive"
   },
   {
     "title": "Telugu Voice Assistant",
     "description": "An open-source, privacy-first voice assistant trained entirely on local Telugu datasets, capable of controlling smart home devices and answering queries.",
     "imageLabel": "VOICE_ASSIST",
-    "image": "https://images.unsplash.com/photo-1589254065878-42c9da997008?auto=format&fit=crop&w=1200&q=80",
-    "link": "#"
+    "image": "https://images.unsplash.com/photo-1589254065878-42c9da997008?auto=format&fit=crop&w=600&h=600&q=80",
+    "link": "/projects/telugu-voice-assistant"
   },
   {
     "title": "eHRS",
     "description": "An Electronic Health Record System aimed at providing accessible, secure, and open-source healthcare technology solutions for public health systems.",
     "imageLabel": "EHRS",
-    "image": "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1200&q=80",
-    "link": "#"
+    "image": "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=600&h=600&q=80",
+    "link": "/projects/ehrs"
   }
 ]

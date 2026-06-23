@@ -1,6 +1,11 @@
 ---
-// src/components/projects/FeaturedProjectsCarousel.astro
-import FeaturedProjectCard from "../molecules/FeaturedProjectCard.astro";
+// src/components/organisms/FeaturedProjectsCarousel.astro
+import {
+  getLangFromUrl,
+  useTranslations,
+  useTranslatedPath,
+} from "../../i18n/utils";
+import projectsData from "../../data/organisms/projects.json";
 
 interface FeaturedProject {
   title: string;
@@ -15,331 +20,923 @@ interface Props {
 }
 
 const { projects } = Astro.props;
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const translatePath = useTranslatedPath(lang);
+
+// Helper to format title (e.g. "Swecha OS 2026" -> split the year onto a separate line)
+const formatTitle = (title: string) => {
+  const parts = title.split(" ");
+  const lastPart = parts[parts.length - 1];
+  if (/^\d{4}$/.test(lastPart)) {
+    return {
+      main: parts.slice(0, -1).join(" "),
+      year: lastPart,
+    };
+  }
+  return { main: title, year: null };
+};
+
+// Retrieve tags and status from projects database matching by title
+const getProjectDetails = (title: string) => {
+  const match = projectsData.projects.find((p) => {
+    const fTitle = title.toLowerCase().trim();
+    const pTitle = p.title.toLowerCase().trim();
+    return (
+      fTitle === pTitle || fTitle.includes(pTitle) || pTitle.includes(fTitle)
+    );
+  });
+
+  if (match) {
+    return {
+      status: match.status,
+      tags: match.tags,
+    };
+  }
+
+  // Defaults for new/external projects
+  if (title.toLowerCase().includes("voice")) {
+    return {
+      status: "In Development",
+      tags: ["AI", "Localization", "Voice"],
+    };
+  }
+
+  return {
+    status: "Active",
+    tags: ["Community", "Software"],
+  };
+};
 ---
 
-<section
-  class="pt-6 pb-8 border-b border-structural-borders/20 relative group/carousel"
->
-  <div class="container mx-auto px-4 mb-3">
-    <h2
-      class="featured-projects-title text-xl md:text-2xl font-extrabold text-text-main flex items-center gap-3"
-    >
-      <span class="w-1.5 h-6 bg-secondary-accent rounded-full section-pill"
-      ></span>
-      Featured Projects
-    </h2>
-  </div>
-
-  <!-- Centered Carousel Wrapper matching page grid alignment -->
-  <div class="container mx-auto px-4 max-w-7xl relative">
-    <!-- Floating Prev Button (Left side, only visible on hover) -->
-    <button
-      id="featured-prev-btn"
-      class="absolute top-[170px] md:top-[210px] -translate-y-1/2 z-30 hidden md:flex items-center justify-center p-2 text-text-muted/70 hover:text-secondary-accent transition-all duration-300 cursor-pointer group/btn"
-      aria-label="Previous project"
-    >
-      <svg
-        class="h-10 w-10 md:h-12 md:w-12 transition-all duration-300 group-hover/btn:scale-110 filter drop-shadow-[0_0_8px_rgba(77,255,184,0)] group-hover/btn:drop-shadow-[0_0_8px_rgba(77,255,184,0.5)]"
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke="currentColor"
-        stroke-width="2"
-      >
-        <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"
-        ></path>
-      </svg>
-    </button>
-
-    <!-- Floating Next Button (Right side, only visible on hover) -->
-    <button
-      id="featured-next-btn"
-      class="absolute top-[170px] md:top-[210px] -translate-y-1/2 z-30 hidden md:flex items-center justify-center p-2 text-text-muted/70 hover:text-secondary-accent transition-all duration-300 cursor-pointer group/btn"
-      aria-label="Next project"
-    >
-      <svg
-        class="h-10 w-10 md:h-12 md:w-12 transition-all duration-300 group-hover/btn:scale-110 filter drop-shadow-[0_0_8px_rgba(77,255,184,0)] group-hover/btn:drop-shadow-[0_0_8px_rgba(77,255,184,0.5)]"
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke="currentColor"
-        stroke-width="2"
-      >
-        <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"
-        ></path>
-      </svg>
-    </button>
-
-    <!-- Scroll Container -->
-    <div
-      class="projects-carousel-container w-full overflow-x-auto pb-6 snap-x snap-mandatory hide-scrollbar"
-    >
-      <div class="projects-scroll-track flex gap-6 w-max">
-        {
-          projects.map((project) => (
-            <FeaturedProjectCard
-              title={project.title}
-              description={project.description}
-              imageLabel={project.imageLabel}
-              image={project.image}
-              link={project.link}
-            />
-          ))
-        }
-      </div>
-    </div>
-
-    <!-- Glowing Digital Bar Indicators -->
-    <div
-      class="flex items-center justify-center gap-2 mt-4 relative z-30 select-none"
-    >
+<section class="py-12 relative overflow-hidden featured-3d-section">
+  <!-- 3D Slider Container -->
+  <div
+    class="slider-3d-container relative w-full max-w-5xl mx-auto h-[420px] md:h-[520px]"
+  >
+    <!-- Track/Wrapper -->
+    <div class="slider-3d-track relative w-full h-full">
       {
-        projects.map((_, index) => (
-          <button
-            type="button"
-            data-project-dot={index}
-            class={`h-1 rounded-sm transition-all duration-300 cursor-pointer ${
-              index === 0
-                ? "bg-secondary-accent w-8 shadow-[0_0_8px_rgba(77,255,184,0.6)]"
-                : "bg-text-muted/30 hover:bg-text-muted/60 w-3"
-            }`}
-            aria-label={`Go to featured project ${index + 1}`}
-          />
-        ))
+        projects.map((project, index) => {
+          const { main, year } = formatTitle(project.title);
+          const { status, tags } = getProjectDetails(project.title);
+          return (
+            <div class="slide-3d" data-index={index}>
+              <a
+                href={translatePath(project.link)}
+                class="slide-3d-link block group"
+              >
+                {/* Outer Frame Wrapper (Sharp rectangular border) */}
+                <div class="slide-frame-wrapper flex items-center justify-center">
+                  {/* Circular image container */}
+                  <div class="slide-circle-container">
+                    {project.image ? (
+                      <img
+                        src={project.image}
+                        alt={project.title}
+                        class="slide-image"
+                      />
+                    ) : (
+                      <div class="slide-image-placeholder">
+                        {project.imageLabel}
+                      </div>
+                    )}
+                    {/* Blur/Dark mask overlay for inactive slides */}
+                    <div class="slide-mask" />
+                    {/* Hover description overlay (only visible on active slide hover) */}
+                    <div class="slide-hover-overlay">
+                      <div class="slide-hover-content">
+                        <p class="slide-hover-desc">{project.description}</p>
+                        <span class="slide-read-more">Read More →</span>
+                      </div>
+                    </div>
+                    {/* Details overlay (visible when Read More is clicked) */}
+                    <div class="slide-details-overlay">
+                      <button
+                        type="button"
+                        class="slide-details-close-btn"
+                        aria-label="Close details"
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke-width="2.5"
+                          stroke="currentColor"
+                          class="w-4 h-4"
+                        >
+                          <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            d="M6 18L18 6M6 6l12 12"
+                          />
+                        </svg>
+                      </button>
+                      <div class="slide-details-content">
+                        <span class="slide-details-status">{status}</span>
+                        <h4 class="slide-details-title">{project.title}</h4>
+                        <div class="slide-details-tags">
+                          {tags.map((tag) => (
+                            <span class="slide-details-tag-pill">{tag}</span>
+                          ))}
+                        </div>
+                        <span class="slide-details-btn">Open Project</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                {/* Title/Info container */}
+                <div class="slide-info text-center mt-4">
+                  <h3 class="slide-title transition-all duration-300">
+                    <span class="slide-title-main block">{main}</span>
+                    {year && (
+                      <span class="slide-title-year block mt-1">{year}</span>
+                    )}
+                  </h3>
+                </div>
+              </a>
+            </div>
+          );
+        })
       }
     </div>
+
+    <!-- Navigation controls (Left & Right arrows) -->
+    <button
+      id="slider-3d-prev"
+      class="slider-arrow-btn left-4 md:left-10"
+      aria-label="Previous Project"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="2.5"
+        stroke="currentColor"
+        class="w-6 h-6"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M15.75 19.5L8.25 12l7.5-7.5"></path>
+      </svg>
+    </button>
+    <button
+      id="slider-3d-next"
+      class="slider-arrow-btn right-4 md:right-10"
+      aria-label="Next Project"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="2.5"
+        stroke="currentColor"
+        class="w-6 h-6"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M8.25 4.5l7.5 7.5-7.5 7.5"></path>
+      </svg>
+    </button>
+  </div>
+
+  <!-- Bottom dots/indicators -->
+  <div class="flex justify-center items-center gap-2 mt-6">
+    {
+      projects.map((_, index) => (
+        <button
+          type="button"
+          class="slider-3d-dot w-2.5 h-2.5 rounded-full transition-all duration-300"
+          data-slide-index={index}
+          aria-label={`Go to slide ${index + 1}`}
+        />
+      ))
+    }
   </div>
 </section>
 
 <script>
-  function initProjectsCarousel() {
-    const carousel = document.querySelector(".projects-carousel-container");
-    const track = carousel?.querySelector(".projects-scroll-track");
-    const cards = track?.querySelectorAll("a");
-    const dots = document.querySelectorAll("button[data-project-dot]");
-    const prevBtn = document.getElementById("featured-prev-btn");
-    const nextBtn = document.getElementById("featured-next-btn");
+  function init3DSlider() {
+    const track = document.querySelector(".slider-3d-track");
+    const slides = track?.querySelectorAll(".slide-3d");
+    const dots = document.querySelectorAll(".slider-3d-dot");
+    const prevBtn = document.getElementById("slider-3d-prev");
+    const nextBtn = document.getElementById("slider-3d-next");
 
-    if (!carousel || !cards || cards.length === 0) return;
+    if (!track || !slides || slides.length === 0) return;
 
-    const activeCarousel = carousel;
-    const activeCards = cards;
+    let activeIdx = 0;
+    const totalSlides = slides.length;
+    let autoPlayInterval: any = null;
 
-    let currentIdx = 0;
-    const totalCards = activeCards.length;
-    let autoplayInterval: any = null;
+    function updateSlider() {
+      slides?.forEach((slide, idx) => {
+        // Clear all slider-specific classes
+        slide.className = "slide-3d";
 
-    function scrollToCard(index: number) {
-      if (index < 0) {
-        currentIdx = totalCards - 1;
-      } else if (index >= totalCards) {
-        currentIdx = 0;
-      } else {
-        currentIdx = index;
-      }
-
-      const card = activeCards[currentIdx] as HTMLElement;
-      if (card) {
-        const targetScrollLeft =
-          card.offsetLeft - (activeCarousel.clientWidth - card.clientWidth) / 2;
-        activeCarousel.scrollTo({
-          left: targetScrollLeft,
-          behavior: "smooth",
-        });
-      }
-      updateDots();
-    }
-
-    function updateDots() {
-      dots.forEach((dot, idx) => {
-        if (idx === currentIdx) {
-          dot.classList.remove(
-            "bg-text-muted/30",
-            "hover:bg-text-muted/60",
-            "w-3",
-          );
-          dot.classList.add(
-            "bg-secondary-accent",
-            "w-8",
-            "shadow-[0_0_8px_rgba(77,255,184,0.6)]",
-          );
+        // Assign positioning classes relative to the active index
+        if (idx === activeIdx) {
+          slide.classList.add("active");
+        } else if (idx === (activeIdx - 1 + totalSlides) % totalSlides) {
+          slide.classList.add("prev");
+        } else if (idx === (activeIdx + 1) % totalSlides) {
+          slide.classList.add("next");
+        } else if (idx === (activeIdx - 2 + totalSlides) % totalSlides) {
+          slide.classList.add("far-prev");
         } else {
-          dot.classList.remove(
-            "bg-secondary-accent",
-            "w-8",
-            "shadow-[0_0_8px_rgba(77,255,184,0.6)]",
-          );
-          dot.classList.add(
-            "bg-text-muted/30",
-            "hover:bg-text-muted/60",
-            "w-3",
-          );
+          slide.classList.add("far-next");
+        }
+      });
+
+      // Update dots state
+      dots.forEach((dot, idx) => {
+        if (idx === activeIdx) {
+          dot.classList.add("active");
+        } else {
+          dot.classList.remove("active");
         }
       });
     }
 
-    function syncIndexOnScroll() {
-      const scrollLeft = activeCarousel.scrollLeft;
-      const containerCenter = scrollLeft + activeCarousel.clientWidth / 2;
+    function nextSlide() {
+      activeIdx = (activeIdx + 1) % totalSlides;
+      updateSlider();
+    }
 
-      let closestIdx = 0;
-      let minDiff = Infinity;
+    function prevSlide() {
+      activeIdx = (activeIdx - 1 + totalSlides) % totalSlides;
+      updateSlider();
+    }
 
-      activeCards.forEach((card, idx) => {
-        const cardCenter =
-          (card as HTMLElement).offsetLeft +
-          (card as HTMLElement).clientWidth / 2;
-        const diff = Math.abs(cardCenter - containerCenter);
-        if (diff < minDiff) {
-          minDiff = diff;
-          closestIdx = idx;
-        }
-      });
+    function startAutoPlay() {
+      stopAutoPlay();
+      autoPlayInterval = setInterval(nextSlide, 5000);
+    }
 
-      if (closestIdx !== currentIdx) {
-        currentIdx = closestIdx;
-        updateDots();
+    function stopAutoPlay() {
+      if (autoPlayInterval) {
+        clearInterval(autoPlayInterval);
       }
     }
 
-    // Scroll listener with a debounce to prevent stutter
-    let scrollTimeout: any;
-    activeCarousel.addEventListener("scroll", () => {
-      clearTimeout(scrollTimeout);
-      scrollTimeout = setTimeout(syncIndexOnScroll, 100);
-    });
-
-    // Autoplay Cycle (every 4 seconds)
-    function startAutoplay() {
-      stopAutoplay();
-      autoplayInterval = setInterval(() => {
-        scrollToCard(currentIdx + 1);
-      }, 4000);
-    }
-
-    function stopAutoplay() {
-      if (autoplayInterval) {
-        clearInterval(autoplayInterval);
-      }
-    }
-
-    // Control triggers
+    // Controls listeners
     prevBtn?.addEventListener("click", () => {
-      stopAutoplay();
-      scrollToCard(currentIdx - 1);
-      startAutoplay();
+      stopAutoPlay();
+      prevSlide();
+      startAutoPlay();
     });
 
     nextBtn?.addEventListener("click", () => {
-      stopAutoplay();
-      scrollToCard(currentIdx + 1);
-      startAutoplay();
+      stopAutoPlay();
+      nextSlide();
+      startAutoPlay();
     });
 
     dots.forEach((dot, idx) => {
       dot.addEventListener("click", () => {
-        stopAutoplay();
-        scrollToCard(idx);
-        startAutoplay();
+        stopAutoPlay();
+        activeIdx = idx;
+        updateSlider();
+        startAutoPlay();
       });
     });
 
-    // Touch / interaction listeners to pause autoplay
-    activeCarousel.addEventListener("touchstart", stopAutoplay, {
-      passive: true,
-    });
-    activeCarousel.addEventListener("touchend", startAutoplay, {
-      passive: true,
+    // Touch Swipe Support
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    track.addEventListener(
+      "touchstart",
+      (e: any) => {
+        stopAutoPlay();
+        touchStartX = e.changedTouches[0].screenX;
+      },
+      { passive: true },
+    );
+
+    track.addEventListener(
+      "touchend",
+      (e: any) => {
+        touchEndX = e.changedTouches[0].screenX;
+        handleSwipe();
+        startAutoPlay();
+      },
+      { passive: true },
+    );
+
+    function handleSwipe() {
+      const swipeThreshold = 50;
+      if (touchStartX - touchEndX > swipeThreshold) {
+        nextSlide();
+      } else if (touchEndX - touchStartX > swipeThreshold) {
+        prevSlide();
+      }
+    }
+
+    // Initial update
+    updateSlider();
+    startAutoPlay();
+
+    // Toggle details overlay on Read More click
+    const readMoreBtns = track.querySelectorAll(".slide-read-more");
+    readMoreBtns.forEach((btn) => {
+      btn.addEventListener("click", (e) => {
+        const slide = btn.closest(".slide-3d");
+        if (slide && slide.classList.contains("active")) {
+          e.preventDefault();
+          e.stopPropagation();
+          slide.classList.add("details-active");
+        }
+      });
     });
 
-    // Initial activation
-    startAutoplay();
+    // Close details overlay on close button click
+    const closeBtns = track.querySelectorAll(".slide-details-close-btn");
+    closeBtns.forEach((btn) => {
+      btn.addEventListener("click", (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        const slide = btn.closest(".slide-3d");
+        if (slide) {
+          slide.classList.remove("details-active");
+        }
+      });
+    });
 
-    // Stop autoplay when tab is inactive
+    // Pause slider when page tab loses focus
     document.addEventListener("visibilitychange", () => {
       if (document.hidden) {
-        stopAutoplay();
+        stopAutoPlay();
       } else {
-        startAutoplay();
+        startAutoPlay();
       }
     });
   }
 
-  // Hook into Astro load lifecycle
-  document.addEventListener("DOMContentLoaded", initProjectsCarousel);
-  initProjectsCarousel();
+  // Hook into both standard load and View Transitions lifecycles
+  document.addEventListener("DOMContentLoaded", init3DSlider);
+  document.addEventListener("astro:after-swap", init3DSlider);
 </script>
 
 <style>
-  /* Hide scrollbar for Chrome, Safari and Opera */
-  .hide-scrollbar::-webkit-scrollbar {
+  .featured-3d-section {
+    background: transparent;
+  }
+
+  .slider-3d-container {
+    overflow: visible;
+    user-select: none;
+  }
+
+  .slider-3d-track {
+    perspective: 1000px;
+  }
+
+  .slide-3d {
+    position: absolute;
+    left: 50%;
+    top: 42%;
+    transform: translate(-50%, -50%) scale(0.5);
+    width: 280px;
+    height: 280px;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.65s cubic-bezier(0.25, 1, 0.5, 1);
+    z-index: 1;
+  }
+
+  /* Frame style surrounding the circle */
+  .slide-frame-wrapper {
+    width: 280px;
+    height: 280px;
+    transition: all 0.65s ease;
+  }
+
+  .slide-circle-container {
+    width: 280px;
+    height: 280px;
+    border-radius: 50%;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 12px 36px rgba(0, 0, 0, 0.6);
+    isolation: isolate;
+    -webkit-mask-image: -webkit-radial-gradient(white, black);
+    mask-image: radial-gradient(white, black);
+  }
+
+  .slide-image {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+  }
+
+  .slide-image-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--card-bg, #1b2432);
+    color: var(--text-muted, #94a3b8);
+    font-weight: bold;
+    font-size: 1.1rem;
+  }
+
+  /* Mask overlay to dim inactive slides (solid opacity, no glass blur) */
+  .slide-mask {
+    position: absolute;
+    inset: 0;
+    background: rgba(8, 11, 16, 0.7);
+    transition: all 0.65s ease;
+    border-radius: 50%;
+  }
+
+  /* Info Labels */
+  .slide-info {
+    opacity: 0;
+    transform: translateY(15px);
+    transition: all 0.65s ease;
+  }
+
+  .slide-title {
+    color: var(--secondary-accent, #4dffb8);
+    font-family: "Outfit", system-ui, sans-serif;
+    text-transform: capitalize;
+    text-align: center;
+  }
+
+  .slide-title-main {
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+  }
+
+  .slide-title-year {
+    font-size: 0.9rem;
+    font-weight: 500;
+    opacity: 0.9;
+  }
+
+  /* Active Slide Styling */
+  .slide-3d.active {
+    transform: translate(-50%, -50%) scale(1.35);
+    opacity: 1;
+    pointer-events: auto;
+    z-index: 10;
+  }
+
+  .slide-3d.active .slide-circle-container {
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.85);
+  }
+
+  .slide-3d.active .slide-mask {
+    background: rgba(0, 0, 0, 0);
+  }
+
+  .slide-3d.active .slide-info {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .slide-3d.active .slide-title {
+    color: var(--primary-brand, #00d4ff);
+  }
+
+  .slide-3d.active .slide-title-main {
+    font-size: 1.25rem;
+  }
+
+  .slide-3d.active .slide-title-year {
+    font-size: 1.1rem;
+  }
+
+  /* Hover description overlay */
+  .slide-hover-overlay {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+    background: rgba(8, 11, 16, 0.92);
+    opacity: 0;
+    transition: opacity 0.25s ease;
+    pointer-events: none;
+    z-index: 5;
+  }
+
+  .slide-hover-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    max-width: 85%;
+    opacity: 0;
+    transform: scale(0.7);
+    transition:
+      opacity 0.35s cubic-bezier(0.25, 1, 0.5, 1) 0.08s,
+      transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) 0.08s;
+  }
+
+  .slide-hover-desc {
+    color: rgba(255, 255, 255, 0.92);
+    font-family: "Outfit", system-ui, sans-serif;
+    font-size: 0.65rem;
+    line-height: 1.55;
+    text-align: center;
+    letter-spacing: 0.01em;
+    font-weight: 400;
+    margin: 0;
+  }
+
+  .slide-read-more {
+    display: inline-block;
+    padding: 0.2rem 0.6rem;
+    font-family: "Outfit", system-ui, sans-serif;
+    font-size: 0.45rem;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.9);
+    background: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50px;
+    text-decoration: none;
+    cursor: pointer;
+    transition:
+      background 0.3s ease,
+      border-color 0.3s ease;
+  }
+
+  .slide-read-more:hover {
+    background: rgba(255, 255, 255, 0.25);
+    border-color: rgba(255, 255, 255, 0.5);
+  }
+
+  /* Show overlay only on the active slide when hovered */
+  .slide-3d.active .slide-circle-container:hover .slide-hover-overlay {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .slide-3d.active .slide-circle-container:hover .slide-hover-content {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  /* Smooth image scale zoom when hovered on active slide */
+  .slide-3d.active .slide-circle-container:hover .slide-image {
+    transform: scale(1.08);
+  }
+
+  /* Details Overlay (shown when Read More is pressed) */
+  .slide-details-overlay {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.25rem;
+    background: rgba(8, 11, 16, 0.96);
+    opacity: 0;
+    transform: scale(0.85);
+    pointer-events: none;
+    transition:
+      opacity 0.3s ease,
+      transform 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    z-index: 6;
+  }
+
+  .slide-3d.details-active .slide-details-overlay {
+    opacity: 1;
+    transform: scale(1);
+    pointer-events: auto;
+  }
+
+  /* Force hover overlay to be hidden when details are active */
+  .slide-3d.details-active .slide-circle-container:hover .slide-hover-overlay {
+    opacity: 0 !important;
+    pointer-events: none !important;
+  }
+
+  .slide-details-close-btn {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    color: rgba(255, 255, 255, 0.6);
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+  }
+
+  .slide-details-close-btn:hover {
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.1);
+  }
+
+  .slide-details-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    width: 90%;
+  }
+
+  .slide-details-status {
+    font-size: 0.55rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 0.15rem 0.5rem;
+    border-radius: 4px;
+    background: rgba(0, 212, 255, 0.15);
+    color: var(--primary-brand, #00d4ff);
+    border: 1px solid rgba(0, 212, 255, 0.3);
+  }
+
+  .slide-details-title {
+    font-family: "Outfit", system-ui, sans-serif;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin: 0;
+  }
+
+  .slide-details-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    justify-content: center;
+    max-height: 48px;
+    overflow-y: auto;
+    scrollbar-width: none;
+  }
+  .slide-details-tags::-webkit-scrollbar {
     display: none;
   }
-  /* Hide scrollbar for IE, Edge and Firefox */
-  .hide-scrollbar {
-    -ms-overflow-style: none; /* IE and Edge */
-    scrollbar-width: none; /* Firefox */
+
+  .slide-details-tag-pill {
+    font-size: 0.5rem;
+    font-weight: 500;
+    padding: 0.1rem 0.4rem;
+    border-radius: 3px;
+    background: rgba(255, 255, 255, 0.08);
+    color: rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.15);
   }
 
-  /* Responsive positioning for floating arrows to match timeline spacing (40px / 2.5rem gap) */
-  #featured-prev-btn {
-    left: 1rem;
-  }
-  #featured-next-btn {
-    right: 1rem;
-  }
-
-  @media (min-width: 1360px) {
-    #featured-prev-btn {
-      left: -1rem;
-    }
-    #featured-next-btn {
-      right: -1rem;
-    }
-  }
-
-  @media (min-width: 1440px) {
-    #featured-prev-btn {
-      left: -4rem;
-    }
-    #featured-next-btn {
-      right: -4rem;
-    }
-  }
-  .section-pill {
-    box-shadow: 0 0 10px rgba(77, 255, 184, 0.8);
+  .slide-details-btn {
+    margin-top: 0.3rem;
+    display: inline-block;
+    padding: 0.25rem 0.65rem;
+    font-family: "Outfit", system-ui, sans-serif;
+    font-size: 0.55rem;
+    font-weight: 900;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--canvas-base, #080b10);
+    background: var(--primary-brand, #00d4ff);
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0, 212, 255, 0.3);
+    transition: all 0.2s ease;
   }
 
-  :global(html[data-theme="light"]) .section-pill {
-    background-color: var(--primary-brand) !important;
-    box-shadow: 0 0 8px rgba(2, 90, 158, 0.4) !important;
+  .slide-details-btn:hover {
+    transform: scale(1.05);
+    background: var(--hover-brand, #33e4ff);
+    box-shadow: 0 4px 12px rgba(0, 212, 255, 0.45);
   }
 
-  :global(html[data-theme="light"])
-    button[data-project-dot].bg-secondary-accent {
-    background-color: var(--primary-brand) !important;
-    box-shadow: 0 0 8px rgba(2, 90, 158, 0.4) !important;
+  /* Sibling Slide Positions (Prev / Next) */
+  .slide-3d.prev {
+    transform: translate(calc(-50% - 280px), -50%) scale(0.65);
+    opacity: 0.65;
+    pointer-events: auto;
+    z-index: 5;
   }
 
-  :global(html[data-theme="light"] .featured-projects-title) {
-    color: #ffffff !important;
+  .slide-3d.prev .slide-info {
+    opacity: 0.6;
+    transform: translateY(0);
+  }
+
+  .slide-3d.next {
+    transform: translate(calc(-50% + 280px), -50%) scale(0.65);
+    opacity: 0.65;
+    pointer-events: auto;
+    z-index: 5;
+  }
+
+  .slide-3d.next .slide-info {
+    opacity: 0.6;
+    transform: translateY(0);
+  }
+
+  /* Far Slide Positions (Offscreen fades) */
+  .slide-3d.far-prev {
+    transform: translate(calc(-50% - 380px), -50%) scale(0.6);
+    opacity: 0;
+    z-index: 1;
+  }
+
+  .slide-3d.far-next {
+    transform: translate(calc(-50% + 380px), -50%) scale(0.6);
+    opacity: 0;
+    z-index: 1;
+  }
+
+  /* Navigation Arrow Buttons */
+  .slider-arrow-btn {
+    position: absolute;
+    top: 42%;
+    transform: translateY(-50%);
+    background: var(--card-bg, #1b2432);
+    border: 1px solid var(--structural-borders, #273449);
+    color: var(--text-primary, #f8fafc);
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+    z-index: 20;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  }
+
+  .slider-arrow-btn:hover {
+    background: var(--primary-brand, #00d4ff);
+    color: var(--canvas-base, #080b10);
+    border-color: var(--primary-brand, #00d4ff);
+    box-shadow: 0 0 15px rgba(0, 212, 255, 0.5);
+  }
+
+  /* Bottom Dots styling */
+  .slider-3d-dot {
+    background: rgba(255, 255, 255, 0.15);
+    border: none;
+    cursor: pointer;
+  }
+
+  .slider-3d-dot.active {
+    background: var(--primary-brand, #00d4ff);
+    width: 24px;
+    box-shadow: 0 0 8px rgba(0, 212, 255, 0.5);
+  }
+
+  /* Light Mode Specific Styling Overrides */
+  :global(html[data-theme="light"]) .featured-3d-section {
+    background: transparent;
+  }
+
+  :global(html[data-theme="light"]) .slide-image-placeholder {
+    background: #e2e8f0;
+    color: #475569;
+  }
+
+  :global(html[data-theme="light"]) .slide-mask {
+    background: rgba(255, 255, 255, 0.45);
+  }
+
+  :global(html[data-theme="light"]) .slide-hover-overlay {
+    background: rgba(255, 255, 255, 0.96);
+  }
+
+  :global(html[data-theme="light"]) .slide-hover-desc {
+    color: #0b1e36;
+  }
+
+  :global(html[data-theme="light"]) .slide-read-more {
+    color: #0b1e36;
+    background: rgba(0, 0, 0, 0.05);
+    border-color: rgba(0, 0, 0, 0.2);
+  }
+
+  :global(html[data-theme="light"]) .slide-read-more:hover {
+    background: rgba(0, 0, 0, 0.15);
+    border-color: rgba(0, 0, 0, 0.35);
+  }
+
+  :global(html[data-theme="light"]) .slide-details-overlay {
+    background: rgba(255, 255, 255, 0.98);
+    border: 1px solid rgba(11, 30, 54, 0.08);
+  }
+
+  :global(html[data-theme="light"]) .slide-details-title {
+    color: #0b1e36;
+  }
+
+  :global(html[data-theme="light"]) .slide-details-tag-pill {
+    background: rgba(11, 30, 54, 0.04);
+    color: #3b4d61;
+    border-color: rgba(11, 30, 54, 0.1);
+  }
+
+  :global(html[data-theme="light"]) .slide-details-close-btn {
+    color: rgba(11, 30, 54, 0.6);
+  }
+
+  :global(html[data-theme="light"]) .slide-details-close-btn:hover {
+    color: #0b1e36;
+    background: rgba(11, 30, 54, 0.06);
+  }
+
+  :global(html[data-theme="light"]) .slide-details-btn {
+    color: #ffffff;
+    background: var(--primary-brand, #025a9e);
+    box-shadow: 0 4px 10px rgba(2, 90, 158, 0.2);
+  }
+
+  :global(html[data-theme="light"]) .slide-details-btn:hover {
+    background: var(--hover-brand, #01467c);
+    box-shadow: 0 4px 12px rgba(2, 90, 158, 0.35);
+  }
+
+  :global(html[data-theme="light"]) .slide-circle-container {
+    box-shadow: 0 6px 18px rgba(11, 30, 54, 0.08);
+  }
+
+  :global(html[data-theme="light"]) .slide-3d.active .slide-circle-container {
+    box-shadow: 0 10px 28px rgba(11, 30, 54, 0.12);
+  }
+
+  :global(html[data-theme="light"]) .slider-arrow-btn {
+    background: #ffffff;
+    border-color: rgba(0, 0, 0, 0.08);
+    color: #0b1e36;
+  }
+
+  :global(html[data-theme="light"]) .slider-arrow-btn:hover {
+    background: var(--primary-brand, #025a9e);
+    color: #ffffff;
+    border-color: var(--primary-brand, #025a9e);
+    box-shadow: 0 0 12px rgba(2, 90, 158, 0.4);
+  }
+
+  :global(html[data-theme="light"]) .slider-3d-dot {
+    background: rgba(0, 0, 0, 0.15);
+  }
+
+  :global(html[data-theme="light"]) .slider-3d-dot.active {
+    background: var(--primary-brand, #025a9e);
+    box-shadow: 0 0 8px rgba(2, 90, 158, 0.4);
+  }
+
+  :global(html[data-theme="light"]) .slide-3d.active .slide-title {
+    color: #ffffff;
     text-shadow:
-      0 2px 8px rgba(11, 30, 54, 0.35),
-      0 4px 20px rgba(11, 30, 54, 0.25) !important;
+      0 1px 6px rgba(0, 0, 0, 0.25),
+      0 2px 12px rgba(0, 0, 0, 0.1);
   }
 
-  /* Light mode overrides for navigation arrows to make them white initially and glow on hover */
-  :global(html[data-theme="light"] #featured-prev-btn),
-  :global(html[data-theme="light"] #featured-next-btn) {
-    color: #ffffff !important;
-    filter: drop-shadow(0 2px 4px rgba(11, 30, 54, 0.3)) !important;
+  :global(html[data-theme="light"]) .slide-3d:not(.active) .slide-title {
+    color: rgba(255, 255, 255, 0.8);
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
   }
 
-  :global(html[data-theme="light"] #featured-prev-btn:hover),
-  :global(html[data-theme="light"] #featured-next-btn:hover) {
-    color: var(--primary-brand) !important;
-  }
-
-  :global(html[data-theme="light"] #featured-prev-btn:hover svg),
-  :global(html[data-theme="light"] #featured-next-btn:hover svg) {
-    filter: drop-shadow(0 0 10px rgba(2, 90, 158, 0.6)) !important;
+  /* Responsive styling */
+  @media (max-width: 768px) {
+    .slide-3d {
+      width: 180px;
+      height: 180px;
+    }
+    .slide-frame-wrapper {
+      width: 180px;
+      height: 180px;
+    }
+    .slide-circle-container {
+      width: 180px;
+      height: 180px;
+    }
+    .slide-3d.prev {
+      transform: translate(calc(-50% - 110px), -50%) scale(0.75);
+      opacity: 0.35;
+    }
+    .slide-3d.next {
+      transform: translate(calc(-50% + 110px), -50%) scale(0.75);
+      opacity: 0.35;
+    }
+    .slider-arrow-btn {
+      width: 38px;
+      height: 38px;
+    }
   }
 </style>

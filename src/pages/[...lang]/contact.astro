@@ -52,6 +52,29 @@ const rawAddress = contactData.address.raw;
             subtitle={t("contact.form.subtitle")}
             nameLabel={t("contact.form.name")}
             emailLabel={t("contact.form.email")}
+            reasonLabel={t("contact.form.reason")}
+            reasonOptions={[
+              {
+                value: "general",
+                label: t("contact.form.reason.general") as string,
+              },
+              {
+                value: "donation",
+                label: t("contact.form.reason.donation") as string,
+              },
+              {
+                value: "volunteer",
+                label: t("contact.form.reason.volunteer") as string,
+              },
+              {
+                value: "support",
+                label: t("contact.form.reason.support") as string,
+              },
+              {
+                value: "feedback",
+                label: t("contact.form.reason.feedback") as string,
+              },
+            ]}
             subjectLabel={t("contact.form.subject")}
             messageLabel={t("contact.form.message")}
             sendButtonText={t("contact.form.send")}

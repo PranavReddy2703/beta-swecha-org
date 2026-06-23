@@ -5,6 +5,8 @@ interface Props {
   subtitle: string;
   nameLabel: string;
   emailLabel: string;
+  reasonLabel: string;
+  reasonOptions: { value: string; label: string }[];
   subjectLabel: string;
   messageLabel: string;
   sendButtonText: string;
@@ -15,6 +17,8 @@ const {
   subtitle,
   nameLabel,
   emailLabel,
+  reasonLabel,
+  reasonOptions,
   subjectLabel,
   messageLabel,
   sendButtonText,
@@ -91,55 +95,106 @@ const {
       id="rebuilt-form-fields-container"
       class="space-y-4 transition-all duration-500 ease-in-out lg:max-h-none lg:opacity-100 lg:overflow-visible"
     >
-      <!-- Name Field -->
-      <div class="space-y-1.5">
-        <label
-          for="input-name"
-          class="block text-xs font-semibold text-text-main"
-          >{nameLabel} <span class="text-primary-brand">*</span></label
-        >
-        <input
-          type="text"
-          id="input-name"
-          name="name"
-          required
-          placeholder="First & last name"
-          class="w-full rounded-lg border border-structural-borders/80 bg-canvas-base/80 px-3.5 py-2.5 text-sm text-text-main placeholder-text-muted/40 focus:border-primary-brand focus:ring-1 focus:ring-primary-brand focus:shadow-[0_0_10px_rgba(0,212,255,0.25)] focus:outline-none transition-all duration-200"
-        />
+      <!-- Name & Email Side-by-Side on Desktop/Tablet -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <!-- Name Field -->
+        <div class="space-y-1.5">
+          <label
+            for="input-name"
+            class="block text-xs font-semibold text-text-main"
+            >{nameLabel} <span class="text-primary-brand">*</span></label
+          >
+          <input
+            type="text"
+            id="input-name"
+            name="name"
+            required
+            placeholder="First & last name"
+            class="w-full rounded-lg border border-structural-borders/80 bg-canvas-base/80 px-3.5 py-2.5 text-sm text-text-main placeholder-text-muted/40 focus:border-primary-brand focus:ring-1 focus:ring-primary-brand focus:shadow-[0_0_10px_rgba(0,212,255,0.25)] focus:outline-none transition-all duration-200"
+          />
+        </div>
+
+        <!-- Email Field -->
+        <div class="space-y-1.5">
+          <label
+            for="input-email"
+            class="block text-xs font-semibold text-text-main"
+            >{emailLabel} <span class="text-primary-brand">*</span></label
+          >
+          <input
+            type="email"
+            id="input-email"
+            name="email"
+            required
+            placeholder="yourname@domain.com"
+            class="w-full rounded-lg border border-structural-borders/80 bg-canvas-base/80 px-3.5 py-2.5 text-sm text-text-main placeholder-text-muted/40 focus:border-primary-brand focus:ring-1 focus:ring-primary-brand focus:shadow-[0_0_10px_rgba(0,212,255,0.25)] focus:outline-none transition-all duration-200"
+          />
+        </div>
       </div>
 
-      <!-- Email Field -->
-      <div class="space-y-1.5">
-        <label
-          for="input-email"
-          class="block text-xs font-semibold text-text-main"
-          >{emailLabel} <span class="text-primary-brand">*</span></label
-        >
-        <input
-          type="email"
-          id="input-email"
-          name="email"
-          required
-          placeholder="yourname@domain.com"
-          class="w-full rounded-lg border border-structural-borders/80 bg-canvas-base/80 px-3.5 py-2.5 text-sm text-text-main placeholder-text-muted/40 focus:border-primary-brand focus:ring-1 focus:ring-primary-brand focus:shadow-[0_0_10px_rgba(0,212,255,0.25)] focus:outline-none transition-all duration-200"
-        />
-      </div>
+      <!-- Subject & Inquiry Type Grid Side-by-Side on Desktop/Tablet -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <!-- Subject Field -->
+        <div class="space-y-1.5">
+          <label
+            for="input-subject"
+            class="block text-xs font-semibold text-text-main"
+            >{subjectLabel} <span class="text-primary-brand">*</span></label
+          >
+          <input
+            type="text"
+            id="input-subject"
+            name="subject"
+            required
+            placeholder="What is this transmission regarding?"
+            class="w-full rounded-lg border border-structural-borders/80 bg-canvas-base/80 px-3.5 py-2.5 text-sm text-text-main placeholder-text-muted/40 focus:border-primary-brand focus:ring-1 focus:ring-primary-brand focus:shadow-[0_0_10px_rgba(0,212,255,0.25)] focus:outline-none transition-all duration-200"
+          />
+        </div>
 
-      <!-- Subject Field -->
-      <div class="space-y-1.5">
-        <label
-          for="input-subject"
-          class="block text-xs font-semibold text-text-main"
-          >{subjectLabel} <span class="text-primary-brand">*</span></label
-        >
-        <input
-          type="text"
-          id="input-subject"
-          name="subject"
-          required
-          placeholder="What is this transmission regarding?"
-          class="w-full rounded-lg border border-structural-borders/80 bg-canvas-base/80 px-3.5 py-2.5 text-sm text-text-main placeholder-text-muted/40 focus:border-primary-brand focus:ring-1 focus:ring-primary-brand focus:shadow-[0_0_10px_rgba(0,212,255,0.25)] focus:outline-none transition-all duration-200"
-        />
+        <!-- Reason Dropdown Field -->
+        <div class="space-y-1.5">
+          <label
+            for="input-reason"
+            class="block text-xs font-semibold text-text-main"
+            >{reasonLabel} <span class="text-primary-brand">*</span></label
+          >
+          <div class="relative">
+            <select
+              id="input-reason"
+              name="reason"
+              required
+              class="w-full appearance-none rounded-lg border border-structural-borders/80 bg-canvas-base/80 px-3.5 py-2.5 pr-10 text-sm text-text-main focus:border-primary-brand focus:ring-1 focus:ring-primary-brand focus:shadow-[0_0_10px_rgba(0,212,255,0.25)] focus:outline-none transition-all duration-200 cursor-pointer"
+            >
+              <option
+                value=""
+                disabled
+                selected
+                class="bg-card-bg text-text-muted">Select a reason</option
+              >
+              {
+                reasonOptions.map((opt) => (
+                  <option value={opt.value} class="bg-card-bg text-text-main">
+                    {opt.label}
+                  </option>
+                ))
+              }
+            </select>
+            <!-- Custom arrow decoration -->
+            <div
+              class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-text-muted"
+            >
+              <svg
+                class="h-4 w-4 fill-none stroke-current stroke-2"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M19 9l-7 7-7-7"></path>
+              </svg>
+            </div>
+          </div>
+        </div>
       </div>
 
       <!-- Message Field -->
@@ -153,9 +208,9 @@ const {
           id="input-message"
           name="message"
           required
-          rows="4"
+          rows="3"
           placeholder="Write your transmission details..."
-          class="w-full rounded-lg border border-structural-borders/80 bg-canvas-base/80 px-3.5 py-2.5 text-sm text-text-main placeholder-text-muted/40 focus:border-primary-brand focus:ring-1 focus:ring-primary-brand focus:shadow-[0_0_10px_rgba(0,212,255,0.25)] focus:outline-none transition-all duration-200 resize-y min-h-[100px]"
+          class="w-full rounded-lg border border-structural-borders/80 bg-canvas-base/80 px-3.5 py-2.5 text-sm text-text-main placeholder-text-muted/40 focus:border-primary-brand focus:ring-1 focus:ring-primary-brand focus:shadow-[0_0_10px_rgba(0,212,255,0.25)] focus:outline-none transition-all duration-200 resize-y min-h-[80px]"
         ></textarea>
       </div>
     </div>
