@@ -11,13 +11,14 @@ import newsData from "../../data/organisms/news.json";
 import featuredNews from "../../data/organisms/featured-news.json";
 
 // Import New Redesigned Components
-import NewsHero from "@components/news/NewsHero.astro";
-import NewsFilter from "@components/news/NewsFilter.astro";
-import EditorialNewsCard from "@components/news/EditorialNewsCard.astro";
-import NewsTimeline from "@components/news/NewsTimeline.astro";
-import PublicationGroups from "@components/news/PublicationGroups.astro";
-import ArticleDetailModal from "@components/news/ArticleDetailModal.astro";
-import TopStoriesCarousel from "@components/news/TopStoriesCarousel.astro";
+import NewsHero from "@organisms/NewsHero.astro";
+import NewsFilter from "@molecules/NewsFilter.astro";
+import EditorialNewsCard from "@molecules/EditorialNewsCard.astro";
+import NewsTimeline from "@organisms/NewsTimeline.astro";
+import PublicationGroups from "@organisms/PublicationGroups.astro";
+import ArticleDetailModal from "@organisms/ArticleDetailModal.astro";
+import TopStoriesCarousel from "@organisms/TopStoriesCarousel.astro";
+import MagazineStand from "@organisms/MagazineStand.astro";
 
 export function getStaticPaths() {
   return Object.keys(languages).map((lang) => {
@@ -250,6 +251,9 @@ const fellowshipDesc =
 
           <!-- Milestones vertical timeline -->
           <NewsTimeline milestones={newsData.milestones} lang={lang} />
+
+          <!-- Magazine Stand -->
+          <MagazineStand lang={lang} />
         </div>
       </div>
     </div>

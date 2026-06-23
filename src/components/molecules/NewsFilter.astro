@@ -1,6 +1,7 @@
 ---
 // src/components/news/NewsFilter.astro
-import PublicationGroups from "./PublicationGroups.astro";
+import { getLangFromUrl, useTranslations } from "../../i18n/utils";
+import PublicationGroups from "../organisms/PublicationGroups.astro";
 
 interface Props {
   lang: string;

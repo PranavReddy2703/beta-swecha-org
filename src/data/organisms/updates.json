@@ -1,0 +1,43 @@
+{
+  "updates": [
+    {
+      "title": {
+        "en": "Telugu LLM Datathon Registration Open!",
+        "te": "తెలుగు ఎల్.ఎల్.ఎం. డేటాథాన్ రిజిస్ట్రేషన్ ప్రారంభమైంది!",
+        "hi": "तेलुगु एल.एल.एम. डेटाथॉन पंजीकरण खुला है!"
+      },
+      "category": {
+        "en": "Event",
+        "te": "ఈవెంట్",
+        "hi": "आयोजन"
+      },
+      "link": "/events/telugu-llm-datathon"
+    },
+    {
+      "title": {
+        "en": "Swecha OS Meetup this Saturday",
+        "te": "స్వేచ్ఛా OS మీటప్ ఈ శనివారం",
+        "hi": "स्वेच्छा OS मीटअप इस शनिवार"
+      },
+      "category": {
+        "en": "Meetup",
+        "te": "మీటప్",
+        "hi": "मीटअप"
+      },
+      "link": "/events/swecha-os-meetup"
+    },
+    {
+      "title": {
+        "en": "Vishwam AI Project Launched",
+        "te": "విశ్వం AI ప్రాజెక్ట్ ప్రారంభించబడింది",
+        "hi": "विश्वम AI प्रोजेक्ट लॉन्च किया गया"
+      },
+      "category": {
+        "en": "Initiative",
+        "te": "చొరవ",
+        "hi": "पहल"
+      },
+      "link": "/initiatives/vishwam-ai"
+    }
+  ]
+}
