@@ -24,7 +24,8 @@ export const MainStory: Story = {
       publication: "Tech Publication",
       url: "#",
       year: 2024,
-      image: "https://images.unsplash.com/photo-1517048676732-d65bc937f952?w=800&q=80",
+      image:
+        "https://images.unsplash.com/photo-1517048676732-d65bc937f952?w=800&q=80",
     },
     lang: "en",
     isLarge: true,
@@ -45,7 +46,8 @@ export const SecondaryStory: Story = {
       publication: "Community Publication",
       url: "#",
       year: 2024,
-      image: "https://images.unsplash.com/photo-1517048676732-d65bc937f952?w=800&q=80",
+      image:
+        "https://images.unsplash.com/photo-1517048676732-d65bc937f952?w=800&q=80",
     },
     lang: "en",
     isLarge: false,

@@ -13,5 +13,6 @@ type Story = StoryObj<typeof NewsFilter>;
 export const Default: Story = {
   args: {
     lang: "en",
+    articles: [],
   },
 };

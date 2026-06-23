@@ -13,7 +13,7 @@ type Story = StoryObj<typeof NewsTimeline>;
 export const Default: Story = {
   args: {
     lang: "en",
-    events: [
+    milestones: [
       {
         id: "1",
         title: { en: "Event 1" },
