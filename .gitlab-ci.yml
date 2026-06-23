@@ -2,11 +2,7 @@ image: node:22
 
 variables:
   FF_USE_FASTZIP: "true"
-  CACHE_COMPRESSION_LEVEL: "fastest"
   ARTIFACT_COMPRESSION_LEVEL: "fastest"
-  npm_config_cache: "$CI_PROJECT_DIR/.npm"
-  # Prevent git clean from crashing on Windows long paths inside .npm/ cache and permission issues on build artifacts
-  GIT_CLEAN_FLAGS: -ffdx -e .npm/ -e dist/ -e storybook-static/
 
 stages:
   - quality
@@ -14,11 +10,6 @@ stages:
   - build
   - test
   - deploy
-
-cache:
-  key: ${CI_COMMIT_REF_SLUG}
-  paths:
-    - .npm/
 
 lint_and_audit:
   stage: quality
@@ -36,22 +27,35 @@ typecheck_and_deadcode:
     - npm run typecheck
     - npm run knip
 
-build_assets:
+build_app:
   stage: build
   needs: ["lint_and_audit", "typecheck_and_deadcode"]
+  variables:
+    NODE_OPTIONS: "--max_old_space_size=4096"
   script:
     - npm ci --prefer-offline --no-audit
     - npm run build
-    - npm run build-storybook -- -o storybook-static
   artifacts:
     paths:
       - dist/
+    expire_in: 1 day
+
+build_storybook:
+  stage: build
+  needs: ["lint_and_audit", "typecheck_and_deadcode"]
+  variables:
+    NODE_OPTIONS: "--max_old_space_size=4096"
+  script:
+    - npm ci --prefer-offline --no-audit
+    - npm run build-storybook -- -o storybook-static
+  artifacts:
+    paths:
       - storybook-static/
     expire_in: 1 day
 
 lighthouse_ci:
   stage: test
-  needs: ["build_assets"]
+  needs: ["build_app"]
   before_script:
     - apt-get update && apt-get install -y chromium
     - export CHROME_PATH=/usr/bin/chromium
@@ -61,7 +65,7 @@ lighthouse_ci:
 
 pages:
   stage: deploy
-  needs: ["build_assets", "lighthouse_ci"]
+  needs: ["build_app", "build_storybook", "lighthouse_ci"]
   script:
     - cp -r dist/* public/
     - mkdir -p public/storybook

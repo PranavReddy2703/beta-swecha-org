@@ -11,7 +11,8 @@
     "src/components/types/index.ts",
     "src/i18n/ui.ts",
     "src/pwa.ts",
-    "src/mock-pwa.ts"
+    "src/mock-pwa.ts",
+    "generate-swecha-news.js"
   ],
   "ignoreExportsUsedInFile": true,
   "ignoreDependencies": [
