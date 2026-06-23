@@ -52,11 +52,11 @@ validate_and_build:
 
     # 3. Build Apps
     - npm run build
-    - npm run build-storybook -- -o public/storybook
+    - npm run build-storybook
   artifacts:
     paths:
       - dist/
-      - public/storybook/
+      - storybook-static/
     expire_in: 1 day
 
 lighthouse_ci:
@@ -70,8 +70,9 @@ pages:
   stage: deploy
   needs: ["validate_and_build", "lighthouse_ci"]
   script:
-    - mkdir -p public
+    - mkdir -p public public/storybook
     - cp -a dist/. public/
+    - cp -a storybook-static/. public/storybook/
   artifacts:
     paths:
       - public
