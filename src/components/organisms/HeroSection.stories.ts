@@ -9,7 +9,7 @@ const meta: Meta<typeof HeroSection> = {
     docs: {
       description: {
         component:
-          "The main hero section of the home page. Retrieves translations via i18n and renders FeatureCards.",
+          "The main hero section of the landing page. Features a two-column layout presenting Swecha's core mission, impact statistics, and interactive glassmorphic pillar cards for key initiatives.",
       },
     },
     layout: "fullscreen",
