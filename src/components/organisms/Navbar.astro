@@ -1,0 +1,348 @@
+---
+// src/components/organisms/Navbar.astro
+import NavLink from "../atoms/NavLink.astro";
+import NavDropdown from "../atoms/NavDropdown.astro";
+import LanguageSwitcher from "../molecules/LanguageSwitcher.astro";
+import ThemeToggle from "../molecules/ThemeToggle.astro";
+import HamburgerMenu from "../molecules/HamburgerMenu.astro";
+import MobileDrawer from "./MobileDrawer.astro";
+import {
+  getLangFromUrl,
+  useTranslations,
+  useTranslatedPath,
+} from "../../i18n/utils";
+import { languages } from "../../i18n/ui";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const translatePath = useTranslatedPath(lang);
+
+const navItems = [
+  { name: t("nav.about") as string, href: translatePath("/about") },
+  { name: t("nav.projects") as string, href: translatePath("/projects") },
+  {
+    name: t("nav.initiatives") as string,
+    href: translatePath("/initiatives"),
+    isDropdown: true,
+    children: [
+      {
+        name: t("nav.initiatives.vishwamai") as string,
+        href: translatePath("/initiatives/vishwam-ai"),
+        icon: '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2 text-slate-400"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/></svg>',
+      },
+      {
+        name: t("nav.initiatives.devdays") as string,
+        href: translatePath("/initiatives/devdays"),
+        icon: '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2 text-slate-400"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>',
+      },
+      {
+        name: t("nav.initiatives.publichealth") as string,
+        href: translatePath("/initiatives/peoples-health"),
+        icon: '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2 text-slate-400"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>',
+      },
+      {
+        name: t("nav.initiatives.code4change") as string,
+        href: translatePath("/initiatives/code4change"),
+        icon: '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2 text-slate-400"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>',
+      },
+    ],
+  },
+  { name: t("nav.events") as string, href: translatePath("/events") },
+  { name: t("nav.news") as string, href: translatePath("/news") },
+  { name: t("nav.donations") as string, href: translatePath("/donate") },
+  { name: t("nav.careers") as string, href: translatePath("/careers") },
+  { name: t("nav.contact") as string, href: translatePath("/contact") },
+];
+
+const isCurrentPage = (href: string) => {
+  const normalize = (path: string) => path.replace(/\/$/, "") || "/";
+  const normPathname = normalize(Astro.url.pathname);
+  const normHref = normalize(href);
+  if (normHref === "/") {
+    return normPathname === "/";
+  }
+  return normPathname === normHref || normPathname.startsWith(normHref + "/");
+};
+---
+
+<header id="site-header" class="navbar-header">
+  <!-- Animated gradient border at bottom -->
+  <div class="navbar-gradient-border"></div>
+
+  <div class="px-6 sm:px-10 lg:px-16">
+    <div class="navbar-inner">
+      <!-- Logo Container -->
+      <div class="flex-shrink-0">
+        <a
+          href={translatePath("/")}
+          class="logo-link flex items-center"
+          aria-label="Swecha Home"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 170 48"
+            class="h-10 w-auto select-none navbar-logo-svg"
+            fill="none"
+            overflow="visible"
+          >
+            <defs>
+              <linearGradient
+                id="swecha-logo-grad"
+                x1="0%"
+                y1="0%"
+                x2="100%"
+                y2="0%"
+              >
+                <stop offset="0%" stop-color="#00D4FF"></stop>
+                <stop offset="50%" stop-color="#33E4FF"></stop>
+                <stop offset="100%" stop-color="#4DFFB8"></stop>
+              </linearGradient>
+            </defs>
+            <g class="logo-content-group" overflow="visible">
+              <!-- Swecha Text -->
+              <text
+                x="2"
+                y="36"
+                font-family="'Great Vibes', 'Alex Brush', 'Brush Script MT', cursive"
+                font-size="38"
+                style="letter-spacing: 0.5px;"
+              >
+                Swecha
+              </text>
+              <!-- Large Bird -->
+              <path
+                class="logo-bird-1"
+                d="M0 10 Q8 4 18 3 Q28 2 36 6 Q38 7 40 8 Q42 7 44 6 Q52 2 62 3 Q72 4 80 10 Q72 8 62 7 Q52 6 44 8.5 Q42 11 40 12 Q38 11 36 8.5 Q28 6 18 7 Q8 8 0 10 Z"
+                transform="translate(108, 3) scale(0.35) rotate(-10)"></path>
+              <!-- Small Bird -->
+              <path
+                class="logo-bird-2"
+                d="M0 10 Q8 4 18 3 Q28 2 36 6 Q38 7 40 8 Q42 7 44 6 Q52 2 62 3 Q72 4 80 10 Q72 8 62 7 Q52 6 44 8.5 Q42 11 40 12 Q38 11 36 8.5 Q28 6 18 7 Q8 8 0 10 Z"
+                transform="translate(126, 12) scale(0.24) rotate(-5)"></path>
+            </g>
+          </svg>
+        </a>
+      </div>
+
+      <!-- Desktop Navigation Menu -->
+      <nav
+        class="hidden md:flex items-center space-x-4 lg:space-x-6"
+        id="desktop-nav"
+      >
+        {
+          navItems.map((item) =>
+            item.isDropdown ? (
+              <NavDropdown
+                label={item.name}
+                items={item.children || []}
+                isActive={isCurrentPage(item.href)}
+              />
+            ) : (
+              <NavLink
+                href={item.href}
+                label={item.name}
+                isActive={isCurrentPage(item.href)}
+              />
+            ),
+          )
+        }
+      </nav>
+
+      <!-- Actions Container (Language + Theme + Mobile Menu) -->
+      <div class="flex items-center space-x-2">
+        <LanguageSwitcher title={t("nav.selectLanguage")} />
+        <ThemeToggle title={t("nav.toggleTheme")} />
+        <HamburgerMenu srLabel={t("nav.openMenu")} />
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile Drawer Menu -->
+  <MobileDrawer navItems={navItems} isCurrentPage={isCurrentPage} />
+</header>
+
+<script>
+  // ── Scroll-aware header ──
+  const header = document.getElementById("site-header");
+  let ticking = false;
+
+  const handleScroll = () => {
+    const scrollY = window.scrollY;
+
+    if (header) {
+      if (scrollY > 20) {
+        header.classList.add("navbar-scrolled");
+      } else {
+        header.classList.remove("navbar-scrolled");
+      }
+    }
+
+    ticking = false;
+  };
+
+  window.addEventListener(
+    "scroll",
+    () => {
+      if (!ticking) {
+        requestAnimationFrame(handleScroll);
+        ticking = true;
+      }
+    },
+    { passive: true },
+  );
+
+  // ── Mobile drawer interaction logic ──
+  const toggleBtn = document.getElementById("mobile-menu-toggle");
+  const mobileMenu = document.getElementById("mobile-menu");
+  const hamburgerLines = document.getElementById("hamburger-lines");
+
+  if (toggleBtn && mobileMenu && hamburgerLines) {
+    toggleBtn.addEventListener("click", () => {
+      const isExpanded = toggleBtn.getAttribute("aria-expanded") === "true";
+      toggleBtn.setAttribute("aria-expanded", (!isExpanded).toString());
+
+      mobileMenu.classList.toggle("mobile-drawer-open");
+      hamburgerLines.classList.toggle("hamburger-active");
+
+      if (!isExpanded) {
+        const links = mobileMenu.querySelectorAll(".mobile-nav-link");
+        links.forEach((link) => {
+          (link as HTMLElement).style.animationPlayState = "running";
+        });
+      }
+    });
+  }
+</script>
+
+<style>
+  .navbar-header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    width: 100%;
+    background: color-mix(in srgb, var(--secondary-bg) 80%, transparent);
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+    transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow:
+      0 8px 30px -5px rgba(0, 0, 0, 0.15),
+      0 0 1px 1px rgba(255, 255, 255, 0.05) inset;
+  }
+
+  .navbar-header.navbar-scrolled {
+    background: color-mix(in srgb, var(--secondary-bg) 92%, transparent);
+    box-shadow:
+      0 15px 40px -5px rgba(0, 0, 0, 0.25),
+      0 5px 15px rgba(0, 0, 0, 0.1),
+      0 0 1px 1px rgba(255, 255, 255, 0.05) inset;
+  }
+
+  .navbar-header.navbar-scrolled .navbar-inner {
+    height: 4rem;
+  }
+
+  .navbar-header.navbar-scrolled .navbar-gradient-border {
+    opacity: 1;
+  }
+
+  .navbar-gradient-border {
+    --border-edge: var(--structural-borders);
+    --border-mid-1: var(--primary-brand);
+    --border-mid-2: var(--secondary-accent);
+
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      var(--border-edge) 15%,
+      var(--border-mid-1) 40%,
+      var(--border-mid-2) 60%,
+      var(--border-edge) 85%,
+      transparent 100%
+    );
+    background-size: 200% 100%;
+    opacity: 0.5;
+    transition:
+      opacity 0.35s ease,
+      height 0.35s ease;
+  }
+
+  :global(html[data-theme="light"]) .navbar-gradient-border {
+    display: none;
+  }
+
+  @keyframes borderShimmer {
+    0%,
+    100% {
+      background-position: 200% 0;
+    }
+    50% {
+      background-position: -200% 0;
+    }
+  }
+
+  .navbar-inner {
+    display: flex;
+    height: 5rem;
+    align-items: center;
+    justify-content: space-between;
+    transition: height 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .navbar-header {
+    animation: navbarSlideIn 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  @keyframes navbarSlideIn {
+    from {
+      transform: translateY(-100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
+  .logo-link {
+    cursor: pointer;
+    text-decoration: none;
+    outline: none;
+    display: flex;
+    align-items: center;
+  }
+
+  .navbar-logo-svg {
+    overflow: visible;
+  }
+
+  .logo-content-group {
+    fill: var(--text-primary);
+    transition:
+      fill 0.3s ease,
+      filter 0.3s ease;
+  }
+
+  .logo-bird-1,
+  .logo-bird-2 {
+    transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+  }
+
+  .logo-link:hover .logo-content-group {
+    fill: url(#swecha-logo-grad);
+    filter: drop-shadow(0 0 4px rgba(0, 212, 255, 0.5))
+      drop-shadow(0 0 10px rgba(77, 255, 184, 0.35));
+  }
+
+  .logo-link:hover .logo-bird-1 {
+    transform: translate(108px, 1px) scale(0.35) rotate(-14deg);
+  }
+
+  .logo-link:hover .logo-bird-2 {
+    transform: translate(126px, 10px) scale(0.24) rotate(-9deg);
+  }
+</style>

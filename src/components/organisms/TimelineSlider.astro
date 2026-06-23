@@ -1,0 +1,244 @@
+---
+// src/components/TimelineSlider.astro
+import { getNodeColors } from "../../utils/timelineColors";
+
+interface Props {
+  events: Array<{
+    year: string;
+    title: string;
+    description: string;
+  }>;
+}
+
+const { events } = Astro.props;
+const N = events.length;
+---
+
+<div class="w-full overflow-visible py-6 relative flex justify-center mt-4">
+  <ul
+    id="sliding-timeline"
+    class="timeline timeline-horizontal select-none transition-transform duration-500 ease-out flex justify-between relative"
+    style={`width: ${events.length * 200}px; min-width: ${events.length * 200}px;`}
+  >
+    {
+      events.map((event, index) => {
+        const colors = getNodeColors(index, N, false);
+        const nextColors =
+          index < N - 1 ? getNodeColors(index + 1, N, false) : null;
+        const prevColors =
+          index > 0 ? getNodeColors(index - 1, N, false) : null;
+
+        const colorsLight = getNodeColors(index, N, true);
+        const nextColorsLight =
+          index < N - 1 ? getNodeColors(index + 1, N, true) : null;
+        const prevColorsLight =
+          index > 0 ? getNodeColors(index - 1, N, true) : null;
+
+        return (
+          <li
+            class="flex-1 relative timeline-node-wrapper"
+            style={`
+          --node-color-dark: ${colors.color};
+          --node-glow-dark: ${colors.glow};
+          --node-shadow-dark: ${colors.shadow};
+          --next-color-dark: ${nextColors?.color || colors.color};
+          --prev-color-dark: ${prevColors?.color || colors.color};
+
+          --node-color-light: ${colorsLight.color};
+          --node-glow-light: ${colorsLight.glow};
+          --node-shadow-light: ${colorsLight.shadow};
+          --next-color-light: ${nextColorsLight?.color || colorsLight.color};
+          --prev-color-light: ${prevColorsLight?.color || colorsLight.color};
+        `}
+          >
+            <hr
+              class={`timeline-line-prev h-[4px] border-none transition-all duration-500 ease-in-out relative z-[1] ${index === 0 ? "opacity-0 pointer-events-none timeline-line-dummy" : "bg-[#141f26]/70"}`}
+            />
+
+            <button
+              class="timeline-middle timeline-node relative flex flex-col items-center group z-10 focus:outline-none cursor-pointer"
+              data-index={index}
+              data-color={colors.color}
+              data-glow={colors.glow}
+              data-shadow={colors.shadow}
+              data-color-light={colorsLight.color}
+              data-glow-light={colorsLight.glow}
+              data-shadow-light={colorsLight.shadow}
+              aria-label={`Jump to event year ${event.year}`}
+            >
+              {/* The Node Dot with pulse ring */}
+              <div class="relative flex items-center justify-center h-8 w-8 dot-wrapper">
+                {/* Pulse Ring */}
+                <span class="pulse-ring absolute inset-0 rounded-full border opacity-0 hidden" />
+
+                {/* Circular Glow around the node */}
+                <div class="dot-glow" style={`--node-glow: ${colors.glow};`} />
+
+                {/* Core Dot */}
+                <div class="node-dot h-5 w-5 rounded-full border-[3px] border-[#080B10] bg-transparent transition-all duration-500 transform z-10" />
+
+                {/* Left Edge Screen Extension (only for index 0) */}
+                {index === 0 && (
+                  <div class="timeline-line-prev-extend h-[4px] transition-all duration-500 ease-in-out" />
+                )}
+
+                {/* Right Edge Screen Extension (only for last index) */}
+                {index === N - 1 && (
+                  <div class="timeline-line-next-extend h-[4px] transition-all duration-500 ease-in-out" />
+                )}
+              </div>
+            </button>
+
+            <div class="timeline-end mt-3 text-center w-full">
+              {/* Year Label */}
+              <span class="node-year text-xs sm:text-sm font-bold text-text-muted transition-colors duration-300">
+                {event.year}
+              </span>
+            </div>
+
+            <hr
+              class={`timeline-line-next h-[4px] border-none transition-all duration-500 ease-in-out relative z-[1] ${index === N - 1 ? "opacity-0 pointer-events-none timeline-line-dummy" : "bg-[#141f26]/70"}`}
+            />
+          </li>
+        );
+      })
+    }
+  </ul>
+</div>
+
+<style>
+  .timeline-node-wrapper {
+    --current-node-color: var(--node-color-dark);
+    --current-node-glow: var(--node-glow-dark);
+    --current-node-shadow: var(--node-shadow-dark);
+    --line-next-bg: linear-gradient(
+      to right,
+      var(--node-color-dark),
+      var(--next-color-dark)
+    );
+    --line-prev-bg: linear-gradient(
+      to right,
+      var(--prev-color-dark),
+      var(--node-color-dark)
+    );
+    --extend-next-bg: linear-gradient(
+      to right,
+      var(--node-color-dark) 0%,
+      transparent 100%
+    );
+    --extend-prev-bg: linear-gradient(
+      to right,
+      transparent 0%,
+      var(--node-color-dark) 100%
+    );
+  }
+
+  :global(html[data-theme="light"]) .timeline-node-wrapper {
+    --current-node-color: var(--node-color-light);
+    --current-node-glow: var(--node-glow-light);
+    --current-node-shadow: var(--node-shadow-light);
+    --line-next-bg: linear-gradient(
+      to right,
+      var(--node-color-light),
+      var(--next-color-light)
+    );
+    --line-prev-bg: linear-gradient(
+      to right,
+      var(--prev-color-light),
+      var(--node-color-light)
+    );
+    --extend-next-bg: linear-gradient(
+      to right,
+      var(--node-color-light) 0%,
+      transparent 100%
+    );
+    --extend-prev-bg: linear-gradient(
+      to right,
+      transparent 0%,
+      var(--node-color-light) 100%
+    );
+  }
+
+  .timeline-line-prev:not(.timeline-line-dummy) {
+    background: var(--line-prev-bg) !important;
+  }
+
+  .timeline-line-next:not(.timeline-line-dummy) {
+    background: var(--line-next-bg) !important;
+  }
+
+  #sliding-timeline {
+    position: relative;
+    left: 50%;
+  }
+
+  /* Edge extensions positioning */
+  .timeline-line-prev-extend {
+    position: absolute !important;
+    right: calc(50% + 8px) !important;
+    margin: 0 !important;
+    transform: translateY(-50%) !important;
+    top: 50% !important;
+    z-index: 0 !important;
+    opacity: 1;
+    background: var(--extend-prev-bg) !important;
+  }
+
+  .timeline-line-next-extend {
+    position: absolute !important;
+    left: calc(50% + 8px) !important;
+    margin: 0 !important;
+    transform: translateY(-50%) !important;
+    top: 50% !important;
+    z-index: 0 !important;
+    opacity: 1;
+    background: var(--extend-next-bg) !important;
+  }
+
+  /* Circular Glow behind each milestone node */
+  .dot-glow {
+    position: absolute;
+    inset: -14px;
+    border-radius: 50%;
+    background: radial-gradient(
+      circle,
+      var(--node-glow, rgba(0, 212, 255, 0.2)) 0%,
+      transparent 70%
+    );
+    pointer-events: none;
+    z-index: 0;
+    transition: all 0.5s ease-in-out;
+  }
+
+  /* DaisyUI timeline overrides */
+  .timeline hr {
+    height: 4px !important;
+    border: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border-radius: 0 !important;
+  }
+
+  .timeline-end {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+
+  /* Active pulse animation */
+  @keyframes subtle-pulse {
+    0% {
+      transform: scale(0.6);
+      opacity: 0.6;
+    }
+    100% {
+      transform: scale(1.6);
+      opacity: 0;
+    }
+  }
+
+  .active-pulse {
+    display: block !important;
+    animation: subtle-pulse 3s cubic-bezier(0.2, 0.8, 0.2, 1) infinite;
+  }
+</style>

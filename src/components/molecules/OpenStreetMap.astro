@@ -1,0 +1,262 @@
+---
+// src/components/contact/OpenStreetMap.astro
+import "leaflet/dist/leaflet.css";
+---
+
+<div
+  id="osm-map-container"
+  class="group/map relative w-full h-[350px] md:h-full flex-grow rounded-xl border border-structural-borders/80 bg-[#0c1017] overflow-hidden transition-all duration-300 hover:border-primary-brand/35 hover:shadow-[0_0_20px_rgba(0,212,255,0.08)]"
+>
+  <!-- Interactive Map Div -->
+  <div id="map" class="w-full h-full z-10"></div>
+</div>
+
+<script>
+  import L from "leaflet";
+
+  // Coordinate for Swecha Office (near CGG Gachibowli)
+  const officeCoords: [number, number] = [17.4360775, 78.3612286];
+
+  // Initialize the map, centering on coordinates
+  const map = L.map("map", {
+    center: officeCoords,
+    zoom: 17,
+    zoomControl: true,
+    scrollWheelZoom: false, // Prevents scroll hijacking on the page
+  });
+
+  // Set up both tile layers
+  const darkTiles = L.tileLayer(
+    "https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png",
+    {
+      maxZoom: 20,
+      attribution:
+        '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions" target="_blank" rel="noopener noreferrer">CARTO</a>',
+    },
+  );
+
+  const lightTiles = L.tileLayer(
+    "https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png",
+    {
+      maxZoom: 20,
+      attribution:
+        '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions" target="_blank" rel="noopener noreferrer">CARTO</a>',
+    },
+  );
+
+  function updateTiles() {
+    const isLight =
+      document.documentElement.getAttribute("data-theme") === "light";
+    if (isLight) {
+      map.removeLayer(darkTiles);
+      lightTiles.addTo(map);
+    } else {
+      map.removeLayer(lightTiles);
+      darkTiles.addTo(map);
+    }
+  }
+
+  // Initial apply
+  updateTiles();
+
+  // Listen to data-theme toggle events/attribute changes
+  const observer = new MutationObserver((mutations) => {
+    mutations.forEach((mutation) => {
+      if (mutation.attributeName === "data-theme") {
+        updateTiles();
+      }
+    });
+  });
+  observer.observe(document.documentElement, { attributes: true });
+
+  // Custom DivIcon representing a pulsing cyan dot with high-end glow
+  const customMarkerIcon = L.divIcon({
+    className: "swecha-leaflet-marker",
+    html: `
+      <div class="marker-pulse-wrapper relative flex h-7 w-7 items-center justify-center">
+        <span class="pulse-ring absolute h-7 w-7 rounded-full transition-all duration-500"></span>
+        <span class="pulse-ring-outer absolute h-7 w-7 rounded-full transition-all duration-500"></span>
+        <span class="core-dot relative inline-flex rounded-full h-3 w-3 border border-slate-950"></span>
+      </div>
+    `,
+    iconSize: [28, 28],
+    iconAnchor: [14, 14],
+  });
+
+  // Create marker and add to map
+  const marker = L.marker(officeCoords, { icon: customMarkerIcon }).addTo(map);
+
+  // Bind a tooltip displaying "Swecha Office"
+  marker
+    .bindTooltip("Swecha Office", {
+      permanent: true,
+      direction: "top",
+      className: "swecha-leaflet-tooltip",
+      offset: [0, -14],
+    })
+    .openTooltip();
+</script>
+
+<style is:global>
+  /* Custom Tooltip Styling matching editorial aesthetic */
+  .swecha-leaflet-tooltip {
+    background-color: #111827 !important;
+    border: 1px solid var(--structural-borders) !important;
+    color: var(--text-primary) !important;
+    font-weight: 800 !important;
+    font-size: 11px !important;
+    letter-spacing: 0.08em !important;
+    text-transform: uppercase !important;
+    border-radius: 6px !important;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5) !important;
+    padding: 5px 9px !important;
+    font-family: inherit !important;
+  }
+
+  /* Tooltip arrow custom coloring */
+  .swecha-leaflet-tooltip::before {
+    border-top-color: #111827 !important;
+  }
+
+  /* Marker animations */
+  .pulse-ring {
+    animation: markerPing 1.8s cubic-bezier(0, 0, 0.2, 1) infinite;
+    background-color: rgba(0, 212, 255, 0.35);
+  }
+
+  .pulse-ring-outer {
+    animation: markerPing 1.8s cubic-bezier(0, 0, 0.2, 1) infinite;
+    animation-delay: 0.6s;
+    background-color: rgba(0, 212, 255, 0.1);
+  }
+
+  .core-dot {
+    background-color: #00d4ff;
+    box-shadow: 0 0 10px #00d4ff;
+  }
+
+  @keyframes markerPing {
+    0% {
+      transform: scale(0.4);
+      opacity: 0.8;
+    }
+    100% {
+      transform: scale(1.6);
+      opacity: 0;
+    }
+  }
+
+  /* Active/Hover animation: Accelerate and expand pulse when map card is hovered */
+  #osm-map-container:hover .pulse-ring {
+    animation-duration: 1.2s;
+    background-color: rgba(0, 212, 255, 0.5);
+  }
+
+  #osm-map-container:hover .pulse-ring-outer {
+    animation-duration: 1.2s;
+    background-color: rgba(0, 212, 255, 0.2);
+  }
+
+  /* Clean leaflet pane default styling adjustments */
+  .leaflet-container {
+    background: #080b10 !important;
+    font-family: inherit !important;
+  }
+
+  /* Minimal zoom controls design */
+  .leaflet-bar {
+    border: 1px solid var(--structural-borders) !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25) !important;
+    border-radius: 8px !important;
+    overflow: hidden;
+  }
+
+  .leaflet-bar a {
+    background-color: #111827 !important;
+    color: var(--text-muted) !important;
+    border-bottom: 1px solid var(--structural-borders) !important;
+    transition: all 0.2s ease;
+  }
+
+  .leaflet-bar a:hover {
+    background-color: #1f2937 !important;
+    color: var(--primary-brand) !important;
+  }
+
+  /* Clean attribution text stylings */
+  .leaflet-control-attribution {
+    background-color: rgba(17, 24, 39, 0.85) !important;
+    color: var(--text-muted) !important;
+    font-size: 9px !important;
+    backdrop-blur: md;
+    border-top-left-radius: 4px;
+    border-left: 1px solid var(--structural-borders) !important;
+    border-top: 1px solid var(--structural-borders) !important;
+  }
+
+  .leaflet-control-attribution a {
+    color: var(--primary-brand) !important;
+    font-weight: bold;
+    text-decoration: none !important;
+  }
+
+  /* Light mode overrides for Leaflet elements */
+  html[data-theme="light"] .pulse-ring {
+    background-color: rgba(16, 185, 129, 0.35) !important;
+  }
+
+  html[data-theme="light"] .pulse-ring-outer {
+    background-color: rgba(16, 185, 129, 0.1) !important;
+  }
+
+  html[data-theme="light"] .core-dot {
+    background-color: #10b981 !important;
+    box-shadow: 0 0 10px #10b981 !important;
+  }
+
+  html[data-theme="light"] #osm-map-container:hover .pulse-ring {
+    background-color: rgba(16, 185, 129, 0.5) !important;
+  }
+
+  html[data-theme="light"] #osm-map-container:hover .pulse-ring-outer {
+    background-color: rgba(16, 185, 129, 0.2) !important;
+  }
+
+  html[data-theme="light"] .swecha-leaflet-tooltip {
+    background-color: #ffffff !important;
+    border: 1px solid rgba(0, 0, 0, 0.15) !important;
+    color: var(--text-primary) !important;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08) !important;
+  }
+
+  html[data-theme="light"] .swecha-leaflet-tooltip::before {
+    border-top-color: #ffffff !important;
+  }
+
+  html[data-theme="light"] .leaflet-container {
+    background: #e2e8f0 !important;
+  }
+
+  html[data-theme="light"] .leaflet-bar {
+    border: 1px solid rgba(0, 0, 0, 0.1) !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08) !important;
+  }
+
+  html[data-theme="light"] .leaflet-bar a {
+    background-color: #ffffff !important;
+    color: var(--text-muted) !important;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08) !important;
+  }
+
+  html[data-theme="light"] .leaflet-bar a:hover {
+    background-color: #f8fafc !important;
+    color: var(--primary-brand) !important;
+  }
+
+  html[data-theme="light"] .leaflet-control-attribution {
+    background-color: rgba(255, 255, 255, 0.9) !important;
+    color: var(--text-muted) !important;
+    border-left: 1px solid rgba(0, 0, 0, 0.08) !important;
+    border-top: 1px solid rgba(0, 0, 0, 0.08) !important;
+  }
+</style>

@@ -1,0 +1,173 @@
+---
+// src/components/news/ArticleDetailModal.astro
+interface Props {
+  lang: string;
+}
+
+const { lang } = Astro.props;
+
+const closeLabel =
+  lang === "te" ? "మూసివేయి" : lang === "hi" ? "बंद करें" : "Close";
+const readFullLabel =
+  lang === "te"
+    ? "పూర్తి కథనాన్ని చదవండి"
+    : lang === "hi"
+      ? "पूरा लेख पढ़ें"
+      : "Read Full Article";
+const relatedLabel =
+  lang === "te"
+    ? "సంబంధిత కథనాలు"
+    : lang === "hi"
+      ? "संबंधित लेख"
+      : "Related Articles";
+const byAuthor = lang === "te" ? "రచన: " : lang === "hi" ? "लेखक: " : "By ";
+---
+
+<div
+  id="article-detail-modal"
+  class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/70 backdrop-blur-md opacity-0 pointer-events-none transition-all duration-300 select-none"
+  role="dialog"
+  aria-modal="true"
+>
+  <!-- Modal Box -->
+  <div
+    class="relative w-full max-w-4xl max-h-[85vh] overflow-y-auto rounded-2xl border border-structural-borders/80 bg-slate-950 p-6 md:p-8 shadow-2xl scale-95 transition-all duration-300 flex flex-col gap-6"
+    id="modal-box"
+  >
+    <!-- Close Button -->
+    <button
+      type="button"
+      id="close-modal-btn"
+      class="absolute top-4 right-4 p-2 rounded-lg bg-card-bg/50 border border-structural-borders text-text-muted hover:text-primary-brand hover:border-primary-brand/35 transition-all duration-200 cursor-pointer"
+      aria-label={closeLabel}
+    >
+      <svg
+        class="h-5 w-5"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+        stroke-width="2.5"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M6 18L18 6M6 6l12 12"></path>
+      </svg>
+    </button>
+
+    <!-- Modal Header Meta -->
+    <div class="flex items-center gap-3 mt-2 flex-wrap">
+      <span
+        id="modal-pub-logo"
+        class="flex items-center justify-center w-6 h-6 rounded bg-gradient-to-br from-primary-brand to-secondary-accent text-[9px] font-black text-slate-950 select-none shadow-sm"
+      >
+        ET
+      </span>
+      <span
+        id="modal-pub-name"
+        class="text-xs font-bold text-text-main tracking-wide"
+      >
+        Economic Times
+      </span>
+      <span class="text-text-muted/30">•</span>
+      <span id="modal-date" class="text-[10px] font-bold text-text-muted">
+        July 2, 2024
+      </span>
+      <span class="text-text-muted/30">•</span>
+      <span
+        id="modal-reading-time"
+        class="text-[10px] font-bold text-text-muted font-mono"
+      >
+        3 min read
+      </span>
+    </div>
+
+    <!-- Title & Author -->
+    <div class="space-y-2">
+      <h2
+        id="modal-title"
+        class="text-xl md:text-2xl lg:text-3xl font-black text-text-main leading-tight tracking-tight"
+      >
+        Telangana Announces Datathon with Swecha to Create Telugu LLM
+      </h2>
+      <div class="text-xs text-text-muted font-semibold">
+        {byAuthor}<span id="modal-author" class="text-primary-brand font-bold"
+          >ET Government Desk</span
+        >
+      </div>
+    </div>
+
+    <!-- Body Layout -->
+    <div class="flex flex-col lg:flex-row gap-6">
+      <!-- Description & CTA -->
+      <div class="flex-1 flex flex-col justify-between gap-5 relative z-10">
+        <div class="space-y-4">
+          <p
+            id="modal-desc"
+            class="text-sm font-bold text-text-main leading-relaxed"
+          >
+            The Telangana ITE&C Department, in association with Swecha,
+            announced a statewide Datathon to create Telugu Large Language Model
+            datasets.
+          </p>
+          <div
+            id="modal-summary"
+            class="text-xs text-text-muted leading-relaxed font-medium space-y-3"
+          >
+            This collaboration focuses on digitizing diverse Telugu linguistic
+            resources, oral traditions, and folklore.
+          </div>
+        </div>
+
+        <div class="pt-3">
+          <a
+            href="#"
+            id="modal-cta-btn"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-2 rounded-lg bg-gradient-to-r from-primary-brand to-secondary-accent px-5 py-3 text-xs font-black text-slate-950 transition-all duration-300 shadow-[0_0_15px_rgba(2,132,199,0.15)] hover:shadow-[0_0_25px_rgba(2,132,199,0.4)] hover:scale-[1.02] active:scale-[0.98]"
+          >
+            <span>{readFullLabel}</span>
+            <svg
+              class="h-4 w-4 transform transition-transform duration-300 group-hover:translate-x-0.5"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              stroke-width="2.5"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Image Column -->
+      <div
+        class="w-full lg:w-[45%] h-48 lg:h-auto overflow-hidden rounded-xl bg-slate-950 border border-structural-borders relative shrink-0"
+      >
+        <img
+          src=""
+          id="modal-image"
+          alt="Article Banner"
+          class="absolute inset-0 h-full w-full object-cover object-center"
+        />
+      </div>
+    </div>
+
+    <!-- Related Articles Section -->
+    <div class="border-t border-structural-borders/30 pt-5 space-y-4">
+      <h3 class="text-xs font-black text-text-main uppercase tracking-widest">
+        {relatedLabel}
+      </h3>
+      <div
+        class="grid grid-cols-1 md:grid-cols-3 gap-4"
+        id="modal-related-grid"
+      >
+        <!-- Injected Dynamically by JS -->
+      </div>
+    </div>
+  </div>
+</div>

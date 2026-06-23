@@ -1,0 +1,20 @@
+[
+  {
+    "title": "Email Us",
+    "value": "reachus@swecha.net",
+    "icon": "Mail",
+    "link": "https://mail.google.com/mail/?view=cm&fs=1&to=reachus@swecha.net"
+  },
+  {
+    "title": "Call Us",
+    "value": "+91 89775 03615",
+    "icon": "Phone",
+    "link": "tel:+918977503615"
+  },
+  {
+    "title": "Internship Queries",
+    "value": "internships@swecha.org",
+    "icon": "GraduationCap",
+    "link": "https://mail.google.com/mail/?view=cm&fs=1&to=internships@swecha.org"
+  }
+]

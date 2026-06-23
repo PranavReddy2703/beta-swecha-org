@@ -1,0 +1,49 @@
+---
+// src/components/events/DiscussionTrackCard.astro
+interface Props {
+  title: string;
+  description: string;
+  index: number;
+}
+
+const { title, description, index } = Astro.props;
+const formattedIndex = String(index + 1).padStart(2, "0");
+---
+
+<div
+  class="glass-white-card group relative rounded-2xl border border-structural-borders bg-card-bg/50 p-8 md:p-10 backdrop-blur-md transition-all duration-300 hover:border-secondary-accent/40 hover:-translate-y-1.5 hover:shadow-[0_12px_40px_rgba(77,255,184,0.03)] overflow-hidden"
+>
+  <!-- Glowing subtle tech line on top -->
+  <div
+    class="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-secondary-accent/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+  >
+  </div>
+
+  <!-- Tech Index Number (01, 02) -->
+  <div
+    class="absolute right-6 top-6 text-5xl md:text-6xl font-black text-sky-200 dark:text-structural-borders/40 select-none group-hover:text-sky-300 dark:group-hover:text-secondary-accent/15 group-hover:scale-105 transition-all duration-300 font-mono"
+  >
+    {formattedIndex}
+  </div>
+
+  <!-- Content -->
+  <div class="space-y-4 relative z-10 max-w-[85%]">
+    <div
+      class="inline-flex items-center space-x-2 text-xs font-semibold uppercase tracking-wider text-secondary-accent"
+    >
+      <span class="w-1.5 h-1.5 rounded-full bg-secondary-accent animate-pulse"
+      ></span>
+      <span>Track {formattedIndex}</span>
+    </div>
+
+    <h3
+      class="text-xl md:text-2xl font-extrabold text-text-main group-hover:text-secondary-accent transition-colors duration-200"
+    >
+      {title}
+    </h3>
+
+    <p class="text-sm md:text-base text-text-muted leading-relaxed font-normal">
+      {description}
+    </p>
+  </div>
+</div>

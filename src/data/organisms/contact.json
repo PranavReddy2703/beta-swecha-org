@@ -1,0 +1,36 @@
+{
+  "address": {
+    "raw": "Swecha\nSy No. 91\nBeside Centre for Good Governance\nGreenlands Colony\nSVM\nJawaharlal\nNehru Outer Ring Road\nMadhava Reddy Colony\nGachibowli\nHyderabad\nTelangana 500032",
+    "display": "Swecha, Sy No. 91, Beside Centre for Good Governance, Greenlands Colony, SVM, Jawaharlal, Nehru Outer Ring Road, Madhava Reddy Colony, Gachibowli, Hyderabad, Telangana 500032"
+  },
+  "channels": [
+    {
+      "title": "Email Us",
+      "value": "reachus@swecha.net",
+      "icon": "Mail",
+      "link": "https://mail.google.com/mail/?view=cm&fs=1&to=reachus@swecha.net"
+    },
+    {
+      "title": "Call Us",
+      "value": "+91 89775 03615",
+      "icon": "Phone",
+      "link": "tel:+918977503615"
+    },
+    {
+      "title": "Internship Queries",
+      "value": "internships@swecha.org",
+      "icon": "GraduationCap",
+      "link": "https://mail.google.com/mail/?view=cm&fs=1&to=internships@swecha.org"
+    }
+  ],
+  "gmailRedirects": {
+    "reachus": "https://mail.google.com/mail/?view=cm&fs=1&to=reachus@swecha.net",
+    "internships": "https://mail.google.com/mail/?view=cm&fs=1&to=internships@swecha.org"
+  },
+  "map": {
+    "title": "Office Location",
+    "coordinates": "17.4196° N, 78.3496° E",
+    "googleMapsUrl": "https://maps.google.com/?q=Swecha+Gachibowli+Hyderabad",
+    "embedUrl": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3806.962057761066!2d78.3496057751656!3d17.419614483488734!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb935515233157%3A0x1d4d38e21703666b!2sSwecha!5e0!3m2!1sen!2sin!4v1718531234567!5m2!1sen!2sin"
+  }
+}

@@ -20,11 +20,11 @@ This guide defines the development standards, environment setup, and branching w
 
 All contributors must align with the following runtime baselines to ensure consistent execution across development environments:
 
-| Requirement | Version |
-|---|---|
-| Node.js | `v22.x` (LTS) |
-| npm | `v10.x` or later |
-| Editor | VS Code (with Prettier, ESLint, and Astro extensions) |
+| Requirement | Version                                               |
+| ----------- | ----------------------------------------------------- |
+| Node.js     | `v22.x` (LTS)                                         |
+| npm         | `v10.x` or later                                      |
+| Editor      | VS Code (with Prettier, ESLint, and Astro extensions) |
 
 ---
 
@@ -45,13 +45,13 @@ npm run dev
 
 ### Script Reference
 
-| Command | Description |
-|---|---|
-| `npm run dev` | Starts the development server at `http://localhost:4321` with HMR |
-| `npm run build` | Compiles the production SSR/Static output |
-| `npm run typecheck` | Runs the TypeScript engine to surface type errors |
-| `npm run lint` | Validates syntax, formatting rules, and dead code |
-| `npm run knip` | Audits for unused exports, components, and dangling dependencies |
+| Command             | Description                                                       |
+| ------------------- | ----------------------------------------------------------------- |
+| `npm run dev`       | Starts the development server at `http://localhost:4321` with HMR |
+| `npm run build`     | Compiles the production SSR/Static output                         |
+| `npm run typecheck` | Runs the TypeScript engine to surface type errors                 |
+| `npm run lint`      | Validates syntax, formatting rules, and dead code                 |
+| `npm run knip`      | Audits for unused exports, components, and dangling dependencies  |
 
 ---
 
@@ -59,16 +59,16 @@ npm run dev
 
 All interface components must strictly use the **Electric Cyan Tech Matrix** semantic color tokens. Arbitrary hex values and default Tailwind colors are not permitted.
 
-| Token | Hex | Usage |
-|---|---|---|
-| Canvas Base | `#080B10` | Primary background layer |
-| Secondary Background | `#111827` | Section breaks, footer trays, header blocks |
-| Card Background | `#1B2432` | Discrete component wrapper containers |
-| Elevated Surface | `#263445` | Dropdowns, modals, and popover elements |
-| Primary Brand | `#00D4FF` | Interactive links, active nav markers, focal targets |
-| Hover Brand | `#33E4FF` | Focus and hover interaction states |
-| Secondary Accent | `#4DFFB8` | Notifications, verified labels, milestone indicators |
-| Structural Borders | `#273449` | 1px layout dividers and wireframe partitions |
+| Token                | Hex       | Usage                                                |
+| -------------------- | --------- | ---------------------------------------------------- |
+| Canvas Base          | `#080B10` | Primary background layer                             |
+| Secondary Background | `#111827` | Section breaks, footer trays, header blocks          |
+| Card Background      | `#1B2432` | Discrete component wrapper containers                |
+| Elevated Surface     | `#263445` | Dropdowns, modals, and popover elements              |
+| Primary Brand        | `#00D4FF` | Interactive links, active nav markers, focal targets |
+| Hover Brand          | `#33E4FF` | Focus and hover interaction states                   |
+| Secondary Accent     | `#4DFFB8` | Notifications, verified labels, milestone indicators |
+| Structural Borders   | `#273449` | 1px layout dividers and wireframe partitions         |
 
 ---
 
@@ -136,13 +136,13 @@ All branches must fork from `dev` and conform to the following lowercase, hyphen
 Pattern: <type>/issue-<ID>-<kebab-case-summary>
 ```
 
-| Type | Pattern | Example |
-|---|---|---|
-| New Feature | `feature/issue-[ID]-short-description` | `feature/issue-104-electric-cyan-cards` |
-| Bug Fix | `bugfix/issue-[ID]-short-description` | `bugfix/issue-89-i18n-routing-dropdown` |
-| Refactor | `refactor/issue-[ID]-short-description` | `refactor/issue-45-cleanup-unused-astro-islands` |
-| Performance | `perf/issue-[ID]-short-description` | `perf/issue-112-optimize-daisyui-asset-loading` |
-| Chore / CI | `chore/issue-[ID]-short-description` | `chore/issue-12-update-gitlab-ci-node-cache` |
+| Type        | Pattern                                 | Example                                          |
+| ----------- | --------------------------------------- | ------------------------------------------------ |
+| New Feature | `feature/issue-[ID]-short-description`  | `feature/issue-104-electric-cyan-cards`          |
+| Bug Fix     | `bugfix/issue-[ID]-short-description`   | `bugfix/issue-89-i18n-routing-dropdown`          |
+| Refactor    | `refactor/issue-[ID]-short-description` | `refactor/issue-45-cleanup-unused-astro-islands` |
+| Performance | `perf/issue-[ID]-short-description`     | `perf/issue-112-optimize-daisyui-asset-loading`  |
+| Chore / CI  | `chore/issue-[ID]-short-description`    | `chore/issue-12-update-gitlab-ci-node-cache`     |
 
 Generic branch naming patterns (e.g., `pranav-fix` or `updated-ui`) are prohibited.
 
@@ -154,15 +154,14 @@ All commits must follow the [Conventional Commits](https://www.conventionalcommi
 <type>(<scope>): <short description> (#<issue-id>)
 ```
 
-
-| Type | Usage |
-|---|---|
-| `feat` | New user-facing component, utility, or feature asset |
-| `fix` | Corrective patch resolving a bug or console error |
-| `refactor` | Code restructuring with no change to user-facing behavior |
-| `perf` | Hydration strategy changes, bundle reduction, or speed improvements |
-| `docs` | Documentation updates, markdown edits, or inline code annotations |
-| `infra` | Changes to `.gitlab-ci.yml`, `package.json`, or environment configuration |
+| Type       | Usage                                                                     |
+| ---------- | ------------------------------------------------------------------------- |
+| `feat`     | New user-facing component, utility, or feature asset                      |
+| `fix`      | Corrective patch resolving a bug or console error                         |
+| `refactor` | Code restructuring with no change to user-facing behavior                 |
+| `perf`     | Hydration strategy changes, bundle reduction, or speed improvements       |
+| `docs`     | Documentation updates, markdown edits, or inline code annotations         |
+| `infra`    | Changes to `.gitlab-ci.yml`, `package.json`, or environment configuration |
 
 **Examples:**
 

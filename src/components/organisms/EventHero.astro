@@ -1,0 +1,153 @@
+---
+// src/components/events/EventHero.astro
+import Badge from "../atoms/Badge.astro";
+import Button from "../atoms/Button.astro";
+import {
+  getLangFromUrl,
+  useTranslations,
+  useTranslatedPath,
+} from "../../i18n/utils";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const translatePath = useTranslatedPath(lang);
+---
+
+<header
+  class="relative w-full overflow-hidden bg-canvas-base border-b border-structural-borders/30"
+>
+  <!-- Neon Tech Ambient Glows -->
+  <div class="absolute inset-0 pointer-events-none z-10 overflow-hidden">
+    <div
+      class="absolute -top-30 left-1/3 w-[500px] h-[350px] bg-primary-brand/15 blur-[130px] rounded-full"
+    >
+    </div>
+    <div
+      class="absolute bottom-0 right-1/4 w-[400px] h-[300px] bg-secondary-accent/10 blur-[110px] rounded-full"
+    >
+    </div>
+  </div>
+
+  <!-- Hero Content and Banner Wrapper -->
+  <div
+    class="relative w-full h-[65vh] min-h-[500px] md:h-[75vh] flex items-center justify-center"
+  >
+    <!-- Background Image with Overlay -->
+    <div class="absolute inset-0 z-0">
+      <img
+        src="/images/event-banner.webp"
+        alt="Trust and Safety in AI Conference Banner"
+        class="w-full h-full object-cover object-center scale-105 filter brightness-60 contrast-105 transition-all duration-1000 ease-out hover:scale-100"
+      />
+      <!-- Subtle Tech Matrix Grid Overlay -->
+      <div
+        class="absolute inset-0 bg-[linear-gradient(to_right,#273449_1px,transparent_1px),linear-gradient(to_bottom,#273449_1px,transparent_1px)] bg-[size:4rem_4rem] opacity-[0.06] mix-blend-overlay"
+      >
+      </div>
+
+      <!-- Base dark scrim — lets photo show through naturally -->
+      <div
+        class="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-black/10 z-10"
+      >
+      </div>
+
+      <!-- Edge vignette — keeps text readable without killing the photo -->
+      <div
+        class="absolute inset-0 z-10"
+        style="background: radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.55) 100%);"
+      >
+      </div>
+
+      <!-- Bottom fade — blends hero into the section below (theme-aware via CSS) -->
+      <div class="hero-bottom-fade absolute inset-x-0 bottom-0 h-48 z-20"></div>
+    </div>
+
+    <!-- Immersive Content Area -->
+    <div
+      class="relative z-20 max-w-5xl mx-auto px-4 text-center sm:px-6 lg:px-8 space-y-6 md:space-y-8 animate-fade-in"
+    >
+      <!-- Event Category Badge -->
+      <div
+        class="inline-flex justify-center transition-all duration-300 hover:scale-105"
+      >
+        <Badge label={t("event.badge")} variant="hero" />
+      </div>
+
+      <!-- Main Event Title -->
+      <div class="space-y-3 md:space-y-4">
+        <h1
+          class="text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tight text-white leading-tight select-none"
+        >
+          {t("event.title")}
+        </h1>
+        <p
+          class="text-xl sm:text-2xl md:text-3xl font-semibold tracking-wide text-white drop-shadow-[0_0_15px_rgba(0,212,255,0.4)]"
+        >
+          {t("event.subtitle")}
+        </p>
+      </div>
+
+      <!-- Event Description -->
+      <p
+        class="max-w-2xl mx-auto text-base sm:text-lg text-white/80 leading-relaxed font-medium md:text-xl"
+      >
+        {t("event.description")}
+      </p>
+
+      <!-- Primary CTA Actions -->
+      <div
+        class="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4"
+      >
+        <Button
+          href="#register-section"
+          label={t("event.btn.register")}
+          variant="primary"
+          class="w-full sm:w-auto px-8 py-4 shadow-[0_0_30px_rgba(0,212,255,0.25)] hover:shadow-[0_0_40px_rgba(0,212,255,0.4)]"
+        />
+        <Button
+          href="#about-section"
+          label={t("event.btn.readMore")}
+          variant="secondary"
+          class="w-full sm:w-auto px-8 py-4 hover:border-secondary-accent/40"
+        />
+      </div>
+    </div>
+  </div>
+</header>
+
+<style>
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-fade-in {
+    animation: fadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  /* Bottom fade: dark mode fades into near-black page background */
+  .hero-bottom-fade {
+    background: linear-gradient(
+      to bottom,
+      transparent 0%,
+      rgba(8, 11, 16, 0.6) 50%,
+      rgba(8, 11, 16, 1) 100%
+    );
+  }
+
+  /* Bottom fade: light mode fades into the sky-blue body gradient */
+  :global(html[data-theme="light"]) .hero-bottom-fade {
+    background: linear-gradient(
+      to bottom,
+      transparent 0%,
+      rgba(96, 165, 250, 0.5) 50%,
+      rgba(96, 165, 250, 1) 100%
+    );
+  }
+</style>

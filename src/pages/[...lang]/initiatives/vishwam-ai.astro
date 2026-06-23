@@ -1,0 +1,264 @@
+---
+import Layout from "../../../layouts/Layout.astro";
+import { getLangFromUrl, useTranslations } from "../../../i18n/utils";
+import { languages, defaultLang } from "../../../i18n/ui";
+
+export function getStaticPaths() {
+  return Object.keys(languages).map((lang) => {
+    return {
+      params: {
+        lang: lang === defaultLang ? undefined : lang,
+      },
+    };
+  });
+}
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+
+<Layout title={`Pioneering AI Solutions for the Global South - Swecha.org`}>
+  <div class="pt-32 pb-24 px-6 sm:px-10 lg:px-16 container mx-auto">
+    <div class="max-w-4xl mx-auto">
+      <!-- Badge/Tagline -->
+      <div
+        class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary-brand/10 border border-primary-brand/20 text-primary-brand text-sm font-semibold tracking-wider uppercase mb-8"
+      >
+        <span class="relative flex h-2 w-2">
+          <span
+            class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary-brand opacity-75"
+          ></span>
+          <span
+            class="relative inline-flex rounded-full h-2 w-2 bg-primary-brand"
+          ></span>
+        </span>
+        VISHWAM.ai
+      </div>
+
+      <!-- Main Heading -->
+      <h1
+        class="vishwam-title text-4xl md:text-6xl font-black text-white mb-6 tracking-tight leading-tight"
+      >
+        Pioneering AI Solutions for the Global South
+      </h1>
+
+      <!-- Full name -->
+      <h2
+        class="vishwam-subtitle text-xl md:text-2xl font-bold text-white/90 mb-6 tracking-wide leading-snug"
+      >
+        Venture for Innovation and Social Wellbeing through AI for the
+        Marginalised
+      </h2>
+
+      <!-- Description -->
+      <p
+        class="vishwam-desc text-lg md:text-xl text-white/90 mb-16 leading-relaxed"
+      >
+        A group of open source enthusiasts, community builders, technologists
+        and researchers working towards tech for social good. We bring together
+        expertise from research institutions, industry partners, and community
+        organizations to create innovative AI technologies, and foundations to
+        help building solutions for the Global South.
+      </p>
+
+      <!-- Journey Section -->
+      <div class="mt-20">
+        <h2
+          class="vishwam-section-title text-3xl font-black text-white mb-12 tracking-tight flex items-center gap-3"
+        >
+          <svg
+            class="w-8 h-8 text-primary-brand"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2.5"
+              d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"
+            ></path>
+          </svg>
+          Our Journey
+        </h2>
+
+        <div
+          class="relative pl-8 md:pl-12 border-l border-structural-borders/80 space-y-12 py-4"
+        >
+          <!-- Timeline Vertical Line Gradient Overlay -->
+          <div
+            class="absolute left-0 top-0 bottom-0 w-[1px] bg-gradient-to-b from-primary-brand via-secondary-accent to-transparent"
+          >
+          </div>
+
+          <!-- Journey Item: 2004 -->
+          <div class="relative group">
+            <!-- Glowing Dot -->
+            <div
+              class="absolute -left-[37px] md:-left-[53px] top-1.5 flex items-center justify-center"
+            >
+              <div
+                class="w-4 h-4 rounded-full bg-card-bg border-2 border-primary-brand transition-all duration-300 group-hover:scale-125 group-hover:border-secondary-accent group-hover:shadow-[0_0_12px_rgba(77,255,184,0.8)]"
+              >
+              </div>
+            </div>
+            <!-- Content -->
+            <div
+              class="glass-card glass-white-card border border-structural-borders p-8 rounded-2xl bg-card-bg/20 backdrop-blur-xl transition-all duration-500 hover:bg-card-bg/40 hover:-translate-y-1 hover:border-primary-brand/35 hover:shadow-[0_20px_40px_rgba(0,0,0,0.3)]"
+            >
+              <span
+                class="text-3xl font-black bg-gradient-to-r from-primary-brand to-secondary-accent bg-clip-text text-transparent mb-2 block"
+                >2004</span
+              >
+              <h3
+                class="text-xl font-bold text-text-main mb-3 group-hover:text-primary-brand transition-colors"
+              >
+                Swecha Foundation
+              </h3>
+              <p class="text-text-muted leading-relaxed">
+                Launch of Swecha, the first Telugu OS, marking our commitment to
+                localized technology solutions.
+              </p>
+            </div>
+          </div>
+
+          <!-- Journey Item: 2014 -->
+          <div class="relative group">
+            <!-- Glowing Dot -->
+            <div
+              class="absolute -left-[37px] md:-left-[53px] top-1.5 flex items-center justify-center"
+            >
+              <div
+                class="w-4 h-4 rounded-full bg-card-bg border-2 border-primary-brand transition-all duration-300 group-hover:scale-125 group-hover:border-secondary-accent group-hover:shadow-[0_0_12px_rgba(77,255,184,0.8)]"
+              >
+              </div>
+            </div>
+            <!-- Content -->
+            <div
+              class="glass-card glass-white-card border border-structural-borders p-8 rounded-2xl bg-card-bg/20 backdrop-blur-xl transition-all duration-500 hover:bg-card-bg/40 hover:-translate-y-1 hover:border-primary-brand/35 hover:shadow-[0_20px_40px_rgba(0,0,0,0.3)]"
+            >
+              <span
+                class="text-3xl font-black bg-gradient-to-r from-primary-brand to-secondary-accent bg-clip-text text-transparent mb-2 block"
+                >2014</span
+              >
+              <h3
+                class="text-xl font-bold text-text-main mb-3 group-hover:text-primary-brand transition-colors"
+              >
+                BalaSwecha Initiative
+              </h3>
+              <p class="text-text-muted leading-relaxed">
+                Development of educational software ecosystem, training over 500
+                teachers.
+              </p>
+            </div>
+          </div>
+
+          <!-- Journey Item: 2020 -->
+          <div class="relative group">
+            <!-- Glowing Dot -->
+            <div
+              class="absolute -left-[37px] md:-left-[53px] top-1.5 flex items-center justify-center"
+            >
+              <div
+                class="w-4 h-4 rounded-full bg-card-bg border-2 border-primary-brand transition-all duration-300 group-hover:scale-125 group-hover:border-secondary-accent group-hover:shadow-[0_0_12px_rgba(77,255,184,0.8)]"
+              >
+              </div>
+            </div>
+            <!-- Content -->
+            <div
+              class="glass-card glass-white-card border border-structural-borders p-8 rounded-2xl bg-card-bg/20 backdrop-blur-xl transition-all duration-500 hover:bg-card-bg/40 hover:-translate-y-1 hover:border-primary-brand/35 hover:shadow-[0_20px_40px_rgba(0,0,0,0.3)]"
+            >
+              <span
+                class="text-3xl font-black bg-gradient-to-r from-primary-brand to-secondary-accent bg-clip-text text-transparent mb-2 block"
+                >2020</span
+              >
+              <h3
+                class="text-xl font-bold text-text-main mb-3 group-hover:text-primary-brand transition-colors"
+              >
+                AI Initiative Launch
+              </h3>
+              <p class="text-text-muted leading-relaxed">
+                Beginning of our focused AI development for the Global South.
+              </p>
+            </div>
+          </div>
+
+          <!-- Journey Item: 2024 -->
+          <div class="relative group">
+            <!-- Glowing Dot -->
+            <div
+              class="absolute -left-[37px] md:-left-[53px] top-1.5 flex items-center justify-center"
+            >
+              <div
+                class="w-4 h-4 rounded-full bg-card-bg border-2 border-primary-brand transition-all duration-300 group-hover:scale-125 group-hover:border-secondary-accent group-hover:shadow-[0_0_12px_rgba(77,255,184,0.8)]"
+              >
+              </div>
+            </div>
+            <!-- Content -->
+            <div
+              class="glass-card glass-white-card border border-structural-borders p-8 rounded-2xl bg-card-bg/20 backdrop-blur-xl transition-all duration-500 hover:bg-card-bg/40 hover:-translate-y-1 hover:border-primary-brand/35 hover:shadow-[0_20px_40px_rgba(0,0,0,0.3)]"
+            >
+              <span
+                class="text-3xl font-black bg-gradient-to-r from-primary-brand to-secondary-accent bg-clip-text text-transparent mb-2 block"
+                >2024</span
+              >
+              <h3
+                class="text-xl font-bold text-text-main mb-3 group-hover:text-primary-brand transition-colors"
+              >
+                VISWAM.ai Establishment
+              </h3>
+              <p class="text-text-muted leading-relaxed">
+                Formation of the Centre of Excellence on AI for the Global
+                South.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</Layout>
+
+<style>
+  /* Dark/default mode styles: blue-green gradient for main titles */
+  .vishwam-title,
+  .vishwam-section-title {
+    background: linear-gradient(135deg, #00d4ff, #4dffb8) !important;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    text-shadow: none !important;
+  }
+
+  /* Light mode overrides to make text white with visual depth on the blue gradient background */
+  :global(html[data-theme="light"]) .vishwam-title {
+    color: #ffffff !important;
+    -webkit-text-fill-color: #ffffff !important;
+    background: none !important;
+    text-shadow:
+      0 2px 8px rgba(11, 30, 54, 0.35),
+      0 4px 20px rgba(11, 30, 54, 0.25) !important;
+  }
+
+  :global(html[data-theme="light"]) .vishwam-subtitle {
+    color: rgba(255, 255, 255, 0.95) !important;
+    text-shadow:
+      0 2px 6px rgba(11, 30, 54, 0.3),
+      0 4px 15px rgba(11, 30, 54, 0.2) !important;
+  }
+
+  :global(html[data-theme="light"]) .vishwam-desc {
+    color: rgba(255, 255, 255, 0.95) !important;
+    text-shadow:
+      0 2px 6px rgba(11, 30, 54, 0.3),
+      0 4px 15px rgba(11, 30, 54, 0.2) !important;
+  }
+
+  :global(html[data-theme="light"]) .vishwam-section-title {
+    color: #ffffff !important;
+    -webkit-text-fill-color: #ffffff !important;
+    background: none !important;
+    text-shadow:
+      0 2px 8px rgba(11, 30, 54, 0.35),
+      0 4px 20px rgba(11, 30, 54, 0.25) !important;
+  }
+</style>

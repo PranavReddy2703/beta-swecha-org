@@ -1,8 +1,21 @@
 ---
 // src/pages/[...lang]/news.astro
-import Layout from '@layouts/Layout.astro';
-import { getLangFromUrl, useTranslations, useTranslatedPath } from '../../i18n/utils';
-import { languages, defaultLang } from '../../i18n/ui';
+import Layout from "@layouts/Layout.astro";
+import {
+  getLangFromUrl,
+  useTranslations,
+  useTranslatedPath,
+} from "../../i18n/utils";
+import { languages, defaultLang } from "../../i18n/ui";
+import newsData from "../../data/organisms/news.json";
+
+// Import New Redesigned Components
+import NewsHero from "@components/news/NewsHero.astro";
+import NewsFilter from "@components/news/NewsFilter.astro";
+import EditorialNewsCard from "@components/news/EditorialNewsCard.astro";
+import NewsTimeline from "@components/news/NewsTimeline.astro";
+import PublicationGroups from "@components/news/PublicationGroups.astro";
+import ArticleDetailModal from "@components/news/ArticleDetailModal.astro";
 
 export function getStaticPaths() {
   return Object.keys(languages).map((lang) => {
@@ -17,32 +30,682 @@ export function getStaticPaths() {
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 const translatePath = useTranslatedPath(lang);
+
+// Extract featured article and regular articles
+const featuredArticle =
+  newsData.articles.find((a) => a.featured) || newsData.articles[0];
+const regularArticles = newsData.articles.filter(
+  (a) => a.id !== featuredArticle.id,
+);
+
+// Sidebar Picks for You
+const picksLabel =
+  lang === "te"
+    ? "మీ కోసం ఎంపిక చేసినవి"
+    : lang === "hi"
+      ? "आपके लिए चुनिंदा"
+      : "Picks for you";
+const fellowshipTitle =
+  lang === "te"
+    ? "స్వేచ్ఛ ఓపెన్ సోర్స్ ఫెలోషిప్"
+    : lang === "hi"
+      ? "स्वेच्छा ओपन सोर्स फेलोशिप"
+      : "Swecha Open Source Fellowship";
+const fellowshipDesc =
+  lang === "te"
+    ? "యువ విద్యార్థులకు ఉచిత సాఫ్ట్‌వేర్ అభివృద్ధి నమూనాపై శిక్షణ ఇచ్చే ఫ్లాగ్‌షిప్ ప్రోగ్రామ్."
+    : lang === "hi"
+      ? "युवा छात्रों को मुफ्त सॉफ्टवेयर विकास मॉडल पर प्रशिक्षित करने वाला प्रमुख कार्यक्रम।"
+      : "Flagship program training young students on the free software development model.";
 ---
 
-<Layout title={`${t('nav.news')} - Swecha.org`}>
-  <section class="py-20 flex flex-col items-center justify-center min-h-[calc(100vh-4rem)] relative overflow-hidden bg-canvas-base">
-    <div class="absolute inset-0 pointer-events-none opacity-10">
-      <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-[500px] w-[500px] rounded-full bg-primary-brand/30 blur-[120px]"></div>
-    </div>
-    
-    <div class="container mx-auto px-4 max-w-xl text-center relative z-10">
-      <div class="rounded-2xl border border-structural-borders bg-card-bg/60 p-8 md:p-12 backdrop-blur-md shadow-2xl">
-        <span class="inline-flex items-center gap-1.5 rounded-full border border-primary-brand/30 bg-primary-brand/10 px-3 py-1 text-xs font-semibold tracking-wider text-primary-brand uppercase mb-6">
-          {t('dev.stage')}
-        </span>
-        <h1 class="text-3xl font-extrabold tracking-tight text-text-main sm:text-4xl mb-4">
-          {t('nav.news')}
-        </h1>
-        <p class="text-base text-text-muted leading-relaxed mb-6">
-          {t('news.dev.desc')}
-        </p>
-        <a 
-          href={translatePath('/')} 
-          class="inline-flex items-center justify-center rounded-lg bg-primary-brand px-5 py-2.5 text-sm font-bold text-slate-950 transition duration-200 hover:bg-hover-brand"
+<Layout
+  title={`${t("news.title")} - Swecha.org`}
+  description={t("news.subtitle")}
+>
+  <div
+    class="relative min-h-[calc(100vh-4rem)] text-text-main transition-colors duration-300 pt-3 md:pt-4 pb-16 md:pb-24 overflow-hidden"
+  >
+    <div
+      class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-8 md:space-y-12"
+    >
+      <!-- HERO & BRIEFING SECTION -->
+      <section
+        class="scroll-reveal-section opacity-0 translate-y-6 transition-all duration-500 ease-out"
+      >
+        <NewsHero t={t} lang={lang} />
+      </section>
+
+      <!-- FILTER CONTROLS BAR -->
+      <section
+        class="scroll-reveal-section opacity-0 translate-y-6 transition-all duration-500 ease-out"
+      >
+        <NewsFilter lang={lang} t={t} articles={newsData.articles} />
+      </section>
+
+      <!-- MAIN LAYOUT GRID (Google News Style columns) -->
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-10">
+        <!-- LEFT COLUMN (2/3 width) - Articles list & grid -->
+        <div class="lg:col-span-2 space-y-12 md:space-y-16">
+          <!-- Featured Story Container (Hidden if search/filter active) -->
+          <div
+            id="featured-story-section"
+            class="scroll-reveal-section opacity-0 translate-y-6 transition-all duration-500 ease-out"
+          >
+            <div class="flex items-center space-x-3 mb-4 select-none">
+              <h2
+                class="news-section-header text-sm font-black text-text-main uppercase tracking-widest"
+              >
+                {
+                  lang === "te"
+                    ? "ప్రధాన వార్త"
+                    : lang === "hi"
+                      ? "मुख्य समाचार"
+                      : "Top Story"
+                }
+              </h2>
+              <span
+                class="h-[1px] flex-grow bg-gradient-to-r from-structural-borders via-structural-borders/30 to-transparent"
+              ></span>
+            </div>
+            <EditorialNewsCard
+              article={featuredArticle}
+              lang={lang}
+              isLarge={true}
+            />
+          </div>
+
+          <!-- Filtered Results Grid -->
+          <div class="space-y-4">
+            <div class="flex items-center space-x-3 mb-4 select-none">
+              <h2
+                id="grid-header-title"
+                class="news-section-header text-sm font-black text-text-main uppercase tracking-widest"
+              >
+                {
+                  lang === "te"
+                    ? "అన్ని కథనాలు"
+                    : lang === "hi"
+                      ? "सभी लेख"
+                      : "All Stories"
+                }
+              </h2>
+              <span
+                class="h-[1px] flex-grow bg-gradient-to-r from-structural-borders via-structural-borders/30 to-transparent"
+              ></span>
+            </div>
+
+            <!-- Articles grid container -->
+            <div
+              id="news-grid-container"
+              class="grid grid-cols-1 md:grid-cols-2 gap-6"
+            >
+              {
+                regularArticles.map((article) => (
+                  <EditorialNewsCard
+                    article={article}
+                    lang={lang}
+                    isLarge={false}
+                  />
+                ))
+              }
+            </div>
+
+            <!-- Empty Results State -->
+            <div
+              id="empty-state"
+              class="hidden flex-col items-center justify-center text-center py-16 px-4 bg-secondary-bg/15 border border-dashed border-structural-borders rounded-2xl select-none"
+            >
+              <svg
+                class="h-10 w-10 text-text-muted/60 mb-3"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                ></path>
+              </svg>
+              <h3 class="text-sm font-bold text-text-main">
+                {
+                  lang === "te"
+                    ? "కథనాలు ఏవీ లభించలేదు"
+                    : lang === "hi"
+                      ? "कोई लेख नहीं मिला"
+                      : "No articles found"
+                }
+              </h3>
+              <p class="text-xs text-text-muted mt-1 max-w-xs leading-relaxed">
+                {
+                  lang === "te"
+                    ? "మీ శోధన పదాన్ని లేదా ఫిల్టర్లను మార్చడానికి ప్రయత్నించండి."
+                    : lang === "hi"
+                      ? "कृपया अपना खोज शब्द या फ़िल्टर बदलें।"
+                      : "Try adjusting your search criteria or active filters."
+                }
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- RIGHT COLUMN (1/3 width) - Weather/Picks & Milestones -->
+        <div
+          class="lg:col-span-1 space-y-8 lg:sticky lg:top-24 lg:self-start lg:pt-8"
         >
-          {t('dev.returnHome')}
-        </a>
+          <!-- Picks for you block -->
+          <div
+            class="picks-for-you-card bg-gradient-to-br from-primary-brand/10 to-secondary-accent/10 border border-primary-brand/20 rounded-2xl p-5 space-y-4 shadow-sm hover:border-primary-brand/35 transition-all duration-300 group select-none"
+          >
+            <div class="flex items-center gap-2">
+              <span class="w-2 h-2 rounded-full bg-primary-brand animate-pulse"
+              ></span>
+              <h3
+                class="text-xs font-black text-text-main uppercase tracking-widest"
+              >
+                {picksLabel}
+              </h3>
+            </div>
+
+            <div class="space-y-2">
+              <h4
+                class="text-sm font-bold text-text-main group-hover:text-primary-brand transition-colors duration-200"
+              >
+                {fellowshipTitle}
+              </h4>
+              <p
+                class="text-[11px] text-text-muted leading-relaxed font-medium"
+              >
+                {fellowshipDesc}
+              </p>
+            </div>
+
+            <a
+              href="https://www.meetup.com/swechafsmi/"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center gap-1.5 text-[11px] font-black text-primary-brand group-hover:text-secondary-accent transition-colors duration-200"
+            >
+              <span
+                >{
+                  lang === "te"
+                    ? "కమ్యూనిటీతో కలవండి"
+                    : lang === "hi"
+                      ? "समुदाय से जुड़ें"
+                      : "Join community hub"
+                }</span
+              >
+              <svg
+                class="h-3.5 w-3.5 shrink-0 transform transition-transform duration-300 group-hover:translate-x-0.5"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                stroke-width="2.5"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M9 5l7 7-7 7"></path>
+              </svg>
+            </a>
+          </div>
+
+          <!-- Milestones vertical timeline -->
+          <NewsTimeline milestones={newsData.milestones} lang={lang} />
+        </div>
       </div>
     </div>
-  </section>
+  </div>
+
+  <!-- ARTICLE DETAIL EXPERIENCE MODAL -->
+  <ArticleDetailModal lang={lang} />
 </Layout>
+
+<!-- Client Side Controller State Machine -->
+<script define:vars={{ articles: newsData.articles, lang }}>
+  document.addEventListener("DOMContentLoaded", () => {
+    // DOM Elements
+    const searchInput = document.getElementById("search-input");
+    const categoryPills = document.querySelectorAll(".category-pill");
+    const yearSelect = document.getElementById("year-select");
+    const pubSelect = document.getElementById("pub-select");
+    const sortSelect = document.getElementById("sort-select");
+    const pubGroupBtns = document.querySelectorAll("[data-pub-filter]");
+
+    const featuredStorySection = document.getElementById(
+      "featured-story-section",
+    );
+    const gridHeaderTitle = document.getElementById("grid-header-title");
+    const newsGridContainer = document.getElementById("news-grid-container");
+    const emptyState = document.getElementById("empty-state");
+
+    const articleCards = document.querySelectorAll(".article-card");
+    const modal = document.getElementById("article-detail-modal");
+    const modalBox = document.getElementById("modal-box");
+    const closeModalBtn = document.getElementById("close-modal-btn");
+    const modalPubLogo = document.getElementById("modal-pub-logo");
+    const modalPubName = document.getElementById("modal-pub-name");
+    const modalDate = document.getElementById("modal-date");
+    const modalReadingTime = document.getElementById("modal-reading-time");
+    const modalTitle = document.getElementById("modal-title");
+    const modalAuthor = document.getElementById("modal-author");
+    const modalDesc = document.getElementById("modal-desc");
+    const modalSummary = document.getElementById("modal-summary");
+    const modalCtaBtn = document.getElementById("modal-cta-btn");
+    const modalImage = document.getElementById("modal-image");
+    const modalRelatedGrid = document.getElementById("modal-related-grid");
+
+    // State Variables
+    let activeSearch = "";
+    let activeCategory = "all";
+    let activeYear = "all";
+    let activePub = "all";
+    let activeSort = "latest";
+
+    // State Machine Filtering logic
+    function applyFilters() {
+      // Show/Hide top featured card if filters are active
+      const filtersActive =
+        activeSearch ||
+        activeCategory !== "all" ||
+        activeYear !== "all" ||
+        activePub !== "all";
+      if (filtersActive) {
+        featuredStorySection.style.display = "none";
+        gridHeaderTitle.textContent =
+          lang === "te"
+            ? "ఫిల్టర్ చేసిన ఫలితాలు"
+            : lang === "hi"
+              ? "फ़िल्टर किए गए परिणाम"
+              : "Search Results";
+      } else {
+        featuredStorySection.style.display = "block";
+        gridHeaderTitle.textContent =
+          lang === "te"
+            ? "అన్ని కథనాలు"
+            : lang === "hi"
+              ? "सभी लेख"
+              : "All Stories";
+      }
+
+      // Gather featured card ID to omit it from grid if filters are NOT active
+      const featuredCard = articles.find((a) => a.featured);
+      const featuredId = featuredCard ? featuredCard.id : null;
+
+      // Filter articles array
+      let filteredList = articles.filter((art) => {
+        // Skip featured story in grid if no search is active
+        if (!filtersActive && art.id === featuredId) return false;
+
+        // Search Match
+        const titleText = (
+          art.title[lang] ||
+          art.title["en"] ||
+          ""
+        ).toLowerCase();
+        const descText = (
+          art.description[lang] ||
+          art.description["en"] ||
+          ""
+        ).toLowerCase();
+        const summaryText = (
+          art.summary[lang] ||
+          art.summary["en"] ||
+          ""
+        ).toLowerCase();
+        const pubText = art.publication.toLowerCase();
+        const matchSearch =
+          !activeSearch ||
+          titleText.includes(activeSearch) ||
+          descText.includes(activeSearch) ||
+          summaryText.includes(activeSearch) ||
+          pubText.includes(activeSearch);
+
+        // Category Match
+        const artCat = art.category.en.toLowerCase().replace(/ /g, "-");
+        const matchCat = activeCategory === "all" || artCat === activeCategory;
+
+        // Year Match
+        const matchYear =
+          activeYear === "all" || art.year.toString() === activeYear;
+
+        // Publication Match
+        const matchPub =
+          activePub === "all" || art.publication.toLowerCase() === activePub;
+
+        return matchSearch && matchCat && matchYear && matchPub;
+      });
+
+      // Sort logic
+      filteredList.sort((a, b) => {
+        const dateA = new Date(a.date.en);
+        const dateB = new Date(b.date.en);
+        return activeSort === "latest" ? dateB - dateA : dateA - dateB;
+      });
+
+      // Render cards in the DOM grid
+      renderGrid(filteredList);
+
+      // Sync active visual styles on publisher pills
+      pubGroupBtns.forEach((b) => {
+        if (b.getAttribute("data-pub-filter") === activePub) {
+          b.classList.add("active-pub-pill");
+        } else {
+          b.classList.remove("active-pub-pill");
+        }
+      });
+    }
+
+    function renderGrid(list) {
+      newsGridContainer.innerHTML = "";
+
+      if (list.length === 0) {
+        emptyState.classList.remove("hidden");
+        emptyState.classList.add("flex");
+        return;
+      } else {
+        emptyState.classList.remove("flex");
+        emptyState.classList.add("hidden");
+      }
+
+      list.forEach((art) => {
+        const titleStr = art.title[lang] || art.title["en"];
+        const descStr = art.description[lang] || art.description["en"];
+        const dateStr = art.date[lang] || art.date["en"];
+        const readingTimeStr = art.readingTime[lang] || art.readingTime["en"];
+        const categoryStr = art.category[lang] || art.category["en"];
+        const logo =
+          art.publicationLogo || art.publication.slice(0, 2).toUpperCase();
+        const logoHTML = logo.startsWith("/")
+          ? `<img src="${logo}" alt="${art.publication}" class="w-5 h-5 object-cover rounded shadow-sm shrink-0" />`
+          : `<span class="flex items-center justify-center w-5 h-5 rounded bg-gradient-to-br from-primary-brand/80 to-secondary-accent/80 text-[8px] font-black text-slate-950 select-none shadow-sm shrink-0">${logo}</span>`;
+
+        const cardHTML = `
+          <div 
+            data-article-id="${art.id}"
+            class="article-card group relative overflow-hidden rounded-2xl border border-structural-borders bg-secondary-bg/25 hover:bg-secondary-bg/40 backdrop-blur-md transition-all duration-300 flex justify-between gap-4 p-4 md:p-5 cursor-pointer shadow-sm hover:shadow-md hover:border-primary-brand/35 select-none"
+          >
+            <div class="flex-1 flex flex-col justify-between space-y-3.5 z-10 min-w-0">
+              <div class="space-y-2">
+                <div class="flex items-center gap-2 max-w-full">
+                  ${logoHTML}
+                  <span class="text-[10px] font-bold text-text-main truncate shrink-0 max-w-[120px]">
+                    ${art.publication}
+                  </span>
+                  <span class="text-text-muted/30 text-[9px]">•</span>
+                  <span class="text-[9px] font-bold text-text-muted shrink-0">
+                    ${dateStr}
+                  </span>
+                </div>
+                <h3 class="text-sm md:text-base font-black tracking-tight text-text-main group-hover:text-primary-brand transition-colors duration-300 leading-snug line-clamp-2 md:line-clamp-3">
+                  ${titleStr}
+                </h3>
+                <p class="text-xs text-text-muted leading-relaxed font-medium line-clamp-2 hidden md:block">
+                  ${descStr}
+                </p>
+              </div>
+              <div class="flex items-center gap-2.5 pt-0.5">
+                <span class="inline-flex items-center px-2 py-0.5 rounded text-[9px] font-black tracking-wider text-primary-brand bg-primary-brand/10 border border-primary-brand/20 select-none">
+                  ${categoryStr}
+                </span>
+                <span class="text-[9px] font-bold text-text-muted font-mono">${readingTimeStr}</span>
+              </div>
+            </div>
+            <div class="w-20 h-20 md:w-24 md:h-24 overflow-hidden rounded-xl bg-slate-950 shrink-0 border border-structural-borders/30 relative">
+              <img 
+                src="${art.image}" 
+                alt="${titleStr}"
+                class="h-full w-full object-cover object-center transition-transform duration-500 ease-out group-hover:scale-[1.02]"
+              />
+            </div>
+          </div>
+        `;
+        newsGridContainer.insertAdjacentHTML("beforeend", cardHTML);
+      });
+
+      // Re-attach card click listeners
+      newsGridContainer.querySelectorAll(".article-card").forEach((card) => {
+        card.addEventListener("click", () => {
+          const id = card.getAttribute("data-article-id");
+          openArticleModal(id);
+        });
+      });
+    }
+
+    // Modal experience logic
+    function openArticleModal(articleId) {
+      const art = articles.find((a) => a.id === articleId);
+      if (!art) return;
+
+      const titleStr = art.title[lang] || art.title["en"];
+      const descStr = art.description[lang] || art.description["en"];
+      const summaryStr = art.summary[lang] || art.summary["en"];
+      const authorStr = art.author[lang] || art.author["en"];
+      const dateStr = art.date[lang] || art.date["en"];
+      const readingTimeStr = art.readingTime[lang] || art.readingTime["en"];
+      const logo =
+        art.publicationLogo || art.publication.slice(0, 2).toUpperCase();
+
+      // Hydrate Modal Info
+      if (logo.startsWith("/")) {
+        modalPubLogo.innerHTML = `<img src="${logo}" alt="${art.publication}" class="w-full h-full object-cover rounded" />`;
+        modalPubLogo.className =
+          "flex items-center justify-center w-6 h-6 rounded bg-transparent select-none";
+      } else {
+        modalPubLogo.innerHTML = logo;
+        modalPubLogo.className =
+          "flex items-center justify-center w-6 h-6 rounded bg-gradient-to-br from-primary-brand to-secondary-accent text-[9px] font-black text-slate-950 select-none shadow-sm";
+      }
+      modalPubName.textContent = art.publication;
+      modalDate.textContent = dateStr;
+      modalReadingTime.textContent = readingTimeStr;
+      modalTitle.textContent = titleStr;
+      modalAuthor.textContent = authorStr;
+      modalDesc.textContent = descStr;
+      modalSummary.textContent = summaryStr;
+      modalCtaBtn.setAttribute("href", art.url);
+      modalImage.setAttribute("src", art.image);
+
+      // Hydrate Related Articles Grid (3 related items)
+      modalRelatedGrid.innerHTML = "";
+      const relatedList = articles
+        .filter(
+          (a) =>
+            a.id !== articleId &&
+            (a.category.en === art.category.en ||
+              a.publication === art.publication),
+        )
+        .slice(0, 3);
+
+      // Fallback to any articles if related counts < 3
+      if (relatedList.length < 3) {
+        const fallbacks = articles.filter(
+          (a) => a.id !== articleId && !relatedList.some((r) => r.id === a.id),
+        );
+        relatedList.push(...fallbacks.slice(0, 3 - relatedList.length));
+      }
+
+      relatedList.forEach((rel) => {
+        const relTitle = rel.title[lang] || rel.title["en"];
+        const relDate = rel.date[lang] || rel.date["en"];
+        const relLogo =
+          rel.publicationLogo || rel.publication.slice(0, 2).toUpperCase();
+        const relLogoHTML = relLogo.startsWith("/")
+          ? `<img src="${relLogo}" alt="${rel.publication}" class="w-4 h-4 object-cover rounded shadow-sm shrink-0" />`
+          : `<span class="flex items-center justify-center w-4 h-4 rounded bg-gradient-to-br from-primary-brand/80 to-secondary-accent/80 text-[7px] font-black text-slate-950 select-none shadow-sm shrink-0">${relLogo}</span>`;
+
+        const relHTML = `
+          <div 
+            data-article-id="${rel.id}"
+            class="modal-related-card group border border-structural-borders/80 bg-card-bg/25 hover:border-primary-brand/35 hover:bg-card-bg/40 p-3.5 rounded-xl cursor-pointer transition-all duration-200 select-none min-w-0"
+          >
+            <div class="flex items-center gap-2 mb-1.5 min-w-0">
+              ${relLogoHTML}
+              <span class="text-[9px] font-bold text-text-main truncate shrink-0 max-w-[80px]">${rel.publication}</span>
+              <span class="text-text-muted/30 text-[8px]">•</span>
+              <span class="text-[8px] font-bold text-text-muted shrink-0">${relDate}</span>
+            </div>
+            <h4 class="text-xs font-black text-text-main group-hover:text-primary-brand transition-colors duration-200 leading-snug line-clamp-2">
+              ${relTitle}
+            </h4>
+          </div>
+        `;
+        modalRelatedGrid.insertAdjacentHTML("beforeend", relHTML);
+      });
+
+      // Bind click listeners for related cards in modal
+      modalRelatedGrid
+        .querySelectorAll(".modal-related-card")
+        .forEach((relCard) => {
+          relCard.addEventListener("click", (e) => {
+            e.stopPropagation();
+            const nextId = relCard.getAttribute("data-article-id");
+            openArticleModal(nextId);
+            // Scroll modal box to top
+            modalBox.scrollTop = 0;
+          });
+        });
+
+      // Display Modal (animations)
+      modal.classList.remove("opacity-0", "pointer-events-none");
+      modalBox.classList.remove("scale-95");
+      modalBox.classList.add("scale-100");
+      document.body.style.overflow = "hidden"; // Lock background scroll
+    }
+
+    function closeArticleModal() {
+      modal.classList.add("opacity-0", "pointer-events-none");
+      modalBox.classList.remove("scale-100");
+      modalBox.classList.add("scale-95");
+      document.body.style.overflow = ""; // Restore scroll
+    }
+
+    // Input Search Listeners
+    searchInput.addEventListener("input", (e) => {
+      activeSearch = e.target.value.toLowerCase().trim();
+      applyFilters();
+    });
+
+    // Category Pill Selector
+    categoryPills.forEach((pill) => {
+      pill.addEventListener("click", () => {
+        categoryPills.forEach((p) => {
+          p.classList.remove(
+            "bg-primary-brand",
+            "border-primary-brand",
+            "text-[var(--primary-btn-text)]",
+            "shadow-sm",
+            "shadow-primary-brand/20",
+          );
+          p.classList.add(
+            "bg-card-bg/25",
+            "border-structural-borders",
+            "text-text-muted",
+          );
+        });
+        pill.classList.remove(
+          "bg-card-bg/25",
+          "border-structural-borders",
+          "text-text-muted",
+        );
+        pill.classList.add(
+          "bg-primary-brand",
+          "border-primary-brand",
+          "text-[var(--primary-btn-text)]",
+          "shadow-sm",
+          "shadow-primary-brand/20",
+        );
+
+        activeCategory = pill.getAttribute("data-category");
+        applyFilters();
+      });
+    });
+
+    // Dropdown Selection Triggers
+    yearSelect.addEventListener("change", (e) => {
+      activeYear = e.target.value;
+      applyFilters();
+    });
+
+    if (pubSelect) {
+      pubSelect.addEventListener("change", (e) => {
+        activePub = e.target.value.toLowerCase();
+        applyFilters();
+      });
+    }
+
+    sortSelect.addEventListener("change", (e) => {
+      activeSort = e.target.value;
+      applyFilters();
+    });
+
+    // Publication Group Buttons click linkage
+    pubGroupBtns.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const clickedPub = btn.getAttribute("data-pub-filter");
+
+        // Toggle filter: if already active, clear it (set to 'all')
+        if (activePub === clickedPub) {
+          activePub = "all";
+          if (pubSelect) pubSelect.selectedIndex = 0;
+        } else {
+          activePub = clickedPub;
+          if (pubSelect) {
+            for (let i = 0; i < pubSelect.options.length; i++) {
+              if (pubSelect.options[i].value.toLowerCase() === clickedPub) {
+                pubSelect.selectedIndex = i;
+                break;
+              }
+            }
+          }
+        }
+        applyFilters();
+
+        // Scroll filter controls section into view smoothly
+        document
+          .getElementById("search-input")
+          .scrollIntoView({ behavior: "smooth", block: "center" });
+      });
+    });
+
+    // Bind original card triggers
+    articleCards.forEach((card) => {
+      card.addEventListener("click", () => {
+        const id = card.getAttribute("data-article-id");
+        openArticleModal(id);
+      });
+    });
+
+    // Close Actions
+    if (closeModalBtn)
+      closeModalBtn.addEventListener("click", closeArticleModal);
+    modal.addEventListener("click", (e) => {
+      if (e.target === modal) closeArticleModal();
+    });
+
+    // ESC close keybind
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") closeArticleModal();
+    });
+  });
+</script>
+
+<style>
+  /* Premium scroll-reveal section styling */
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(24px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .scroll-reveal-section {
+    animation: fadeInUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+</style>

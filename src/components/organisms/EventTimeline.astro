@@ -1,0 +1,371 @@
+---
+// src/components/events/EventTimeline.astro
+import EventTimelineCard from "@components/molecules/EventTimelineCard.astro";
+import TimelineConnector from "@components/atoms/TimelineConnector.astro";
+
+interface Props {
+  events: Array<{
+    slug: string;
+    title: string;
+    shortDescription: string;
+    image: string;
+    date: string;
+    venue: string;
+    category: string;
+    past: boolean;
+    alignment: "left" | "right";
+  }>;
+}
+
+const { events } = Astro.props;
+---
+
+<div
+  class="relative w-full max-w-5xl mx-auto py-16 mt-16"
+  id="timeline-container"
+>
+  <!-- Snake Head Graphic (Futuristic outline, cyan glow eyes) -->
+  <div
+    class="absolute left-1/2 top-0 -translate-x-1/2 -translate-y-[85%] z-20 pointer-events-none select-none text-center flex flex-col items-center"
+  >
+    <svg
+      class="w-14 h-14 text-primary-brand drop-shadow-[0_0_12px_rgba(0,212,255,0.45)]"
+      viewBox="0 0 100 100"
+      fill="none"
+    >
+      <path
+        d="M 50,8 L 82,42 L 66,78 L 50,92 L 34,78 L 18,42 Z"
+        stroke="currentColor"
+        stroke-width="3.5"
+        stroke-linejoin="round"></path>
+      <path
+        d="M 50,22 L 50,70"
+        stroke="currentColor"
+        stroke-width="1.5"
+        stroke-dasharray="3 3"
+        opacity="0.7"></path>
+      <path
+        d="M 32,54 L 68,54"
+        stroke="currentColor"
+        stroke-width="1.5"
+        opacity="0.5"></path>
+
+      <!-- Glowing Emerald Eyes -->
+      <polygon points="32,44 38,44 35,49" fill="#4DFFB8" class="animate-pulse"
+      ></polygon>
+      <polygon points="68,44 62,44 65,49" fill="#4DFFB8" class="animate-pulse"
+      ></polygon>
+    </svg>
+    <span
+      class="text-[9px] font-bold tracking-widest text-primary-brand/60 uppercase mt-2 font-mono"
+      >SYS_CORE_INIT</span
+    >
+  </div>
+
+  <!-- Dynamic SVG Winding Snake Body -->
+  <svg
+    class="absolute inset-0 w-full h-full pointer-events-none z-0 overflow-visible"
+    id="snake-svg"
+  >
+    <!-- Winding Glow Underlay -->
+    <path
+      id="snake-path-bg"
+      fill="none"
+      stroke="url(#snake-track-grad)"
+      stroke-width="6"
+      stroke-linecap="round"
+      opacity="0.12"
+      class="transition-all duration-300"></path>
+
+    <!-- Scroll-illuminated Active path -->
+    <path
+      id="snake-path"
+      fill="none"
+      stroke="url(#snake-active-grad)"
+      stroke-width="3.5"
+      stroke-linecap="round"
+      class="transition-all duration-150"></path>
+
+    <!-- Infinite Travelling Neon Energy Pulse -->
+    <path
+      id="snake-pulse"
+      fill="none"
+      stroke="url(#pulse-gradient)"
+      stroke-width="4"
+      stroke-linecap="round"
+      stroke-dasharray="140 750"
+      class="pulse-animation"></path>
+
+    <defs>
+      <!-- Background track gradient -->
+      <linearGradient id="snake-track-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+        <stop offset="0%" stop-color="#00D4FF"></stop>
+        <stop offset="50%" stop-color="#4DFFB8"></stop>
+        <stop offset="100%" stop-color="#273449"></stop>
+      </linearGradient>
+
+      <!-- Active illuminated gradient -->
+      <linearGradient id="snake-active-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+        <stop offset="0%" stop-color="#00D4FF"></stop>
+        <stop offset="100%" stop-color="#4DFFB8"></stop>
+      </linearGradient>
+
+      <!-- Traveling energy pulse gradient -->
+      <linearGradient id="pulse-gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+        <stop offset="0%" stop-color="#4DFFB8" stop-opacity="1"></stop>
+        <stop offset="70%" stop-color="#00D4FF" stop-opacity="0.8"></stop>
+        <stop offset="100%" stop-color="#00D4FF" stop-opacity="0"></stop>
+      </linearGradient>
+    </defs>
+  </svg>
+
+  <!-- Timeline Nodes -->
+  <div
+    class="space-y-12 md:space-y-0 relative z-10"
+    id="timeline-nodes-container"
+  >
+    {
+      events.map((event, index) => {
+        const isLeft = event.alignment === "left";
+        return (
+          <div
+            class="timeline-row relative w-full flex flex-col md:block py-6 md:py-16"
+            data-category={event.category.toLowerCase()}
+            data-past={event.past ? "true" : "false"}
+            data-title={event.title.toLowerCase()}
+            data-desc={event.shortDescription.toLowerCase()}
+          >
+            {/* Timeline Connector & Dot */}
+            <TimelineConnector isLeft={isLeft} index={index} />
+
+            {/* Timeline Card Wrapper (Desktop aligned left/right, Mobile staggered left/right slightly) */}
+            <div
+              class={`relative w-full md:w-1/2 flex justify-center ${event.alignment === "right" ? "md:justify-start" : "md:justify-end"}`}
+            >
+              <EventTimelineCard
+                event={event}
+                class="timeline-card-reveal opacity-0 translate-y-8 transition-all duration-700 ease-out"
+              />
+            </div>
+          </div>
+        );
+      })
+    }
+  </div>
+
+  <!-- Snake Tail Graphic -->
+  <div
+    class="absolute left-1/2 bottom-0 -translate-x-1/2 translate-y-[100%] z-20 pointer-events-none select-none flex flex-col items-center space-y-2"
+  >
+    <div
+      class="w-5 h-5 rounded-full border-2 border-secondary-accent/60 bg-[#080B10] shadow-[0_0_8px_rgba(77,255,184,0.3)] animate-pulse"
+    >
+    </div>
+    <div
+      class="w-3.5 h-3.5 rounded-full border-2 border-secondary-accent/40 bg-[#080B10] opacity-75"
+    >
+    </div>
+    <div class="w-2 h-2 rounded-full bg-secondary-accent/30 opacity-55"></div>
+  </div>
+</div>
+
+<script>
+  // --- Dynamic SVG Snake Path Generation ---
+  const container = document.getElementById("timeline-container");
+  const pathBg = document.getElementById(
+    "snake-path-bg",
+  ) as SVGPathElement | null;
+  const pathActive = document.getElementById(
+    "snake-path",
+  ) as SVGPathElement | null;
+  const pathPulse = document.getElementById(
+    "snake-pulse",
+  ) as SVGPathElement | null;
+
+  function drawSnake() {
+    const dots = document.querySelectorAll(
+      '.timeline-row:not([style*="display: none"]) .timeline-dot',
+    );
+
+    if (!container || !pathBg || !pathActive || !pathPulse || dots.length === 0)
+      return;
+
+    const containerRect = container.getBoundingClientRect();
+    const centerX = containerRect.width / 2;
+
+    // Start path at top center
+    let d = `M ${centerX},0`;
+
+    dots.forEach((dot, index) => {
+      const dotRect = dot.getBoundingClientRect();
+      const x = dotRect.left + dotRect.width / 2 - containerRect.left;
+      const y = dotRect.top + dotRect.height / 2 - containerRect.top;
+
+      if (index === 0) {
+        // Curve from top center to first dot
+        d += ` C ${centerX},${y * 0.3} ${x},${y * 0.75} ${x},${y}`;
+      } else {
+        const prevDotRect = dots[index - 1].getBoundingClientRect();
+        const prevX =
+          prevDotRect.left + prevDotRect.width / 2 - containerRect.left;
+        const prevY =
+          prevDotRect.top + prevDotRect.height / 2 - containerRect.top;
+
+        const dy = y - prevY;
+        const isLeftDot = x < centerX;
+
+        // Custom curve bending control points for wide desktop curves
+        let controlX1 = prevX;
+        let controlX2 = x;
+
+        if (window.innerWidth >= 768) {
+          if (isLeftDot) {
+            // Moving from Right (55%) to Left (15%)
+            controlX1 = prevX + 40;
+            controlX2 = x - 40;
+          } else {
+            // Moving from Left (15%) to Right (55%)
+            controlX1 = prevX - 40;
+            controlX2 = x + 40;
+          }
+        } else {
+          // On mobile, the vertical track is straight, so keep controls close to dot X
+          controlX1 = prevX;
+          controlX2 = x;
+        }
+
+        d += ` C ${controlX1},${prevY + dy * 0.35} ${controlX2},${prevY + dy * 0.65} ${x},${y}`;
+      }
+    });
+
+    // Draw curve to bottom tail center
+    const lastDotRect = dots[dots.length - 1].getBoundingClientRect();
+    const lastX = lastDotRect.left + lastDotRect.width / 2 - containerRect.left;
+    const lastY = lastDotRect.top + lastDotRect.height / 2 - containerRect.top;
+    const tailY = containerRect.height;
+
+    d += ` C ${lastX},${lastY + 45} ${centerX},${lastY + 45} ${centerX},${tailY}`;
+
+    // Apply paths
+    pathBg.setAttribute("d", d);
+    pathActive.setAttribute("d", d);
+    pathPulse.setAttribute("d", d);
+
+    // Initialize stroke dash values for scroll draw
+    const length = pathActive.getTotalLength();
+    pathActive.style.strokeDasharray = String(length);
+    pathActive.style.strokeDashoffset = String(length);
+  }
+
+  // Draw snake path on mount and resize
+  window.addEventListener("load", drawSnake);
+  window.addEventListener("resize", drawSnake);
+  setTimeout(drawSnake, 100);
+
+  // Expose drawSnake to window
+  (window as any).reDrawSnake = drawSnake;
+
+  // --- Scroll-Drawing Connection Lines ---
+  function handleScrollDraw() {
+    if (!container || !pathActive) return;
+
+    const pathLength = pathActive.getTotalLength();
+    const containerTop = container.offsetTop;
+    const containerHeight = container.offsetHeight;
+    const windowHeight = window.innerHeight;
+
+    const startScroll = containerTop - windowHeight / 2;
+    const endScroll = containerTop + containerHeight - windowHeight / 2;
+    const currentScroll = window.scrollY;
+
+    const scrollRatio =
+      (currentScroll - startScroll) / (endScroll - startScroll);
+    const clampedRatio = Math.min(Math.max(scrollRatio, 0), 1);
+
+    pathActive.style.strokeDashoffset = String(
+      pathLength - pathLength * clampedRatio,
+    );
+  }
+
+  window.addEventListener("scroll", handleScrollDraw);
+
+  // --- Intersection Observer for Progressive Reveal ---
+  const rows = document.querySelectorAll(".timeline-row");
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const row = entry.target as HTMLElement;
+
+          const cards = row.querySelectorAll(".timeline-card-reveal");
+          cards.forEach((card) => {
+            card.classList.remove("opacity-0", "translate-y-8");
+            card.classList.add("opacity-100", "translate-y-0");
+          });
+
+          const dot = row.querySelector(".timeline-dot");
+          if (dot) {
+            dot.classList.add("active-dot");
+          }
+
+          const activeConnectors = row.querySelectorAll(
+            ".left-connector:not(.hidden) .timeline-svg-path, .right-connector:not(.hidden) .timeline-svg-path",
+          );
+          activeConnectors.forEach((path) => {
+            path.classList.add("active-path");
+          });
+
+          observer.unobserve(row);
+        }
+      });
+    },
+    {
+      threshold: 0.1,
+      rootMargin: "0px 0px -40px 0px",
+    },
+  );
+
+  rows.forEach((row) => {
+    observer.observe(row);
+  });
+</script>
+
+<style>
+  /* Infinite Traveling Energy Pulse Animation */
+  @keyframes travel {
+    0% {
+      stroke-dashoffset: 890;
+    }
+    100% {
+      stroke-dashoffset: -890;
+    }
+  }
+
+  .pulse-animation {
+    animation: travel 11s linear infinite;
+    filter: drop-shadow(0 0 6px rgba(0, 212, 255, 0.7))
+      drop-shadow(0 0 2px rgba(77, 255, 184, 0.5));
+  }
+
+  /* Active dot glow */
+  :global(.active-dot) {
+    background-color: var(--primary-brand) !important;
+    border-color: var(--secondary-accent) !important;
+    transform: scale(1.35) !important;
+    box-shadow: 0 0 20px rgba(0, 212, 255, 0.75) !important;
+  }
+
+  /* Hover segment glows */
+  .timeline-row:hover :global(.timeline-dot) {
+    background-color: var(--secondary-accent) !important;
+    border-color: var(--primary-brand) !important;
+    transform: scale(1.45) !important;
+    box-shadow: 0 0 25px rgba(77, 255, 184, 0.9) !important;
+  }
+
+  .timeline-row:hover :global(.timeline-connector-line) {
+    border-color: var(--secondary-accent) !important;
+    opacity: 1 !important;
+  }
+</style>

@@ -1,0 +1,92 @@
+---
+// src/components/atoms/IconButton.astro
+interface Props {
+  id?: string;
+  title?: string;
+  ariaLabel?: string;
+  class?: string;
+}
+
+const { id, title, ariaLabel, class: className = "" } = Astro.props;
+---
+
+<button
+  id={id}
+  tabindex="0"
+  aria-haspopup={id ? "true" : undefined}
+  aria-expanded={id ? "false" : undefined}
+  class={`action-btn ${className}`}
+  title={title}
+  aria-label={ariaLabel || title}
+>
+  <slot />
+</button>
+
+<style>
+  .action-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.25rem;
+    height: 2.25rem;
+    border-radius: 9999px;
+    border: 1px solid
+      color-mix(in srgb, var(--structural-borders) 40%, transparent) !important;
+    background: color-mix(in srgb, var(--card-bg) 50%, transparent) !important;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+    outline: none !important;
+    box-shadow: none;
+    padding: 0;
+    min-height: unset;
+    height: 2.25rem;
+  }
+
+  .action-btn:focus,
+  .action-btn:focus-visible {
+    outline: none !important;
+    box-shadow: none !important;
+  }
+
+  .action-btn::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 9999px;
+    background: radial-gradient(
+      circle at center,
+      var(--primary-brand),
+      transparent 70%
+    );
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .action-btn:hover {
+    border-color: color-mix(in srgb, var(--primary-brand) 50%, transparent);
+    color: var(--primary-brand);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 212, 255, 0.15);
+  }
+
+  .action-btn:hover::before {
+    opacity: 0.08;
+  }
+
+  .action-btn:active {
+    transform: translateY(0) scale(0.95);
+  }
+
+  .action-btn :global(.action-btn-icon) {
+    position: relative;
+    z-index: 1;
+    transition: transform 0.3s ease;
+  }
+
+  .action-btn:hover :global(.action-btn-icon) {
+    transform: scale(1.1);
+  }
+</style>

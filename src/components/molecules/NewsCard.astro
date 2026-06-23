@@ -1,0 +1,97 @@
+---
+// src/components/news/NewsCard.astro
+
+interface Props {
+  title: string;
+  description: string;
+  buttonText: string;
+  link: string;
+  image: string;
+  index: number;
+  gridClass?: string;
+}
+
+const {
+  title,
+  description,
+  buttonText,
+  link,
+  image,
+  index,
+  gridClass = "",
+} = Astro.props;
+---
+
+<div
+  class={`group relative overflow-hidden rounded-2xl border border-structural-borders bg-secondary-bg transition-all duration-300 hover:border-primary-brand/35 hover:shadow-[0_4px_20px_rgba(0,0,0,0.3)] flex flex-col h-full select-none reveal-card cursor-pointer ${gridClass}`}
+  style={`animation-delay: ${index * 120}ms`}
+  onclick={`window.open('${link}', '_blank', 'noopener,noreferrer')`}
+>
+  <!-- Top Image Block -->
+  <div
+    class="w-full min-h-[150px] md:min-h-[185px] lg:min-h-0 lg:flex-grow lg:h-0 overflow-hidden bg-slate-950"
+  >
+    <img
+      src={image}
+      alt={title}
+      class="h-full w-full object-cover object-center transition-transform duration-500 ease-out group-hover:scale-[1.01]"
+    />
+  </div>
+
+  <!-- Bottom Content Block -->
+  <div class="p-4 md:p-5 flex flex-col justify-start flex-shrink-0 space-y-2.5">
+    <div class="space-y-2">
+      <h3
+        class="text-base md:text-lg font-bold tracking-tight text-text-main group-hover:text-primary-brand transition-colors duration-300 leading-snug"
+      >
+        {title}
+      </h3>
+      <p
+        class="text-xs text-text-muted leading-relaxed font-medium line-clamp-2"
+      >
+        {description}
+      </p>
+    </div>
+
+    <div class="pt-0.5">
+      <!-- Clean Text Button with Chevron -->
+      <a
+        href={link}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-flex items-center gap-1 text-[11px] font-bold text-primary-brand hover:text-hover-brand transition-colors duration-200"
+        onclick="event.stopPropagation();"
+      >
+        <span>{buttonText}</span>
+        <svg
+          class="h-3 w-3 transform transition-transform duration-300 group-hover:translate-x-0.5"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          stroke-width="2.5"
+        >
+          <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"
+          ></path>
+        </svg>
+      </a>
+    </div>
+  </div>
+</div>
+
+<style>
+  @keyframes revealCard {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .reveal-card {
+    opacity: 0;
+    animation: revealCard 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+</style>

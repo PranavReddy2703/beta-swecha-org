@@ -1,0 +1,66 @@
+---
+// src/components/news/NewsTimeline.astro
+interface Milestone {
+  id: string;
+  year: string;
+  title: Record<string, string>;
+  description: Record<string, string>;
+}
+
+interface Props {
+  milestones: Milestone[];
+  lang: string;
+}
+
+const { milestones, lang } = Astro.props;
+
+const sectionTitle =
+  lang === "te"
+    ? "జాతీయ & అంతర్జాతీయ గుర్తింపు"
+    : lang === "hi"
+      ? "राष्ट्रीय एवं अंतर्राष्ट्रीय प्रभाव"
+      : "National & International Exposure";
+---
+
+<div class="space-y-4 select-none">
+  <div class="flex items-center space-x-3">
+    <h2
+      class="news-section-header text-sm font-black text-text-main uppercase tracking-widest"
+    >
+      {sectionTitle}
+    </h2>
+    <span
+      class="h-[1px] flex-grow bg-gradient-to-r from-structural-borders via-structural-borders/30 to-transparent"
+    ></span>
+  </div>
+
+  <div
+    class="timeline-line relative pl-4 border-l border-structural-borders/60 space-y-6 pt-2"
+  >
+    {
+      milestones.map((stone) => {
+        const title = stone.title[lang] || stone.title["en"];
+        const desc = stone.description[lang] || stone.description["en"];
+        return (
+          <div class="relative group space-y-1.5">
+            {/* Dot Indicator */}
+            <div class="timeline-dot absolute -left-[21px] top-1.5 w-2.5 h-2.5 rounded-full bg-slate-950 border-2 border-text-muted/40 group-hover:border-primary-brand group-hover:bg-primary-brand transition-all duration-300" />
+
+            {/* Date / Year Badge */}
+            <span class="inline-flex items-center px-2 py-0.5 rounded text-[9px] font-black tracking-wider text-primary-brand bg-primary-brand/10 border border-primary-brand/20 select-none">
+              {stone.year}
+            </span>
+
+            {/* Title & Description */}
+            <h3 class="news-timeline-title text-xs font-bold text-text-main leading-tight group-hover:text-primary-brand transition-colors duration-200">
+              {title}
+            </h3>
+            <p class="news-timeline-desc text-[11px] text-text-muted leading-relaxed font-medium">
+              {desc}
+            </p>
+          </div>
+        );
+      })
+    }
+  </div>
+</div>

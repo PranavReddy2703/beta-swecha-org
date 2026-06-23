@@ -1,0 +1,658 @@
+---
+// src/components/Timeline.astro
+import { getLangFromUrl, useTranslations } from "../../i18n/utils";
+import { getNodeColors } from "../../utils/timelineColors";
+import TimelineCard from "../molecules/TimelineCard.astro";
+import TimelineSlider from "./TimelineSlider.astro";
+import MobileTimelineCard from "../molecules/MobileTimelineCard.astro";
+import TimelineModal from "../molecules/TimelineModal.astro";
+import timelineData from "../../data/organisms/timeline.json";
+import type { ImageMetadata } from "astro";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const tagsByYear: Record<string, string[]> = {
+  "2005": ["GNU/Linux", "Telugu OS", "FOSS"],
+  "2010": ["Community", "Workshops", "Localization"],
+  "2015": ["Digital Literacy", "Schools", "Computing"],
+  "2020": ["Emerging Tech", "Python", "Open Data"],
+  "2026": ["Astro", "Tailwind CSS", "Modern Web"],
+};
+
+const imageImports = import.meta.glob<{ default: ImageMetadata }>(
+  "/src/assets/timeline/*.webp",
+  { eager: true },
+);
+
+const events = timelineData.map((event, index) => {
+  const imagePath = `/src/assets/timeline/${event.year}.webp`;
+  const importedImage = imageImports[imagePath];
+
+  return {
+    year: event.year,
+    title: t(`timeline.${index}.title` as any) || event.title,
+    description: t(`timeline.${index}.description` as any) || event.description,
+    previewImage: importedImage ? importedImage.default : undefined,
+    previewImageUrl: importedImage
+      ? importedImage.default.src
+      : `/images/timeline/${event.year}.webp`,
+    tags: tagsByYear[event.year] || ["Community", "FOSS", "Localization"],
+  };
+});
+
+const N = events.length;
+---
+
+<section
+  id="timeline-section"
+  class="pt-6 pb-12 md:pt-8 md:pb-16 scroll-mt-20 relative transition-colors duration-300 overflow-hidden"
+>
+  <div
+    class="container mx-auto px-4 max-w-7xl relative z-10 flex flex-col items-center gap-8"
+  >
+    <!-- Section Title -->
+    <div class="text-center">
+      <h2
+        class="text-3xl font-extrabold tracking-tight text-text-main sm:text-4xl animate-glow-text"
+      >
+        {t("timeline.title")}
+      </h2>
+    </div>
+
+    <!-- Active Card Area (One card visible at a time) -->
+    <div
+      class="w-full max-w-7xl hidden md:flex items-center justify-between gap-6 md:gap-10"
+    >
+      <!-- Left Arrow Button -->
+      <button
+        id="prev-btn"
+        class="timeline-nav-btn z-20 text-text-muted hover:text-primary-brand hover:scale-110 active:scale-95 transition-all duration-200 cursor-pointer focus:outline-none flex items-center justify-center p-2"
+        aria-label="Previous event"
+      >
+        <svg
+          class="h-8 w-8 sm:h-10 sm:w-10"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2.5"
+            d="M15 19l-7-7 7-7"></path>
+        </svg>
+      </button>
+
+      <!-- Cards Container -->
+      <div
+        class="relative flex-1 max-w-[420px] sm:max-w-[720px] md:max-w-[1020px] lg:max-w-[1200px] min-h-[660px] md:min-h-[400px] overflow-visible flex items-center"
+      >
+        {
+          events.map((event, index) => (
+            <div
+              class="timeline-card absolute inset-0 opacity-0 scale-95 pointer-events-none transition-all duration-500 ease-in-out transform flex items-center justify-center"
+              data-index={index}
+            >
+              <TimelineCard
+                year={event.year}
+                title={event.title}
+                description={event.description}
+                previewImage={event.previewImage}
+                tags={event.tags}
+                index={index}
+              />
+            </div>
+          ))
+        }
+      </div>
+
+      <!-- Right Arrow Button -->
+      <button
+        id="next-btn"
+        class="timeline-nav-btn z-20 text-text-muted hover:text-primary-brand hover:scale-110 active:scale-95 transition-all duration-200 cursor-pointer focus:outline-none flex items-center justify-center p-2"
+        aria-label="Next event"
+      >
+        <svg
+          class="h-8 w-8 sm:h-10 sm:w-10"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2.5"
+            d="M9 5l7 7-7 7"></path>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Timeline Track Slider Component -->
+    <div class="hidden md:block w-full">
+      <TimelineSlider events={events} />
+    </div>
+
+    <!-- Mobile Timeline (Vertical) -->
+    <div class="w-full flex flex-col md:hidden relative mt-4">
+      <!-- Vertical Line -->
+      <div
+        class="absolute left-[27px] top-4 bottom-4 w-[2px] bg-structural-borders/40"
+      >
+      </div>
+
+      <div
+        class="flex flex-col gap-12 w-full mobile-timeline-container relative z-10 py-8"
+      >
+        {
+          events.map((event, index) => (
+            <div class="flex flex-row items-center w-full gap-6 relative mobile-timeline-row">
+              {/* Left: Node */}
+              <div
+                class="relative flex flex-col items-center shrink-0 w-[56px] mobile-timeline-dot transition-all duration-500 scale-75 opacity-40 mobile-node-wrapper"
+                style={`
+                     --node-color-dark: ${getNodeColors(index, N, false).color};
+                     --node-glow-dark: ${getNodeColors(index, N, false).glow};
+                     --node-shadow-dark: ${getNodeColors(index, N, false).shadow};
+                     --node-color-light: ${getNodeColors(index, N, true).color};
+                     --node-glow-light: ${getNodeColors(index, N, true).glow};
+                     --node-shadow-light: ${getNodeColors(index, N, true).shadow};
+                   `}
+              >
+                {/* The Node Dot with pulse ring */}
+                <div class="relative flex items-center justify-center h-8 w-8 dot-wrapper">
+                  {/* Pulse Ring */}
+                  <span class="mobile-pulse-ring absolute inset-0 rounded-full border opacity-0 hidden" />
+
+                  {/* Circular Glow around the node */}
+                  <div
+                    class="mobile-dot-glow absolute inset-[-14px] rounded-full pointer-events-none z-0 transition-all duration-500 opacity-30"
+                    style={`background: radial-gradient(circle, var(--current-node-glow) 0%, transparent 70%);`}
+                  />
+
+                  {/* Core Dot */}
+                  <div
+                    class="mobile-node-dot h-5 w-5 rounded-full border-[3px] border-[#080B10] bg-transparent transition-all duration-500 transform z-10 scale-100"
+                    style={`background-color: var(--current-node-color);`}
+                  />
+                </div>
+              </div>
+
+              {/* Right: Content */}
+              <div class="flex-1 flex flex-col py-2">
+                <MobileTimelineCard
+                  year={event.year}
+                  title={event.title}
+                  description={event.description}
+                  previewImage={event.previewImage}
+                  previewImageUrl={event.previewImageUrl}
+                  tags={event.tags}
+                  index={index}
+                />
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+
+    <TimelineModal />
+  </div>
+</section>
+
+<style>
+  /* Mobile Timeline Node CSS Variables — must stay scoped for :global() Astro syntax */
+  .mobile-node-wrapper {
+    --current-node-color: var(--node-color-dark);
+    --current-node-glow: var(--node-glow-dark);
+    --current-node-shadow: var(--node-shadow-dark);
+  }
+
+  :global(html[data-theme="light"]) .mobile-node-wrapper {
+    --current-node-color: var(--node-color-light);
+    --current-node-glow: var(--node-glow-light);
+    --current-node-shadow: var(--node-shadow-light);
+  }
+
+  :global(html[data-theme="light"]) .mobile-node-dot {
+    border-color: #ffffff !important;
+  }
+
+  .animate-glow-text {
+    background: linear-gradient(135deg, #00d4ff, #4dffb8) !important;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    text-shadow: none !important;
+    display: inline-block;
+  }
+
+  /* Light mode overrides to make Section Title white with visual depth */
+  :global(html[data-theme="light"]) .animate-glow-text {
+    background: none !important;
+    color: #ffffff !important;
+    -webkit-text-fill-color: #ffffff !important;
+    text-shadow:
+      0 2px 8px rgba(11, 30, 54, 0.35),
+      0 4px 20px rgba(11, 30, 54, 0.25) !important;
+  }
+</style>
+
+<script is:inline>
+  function initTimeline() {
+    const cards = document.querySelectorAll(".timeline-card");
+    const nodes = document.querySelectorAll(".timeline-node");
+    const prevBtn = document.getElementById("prev-btn");
+    const nextBtn = document.getElementById("next-btn");
+    /** @type {HTMLElement | null} */
+    const slidingTimeline = document.getElementById("sliding-timeline");
+
+    if (cards.length === 0 || nodes.length === 0) return;
+
+    let activeIndex = 0;
+
+    /** @param {number} index */
+    function updateTimeline(index) {
+      activeIndex = index;
+
+      // 1. Update Cards
+      cards.forEach((card, idx) => {
+        card.classList.remove("active-card", "left-card", "right-card");
+        if (idx === activeIndex) {
+          card.classList.add("active-card");
+        } else if (idx < activeIndex) {
+          card.classList.add("left-card");
+        } else {
+          card.classList.add("right-card");
+        }
+      });
+
+      // 2. Update DaisyUI Timeline Lines
+      const lis = document.querySelectorAll(".timeline > li");
+      lis.forEach((li, idx) => {
+        /** @type {HTMLElement | null} */
+        const prevHr = li.querySelector(".timeline-line-prev");
+        /** @type {HTMLElement | null} */
+        const nextHr = li.querySelector(".timeline-line-next");
+        /** @type {HTMLElement | null} */
+        const node = li.querySelector(".timeline-node");
+
+        // Check if light theme is active
+        const isLight =
+          document.documentElement.getAttribute("data-theme") === "light";
+
+        // Query theme colors dynamically from the HTML attributes
+        const shadowColor = node
+          ? isLight
+            ? node.getAttribute("data-shadow-light") || "rgba(2, 90, 158, 0.15)"
+            : node.getAttribute("data-shadow") || "rgba(0, 212, 255, 0.15)"
+          : "rgba(0, 212, 255, 0.15)";
+
+        if (prevHr && !prevHr.classList.contains("timeline-line-dummy")) {
+          if (idx <= activeIndex) {
+            prevHr.style.opacity = "1.0";
+            prevHr.style.boxShadow = `0 0 8px ${shadowColor}`;
+          } else {
+            prevHr.style.opacity = "0.2";
+            prevHr.style.boxShadow = "none";
+          }
+        }
+
+        if (nextHr && !nextHr.classList.contains("timeline-line-dummy")) {
+          if (idx < activeIndex) {
+            nextHr.style.opacity = "1.0";
+            nextHr.style.boxShadow = `0 0 8px ${shadowColor}`;
+          } else {
+            nextHr.style.opacity = "0.2";
+            nextHr.style.boxShadow = "none";
+          }
+        }
+      });
+
+      // 3. Update Timeline Nodes
+      nodes.forEach((node, idx) => {
+        /** @type {HTMLElement | null} */
+        const ring = node.querySelector(".pulse-ring");
+        /** @type {HTMLElement | null} */
+        const dot = node.querySelector(".node-dot");
+        /** @type {HTMLElement | null} */
+        const glow = node.querySelector(".dot-glow");
+
+        // Find the node year within the same li item
+        const li = node.closest("li");
+        const year = li ? li.querySelector(".node-year") : null;
+
+        // Check if light theme is active
+        const isLight =
+          document.documentElement.getAttribute("data-theme") === "light";
+
+        // Query theme colors dynamically from the HTML attributes
+        const colorVal = isLight
+          ? node.getAttribute("data-color-light") || "#025A9E"
+          : node.getAttribute("data-color") || "#00D4FF";
+        const glowVal = isLight
+          ? node.getAttribute("data-glow-light") || "rgba(2, 90, 158, 0.25)"
+          : node.getAttribute("data-glow") || "rgba(0, 212, 255, 0.25)";
+        const shadowVal = isLight
+          ? node.getAttribute("data-shadow-light") || "rgba(2, 90, 158, 0.15)"
+          : node.getAttribute("data-shadow") || "rgba(0, 212, 255, 0.15)";
+
+        // Toggle Circular background gradient glow around nodes
+        if (glow) {
+          glow.style.setProperty("--node-glow", glowVal);
+          if (idx === activeIndex) {
+            glow.style.opacity = "1.0";
+          } else {
+            glow.style.opacity = "0.3"; // Dimmed glow for inactive nodes
+          }
+        }
+
+        // Toggle Pulse Ring (only active milestone pulses)
+        if (ring) {
+          if (idx === activeIndex) {
+            ring.classList.add("active-pulse");
+            ring.style.borderColor = `${colorVal}50`; // ~31% opacity
+            ring.style.backgroundColor = `${colorVal}08`; // ~3% opacity
+          } else {
+            ring.classList.remove("active-pulse");
+          }
+        }
+
+        // Toggle Dot Styling (Thick dark border, solid color core background, active has thin outline ring)
+        if (dot) {
+          dot.style.backgroundColor = colorVal;
+          dot.style.borderColor = isLight ? "#FFFFFF" : "#080B10"; // Dark border for dark mode, white for light mode
+
+          if (idx === activeIndex) {
+            dot.style.boxShadow = `0 0 0 1.5px ${colorVal}, 0 0 10px ${shadowVal}`;
+            dot.className = `node-dot h-5 w-5 rounded-full border-[3px] transition-all duration-500 transform z-10 scale-115 opacity-100`;
+          } else {
+            dot.style.boxShadow = "none";
+            dot.className = `node-dot h-5 w-5 rounded-full border-[3px] transition-all duration-500 transform z-10 scale-100 opacity-40`; // Inactive nodes dimmed to 40%
+          }
+        }
+
+        // Toggle Year Label styling
+        if (year) {
+          /** @type {HTMLElement} */ (year).style.color = colorVal; // Apply theme color to all labels
+          if (idx === activeIndex) {
+            year.className =
+              "node-year text-xs sm:text-sm font-black scale-105 transition-all duration-300 opacity-100";
+          } else {
+            year.className =
+              "node-year text-xs sm:text-sm font-bold transition-all duration-300 opacity-40"; // Inactive labels dimmed to 40%
+          }
+        }
+      });
+
+      // 4. Centering Slide Offset Logic and Dynamic Edge Extension Widths
+      if (slidingTimeline) {
+        /** @type {HTMLElement} */
+        const activeLi = lis[activeIndex];
+        if (activeLi) {
+          const activeCenter = activeLi.offsetLeft + activeLi.offsetWidth / 2;
+          slidingTimeline.style.transform = `translateX(-${activeCenter}px)`;
+
+          // Dynamically compute exact widths for the left/right extension lines so they end exactly at the viewport borders
+          /** @type {HTMLElement} */
+          const firstLi = lis[0];
+          /** @type {HTMLElement} */
+          const lastLi = lis[lis.length - 1];
+          if (firstLi && lastLi) {
+            const x_0 = firstLi.offsetLeft + firstLi.offsetWidth / 2;
+            const x_N = lastLi.offsetLeft + lastLi.offsetWidth / 2;
+
+            // distance from viewport left to first node center
+            const leftWidth = window.innerWidth / 2 + (x_0 - activeCenter);
+            // distance from last node center to viewport right
+            const rightWidth =
+              window.innerWidth -
+              (window.innerWidth / 2 + (x_N - activeCenter));
+
+            /** @type {HTMLElement | null} */
+            const leftExtend = document.querySelector(
+              ".timeline-line-prev-extend",
+            );
+            /** @type {HTMLElement | null} */
+            const rightExtend = document.querySelector(
+              ".timeline-line-next-extend",
+            );
+
+            if (leftExtend) {
+              leftExtend.style.setProperty(
+                "width",
+                `${Math.max(0, leftWidth)}px`,
+                "important",
+              );
+              leftExtend.style.opacity = "1.0";
+            }
+            if (rightExtend) {
+              rightExtend.style.setProperty(
+                "width",
+                `${Math.max(0, rightWidth)}px`,
+                "important",
+              );
+              // Dim the right edge screen extension when the last node is not active
+              rightExtend.style.opacity =
+                activeIndex === cards.length - 1 ? "1.0" : "0.2";
+            }
+          }
+        }
+      }
+
+      // 5. Navigation buttons boundary states
+      if (prevBtn) {
+        if (activeIndex === 0) {
+          prevBtn.setAttribute("disabled", "true");
+          prevBtn.classList.add("opacity-20", "cursor-not-allowed");
+        } else {
+          prevBtn.removeAttribute("disabled");
+          prevBtn.classList.remove("opacity-20", "cursor-not-allowed");
+        }
+      }
+
+      if (nextBtn) {
+        if (activeIndex === cards.length - 1) {
+          nextBtn.setAttribute("disabled", "true");
+          nextBtn.classList.add("opacity-20", "cursor-not-allowed");
+        } else {
+          nextBtn.removeAttribute("disabled");
+          nextBtn.classList.remove("opacity-20", "cursor-not-allowed");
+        }
+      }
+    }
+
+    // Prev / Next click triggers
+    prevBtn?.addEventListener("click", () => {
+      if (activeIndex > 0) updateTimeline(activeIndex - 1);
+    });
+
+    nextBtn?.addEventListener("click", () => {
+      if (activeIndex < cards.length - 1) updateTimeline(activeIndex + 1);
+    });
+
+    // Node click triggers
+    nodes.forEach((node, idx) => {
+      node.addEventListener("click", () => {
+        updateTimeline(idx);
+      });
+    });
+
+    // Keyboard Arrow navigation triggers
+    window.addEventListener("keydown", (e) => {
+      if (e.key === "ArrowLeft") {
+        if (activeIndex > 0) updateTimeline(activeIndex - 1);
+      } else if (e.key === "ArrowRight") {
+        if (activeIndex < cards.length - 1) updateTimeline(activeIndex + 1);
+      }
+    });
+
+    // Recalculate on window resize/zoom changes
+    window.addEventListener("resize", () => {
+      updateTimeline(activeIndex);
+    });
+
+    // Listen for theme changes to recalculate colors dynamically
+    const observer = new MutationObserver((mutations) => {
+      mutations.forEach((mutation) => {
+        if (mutation.attributeName === "data-theme") {
+          updateTimeline(activeIndex);
+        }
+      });
+    });
+    observer.observe(document.documentElement, { attributes: true });
+
+    // Initial load
+    updateTimeline(0);
+  }
+
+  function initMobileTimeline() {
+    const mobileRows = document.querySelectorAll(".mobile-timeline-row");
+    const readMoreBtns = document.querySelectorAll(".read-more-btn");
+    /** @type {HTMLDialogElement | null} */
+    const modal = document.getElementById("timeline-modal");
+
+    if (!mobileRows.length) return;
+
+    // Intersection Observer for mobile cards Focus State
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const row = entry.target;
+            const card = row.querySelector(".mobile-timeline-card");
+            const dot = row.querySelector(".mobile-timeline-dot");
+
+            if (card) {
+              card.classList.add("scale-100", "opacity-100");
+              card.classList.remove("scale-90", "opacity-60");
+            }
+            if (dot) {
+              dot.classList.add("scale-100", "opacity-100");
+              dot.classList.remove("scale-75", "opacity-40");
+
+              /** @type {HTMLElement | null} */
+              const coreDot = dot.querySelector(".mobile-node-dot");
+              /** @type {HTMLElement | null} */
+              const pulse = dot.querySelector(".mobile-pulse-ring");
+              /** @type {HTMLElement | null} */
+              const glow = dot.querySelector(".mobile-dot-glow");
+
+              if (coreDot) {
+                coreDot.style.boxShadow = `0 0 0 1.5px var(--current-node-color), 0 0 10px var(--current-node-shadow)`;
+                coreDot.classList.add("scale-115");
+                coreDot.classList.remove("scale-100");
+              }
+              if (pulse) {
+                pulse.classList.add("active-pulse");
+                pulse.style.borderColor = `var(--current-node-color)`;
+                pulse.style.backgroundColor = `var(--current-node-shadow)`;
+              }
+              if (glow) glow.style.opacity = "1.0";
+            }
+
+            // Optionally, dim others
+            mobileRows.forEach((otherRow) => {
+              if (otherRow !== row) {
+                const otherCard = otherRow.querySelector(
+                  ".mobile-timeline-card",
+                );
+                const otherDot = otherRow.querySelector(".mobile-timeline-dot");
+                if (otherCard) {
+                  otherCard.classList.remove("scale-100", "opacity-100");
+                  otherCard.classList.add("scale-90", "opacity-60");
+                }
+                if (otherDot) {
+                  otherDot.classList.remove("scale-100", "opacity-100");
+                  otherDot.classList.add("scale-75", "opacity-40");
+
+                  /** @type {HTMLElement | null} */
+                  const coreDot = otherDot.querySelector(".mobile-node-dot");
+                  /** @type {HTMLElement | null} */
+                  const pulse = otherDot.querySelector(".mobile-pulse-ring");
+                  /** @type {HTMLElement | null} */
+                  const glow = otherDot.querySelector(".mobile-dot-glow");
+
+                  if (coreDot) {
+                    coreDot.style.boxShadow = "none";
+                    coreDot.classList.remove("scale-115");
+                    coreDot.classList.add("scale-100");
+                  }
+                  if (pulse) {
+                    pulse.classList.remove("active-pulse");
+                  }
+                  if (glow) glow.style.opacity = "0.3";
+                }
+              }
+            });
+          }
+        });
+      },
+      {
+        root: null,
+        rootMargin: "-40% 0px -40% 0px", // Trigger when row is in the middle 20% of screen
+        threshold: 0,
+      },
+    );
+
+    mobileRows.forEach((row) => observer.observe(row));
+
+    // Modal Interaction
+    readMoreBtns.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const year = btn.getAttribute("data-year");
+        const title = btn.getAttribute("data-title");
+        const description = btn.getAttribute("data-description");
+        const image = btn.getAttribute("data-image");
+        const tags = JSON.parse(btn.getAttribute("data-tags") || "[]");
+
+        const modalYear = document.getElementById("modal-year");
+        const modalTitle = document.getElementById("modal-title");
+        const modalDesc = document.getElementById("modal-description");
+        /** @type {HTMLImageElement | null} */
+        const modalImage = document.getElementById("modal-image");
+        const modalPlaceholder = document.getElementById("modal-placeholder");
+        const modalTags = document.getElementById("modal-tags");
+
+        if (modalYear) modalYear.textContent = year;
+        if (modalTitle) modalTitle.textContent = title;
+        if (modalDesc) modalDesc.textContent = description;
+
+        if (modalImage && modalPlaceholder) {
+          if (image) {
+            modalImage.src = image;
+            modalImage.classList.remove("hidden");
+            modalPlaceholder.classList.add("hidden");
+          } else {
+            modalImage.src = "";
+            modalImage.classList.add("hidden");
+            modalPlaceholder.classList.remove("hidden");
+          }
+        }
+
+        if (modalTags) {
+          modalTags.innerHTML = "";
+          /** @param {string} tag */
+          tags.forEach((tag) => {
+            const badge = document.createElement("div");
+            badge.className =
+              "badge badge-outline border-structural-borders/60 text-text-muted text-[11px] font-semibold px-2.5 py-1";
+            badge.textContent = tag;
+            modalTags.appendChild(badge);
+          });
+        }
+
+        if (modal) {
+          modal.showModal();
+        }
+      });
+    });
+  }
+
+  // Setup listener for Astro page transitions/initial load
+  document.addEventListener("DOMContentLoaded", () => {
+    initTimeline();
+    initMobileTimeline();
+  });
+  initTimeline(); // Run immediately for fast interactive load
+  initMobileTimeline();
+</script>

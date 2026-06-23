@@ -1,0 +1,36 @@
+{
+  "links": [
+    {
+      "id": "about",
+      "label": "About"
+    },
+    {
+      "id": "projects",
+      "label": "Projects"
+    },
+    {
+      "id": "initiatives",
+      "label": "Initiatives"
+    },
+    {
+      "id": "events",
+      "label": "Events"
+    },
+    {
+      "id": "news",
+      "label": "News"
+    },
+    {
+      "id": "donations",
+      "label": "Donate"
+    },
+    {
+      "id": "careers",
+      "label": "Careers"
+    },
+    {
+      "id": "contact",
+      "label": "Contact Us"
+    }
+  ]
+}

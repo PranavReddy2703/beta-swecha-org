@@ -1,0 +1,177 @@
+[
+  {
+    "id": "trust-safety-in-ai",
+    "slug": "trust-safety-in-ai",
+    "title": "Understanding Trust & Safety in AI",
+    "subtitle": "From Code to Creativity",
+    "description": "Artificial Intelligence is rapidly reshaping our world, from the code that powers our systems to the creative works that define our culture. As AI models become more integrated into daily life, understanding the frameworks for trust, safety, and governance is paramount.\n\nThis stakeholder consultation event at IIIT Hyderabad brings together developers, academicians, policymakers, and open-source advocates to explore the path forward. By focusing on transparency, accountability, and community participation, we aim to bridge the gap between rapid technological innovation and responsible societal impact. Join us to discuss how open-source technologies can ensure that the benefits of AI are shared equitably and developed ethically.",
+    "shortDescription": "A stakeholder consultation event exploring responsible AI development, governance, transparency, and community participation.",
+    "image": "/images/event-banner.webp",
+    "date": "31 January 2026",
+    "time": "9:30 AM – 2:00 PM",
+    "venue": "IIIT Hyderabad",
+    "mode": "In-Person",
+    "category": "AI",
+    "registrationLink": "#register-section",
+    "readMoreLink": "#about-section",
+    "featured": true,
+    "past": false,
+    "ongoing": false,
+    "agenda": [
+      {
+        "title": "Harnessing Open Source AI",
+        "description": "Exploring transparent, accountable, and inclusive AI through open technologies and community collaboration."
+      },
+      {
+        "title": "Balancing AI Innovation & Copyright",
+        "description": "Examining licensing frameworks, governance models, copyright implications, and responsible AI innovation."
+      }
+    ],
+    "highlights": [
+      "Open Source AI",
+      "Responsible Innovation",
+      "AI Governance",
+      "Community Participation",
+      "Policy Discussions",
+      "Industry Collaboration"
+    ]
+  },
+  {
+    "id": "os-ai-hackday",
+    "slug": "os-ai-hackday",
+    "title": "Open Source AI Hackday",
+    "subtitle": "Build the Future of Open AI",
+    "description": "A intensive full-day hackday bringing developers, engineers, and designers together to build real-world applications using open source AI models like Llama, Mistral, and local Telugu LLMs. Participants will collaborate on tools that solve local challenges and enhance digital access.",
+    "shortDescription": "Collaborate with developers to build social impact applications using open source AI models.",
+    "image": "/images/news-hackday.webp",
+    "date": "15 February 2026",
+    "time": "10:00 AM – 6:00 PM",
+    "venue": "IIIT Hyderabad",
+    "mode": "In-Person",
+    "category": "Hackathon",
+    "registrationLink": "#register-section",
+    "readMoreLink": "#about-section",
+    "featured": false,
+    "past": false,
+    "ongoing": false,
+    "agenda": [
+      {
+        "title": "Hackday Orientation & Team Formation",
+        "description": "Introduction to available open-source AI frameworks, local APIs, and problem statements."
+      },
+      {
+        "title": "Prototyping & Pitching Sessions",
+        "description": "Teams build their products, receive feedback from mentors, and present their work to the jury."
+      }
+    ],
+    "highlights": [
+      "Hands-on coding",
+      "Mentorship from AI Engineers",
+      "Prizes & Swag",
+      "Project Incubation Opportunities"
+    ]
+  },
+  {
+    "id": "telugu-llm-datathon",
+    "slug": "telugu-llm-datathon",
+    "title": "Telugu LLM Datathon",
+    "subtitle": "Collecting Datasets for Local Language AI",
+    "description": "To address the digital divide, Swecha is building a Telugu Large Language Model. This Datathon is a community-driven initiative to collect, clean, and annotate high-quality Telugu text and audio datasets. Join volunteers and linguists in creating a truly open language dataset.",
+    "shortDescription": "A community drive to gather and validate Telugu text and speech datasets for building open models.",
+    "image": "/images/news-datathon.webp",
+    "date": "22 February 2026",
+    "time": "11:00 AM – 4:00 PM",
+    "venue": "Swecha Office, Gachibowli",
+    "mode": "In-Person",
+    "category": "Community",
+    "registrationLink": "#register-section",
+    "readMoreLink": "#about-section",
+    "featured": false,
+    "past": false,
+    "ongoing": true,
+    "agenda": [
+      {
+        "title": "Dataset Annotation & Curation",
+        "description": "Training volunteers on data cleaning, processing, and tag verification tools."
+      },
+      {
+        "title": "Voice Recording Sprint",
+        "description": "Using our localized software to record and validate Telugu speech datasets across different dialects."
+      }
+    ],
+    "highlights": [
+      "Local Language AI",
+      "Community Dataset Contribution",
+      "Linguistics Workshops",
+      "Data Science Networking"
+    ]
+  },
+  {
+    "id": "viswam-ai-licensing",
+    "slug": "viswam-ai-licensing",
+    "title": "VISWAM.AI Licensing Workshop",
+    "subtitle": "Drafting the Open AI License",
+    "description": "A collaborative consultation workshop aimed at establishing a strong, open-source legal framework for VISWAM.AI and related community-driven AI models. The session covers licensing conditions that protect intellectual property while ensuring the software remains community-owned.",
+    "shortDescription": "A collaborative workshop to refine the draft open AI license for safeguarding community ownership.",
+    "image": "/images/news-license.webp",
+    "date": "10 December 2025",
+    "time": "4:00 PM – 6:00 PM",
+    "venue": "Online (Zoom)",
+    "mode": "Online",
+    "category": "Workshop",
+    "registrationLink": "#register-section",
+    "readMoreLink": "#about-section",
+    "featured": false,
+    "past": true,
+    "ongoing": false,
+    "agenda": [
+      {
+        "title": "Open License Principles Review",
+        "description": "Reviewing standard open licenses (MIT, Apache, GPL) and identifying gaps for modern generative AI models."
+      },
+      {
+        "title": "Feedback & Draft Consolidation",
+        "description": "Reviewing contributions from community legal scholars and finalizing draft v0.2."
+      }
+    ],
+    "highlights": [
+      "Legal Framework Analysis",
+      "Open Source Governance",
+      "IP Safeguarding Policies"
+    ]
+  },
+  {
+    "id": "swecha-os-meetup",
+    "slug": "swecha-os-meetup",
+    "title": "Swecha Open Source Meetup",
+    "subtitle": "Monthly Contributor Assembly",
+    "description": "Our monthly meetup is the gathering point for Swecha open-source contributors. Developers share updates on localized OS custom builds, AI projects, web systems, and school computer lab setups. Learn how to submit your first PR and join active project interest groups.",
+    "shortDescription": "Meet local contributors, demo your open source projects, and join active project groups.",
+    "image": "/images/news-community.webp",
+    "date": "20 December 2025",
+    "time": "2:00 PM – 5:00 PM",
+    "venue": "Swecha Office, Gachibowli",
+    "mode": "In-Person",
+    "category": "Meetup",
+    "registrationLink": "#register-section",
+    "readMoreLink": "#about-section",
+    "featured": false,
+    "past": true,
+    "ongoing": false,
+    "agenda": [
+      {
+        "title": "Project Showcases & Lightning Demos",
+        "description": "5-minute project presentations by local developers highlighting current tools and software updates."
+      },
+      {
+        "title": "Contributor Onboarding & Hacking",
+        "description": "Breakout sessions for newcomers to set up development environments and fix issues."
+      }
+    ],
+    "highlights": [
+      "Open Source Networking",
+      "Interactive Project Demos",
+      "New Contributor Onboarding"
+    ]
+  }
+]

@@ -1,0 +1,437 @@
+---
+// src/components/news/FeaturedNewsCard.astro
+import CategoryBadge from "../atoms/CategoryBadge.astro";
+
+interface Slide {
+  title: string;
+  description: string;
+  link: string;
+  image: string;
+}
+
+interface Props {
+  category: string;
+  buttonText: string;
+  slides: Slide[];
+  index: number;
+}
+
+const { category, buttonText, slides, index } = Astro.props;
+---
+
+<div
+  class="group featured-card relative overflow-hidden rounded-2xl border border-structural-borders/80 bg-card-bg/25 backdrop-blur-xl transition-all duration-500 flex flex-col lg:flex-row gap-6 p-6 md:p-8 select-none reveal-card cursor-pointer h-full"
+  style={`animation-delay: ${index * 120}ms`}
+>
+  <!-- Ambient background glow elements -->
+  <div
+    class="absolute -top-12 -left-12 w-48 h-48 bg-primary-brand/10 rounded-full blur-[80px] pointer-events-none group-hover:bg-primary-brand/15 transition-all duration-700"
+  >
+  </div>
+  <div
+    class="absolute -bottom-16 -right-16 w-52 h-52 bg-secondary-accent/8 rounded-full blur-[90px] pointer-events-none group-hover:bg-secondary-accent/12 transition-all duration-700"
+  >
+  </div>
+
+  <!-- Text Block (Left Side on Desktop) -->
+  <div
+    class="flex-1 flex flex-col justify-between space-y-5 order-2 lg:order-1 relative min-h-[240px] lg:min-h-0 z-10"
+  >
+    <div class="space-y-4">
+      <div>
+        <CategoryBadge text={category} variant="green" />
+      </div>
+
+      <!-- Slides Text Container -->
+      <div
+        class="relative flex-grow flex flex-col justify-center min-h-[130px] md:min-h-[145px] lg:min-h-[160px]"
+      >
+        {
+          slides.map((slide, sIdx) => (
+            <div
+              data-slide-text={sIdx}
+              data-link={slide.link}
+              class={`slide-text-item flex flex-col justify-center space-y-3.5 transition-all duration-500 ease-out ${
+                sIdx === 0
+                  ? "opacity-100 translate-y-0 relative z-10"
+                  : "opacity-0 translate-y-4 absolute inset-0 pointer-events-none z-0"
+              }`}
+            >
+              <h2 class="featured-news-title text-xl md:text-2xl lg:text-3xl font-black text-text-main group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-[var(--text-primary-hover)] group-hover:to-secondary-accent transition-all duration-300 leading-tight tracking-tight">
+                {slide.title}
+              </h2>
+              <p class="text-xs md:text-sm text-text-muted leading-relaxed font-medium">
+                {slide.description}
+              </p>
+            </div>
+          ))
+        }
+      </div>
+
+      <div class="pt-2 z-20">
+        <a
+          href={slides[0].link}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-2 rounded-lg bg-gradient-to-r from-secondary-accent to-[#33ffc2] px-4.5 py-2.5 text-xs font-black text-slate-950 transition-all duration-300 shadow-[0_0_15px_rgba(77,255,184,0.15)] hover:shadow-[0_0_25px_rgba(77,255,184,0.4)] hover:scale-[1.03] active:scale-[0.98] cta-btn"
+          id="featured-news-cta"
+          onclick="event.stopPropagation();"
+        >
+          <span>{buttonText}</span>
+          <svg
+            class="h-4 w-4 transform transition-transform duration-300 group-hover:translate-x-1"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            stroke-width="2.5"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+          </svg>
+        </a>
+      </div>
+    </div>
+
+    <!-- Carousel Nav Indicators (Bottom Row) -->
+    <div
+      class="flex items-center justify-between pt-5 border-t border-structural-borders/30 relative z-20"
+    >
+      <!-- Dots Indicator (Green active state) -->
+      <div class="flex items-center space-x-2.5">
+        {
+          slides.map((_, sIdx) => (
+            <button
+              type="button"
+              data-dot={sIdx}
+              class={`h-1.5 rounded-full transition-all duration-300 cursor-pointer ${
+                sIdx === 0
+                  ? "bg-secondary-accent w-5"
+                  : "bg-text-muted/30 hover:bg-text-muted/60 w-1.5"
+              }`}
+              aria-label={`Go to slide ${sIdx + 1}`}
+            />
+          ))
+        }
+      </div>
+
+      <!-- Arrow Controls (Always visible on mobile/tablet, fade in on desktop hover) -->
+      <div
+        class="flex items-center space-x-2.5 opacity-100 lg:opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+        id="carousel-controls"
+      >
+        <button
+          type="button"
+          id="prev-slide-btn"
+          class="flex items-center justify-center p-2 rounded-lg bg-card-bg/60 border border-structural-borders/80 text-text-muted hover:text-secondary-accent hover:border-secondary-accent/40 hover:bg-secondary-accent/10 transition-all duration-200 cursor-pointer"
+          aria-label="Previous story"
+        >
+          <svg
+            class="h-4.5 w-4.5"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            stroke-width="2.5"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M15 19l-7-7 7-7"></path>
+          </svg>
+        </button>
+        <button
+          type="button"
+          id="next-slide-btn"
+          class="flex items-center justify-center p-2 rounded-lg bg-card-bg/60 border border-structural-borders/80 text-text-muted hover:text-secondary-accent hover:border-secondary-accent/40 hover:bg-secondary-accent/10 transition-all duration-200 cursor-pointer"
+          aria-label="Next story"
+        >
+          <svg
+            class="h-4.5 w-4.5"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            stroke-width="2.5"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M9 5l7 7-7 7"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Image Block (Right Side on Desktop, Top on Mobile) -->
+  <div
+    class="w-full lg:w-[48%] overflow-hidden rounded-xl bg-slate-950 order-1 lg:order-2 lg:self-stretch flex-shrink-0 aspect-[16/9.5] lg:aspect-auto min-h-[200px] lg:min-h-0 relative z-0 border border-structural-borders/40"
+  >
+    <!-- Image gradient overlay to blend left side -->
+    <div
+      class="absolute inset-0 bg-gradient-to-t lg:bg-gradient-to-r from-slate-950/75 via-transparent to-transparent opacity-60 z-15 pointer-events-none"
+    >
+    </div>
+
+    {
+      slides.map((slide, sIdx) => (
+        <img
+          src={slide.image}
+          alt={slide.title}
+          data-slide-image={sIdx}
+          class={`absolute inset-0 h-full w-full object-cover object-center transition-all duration-700 ease-in-out group-hover:scale-[1.04] ${
+            sIdx === 0 ? "opacity-100 scale-100 z-10" : "opacity-0 scale-95 z-0"
+          }`}
+        />
+      ))
+    }
+  </div>
+</div>
+
+<script>
+  // Robust multiple instance selector support
+  document.querySelectorAll(".featured-card").forEach((carousel) => {
+    const textItems = carousel.querySelectorAll(".slide-text-item");
+    const images = carousel.querySelectorAll("img[data-slide-image]");
+    const dots = carousel.querySelectorAll("button[data-dot]");
+    const prevBtn = carousel.querySelector("#prev-slide-btn");
+    const nextBtn = carousel.querySelector("#next-slide-btn");
+    let currentIdx = 0;
+    const totalSlides = textItems.length;
+    let autoplayInterval: any = null;
+
+    function showSlide(index: number) {
+      if (index < 0) {
+        currentIdx = totalSlides - 1;
+      } else if (index >= totalSlides) {
+        currentIdx = 0;
+      } else {
+        currentIdx = index;
+      }
+
+      // Update text slides
+      textItems.forEach((item, idx) => {
+        if (idx === currentIdx) {
+          item.classList.remove(
+            "opacity-0",
+            "translate-y-4",
+            "absolute",
+            "pointer-events-none",
+            "z-0",
+          );
+          item.classList.add(
+            "opacity-100",
+            "translate-y-0",
+            "relative",
+            "z-10",
+          );
+        } else {
+          item.classList.remove(
+            "opacity-100",
+            "translate-y-0",
+            "relative",
+            "z-10",
+          );
+          item.classList.add(
+            "opacity-0",
+            "translate-y-4",
+            "absolute",
+            "pointer-events-none",
+            "z-0",
+          );
+        }
+      });
+
+      // Update images (fade + scale-up entrance)
+      images.forEach((img, idx) => {
+        if (idx === currentIdx) {
+          img.classList.remove("opacity-0", "scale-95", "z-0");
+          img.classList.add("opacity-100", "scale-100", "z-10");
+        } else {
+          img.classList.remove("opacity-100", "scale-100", "z-10");
+          img.classList.add("opacity-0", "scale-95", "z-0");
+        }
+      });
+
+      // Update indicators
+      dots.forEach((dot, idx) => {
+        if (idx === currentIdx) {
+          dot.classList.remove(
+            "bg-text-muted/30",
+            "hover:bg-text-muted/60",
+            "w-1.5",
+          );
+          dot.classList.add("bg-secondary-accent", "w-5");
+        } else {
+          dot.classList.remove("bg-secondary-accent", "w-5");
+          dot.classList.add(
+            "bg-text-muted/30",
+            "hover:bg-text-muted/60",
+            "w-1.5",
+          );
+        }
+      });
+
+      // Update CTA button link
+      const ctaBtn = carousel.querySelector("#featured-news-cta");
+      const currentSlide = textItems[currentIdx];
+      if (ctaBtn && currentSlide) {
+        const newLink = currentSlide.getAttribute("data-link");
+        if (newLink) {
+          ctaBtn.setAttribute("href", newLink);
+        }
+      }
+    }
+
+    // Autoplay Cycle (every 4 seconds)
+    function startAutoplay() {
+      stopAutoplay();
+      autoplayInterval = setInterval(() => {
+        showSlide(currentIdx + 1);
+      }, 4000);
+    }
+
+    function stopAutoplay() {
+      if (autoplayInterval) {
+        clearInterval(autoplayInterval);
+      }
+    }
+
+    // Event controls
+    if (prevBtn) {
+      prevBtn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        stopAutoplay();
+        showSlide(currentIdx - 1);
+        startAutoplay();
+      });
+    }
+
+    if (nextBtn) {
+      nextBtn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        stopAutoplay();
+        showSlide(currentIdx + 1);
+        startAutoplay();
+      });
+    }
+
+    dots.forEach((dot, idx) => {
+      dot.addEventListener("click", (e) => {
+        e.stopPropagation();
+        stopAutoplay();
+        showSlide(idx);
+        startAutoplay();
+      });
+    });
+
+    // Touch Swiping Support for mobile layout
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    carousel.addEventListener(
+      "touchstart",
+      (e: any) => {
+        touchStartX = e.changedTouches[0].screenX;
+      },
+      { passive: true },
+    );
+
+    carousel.addEventListener(
+      "touchend",
+      (e: any) => {
+        touchEndX = e.changedTouches[0].screenX;
+        const threshold = 50;
+        if (touchEndX < touchStartX - threshold) {
+          stopAutoplay();
+          showSlide(currentIdx + 1);
+          startAutoplay();
+        } else if (touchEndX > touchStartX + threshold) {
+          stopAutoplay();
+          showSlide(currentIdx - 1);
+          startAutoplay();
+        }
+      },
+      { passive: true },
+    );
+
+    // Outer card container click navigation
+    carousel.addEventListener("click", (e) => {
+      if ((e.target as HTMLElement).closest("button, a")) {
+        return;
+      }
+      const activeCTA = carousel.querySelector("#featured-news-cta");
+      const activeUrl = activeCTA?.getAttribute("href");
+      if (activeUrl) {
+        window.open(activeUrl, "_blank", "noopener,noreferrer");
+      }
+    });
+
+    // Start autoplay initially
+    startAutoplay();
+
+    // Pause autoplay when tab is inactive
+    document.addEventListener("visibilitychange", () => {
+      if (document.hidden) {
+        stopAutoplay();
+      } else {
+        startAutoplay();
+      }
+    });
+  });
+</script>
+
+<style>
+  @keyframes revealCard {
+    from {
+      opacity: 0;
+      transform: translateY(12px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .reveal-card {
+    opacity: 0;
+    animation: revealCard 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  /* Custom premium dual-tone border glow effect (active by default, intensifies on hover) */
+  .featured-card {
+    border-color: color-mix(in srgb, var(--secondary-accent) 30%, transparent);
+    box-shadow:
+      0 10px 30px -10px rgba(0, 0, 0, 0.7),
+      0 0 20px -5px color-mix(in srgb, var(--secondary-accent) 10%, transparent),
+      0 0 35px -15px color-mix(in srgb, var(--primary-brand) 8%, transparent);
+  }
+
+  .featured-card:hover {
+    border-color: color-mix(in srgb, var(--secondary-accent) 55%, transparent);
+    box-shadow:
+      0 10px 30px -10px rgba(0, 0, 0, 0.7),
+      0 0 30px -5px color-mix(in srgb, var(--secondary-accent) 22%, transparent),
+      0 0 50px -10px color-mix(in srgb, var(--primary-brand) 16%, transparent);
+  }
+
+  /* Light mode overrides for featured-news-title hover to avoid gradient */
+  :global(html[data-theme="light"]) .featured-card:hover .featured-news-title {
+    background: none !important;
+    color: var(--primary-brand) !important;
+    -webkit-text-fill-color: var(--primary-brand) !important;
+  }
+
+  /* Light mode overrides for explore initiatives button (cta-btn) to make it solid blue */
+  :global(html[data-theme="light"]) .cta-btn {
+    background: var(--primary-brand) !important;
+    color: var(--primary-btn-text) !important;
+    box-shadow: 0 4px 12px rgba(2, 90, 158, 0.2) !important;
+  }
+
+  :global(html[data-theme="light"]) .cta-btn:hover {
+    background: var(--hover-brand) !important;
+    color: var(--primary-btn-text) !important;
+    box-shadow: 0 6px 16px rgba(2, 90, 158, 0.35) !important;
+  }
+</style>

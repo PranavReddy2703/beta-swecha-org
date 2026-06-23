@@ -1,0 +1,32 @@
+[
+  {
+    "href": "https://www.linkedin.com/company/swechafsmi",
+    "label": "LinkedIn",
+    "platform": "linkedin"
+  },
+  {
+    "href": "https://code.swecha.org/corpus",
+    "label": "GitLab",
+    "platform": "gitlab"
+  },
+  {
+    "href": "https://x.com/SwechaFSMI",
+    "label": "X / Twitter",
+    "platform": "twitter"
+  },
+  {
+    "href": "https://www.facebook.com/swechafsmi",
+    "label": "Facebook",
+    "platform": "facebook"
+  },
+  {
+    "href": "https://www.instagram.com/swechafsmi/",
+    "label": "Instagram",
+    "platform": "instagram"
+  },
+  {
+    "href": "https://youtube.com/@swechafsmi?si=cnCLsasA9mu6vXkl",
+    "label": "YouTube",
+    "platform": "youtube"
+  }
+]

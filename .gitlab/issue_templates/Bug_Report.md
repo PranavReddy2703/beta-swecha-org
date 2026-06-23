@@ -14,9 +14,9 @@ A clear and concise description of the error or visual anomaly.
 
 ## Visual & Architectural Impact
 
-- **Affected Component / View:** 
+- **Affected Component / View:**
 - **Design Token Violation:** Is an unapproved hex value overriding the Electric Cyan Tech Matrix design primitives? [ Yes / No ]
-- **Device / Browser / Breakpoint:** 
+- **Device / Browser / Breakpoint:**
 
 ---
 

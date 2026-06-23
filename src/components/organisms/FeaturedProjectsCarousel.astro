@@ -1,0 +1,345 @@
+---
+// src/components/projects/FeaturedProjectsCarousel.astro
+import FeaturedProjectCard from "../molecules/FeaturedProjectCard.astro";
+
+interface FeaturedProject {
+  title: string;
+  description: string;
+  imageLabel: string;
+  image?: string;
+  link: string;
+}
+
+interface Props {
+  projects: FeaturedProject[];
+}
+
+const { projects } = Astro.props;
+---
+
+<section
+  class="pt-6 pb-8 border-b border-structural-borders/20 relative group/carousel"
+>
+  <div class="container mx-auto px-4 mb-3">
+    <h2
+      class="featured-projects-title text-xl md:text-2xl font-extrabold text-text-main flex items-center gap-3"
+    >
+      <span class="w-1.5 h-6 bg-secondary-accent rounded-full section-pill"
+      ></span>
+      Featured Projects
+    </h2>
+  </div>
+
+  <!-- Centered Carousel Wrapper matching page grid alignment -->
+  <div class="container mx-auto px-4 max-w-7xl relative">
+    <!-- Floating Prev Button (Left side, only visible on hover) -->
+    <button
+      id="featured-prev-btn"
+      class="absolute top-[170px] md:top-[210px] -translate-y-1/2 z-30 hidden md:flex items-center justify-center p-2 text-text-muted/70 hover:text-secondary-accent transition-all duration-300 cursor-pointer group/btn"
+      aria-label="Previous project"
+    >
+      <svg
+        class="h-10 w-10 md:h-12 md:w-12 transition-all duration-300 group-hover/btn:scale-110 filter drop-shadow-[0_0_8px_rgba(77,255,184,0)] group-hover/btn:drop-shadow-[0_0_8px_rgba(77,255,184,0.5)]"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+        stroke-width="2"
+      >
+        <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"
+        ></path>
+      </svg>
+    </button>
+
+    <!-- Floating Next Button (Right side, only visible on hover) -->
+    <button
+      id="featured-next-btn"
+      class="absolute top-[170px] md:top-[210px] -translate-y-1/2 z-30 hidden md:flex items-center justify-center p-2 text-text-muted/70 hover:text-secondary-accent transition-all duration-300 cursor-pointer group/btn"
+      aria-label="Next project"
+    >
+      <svg
+        class="h-10 w-10 md:h-12 md:w-12 transition-all duration-300 group-hover/btn:scale-110 filter drop-shadow-[0_0_8px_rgba(77,255,184,0)] group-hover/btn:drop-shadow-[0_0_8px_rgba(77,255,184,0.5)]"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+        stroke-width="2"
+      >
+        <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"
+        ></path>
+      </svg>
+    </button>
+
+    <!-- Scroll Container -->
+    <div
+      class="projects-carousel-container w-full overflow-x-auto pb-6 snap-x snap-mandatory hide-scrollbar"
+    >
+      <div class="projects-scroll-track flex gap-6 w-max">
+        {
+          projects.map((project) => (
+            <FeaturedProjectCard
+              title={project.title}
+              description={project.description}
+              imageLabel={project.imageLabel}
+              image={project.image}
+              link={project.link}
+            />
+          ))
+        }
+      </div>
+    </div>
+
+    <!-- Glowing Digital Bar Indicators -->
+    <div
+      class="flex items-center justify-center gap-2 mt-4 relative z-30 select-none"
+    >
+      {
+        projects.map((_, index) => (
+          <button
+            type="button"
+            data-project-dot={index}
+            class={`h-1 rounded-sm transition-all duration-300 cursor-pointer ${
+              index === 0
+                ? "bg-secondary-accent w-8 shadow-[0_0_8px_rgba(77,255,184,0.6)]"
+                : "bg-text-muted/30 hover:bg-text-muted/60 w-3"
+            }`}
+            aria-label={`Go to featured project ${index + 1}`}
+          />
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<script>
+  function initProjectsCarousel() {
+    const carousel = document.querySelector(".projects-carousel-container");
+    const track = carousel?.querySelector(".projects-scroll-track");
+    const cards = track?.querySelectorAll("a");
+    const dots = document.querySelectorAll("button[data-project-dot]");
+    const prevBtn = document.getElementById("featured-prev-btn");
+    const nextBtn = document.getElementById("featured-next-btn");
+
+    if (!carousel || !cards || cards.length === 0) return;
+
+    const activeCarousel = carousel;
+    const activeCards = cards;
+
+    let currentIdx = 0;
+    const totalCards = activeCards.length;
+    let autoplayInterval: any = null;
+
+    function scrollToCard(index: number) {
+      if (index < 0) {
+        currentIdx = totalCards - 1;
+      } else if (index >= totalCards) {
+        currentIdx = 0;
+      } else {
+        currentIdx = index;
+      }
+
+      const card = activeCards[currentIdx] as HTMLElement;
+      if (card) {
+        const targetScrollLeft =
+          card.offsetLeft - (activeCarousel.clientWidth - card.clientWidth) / 2;
+        activeCarousel.scrollTo({
+          left: targetScrollLeft,
+          behavior: "smooth",
+        });
+      }
+      updateDots();
+    }
+
+    function updateDots() {
+      dots.forEach((dot, idx) => {
+        if (idx === currentIdx) {
+          dot.classList.remove(
+            "bg-text-muted/30",
+            "hover:bg-text-muted/60",
+            "w-3",
+          );
+          dot.classList.add(
+            "bg-secondary-accent",
+            "w-8",
+            "shadow-[0_0_8px_rgba(77,255,184,0.6)]",
+          );
+        } else {
+          dot.classList.remove(
+            "bg-secondary-accent",
+            "w-8",
+            "shadow-[0_0_8px_rgba(77,255,184,0.6)]",
+          );
+          dot.classList.add(
+            "bg-text-muted/30",
+            "hover:bg-text-muted/60",
+            "w-3",
+          );
+        }
+      });
+    }
+
+    function syncIndexOnScroll() {
+      const scrollLeft = activeCarousel.scrollLeft;
+      const containerCenter = scrollLeft + activeCarousel.clientWidth / 2;
+
+      let closestIdx = 0;
+      let minDiff = Infinity;
+
+      activeCards.forEach((card, idx) => {
+        const cardCenter =
+          (card as HTMLElement).offsetLeft +
+          (card as HTMLElement).clientWidth / 2;
+        const diff = Math.abs(cardCenter - containerCenter);
+        if (diff < minDiff) {
+          minDiff = diff;
+          closestIdx = idx;
+        }
+      });
+
+      if (closestIdx !== currentIdx) {
+        currentIdx = closestIdx;
+        updateDots();
+      }
+    }
+
+    // Scroll listener with a debounce to prevent stutter
+    let scrollTimeout: any;
+    activeCarousel.addEventListener("scroll", () => {
+      clearTimeout(scrollTimeout);
+      scrollTimeout = setTimeout(syncIndexOnScroll, 100);
+    });
+
+    // Autoplay Cycle (every 4 seconds)
+    function startAutoplay() {
+      stopAutoplay();
+      autoplayInterval = setInterval(() => {
+        scrollToCard(currentIdx + 1);
+      }, 4000);
+    }
+
+    function stopAutoplay() {
+      if (autoplayInterval) {
+        clearInterval(autoplayInterval);
+      }
+    }
+
+    // Control triggers
+    prevBtn?.addEventListener("click", () => {
+      stopAutoplay();
+      scrollToCard(currentIdx - 1);
+      startAutoplay();
+    });
+
+    nextBtn?.addEventListener("click", () => {
+      stopAutoplay();
+      scrollToCard(currentIdx + 1);
+      startAutoplay();
+    });
+
+    dots.forEach((dot, idx) => {
+      dot.addEventListener("click", () => {
+        stopAutoplay();
+        scrollToCard(idx);
+        startAutoplay();
+      });
+    });
+
+    // Touch / interaction listeners to pause autoplay
+    activeCarousel.addEventListener("touchstart", stopAutoplay, {
+      passive: true,
+    });
+    activeCarousel.addEventListener("touchend", startAutoplay, {
+      passive: true,
+    });
+
+    // Initial activation
+    startAutoplay();
+
+    // Stop autoplay when tab is inactive
+    document.addEventListener("visibilitychange", () => {
+      if (document.hidden) {
+        stopAutoplay();
+      } else {
+        startAutoplay();
+      }
+    });
+  }
+
+  // Hook into Astro load lifecycle
+  document.addEventListener("DOMContentLoaded", initProjectsCarousel);
+  initProjectsCarousel();
+</script>
+
+<style>
+  /* Hide scrollbar for Chrome, Safari and Opera */
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  /* Hide scrollbar for IE, Edge and Firefox */
+  .hide-scrollbar {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+
+  /* Responsive positioning for floating arrows to match timeline spacing (40px / 2.5rem gap) */
+  #featured-prev-btn {
+    left: 1rem;
+  }
+  #featured-next-btn {
+    right: 1rem;
+  }
+
+  @media (min-width: 1360px) {
+    #featured-prev-btn {
+      left: -1rem;
+    }
+    #featured-next-btn {
+      right: -1rem;
+    }
+  }
+
+  @media (min-width: 1440px) {
+    #featured-prev-btn {
+      left: -4rem;
+    }
+    #featured-next-btn {
+      right: -4rem;
+    }
+  }
+  .section-pill {
+    box-shadow: 0 0 10px rgba(77, 255, 184, 0.8);
+  }
+
+  :global(html[data-theme="light"]) .section-pill {
+    background-color: var(--primary-brand) !important;
+    box-shadow: 0 0 8px rgba(2, 90, 158, 0.4) !important;
+  }
+
+  :global(html[data-theme="light"])
+    button[data-project-dot].bg-secondary-accent {
+    background-color: var(--primary-brand) !important;
+    box-shadow: 0 0 8px rgba(2, 90, 158, 0.4) !important;
+  }
+
+  :global(html[data-theme="light"] .featured-projects-title) {
+    color: #ffffff !important;
+    text-shadow:
+      0 2px 8px rgba(11, 30, 54, 0.35),
+      0 4px 20px rgba(11, 30, 54, 0.25) !important;
+  }
+
+  /* Light mode overrides for navigation arrows to make them white initially and glow on hover */
+  :global(html[data-theme="light"] #featured-prev-btn),
+  :global(html[data-theme="light"] #featured-next-btn) {
+    color: #ffffff !important;
+    filter: drop-shadow(0 2px 4px rgba(11, 30, 54, 0.3)) !important;
+  }
+
+  :global(html[data-theme="light"] #featured-prev-btn:hover),
+  :global(html[data-theme="light"] #featured-next-btn:hover) {
+    color: var(--primary-brand) !important;
+  }
+
+  :global(html[data-theme="light"] #featured-prev-btn:hover svg),
+  :global(html[data-theme="light"] #featured-next-btn:hover svg) {
+    filter: drop-shadow(0 0 10px rgba(2, 90, 158, 0.6)) !important;
+  }
+</style>

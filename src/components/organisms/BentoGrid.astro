@@ -1,0 +1,117 @@
+---
+// src/components/news/BentoGrid.astro
+import FeaturedNewsCard from "./FeaturedNewsCard.astro";
+import NewsCard from "../molecules/NewsCard.astro";
+
+interface Props {
+  t: any;
+}
+
+const { t } = Astro.props;
+const slides = [
+  {
+    title: t("news.featured.headline"),
+    description: t("news.featured.desc"),
+    link: "https://government.economictimes.indiatimes.com/news/technology/telangana-itec-dept-announces-datathon-in-association-with-swecha-to-create-telugu-large-language-model/111597202",
+    image: "/images/news-featured.webp",
+  },
+  {
+    title: t("news.card1.headline"),
+    description: t("news.card1.desc"),
+    link: "https://government.economictimes.indiatimes.com/news/technology/telangana-itec-dept-announces-datathon-in-association-with-swecha-to-create-telugu-large-language-model/111597202",
+    image: "/images/news-datathon.webp",
+  },
+  {
+    title: t("news.card3.headline"),
+    description: t("news.card3.desc"),
+    link: "https://themachinemaker.com/news/iiit-hyderabad-and-swecha-org-host-ai-hackday-empowering-2000-students-to-build-ai-for-social-good/",
+    image: "/images/news-hackday.webp",
+  },
+  {
+    title: t("news.card2.headline"),
+    description: t("news.card2.desc"),
+    link: "https://www.thehindu.com/news/national/telangana/draft-license-for-consultation-aimed-at-safeguarding-open-source-ai-released/article70595570.ece",
+    image: "/images/news-license.webp",
+  },
+  {
+    title: t("news.card4.headline"),
+    description: t("news.card4.desc"),
+    link: "https://www.meetup.com/swechafsmi/",
+    image: "/images/news-community.webp",
+  },
+];
+---
+
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 auto-rows-fr">
+  <!-- 1. FEATURED STORY -->
+  <div class="md:col-span-2 lg:col-span-2 lg:row-span-1">
+    <FeaturedNewsCard
+      category={t("news.featured.category")}
+      buttonText={t("news.btn.explore")}
+      slides={slides}
+      index={0}
+    />
+  </div>
+
+  <!-- 2. DATATHON -->
+  <div class="md:col-span-1 lg:col-span-1 lg:row-span-2">
+    <NewsCard
+      title={t("news.card1.headline")}
+      description={t("news.card1.desc")}
+      buttonText={t("news.btn.learn")}
+      link="https://government.economictimes.indiatimes.com/news/technology/telangana-itec-dept-announces-datathon-in-association-with-swecha-to-create-telugu-large-language-model/111597202"
+      image="/images/news-datathon.webp"
+      index={1}
+      gridClass="h-full"
+    />
+  </div>
+
+  <!-- 3. AI HACKDAY -->
+  <div class="md:col-span-1 lg:col-span-1 lg:row-span-1">
+    <NewsCard
+      title={t("news.card3.headline")}
+      description={t("news.card3.desc")}
+      buttonText={t("news.btn.view")}
+      link="https://themachinemaker.com/news/iiit-hyderabad-and-swecha-org-host-ai-hackday-empowering-2000-students-to-build-ai-for-social-good/"
+      image="/images/news-hackday.webp"
+      index={2}
+    />
+  </div>
+
+  <!-- 4. OPEN AI LICENSE -->
+  <div class="md:col-span-1 lg:col-span-1 lg:row-span-1">
+    <NewsCard
+      title={t("news.card2.headline")}
+      description={t("news.card2.desc")}
+      buttonText={t("news.btn.read")}
+      link="https://www.thehindu.com/news/national/telangana/draft-license-for-consultation-aimed-at-safeguarding-open-source-ai-released/article70595570.ece"
+      image="/images/news-license.webp"
+      index={3}
+    />
+  </div>
+
+  <!-- 5. COMMUNITY MEETUPS -->
+  <div class="md:col-span-2 lg:col-span-2 lg:row-span-1">
+    <NewsCard
+      title={t("news.card4.headline")}
+      description={t("news.card4.desc")}
+      buttonText={t("news.btn.join")}
+      link="https://www.meetup.com/swechafsmi/"
+      image="/images/news-community.webp"
+      index={4}
+      gridClass="h-full"
+    />
+  </div>
+
+  <!-- 6. DIGITAL FREEDOM -->
+  <div class="md:col-span-1 lg:col-span-1 lg:row-span-1">
+    <NewsCard
+      title={t("news.card5.headline")}
+      description={t("news.card5.desc")}
+      buttonText={t("news.btn.readMore")}
+      link="https://freedommatters.in/untitled-8/"
+      image="/images/news-freedom.webp"
+      index={5}
+    />
+  </div>
+</div>

@@ -6,8 +6,8 @@ A brief, high-level summary of the user story, UI component, or functional asset
 
 ## Target Architecture
 
-- **Component Scope:** 
-- **Target File Path:** 
+- **Component Scope:**
+- **Target File Path:**
 
 ---
 
