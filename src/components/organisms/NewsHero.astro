@@ -1,11 +1,13 @@
 ---
 // src/components/news/NewsHero.astro
+import { useTranslations } from "../../i18n/utils";
+
 interface Props {
-  t: any;
   lang: string;
 }
 
-const { t, lang } = Astro.props;
+const { lang } = Astro.props;
+const t = useTranslations(lang as "en" | "te" | "hi");
 ---
 
 <div class="pt-0">

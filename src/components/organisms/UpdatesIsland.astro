@@ -1,0 +1,179 @@
+---
+// src/components/organisms/UpdatesIsland.astro
+import {
+  getLangFromUrl,
+  useTranslations,
+  useTranslatedPath,
+} from "../../i18n/utils";
+import updatesData from "../../data/organisms/updates.json";
+import BaseIsland from "../molecules/BaseIsland.astro";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const translatePath = useTranslatedPath(lang);
+
+const topUpdates = updatesData.updates.slice(0, 3);
+---
+
+<BaseIsland
+  id="updates-island"
+  position="top"
+  offset="90px"
+  toggleText={t("news.latest.title") || "Updates"}
+  panelWidth="300px"
+>
+  <div class="p-4">
+    <div class="updates-island-header">
+      <h3
+        class="text-xs font-black uppercase tracking-widest text-primary-brand"
+      >
+        {t("news.latest.title") || "Latest Updates"}
+      </h3>
+      <button class="base-island-close-btn" aria-label="Close Updates Panel">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="base-island-close-icon"
+          aria-hidden="true"
+        >
+          <polyline points="9 18 15 12 9 6"></polyline>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Subtle separator -->
+    <div class="updates-divider"></div>
+
+    <div class="updates-island-list">
+      {
+        topUpdates.map((update) => {
+          const title = update.title[lang] || update.title["en"];
+          const category = update.category[lang] || update.category["en"];
+          const url = translatePath(update.link);
+
+          return (
+            <a href={url} class="update-item group">
+              <span class="update-category">[{category}]</span>
+              <span class="update-title">{title}</span>
+            </a>
+          );
+        })
+      }
+    </div>
+
+    <div class="updates-footer">
+      <a href={translatePath("/news")} class="view-all-link group/link">
+        View All
+        <svg
+          class="w-3 h-3 group-hover/link:translate-x-0.5 transition-transform"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          stroke-width="2.5"
+        >
+          <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"
+          ></path>
+        </svg>
+      </a>
+    </div>
+  </div>
+</BaseIsland>
+
+<style>
+  .updates-island-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+  }
+
+  .updates-divider {
+    width: 100%;
+    height: 1px;
+    background: var(--structural-borders);
+    opacity: 0.5;
+    margin: 8px 0 12px 0;
+  }
+
+  .updates-island-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .update-item {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    text-decoration: none;
+    padding: 8px;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid transparent;
+    transition: all 0.3s ease;
+  }
+
+  :global(html[data-theme="light"]) .update-item {
+    background: rgba(0, 0, 0, 0.02);
+  }
+
+  .update-item:hover {
+    background: rgba(0, 212, 255, 0.05);
+    border-color: rgba(0, 212, 255, 0.2);
+    transform: translateY(-2px);
+  }
+
+  :global(html[data-theme="light"]) .update-item:hover {
+    background: rgba(2, 90, 158, 0.05);
+    border-color: rgba(2, 90, 158, 0.2);
+  }
+
+  .update-category {
+    font-size: 9px;
+    font-weight: 700;
+    color: var(--primary-brand);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .update-title {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-main);
+    line-height: 1.4;
+    transition: color 0.3s ease;
+  }
+
+  .update-item:hover .update-title {
+    color: var(--primary-brand);
+  }
+
+  .updates-footer {
+    margin-top: 16px;
+    padding-top: 12px;
+    border-top: 1px solid var(--structural-borders);
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .view-all-link {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 10px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-muted);
+    transition: color 0.3s ease;
+  }
+
+  .view-all-link:hover {
+    color: var(--primary-brand);
+  }
+</style>

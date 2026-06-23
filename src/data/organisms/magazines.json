@@ -1,0 +1,48 @@
+{
+  "magazines": [
+    {
+      "id": "mag-1",
+      "title": {
+        "en": "Swecha Magazine - Issue 01",
+        "te": "స్వేచ్ఛ మ్యాగజైన్ - సంచిక 01",
+        "hi": "स्वेच्छा पत्रिका - अंक 01"
+      },
+      "date": "2023-01-15",
+      "cover": "https://images.unsplash.com/photo-1544644181-1484b3fdfc62?w=600&q=80",
+      "url": "https://www.khanacademy.org/"
+    },
+    {
+      "id": "mag-2",
+      "title": {
+        "en": "Swecha Magazine - Issue 02",
+        "te": "స్వేచ్ఛ మ్యాగజైన్ - సంచిక 02",
+        "hi": "स्वेच्छा पत्रिका - अंक 02"
+      },
+      "date": "2023-06-20",
+      "cover": "https://images.unsplash.com/photo-1497366216548-37526070297c?w=600&q=80",
+      "url": "https://www.coursera.org/"
+    },
+    {
+      "id": "mag-3",
+      "title": {
+        "en": "Swecha Magazine - Issue 03",
+        "te": "స్వేచ్ఛ మ్యాగజైన్ - సంచిక 03",
+        "hi": "स्वेच्छा पत्रिका - अंक 03"
+      },
+      "date": "2024-02-10",
+      "cover": "https://images.unsplash.com/photo-1557804506-669a67965ba0?w=600&q=80",
+      "url": "https://www.edx.org/"
+    },
+    {
+      "id": "mag-4",
+      "title": {
+        "en": "Swecha Magazine - Issue 04",
+        "te": "స్వేచ్ఛ మ్యాగజైన్ - సంచిక 04",
+        "hi": "स्वेच्छा पत्रिका - अंक 04"
+      },
+      "date": "2024-09-05",
+      "cover": "https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=600&q=80",
+      "url": "https://ocw.mit.edu/"
+    }
+  ]
+}

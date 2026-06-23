@@ -1,0 +1,321 @@
+---
+// src/components/molecules/BaseIsland.astro
+interface Props {
+  id: string;
+  position: "top" | "bottom";
+  offset: string;
+  toggleText: string;
+  panelWidth?: string;
+}
+
+const {
+  id,
+  position,
+  offset,
+  toggleText,
+  panelWidth = "max-content",
+} = Astro.props;
+
+const positionStyle = `${position}: ${offset};`;
+---
+
+<div id={id} class="base-island-container closed" style={positionStyle}>
+  <!-- Trigger Handle -->
+  <button class="base-island-toggle" aria-label={`Toggle ${toggleText} Panel`}>
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2.5"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      class="toggle-icon"
+      aria-hidden="true"
+    >
+      <polyline points="15 18 9 12 15 6"></polyline>
+    </svg>
+    <span class="toggle-text">{toggleText}</span>
+  </button>
+
+  <!-- Content Panel -->
+  <div class="base-island-panel" style={`width: ${panelWidth};`}>
+    <slot />
+  </div>
+</div>
+
+<script>
+  function setupIslands() {
+    const islands = document.querySelectorAll(
+      ".base-island-container:not([data-initialized])",
+    );
+
+    islands.forEach((island) => {
+      island.setAttribute("data-initialized", "true");
+
+      const toggleBtn = island.querySelector(".base-island-toggle");
+      const closeBtns = island.querySelectorAll(".base-island-close-btn");
+
+      if (!toggleBtn) return;
+
+      let isExpanded = false;
+
+      const closeIsland = () => {
+        isExpanded = false;
+        island.classList.remove("open");
+        island.classList.add("closed");
+      };
+
+      const toggleIsland = (e: Event) => {
+        e.stopPropagation();
+        isExpanded = !isExpanded;
+        if (isExpanded) {
+          island.classList.remove("closed");
+          island.classList.add("open");
+        } else {
+          closeIsland();
+        }
+      };
+
+      toggleBtn.addEventListener("click", toggleIsland);
+      closeBtns.forEach((btn) => {
+        btn.addEventListener("click", (e) => {
+          e.stopPropagation();
+          closeIsland();
+        });
+      });
+
+      const handleOutsideClick = (e: MouseEvent) => {
+        const target = e.target as HTMLElement;
+        if (isExpanded && !island.contains(target)) {
+          closeIsland();
+        }
+      };
+
+      const handleKeyDown = (e: KeyboardEvent) => {
+        if (e.key === "Escape" && isExpanded) {
+          closeIsland();
+        }
+      };
+
+      document.addEventListener("click", handleOutsideClick);
+      document.addEventListener("keydown", handleKeyDown);
+
+      // Store cleanup function for SPA transitions
+      (island as any)._cleanup = () => {
+        document.removeEventListener("click", handleOutsideClick);
+        document.removeEventListener("keydown", handleKeyDown);
+      };
+    });
+  }
+
+  function cleanupIslands() {
+    const islands = document.querySelectorAll(".base-island-container");
+    islands.forEach((island) => {
+      if ((island as any)._cleanup) {
+        (island as any)._cleanup();
+      }
+    });
+  }
+
+  document.addEventListener("DOMContentLoaded", setupIslands);
+  document.addEventListener("astro:page-load", setupIslands);
+  document.addEventListener("astro:before-swap", cleanupIslands);
+</script>
+
+<style>
+  /* Base Island Styles */
+  .base-island-container {
+    position: fixed;
+    right: 0;
+    transform: translateX(100%);
+    z-index: 99;
+    display: flex;
+    align-items: flex-start;
+    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  /* When bottom aligned, items should start from the bottom so the handle sits low */
+  .base-island-container[style*="bottom:"] {
+    align-items: flex-end;
+  }
+
+  /* When closed, translate to hide content panel, leaving only the toggle tab visible */
+  .base-island-container.closed {
+    transform: translateX(calc(100% - 34px));
+  }
+
+  /* When open, fully reveal the content panel */
+  .base-island-container.open {
+    transform: translateX(0);
+  }
+
+  /* Desktop Peek Hover Effect when closed */
+  @media (hover: hover) {
+    .base-island-container.closed:hover {
+      transform: translateX(calc(100% - 44px));
+    }
+  }
+
+  /* Toggle Handle button */
+  .base-island-toggle {
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 32px;
+    padding: 14px 0;
+    border: 1px solid var(--primary-brand, #00d4ff);
+    border-right: none;
+    border-radius: 12px 0 0 12px;
+    background: rgba(17, 24, 39, 0.7);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    color: var(--primary-brand, #00d4ff);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    outline: none;
+    box-shadow:
+      -4px 0 16px rgba(0, 0, 0, 0.25),
+      0 0 12px rgba(0, 212, 255, 0.2),
+      inset 0 0 8px rgba(0, 212, 255, 0.05);
+    animation: base-island-pulse 2.5s ease-in-out infinite;
+  }
+
+  :global(html[data-theme="light"]) .base-island-toggle {
+    background: rgba(255, 255, 255, 0.8);
+    border-color: var(--primary-brand, #025a9e);
+    color: var(--primary-brand, #025a9e);
+    box-shadow:
+      -4px 0 16px rgba(11, 30, 54, 0.08),
+      0 0 10px rgba(2, 90, 158, 0.15);
+  }
+
+  .base-island-toggle:hover {
+    color: var(--primary-brand);
+    background: rgba(17, 24, 39, 0.85);
+  }
+
+  :global(html[data-theme="light"]) .base-island-toggle:hover {
+    background: rgba(255, 255, 255, 0.9);
+  }
+
+  .toggle-icon {
+    width: 13px;
+    height: 13px;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .base-island-container.open .toggle-icon {
+    transform: rotate(180deg);
+  }
+
+  .toggle-text {
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    user-select: none;
+  }
+
+  @keyframes base-island-pulse {
+    0%,
+    100% {
+      box-shadow:
+        -4px 0 16px rgba(0, 0, 0, 0.25),
+        0 0 8px rgba(0, 212, 255, 0.15),
+        inset 0 0 6px rgba(0, 212, 255, 0.03);
+    }
+    50% {
+      box-shadow:
+        -4px 0 16px rgba(0, 0, 0, 0.25),
+        0 0 18px rgba(0, 212, 255, 0.35),
+        inset 0 0 10px rgba(0, 212, 255, 0.08);
+    }
+  }
+
+  :global(html[data-theme="light"]) .base-island-toggle {
+    animation-name: base-island-pulse-light;
+  }
+
+  @keyframes base-island-pulse-light {
+    0%,
+    100% {
+      box-shadow:
+        -4px 0 16px rgba(11, 30, 54, 0.08),
+        0 0 8px rgba(2, 90, 158, 0.1);
+    }
+    50% {
+      box-shadow:
+        -4px 0 16px rgba(11, 30, 54, 0.08),
+        0 0 16px rgba(2, 90, 158, 0.25);
+    }
+  }
+
+  .base-island-container.open .base-island-toggle {
+    opacity: 0;
+    pointer-events: none;
+    transform: translateX(10px);
+  }
+
+  /* Content Panel */
+  .base-island-panel {
+    /* Padding is handled by slot content to allow for full-bleed content or standard padding */
+    border: 1px solid var(--structural-borders);
+    border-right: none;
+    border-radius: 12px 0 0 12px;
+    background: rgba(17, 24, 39, 0.85);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    box-shadow: -8px 0 32px rgba(0, 0, 0, 0.35);
+  }
+
+  :global(html[data-theme="light"]) .base-island-panel {
+    background: rgba(255, 255, 255, 0.9);
+    border-color: rgba(0, 0, 0, 0.1);
+    box-shadow: -8px 0 32px rgba(11, 30, 54, 0.1);
+  }
+
+  /* Global utility class for close buttons inside the panel slot */
+  :global(.base-island-close-btn) {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: var(--text-muted);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    outline: none;
+  }
+
+  :global(html[data-theme="light"]) :global(.base-island-close-btn) {
+    background: rgba(0, 0, 0, 0.04);
+    border-color: rgba(0, 0, 0, 0.08);
+  }
+
+  :global(.base-island-close-btn:hover) {
+    background: rgba(0, 212, 255, 0.12);
+    border-color: var(--primary-brand);
+    color: var(--primary-brand);
+    transform: scale(1.08);
+  }
+
+  :global(html[data-theme="light"]) :global(.base-island-close-btn:hover) {
+    background: rgba(2, 90, 158, 0.08);
+    border-color: var(--primary-brand);
+    color: var(--primary-brand);
+  }
+
+  :global(.base-island-close-icon) {
+    width: 11px;
+    height: 11px;
+    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+</style>

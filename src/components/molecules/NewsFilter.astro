@@ -1,14 +1,15 @@
 ---
 // src/components/news/NewsFilter.astro
-import PublicationGroups from "./PublicationGroups.astro";
+import { getLangFromUrl, useTranslations } from "../../i18n/utils";
+import PublicationGroups from "../organisms/PublicationGroups.astro";
 
 interface Props {
   lang: string;
-  t: any;
   articles: any[];
 }
 
-const { lang, t, articles } = Astro.props;
+const { lang, articles } = Astro.props;
+const t = useTranslations(lang as "en" | "te" | "hi");
 const uniquePublications = [
   ...new Set(articles.map((a: any) => a.publication)),
 ];

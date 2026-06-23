@@ -1,6 +1,6 @@
 ---
 // src/components/news/TopStoriesCarousel.astro
-import EditorialNewsCard from "./EditorialNewsCard.astro";
+import EditorialNewsCard from "../molecules/EditorialNewsCard.astro";
 
 interface Props {
   articles: any[];
@@ -29,7 +29,7 @@ const { articles, lang } = Astro.props;
   <!-- Carousel Bottom Controls -->
   {
     articles.length > 1 && (
-      <div class="flex items-center justify-center mt-4 px-2 select-none">
+      <div class="flex items-center justify-between mt-4 px-2 select-none">
         <div class="flex items-center gap-2">
           {articles.map((_, index) => (
             <button
@@ -43,6 +43,48 @@ const { articles, lang } = Astro.props;
               aria-label={`Go to featured story ${index + 1}`}
             />
           ))}
+        </div>
+        <div class="flex items-center gap-2.5">
+          <button
+            type="button"
+            id="news-prev-btn"
+            class="flex items-center justify-center p-2 rounded-lg bg-card-bg/60 border border-structural-borders/85 text-text-muted hover:text-secondary-accent hover:border-secondary-accent/40 hover:bg-secondary-accent/10 transition-all duration-200 cursor-pointer shadow-sm"
+            aria-label="Previous story"
+          >
+            <svg
+              class="h-4.5 w-4.5"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              stroke-width="2.5"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M15 19l-7-7 7-7"
+              />
+            </svg>
+          </button>
+          <button
+            type="button"
+            id="news-next-btn"
+            class="flex items-center justify-center p-2 rounded-lg bg-card-bg/60 border border-structural-borders/85 text-text-muted hover:text-secondary-accent hover:border-secondary-accent/40 hover:bg-secondary-accent/10 transition-all duration-200 cursor-pointer shadow-sm"
+            aria-label="Next story"
+          >
+            <svg
+              class="h-4.5 w-4.5"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              stroke-width="2.5"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M9 5l7 7-7 7"
+              />
+            </svg>
+          </button>
         </div>
       </div>
     )
@@ -68,39 +110,6 @@ const { articles, lang } = Astro.props;
         const totalCards = cards.length;
         let autoplayInterval: any = null;
 
-        function smoothScrollTo(
-          element: HTMLElement,
-          target: number,
-          duration: number,
-        ) {
-          const start = element.scrollLeft;
-          const change = target - start;
-          const startTime = performance.now();
-          let isAnimating = true;
-
-          function animateScroll(currentTime: number) {
-            if (!isAnimating) return;
-            const elapsed = currentTime - startTime;
-            const progress = Math.min(elapsed / duration, 1);
-
-            // EaseInOutQuad easing formula
-            const ease =
-              progress < 0.5
-                ? 2 * progress * progress
-                : -1 + (4 - 2 * progress) * progress;
-
-            element.scrollLeft = start + change * ease;
-
-            if (progress < 1) {
-              requestAnimationFrame(animateScroll);
-            } else {
-              isAnimating = false;
-            }
-          }
-
-          requestAnimationFrame(animateScroll);
-        }
-
         function scrollToCard(index: number) {
           if (index < 0) {
             currentIdx = totalCards - 1;
@@ -113,7 +122,10 @@ const { articles, lang } = Astro.props;
           const card = cards[currentIdx] as HTMLElement;
           if (card) {
             const targetScrollLeft = card.offsetLeft;
-            smoothScrollTo(carousel as HTMLElement, targetScrollLeft, 300);
+            carousel.scrollTo({
+              left: targetScrollLeft,
+              behavior: "smooth",
+            });
           }
           updateDots();
         }
@@ -176,13 +188,13 @@ const { articles, lang } = Astro.props;
           scrollTimeout = setTimeout(syncIndexOnScroll, 100);
         });
 
-        // Autoplay Cycle (every 3.5 seconds)
+        // Autoplay Cycle (every 5.5 seconds)
         function startAutoplay() {
           stopAutoplay();
           if (totalCards > 1) {
             autoplayInterval = setInterval(() => {
               scrollToCard(currentIdx + 1);
-            }, 3500);
+            }, 5500);
           }
         }
 
