@@ -1,0 +1,736 @@
+{
+  "events": [
+    {
+      "id": "api-strapi-cms",
+      "devday": "DevDays - 1",
+      "title": "API - First Approach to build Apps with strapi CMS",
+      "date": "Jan 7, 2023",
+      "venue": "Swecha Office",
+      "mentors": ["Hemanth M"],
+      "category": "Backend",
+      "description": "Learn the principles of API-first development and headless CMS architectures, leveraging Strapi to build highly decoupled, performant, and scalable applications.",
+      "linkedin": "https://www.linkedin.com/events/devday-jan20227015572439350878209/",
+      "meetup": "https://www.meetup.com/swechafsmi/events/290692409/"
+    },
+    {
+      "id": "django-apps",
+      "devday": "DevDays - 1",
+      "title": "Developing Re-usable Django apps",
+      "date": "Jan 7, 2023",
+      "venue": "Swecha Office",
+      "mentors": ["Roja Rani"],
+      "category": "Backend",
+      "description": "Deep dive into Django best practices, code modularization, packaging, and structure to create robust, plug-and-play reusable web applications.",
+      "linkedin": "https://www.linkedin.com/events/devday-jan20227015572439350878209/",
+      "meetup": "https://www.meetup.com/swechafsmi/events/290692409/"
+    },
+    {
+      "id": "astro-build",
+      "devday": "DevDays - 1",
+      "title": "Level-up your Frontend Development with ASTRO.BUILD",
+      "date": "Jan 7, 2023",
+      "venue": "Swecha Office",
+      "mentors": ["Vamshi Krishna"],
+      "category": "Frontend",
+      "description": "Master Astro's island architecture to ship zero client-side JavaScript by default, achieving unmatched web performance and modern developer experience.",
+      "linkedin": "https://www.linkedin.com/events/devday-jan20227015572439350878209/",
+      "meetup": "https://www.meetup.com/swechafsmi/events/290692409/"
+    },
+    {
+      "id": "drupal-upgrade",
+      "devday": "DevDays - 1",
+      "title": "Upgrading from Drupal 9 to Drupal 10",
+      "date": "Jan 7, 2023",
+      "venue": "Swecha Office",
+      "mentors": ["Parvateesham"],
+      "category": "Systems & Linux",
+      "description": "A comprehensive migration walkthrough for systems administrators and Drupal developers upgrading core databases, security layers, and modules from Drupal 9 to 10.",
+      "linkedin": "https://www.linkedin.com/events/devday-jan20227015572439350878209/",
+      "meetup": "https://www.meetup.com/swechafsmi/events/290692409/"
+    },
+    {
+      "id": "js-bundlers",
+      "devday": "DevDays - 2",
+      "title": "Demystifying JavaScript Bundlers",
+      "date": "Jan 28, 2023",
+      "venue": "Fission Labs",
+      "mentors": ["Kiran Kumar Ambati"],
+      "category": "Frontend",
+      "description": "Understand what happens under the hood when building Javascript applications. A deep comparison of Webpack, Rollup, Vite, and ESBuild.",
+      "meetup": "https://www.meetup.com/swechafsmi/events/291175629/"
+    },
+    {
+      "id": "nativescript",
+      "devday": "DevDays - 2",
+      "title": "Intro to NativeScript",
+      "date": "Jan 28, 2023",
+      "venue": "Fission Labs",
+      "mentors": ["Supriya Kotturu"],
+      "category": "Frontend",
+      "description": "Build truly native mobile apps for iOS and Android using JavaScript/TypeScript skills without learning native platforms.",
+      "meetup": "https://www.meetup.com/swechafsmi/events/291175629/"
+    },
+    {
+      "id": "n8n-workflow",
+      "devday": "DevDays - 3",
+      "title": "Automate Workflows using n8n",
+      "date": "Feb 11, 2023",
+      "venue": "Swecha Office",
+      "mentors": ["Shashikanth"],
+      "category": "Cloud / DevOps",
+      "description": "Harness open-source workflow automation with n8n. Connect APIs, databases, and message queues visually with self-hosted node servers.",
+      "linkedin": "https://www.linkedin.com/events/workshop-automateworkflowsusing7027926695739330560/",
+      "meetup": "https://www.meetup.com/swechafsmi/events/291401818/"
+    },
+    {
+      "id": "node-addons",
+      "devday": "DevDays - 3",
+      "title": "Build Native Addons with Node - API",
+      "date": "Feb 11, 2023",
+      "venue": "Swecha Office",
+      "mentors": ["Krushi Raj Tula"],
+      "category": "Backend",
+      "description": "Unlock C/C++ speed in Node.js applications by writing high-performance native addons using the Node-API (N-API) standard.",
+      "meetup": "https://www.meetup.com/swechafsmi/events/291401818/"
+    },
+    {
+      "id": "appwrite-backend",
+      "devday": "DevDays - 4",
+      "title": "Backend as a Service - AppWrite",
+      "date": "Feb 25, 2023",
+      "venue": "Swecha Office",
+      "mentors": ["Shashikanth"],
+      "category": "Backend",
+      "description": "Accelerate your application development workflow with Appwrite, a secure self-hosted Backend-as-a-Service featuring Auth, Databases, Storage, and Functions.",
+      "linkedin": "https://www.linkedin.com/events/devdayshyderabad-47032658232976297984/",
+      "meetup": "https://www.meetup.com/swechafsmi/events/291701659/"
+    },
+    {
+      "id": "chatgpt-startups",
+      "devday": "DevDays - 5",
+      "title": "ChatGPT and Startups",
+      "date": "Mar 3, 2023",
+      "venue": "Ozonetel Co.",
+      "mentors": ["Chaitanya Chokkareddy"],
+      "category": "AI / ML",
+      "description": "Explore the commercial possibilities of large language models, prompt engineering patterns, and the integration of GPT models into startup products.",
+      "linkedin": "https://www.linkedin.com/events/devdayhyderabad-5-chatgptandsta7036677657035513856/",
+      "meetup": "https://www.meetup.com/swechafsmi/events/291702159/"
+    },
+    {
+      "id": "rust-tooling",
+      "devday": "DevDays - 6",
+      "title": "Intro to Rust Tooling and Ecosystem",
+      "date": "Mar 11, 2023",
+      "venue": "Ozonetel Co.",
+      "mentors": ["Rohit Dandamudi", "Ranjith Raj Vasam"],
+      "category": "Systems & Linux",
+      "description": "Dive into Rust's system safety guarantees, package management with Cargo, compiler warnings, test runners, and build optimizations.",
+      "meetup": "https://www.meetup.com/swechafsmi/events/291981395/"
+    },
+    {
+      "id": "type-theory",
+      "devday": "DevDays - 6",
+      "title": "Understanding Types using Set theory",
+      "date": "Mar 11, 2023",
+      "venue": "Ozonetel Co.",
+      "mentors": ["Bishwajit Jha"],
+      "category": "Systems & Linux",
+      "description": "Demystify type systems, compiler design, and static validation by viewing data types through the lens of mathematical set theory.",
+      "meetup": "https://www.meetup.com/swechafsmi/events/291981395/"
+    },
+    {
+      "id": "svelte-web",
+      "devday": "DevDays - 7",
+      "title": "Why SVELTE is next big thing in Web Development",
+      "date": "Mar 18, 2023",
+      "venue": "Swecha Office",
+      "mentors": ["Azharuddin Mohd"],
+      "category": "Frontend",
+      "description": "Learn how Svelte shifts work from the browser to build-time, compiling components to highly optimized, tiny vanilla JavaScript code with no Virtual DOM overhead.",
+      "linkedin": "https://www.linkedin.com/events/whysvelteisthenextbigthinginweb7042092281071341569/",
+      "meetup": "https://www.meetup.com/swechafsmi/events/291981447/"
+    },
+    {
+      "id": "react-future",
+      "devday": "DevDays - 8",
+      "title": "Future of REACT",
+      "date": "Mar 25, 2023",
+      "venue": "Honc Office",
+      "mentors": ["Vamshi Krishna", "Supriya Kotturu"],
+      "category": "Frontend",
+      "description": "Unpack the latest features in React, including React Server Components (RSC), hydration enhancements, streaming SSR, and architectural changes.",
+      "linkedin": "https://www.linkedin.com/events/javascripthyderabadmeet-march207043811510409711616/",
+      "meetup": "https://meetup.com/swechafsmi/events/292366066/"
+    },
+    {
+      "id": "solidjs-signals",
+      "devday": "DevDays - 8",
+      "title": "Solid.JS and Signals",
+      "date": "Mar 25, 2023",
+      "venue": "Honc Office",
+      "mentors": ["Piyush Mahapatra"],
+      "category": "Frontend",
+      "description": "Explore the fine-grained reactivity model of Solid.js using Signals, and understand why direct DOM updates outperform Virtual DOM reconciliation.",
+      "linkedin": "https://www.linkedin.com/events/javascripthyderabadmeet-march207043811510409711616/",
+      "meetup": "https://meetup.com/swechafsmi/events/292366066/"
+    },
+    {
+      "id": "typescript-validation",
+      "devday": "DevDays - 8",
+      "title": "Runtime Validation with TypeScript",
+      "date": "Mar 25, 2023",
+      "venue": "Honc Office",
+      "mentors": ["Praveen Puglia"],
+      "category": "Frontend",
+      "description": "Bridge the gap between compile-time types and runtime data validation using libraries like Zod, ensuring type safety in network requests and user inputs.",
+      "linkedin": "https://www.linkedin.com/events/javascripthyderabadmeet-march207043811510409711616/",
+      "meetup": "https://meetup.com/swechafsmi/events/292366066/"
+    },
+    {
+      "id": "react-query",
+      "devday": "DevDays - 9",
+      "title": "Building a robust data layer with REACT query",
+      "date": "Apr 15, 2023",
+      "venue": "JNTUH Tech",
+      "mentors": ["Ramana Venkata Katta"],
+      "category": "Frontend",
+      "description": "Simplify application state by offloading network state to React Query (TanStack Query), handling caching, synchronization, mutations, and pagination seamlessly.",
+      "linkedin": "https://www.linkedin.com/events/buildingarobustdatalayerwithrea7052236867206868992/",
+      "meetup": "https://www.meetup.com/swechafsmi/events/292805964/"
+    },
+    {
+      "id": "debian-packaging",
+      "devday": "DevDays - 10",
+      "title": "Debian GNU/Linux Packaging Workshop",
+      "date": "Jun 10, 2023",
+      "venue": "Swecha Office",
+      "mentors": ["Praveen Bammidi"],
+      "category": "Systems & Linux",
+      "description": "Hands-on guide to compiling source code, defining dependency manifests, and building standard Debian packages (.deb) for distributions like Ubuntu and Swecha OS.",
+      "linkedin": "https://www.linkedin.com/events/devdays-debiangnu-linuxpackagin7072807595698184192/",
+      "meetup": "https://www.meetup.com/swechafsmi/events/294012089/"
+    },
+    {
+      "id": "digital-arts",
+      "devday": "DevDays - 10",
+      "title": "Digital Arts Workshop",
+      "date": "Jun 10, 2023",
+      "venue": "Swecha Office",
+      "mentors": ["Pavan Gudiwada"],
+      "category": "Frontend",
+      "description": "Explore creative coding, vector graphic design, image manipulation tools, and layouts utilizing FOSS software to create premium, eye-catching visual assets.",
+      "linkedin": "https://www.linkedin.com/events/devdays-digtialartsworkshop-lea7072808295433920512/",
+      "meetup": "https://www.meetup.com/swechafsmi/events/294012089/"
+    },
+    {
+      "id": "vue-getting-started",
+      "devday": "DevDays - 10",
+      "title": "Getting started with VUE.JS",
+      "date": "Jun 10, 2023",
+      "venue": "Keka Technologies",
+      "mentors": ["Tarandeep Singh"],
+      "category": "Frontend",
+      "description": "Learn the basics of Vue.js, single-file components, the Composition API, reactive state management, and building interactive, clean user interfaces.",
+      "linkedin": "https://www.linkedin.com/events/devdayhyderabad-10-workshoponge7072472127882297349/",
+      "meetup": "https://www.meetup.com/swechafsmi/events/293903347/"
+    },
+    {
+      "id": "dapr-microservices",
+      "devday": "DevDays - 11",
+      "title": "Building Portable and reliable microservices with DAPR",
+      "date": "Jun 11, 2023",
+      "venue": "Swecha Office",
+      "mentors": ["Subham Sharma"],
+      "category": "Backend",
+      "description": "Simplify microservices architecture using the Distributed Application Runtime (Dapr) to handle state management, pub-sub messaging, and service-to-service invocation.",
+      "linkedin": "https://www.linkedin.com/events/observability-auto-investigatep7072443776652255232/",
+      "meetup": "https://www.meetup.com/swechafsmi/events/293903340/"
+    },
+    {
+      "id": "observability",
+      "devday": "DevDays - 11",
+      "title": "Observability : Now, Next, Later",
+      "date": "Jun 11, 2023",
+      "venue": "Swecha Office",
+      "mentors": ["Aravind Putrevu"],
+      "category": "Cloud / DevOps",
+      "description": "A comprehensive discussion on distributed systems monitoring, structured logs, OpenTelemetry traces, metrics collection, and predicting outages.",
+      "linkedin": "https://www.linkedin.com/events/observability-auto-investigatep7072443776652255232/",
+      "meetup": "https://www.meetup.com/swechafsmi/events/293903340/"
+    },
+    {
+      "id": "prometheus-alerting",
+      "devday": "DevDays - 11",
+      "title": "Reducing alert fatigue for Prometheus alerts on Kubernetes",
+      "date": "Jun 11, 2023",
+      "venue": "Swecha Office",
+      "mentors": ["Pavan Gudiwada"],
+      "category": "Cloud / DevOps",
+      "description": "Design intelligent alerting systems inside Kubernetes. Learn how to silence noise, group related notifications, and write actionable alerts with Prometheus and Alertmanager.",
+      "linkedin": "https://www.linkedin.com/events/observability-auto-investigatep7072443776652255232/",
+      "meetup": "https://www.meetup.com/swechafsmi/events/293903340/"
+    },
+    {
+      "id": "android-development",
+      "devday": "DevDays - 12",
+      "title": "Android Development Workshop",
+      "date": "Jul 1, 2023",
+      "venue": "Swecha Office",
+      "mentors": ["Hemasai charan K", "Tarun Yekbote"],
+      "category": "Frontend",
+      "description": "Introduction to modern Android application design, using Kotlin and Jetpack Compose to build fluid layouts, fetch remote APIs, and manage state.",
+      "linkedin": "https://www.linkedin.com/events/devdayshyderabad-androidecosyst7077977685112602624/",
+      "meetup": "https://www.meetup.com/swechafsmi/events/294163891/"
+    },
+    {
+      "id": "nextgen-llms",
+      "devday": "DevDays - 13",
+      "title": "Building Next-Gen Application with LLMs",
+      "date": "Jul 8, 2023",
+      "venue": "Tech Mahindra",
+      "mentors": ["JanakiRam MSV"],
+      "category": "AI / ML",
+      "description": "Leverage models like Llama and Mistral locally or via cloud APIs. Learn to build agentic workflows, function calling pipelines, and custom prompt structures.",
+      "linkedin": "https://www.linkedin.com/events/devdayshyderabad-ai-mlin2023and7077915291275460608/",
+      "meetup": "https://www.meetup.com/swechafsmi/events/294163951/"
+    },
+    {
+      "id": "ml-web",
+      "devday": "DevDays - 13",
+      "title": "Machine Learning on Web in 2023 and Future",
+      "date": "Jul 8, 2023",
+      "venue": "Tech Mahindra",
+      "mentors": ["Jason Mayes"],
+      "category": "AI / ML",
+      "description": "Bring AI algorithms directly to the browser. Explore TensorFlow.js, web-based classification models, client-side computer vision, and privacy-first local processing.",
+      "linkedin": "https://www.linkedin.com/events/devdayshyderabad-ai-mlin2023and7077915291275460608/",
+      "meetup": "https://www.meetup.com/swechafsmi/events/294163951/"
+    },
+    {
+      "id": "data-science-exploring",
+      "devday": "DevDays - 14",
+      "title": "Exploring Data Science",
+      "date": "Jul 16, 2023",
+      "venue": "PurpleTalk Inc.",
+      "mentors": ["Roja Rani", "Pranali Bose"],
+      "category": "AI / ML",
+      "description": "Master data cleaning, exploratory data analysis (EDA), visualization using Pandas, NumPy, and Seaborn, and learn training principles for supervised models.",
+      "linkedin": "https://www.linkedin.com/events/datascience-devdayshyd-147085200165497671681/",
+      "meetup": "https://www.meetup.com/swechafsmi/events/294741332/"
+    },
+    {
+      "id": "cloud-computing-multi",
+      "devday": "DevDays - 15",
+      "title": "Multi-track: Cloud Computing",
+      "date": "Jul 29, 2023",
+      "venue": "IIIT-Hyderabad",
+      "mentors": ["Ranga Karnam", "Vivek Viswanathan"],
+      "category": "Cloud / DevOps",
+      "description": "A cloud track detailing design patterns on AWS and Azure, containerized workloads under ECS/EKS, auto-scaling, and infrastructure safety.",
+      "linkedin": "https://www.linkedin.com/events/cloudcomputing-modernweb-emergi7089449835912704000/",
+      "meetup": "https://www.meetup.com/swechafsmi/events/294741349/"
+    },
+    {
+      "id": "modern-web-multi",
+      "devday": "DevDays - 15",
+      "title": "Multitrack : Modern Web Track",
+      "date": "Jul 29, 2023",
+      "venue": "IIIT-Hyderabad",
+      "mentors": ["M Zubair Ahmed", "Ganesh Katrapati"],
+      "category": "Frontend",
+      "description": "A deep look into next-generation frameworks (Next.js, Remix), bundlers, micro-frontends, edge caching, and server-side state optimization.",
+      "linkedin": "https://www.linkedin.com/events/cloudcomputing-modernweb-emergi7089449835912704000/",
+      "meetup": "https://www.meetup.com/swechafsmi/events/294741349/"
+    },
+    {
+      "id": "rust-language-m15",
+      "devday": "DevDays - 15",
+      "title": "Rust Language",
+      "date": "Jul 29, 2023",
+      "venue": "IIIT-Hyderabad",
+      "mentors": ["Akhil Teja"],
+      "category": "Systems & Linux",
+      "description": "Introduction to Rust's memory management system without a garbage collector. Deep dive into ownership, borrowing rules, and lifetimes.",
+      "linkedin": "https://www.linkedin.com/events/cloudcomputing-modernweb-emergi7089449835912704000/",
+      "meetup": "https://www.meetup.com/swechafsmi/events/294741349/"
+    },
+    {
+      "id": "go-language-m15",
+      "devday": "DevDays - 15",
+      "title": "Go Language",
+      "date": "Jul 29, 2023",
+      "venue": "IIIT-Hyderabad",
+      "mentors": ["Azharuddin Mohd", "Subham Sharma"],
+      "category": "Backend",
+      "description": "A hands-on Go workshop explaining fast concurrency patterns with Goroutines and channels, strict typing, interfaces, and backend router layouts.",
+      "linkedin": "https://www.linkedin.com/events/cloudcomputing-modernweb-emergi7089449835912704000/",
+      "meetup": "https://www.meetup.com/swechafsmi/events/294741349/"
+    },
+    {
+      "id": "prompt-engineering",
+      "devday": "DevDays - 16",
+      "title": "The Power of Effective Prompt Engineering",
+      "date": "Aug 26, 2023",
+      "venue": "Zapcom Solutions",
+      "mentors": ["Vishal Jaishankar"],
+      "category": "AI / ML",
+      "description": "Optimize AI model behavior. Learn Few-Shot Prompting, Chain of Thought (CoT), ReAct framing, and programmatic structures for reliable LLM outputs.",
+      "linkedin": "https://www.linkedin.com/events/thepowerofeffectivepromptengine7100138337759285248/",
+      "meetup": "https://www.meetup.com/swechafsmi/events/295630377/"
+    },
+    {
+      "id": "genai-future",
+      "devday": "DevDays - 16",
+      "title": "Future of GenAI",
+      "date": "Aug 26, 2023",
+      "venue": "Zapcom Solutions",
+      "mentors": ["Ganesh Katrapati"],
+      "category": "AI / ML",
+      "description": "Explore custom model fine-tuning, Retrieval Augmented Generation (RAG) structures, vector databases, and scalable deployment pipelines for generative AI.",
+      "linkedin": "https://www.linkedin.com/events/thepowerofeffectivepromptengine7100138337759285248/",
+      "meetup": "https://www.meetup.com/swechafsmi/events/295823761/"
+    },
+    {
+      "id": "ui-design-software",
+      "devday": "DevDays - 17",
+      "title": "UI Design for Software Development",
+      "date": "Sep 2, 2023",
+      "venue": "Swecha Office",
+      "mentors": ["Dr. Kamma K Babu"],
+      "category": "Frontend",
+      "description": "A visual-focused seminar detailing interface hierarchy, grid layout rules, typographic choices, colors, and building design systems developers enjoy.",
+      "linkedin": "https://www.linkedin.com/events/digitaldesignprinciples-devdays7103368620696600576/",
+      "meetup": "https://www.meetup.com/swechafsmi/events/295957275/"
+    },
+    {
+      "id": "llm-productivity",
+      "devday": "DevDays - 18",
+      "title": "I&ML for Developer Productivity: Using LLMs for Software Development",
+      "date": "Sep 16, 2023",
+      "venue": "Swecha Office",
+      "mentors": ["Shashikanth"],
+      "category": "AI / ML",
+      "description": "Integrate LLM code generation, context-aware autocompletes, agentic code analysis tools, and automated unit testing into your local development workflows.",
+      "linkedin": "https://www.linkedin.com/events/devdayshyd-ai-mlfordeveloperpro7106179765375569920/",
+      "meetup": "https://www.meetup.com/swechafsmi/events/296162660/"
+    },
+    {
+      "id": "go-language-mini",
+      "devday": "DevDays - 19",
+      "title": "Go Language Mini-BootCamp / Introduction to Go Language",
+      "date": "Sep 23, 2023",
+      "venue": "EPAM India Office",
+      "mentors": ["Mani Sai"],
+      "category": "Backend",
+      "description": "Introductory bootcamp to Go syntax, concurrency loops, interfaces, maps, slices, standard library servers, and building basic API endpoints.",
+      "linkedin": "https://www.linkedin.com/events/devdayshyd-cloudcomputing7106175635835797504/",
+      "meetup": "https://www.meetup.com/swechafsmi/events/295994081/"
+    },
+    {
+      "id": "go-microservices",
+      "devday": "DevDays - 19",
+      "title": "Go Language Mini-BootCamp / Developing Microservices",
+      "date": "Sep 23, 2023",
+      "venue": "EPAM India Office",
+      "mentors": ["Jeevan Reddy Ragula"],
+      "category": "Backend",
+      "description": "Architect robust services in Go. Implement request routing, database connection pools, middleware authorization, structured logging, and unit tests.",
+      "linkedin": "https://www.linkedin.com/events/devdayshyd-cloudcomputing7106175635835797504/",
+      "meetup": "https://www.meetup.com/swechafsmi/events/296223713/"
+    },
+    {
+      "id": "slm-power",
+      "devday": "DevDays - 20",
+      "title": "The Power of Small Language Models (SLMs) | AI, ML",
+      "date": "Nov 4, 2023",
+      "venue": "Swecha Office",
+      "mentors": [
+        "Chaitanya Chokkareddy",
+        "Srinivas Sripada",
+        "Praveen Puglia"
+      ],
+      "category": "AI / ML",
+      "description": "Examine the benefits of small language models (under 10B parameters) like Phi-3 and Gemma. Learn how offline, local model hosting provides low-latency, private AI execution.",
+      "linkedin": "https://www.linkedin.com/events/devdayshyderabad-thepowerofsmal7125900783585226755/",
+      "meetup": "https://www.meetup.com/swechafsmi/events/297280360/"
+    },
+    {
+      "id": "javascript-hyderabad-nov",
+      "devday": "DevDays - 21",
+      "title": "Javascript Hyderabad November 2023",
+      "date": "Nov 25, 2023",
+      "venue": "Swecha Office",
+      "mentors": ["M Zubair Ahmed"],
+      "category": "Frontend",
+      "description": "A deep dive into advanced JavaScript concepts, including closures, prototypical inheritance, the event loop, web workers, and modern language features.",
+      "linkedin": "https://www.linkedin.com/events/devdayshyderabad-javascriptnove7133405282960883712/",
+      "meetup": "https://www.meetup.com/swechafsmi/events/297573873/"
+    },
+    {
+      "id": "cloud-ai-go-track",
+      "devday": "DevDays - 22",
+      "title": "Multi - Track DevDay — Cloud Computing | AI, ML | Go Language",
+      "date": "Dec 2, 2023",
+      "venue": "Service Now",
+      "mentors": ["Shashikanth", "Ranjith Raj Vasam", "Akhil Teja"],
+      "category": "AI / ML",
+      "description": "A collaborative multi-track event where developers learn about scalable cloud hosting structures, local model training, and concurrent systems in Go.",
+      "linkedin": "https://www.linkedin.com/events/devdayshyderabad-december2nd2027133435664091541505/"
+    }
+  ],
+  "mentors": {
+    "Hemanth M": {
+      "name": "Hemanth M",
+      "designation": "Senior Technical Architect",
+      "bio": "Hemanth M is a senior web architect with over a decade of experience designing API-first systems, headless CMS architectures, and JAMstack platforms. He is a frequent contributor to open-source content management projects.",
+      "linkedin": "https://www.linkedin.com/search/results/all/?keywords=Hemanth%20M%20Swecha",
+      "github": "https://github.com/hemanth-m"
+    },
+    "Roja Rani": {
+      "name": "Roja Rani",
+      "designation": "Python & Data Science Developer",
+      "bio": "Roja Rani specializes in Python web frameworks, modular design, and data science pipelines. She is a dedicated mentor who has trained hundreds of students in building reusable Python packages and data modeling techniques.",
+      "linkedin": "https://www.linkedin.com/search/results/all/?keywords=Roja%20Rani%20Swecha",
+      "github": "https://github.com/roja-rani"
+    },
+    "Vamshi Krishna": {
+      "name": "Vamshi Krishna",
+      "designation": "Lead Frontend Engineer",
+      "bio": "Vamshi Krishna is a frontend performance enthusiast. Expert in Astro, React, and server-side rendering, he works on building high-speed user interfaces and teaches modern state-management patterns in developer workshops.",
+      "linkedin": "https://www.linkedin.com/search/results/all/?keywords=Vamshi%20Krishna%20Swecha",
+      "github": "https://github.com/vamshi-k"
+    },
+    "Parvateesham": {
+      "name": "Parvateesham",
+      "designation": "Drupal & Systems Specialist",
+      "bio": "Parvateesham has long-standing expertise in enterprise content systems and LAMP/LEMP stacks. He specializes in Drupal migrations, security hardening, database optimizations, and system administration.",
+      "linkedin": "https://www.linkedin.com/search/results/all/?keywords=Parvateesham%20Swecha",
+      "github": "https://github.com/parvateesham"
+    },
+    "Kiran Kumar Ambati": {
+      "name": "Kiran Kumar Ambati",
+      "designation": "Senior UI Engineer",
+      "bio": "Kiran Kumar Ambati is a build-tool enthusiast. He specializes in modern JavaScript compilers, build optimization, bundle size analysis, and modular application design using ESBuild, Webpack, and Vite.",
+      "linkedin": "https://www.linkedin.com/in/kirankumarambati/",
+      "github": "https://github.com/kirankumar"
+    },
+    "Supriya Kotturu": {
+      "name": "Supriya Kotturu",
+      "designation": "Mobile & Frontend Engineer",
+      "bio": "Supriya Kotturu is a cross-platform mobile developer. She works extensively with NativeScript, React Native, and web frameworks, helping developers write single-codebase apps that deploy natively to iOS and Android.",
+      "linkedin": "https://www.linkedin.com/search/results/all/?keywords=Supriya%20Kotturu%20Swecha",
+      "github": "https://github.com/supriya-k"
+    },
+    "Shashikanth": {
+      "name": "Shashikanth",
+      "designation": "DevOps & Integration Architect",
+      "bio": "Shashikanth is an expert in workflow automation, DevOps tooling, and serverless backend systems. He has spent years designing integrations using n8n, Appwrite, and custom Docker container configurations to streamline enterprise workflows.",
+      "linkedin": "https://www.linkedin.com/search/results/all/?keywords=Shashikanth%20Swecha",
+      "github": "https://github.com/shashikanth-s"
+    },
+    "Krushi Raj Tula": {
+      "name": "Krushi Raj Tula",
+      "designation": "Systems & Node.js Developer",
+      "bio": "Krushi Raj Tula works at the intersection of JavaScript and systems programming. He is a Node-API enthusiast, writing high-performance native modules in C/C++ that interact directly with OS-level bindings.",
+      "linkedin": "https://www.linkedin.com/search/results/all/?keywords=Krushi%20Raj%20Tula%20Swecha",
+      "github": "https://github.com/krushiraj"
+    },
+    "Chaitanya Chokkareddy": {
+      "name": "Chaitanya Chokkareddy",
+      "designation": "Co-Founder & CTO, Ozonetel",
+      "bio": "Chaitanya Chokkareddy is a tech visionary, CTO of Ozonetel, and a leading expert in telecom and AI. He builds enterprise cloud telephony products and researches prompt engineering, conversational AI, and Small Language Models.",
+      "linkedin": "https://www.linkedin.com/in/chaitanyac/",
+      "github": "https://github.com/chokkareddy"
+    },
+    "Rohit Dandamudi": {
+      "name": "Rohit Dandamudi",
+      "designation": "Systems Software Architect",
+      "bio": "Rohit Dandamudi is a Rust core enthusiast. He is passionate about static analysis, memory safety guarantees, and developing low-level concurrent network tools using Rust's async primitives.",
+      "linkedin": "https://www.linkedin.com/search/results/all/?keywords=Rohit%20Dandamudi%20Swecha",
+      "github": "https://github.com/rohit-d"
+    },
+    "Ranjith Raj Vasam": {
+      "name": "Ranjith Raj Vasam",
+      "designation": "Cloud Infrastructure Architect",
+      "bio": "Ranjith Raj Vasam is a container orchestration and cloud specialist. He designs highly resilient container environments using Docker, Kubernetes, and Prometheus monitoring systems.",
+      "linkedin": "https://www.linkedin.com/search/results/all/?keywords=Ranjith%20Raj%20Vasam%20Swecha",
+      "github": "https://github.com/ranjith-raj"
+    },
+    "Bishwajit Jha": {
+      "name": "Bishwajit Jha",
+      "designation": "Programming Language Researcher",
+      "bio": "Bishwajit Jha works in functional programming and compiler design. He studies type systems, type checking constraints, and category theory, helping developers write safer and more mathematically sound applications.",
+      "linkedin": "https://www.linkedin.com/search/results/all/?keywords=Bishwajit%20Jha%20Swecha",
+      "github": "https://github.com/bishwajit-jha"
+    },
+    "Azharuddin Mohd": {
+      "name": "Azharuddin Mohd",
+      "designation": "Full-Stack Tech Lead",
+      "bio": "Azharuddin Mohd is a senior engineer specializing in Svelte, Go, and reactive programming. He focuses on light, fast frontend architectures and high-performance, concurrent backend server layers.",
+      "linkedin": "https://www.linkedin.com/search/results/all/?keywords=Azharuddin%20Mohd%20Swecha",
+      "github": "https://github.com/azharuddin"
+    },
+    "Piyush Mahapatra": {
+      "name": "Piyush Mahapatra",
+      "designation": "Frontend Systems Architect",
+      "bio": "Piyush Mahapatra specializes in reactive systems, signal-based states, and browser compiler optimization. He focuses on micro-frontend systems and high-fidelity reactive styling layouts.",
+      "linkedin": "https://www.linkedin.com/search/results/all/?keywords=Piyush%20Mahapatra%20Swecha",
+      "github": "https://github.com/piyush-m"
+    },
+    "Praveen Puglia": {
+      "name": "Praveen Puglia",
+      "designation": "Lead UI Developer & Educator",
+      "bio": "Praveen Puglia is an experienced frontend lead and tech educator. He writes extensively on TypeScript, type validation (Zod, Valibot), utility classes, and accessible web standards.",
+      "linkedin": "https://www.linkedin.com/in/praveenpuglia/",
+      "github": "https://github.com/praveenpuglia"
+    },
+    "Ramana Venkata Katta": {
+      "name": "Ramana Venkata Katta",
+      "designation": "Principal Software Engineer",
+      "bio": "Ramana Venkata Katta is a caching and state synchronization specialist. Expert in TanStack Query (React Query) and Redux, he designs offline-first architectures for web platforms.",
+      "linkedin": "https://www.linkedin.com/search/results/all/?keywords=Ramana%20Venkata%20Katta%20Swecha",
+      "github": "https://github.com/ramana-katta"
+    },
+    "Praveen Bammidi": {
+      "name": "Praveen Bammidi",
+      "designation": "Linux Kernel & Packaging Specialist",
+      "bio": "Praveen Bammidi is a long-time Debian contributor. He handles upstream packaging, configuration setups, kernel compilation, and open-source system security distributions for Swecha OS.",
+      "linkedin": "https://www.linkedin.com/search/results/all/?keywords=Praveen%20Bammidi%20Swecha",
+      "github": "https://github.com/praveen-b"
+    },
+    "Pavan Gudiwada": {
+      "name": "Pavan Gudiwada",
+      "designation": "DevOps & Creative Engineer",
+      "bio": "Pavan Gudiwada is a versatile technologist. He bridges creative vector design with container engineering, managing Kubernetes configurations, reducing alerting fatigue, and designing graphics on FOSS tools.",
+      "linkedin": "https://www.linkedin.com/search/results/all/?keywords=Pavan%20Gudiwada%20Swecha",
+      "github": "https://github.com/pavan-g"
+    },
+    "Tarandeep Singh": {
+      "name": "Tarandeep Singh",
+      "designation": "Frontend Developer, Keka",
+      "bio": "Tarandeep Singh is a frontend engineer specializing in Vue.js, single-page application lifecycle rendering, and component hierarchies. He works on human resource system interfaces at Keka.",
+      "linkedin": "https://www.linkedin.com/search/results/all/?keywords=Tarandeep%20Singh%20Swecha",
+      "github": "https://github.com/tarandeep-s"
+    },
+    "Subham Sharma": {
+      "name": "Subham Sharma",
+      "designation": "Microservices Architect",
+      "bio": "Subham Sharma is an expert in cloud-native design, Go, and Dapr. He works on decoupling large systems into microservices, implementing message buses, event-driven designs, and high-volume data streams.",
+      "linkedin": "https://www.linkedin.com/search/results/all/?keywords=Subham%20Sharma%20Swecha",
+      "github": "https://github.com/subham-s"
+    },
+    "Aravind Putrevu": {
+      "name": "Aravind Putrevu",
+      "designation": "Developer Advocate, Elastic",
+      "bio": "Aravind Putrevu is a Developer Advocate at Elastic, focusing on search, logs, metrics, and distributed systems monitoring. He runs sessions globally on observability, telemetry, and index storage.",
+      "linkedin": "https://www.linkedin.com/in/aravindputrevu/",
+      "github": "https://github.com/aravind-putrevu"
+    },
+    "Hemasai charan K": {
+      "name": "Hemasai charan K",
+      "designation": "Mobile Solutions Architect",
+      "bio": "Hemasai charan K is an experienced mobile developer specializing in Kotlin, Android SDK, Jetpack Compose, and background system services design for enterprise mobile products.",
+      "linkedin": "https://www.linkedin.com/search/results/all/?keywords=Hemasai%20charan%20K%20Swecha",
+      "github": "https://github.com/hemasai-c"
+    },
+    "Tarun Yekbote": {
+      "name": "Tarun Yekbote",
+      "designation": "Senior Android Engineer",
+      "bio": "Tarun Yekbote specializes in Android architecture components, database syncing, mobile security, and offline-first native applications with optimized battery efficiency models.",
+      "linkedin": "https://www.linkedin.com/search/results/all/?keywords=Tarun%20Yekbote%20Swecha",
+      "github": "https://github.com/tarun-y"
+    },
+    "JanakiRam MSV": {
+      "name": "JanakiRam MSV",
+      "designation": "Principal Analyst & AI Architect",
+      "bio": "JanakiRam MSV is a prominent cloud and AI architect, analyst, and writer. He provides deep advisory consulting on edge computing, Kubernetes setups, and building custom LLM integration workflows.",
+      "linkedin": "https://www.linkedin.com/in/janakiramm/",
+      "github": "https://github.com/janakiramm"
+    },
+    "Jason Mayes": {
+      "name": "Jason Mayes",
+      "designation": "Web ML Lead, Google",
+      "bio": "Jason Mayes is a leading advocate for TensorFlow.js and Web ML at Google. He helps millions of developers build smart client-side web apps using browser-based computer vision and deep neural networks.",
+      "linkedin": "https://www.linkedin.com/in/creativetech/",
+      "github": "https://github.com/jasonmayes"
+    },
+    "Pranali Bose": {
+      "name": "Pranali Bose",
+      "designation": "Data Scientist",
+      "bio": "Pranali Bose is a data scientist specializing in NLP, dialect classification, and machine learning models. She works closely with WomenWhoHack, mentoring female developers in big data frameworks.",
+      "linkedin": "https://www.linkedin.com/search/results/all/?keywords=Pranali%20Bose%20Swecha",
+      "github": "https://github.com/pranali-bose"
+    },
+    "Ranga Karnam": {
+      "name": "Ranga Karnam",
+      "designation": "Founder, in28Minutes",
+      "bio": "Ranga Karnam is an educational entrepreneur and founder of in28Minutes. He has trained over a million developers on cloud architectures (AWS, Azure, GCP), microservices, Spring Boot, and DevOps containers.",
+      "linkedin": "https://www.linkedin.com/in/rangakarnam/",
+      "github": "https://github.com/in28minutes"
+    },
+    "Vivek Viswanathan": {
+      "name": "Vivek Viswanathan",
+      "designation": "Enterprise Cloud Architect",
+      "bio": "Vivek Viswanathan is a solutions architect specializing in cloud migrations, hybrid setups, infrastructure security, and designing distributed data systems at scale.",
+      "linkedin": "https://www.linkedin.com/search/results/all/?keywords=Vivek%20Viswanathan%20Swecha",
+      "github": "https://github.com/vivek-v"
+    },
+    "M Zubair Ahmed": {
+      "name": "M Zubair Ahmed",
+      "designation": "Lead Full-Stack Architect",
+      "bio": "M Zubair Ahmed is a Javascript specialist. He has worked for years designing enterprise SPA structures, micro-frontend networks, node layers, and concurrent database synchronization modules.",
+      "linkedin": "https://www.linkedin.com/search/results/all/?keywords=M%20Zubair%20Ahmed%20Swecha",
+      "github": "https://github.com/zubair-ahmed"
+    },
+    "Ganesh Katrapati": {
+      "name": "Ganesh Katrapati",
+      "designation": "GenAI Solutions Developer",
+      "bio": "Ganesh Katrapati is a full-stack engineer and AI specialist. He builds application pipelines integrating Retrieval Augmented Generation (RAG), vector storage systems, and local language models.",
+      "linkedin": "https://www.linkedin.com/search/results/all/?keywords=Ganesh%20Katrapati%20Swecha",
+      "github": "https://github.com/ganesh-k"
+    },
+    "Akhil Teja": {
+      "name": "Akhil Teja",
+      "designation": "Systems Programmer & Rust Mentor",
+      "bio": "Akhil Teja is a backend software engineer specializing in Rust, systems programming, and high-performance routing protocols. He is a primary mentor in regional Rust learning circles.",
+      "linkedin": "https://www.linkedin.com/search/results/all/?keywords=Akhil%20Teja%20Swecha",
+      "github": "https://github.com/akhil-teja"
+    },
+    "Vishal Jaishankar": {
+      "name": "Vishal Jaishankar",
+      "designation": "LLM Integration Engineer",
+      "bio": "Vishal Jaishankar researches prompt engineering, agent frameworks, and LLM orchestration. He builds scalable interfaces that translate developer workflows into reliable language models queries.",
+      "linkedin": "https://www.linkedin.com/search/results/all/?keywords=Vishal%20Jaishankar%20Swecha",
+      "github": "https://github.com/vishal-j"
+    },
+    "Dr. Kamma K Babu": {
+      "name": "Dr. Kamma K Babu",
+      "designation": "UX Design Consultant & Academic",
+      "bio": "Dr. Kamma K Babu is an expert UI/UX designer and design thinking consultant. He researches human-computer interaction (HCI) and collaborates with Swecha to teach design system building.",
+      "linkedin": "https://www.linkedin.com/search/results/all/?keywords=Kamma%20K%20Babu%20Swecha",
+      "github": "https://github.com/dr-kamma-babu"
+    },
+    "Mani Sai": {
+      "name": "Mani Sai",
+      "designation": "Backend Engineer",
+      "bio": "Mani Sai is a Go backend developer specializing in web protocols, database interfaces, API route design, and writing high-fidelity modular testing scripts.",
+      "linkedin": "https://www.linkedin.com/search/results/all/?keywords=Mani%20Sai%20Swecha",
+      "github": "https://github.com/mani-sai"
+    },
+    "Jeevan Reddy Ragula": {
+      "name": "Jeevan Reddy Ragula",
+      "designation": "Senior Systems Developer, EPAM",
+      "bio": "Jeevan Reddy Ragula is a senior backend engineer at EPAM. He specializes in Go-based microservices architecture, network performance optimization, and container security setups.",
+      "linkedin": "https://www.linkedin.com/search/results/all/?keywords=Jeevan%20Reddy%20Ragula%20Swecha",
+      "github": "https://github.com/jeevan-reddy"
+    },
+    "Srinivas Sripada": {
+      "name": "Srinivas Sripada",
+      "designation": "AI/ML Research Consultant",
+      "bio": "Srinivas Sripada is a systems researcher specializing in machine learning, dialect modeling, and local Small Language Models (SLMs) deployment inside low-bandwidth edge computing networks.",
+      "linkedin": "https://www.linkedin.com/search/results/all/?keywords=Srinivas%20Sripada%20Swecha",
+      "github": "https://github.com/srinivas-sripada"
+    }
+  }
+}
