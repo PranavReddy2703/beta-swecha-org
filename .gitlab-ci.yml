@@ -29,7 +29,7 @@ stages:
   - deploy
 
 # ── Single Serial Job ────────────────────────────────────────────────
-# All checks and builds run serially here to completely eliminate 
+# All checks and builds run serially here to completely eliminate
 # cross-runner cache issues and avoid running npm ci multiple times.
 validate_and_build:
   stage: build_and_test
@@ -39,17 +39,17 @@ validate_and_build:
     NODE_OPTIONS: "--max_old_space_size=4096"
   script:
     - npm ci --prefer-offline --no-audit
-    
+
     # 1. Quality & Security
     - npm run format:check
     - npm run i18n:check
     - npx secretlint "**/*"
     - npm audit --omit=dev --audit-level=high
-    
+
     # 2. Typecheck & Dead code
     - npm run typecheck
     - npm run knip
-    
+
     # 3. Build Apps
     - npm run build
     - npm run build-storybook -- -o public/storybook
