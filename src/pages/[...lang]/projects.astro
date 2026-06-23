@@ -1,7 +1,11 @@
 ---
 // src/pages/[...lang]/projects.astro
 import Layout from "@layouts/Layout.astro";
-import { getLangFromUrl, useTranslations } from "../../i18n/utils";
+import {
+  getLangFromUrl,
+  useTranslations,
+  useTranslatedPath,
+} from "../../i18n/utils";
 import { languages, defaultLang } from "../../i18n/ui";
 import ProjectsHeader from "@organisms/ProjectsHeader.astro";
 import FeaturedProjectsCarousel from "@organisms/FeaturedProjectsCarousel.astro";
@@ -29,13 +33,27 @@ export function getStaticPaths() {
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
+const translatePath = useTranslatedPath(lang);
 
 const featuredProjects = featuredProjectsData as FeaturedProjectData[];
 const categories = projectsData.categories as CategoryData[];
 const statusOrder = siteData.statusOrder as Record<string, number>;
-const projects = (projectsData.projects as ProjectData[]).sort((a, b) => {
-  return (statusOrder[a.status] || 99) - (statusOrder[b.status] || 99);
-});
+
+// Filter out projects that are featured in the carousel
+const projects = (projectsData.projects as ProjectData[])
+  .filter((project) => {
+    return !featuredProjects.some((featured) => {
+      const fTitle = featured.title.toLowerCase().trim();
+      const pTitle = project.title.toLowerCase().trim();
+      // Match exact titles, or where one title contains the other (e.g. "Swecha OS" and "Swecha OS 2026")
+      return (
+        fTitle === pTitle || fTitle.includes(pTitle) || pTitle.includes(fTitle)
+      );
+    });
+  })
+  .sort((a, b) => {
+    return (statusOrder[a.status] || 99) - (statusOrder[b.status] || 99);
+  });
 ---
 
 <Layout title={`${t("nav.projects")} - Swecha.org`}>
@@ -111,7 +129,7 @@ const projects = (projectsData.projects as ProjectData[]).sort((a, b) => {
             description={project.description}
             tags={project.tags}
             status={project.status}
-            link={project.link}
+            link={translatePath(project.link)}
           />
         ))
       }
