@@ -196,5 +196,20 @@
   "donations.cta.title": "ప్రతి సహకారం విలువైనది",
   "donations.cta.desc": "పెద్దది అయినా చిన్నది అయినా, మీ విరాళం ఉచిత సాఫ్ట్‌వేర్ మరియు డిజిటల్ అక్షరాస్యతతో సంఘాలను సాధికారం చేయడంలో నిజమైన మార్పును తీసుకొస్తుంది.",
   "donations.cta.btn.email": "ఇప్పుడే విరాళం ఇవ్వండి",
-  "donations.cta.btn.contact": "సంప్రదించండి"
+  "donations.cta.btn.contact": "సంప్రదించండి",
+  "news.picksLabel": "మీ కోసం ఎంపిక చేసినవి",
+  "news.fellowshipTitle": "స్వేచ్ఛ ఓపెన్ సోర్స్ ఫెలోషిప్",
+  "news.fellowshipDesc": "యువ విద్యార్థులకు ఉచిత సాఫ్ట్‌వేర్ అభివృద్ధి నమూనాపై శిక్షణ ఇచ్చే ఫ్లాగ్‌షిప్ ప్రోగ్రామ్.",
+  "news.joinCommunity": "కమ్యూనిటీతో కలవండి",
+  "news.topStory": "ప్రధాన వార్త",
+  "news.allStories": "అన్ని కథనాలు",
+  "news.searchResults": "ఫిల్టర్ చేసిన ఫలితాలు",
+  "news.noArticles": "కథనాలు ఏవీ లభించలేదు",
+  "news.adjustSearch": "మీ శోధన పదాన్ని లేదా ఫిల్టర్లను మార్చడానికి ప్రయత్నించండి.",
+  "projects.allTitle": "అన్ని ప్రాజెక్ట్‌లు",
+  "projects.allDesc": "మా సాధనాలు మరియు ప్లాట్‌ఫారమ్‌ల మొత్తం పర్యావరణ వ్యవస్థను బ్రౌజ్ చేయండి.",
+  "projects.filterBtn": "ప్రాజెక్ట్‌లను ఫిల్టర్ చేయండి",
+  "projects.status": "స్థితి",
+  "projects.featuredBadge": "ప్రధానమైనవి",
+  "events.filterBtn": "ఈవెంట్‌లను ఫిల్టర్ చేయండి"
 }
