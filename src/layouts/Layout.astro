@@ -4,6 +4,8 @@ import Navbar from "@organisms/Navbar.astro";
 import BackgroundDecorations from "@organisms/BackgroundDecorations.astro";
 import Footer from "@organisms/Footer.astro";
 import SocialIsland from "@organisms/SocialIsland.astro";
+import UpdatesIsland from "@organisms/UpdatesIsland.astro";
+import FeedbackPopup from "@molecules/FeedbackPopup.astro";
 import "../styles/global.css";
 import { getLangFromUrl, useTranslations } from "../i18n/utils";
 
@@ -29,7 +31,7 @@ const {
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="manifest" href="/manifest.webmanifest" />
     <meta name="theme-color" content="#080B10" />
-    <title>{title}</title>
+    <title>Swecha</title>
     <meta name="description" content={description} />
 
     <!-- Inline script to set the theme before render to prevent FOUC -->
@@ -109,7 +111,13 @@ const {
     <!-- Social Media Island -->
     <SocialIsland />
 
+    <!-- Updates Island -->
+    <UpdatesIsland />
+
     <!-- Footer Component -->
     <Footer />
+
+    <!-- Give Us Feedback Pop-up -->
+    <FeedbackPopup />
   </body>
 </html>

@@ -1,0 +1,279 @@
+---
+// src/components/news/TopStoriesCarousel.astro
+import EditorialNewsCard from "../molecules/EditorialNewsCard.astro";
+
+interface Props {
+  articles: any[];
+  lang: string;
+}
+
+const { articles, lang } = Astro.props;
+---
+
+<div class="relative group/news-carousel w-full">
+  <!-- Scroll Container -->
+  <div
+    class="news-carousel-container w-full overflow-x-auto pb-1 snap-x snap-mandatory hide-scrollbar"
+  >
+    <div class="news-scroll-track flex items-stretch gap-4 w-max">
+      {
+        articles.map((article) => (
+          <div class="w-[calc(100vw-2rem)] lg:w-[816px] max-w-full flex flex-col flex-none snap-center snap-always px-0.5">
+            <EditorialNewsCard article={article} lang={lang} isLarge={true} />
+          </div>
+        ))
+      }
+    </div>
+  </div>
+
+  <!-- Carousel Bottom Controls -->
+  {
+    articles.length > 1 && (
+      <div class="flex items-center justify-between mt-4 px-2 select-none">
+        <div class="flex items-center gap-2">
+          {articles.map((_, index) => (
+            <button
+              type="button"
+              data-news-dot={index}
+              class={`h-1.5 rounded-sm transition-all duration-300 cursor-pointer ${
+                index === 0
+                  ? "bg-secondary-accent w-8 shadow-[0_0_8px_rgba(77,255,184,0.6)] active-dot"
+                  : "bg-text-muted/30 hover:bg-text-muted/60 w-3.5"
+              }`}
+              aria-label={`Go to featured story ${index + 1}`}
+            />
+          ))}
+        </div>
+        <div class="flex items-center gap-2.5">
+          <button
+            type="button"
+            id="news-prev-btn"
+            class="flex items-center justify-center p-2 rounded-lg bg-card-bg/60 border border-structural-borders/85 text-text-muted hover:text-secondary-accent hover:border-secondary-accent/40 hover:bg-secondary-accent/10 transition-all duration-200 cursor-pointer shadow-sm"
+            aria-label="Previous story"
+          >
+            <svg
+              class="h-4.5 w-4.5"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              stroke-width="2.5"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M15 19l-7-7 7-7"
+              />
+            </svg>
+          </button>
+          <button
+            type="button"
+            id="news-next-btn"
+            class="flex items-center justify-center p-2 rounded-lg bg-card-bg/60 border border-structural-borders/85 text-text-muted hover:text-secondary-accent hover:border-secondary-accent/40 hover:bg-secondary-accent/10 transition-all duration-200 cursor-pointer shadow-sm"
+            aria-label="Next story"
+          >
+            <svg
+              class="h-4.5 w-4.5"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              stroke-width="2.5"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M9 5l7 7-7 7"
+              />
+            </svg>
+          </button>
+        </div>
+      </div>
+    )
+  }
+</div>
+
+<script>
+  function initNewsCarousels() {
+    document
+      .querySelectorAll(".news-carousel-container")
+      .forEach((carousel) => {
+        const track = carousel.querySelector(".news-scroll-track");
+        if (!track) return;
+        const cards = track.querySelectorAll(".article-card");
+        const parent = carousel.parentElement;
+        if (cards.length === 0 || !parent) return;
+
+        const dots = parent.querySelectorAll("button[data-news-dot]");
+        const prevBtn = parent.querySelector("#news-prev-btn");
+        const nextBtn = parent.querySelector("#news-next-btn");
+
+        let currentIdx = 0;
+        const totalCards = cards.length;
+        let autoplayInterval: any = null;
+
+        function scrollToCard(index: number) {
+          if (index < 0) {
+            currentIdx = totalCards - 1;
+          } else if (index >= totalCards) {
+            currentIdx = 0;
+          } else {
+            currentIdx = index;
+          }
+
+          const card = cards[currentIdx] as HTMLElement;
+          if (card) {
+            const targetScrollLeft = card.offsetLeft;
+            carousel.scrollTo({
+              left: targetScrollLeft,
+              behavior: "smooth",
+            });
+          }
+          updateDots();
+        }
+
+        function updateDots() {
+          dots.forEach((dot, idx) => {
+            if (idx === currentIdx) {
+              dot.classList.remove(
+                "bg-text-muted/30",
+                "hover:bg-text-muted/60",
+                "w-3.5",
+              );
+              dot.classList.add(
+                "bg-secondary-accent",
+                "w-8",
+                "shadow-[0_0_8px_rgba(77,255,184,0.6)]",
+                "active-dot",
+              );
+            } else {
+              dot.classList.remove(
+                "bg-secondary-accent",
+                "w-8",
+                "shadow-[0_0_8px_rgba(77,255,184,0.6)]",
+                "active-dot",
+              );
+              dot.classList.add(
+                "bg-text-muted/30",
+                "hover:bg-text-muted/60",
+                "w-3.5",
+              );
+            }
+          });
+        }
+
+        function syncIndexOnScroll() {
+          const scrollLeft = carousel.scrollLeft;
+
+          let closestIdx = 0;
+          let minDiff = Infinity;
+
+          cards.forEach((card, idx) => {
+            const cardLeft = (card as HTMLElement).offsetLeft;
+            const diff = Math.abs(cardLeft - scrollLeft);
+            if (diff < minDiff) {
+              minDiff = diff;
+              closestIdx = idx;
+            }
+          });
+
+          if (closestIdx !== currentIdx) {
+            currentIdx = closestIdx;
+            updateDots();
+          }
+        }
+
+        // Scroll listener with a debounce to prevent stutter
+        let scrollTimeout: any;
+        carousel.addEventListener("scroll", () => {
+          clearTimeout(scrollTimeout);
+          scrollTimeout = setTimeout(syncIndexOnScroll, 100);
+        });
+
+        // Autoplay Cycle (every 5.5 seconds)
+        function startAutoplay() {
+          stopAutoplay();
+          if (totalCards > 1) {
+            autoplayInterval = setInterval(() => {
+              scrollToCard(currentIdx + 1);
+            }, 5500);
+          }
+        }
+
+        function stopAutoplay() {
+          if (autoplayInterval) {
+            clearInterval(autoplayInterval);
+          }
+        }
+
+        // Control triggers
+        prevBtn?.addEventListener("click", (e) => {
+          e.stopPropagation();
+          stopAutoplay();
+          scrollToCard(currentIdx - 1);
+          startAutoplay();
+        });
+
+        nextBtn?.addEventListener("click", (e) => {
+          e.stopPropagation();
+          stopAutoplay();
+          scrollToCard(currentIdx + 1);
+          startAutoplay();
+        });
+
+        dots.forEach((dot, idx) => {
+          dot.addEventListener("click", (e) => {
+            e.stopPropagation();
+            stopAutoplay();
+            scrollToCard(idx);
+            startAutoplay();
+          });
+        });
+
+        // Touch / interaction listeners to pause autoplay
+        carousel.addEventListener("touchstart", stopAutoplay, {
+          passive: true,
+        });
+        carousel.addEventListener("touchend", startAutoplay, {
+          passive: true,
+        });
+
+        // Initial activation
+        startAutoplay();
+
+        // Stop autoplay when tab is inactive
+        document.addEventListener("visibilitychange", () => {
+          if (document.hidden) {
+            stopAutoplay();
+          } else {
+            startAutoplay();
+          }
+        });
+      });
+  }
+
+  // Hook into Astro load lifecycle
+  document.addEventListener("DOMContentLoaded", initNewsCarousels);
+  initNewsCarousels();
+</script>
+
+<style>
+  /* Hide scrollbar for Chrome, Safari and Opera */
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  /* Hide scrollbar for IE, Edge and Firefox */
+  .hide-scrollbar {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+
+  /* Light mode overrides for navigation active dot */
+  :global(html[data-theme="light"]) button[data-news-dot].active-dot {
+    background-color: var(--primary-brand) !important;
+    box-shadow: 0 0 8px rgba(2, 90, 158, 0.4) !important;
+  }
+
+  /* Stretch EditorialNewsCard to full height of slide wrapper */
+  :global(.news-carousel-container .article-card) {
+    height: 100% !important;
+  }
+</style>

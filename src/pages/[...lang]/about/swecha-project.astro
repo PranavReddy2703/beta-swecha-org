@@ -1,4 +1,5 @@
 ---
+// src/pages/[...lang]/about/swecha-project.astro
 import Layout from "../../../layouts/Layout.astro";
 import { getLangFromUrl, useTranslations } from "../../../i18n/utils";
 import { languages, defaultLang } from "../../../i18n/ui";
@@ -15,56 +16,213 @@ export function getStaticPaths() {
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
+
+const content: Record<
+  string,
+  {
+    titleFirst: string;
+    titleLast: string;
+    title: string;
+    subtitle: string;
+    p1: string;
+    p2: string;
+    p3: string;
+    ctaTitle: string;
+    ctaDesc: string;
+  }
+> = {
+  en: {
+    titleFirst: "Swecha",
+    titleLast: "Project",
+    title: "Swecha Project",
+    subtitle:
+      "The original initiative that sparked a movement. Bringing software freedom and localized solutions to the community since 2005.",
+    p1: "Swecha is a project that aims to localise GNU/Linux and other Free Software to Telugu. The project will strive to bridge the language barrier that is one of major reasons behind the digital divide.",
+    p2: "We have a working system in which most common tasks like writing and printing documents, browsing the web, sending/receiving emails, chatting, editing graphics etc. can all be in Telugu. The project has also developed a Telugu text-to-speech (TTS) system and integrated it with the desktop. Since one can hear the text on the desktop or web page by pointing at it, illiterate people may use it to access the desktop, read news on the web, and interact with technology in their native language. Most of this work will ultimately reach all the GNU/Linux distributions, and it is also packed into an easy-to-use LiveCD distribution.",
+    p3: "The word Swecha means Freedom in Telugu. Swecha is a Free Software project driven by volunteers, and most components of the projects are licensed under the GNU General Public License. You can use this software for any purpose, make modifications you like, and distribute it to anyone.",
+    ctaTitle: "Get Involved",
+    ctaDesc:
+      "We are seeking more volunteers for tasks involving development, translation of English text to Telugu, and documentation. If you are willing to join the effort, please contact us and see how to get involved.",
+  },
+  te: {
+    titleFirst: "స్వేచ్ఛ",
+    titleLast: "ప్రాజెక్ట్",
+    title: "స్వేచ్ఛ ప్రాజెక్ట్",
+    subtitle:
+      "ఒక ఉద్యమానికి దారితీసిన అసలు కార్యాచరణ. 2005 నుండి సమాజానికి సాఫ్ట్‌వేర్ స్వేచ్ఛను మరియు స్థానికీకరించిన పరిష్కారాలను తీసుకువస్తోంది.",
+    p1: "స్వేచ్ఛ అనేది GNU/Linux మరియు ఇతర ఉచిత సాఫ్ట్‌వేర్‌లను తెలుగులోకి స్థానికీకరించడం లక్ష్యంగా పెట్టుకున్న ఒక ప్రాజెక్ట్. డిజిటల్ విభజనకు ప్రధాన కారణాలలో ఒకటిగా ఉన్న భాషా అడ్డంకిని అధిగమించడానికి ఈ ప్రాజెక్ట్ కృషి చేస్తుంది.",
+    p2: "పత్రాలు రాయడం మరియు ముద్రించడం, వెబ్ బ్రౌజ్ చేయడం, ఇమెయిల్‌లు పంపడం/స్వీకరించడం, చాటింగ్ చేయడం, గ్రాఫిక్స్ సవరించడం వంటి అత్యంత సాధారణ పనులన్నీ తెలుగులోనే చేయగలిగేలా ఒక వ్యవస్థను మేము రూపొందించాము. ఈ ప్రాజెక్ట్ ఒక తెలుగు టెక్స్ట్-టు-స్పీచ్ (TTS) వ్యవస్థను కూడా అభివృద్ధి చేసి డెస్క్‌టాప్‌తో అనుసంధానించింది. స్క్రీన్‌పై లేదా వెబ్ పేజీలో ఉన్న వచనాన్ని పాయింట్ చేయడం ద్వారా వినగలిగే సౌకర్యం ఉన్నందున, నిరక్షరాస్యులు కూడా దీనిని డెస్క్‌టాప్ ఉపయోగించడానికి, వెబ్‌లో వార్తలు చదవడానికి సులభంగా ఉపయోగించవచ్చు. ఈ పని అంతిమంగా అన్ని GNU/Linux డిస్ట్రిబ్యూషన్‌లకు చేరుకుంటుంది, మరియు ఇది సులభంగా ఉపయోగించగల LiveCD డిస్ట్రిబ్యూషన్‌గా కూడా లభిస్తుంది.",
+    p3: "స్వేచ్ఛ అంటే తెలుగులో స్వాతంత్ర్యం అని అర్థం. స్వేచ్ఛ అనేది వాలంటీర్లచే నడపబడే ఒక ఉచిత సాఫ్ట్‌వేర్ ప్రాజెక్ట్, మరియు ఈ ప్రాజెక్ట్‌ల యొక్క అధిక భాగాలు GNU జనరల్ పబ్లిక్ లైసెన్స్ క్రింద లైసెన్స్ పొందాయి. మీరు ఈ సాఫ్ట్‌వేర్‌ను ఏ ఉద్దేశానికైనా ఉపయోగించవచ్చు, మీకు నచ్చిన మార్పులను చేయవచ్చు మరియు ఎవరికైనా పంపిణీ చేయవచ్చు.",
+    ctaTitle: "భాగస్వామ్యం అవ్వండి",
+    ctaDesc:
+      "డెవలప్‌మెంట్, ఇంగ్లీష్ నుండి తెలుగులోకి అనువాదం మరియు డాక్యుమెంటేషన్‌కు సంబంధించిన పనుల కోసం మేము మరింత మంది వాలంటీర్లను కోరుతున్నాము. మీరు ఈ ప్రయత్నంలో చేరడానికి సిద్ధంగా ఉంటే, దయచేసి మమ్మల్ని సంప్రదించండి మరియు ఎలా భాగస్వామ్యం కావాలో తెలుసుకోండి.",
+  },
+  hi: {
+    titleFirst: "स्वेच्छा",
+    titleLast: "परियोजना",
+    title: "स्वेच्छा परियोजना",
+    subtitle:
+      "एक आंदोलन की शुरुआत करने वाली पहली पहल। 2005 से समुदाय के लिए सॉफ्टवेयर स्वतंत्रता और स्थानीय समाधान ला रहा है।",
+    p1: "स्वेच्छा एक परियोजना है जिसका उद्देश्य जीएनयू/लिनक्स (GNU/Linux) और अन्य मुफ्त सॉफ्टवेयरों का तेलुगु में स्थानीयकरण करना है। यह परियोजना भाषा की बाधा को दूर करने का प्रयास करेगी, जो डिजिटल विभाजन के प्रमुख कारणों में से एक है।",
+    p2: "हमारे पास एक कार्यशील प्रणाली है जिसमें दस्तावेज़ लिखना और प्रिंट करना, वेब ब्राउज़ करना, ईमेल भेजना/प्राप्त करना, चैटिंग, ग्राफिक्स संपादन आदि जैसे अधिकांश सामान्य कार्य तेलुगु में किए जा सकते हैं। इस परियोजना ने एक तेलुगु टेक्स्ट-टू-स्पीच (TTS) प्रणाली भी विकसित की है और इसे डेस्कटॉप के साथ एकीकृत किया है। चूंकि कोई भी डेस्कटॉप या वेब पेज पर कर्सर रखकर टेक्स्ट को सुन सकता है, इसे वे तकनीकी रूप से अपनी मूल भाषा में समझने और उपयोग करने के लिए कर सकते हैं। यह काम अंततः सभी GNU/Linux वितरणों तक पहुंचेगा, और इसे उपयोग में आसान LiveCD वितरण में भी पैक किया गया है।",
+    p3: "तेलुगु में स्वेच्छा शब्द का अर्थ स्वतंत्रता है। स्वेच्छा स्वयंसेवकों द्वारा संचालित एक मुफ्त सॉफ्टवेयर परियोजना है, और इसके अधिकांश घटक जीएनयू जनरल पब्लिक लाइसेंस (GNU GPL) के तहत लाइसेंस प्राप्त हैं। आप इस सॉफ्टवेयर का उपयोग किसी भी उद्देश्य के लिए कर सकते हैं, अपनी पसंद के बदलाव कर सकते हैं और इसे किसी को भी वितरित कर सकते हैं।",
+    ctaTitle: "शामिल हों",
+    ctaDesc:
+      "हम विकास, अंग्रेजी से तेलुगु अनुवाद और दस्तावेज़ीकरण से जुड़े कार्यों के लिए अधिक स्वयंसेवकों की तलाश कर रहे हैं। यदि आप इस प्रयास में शामिल होने के इच्छुक हैं, तो कृपया हमसे संपर्क करें और देखें कि आप कैसे जुड़ सकते हैं।",
+  },
+};
+
+const activeContent = content[lang] || content[defaultLang];
 ---
 
-<Layout title={`Swecha Project - Swecha.org`}>
+<Layout title={`${activeContent.title} - Swecha.org`}>
   <div
-    class="pt-32 pb-16 px-6 sm:px-10 lg:px-16 container mx-auto min-h-[calc(100vh-4rem)]"
+    class="pt-32 pb-16 px-4 sm:px-6 lg:px-8 container mx-auto max-w-7xl min-h-[calc(100vh-4rem)]"
   >
-    <div class="max-w-4xl">
-      <div class="mb-10 inline-block">
-        <a
-          href={lang === defaultLang ? "/about" : `/${lang}/about`}
-          class="btn btn-circle btn-ghost text-text-muted hover:text-primary-brand hover:bg-structural-borders/30"
-          aria-label="Return to About"
+    <!-- Back Button -->
+    <div class="mb-8 relative z-10">
+      <a
+        href={lang === defaultLang ? "/about" : `/${lang}/about`}
+        class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-secondary-bg/85 border border-structural-borders/80 text-text-muted hover:text-primary-brand hover:border-primary-brand/50 transition-all duration-300 shadow-sm"
+        aria-label="Return to About"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-4 w-4"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          stroke-width="2.5"
         >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            class="h-6 w-6"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
-          </svg>
-        </a>
-      </div>
-      <h1
-        class="text-4xl md:text-6xl font-black text-text-main mb-6 tracking-tight"
-      >
-        Swecha <span class="text-primary-brand">Project</span>
-      </h1>
-      <p class="text-xl text-text-muted mb-12 leading-relaxed">
-        The original initiative that sparked a movement. Bringing software
-        freedom and localized solutions to the community since 2005.
-      </p>
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+        </svg>
+        <span
+          >{lang === "te" ? "వెనుకకు" : lang === "hi" ? "पीछे" : "Back"}</span
+        >
+      </a>
+    </div>
 
-      <div
-        class="bg-secondary-bg border border-structural-borders p-8 rounded-2xl shadow-xl"
+    <!-- Title and Subtitle -->
+    <div class="max-w-3xl mb-12">
+      <h1
+        class="text-4xl md:text-5xl lg:text-6xl font-black text-white mb-6 tracking-tight drop-shadow-sm"
       >
-        <h2 class="text-2xl font-bold text-text-main mb-4">
-          Under Development
-        </h2>
-        <p class="text-text-muted">
-          This section is currently being updated. Check back soon for detailed
-          information about the Swecha project's history, milestones, and
-          ongoing efforts.
+        {activeContent.title}
+      </h1>
+      <p class="text-lg md:text-xl swecha-description-text leading-relaxed">
+        {activeContent.subtitle}
+      </p>
+    </div>
+
+    <!-- Two-Column Layout Grid -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+      <!-- Left Column - Content (7 cols) -->
+      <div class="lg:col-span-7 space-y-6 leading-relaxed font-medium">
+        <p class="text-base md:text-lg swecha-description-text">
+          {activeContent.p1}
+        </p>
+        <p class="text-base md:text-lg swecha-description-text">
+          {activeContent.p2}
+        </p>
+        <p class="text-base md:text-lg swecha-description-text">
+          {activeContent.p3}
+        </p>
+
+        <!-- Get Involved CTA Card -->
+        <div
+          class="p-6 md:p-8 rounded-2xl border border-primary-brand/20 bg-gradient-to-br from-primary-brand/10 to-secondary-accent/5 shadow-sm space-y-4"
+        >
+          <h3 class="text-xl font-bold text-text-main">
+            {activeContent.ctaTitle}
+          </h3>
+          <p class="text-sm">
+            {activeContent.ctaDesc}
+          </p>
+          <div class="pt-2">
+            <a
+              href={lang === defaultLang ? "/contact" : `/${lang}/contact`}
+              class="inline-flex items-center gap-2 rounded-lg bg-primary-brand px-5 py-2.5 text-xs font-black text-white hover:bg-hover-brand transition-all duration-300 shadow-[0_0_15px_rgba(2,90,158,0.2)] hover:scale-[1.02]"
+            >
+              <span
+                >{
+                  lang === "te"
+                    ? "మమ్మల్ని సంప్రదించండి"
+                    : lang === "hi"
+                      ? "हमसे संपर्क करें"
+                      : "Contact Us"
+                }</span
+              >
+              <svg
+                class="h-4 w-4"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                stroke-width="2.5"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M9 5l7 7-7 7"></path>
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Column - Visual Mockup (5 cols) -->
+      <div class="lg:col-span-5 space-y-4">
+        <div
+          class="group relative overflow-hidden rounded-2xl border border-structural-borders bg-slate-950/40 p-3 shadow-lg transition-all duration-500 hover:border-primary-brand/45 hover:shadow-2xl"
+        >
+          <!-- Glassmorphic glow background -->
+          <div
+            class="absolute -top-12 -left-12 w-40 h-40 bg-primary-brand/10 rounded-full blur-[80px] pointer-events-none group-hover:bg-primary-brand/15 transition-all duration-700"
+          >
+          </div>
+          <div
+            class="absolute -bottom-16 -right-16 w-40 h-40 bg-secondary-accent/5 rounded-full blur-[80px] pointer-events-none"
+          >
+          </div>
+
+          <!-- Screenshot wrapper -->
+          <div
+            class="overflow-hidden rounded-xl bg-slate-950 aspect-[16/10] relative z-10 border border-structural-borders/40"
+          >
+            <img
+              src="/images/swecha-desktop.png"
+              alt="Swecha OS Telugu Desktop"
+              class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
+            />
+          </div>
+        </div>
+
+        <p class="text-xs text-text-muted/80 text-center font-mono italic">
+          {
+            lang === "te"
+              ? "తెలుగులోకి స్థానికీకరించబడిన స్వేచ్ఛ GNOME డెస్క్‌టాప్ వాతావరణం"
+              : lang === "hi"
+                ? "तेलुगु में स्थानीयकृत स्वेच्छा गनोम (GNOME) डेस्कटॉप वातावरण"
+                : "The Swecha GNOME Desktop environment localized in Telugu."
+          }
         </p>
       </div>
     </div>
   </div>
 </Layout>
+
+<style>
+  .swecha-description-text,
+  .swecha-description-text p {
+    color: #ffffff !important;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.45);
+  }
+
+  :global(html[data-theme="light"]) .swecha-description-text,
+  :global(html[data-theme="light"]) .swecha-description-text p {
+    color: #ffffff !important;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
+  }
+</style>

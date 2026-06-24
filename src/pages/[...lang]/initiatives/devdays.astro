@@ -2,6 +2,7 @@
 import Layout from "../../../layouts/Layout.astro";
 import { getLangFromUrl, useTranslations } from "../../../i18n/utils";
 import { languages, defaultLang } from "../../../i18n/ui";
+import devdaysData from "../../../data/devdays.json";
 
 export function getStaticPaths() {
   return Object.keys(languages).map((lang) => {
@@ -15,38 +16,404 @@ export function getStaticPaths() {
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
+const { events, mentors } = devdaysData;
 ---
 
-<Layout title={`DevDays - Swecha.org`}>
-  <div class="pt-32 pb-16 px-6 sm:px-10 lg:px-16 container mx-auto">
-    <div class="max-w-4xl">
-      <h1
-        class="devdays-title text-4xl md:text-6xl font-black text-text-main mb-6 tracking-tight"
-      >
-        DevDays
-      </h1>
-      <p class="devdays-desc text-xl text-text-muted mb-12 leading-relaxed">
-        A platform for developers, open-source contributors, and technology
-        enthusiasts to collaborate, learn, and build together.
-      </p>
+<Layout title={`DevDays Initiative - Swecha.org`}>
+  <div class="pt-24 pb-16 px-4 sm:px-6 lg:px-8 container mx-auto">
+    <div class="max-w-6xl mx-auto space-y-12">
+      <!-- Hero Section -->
+      <section class="space-y-4 flex flex-col items-center text-center">
+        <h1
+          class="devdays-title text-5xl sm:text-6xl md:text-7xl font-black text-white tracking-tight leading-tight"
+        >
+          DevDays
+        </h1>
+        <p
+          class="devdays-desc text-base sm:text-lg text-text-muted max-w-3xl leading-relaxed"
+        >
+          DevDays is Swecha's premier peer-to-peer technical mentorship program.
+          We gather engineering students, active open-source contributors, and
+          industry mentors under one roof to build systems, explore frameworks,
+          and bridge the digital divide through public-interest technology.
+        </p>
+      </section>
 
-      <div
-        class="bg-secondary-bg border border-structural-borders p-8 rounded-2xl shadow-xl"
+      <!-- Stats Grid -->
+      <section class="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div
+          class="devdays-solid-card rounded-2xl p-6 border border-gray-200 dark:border-structural-borders bg-white dark:bg-[#111827]/60 shadow-sm transition-all duration-300"
+        >
+          <span
+            class="block text-3xl font-black bg-gradient-to-r from-primary-brand to-secondary-accent bg-clip-text text-transparent mb-1"
+          >
+            22+
+          </span>
+          <span
+            class="text-xs font-bold text-text-muted uppercase tracking-wider"
+          >
+            Completed Editions
+          </span>
+        </div>
+        <div
+          class="devdays-solid-card rounded-2xl p-6 border border-gray-200 dark:border-structural-borders bg-white dark:bg-[#111827]/60 shadow-sm transition-all duration-300"
+        >
+          <span
+            class="block text-3xl font-black bg-gradient-to-r from-primary-brand to-secondary-accent bg-clip-text text-transparent mb-1"
+          >
+            40+
+          </span>
+          <span
+            class="text-xs font-bold text-text-muted uppercase tracking-wider"
+          >
+            Hands-on Sessions
+          </span>
+        </div>
+        <div
+          class="devdays-solid-card rounded-2xl p-6 border border-gray-200 dark:border-structural-borders bg-white dark:bg-[#111827]/60 shadow-sm transition-all duration-300"
+        >
+          <span
+            class="block text-3xl font-black bg-gradient-to-r from-primary-brand to-secondary-accent bg-clip-text text-transparent mb-1"
+          >
+            35+
+          </span>
+          <span
+            class="text-xs font-bold text-text-muted uppercase tracking-wider"
+          >
+            Tech Mentors
+          </span>
+        </div>
+        <div
+          class="devdays-solid-card rounded-2xl p-6 border border-gray-200 dark:border-structural-borders bg-white dark:bg-[#111827]/60 shadow-sm transition-all duration-300"
+        >
+          <span
+            class="block text-3xl font-black bg-gradient-to-r from-primary-brand to-secondary-accent bg-clip-text text-transparent mb-1"
+          >
+            1,000+
+          </span>
+          <span
+            class="text-xs font-bold text-text-muted uppercase tracking-wider"
+          >
+            Developers Trained
+          </span>
+        </div>
+      </section>
+
+      <!-- Search & Filters -->
+      <section
+        class="flex flex-col md:flex-row md:items-center justify-between gap-6 pb-2 border-b border-structural-borders/30"
       >
-        <h2 class="text-2xl font-bold text-text-main mb-4">
-          Under Development
-        </h2>
-        <p class="text-text-muted">
-          We are preparing exciting resources and schedules for upcoming DevDays
-          events. Check back soon!
+        <!-- Categories Filters -->
+        <div class="flex flex-wrap gap-2.5 items-center" id="filters-container">
+          <button class="filter-btn active" data-category="All">
+            All Categories
+          </button>
+          <button class="filter-btn" data-category="AI / ML"> AI / ML </button>
+          <button class="filter-btn" data-category="Frontend">
+            Frontend
+          </button>
+          <button class="filter-btn" data-category="Backend"> Backend </button>
+          <button class="filter-btn" data-category="Cloud / DevOps">
+            Cloud / DevOps
+          </button>
+          <button class="filter-btn" data-category="Systems & Linux">
+            Systems & Linux
+          </button>
+        </div>
+
+        <!-- Search input -->
+        <div class="relative w-full md:w-80">
+          <span
+            class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-text-muted/60"
+          >
+            <svg
+              class="h-4 w-4"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2.5"
+                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+            </svg>
+          </span>
+          <input
+            type="text"
+            id="search-input"
+            placeholder="Search events, mentors..."
+            class="w-full pl-9 pr-4 py-2 text-sm rounded-xl border border-gray-300 dark:border-structural-borders bg-white dark:bg-[#111827]/40 text-text-main focus:outline-none focus:border-primary-brand focus:ring-1 focus:ring-primary-brand/30 transition-all"
+          />
+        </div>
+      </section>
+
+      <!-- Events Card Grid -->
+      <section
+        class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+        id="events-grid"
+      >
+        {
+          events.map((event) => (
+            <div
+              class="event-card flex flex-col justify-between rounded-2xl p-6 border shadow-sm hover:shadow-md hover:border-primary-brand/40 hover:-translate-y-0.5 transition-all duration-300"
+              id={event.id}
+              data-category={event.category}
+              data-search-text={`${event.title} ${event.description} ${event.devday} ${event.mentors.join(" ")}`.toLowerCase()}
+            >
+              <div class="space-y-4">
+                {/* Card Tag Header */}
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center gap-1.5">
+                    <span class="px-2.5 py-0.5 rounded-full text-[10px] font-black tracking-wider uppercase bg-amber-500/10 border border-amber-500/20 text-amber-600 dark:text-amber-400">
+                      {event.devday}
+                    </span>
+                    <span class="px-2.5 py-0.5 rounded-full text-[10px] font-black tracking-wider uppercase bg-primary-brand/10 border border-primary-brand/20 text-primary-brand">
+                      {event.category}
+                    </span>
+                  </div>
+                  <div class="flex items-center gap-1">
+                    {event.linkedin && (
+                      <a
+                        href={event.linkedin}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="text-text-muted hover:text-[#025a9e] dark:hover:text-primary-brand transition-colors cursor-pointer flex items-center justify-center p-1 rounded-lg hover:bg-gray-100 dark:hover:bg-structural-borders/30"
+                        title="View Event on LinkedIn"
+                      >
+                        <svg
+                          class="w-3.5 h-3.5"
+                          fill="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.779-1.75-1.75s.784-1.75 1.75-1.75 1.75.779 1.75 1.75-.784 1.75-1.75 1.75zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
+                        </svg>
+                      </a>
+                    )}
+                    {event.meetup && (
+                      <a
+                        href={event.meetup}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="text-text-muted hover:text-[#E03E52] dark:hover:text-[#E03E52] transition-colors cursor-pointer flex items-center justify-center p-1 rounded-lg hover:bg-gray-100 dark:hover:bg-structural-borders/30"
+                        title="View Event on Meetup"
+                      >
+                        <svg
+                          class="w-3.5 h-3.5"
+                          fill="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path d="M19.122 11.233c.12-.62.147-1.254.06-1.884a7.013 7.013 0 0 0-3.237-5.187 7.07 7.07 0 0 0-6.197-.47 7.202 7.202 0 0 0-4.47 5.767 7.24 7.24 0 0 0 2.213 6.068 7.07 7.07 0 0 0 5.86 1.757 7.203 7.203 0 0 0 5.917-6.055zm.698-1.574c-.056.883-.243 1.756-.549 2.59a9.143 9.143 0 0 1-7.669 5.856 9.07 9.07 0 0 1-7.399-2.915 9.199 9.199 0 0 1-1.745-7.795 9.202 9.202 0 0 1 5.674-6.852 9.073 9.073 0 0 1 8.016.942 9.141 9.141 0 0 1 3.673 8.169zm-5.168 4.51c-.76.772-1.874 1.15-2.88 1.15s-2.12-.378-2.88-1.15c-.947-.962-.947-2.527 0-3.488.76-.772 1.874-1.15 2.88-1.15s2.12.378 2.88 1.15c.947.962.947 2.527 0 3.488zm-.835-.85c.488-.496.488-1.302 0-1.797-.393-.4-1.04-.4-1.433 0s-.488 1.3-.095 1.7c.393.4 1.04.4 1.433 0z" />
+                        </svg>
+                      </a>
+                    )}
+                  </div>
+                </div>
+
+                {/* Event Details */}
+                <div class="space-y-2">
+                  <h3 class="text-lg font-bold text-text-main tracking-tight leading-snug group-hover:text-primary-brand transition-colors">
+                    {event.title}
+                  </h3>
+                  <p class="text-xs sm:text-sm text-text-muted leading-relaxed">
+                    {event.description}
+                  </p>
+                </div>
+              </div>
+
+              {/* Card Footer Details */}
+              <div class="mt-6 pt-4 border-t border-gray-100 dark:border-structural-borders/30 space-y-3 shrink-0">
+                <div class="flex items-center justify-between text-xs text-text-muted">
+                  <div class="flex items-center gap-1.5">
+                    <svg
+                      class="w-3.5 h-3.5"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      stroke-width="2"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                      />
+                    </svg>
+                    <span>{event.date}</span>
+                  </div>
+                  <div class="flex items-center gap-1.5">
+                    <svg
+                      class="w-3.5 h-3.5"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      stroke-width="2"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                      />
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+                      />
+                    </svg>
+                    <span>{event.venue}</span>
+                  </div>
+                </div>
+
+                <div class="flex flex-wrap items-center gap-1">
+                  <span class="text-[11px] font-bold text-text-muted mr-1">
+                    Mentors:
+                  </span>
+                  {event.mentors.map((mentor, index) => (
+                    <>
+                      <button
+                        class="mentor-btn text-xs font-bold text-primary-brand hover:underline cursor-pointer transition-all active:scale-[0.98]"
+                        data-mentor={mentor}
+                      >
+                        {mentor}
+                      </button>
+                      {index < event.mentors.length - 1 && (
+                        <span class="text-xs text-text-muted mr-0.5">,</span>
+                      )}
+                    </>
+                  ))}
+                </div>
+              </div>
+            </div>
+          ))
+        }
+      </section>
+
+      <!-- Empty state -->
+      <div
+        id="empty-state"
+        class="hidden text-center py-16 devdays-solid-card rounded-2xl border border-gray-200 dark:border-structural-borders bg-white dark:bg-[#111827]/60"
+      >
+        <svg
+          class="mx-auto h-12 w-12 text-text-muted"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          stroke-width="1.5"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+          ></path>
+        </svg>
+        <h3 class="mt-4 text-lg font-bold text-text-main">
+          No DevDays events found
+        </h3>
+        <p class="mt-2 text-sm text-text-muted">
+          Try adjusting your search keywords or filter category.
         </p>
       </div>
     </div>
   </div>
+
+  <!-- Mentor Details Modal -->
+  <dialog
+    id="mentor-modal"
+    class="modal modal-bottom sm:modal-middle bg-transparent backdrop:backdrop-blur-md backdrop:bg-[#080B10]/60"
+  >
+    <div
+      class="modal-box bg-white dark:bg-[#111827] border border-gray-200 dark:border-structural-borders shadow-2xl rounded-t-2xl sm:rounded-2xl p-0 overflow-hidden text-left relative flex flex-col max-h-[90vh] max-w-lg"
+    >
+      <!-- Close button -->
+      <form method="dialog" class="absolute top-4 right-4 z-20">
+        <button
+          class="btn btn-sm btn-circle btn-ghost bg-gray-100 dark:bg-black/40 text-text-main hover:bg-gray-200 dark:hover:bg-black/60 border-none outline-none cursor-pointer"
+          aria-label="Close"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-5 w-5"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            ><path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2.5"
+              d="M6 18L18 6M6 6l12 12"></path></svg
+          >
+        </button>
+      </form>
+
+      <!-- Profile Banner Gradient -->
+      <div
+        class="h-28 bg-gradient-to-r from-primary-brand/30 to-secondary-accent/30 shrink-0 relative"
+      >
+        <div class="absolute -bottom-10 left-6">
+          <!-- Initials Avatar -->
+          <div
+            id="mentor-avatar"
+            class="w-20 h-20 rounded-2xl flex items-center justify-center text-2xl font-black text-white bg-gradient-to-br from-primary-brand to-secondary-accent border-4 border-white dark:border-[#111827] shadow-md"
+          >
+            PH
+          </div>
+        </div>
+      </div>
+
+      <!-- Modal Content Body -->
+      <div class="p-6 pt-12 overflow-y-auto flex-grow flex flex-col gap-5">
+        <div>
+          <h3
+            id="mentor-modal-name"
+            class="text-2xl font-black text-text-main tracking-tight mb-0.5"
+          >
+            Mentor Name
+          </h3>
+          <p
+            id="mentor-modal-designation"
+            class="text-xs font-bold text-primary-brand tracking-wide uppercase"
+          >
+            Designation / Role
+          </p>
+        </div>
+
+        <div class="space-y-2">
+          <h4
+            class="text-xs font-bold text-text-muted uppercase tracking-wider"
+          >
+            Biography
+          </h4>
+          <p
+            id="mentor-modal-bio"
+            class="text-sm text-text-muted leading-relaxed"
+          >
+            Biography profile detail goes here...
+          </p>
+        </div>
+
+        <!-- Mentored Sessions Section -->
+        <div
+          class="space-y-3 pt-3 border-t border-gray-100 dark:border-structural-borders/30"
+        >
+          <h4
+            class="text-xs font-bold text-text-muted uppercase tracking-wider"
+          >
+            Sessions Mentored
+          </h4>
+          <div id="mentor-modal-sessions" class="flex flex-col gap-2">
+            <!-- Sessions links will be dynamically populated here -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <form method="dialog" class="modal-backdrop">
+      <button class="cursor-default">close</button>
+    </form>
+  </dialog>
 </Layout>
 
 <style>
-  /* Dark/default mode styles: blue-green gradient for main titles */
+  /* Title gradient for DevDays Initiative header */
   .devdays-title {
     background: linear-gradient(135deg, #00d4ff, #4dffb8) !important;
     -webkit-background-clip: text !important;
@@ -71,4 +438,296 @@ const t = useTranslations(lang);
       0 2px 6px rgba(11, 30, 54, 0.3),
       0 4px 15px rgba(11, 30, 54, 0.2) !important;
   }
+
+  /* Solid card overrides for light and dark modes */
+  :global(html[data-theme="light"]) .devdays-solid-card,
+  :global(html[data-theme="light"]) .event-card {
+    background-color: #ffffff !important;
+    background-image: none !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    border-color: #e2e8f0 !important;
+    opacity: 1 !important;
+  }
+
+  :global(html:not([data-theme="light"])) .devdays-solid-card,
+  :global(html:not([data-theme="light"])) .event-card {
+    background-color: rgba(17, 24, 39, 0.6) !important;
+    border-color: var(--structural-borders) !important;
+    background-image: none !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+
+  :global(.filter-btn) {
+    flex-shrink: 0;
+    font-size: 0.825rem;
+    font-weight: 700;
+    padding: 0.5rem 1.25rem;
+    border-radius: 9999px;
+    border: 1px solid var(--structural-borders);
+    background-color: color-mix(in srgb, var(--card-bg) 40%, transparent);
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+  }
+
+  :global(.filter-btn:hover) {
+    background-color: var(--elevated-surface);
+    color: var(--text-primary);
+    border-color: var(--primary-brand);
+  }
+
+  :global(.filter-btn.active) {
+    background-color: var(--primary-brand);
+    color: var(--primary-btn-text);
+    border-color: var(--primary-brand);
+    box-shadow: 0 4px 14px rgba(0, 212, 255, 0.25);
+  }
+
+  :global(html[data-theme="light"] .filter-btn.active) {
+    box-shadow: 0 4px 14px rgba(2, 132, 199, 0.25);
+  }
+
+  :global(html[data-theme="light"] .filter-btn:not(.active)) {
+    background-color: color-mix(
+      in srgb,
+      var(--card-bg) 60%,
+      transparent
+    ) !important;
+  }
+
+  /* Flashing animation for target cards when jumped from modal */
+  @keyframes cardFlash {
+    0% {
+      box-shadow: 0 0 0 0px var(--primary-brand);
+      border-color: var(--primary-brand);
+      transform: scale(1.02);
+    }
+    50% {
+      box-shadow: 0 0 25px 4px var(--primary-brand);
+      border-color: var(--primary-brand);
+      transform: scale(1.02);
+    }
+    100% {
+      box-shadow: none;
+      border-color: inherit;
+      transform: scale(1);
+    }
+  }
+
+  .flash-highlight {
+    animation: cardFlash 1.8s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+  }
+
+  /* Mentor details modal overrides for light mode */
+  :global(html[data-theme="light"] #mentor-modal .modal-box) {
+    background-color: #ffffff !important;
+    background-image: none !important;
+  }
+
+  /* Add visible borders for session buttons in light mode */
+  :global(html[data-theme="light"] #mentor-modal-sessions button) {
+    background-color: #ffffff !important;
+    background-image: none !important;
+    border: 1px solid #cbd5e1 !important;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05) !important;
+  }
+
+  :global(html[data-theme="light"] #mentor-modal-sessions button:hover) {
+    border-color: var(--primary-brand) !important;
+    background-color: rgba(2, 90, 158, 0.04) !important;
+  }
+
+  /* Backdrop blur for mentor details modal in light mode */
+  :global(html[data-theme="light"]) #mentor-modal::backdrop {
+    background-color: rgba(255, 255, 255, 0.45) !important;
+    backdrop-filter: blur(12px) !important;
+    -webkit-backdrop-filter: blur(12px) !important;
+  }
+  :global(html[data-theme="light"]) #mentor-modal .modal-backdrop {
+    background-color: rgba(255, 255, 255, 0.45) !important;
+    backdrop-filter: blur(12px) !important;
+    -webkit-backdrop-filter: blur(12px) !important;
+  }
+
+  /* Dark mode: make the background blurry when modal is opened */
+  :global(html:not([data-theme="light"])) #mentor-modal::backdrop {
+    background-color: rgba(8, 11, 16, 0.6) !important;
+    backdrop-filter: blur(12px) !important;
+    -webkit-backdrop-filter: blur(12px) !important;
+  }
+  :global(html:not([data-theme="light"])) #mentor-modal .modal-backdrop {
+    background-color: rgba(8, 11, 16, 0.6) !important;
+    backdrop-filter: blur(12px) !important;
+    -webkit-backdrop-filter: blur(12px) !important;
+  }
 </style>
+
+<script define:vars={{ mentors, events }}>
+  document.addEventListener("DOMContentLoaded", () => {
+    const searchInput = document.getElementById("search-input");
+    const filterPills = document.querySelectorAll(".filter-btn");
+    const eventCards = document.querySelectorAll(".event-card");
+    const emptyState = document.getElementById("empty-state");
+    const mentorButtons = document.querySelectorAll(".mentor-btn");
+
+    /** @type {HTMLDialogElement | null} */
+    const mentorModal = document.getElementById("mentor-modal");
+    const mName = document.getElementById("mentor-modal-name");
+    const mDesignation = document.getElementById("mentor-modal-designation");
+    const mBio = document.getElementById("mentor-modal-bio");
+    const mAvatar = document.getElementById("mentor-avatar");
+    const mSessionsList = document.getElementById("mentor-modal-sessions");
+
+    let currentCategory = "All";
+    let searchQuery = "";
+
+    // 1. Search and Filter Logic
+    function applySearchAndFilters() {
+      let visibleCount = 0;
+
+      eventCards.forEach((card) => {
+        const cardCategory = card.getAttribute("data-category");
+        const searchText = card.getAttribute("data-search-text") || "";
+
+        const matchesCategory =
+          currentCategory === "All" || cardCategory === currentCategory;
+        const matchesSearch = searchText.includes(searchQuery);
+
+        if (matchesCategory && matchesSearch) {
+          card.classList.remove("hidden");
+          visibleCount++;
+        } else {
+          card.classList.add("hidden");
+        }
+      });
+
+      if (visibleCount === 0) {
+        emptyState.classList.remove("hidden");
+      } else {
+        emptyState.classList.add("hidden");
+      }
+    }
+
+    // Search Keyup
+    searchInput?.addEventListener("input", (e) => {
+      searchQuery = e.target.value.toLowerCase().trim();
+      applySearchAndFilters();
+    });
+
+    // Category click
+    filterPills.forEach((pill) => {
+      pill.addEventListener("click", () => {
+        filterPills.forEach((p) => {
+          p.classList.remove("active");
+        });
+
+        pill.classList.add("active");
+
+        currentCategory = pill.getAttribute("data-category") || "All";
+        applySearchAndFilters();
+      });
+    });
+
+    // Get initials for avatar
+    function getInitials(name) {
+      if (!name) return "M";
+      const parts = name.split(" ");
+      if (parts.length >= 2) {
+        return (parts[0][0] + parts[1][0]).toUpperCase();
+      }
+      return name.slice(0, 2).toUpperCase();
+    }
+
+    // 2. Open Mentor Detail Modal
+    function openMentorModal(mentorName) {
+      const mentor = mentors[mentorName];
+      if (!mentor) return;
+
+      if (mName) mName.textContent = mentor.name;
+      if (mDesignation) mDesignation.textContent = mentor.designation;
+      if (mBio) mBio.textContent = mentor.bio;
+      if (mAvatar) mAvatar.textContent = getInitials(mentor.name);
+
+      // Populate other mentored sessions list
+      if (mSessionsList) {
+        mSessionsList.innerHTML = "";
+
+        // Find all sessions mentored by this mentor
+        const mentoredSessions = events.filter((ev) =>
+          ev.mentors.includes(mentorName),
+        );
+
+        mentoredSessions.forEach((session) => {
+          const sessionBtn = document.createElement("button");
+          sessionBtn.className =
+            "flex items-center justify-between text-left p-2.5 rounded-xl border border-gray-100 dark:border-structural-borders/30 bg-gray-50/50 dark:bg-card-bg/20 hover:border-primary-brand/35 text-xs text-text-main cursor-pointer transition-all";
+
+          sessionBtn.innerHTML = `
+            <div class="pr-2">
+              <span class="text-[9px] font-black uppercase text-amber-500 mr-1.5">${session.devday}</span>
+              <span class="font-bold block sm:inline text-text-main">${session.title}</span>
+            </div>
+            <svg class="w-3.5 h-3.5 text-primary-brand flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+            </svg>
+          `;
+
+          sessionBtn.addEventListener("click", () => {
+            // Close the modal
+            mentorModal?.close();
+
+            // Find the targeted card
+            const targetCard = document.getElementById(session.id);
+            if (targetCard) {
+              // Reset category to "All" and clear search if targeted session is hidden
+              const currentPillAll = document.querySelector(
+                '[data-category="All"]',
+              );
+              if (currentCategory !== "All" || searchQuery !== "") {
+                currentCategory = "All";
+                searchQuery = "";
+                if (searchInput) searchInput.value = "";
+
+                filterPills.forEach((p) => {
+                  p.classList.remove("active");
+                });
+                currentPillAll?.classList.add("active");
+                applySearchAndFilters();
+              }
+
+              // Scroll to the card
+              setTimeout(() => {
+                targetCard.scrollIntoView({
+                  behavior: "smooth",
+                  block: "center",
+                });
+
+                // Trigger flash highlight
+                targetCard.classList.remove("flash-highlight");
+                void targetCard.offsetWidth; // trigger reflow
+                targetCard.classList.add("flash-highlight");
+              }, 100);
+            }
+          });
+
+          mSessionsList.appendChild(sessionBtn);
+        });
+      }
+
+      mentorModal?.showModal();
+    }
+
+    // Attach click events on mentor tag buttons
+    mentorButtons.forEach((btn) => {
+      btn.addEventListener("click", (e) => {
+        e.stopPropagation(); // prevent card container clicks if any
+        const mentorName = btn.getAttribute("data-mentor");
+        if (mentorName) {
+          openMentorModal(mentorName);
+        }
+      });
+    });
+  });
+</script>

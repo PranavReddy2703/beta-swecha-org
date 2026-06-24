@@ -1,14 +1,15 @@
 ---
 // src/components/news/NewsFilter.astro
-import PublicationGroups from "./PublicationGroups.astro";
+import { getLangFromUrl, useTranslations } from "../../i18n/utils";
+import PublicationGroups from "../organisms/PublicationGroups.astro";
 
 interface Props {
   lang: string;
-  t: any;
   articles: any[];
 }
 
-const { lang, t, articles } = Astro.props;
+const { lang, articles } = Astro.props;
+const t = useTranslations(lang as "en" | "te" | "hi");
 const uniquePublications = [
   ...new Set(articles.map((a: any) => a.publication)),
 ];
@@ -125,7 +126,7 @@ const years = ["All", "2026", "2025", "2024"];
     </div>
 
     <!-- Dropdowns Grid -->
-    <div class="grid grid-cols-2 gap-2.5 shrink-0 lg:w-[260px]">
+    <div class="grid grid-cols-3 gap-2.5 shrink-0 lg:w-[380px]">
       <!-- Year Select -->
       <div class="flex flex-col">
         <label
@@ -142,6 +143,26 @@ const years = ["All", "2026", "2025", "2024"];
             years
               .filter((y) => y !== "All")
               .map((year) => <option value={year}>{year}</option>)
+          }
+        </select>
+      </div>
+
+      <!-- Publication Select -->
+      <div class="flex flex-col">
+        <label
+          for="pub-select"
+          class="news-filter-label text-[9px] font-bold text-text-muted uppercase tracking-wider mb-1"
+          >{labels.publication}</label
+        >
+        <select
+          id="pub-select"
+          class="px-2.5 h-9 rounded-lg border border-structural-borders bg-card-bg/35 text-[10px] text-text-main font-semibold focus:outline-none focus:border-primary-brand/50 cursor-pointer transition-colors duration-200 shadow-sm"
+        >
+          <option value="all">{labels.all}</option>
+          {
+            [...new Set(articles.map((a) => a.publication))].map((pub) => (
+              <option value={pub.toLowerCase()}>{pub}</option>
+            ))
           }
         </select>
       </div>

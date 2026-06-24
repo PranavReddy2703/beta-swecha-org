@@ -45,6 +45,11 @@ const navItems = [
         href: translatePath("/initiatives/code4change"),
         icon: '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2 text-slate-400"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>',
       },
+      {
+        name: t("nav.initiatives.voluntarycomputing") as string,
+        href: translatePath("/initiatives/voluntary-computing"),
+        icon: '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2 text-slate-400"><rect width="20" height="14" x="2" y="3" rx="2"/><line x1="8" x2="16" y1="21" y2="21"/><line x1="12" x2="12" y1="17" y2="21"/></svg>',
+      },
     ],
   },
   { name: t("nav.events") as string, href: translatePath("/events") },
@@ -126,7 +131,7 @@ const isCurrentPage = (href: string) => {
 
       <!-- Desktop Navigation Menu -->
       <nav
-        class="hidden md:flex items-center space-x-4 lg:space-x-6"
+        class="hidden md:flex items-center space-x-3 lg:space-x-5"
         id="desktop-nav"
       >
         {
@@ -269,6 +274,7 @@ const isCurrentPage = (href: string) => {
     transition:
       opacity 0.35s ease,
       height 0.35s ease;
+    animation: borderShimmer 8s linear infinite;
   }
 
   :global(html[data-theme="light"]) .navbar-gradient-border {

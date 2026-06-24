@@ -1,7 +1,11 @@
 ---
 // src/pages/[...lang]/projects.astro
 import Layout from "@layouts/Layout.astro";
-import { getLangFromUrl, useTranslations } from "../../i18n/utils";
+import {
+  getLangFromUrl,
+  useTranslations,
+  useTranslatedPath,
+} from "../../i18n/utils";
 import { languages, defaultLang } from "../../i18n/ui";
 import ProjectsHeader from "@organisms/ProjectsHeader.astro";
 import FeaturedProjectsCarousel from "@organisms/FeaturedProjectsCarousel.astro";
@@ -9,6 +13,8 @@ import ProjectsGrid from "@organisms/ProjectsGrid.astro";
 import ProjectCard from "@molecules/ProjectCard.astro";
 import FilterPill from "@atoms/FilterPill.astro";
 import projectsData from "@data/organisms/projects.json";
+import featuredProjectsData from "@data/organisms/featured-projects.json";
+import siteData from "@data/site.json";
 import type {
   FeaturedProjectData,
   ProjectData,
@@ -27,17 +33,27 @@ export function getStaticPaths() {
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
+const translatePath = useTranslatedPath(lang);
 
-const featuredProjects = projectsData.featured as FeaturedProjectData[];
+const featuredProjects = featuredProjectsData as FeaturedProjectData[];
 const categories = projectsData.categories as CategoryData[];
-const statusOrder: Record<string, number> = {
-  Active: 1,
-  Ongoing: 2,
-  Completed: 3,
-};
-const projects = (projectsData.projects as ProjectData[]).sort((a, b) => {
-  return (statusOrder[a.status] || 99) - (statusOrder[b.status] || 99);
-});
+const statusOrder = siteData.statusOrder as Record<string, number>;
+
+// Filter out projects that are featured in the carousel
+const projects = (projectsData.projects as ProjectData[])
+  .filter((project) => {
+    return !featuredProjects.some((featured) => {
+      const fTitle = featured.title.toLowerCase().trim();
+      const pTitle = project.title.toLowerCase().trim();
+      // Match exact titles, or where one title contains the other (e.g. "Swecha OS" and "Swecha OS 2026")
+      return (
+        fTitle === pTitle || fTitle.includes(pTitle) || pTitle.includes(fTitle)
+      );
+    });
+  })
+  .sort((a, b) => {
+    return (statusOrder[a.status] || 99) - (statusOrder[b.status] || 99);
+  });
 ---
 
 <Layout title={`${t("nav.projects")} - Swecha.org`}>
@@ -52,10 +68,10 @@ const projects = (projectsData.projects as ProjectData[]).sort((a, b) => {
   <section class="py-12">
     <div class="container mx-auto px-4 mb-8">
       <h2 class="all-projects-title text-2xl font-bold text-text-main mb-2">
-        All Projects
+        {t("projects.allTitle")}
       </h2>
       <p class="all-projects-desc text-text-muted">
-        Browse through our entire ecosystem of tools and platforms.
+        {t("projects.allDesc")}
       </p>
 
       <!-- Mobile Filter Toggle -->
@@ -76,7 +92,7 @@ const projects = (projectsData.projects as ProjectData[]).sort((a, b) => {
             d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"
           ></path>
         </svg>
-        Filter Projects
+        {t("projects.filterBtn")}
         <svg
           id="filter-toggle-icon"
           class="w-4 h-4 ml-1 transition-transform"
@@ -113,7 +129,7 @@ const projects = (projectsData.projects as ProjectData[]).sort((a, b) => {
             description={project.description}
             tags={project.tags}
             status={project.status}
-            link={project.link}
+            link={translatePath(project.link)}
           />
         ))
       }

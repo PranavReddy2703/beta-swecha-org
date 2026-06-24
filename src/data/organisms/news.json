@@ -1,444 +1,348 @@
 {
   "articles": [
     {
-      "id": "telangana-llm-datathon",
-      "featured": true,
+      "id": "article-1782181308912-4",
       "year": 2024,
       "date": {
-        "en": "July 2, 2024",
-        "te": "జూలై 2, 2024",
-        "hi": "2 जुलाई 2024"
-      },
-      "readingTime": {
-        "en": "3 min read",
-        "te": "3 ని. పఠనం",
-        "hi": "3 मिनट"
-      },
-      "publication": "Economic Times",
-      "publicationLogo": "/images/logos/economic_times.svg",
-      "category": {
-        "en": "AI Initiative",
-        "te": "AI కార్యక్రమం",
-        "hi": "एआई पहल"
-      },
-      "author": {
-        "en": "ET Government Desk",
-        "te": "ET గవర్నమెంట్ డెస్క్",
-        "hi": "ईटी गवर्नमेंट डेस्क"
-      },
-      "title": {
-        "en": "Telangana Announces Datathon with Swecha to Create Telugu LLM",
-        "te": "తెలుగు LLM సృష్టి కోసం స్వేచ్ఛతో కలిసి డేటాథాన్‌ను ప్రకటించిన తెలంగాణ",
-        "hi": "तेलुगु एलएलएम बनाने के लिए तेलंगाना ने स्वेच्छा के साथ डेटाथॉन की घोषणा की"
-      },
-      "description": {
-        "en": "The Telangana ITE&C Department, in association with Swecha, announced a statewide Datathon to create Telugu Large Language Model datasets.",
-        "te": "తెలంగాణ ఐటిఇ&సి విభాగం, స్వేచ్ఛతో కలిసి తెలుగు లార్జ్ లాంగ్వేజ్ మోడల్ డేటాసెట్లను సృష్టించడానికి రాష్ట్రవ్యాప్త డేటాథాన్‌ను ప్రకటించింది.",
-        "hi": "तेलंगाना आईटीईएंडसी विभाग ने स्वेच्छा के साथ मिलकर तेलुगु लार्ज लैंग्वेज मॉडल डेटासेट बनाने के लिए राज्यव्यापी डेटाथॉन की घोषणा की।"
-      },
-      "summary": {
-        "en": "This collaboration focuses on digitizing diverse Telugu linguistic resources, oral traditions, and folklore. College students across the state are participating in collecting speech and text datasets to ensure high-quality local-language training files.",
-        "te": "ఈ భాగస్వామ్యం వైవిధ్యమైన తెలుగు భాషా వనరులు, మౌఖిక సంప్రదాయాలు మరియు జానపద కథలను డిజిటలైజ్ చేయడంపై దృష్టి పెడుతుంది. నాణ్యమైన స్థానిక-భాషా శిక్షణ ఫైళ్లను నిర్ధారించడానికి రాష్ట్రవ్యాప్తంగా కళాశాల విద్యార్థులు ప్రసంగ మరియు వచన డేటాసెట్లను సేకరించడంలో పాల్గొంటున్నారు.",
-        "hi": "यह सहयोग विविध तेलुगु भाषाई संसाधनों, मौखिक परंपराओं और लोककथाओं को डिजिटल बनाने पर केंद्रित है। उच्च गुणवत्ता वाली स्थानीय-भाषा प्रशिक्षण फाइलें सुनिश्चित करने के लिए राज्य भर के कॉलेज छात्र भाषण और पाठ डेटासेट एकत्र करने में भाग ले रहे हैं।"
-      },
-      "image": "/images/news-datathon.webp",
-      "url": "https://government.economictimes.indiatimes.com/news/technology/telangana-itec-dept-announces-datathon-in-association-with-swecha-to-create-telugu-large-language-model/111597202"
-    },
-    {
-      "id": "iiit-hyderabad-ai-hackday",
-      "featured": false,
-      "year": 2026,
-      "date": {
-        "en": "February 15, 2026",
-        "te": "ఫిబ్రవరి 15, 2026",
-        "hi": "15 फरवरी 2026"
-      },
-      "readingTime": {
-        "en": "4 min read",
-        "te": "4 ని. పఠనం",
-        "hi": "4 मिनट"
-      },
-      "publication": "The Machine Maker",
-      "publicationLogo": "/images/logos/the_machine_maker.svg",
-      "category": {
-        "en": "Event Coverage",
-        "te": "ఈవెంట్ కవరేజ్",
-        "hi": "इवेंट कवरेज"
-      },
-      "author": {
-        "en": "Machine Maker Desk",
-        "te": "మెషిన్ మేకర్ డెస్క్",
-        "hi": "मशीन मेकर डेस्क"
-      },
-      "title": {
-        "en": "IIIT Hyderabad and Swecha.org Host AI Hackday for Social Good",
-        "te": "సామాజిక మంచి కోసం AI హ్యాక్‌డే నిర్వహించిన IIIT హైదరాబాద్ మరియు స్వేచ్ఛ",
-        "hi": "ट्रस्ट एंड सेफ्टी इन एआई: आईआईआईटी हैदराबाद और स्वेच्छा ने सोशल गुड के लिए एआई हैकथॉन की मेजबानी की"
-      },
-      "description": {
-        "en": "Empowering over 2,000 engineering students to collaborate on building social good applications using open source AI models.",
-        "te": "ఓపెన్ సోర్స్ AI మోడళ్లను ఉపయోగించి సామాజిక మంచి కోసం అప్లికేషన్లను నిర్మించడానికి 2,000 మందికి పైగా ఇంజనీరింగ్ విద్యార్థులకు సాధికారత లభించింది.",
-        "hi": "ओपन सोर्स एआई मॉडल का उपयोग करके सामाजिक भलाई के लिए अनुप्रयोगों के निर्माण पर सहयोग करने के लिए 2,000 से अधिक इंजीनियरिंग छात्रों को सशक्त बनाना।"
-      },
-      "summary": {
-        "en": "The hackday focused on building practical implementations of Telugu speech recognition, agricultural support chatbots, and educational games. Mentors from major tech firms guided students in using locally deployed LLM endpoints.",
-        "te": "ఈ హ్యాక్‌డే తెలుగు స్పీచ్ రికగ్నిషన్, వ్యవసాయ సహాయక చాట్‌బాట్‌లు మరియు విద్యాపరమైన గేమ్‌ల ఆచరణాత్మక రూపకల్పనపై దృష్టి సారించింది. స్థానికంగా మోహరించిన LLM ఎండ్‌పాయింట్లను ఉపయోగించడంలో ప్రముఖ టెక్ కంపెనీల నిపుణులు విద్యార్థులకు మార్గనిర్దేశం చేశారు.",
-        "hi": "हैकथॉन में तेलुगु भाषण पहचान, कृषि सहायता चैटबॉट्स और शैक्षिक खेलों के व्यावहारिक कार्यान्वयन के निर्माण पर ध्यान केंद्रित किया गया। प्रमुख टेक कंपनियों के मेंटर्स ने छात्रों को स्थानीय रूप से तैनात एलएलएम का उपयोग करने में मार्गदर्शन किया।"
-      },
-      "image": "/images/news-hackday.webp",
-      "url": "https://themachinemaker.com/news/iiit-hyderabad-and-swecha-org-host-ai-hackday-empowering-2000-students-to-build-ai-for-social-good/"
-    },
-    {
-      "id": "viswam-ai-licensing",
-      "featured": false,
-      "year": 2026,
-      "date": {
-        "en": "February 22, 2026",
-        "te": "ఫిబ్రవరి 22, 2026",
-        "hi": "22 फरवरी 2026"
-      },
-      "readingTime": {
-        "en": "5 min read",
-        "te": "5 ని. పఠనం",
-        "hi": "5 मिनट"
-      },
-      "publication": "The Hindu",
-      "publicationLogo": "/images/logos/the_hindu.svg",
-      "category": {
-        "en": "Press Release",
-        "te": "పత్రికా ప్రకటన",
-        "hi": "प्रेस विज्ञप्ति"
-      },
-      "author": {
-        "en": "Special Correspondent",
-        "te": "ప్రత్యేక ప్రతినిధి",
-        "hi": "विशेष संवाददाता"
-      },
-      "title": {
-        "en": "Draft License for Consultation Aimed at Safeguarding Open-Source AI Released",
-        "te": "ఓపెన్ సోర్స్ AI రక్షణ కొరకు విడుదలైన ముసాయిదా లైసెన్స్ సంప్రదింపులు",
-        "hi": "ओपन-सोर्स एआई की सुरक्षा के उद्देश्य से परामर्श के लिए ड्राफ्ट लाइसेंस जारी"
-      },
-      "description": {
-        "en": "Viswam.AI and SFLC.in release a draft open source AI license for public consultation to protect localized datasets.",
-        "te": "స్థానిక భాషా డేటాసెట్లను రక్షించడానికి విస్వమ్.AI మరియు SFLC.in బహిరంగ సంప్రదింపుల కోసం డ్రాఫ్ట్ ఓపెన్ సోర్స్ AI లైసెన్స్‌ను విడుదల చేశాయి.",
-        "hi": "स्थानीयकृत डेटासेट की सुरक्षा के लिए विस्वम.एआई और एसएफएलसी.इन ने सार्वजनिक परामर्श के लिए एक ड्राफ्ट ओपन सोर्स एआई लाइसेंस जारी किया।"
-      },
-      "summary": {
-        "en": "Released during the Trust & Safety in AI roundtable, this license aims to prevent corporate hoarding of crowdsourced regional language data while keeping software code, weights, and data formats open and accessible.",
-        "te": "AI రౌండ్‌టేబుల్ సమావేశంలో విడుదలైన ఈ లైసెన్స్, సాఫ్ట్‌వేర్ కోడ్, వెయిట్స్ మరియు డేటా ఫార్మాట్‌లను అందరికీ అందుబాటులో ఉంచుతూ, క్రౌడ్‌సోర్స్డ్ ప్రాంతీయ భాషా డేటాను కార్పొరేట్ సంస్థలు తమ స్వంతం చేసుకోకుండా నిరోధించడం లక్ష్యంగా పెట్టుకుంది.",
-        "hi": "एआई राउंडटेबल के दौरान जारी इस लाइसेंस का उद्देश्य सॉफ्टवेयर कोड, वेट और डेटा प्रारूपों को खुला और सुलभ रखते हुए कॉर्पोरेट कंपनियों द्वारा क्राउडसोर्स किए गए क्षेत्रीय भाषा डेटा को हड़पने से रोकना है।"
-      },
-      "image": "/images/news-license.webp",
-      "url": "https://www.thehindu.com/news/national/telangana/draft-license-for-consultation-aimed-at-safeguarding-open-source-ai-released/article70595570.ece"
-    },
-    {
-      "id": "tripura-star-license",
-      "featured": false,
-      "year": 2026,
-      "date": {
-        "en": "February 22, 2026",
-        "te": "ఫిబ్రవరి 22, 2026",
-        "hi": "22 फरवरी 2026"
-      },
-      "readingTime": {
-        "en": "3 min read",
-        "te": "3 ని. పఠనం",
-        "hi": "3 मिनट"
-      },
-      "publication": "Tripura Star News",
-      "publicationLogo": "/images/logos/tripura_star_news.svg",
-      "category": {
-        "en": "News",
-        "te": "వార్తలు",
-        "hi": "समाचार"
-      },
-      "author": {
-        "en": "Tripura Star Desk",
-        "te": "త్రిపుర స్టార్ డెస్క్",
-        "hi": "त्रिपुरा स्टार डेस्क"
-      },
-      "title": {
-        "en": "Viswam AI and SFLC.in Release Draft License to Safeguard Community Ownership of Open Source AI",
-        "te": "ఓపెన్ సోర్స్ AI కమ్యూనిటీ యాజమాన్యం రక్షణకు విస్వమ్ AI మరియు SFLC.in డ్రాఫ్ట్ లైసెన్స్ విడుదల",
-        "hi": "विस्वम एआई और एसएफएलसी.इन ने ओपन सोर्स एआई के सामुदायिक स्वामित्व की सुरक्षा के लिए ड्राफ्ट लाइसेंस जारी किया"
-      },
-      "description": {
-        "en": "Detailing the cooperative legal framework developed to prevent exploitation of community AI datasets.",
-        "te": "కమ్యూనిటీ AI డేటాసెట్ల దుర్వినియోగాన్ని నిరోధించడానికి రూపొందించిన సహకార చట్టపరమైన ఫ్రేమ్‌వర్క్ వివరాలు.",
-        "hi": "सामुदायिक एआई डेटासेट के शोषण को रोकने के लिए विकसित सहकारी कानूनी ढांचे का विवरण।"
-      },
-      "summary": {
-        "en": "The draft covers licensing mechanisms that protect collective contributions from being copyrighted by proprietary platforms. This is a critical development for Indic languages and regional digital sovereignty.",
-        "te": "ఈ ముసాయిదా లైసెన్స్ ప్లాట్‌ఫారమ్‌ల ద్వారా సామూహిక విరాళాలను కాపీరైట్ చేయకుండా రక్షించే లైసెన్సింగ్ విధానాలను కవర్ చేస్తుంది. ఇది భారతీయ భాషలు మరియు ప్రాంతీయ డిజిటల్ సార్వభౌమాధికారానికి కీలకమైన పరిణామం.",
-        "hi": "यह ड्राफ्ट सामूहिक योगदानों को मालिकाना मंचों द्वारा कॉपीराइट किए जाने से बचाने वाले लाइसेंसिंग तंत्र को कवर करता है। यह भारतीय भाषाओं और क्षेत्रीय डिजिटल संप्रभुता के लिए एक महत्वपूर्ण विकास है।"
-      },
-      "image": "/images/news-license.webp",
-      "url": "https://www.tripurastarnews.com/viswam-ai-and-sflc-in-release-draft-license-for-consultation-aimed-at-safeguarding-open-source-aiand-community-ownership/"
-    },
-    {
-      "id": "swecha-monthly-meetup",
-      "featured": false,
-      "year": 2025,
-      "date": {
-        "en": "December 20, 2025",
-        "te": "డిసెంబర్ 20, 2025",
-        "hi": "20 दिसंबर 2025"
+        "en": "July 9, 2024",
+        "te": "జూలై 9, 2024",
+        "hi": "9 जुलाई 2024"
       },
       "readingTime": {
         "en": "2 min read",
         "te": "2 ని. పఠనం",
         "hi": "2 मिनट"
       },
-      "publication": "Meetup",
-      "publicationLogo": "/images/logos/meetup.svg",
-      "category": {
-        "en": "Community Update",
-        "te": "కమ్యూనిటీ అప్‌డేట్",
-        "hi": "सामुदायिक अपडेट"
-      },
-      "author": {
-        "en": "Swecha FSMI",
-        "te": "స్వేచ్ఛ FSMI",
-        "hi": "स्वेच्छा एफएसएमआई"
-      },
-      "title": {
-        "en": "Join the Swecha Open Source Assembly Monthly Contributor Meetup",
-        "te": "స్వేచ్ఛ ఓపెన్ సోర్స్ మంత్లీ కంట్రిబ్యూటర్ మీటప్‌లో చేరండి",
-        "hi": "स्वेच्छा ओपन सोर्स असेंबली मासिक योगदानकर्ता बैठक में शामिल हों"
-      },
-      "description": {
-        "en": "Monthly meetup for open-source contributors working on localized OS custom builds, voice collections, and web systems.",
-        "te": "స్థానికీకరించిన OS బిల్డ్‌లు, వాయిస్ సేకరణలు మరియు వెబ్ సిస్టమ్‌లపై పనిచేస్తున్న ఓపెన్-సోర్స్ కంట్రిబ్యూటర్ల నెలవారీ సమావేశం.",
-        "hi": "स्थानीयकृत ओएस कस्टम बिल्ड, वॉयस कलेक्शन और वेब सिस्टम पर काम करने वाले ओपन-सोर्स योगदानकर्ताओं के लिए मासिक बैठक।"
-      },
-      "summary": {
-        "en": "Meet local software developers, academics, and activists. The assembly features project demonstrations, onboarding slots for first-time contributors, and code reviews for active software branches.",
-        "te": "స్థానిక సాఫ్ట్‌వేర్ డెవలపర్లు, విద్యావేత్తలు మరియు కార్యకర్తలను కలవండి. ఈ అసెంబ్లీలో ప్రాజెక్ట్ ప్రదర్శనలు, కొత్త కంట్రిబ్యూటర్లకు ఆన్‌బోర్డింగ్ మరియు క్రియాశీల సాఫ్ట్‌వేర్ బ్రాంచ్‌ల కోడ్ సమీక్షలు ఉంటాయి.",
-        "hi": "स्थानीय सॉफ्टवेयर डेवलपर्स, शिक्षाविदों और कार्यकर्ताओं से मिलें। असेंबली में प्रोजेक्ट डिमॉन्स्ट्रेशन, पहली बार योगदान देने वालों के लिए ऑनबोर्डिंग और सक्रिय सॉफ्टवेयर ब्रांचों के लिए कोड समीक्षा शामिल है।"
-      },
-      "image": "/images/news-community.webp",
-      "url": "https://www.meetup.com/swechafsmi/"
-    },
-    {
-      "id": "freedom-matters-digital-freedom",
-      "featured": false,
-      "year": 2026,
-      "date": {
-        "en": "January 10, 2026",
-        "te": "జనవరి 10, 2026",
-        "hi": "10 जनवरी 2026"
-      },
-      "readingTime": {
-        "en": "6 min read",
-        "te": "6 ని. పఠనం",
-        "hi": "6 मिनट"
-      },
-      "publication": "Freedom Matters",
-      "publicationLogo": "/images/logos/freedom_matters.svg",
-      "category": {
-        "en": "Blog",
-        "te": "బ్లాగ్",
-        "hi": "ब्लॉग"
-      },
-      "author": {
-        "en": "Kiran Chandra",
-        "te": "కిరణ్ చంద్ర",
-        "hi": "किरण चंद्र"
-      },
-      "title": {
-        "en": "Promoting Digital Freedom Through Open Technology and Localization",
-        "te": "ఓపెన్ టెక్నాలజీ మరియు స్థానికీకరణ ద్వారా డిజిటల్ స్వేచ్ఛను పెంపొందించడం",
-        "hi": "ओपन टेक्नोलॉजी और स्थानीयकरण के माध्यम से डिजिटल स्वतंत्रता को बढ़ावा देना"
-      },
-      "description": {
-        "en": "An in-depth perspective on how free software bridges the digital divide and protects digital sovereignty in local languages.",
-        "te": "ఉచిత సాఫ్ట్‌వేర్ డిజిటల్ విభజనను ఎలా తగ్గిస్తుందో మరియు స్థానిక భాషలలో డిజిటల్ సార్వభౌమాధికారాన్ని ఎలా రక్షిస్తుందో వివరించే లోతైన కథనం.",
-        "hi": "इस बात पर गहन दृष्टिकोण कि कैसे मुफ्त सॉफ्टवेयर डिजिटल विभाजन को पाटता है और स्थानीय भाषाओं में डिजिटल संप्रभुता की रक्षा करता है।"
-      },
-      "summary": {
-        "en": "This article outlines Swecha's long-standing journey from the first Telugu OS release to voice-enabled AI modules for farming. It builds the case for democratic technology infrastructure run by communities rather than monolithic corporations.",
-        "te": "ఈ వ్యాసం మొదటి తెలుగు OS విడుదల నుండి వ్యవసాయం కోసం వాయిస్-ఎనేబుల్డ్ AI మాడ్యూల్స్ వరకు స్వేచ్ఛ సాగించిన సుదీర్ఘ ప్రయాణాన్ని వివరిస్తుంది. ఏకఛత్రాధిపత్య కార్పొరేట్ సంస్థల కంటే కమ్యూనిటీల చేత నడపబడే ప్రజాస్వామ్య సాంకేతిక మౌలిక సదుపాయాల యొక్క ప్రాముఖ్యతను ఇది స్పష్టం చేస్తుంది.",
-        "hi": "यह लेख पहले तेलुगु ओएस रिलीज से लेकर खेती के लिए आवाज-सक्षम एआई मॉड्यूल तक स्वेच्छा की लंबी यात्रा को रेखांकित करता है। यह विशाल कॉर्पोरेट कंपनियों के बजाय समुदायों द्वारा संचालित लोकतांत्रिक प्रौद्योगिकी बुनियादी ढांचे का समर्थन करता है।"
-      },
-      "image": "/images/news-freedom.webp",
-      "url": "https://freedommatters.in/untitled-8/"
-    },
-    {
-      "id": "telangana-today-folklore",
-      "featured": true,
-      "year": 2024,
-      "date": {
-        "en": "August 18, 2024",
-        "te": "ఆగస్టు 18, 2024",
-        "hi": "18 अगस्त 2024"
-      },
-      "readingTime": {
-        "en": "4 min read",
-        "te": "4 ని. పఠనం",
-        "hi": "4 मिनट"
-      },
       "publication": "Telangana Today",
-      "publicationLogo": "/images/logos/telangana_today.svg",
+      "publicationLogo": "https://www.google.com/s2/favicons?domain=telanganatoday.com&sz=128",
       "category": {
-        "en": "AI Initiative",
-        "te": "AI కార్యక్రమం",
-        "hi": "एआई पहल"
+        "en": "Digital Heritage",
+        "te": "డిజిటల్ హెరిటేజ్",
+        "hi": "डिजिटल विरासत"
       },
       "author": {
-        "en": "Sravan Kumar",
-        "te": "శ్రవణ్ కుమార్",
-        "hi": "श्रवण कुमार"
+        "en": "Editorial Desk",
+        "te": "ఎడిటోరియల్ డెస్క్",
+        "hi": "संपादकीय डेस्क"
       },
       "title": {
-        "en": "Preserving Telugu Oral Traditions and Folklore Through Generative AI",
-        "te": "జనరేటివ్ AI ద్వారా తెలుగు మౌఖిక సంప్రదాయాలు మరియు జానపద కథల రక్షణ",
-        "hi": "जेनरेटिव एआई के माध्यम से तेलुगु मौखिक परंपराओं और लोककथाओं का संरक्षण"
+        "en": "Swecha to digitize local folklore via Telugu LLM",
+        "te": "తెలుగు LLM ద్వారా స్థానిక జానపద కథలను డిజిటలైజ్ చేసేందుకు స్వేచ్చ",
+        "hi": "स्वेचा तेलुगु एलएलएम के माध्यम से स्थानीय लोककथाओं को डिजिटल बनाने के लिए"
       },
       "description": {
-        "en": "Swecha's Summer of AI internship leverages engineering students to digitize Telugu stories and folk songs.",
-        "te": "తెలుగు కథలు మరియు జానపద గీతాలను డిజిటలైజ్ చేయడానికి స్వేచ్ఛ యొక్క సమ్మర్ ఆఫ్ AI ఇంటర్న్‌షిప్ ఇంజనీరింగ్ విద్యార్థులను భాగస్వామ్యం చేసింది.",
-        "hi": "तेलुगु कहानियों और लोक गीतों को डिजिटल बनाने के लिए स्वेच्छा का समर ऑफ एआई इंटर्नशिप इंजीनियरिंग छात्रों का लाभ उठाता है।"
+        "en": "As part of its large-scale internship program, Swecha is engaging students to collect, translate, and digitize local folklore, songs, and heritage data. This grassroots effort will train their upcoming open-source Telugu language models.",
+        "te": "దాని పెద్ద-స్థాయి ఇంటర్న్‌షిప్ ప్రోగ్రామ్‌లో భాగంగా, స్థానిక జానపద కథలు, పాటలు మరియు వారసత్వ డేటాను సేకరించడానికి, అనువదించడానికి మరియు డిజిటలైజ్ చేయడానికి స్వేచా విద్యార్థులను ఎంగేజ్ చేస్తోంది. ఈ అట్టడుగు ప్రయత్నం వారి రాబోయే ఓపెన్ సోర్స్ తెలుగు భాషా నమూనాలకు శిక్షణనిస్తుంది.",
+        "hi": "अपने बड़े पैमाने के इंटर्नशिप कार्यक्रम के हिस्से के रूप में, स्वेचा छात्रों को स्थानीय लोककथाओं, गीतों और विरासत डेटा को इकट्ठा करने, अनुवाद करने और डिजिटल बनाने में संलग्न कर रही है। यह जमीनी स्तर का प्रयास उनके आगामी ओपन-सोर्स तेलुगु भाषा मॉडल को प्रशिक्षित करेगा।"
       },
       "summary": {
-        "en": "Through regional recordings, Swecha has gathered over 1.5 million Telugu voice samples (Gonthuka project) and digitized historic text libraries. This provides training materials for local-language AI systems to answer community needs accurately.",
-        "te": "ప్రాంతీయ రికార్డింగ్‌ల ద్వారా, స్వేచ్ఛ 1.5 మిలియన్లకు పైగా తెలుగు వాయిస్ నమూనాలను సేకరించింది (గొంతుక ప్రాజెక్ట్) మరియు చారిత్రక వచన గ్రంథాలయాలను డిజిటలైజ్ చేసింది. ఇది కమ్యూనిటీ అవసరాలకు ఖచ్చితంగా సమాధానం ఇవ్వడానికి స్థానిక-భాషా AI వ్యవస్థలకు శిక్షణ సామగ్రిని అందిస్తుంది.",
-        "hi": "क्षेत्रीय रिकॉर्डिंग के माध्यम से, स्वेच्छा ने 15 लाख से अधिक तेलुगु आवाज के नमूने एकत्र किए हैं (गोंथुका परियोजना) और ऐतिहासिक पाठ पुस्तकालयों को डिजिटल बनाया है। यह स्थानीय-भाषा एआई प्रणालियों के लिए प्रशिक्षण सामग्री प्रदान करता है।"
+        "en": "As part of its large-scale internship program, Swecha is engaging students to collect, translate, and digitize local folklore, songs, and heritage data. This grassroots effort will train their upcoming open-source Telugu language models.",
+        "te": "దాని పెద్ద-స్థాయి ఇంటర్న్‌షిప్ ప్రోగ్రామ్‌లో భాగంగా, స్థానిక జానపద కథలు, పాటలు మరియు వారసత్వ డేటాను సేకరించడానికి, అనువదించడానికి మరియు డిజిటలైజ్ చేయడానికి స్వేచా విద్యార్థులను ఎంగేజ్ చేస్తోంది. ఈ అట్టడుగు ప్రయత్నం వారి రాబోయే ఓపెన్ సోర్స్ తెలుగు భాషా నమూనాలకు శిక్షణనిస్తుంది.",
+        "hi": "अपने बड़े पैमाने के इंटर्नशिप कार्यक्रम के हिस्से के रूप में, स्वेचा छात्रों को स्थानीय लोककथाओं, गीतों और विरासत डेटा को इकट्ठा करने, अनुवाद करने और डिजिटल बनाने में संलग्न कर रही है। यह जमीनी स्तर का प्रयास उनके आगामी ओपन-सोर्स तेलुगु भाषा मॉडल को प्रशिक्षित करेगा।"
       },
-      "image": "/images/news-featured.webp",
+      "image": "/images/news-datathon.webp",
       "url": "https://telanganatoday.com/hyderabad-swecha-to-digitize-local-folklore-via-telugu-llm"
     },
     {
-      "id": "times-of-india-ai-for-society",
-      "featured": false,
+      "id": "article-1782181318592-5",
       "year": 2024,
       "date": {
-        "en": "March 24, 2024",
-        "te": "మార్చి 24, 2024",
-        "hi": "24 मार्च 2024"
+        "en": "May 2, 2024",
+        "te": "మే 2, 2024",
+        "hi": "2 मई 2024"
       },
       "readingTime": {
-        "en": "3 min read",
-        "te": "3 ని. పఠనం",
-        "hi": "3 मिनट"
-      },
-      "publication": "Times of India",
-      "publicationLogo": "/images/logos/times_of_india.svg",
-      "category": {
-        "en": "Conferences & Events",
-        "te": "కాన్ఫరెన్స్ & ఈవెంట్‌లు",
-        "hi": "सम्मेलन और कार्यक्रम"
-      },
-      "author": {
-        "en": "TOI News Network",
-        "te": "TOI న్యూస్ నెట్‌వర్క్",
-        "hi": "टीओआई न्यूज नेटवर्क"
-      },
-      "title": {
-        "en": "Swecha AI Days Discusses Voice Assistants for Rural Farmers",
-        "te": "గ్రామీణ రైతులకు వాయిస్ అసిస్టెంట్లపై చర్చించిన స్వేచ్ఛ AI డేస్",
-        "hi": "स्वेच्छा एआई डेज में ग्रामीण किसानों के लिए वॉयस असिस्टेंट पर चर्चा की गई"
-      },
-      "description": {
-        "en": "A panel of technology experts outlines the design of local-language speech engines to assist farming communities.",
-        "te": "వ్యవసాయ సంఘాలకు సహాయం చేయడానికి స్థానిక-భాషా స్పీచ్ ఇంజన్ల రూపకల్పనను సాంకేతిక నిపుణుల బృందం వివరించింది.",
-        "hi": "प्रौद्योगिकी विशेषज्ञों के एक पैनल ने कृषि समुदायों की सहायता के लिए स्थानीय-भाषा भाषण इंजनों के डिजाइन की रूपरेखा तैयार की।"
-      },
-      "summary": {
-        "en": "The event featured live demonstrations of localized voice agents answering agricultural, soil quality, and government crop subsidy queries in local dialects. It emphasizes reducing barriers to digital literacy for low-income segments.",
-        "te": "ఈ ఈవెంట్‌లో వ్యవసాయం, నేల నాణ్యత మరియు ప్రభుత్వ పంట సబ్సిడీల ప్రశ్నలకు స్థానిక యాసలో సమాధానమిచ్చే వాయిస్ ఏజెంట్ల ప్రత్యక్ష ప్రదర్శనలు జరిగాయి. ఇది తక్కువ ఆదాయ వర్గాలకు డిజిటల్ అక్షరాస్యత అడ్డంకులను తగ్గించడాన్ని నొక్కి చెబుతుంది.",
-        "hi": "इस कार्यक्रम में स्थानीय बोलियों में कृषि, मिट्टी की गुणवत्ता और सरकारी फसल सब्सिडी के सवालों के जवाब देने वाले स्थानीय वॉयस एजेंटों के लाइव प्रदर्शन शामिल थे। यह कम आय वाले वर्गों के लिए डिजिटल साक्षरता बाधाओं को कम करने पर जोर देता है।"
-      },
-      "image": "/images/news-featured.webp",
-      "url": "https://timesofindia.indiatimes.com/city/hyderabad/ai-days-by-swecha-to-discuss-ai-for-farmers/articleshow/108712345.cms"
-    },
-    {
-      "id": "the-hindu-ai-days-2025",
-      "featured": true,
-      "year": 2025,
-      "date": {
-        "en": "April 6, 2025",
-        "te": "ఏప్రిల్ 6, 2025",
-        "hi": "6 अप्रैल 2025"
-      },
-      "readingTime": {
-        "en": "4 min read",
-        "te": "4 ని. పఠనం",
-        "hi": "4 मिनट"
+        "en": "2 min read",
+        "te": "2 ని. పఠనం",
+        "hi": "2 मिनट"
       },
       "publication": "The Hindu",
-      "publicationLogo": "/images/logos/the_hindu.svg",
+      "publicationLogo": "https://www.google.com/s2/favicons?domain=thehindu.com&sz=128",
       "category": {
-        "en": "Conferences & Events",
-        "te": "కాన్ఫరెన్స్ & ఈవెంట్‌లు",
-        "hi": "सम्मेलन और कार्यक्रम"
+        "en": "Voice AI",
+        "te": "వాయిస్ AI",
+        "hi": "आवाज ए.आई"
       },
       "author": {
-        "en": "Staff Reporter",
-        "te": "స్టాఫ్ రిపోర్టర్",
-        "hi": "स्टाफ रिपोर्टर"
+        "en": "Editorial Desk",
+        "te": "ఎడిటోరియల్ డెస్క్",
+        "hi": "संपादकीय डेस्क"
       },
       "title": {
-        "en": "Swecha AI Days 2025 Focuses on 'AI for Society' with 1,500+ Innovators",
-        "te": "1,500 మందికి పైగా ఆవిష్కర్తలతో 'సామాజిక హితం కొరకు AI' అంశంపై స్వేచ్ఛ AI డేస్ 2025",
-        "hi": "स्वेच्छा एआई डेज 2025 में 1,500 से अधिक इनोवेटर्स के साथ 'एआई फॉर सोसाइटी' पर ध्यान केंद्रित किया गया"
+        "en": "Swecha Gonthuka project aims to build a comprehensive Telugu AI voice assistant",
+        "te": "Swecha Gonthuka project aims to build a comprehensive Telugu AI voice assistant",
+        "hi": "स्वेचा गोंथुका परियोजना का लक्ष्य एक व्यापक तेलुगु एआई वॉयस असिस्टेंट का निर्माण करना है"
       },
       "description": {
-        "en": "The national conference highlighted community-owned AI models, Telugu translation engines, and multi-domain hackathons.",
-        "te": "జాతీయ సమావేశంలో కమ్యూనిటీ యాజమాన్యంలోని AI నమూనాలు, తెలుగు అనువాద ఇంజన్లు మరియు మల్టీ-డొమైన్ హ్యాకథాన్‌లు ప్రధాన ఆకర్షణగా నిలిచాయి.",
-        "hi": "राष्ट्रीय सम्मेलन ने सामुदायिक स्वामित्व वाले एआई मॉडल, तेलुगु अनुवाद इंजन और मल्टी-डोमेन हैकथॉन पर प्रकाश डाला।"
+        "en": "Swecha has introduced 'Swecha Gonthuka', an ambitious voice collection drive. Volunteers across Telangana are contributing thousands of hours of spoken Telugu to build an open-source AI voice assistant capable of regional dialects.",
+        "te": "స్వేచ్చ ప్రతిష్టాత్మక వాయిస్ సేకరణ డ్రైవ్ 'స్వేచ్ఛ గొంతుక'ను పరిచయం చేసింది. ప్రాంతీయ మాండలికాల సామర్థ్యం గల ఓపెన్ సోర్స్ AI వాయిస్ అసిస్టెంట్‌ను రూపొందించడానికి తెలంగాణ అంతటా వాలంటీర్లు వేలాది గంటల మాట్లాడే తెలుగును అందిస్తున్నారు.",
+        "hi": "स्वेचा ने एक महत्वाकांक्षी आवाज संग्रह अभियान 'स्वेचा गोन्थुका' पेश किया है। तेलंगाना भर के स्वयंसेवक क्षेत्रीय बोलियों में सक्षम ओपन-सोर्स एआई वॉयस असिस्टेंट बनाने के लिए हजारों घंटे की तेलुगु बोली में योगदान दे रहे हैं।"
       },
       "summary": {
-        "en": "Speakers from global technology firms and academic institutions debated open-source model optimization, dataset governance, and localized AI ethics. The event hosted a massive multi-day build sprint addressing healthcare and educational divides.",
-        "te": "గ్లోబల్ టెక్నాలజీ కంపెనీలు మరియు విద్యాసంస్థల ప్రతినిధులు ఓపెన్-సోర్స్ మోడల్ ఆప్టిమైజేషన్, డేటాసెట్ గవర్నెన్స్ మరియు స్థానిక AI నైతికతపై చర్చించారు. ఈ ఈవెంట్ ఆరోగ్యం మరియు విద్యా విభజనలను పరిష్కరించే బహుళ రోజుల బిల్డ్ స్ప్రింట్‌ను నిర్వహించింది.",
-        "hi": "वैश्विक प्रौद्योगिकी फर्मों और शैक्षणिक संस्थानों के वक्ताओं ने ओपन-सोर्स मॉडल अनुकूलन, डेटासेट गवर्नेंस और स्थानीय एआई नैतिकता पर चर्चा की। इस कार्यक्रम ने स्वास्थ्य सेवा और शैक्षिक अंतर को संबोधित करने वाले बहु-दिवसीय बिल्ड स्प्रिंट की मेजबानी की।"
+        "en": "Swecha has introduced 'Swecha Gonthuka', an ambitious voice collection drive. Volunteers across Telangana are contributing thousands of hours of spoken Telugu to build an open-source AI voice assistant capable of regional dialects.",
+        "te": "స్వేచ్చ ప్రతిష్టాత్మక వాయిస్ సేకరణ డ్రైవ్ 'స్వేచ్ఛ గొంతుక'ను పరిచయం చేసింది. ప్రాంతీయ మాండలికాల సామర్థ్యం గల ఓపెన్ సోర్స్ AI వాయిస్ అసిస్టెంట్‌ను రూపొందించడానికి తెలంగాణ అంతటా వాలంటీర్లు వేలాది గంటల మాట్లాడే తెలుగును అందిస్తున్నారు.",
+        "hi": "स्वेचा ने एक महत्वाकांक्षी आवाज संग्रह अभियान 'स्वेचा गोन्थुका' पेश किया है। तेलंगाना भर के स्वयंसेवक क्षेत्रीय बोलियों में सक्षम ओपन-सोर्स एआई वॉयस असिस्टेंट बनाने के लिए हजारों घंटे की तेलुगु बोली में योगदान दे रहे हैं।"
       },
-      "image": "/images/news-featured.webp",
-      "url": "https://www.thehindu.com/news/cities/Hyderabad/swecha-ai-days-2025-ai-for-society/article8872656.ece"
+      "image": "/images/news-community.webp",
+      "url": "https://www.thehindu.com/news/cities/Hyderabad/swecha-gonthuka-project-to-build-telugu-ai-voice-assistant/article68123456.ece"
     },
     {
-      "id": "ehrs-rural-health",
-      "featured": false,
-      "year": 2025,
+      "id": "article-1782181326034-6",
+      "year": 2024,
       "date": {
-        "en": "November 12, 2025",
-        "te": "నవంబర్ 12, 2025",
-        "hi": "12 नवंबर 2025"
+        "en": "March 30, 2024",
+        "te": "మార్చి 30, 2024",
+        "hi": "30 मार्च 2024"
       },
       "readingTime": {
-        "en": "5 min read",
-        "te": "5 ని. పఠనం",
-        "hi": "5 मिनट"
+        "en": "2 min read",
+        "te": "2 ని. పఠనం",
+        "hi": "2 मिनट"
       },
-      "publication": "Indian Express",
-      "publicationLogo": "/images/logos/indian_express.svg",
+      "publication": "The Hindu",
+      "publicationLogo": "https://www.google.com/s2/favicons?domain=thehindu.com&sz=128",
       "category": {
-        "en": "Community Initiatives",
-        "te": "కమ్యూనిటీ కార్యక్రమాలు",
-        "hi": "सामुदायिक पहल"
+        "en": "Conferences",
+        "te": "సమావేశాలు",
+        "hi": "सम्मेलन"
       },
       "author": {
-        "en": "Express News Service",
-        "te": "ఎక్స్‌ప్రెస్ న్యూస్ సర్వీస్",
-        "hi": "एक्सप्रेस न्यूज सर्विस"
+        "en": "Editorial Desk",
+        "te": "ఎడిటోరియల్ డెస్క్",
+        "hi": "संपादकीय डेस्क"
       },
       "title": {
-        "en": "Swecha EHR Initiative Digitizes Health Records in Rural Areas",
-        "te": "గ్రామీణ ప్రాంతాలలో ఆరోగ్య రికార్డులను డిజిటలైజ్ చేసిన స్వేచ్ఛ EHR కార్యక్రమం",
-        "hi": "स्वेच्छा ईएचआर पहल ने ग्रामीण क्षेत्रों में स्वास्थ्य रिकॉर्ड का डिजिटलीकरण किया"
+        "en": "AI Days 2024 focuses on democratising Artificial Intelligence",
+        "te": "AI డేస్ 2024 ఆర్టిఫిషియల్ ఇంటెలిజెన్స్‌ను ప్రజాస్వామ్యీకరించడంపై దృష్టి పెడుతుంది",
+        "hi": "एआई डेज़ 2024 आर्टिफिशियल इंटेलिजेंस को लोकतांत्रिक बनाने पर केंद्रित है"
       },
       "description": {
-        "en": "Collaborative project deployed in local village councils utilizing open-source Electronic Health Record systems.",
-        "te": "ఓపెన్-సోర్స్ ఎలక్ట్రానిక్ హెల్త్ రికార్డ్ సిస్టమ్‌లను ఉపయోగించి స్థానిక గ్రామ పంచాయతీలలో అమలు చేసిన ఉమ్మడి ప్రాజెక్టు.",
-        "hi": "ओपन-सोर्स इलेक्ट्रॉनिक हेल्थ रिकॉर्ड सिस्टम का उपयोग करके स्थानीय ग्राम पंचायतों में तैनात सहयोगी परियोजना।"
+        "en": "Held at JNTU Hyderabad, the AI Days 2024 conference, co-organized by Swecha, brought together students, researchers, and policymakers to discuss the ethics, open-source licensing, and grassroots impact of AI.",
+        "te": "JNTU హైదరాబాద్‌లో జరిగిన AI డేస్ 2024 కాన్ఫరెన్స్, స్వేచా సహ-ఆర్గనైజ్ చేయబడింది, విద్యార్థులు, పరిశోధకులు మరియు విధాన రూపకర్తలను కలిసి AI యొక్క నైతికత, ఓపెన్-సోర్స్ లైసెన్సింగ్ మరియు అట్టడుగు స్థాయి ప్రభావం గురించి చర్చించారు.",
+        "hi": "जेएनटीयू हैदराबाद में आयोजित, एआई डेज़ 2024 सम्मेलन, स्वेचा द्वारा सह-आयोजित, नैतिकता, ओपन-सोर्स लाइसेंसिंग और एआई के जमीनी स्तर पर प्रभाव पर चर्चा करने के लिए छात्रों, शोधकर्ताओं और नीति निर्माताओं को एक साथ लाया गया।"
       },
       "summary": {
-        "en": "Volunteers and medical students deployed custom database systems to capture family histories, vaccination rates, and endemic disease trends. The system operates fully offline, ensuring continuous access in remote clusters.",
-        "te": "కుటుంబ చరిత్రలు, టీకాల రేట్లు మరియు స్థానిక వ్యాధుల ధోరణులను నమోదు చేయడానికి వాలంటీర్లు మరియు వైద్య విద్యార్థులు కస్టమ్ డేటాబేస్ వ్యవస్థలను ఉపయోగించారు. ఈ వ్యవస్థ పూర్తిగా ఆఫ్‌లైన్‌లో పనిచేస్తూ, రిమోట్ క్లస్టర్లలో నిరంతర ప్రాప్యతను నిర్ధారిస్తుంది.",
-        "hi": "स्वयंसेवकों और चिकित्सा छात्रों ने पारिवारिक इतिहास, टीकाकरण दरों और स्थानीय रोग प्रवृत्तियों को दर्ज करने के लिए कस्टम डेटाबेस सिस्टम का उपयोग किया। यह प्रणाली पूरी तरह से ऑफ़लाइन काम करती है, जिससे दूरदराज के क्षेत्रों में निरंतर पहुंच सुनिश्चित होती है।"
+        "en": "Held at JNTU Hyderabad, the AI Days 2024 conference, co-organized by Swecha, brought together students, researchers, and policymakers to discuss the ethics, open-source licensing, and grassroots impact of AI.",
+        "te": "JNTU హైదరాబాద్‌లో జరిగిన AI డేస్ 2024 కాన్ఫరెన్స్, స్వేచా సహ-ఆర్గనైజ్ చేయబడింది, విద్యార్థులు, పరిశోధకులు మరియు విధాన రూపకర్తలను కలిసి AI యొక్క నైతికత, ఓపెన్-సోర్స్ లైసెన్సింగ్ మరియు అట్టడుగు స్థాయి ప్రభావం గురించి చర్చించారు.",
+        "hi": "जेएनटीयू हैदराबाद में आयोजित, एआई डेज़ 2024 सम्मेलन, स्वेचा द्वारा सह-आयोजित, नैतिकता, ओपन-सोर्स लाइसेंसिंग और एआई के जमीनी स्तर पर प्रभाव पर चर्चा करने के लिए छात्रों, शोधकर्ताओं और नीति निर्माताओं को एक साथ लाया गया।"
       },
-      "image": "/images/news-freedom.webp",
-      "url": "https://www.newindianexpress.com/cities/hyderabad/swecha-ehrs-project-digital-health-empowerment"
+      "image": "/images/news-featured.webp",
+      "url": "https://www.thehindu.com/news/national/telangana/ai-days-2024-focuses-on-democratising-artificial-intelligence/article68007283.ece"
+    },
+    {
+      "id": "article-1782181333684-7",
+      "year": 2024,
+      "date": {
+        "en": "August 30, 2024",
+        "te": "ఆగస్టు 30, 2024",
+        "hi": "30 अगस्त 2024"
+      },
+      "readingTime": {
+        "en": "2 min read",
+        "te": "2 ని. పఠనం",
+        "hi": "2 मिनट"
+      },
+      "publication": "The Hindu",
+      "publicationLogo": "https://www.google.com/s2/favicons?domain=thehindu.com&sz=128",
+      "category": {
+        "en": "AI Governance",
+        "te": "AI గవర్నెన్స్",
+        "hi": "एआई शासन"
+      },
+      "author": {
+        "en": "Editorial Desk",
+        "te": "ఎడిటోరియల్ డెస్క్",
+        "hi": "संपादकीय डेस्क"
+      },
+      "title": {
+        "en": "Understanding Trust and Safety in AI: Swecha hosts major roundtable",
+        "te": "AIలో నమ్మకం మరియు భద్రతను అర్థం చేసుకోవడం: స్వేచా ప్రధాన రౌండ్‌టేబుల్‌ని నిర్వహిస్తుంది",
+        "hi": "एआई में विश्वास और सुरक्षा को समझना: स्वेच्छा प्रमुख गोलमेज सम्मेलन की मेजबानी करती है"
+      },
+      "description": {
+        "en": "A pivotal roundtable at IIIT Hyderabad, hosted by Swecha and SFLC.in, debated the intersection of AI innovation and copyright. Experts drafted a new open-source AI license for the Indian context.",
+        "te": "IIIT హైదరాబాద్‌లో స్వేచా మరియు SFLC.in హోస్ట్ చేసిన కీలకమైన రౌండ్‌టేబుల్, AI ఆవిష్కరణ మరియు కాపీరైట్ యొక్క విభజన గురించి చర్చించింది. నిపుణులు భారతీయ సందర్భం కోసం కొత్త ఓపెన్ సోర్స్ AI లైసెన్స్‌ని రూపొందించారు.",
+        "hi": "आईआईआईटी हैदराबाद में स्वेचा और एसएफएलसी.इन द्वारा आयोजित एक निर्णायक गोलमेज सम्मेलन में एआई नवाचार और कॉपीराइट के प्रतिच्छेदन पर बहस हुई। विशेषज्ञों ने भारतीय संदर्भ के लिए एक नए ओपन-सोर्स एआई लाइसेंस का मसौदा तैयार किया।"
+      },
+      "summary": {
+        "en": "A pivotal roundtable at IIIT Hyderabad, hosted by Swecha and SFLC.in, debated the intersection of AI innovation and copyright. Experts drafted a new open-source AI license for the Indian context.",
+        "te": "IIIT హైదరాబాద్‌లో స్వేచా మరియు SFLC.in హోస్ట్ చేసిన కీలకమైన రౌండ్‌టేబుల్, AI ఆవిష్కరణ మరియు కాపీరైట్ యొక్క విభజన గురించి చర్చించింది. నిపుణులు భారతీయ సందర్భం కోసం కొత్త ఓపెన్ సోర్స్ AI లైసెన్స్‌ని రూపొందించారు.",
+        "hi": "आईआईआईटी हैदराबाद में स्वेचा और एसएफएलसी.इन द्वारा आयोजित एक निर्णायक गोलमेज सम्मेलन में एआई नवाचार और कॉपीराइट के प्रतिच्छेदन पर बहस हुई। विशेषज्ञों ने भारतीय संदर्भ के लिए एक नए ओपन-सोर्स एआई लाइसेंस का मसौदा तैयार किया।"
+      },
+      "image": "/images/news-license.webp",
+      "url": "https://www.thehindu.com/news/cities/Hyderabad/understanding-trust-and-safety-in-ai/article68582123.ece"
+    },
+    {
+      "id": "article-1782181339903-8",
+      "year": 2023,
+      "date": {
+        "en": "December 31, 2023",
+        "te": "డిసెంబర్ 31, 2023",
+        "hi": "31 दिसंबर 2023"
+      },
+      "readingTime": {
+        "en": "2 min read",
+        "te": "2 ని. పఠనం",
+        "hi": "2 मिनट"
+      },
+      "publication": "New Indian Express",
+      "publicationLogo": "https://www.google.com/s2/favicons?domain=newindianexpress.com&sz=128",
+      "category": {
+        "en": "Storytelling AI",
+        "te": "కథ చెప్పే AI",
+        "hi": "कहानी सुनाने वाला ए.आई"
+      },
+      "author": {
+        "en": "Editorial Desk",
+        "te": "ఎడిటోరియల్ డెస్క్",
+        "hi": "संपादकीय डेस्क"
+      },
+      "title": {
+        "en": "Swecha unveils 'Chandamama Kathalu' in Telugu with AI model",
+        "te": "Swecha unveils 'Chandamama Kathalu' in Telugu with AI model",
+        "hi": "स्वेचा ने एआई मॉडल के साथ तेलुगु में 'चंदामामा कथलू' का अनावरण किया"
+      },
+      "description": {
+        "en": "Swecha successfully demonstrated an AI model that generates new Telugu stories in the style of the classic Chandamama magazines, proving the efficacy of small language models for specific cultural tasks.",
+        "te": "నిర్దిష్ట సాంస్కృతిక పనుల కోసం చిన్న భాషా నమూనాల సామర్థ్యాన్ని రుజువు చేస్తూ, క్లాసిక్ చందమామ మ్యాగజైన్‌ల తరహాలో కొత్త తెలుగు కథలను రూపొందించే AI మోడల్‌ను స్వేచ్ఛ విజయవంతంగా ప్రదర్శించింది.",
+        "hi": "स्वेचा ने एक एआई मॉडल का सफलतापूर्वक प्रदर्शन किया जो क्लासिक चंदामामा पत्रिकाओं की शैली में नई तेलुगु कहानियां तैयार करता है, जो विशिष्ट सांस्कृतिक कार्यों के लिए छोटे भाषा मॉडल की प्रभावकारिता को साबित करता है।"
+      },
+      "summary": {
+        "en": "Swecha successfully demonstrated an AI model that generates new Telugu stories in the style of the classic Chandamama magazines, proving the efficacy of small language models for specific cultural tasks.",
+        "te": "నిర్దిష్ట సాంస్కృతిక పనుల కోసం చిన్న భాషా నమూనాల సామర్థ్యాన్ని రుజువు చేస్తూ, క్లాసిక్ చందమామ మ్యాగజైన్‌ల తరహాలో కొత్త తెలుగు కథలను రూపొందించే AI మోడల్‌ను స్వేచ్ఛ విజయవంతంగా ప్రదర్శించింది.",
+        "hi": "स्वेचा ने एक एआई मॉडल का सफलतापूर्वक प्रदर्शन किया जो क्लासिक चंदामामा पत्रिकाओं की शैली में नई तेलुगु कहानियां तैयार करता है, जो विशिष्ट सांस्कृतिक कार्यों के लिए छोटे भाषा मॉडल की प्रभावकारिता को साबित करता है।"
+      },
+      "image": "/images/news-featured.webp",
+      "url": "https://www.newindianexpress.com/states/telangana/2023/Dec/31/swecha-unveils-chandamama-kathalu-in-telugu-with-ai-model-2646452.html"
+    },
+    {
+      "id": "article-1782181345187-9",
+      "year": 2023,
+      "date": {
+        "en": "December 15, 2023",
+        "te": "డిసెంబర్ 15, 2023",
+        "hi": "15 दिसंबर 2023"
+      },
+      "readingTime": {
+        "en": "2 min read",
+        "te": "2 ని. పఠనం",
+        "hi": "2 मिनट"
+      },
+      "publication": "Swecha.org",
+      "publicationLogo": "https://www.google.com/s2/favicons?domain=swecha.org&sz=128",
+      "category": {
+        "en": "Community",
+        "te": "సంఘం",
+        "hi": "समुदाय"
+      },
+      "author": {
+        "en": "Editorial Desk",
+        "te": "ఎడిటోరియల్ డెస్క్",
+        "hi": "संपादकीय डेस्क"
+      },
+      "title": {
+        "en": "Thousands gather for Swecha's Open Source Technologies Summit",
+        "te": "స్వేచా ఓపెన్ సోర్స్ టెక్నాలజీస్ సమ్మిట్ కోసం వేలాది మంది గుమిగూడారు",
+        "hi": "स्वेचा के ओपन सोर्स टेक्नोलॉजीज शिखर सम्मेलन के लिए हजारों लोग एकत्र हुए"
+      },
+      "description": {
+        "en": "Emphasizing that technology must serve society, Swecha's annual summit attracted over 5,000 engineering students who contributed to health-tech, agri-tech, and open-source civic platforms.",
+        "te": "సాంకేతికత సమాజానికి సేవ చేయాలని ఉద్ఘాటిస్తూ, స్వేచా యొక్క వార్షిక శిఖరాగ్ర సమావేశం 5,000 మంది ఇంజనీరింగ్ విద్యార్థులను ఆకర్షించింది, వారు హెల్త్-టెక్, అగ్రి-టెక్ మరియు ఓపెన్-సోర్స్ సివిక్ ప్లాట్‌ఫారమ్‌లకు సహకరించారు.",
+        "hi": "इस बात पर जोर देते हुए कि प्रौद्योगिकी को समाज की सेवा करनी चाहिए, स्वेचा के वार्षिक शिखर सम्मेलन ने 5,000 से अधिक इंजीनियरिंग छात्रों को आकर्षित किया जिन्होंने स्वास्थ्य-तकनीक, कृषि-तकनीक और ओपन-सोर्स नागरिक प्लेटफार्मों में योगदान दिया।"
+      },
+      "summary": {
+        "en": "Emphasizing that technology must serve society, Swecha's annual summit attracted over 5,000 engineering students who contributed to health-tech, agri-tech, and open-source civic platforms.",
+        "te": "సాంకేతికత సమాజానికి సేవ చేయాలని ఉద్ఘాటిస్తూ, స్వేచా యొక్క వార్షిక శిఖరాగ్ర సమావేశం 5,000 మంది ఇంజనీరింగ్ విద్యార్థులను ఆకర్షించింది, వారు హెల్త్-టెక్, అగ్రి-టెక్ మరియు ఓపెన్-సోర్స్ సివిక్ ప్లాట్‌ఫారమ్‌లకు సహకరించారు.",
+        "hi": "इस बात पर जोर देते हुए कि प्रौद्योगिकी को समाज की सेवा करनी चाहिए, स्वेचा के वार्षिक शिखर सम्मेलन ने 5,000 से अधिक इंजीनियरिंग छात्रों को आकर्षित किया जिन्होंने स्वास्थ्य-तकनीक, कृषि-तकनीक और ओपन-सोर्स नागरिक प्लेटफार्मों में योगदान दिया।"
+      },
+      "image": "/images/news-featured.webp",
+      "url": "https://swecha.org/news/summit2023"
+    },
+    {
+      "id": "article-1782181351238-10",
+      "year": 2023,
+      "date": {
+        "en": "October 10, 2023",
+        "te": "అక్టోబర్ 10, 2023",
+        "hi": "10 अक्टूबर 2023"
+      },
+      "readingTime": {
+        "en": "2 min read",
+        "te": "2 ని. పఠనం",
+        "hi": "2 मिनट"
+      },
+      "publication": "Freedom Matters",
+      "publicationLogo": "https://www.google.com/s2/favicons?domain=freedommatters.in&sz=128",
+      "category": {
+        "en": "Education",
+        "te": "విద్య",
+        "hi": "शिक्षा"
+      },
+      "author": {
+        "en": "Editorial Desk",
+        "te": "ఎడిటోరియల్ డెస్క్",
+        "hi": "संपादकीय डेस्क"
+      },
+      "title": {
+        "en": "Bridging the Digital Divide: Swecha's Free Software interventions in rural schools",
+        "te": "బ్రిడ్జింగ్ ది డిజిటల్ డివైడ్: గ్రామీణ పాఠశాలల్లో స్వేచా యొక్క ఉచిత సాఫ్ట్‌వేర్ జోక్యాలు",
+        "hi": "डिजिटल विभाजन को पाटना: ग्रामीण स्कूलों में स्वेच्छा का मुफ्त सॉफ्टवेयर हस्तक्षेप"
+      },
+      "description": {
+        "en": "Through customized GNU/Linux operating systems, Swecha has equipped hundreds of rural government schools with functional, free software-based computer labs, completely avoiding costly proprietary licenses.",
+        "te": "అనుకూలీకరించిన GNU/Linux ఆపరేటింగ్ సిస్టమ్‌ల ద్వారా, స్వేచా వందలాది గ్రామీణ ప్రభుత్వ పాఠశాలలను ఫంక్షనల్, ఉచిత సాఫ్ట్‌వేర్ ఆధారిత కంప్యూటర్ ల్యాబ్‌లతో అమర్చింది, ఖరీదైన యాజమాన్య లైసెన్స్‌లను పూర్తిగా తప్పించింది.",
+        "hi": "अनुकूलित जीएनयू/लिनक्स ऑपरेटिंग सिस्टम के माध्यम से, स्वेचा ने महंगे मालिकाना लाइसेंस से पूरी तरह परहेज करते हुए सैकड़ों ग्रामीण सरकारी स्कूलों को कार्यात्मक, मुफ्त सॉफ्टवेयर-आधारित कंप्यूटर प्रयोगशालाओं से सुसज्जित किया है।"
+      },
+      "summary": {
+        "en": "Through customized GNU/Linux operating systems, Swecha has equipped hundreds of rural government schools with functional, free software-based computer labs, completely avoiding costly proprietary licenses.",
+        "te": "అనుకూలీకరించిన GNU/Linux ఆపరేటింగ్ సిస్టమ్‌ల ద్వారా, స్వేచా వందలాది గ్రామీణ ప్రభుత్వ పాఠశాలలను ఫంక్షనల్, ఉచిత సాఫ్ట్‌వేర్ ఆధారిత కంప్యూటర్ ల్యాబ్‌లతో అమర్చింది, ఖరీదైన యాజమాన్య లైసెన్స్‌లను పూర్తిగా తప్పించింది.",
+        "hi": "अनुकूलित जीएनयू/लिनक्स ऑपरेटिंग सिस्टम के माध्यम से, स्वेचा ने महंगे मालिकाना लाइसेंस से पूरी तरह परहेज करते हुए सैकड़ों ग्रामीण सरकारी स्कूलों को कार्यात्मक, मुफ्त सॉफ्टवेयर-आधारित कंप्यूटर प्रयोगशालाओं से सुसज्जित किया है।"
+      },
+      "image": "/images/news-featured.webp",
+      "url": "https://freedommatters.in/swecha-rural-schools"
+    },
+    {
+      "id": "article-1782181359070-11",
+      "year": 2024,
+      "date": {
+        "en": "January 2, 2024",
+        "te": "జనవరి 2, 2024",
+        "hi": "2 जनवरी 2024"
+      },
+      "readingTime": {
+        "en": "2 min read",
+        "te": "2 ని. పఠనం",
+        "hi": "2 मिनट"
+      },
+      "publication": "IndiaAI",
+      "publicationLogo": "https://www.google.com/s2/favicons?domain=indiaai.gov.in&sz=128",
+      "category": {
+        "en": "National News",
+        "te": "జాతీయ వార్తలు",
+        "hi": "राष्ट्रीय समाचार"
+      },
+      "author": {
+        "en": "Editorial Desk",
+        "te": "ఎడిటోరియల్ డెస్క్",
+        "hi": "संपादकीय डेस्क"
+      },
+      "title": {
+        "en": "Hyderabad's Swecha org launches an AI model on Chandamama Kathalu",
+        "te": "Hyderabad's Swecha org launches an AI model on Chandamama Kathalu",
+        "hi": "हैदराबाद के स्वेचा संगठन ने चंदामामा कथलू पर एक एआई मॉडल लॉन्च किया"
+      },
+      "description": {
+        "en": "Featured on the national IndiaAI portal, Swecha’s new generative AI model bridges generations by recreating beloved Telugu folklore through modern AI architecture, setting a precedent for vernacular AI.",
+        "te": "జాతీయ IndiaAI పోర్టల్‌లో ఫీచర్ చేయబడింది, స్వేచా యొక్క కొత్త ఉత్పాదక AI మోడల్ ఆధునిక AI ఆర్కిటెక్చర్ ద్వారా ప్రియమైన తెలుగు జానపద కథలను పునర్నిర్మించడం ద్వారా తరతరాలను వంతెన చేస్తుంది, ఇది మాతృభాష AIకి ఒక ఉదాహరణగా నిలిచింది.",
+        "hi": "राष्ट्रीय इंडियाएआई पोर्टल पर प्रदर्शित, स्वेचा का नया जेनरेटिव एआई मॉडल आधुनिक एआई वास्तुकला के माध्यम से प्रिय तेलुगु लोककथाओं को फिर से बनाकर पीढ़ियों को जोड़ता है, जो स्थानीय एआई के लिए एक मिसाल कायम करता है।"
+      },
+      "summary": {
+        "en": "Featured on the national IndiaAI portal, Swecha’s new generative AI model bridges generations by recreating beloved Telugu folklore through modern AI architecture, setting a precedent for vernacular AI.",
+        "te": "జాతీయ IndiaAI పోర్టల్‌లో ఫీచర్ చేయబడింది, స్వేచా యొక్క కొత్త ఉత్పాదక AI మోడల్ ఆధునిక AI ఆర్కిటెక్చర్ ద్వారా ప్రియమైన తెలుగు జానపద కథలను పునర్నిర్మించడం ద్వారా తరతరాలను వంతెన చేస్తుంది, ఇది మాతృభాష AIకి ఒక ఉదాహరణగా నిలిచింది.",
+        "hi": "राष्ट्रीय इंडियाएआई पोर्टल पर प्रदर्शित, स्वेचा का नया जेनरेटिव एआई मॉडल आधुनिक एआई वास्तुकला के माध्यम से प्रिय तेलुगु लोककथाओं को फिर से बनाकर पीढ़ियों को जोड़ता है, जो स्थानीय एआई के लिए एक मिसाल कायम करता है।"
+      },
+      "image": "/images/news-featured.webp",
+      "url": "https://indiaai.gov.in/news/hyderabad-s-swecha-org-launches-an-ai-model-on-chandamama-kathalu"
     }
   ],
   "milestones": [
