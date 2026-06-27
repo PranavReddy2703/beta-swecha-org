@@ -1,0 +1,41 @@
+---
+// src/components/atoms/SectionHeading.astro
+interface Props {
+  title: string;
+  subtitle?: string;
+  align?: "center" | "left";
+  underline?: boolean;
+  class?: string;
+}
+
+const {
+  title,
+  subtitle,
+  align = "center",
+  underline = true,
+  class: className = "",
+} = Astro.props;
+
+const alignClass = align === "center" ? "text-center" : "text-left";
+const underlineMargin = align === "center" ? "mx-auto" : "";
+---
+
+<div class={`${alignClass} ${className}`}>
+  <h2
+    class="text-xs font-black uppercase tracking-widest text-primary-brand/80"
+  >
+    {title}
+  </h2>
+  {
+    underline && (
+      <div
+        class={`h-[2px] w-12 bg-gradient-to-r from-primary-brand to-secondary-accent mt-3 rounded-full ${underlineMargin}`}
+      />
+    )
+  }
+  {
+    subtitle && (
+      <p class="text-sm text-text-muted mt-3 leading-relaxed">{subtitle}</p>
+    )
+  }
+</div>
