@@ -6,6 +6,7 @@ import Footer from "@organisms/Footer.astro";
 import SocialIsland from "@organisms/SocialIsland.astro";
 import UpdatesIsland from "@organisms/UpdatesIsland.astro";
 import FeedbackPopup from "@molecules/FeedbackPopup.astro";
+import ChatbotButton from "@molecules/ChatbotButton.astro";
 import "../styles/global.css";
 import { getLangFromUrl, useTranslations } from "../i18n/utils";
 
@@ -119,5 +120,8 @@ const {
 
     <!-- Give Us Feedback Pop-up -->
     <FeedbackPopup />
+
+    <!-- Chatbot FAB -->
+    <ChatbotButton />
   </body>
 </html>

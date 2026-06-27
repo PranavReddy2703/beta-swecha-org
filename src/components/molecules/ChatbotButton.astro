@@ -1,0 +1,429 @@
+---
+// src/components/molecules/ChatbotButton.astro
+---
+
+<!-- Chatbot FAB Button -->
+<div id="chatbot-fab" class="chatbot-fab-wrapper">
+  <button
+    id="chatbot-trigger"
+    class="chatbot-trigger"
+    aria-label="Chat with us"
+  >
+    <!-- Robot face SVG icon -->
+    <svg
+      class="chatbot-icon"
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <!-- Antenna -->
+      <line
+        x1="12"
+        y1="2"
+        x2="12"
+        y2="6"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"></line>
+      <circle cx="12" cy="2" r="1.2" fill="currentColor"></circle>
+      <!-- Head -->
+      <rect
+        x="4"
+        y="6"
+        width="16"
+        height="12"
+        rx="3"
+        stroke="currentColor"
+        stroke-width="1.8"
+        fill="none"></rect>
+      <!-- Eyes -->
+      <circle cx="9" cy="12" r="1.6" fill="currentColor" class="chatbot-eye"
+      ></circle>
+      <circle cx="15" cy="12" r="1.6" fill="currentColor" class="chatbot-eye"
+      ></circle>
+      <!-- Smile -->
+      <path
+        d="M9.5 15.5 C10.5 16.8, 13.5 16.8, 14.5 15.5"
+        stroke="currentColor"
+        stroke-width="1.5"
+        stroke-linecap="round"
+        fill="none"></path>
+    </svg>
+
+    <!-- Notification dot -->
+    <span class="chatbot-dot"></span>
+  </button>
+
+  <!-- Tooltip / Popup bubble -->
+  <div id="chatbot-popup" class="chatbot-popup" aria-live="polite">
+    <button
+      id="chatbot-popup-close"
+      class="chatbot-popup-close"
+      aria-label="Close chatbot message"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        class="h-3 w-3"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="3"
+          d="M6 18L18 6M6 6l12 12"></path>
+      </svg>
+    </button>
+    <div class="chatbot-popup-content">
+      <span class="chatbot-popup-emoji">🤖</span>
+      <div>
+        <p class="chatbot-popup-title">Hey there!</p>
+        <p class="chatbot-popup-text">
+          I'm still under development. Check back soon!
+        </p>
+      </div>
+    </div>
+    <!-- Little tail/arrow pointing to the button -->
+    <div class="chatbot-popup-tail"></div>
+  </div>
+</div>
+
+<script>
+  function setupChatbot() {
+    const trigger = document.getElementById("chatbot-trigger");
+    const popup = document.getElementById("chatbot-popup");
+    const closeBtn = document.getElementById("chatbot-popup-close");
+
+    if (!trigger || !popup || trigger.dataset.initialized === "true") return;
+    trigger.dataset.initialized = "true";
+
+    let isOpen = false;
+
+    const openPopup = () => {
+      isOpen = true;
+      popup.classList.add("show");
+      trigger.classList.add("active");
+    };
+
+    const closePopup = () => {
+      isOpen = false;
+      popup.classList.remove("show");
+      trigger.classList.remove("active");
+    };
+
+    trigger.addEventListener("click", (e) => {
+      e.stopPropagation();
+      if (isOpen) {
+        closePopup();
+      } else {
+        openPopup();
+      }
+    });
+
+    closeBtn?.addEventListener("click", (e) => {
+      e.stopPropagation();
+      closePopup();
+    });
+
+    // Close on outside click
+    document.addEventListener("click", (e) => {
+      const target = e.target as HTMLElement;
+      const wrapper = document.getElementById("chatbot-fab");
+      if (isOpen && wrapper && !wrapper.contains(target)) {
+        closePopup();
+      }
+    });
+
+    // Close on Escape key
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && isOpen) {
+        closePopup();
+      }
+    });
+  }
+
+  document.addEventListener("DOMContentLoaded", setupChatbot);
+  document.addEventListener("astro:page-load", setupChatbot);
+  setupChatbot();
+</script>
+
+<style>
+  /* ====== Position & Wrapper ====== */
+  .chatbot-fab-wrapper {
+    position: fixed;
+    bottom: 44px;
+    right: 52px;
+    z-index: 90;
+  }
+
+  /* Keep the button above the minimised footer but below modals */
+  /* On mobile, tuck it in slightly so it doesn't crowd the social island tab */
+  @media (max-width: 639px) {
+    .chatbot-fab-wrapper {
+      bottom: 38px;
+      right: 20px;
+    }
+  }
+
+  /* ====== Trigger Button ====== */
+  .chatbot-trigger {
+    position: relative;
+    cursor: pointer;
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    border: none;
+    outline: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    /* Premium gradient background */
+    background: linear-gradient(135deg, #00d4ff 0%, #4dffb8 100%);
+    color: #080b10;
+
+    box-shadow:
+      0 6px 24px rgba(0, 212, 255, 0.35),
+      0 2px 8px rgba(0, 0, 0, 0.2),
+      inset 0 1px 0 rgba(255, 255, 255, 0.25);
+
+    transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    animation: chatbot-bob 3s ease-in-out infinite;
+  }
+
+  :global(html[data-theme="light"]) .chatbot-trigger {
+    background: linear-gradient(135deg, #025a9e 0%, #3b82f6 100%);
+    color: #ffffff;
+    box-shadow:
+      0 6px 24px rgba(2, 90, 158, 0.3),
+      0 2px 8px rgba(11, 30, 54, 0.12),
+      inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  }
+
+  .chatbot-trigger:hover {
+    transform: scale(1.1) translateY(-2px);
+    box-shadow:
+      0 10px 32px rgba(0, 212, 255, 0.5),
+      0 4px 12px rgba(0, 0, 0, 0.25),
+      inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    animation: none;
+  }
+
+  :global(html[data-theme="light"]) .chatbot-trigger:hover {
+    box-shadow:
+      0 10px 32px rgba(2, 90, 158, 0.4),
+      0 4px 12px rgba(11, 30, 54, 0.15),
+      inset 0 1px 0 rgba(255, 255, 255, 0.25);
+  }
+
+  .chatbot-trigger:active {
+    transform: scale(0.95);
+  }
+
+  .chatbot-trigger.active {
+    animation: none;
+    transform: scale(1.05);
+    box-shadow:
+      0 8px 28px rgba(0, 212, 255, 0.45),
+      0 3px 10px rgba(0, 0, 0, 0.2);
+  }
+
+  /* ====== Robot Icon ====== */
+  .chatbot-icon {
+    width: 26px;
+    height: 26px;
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .chatbot-trigger:hover .chatbot-icon {
+    transform: rotate(-8deg) scale(1.05);
+  }
+
+  /* Blink animation for the robot eyes */
+  .chatbot-eye {
+    animation: chatbot-blink 4s ease-in-out infinite;
+  }
+
+  @keyframes chatbot-blink {
+    0%,
+    92%,
+    100% {
+      transform: scaleY(1);
+    }
+    96% {
+      transform: scaleY(0.1);
+    }
+  }
+
+  /* ====== Notification Dot ====== */
+  .chatbot-dot {
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #ff4d6a;
+    border: 2px solid #080b10;
+    animation: chatbot-dot-pulse 2s ease-in-out infinite;
+  }
+
+  :global(html[data-theme="light"]) .chatbot-dot {
+    border-color: #ffffff;
+  }
+
+  @keyframes chatbot-dot-pulse {
+    0%,
+    100% {
+      box-shadow: 0 0 0 0 rgba(255, 77, 106, 0.5);
+    }
+    50% {
+      box-shadow: 0 0 0 4px rgba(255, 77, 106, 0);
+    }
+  }
+
+  /* ====== Gentle Bobbing Animation ====== */
+  @keyframes chatbot-bob {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-5px);
+    }
+  }
+
+  /* ====== Popup Bubble ====== */
+  .chatbot-popup {
+    position: absolute;
+    bottom: calc(100% + 14px);
+    right: 0;
+    width: 260px;
+    padding: 14px 16px;
+    border-radius: 16px;
+    opacity: 0;
+    transform: translateY(8px) scale(0.95);
+    pointer-events: none;
+    transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+
+    /* Glassmorphism */
+    background: rgba(27, 36, 50, 0.92);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(0, 212, 255, 0.2);
+    box-shadow:
+      0 16px 48px rgba(0, 0, 0, 0.4),
+      0 0 20px rgba(0, 212, 255, 0.08),
+      inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  }
+
+  :global(html[data-theme="light"]) .chatbot-popup {
+    background: rgba(255, 255, 255, 0.96);
+    border-color: rgba(2, 90, 158, 0.18);
+    box-shadow:
+      0 16px 48px rgba(11, 30, 54, 0.15),
+      0 0 0 1px rgba(255, 255, 255, 0.5),
+      inset 0 1px 0 rgba(255, 255, 255, 0.5);
+  }
+
+  .chatbot-popup.show {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    pointer-events: auto;
+  }
+
+  /* ====== Popup Content ====== */
+  .chatbot-popup-content {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .chatbot-popup-emoji {
+    font-size: 24px;
+    line-height: 1;
+    flex-shrink: 0;
+    animation: chatbot-wave 2s ease-in-out infinite;
+  }
+
+  @keyframes chatbot-wave {
+    0%,
+    100% {
+      transform: rotate(0deg);
+    }
+    25% {
+      transform: rotate(12deg);
+    }
+    75% {
+      transform: rotate(-8deg);
+    }
+  }
+
+  .chatbot-popup-title {
+    font-family: "Outfit", system-ui, sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 0 0 3px;
+  }
+
+  .chatbot-popup-text {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin: 0;
+    line-height: 1.45;
+  }
+
+  /* ====== Close Button ====== */
+  .chatbot-popup-close {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: none;
+    outline: none;
+    background: rgba(255, 255, 255, 0.06);
+    color: var(--text-muted);
+    transition: all 0.2s ease;
+  }
+
+  :global(html[data-theme="light"]) .chatbot-popup-close {
+    background: rgba(0, 0, 0, 0.04);
+  }
+
+  .chatbot-popup-close:hover {
+    background: rgba(0, 212, 255, 0.15);
+    color: var(--primary-brand);
+    transform: scale(1.1);
+  }
+
+  :global(html[data-theme="light"]) .chatbot-popup-close:hover {
+    background: rgba(2, 90, 158, 0.1);
+    color: var(--primary-brand);
+  }
+
+  /* ====== Tail Arrow ====== */
+  .chatbot-popup-tail {
+    position: absolute;
+    bottom: -6px;
+    right: 20px;
+    width: 12px;
+    height: 12px;
+    background: rgba(27, 36, 50, 0.92);
+    border-right: 1px solid rgba(0, 212, 255, 0.2);
+    border-bottom: 1px solid rgba(0, 212, 255, 0.2);
+    transform: rotate(45deg);
+  }
+
+  :global(html[data-theme="light"]) .chatbot-popup-tail {
+    background: rgba(255, 255, 255, 0.96);
+    border-color: rgba(2, 90, 158, 0.18);
+  }
+</style>
