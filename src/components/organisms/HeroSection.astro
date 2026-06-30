@@ -5,6 +5,9 @@ import {
   useTranslations,
   useTranslatedPath,
 } from "../../i18n/utils";
+import StatItem from "../atoms/StatItem.astro";
+import SectionHeading from "../atoms/SectionHeading.astro";
+import PillarCard from "../molecules/PillarCard.astro";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
@@ -21,8 +24,7 @@ const translatePath = useTranslatedPath(lang);
   >
     <!-- Animated Big Swecha Logo -->
     <div
-      class="hero-logo-container mb-8 md:mb-12 relative flex items-center justify-center w-full max-w-lg mx-auto animate-fade-in-up"
-      style="animation-delay: 0.1s;"
+      class="hero-logo-container mb-8 md:mb-12 relative flex items-center justify-center w-full max-w-lg mx-auto"
     >
       <div
         class="logo-glow-effect absolute w-72 h-72 md:w-[450px] md:h-[450px] rounded-full bg-primary-brand/10 blur-[100px] opacity-60 dark:opacity-40 animate-pulse pointer-events-none"
@@ -92,8 +94,7 @@ const translatePath = useTranslatedPath(lang);
 
     <!-- Headline with premium typography -->
     <h1
-      class="hero-title text-3xl sm:text-4xl md:text-5xl lg:text-5xl font-black text-text-main tracking-tight mb-6 max-w-5xl animate-fade-in-up"
-      style="animation-delay: 0.3s;"
+      class="hero-title text-3xl sm:text-4xl md:text-5xl lg:text-5xl font-black text-text-main tracking-tight mb-6 max-w-5xl"
     >
       {t("hero.title1")}
       <span
@@ -105,17 +106,13 @@ const translatePath = useTranslatedPath(lang);
 
     <!-- Subtitle description -->
     <p
-      class="hero-desc text-base sm:text-lg text-text-muted mb-10 leading-relaxed max-w-3xl animate-fade-in-up"
-      style="animation-delay: 0.4s;"
+      class="hero-desc text-base sm:text-lg text-text-muted mb-10 leading-relaxed max-w-3xl"
     >
       {t("hero.desc")}
     </p>
 
     <!-- Action buttons -->
-    <div
-      class="flex flex-wrap items-center justify-center gap-4 mb-16 animate-fade-in-up"
-      style="animation-delay: 0.5s;"
-    >
+    <div class="flex flex-wrap items-center justify-center gap-4 mb-16">
       <a
         href={translatePath("/projects")}
         class="hero-primary-btn px-6 py-3.5 rounded-xl bg-primary-brand text-[var(--primary-btn-text)] font-black text-sm tracking-wide shadow-md shadow-primary-brand/10 hover:bg-hover-brand hover:scale-105 active:scale-95 transition-all duration-300"
@@ -135,284 +132,60 @@ const translatePath = useTranslatedPath(lang);
       class="grid grid-cols-2 sm:grid-cols-4 gap-8 md:gap-12 w-full max-w-4xl pt-10 border-t border-structural-borders/30 justify-center items-center mb-24 animate-fade-in-up"
       style="animation-delay: 0.6s;"
     >
-      <div class="stats-item flex flex-col items-center">
-        <span
-          class="stats-val text-3xl sm:text-4xl md:text-5xl font-black bg-gradient-to-r from-primary-brand to-secondary-accent bg-clip-text text-transparent"
-        >
-          {t("hero.stats.students.val")}
-        </span>
-        <span
-          class="stats-lbl text-[10px] font-extrabold text-text-muted mt-2 uppercase tracking-wider"
-        >
-          {t("hero.stats.students.lbl")}
-        </span>
-      </div>
-      <div class="stats-item flex flex-col items-center">
-        <span
-          class="stats-val text-3xl sm:text-4xl md:text-5xl font-black bg-gradient-to-r from-primary-brand to-secondary-accent bg-clip-text text-transparent"
-        >
-          {t("hero.stats.workshops.val")}
-        </span>
-        <span
-          class="stats-lbl text-[10px] font-extrabold text-text-muted mt-2 uppercase tracking-wider"
-        >
-          {t("hero.stats.workshops.lbl")}
-        </span>
-      </div>
-      <div class="stats-item flex flex-col items-center">
-        <span
-          class="stats-val text-3xl sm:text-4xl md:text-5xl font-black bg-gradient-to-r from-primary-brand to-secondary-accent bg-clip-text text-transparent"
-        >
-          {t("hero.stats.projects.val")}
-        </span>
-        <span
-          class="stats-lbl text-[10px] font-extrabold text-text-muted mt-2 uppercase tracking-wider"
-        >
-          {t("hero.stats.projects.lbl")}
-        </span>
-      </div>
-      <div class="stats-item flex flex-col items-center">
-        <span
-          class="stats-val text-3xl sm:text-4xl md:text-5xl font-black bg-gradient-to-r from-primary-brand to-secondary-accent bg-clip-text text-transparent"
-        >
-          {t("hero.stats.years.val")}
-        </span>
-        <span
-          class="stats-lbl text-[10px] font-extrabold text-text-muted mt-2 uppercase tracking-wider"
-        >
-          {t("hero.stats.years.lbl")}
-        </span>
-      </div>
+      <StatItem
+        value={t("hero.stats.students.val")}
+        label={t("hero.stats.students.lbl")}
+      />
+      <StatItem
+        value={t("hero.stats.workshops.val")}
+        label={t("hero.stats.workshops.lbl")}
+      />
+      <StatItem
+        value={t("hero.stats.projects.val")}
+        label={t("hero.stats.projects.lbl")}
+      />
+      <StatItem
+        value={t("hero.stats.years.val")}
+        label={t("hero.stats.years.lbl")}
+      />
     </div>
 
     <!-- Initiatives/Pillars horizontal grid at the bottom -->
     <div class="w-full mt-8 animate-fade-in-up" style="animation-delay: 0.7s;">
       <!-- Section Title & Decoration -->
-      <div class="text-center mb-10">
-        <h2
-          class="text-xs font-black uppercase tracking-widest text-primary-brand/80"
-        >
-          {t("nav.initiatives")}
-        </h2>
-        <div
-          class="h-[2px] w-12 bg-gradient-to-r from-primary-brand to-secondary-accent mx-auto mt-3 rounded-full"
-        >
-        </div>
-      </div>
+      <SectionHeading title={t("nav.initiatives")} class="mb-10" />
 
       <div
         class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 w-full text-left"
       >
-        <!-- Pillar Card: VISHWAM.ai -->
-        <a
+        <PillarCard
           href={translatePath("/initiatives/vishwam-ai")}
-          class="pillar-card glass-card glass-white-card group relative flex flex-col justify-between p-5 rounded-2xl border border-structural-borders bg-card-bg/25 backdrop-blur-xl transition-all duration-500 hover:-translate-y-2 hover:border-primary-brand/35 hover:shadow-xl hover:shadow-primary-brand/5"
-        >
-          <div class="flex flex-col gap-3">
-            <div
-              class="w-10 h-10 rounded-xl bg-violet-600/10 text-violet-400 flex items-center justify-center group-hover:scale-110 transition-transform duration-300"
-            >
-              <svg
-                class="w-5 h-5"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                stroke-width="2"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"
-                ></path>
-              </svg>
-            </div>
-            <div class="space-y-1">
-              <h2
-                class="text-base font-bold text-text-main group-hover:text-primary-brand transition-colors"
-              >
-                {t("hero.pillar.vishwam.title")}
-              </h2>
-              <p class="text-xs text-text-muted leading-relaxed">
-                {t("hero.pillar.vishwam.desc")}
-              </p>
-            </div>
-          </div>
-          <div
-            class="flex items-center gap-1 text-[10px] font-bold text-primary-brand uppercase tracking-wider pt-6 mt-auto"
-          >
-            Explore
-            <svg
-              class="w-3 h-3 transition-transform duration-300 group-hover:translate-x-1"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              stroke-width="2.5"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M9 5l7 7-7 7"></path>
-            </svg>
-          </div>
-        </a>
-
-        <!-- Pillar Card: Swecha OS -->
-        <a
+          title={t("hero.pillar.vishwam.title")}
+          description={t("hero.pillar.vishwam.desc")}
+          iconPath="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"
+          iconColorClass="bg-violet-600/10 text-violet-400"
+        />
+        <PillarCard
           href={translatePath("/about/swecha-os")}
-          class="pillar-card glass-card glass-white-card group relative flex flex-col justify-between p-5 rounded-2xl border border-structural-borders bg-card-bg/25 backdrop-blur-xl transition-all duration-500 hover:-translate-y-2 hover:border-primary-brand/35 hover:shadow-xl hover:shadow-primary-brand/5"
-        >
-          <div class="flex flex-col gap-3">
-            <div
-              class="w-10 h-10 rounded-xl bg-primary-brand/10 text-primary-brand flex items-center justify-center group-hover:scale-110 transition-transform duration-300"
-            >
-              <svg
-                class="w-5 h-5"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                stroke-width="2"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-                ></path>
-              </svg>
-            </div>
-            <div class="space-y-1">
-              <h2
-                class="text-base font-bold text-text-main group-hover:text-primary-brand transition-colors"
-              >
-                {t("hero.pillar.os.title")}
-              </h2>
-              <p class="text-xs text-text-muted leading-relaxed">
-                {t("hero.pillar.os.desc")}
-              </p>
-            </div>
-          </div>
-          <div
-            class="flex items-center gap-1 text-[10px] font-bold text-primary-brand uppercase tracking-wider pt-6 mt-auto"
-          >
-            Explore
-            <svg
-              class="w-3 h-3 transition-transform duration-300 group-hover:translate-x-1"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              stroke-width="2.5"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M9 5l7 7-7 7"></path>
-            </svg>
-          </div>
-        </a>
-
-        <!-- Pillar Card: Code4Change -->
-        <a
+          title={t("hero.pillar.os.title")}
+          description={t("hero.pillar.os.desc")}
+          iconPath="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+          iconColorClass="bg-primary-brand/10 text-primary-brand"
+        />
+        <PillarCard
           href={translatePath("/initiatives/code4change")}
-          class="pillar-card glass-card glass-white-card group relative flex flex-col justify-between p-5 rounded-2xl border border-structural-borders bg-card-bg/25 backdrop-blur-xl transition-all duration-500 hover:-translate-y-2 hover:border-primary-brand/35 hover:shadow-xl hover:shadow-primary-brand/5"
-        >
-          <div class="flex flex-col gap-3">
-            <div
-              class="w-10 h-10 rounded-xl bg-amber-500/10 text-amber-500 flex items-center justify-center group-hover:scale-110 transition-transform duration-300"
-            >
-              <svg
-                class="w-5 h-5"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                stroke-width="2"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
-              </svg>
-            </div>
-            <div class="space-y-1">
-              <h2
-                class="text-base font-bold text-text-main group-hover:text-primary-brand transition-colors"
-              >
-                {t("hero.pillar.code4change.title")}
-              </h2>
-              <p class="text-xs text-text-muted leading-relaxed">
-                {t("hero.pillar.code4change.desc")}
-              </p>
-            </div>
-          </div>
-          <div
-            class="flex items-center gap-1 text-[10px] font-bold text-primary-brand uppercase tracking-wider pt-6 mt-auto"
-          >
-            Explore
-            <svg
-              class="w-3 h-3 transition-transform duration-300 group-hover:translate-x-1"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              stroke-width="2.5"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M9 5l7 7-7 7"></path>
-            </svg>
-          </div>
-        </a>
-
-        <!-- Pillar Card: People's Health -->
-        <a
+          title={t("hero.pillar.code4change.title")}
+          description={t("hero.pillar.code4change.desc")}
+          iconPath="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"
+          iconColorClass="bg-amber-500/10 text-amber-500"
+        />
+        <PillarCard
           href={translatePath("/initiatives/peoples-health")}
-          class="pillar-card glass-card glass-white-card group relative flex flex-col justify-between p-5 rounded-2xl border border-structural-borders bg-card-bg/25 backdrop-blur-xl transition-all duration-500 hover:-translate-y-2 hover:border-primary-brand/35 hover:shadow-xl hover:shadow-primary-brand/5"
-        >
-          <div class="flex flex-col gap-3">
-            <div
-              class="w-10 h-10 rounded-xl bg-emerald-500/10 text-emerald-500 flex items-center justify-center group-hover:scale-110 transition-transform duration-300"
-            >
-              <svg
-                class="w-5 h-5"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                stroke-width="2"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
-                ></path>
-              </svg>
-            </div>
-            <div class="space-y-1">
-              <h2
-                class="text-base font-bold text-text-main group-hover:text-primary-brand transition-colors"
-              >
-                {t("hero.pillar.health.title")}
-              </h2>
-              <p class="text-xs text-text-muted leading-relaxed">
-                {t("hero.pillar.health.desc")}
-              </p>
-            </div>
-          </div>
-          <div
-            class="flex items-center gap-1 text-[10px] font-bold text-primary-brand uppercase tracking-wider pt-6 mt-auto"
-          >
-            Explore
-            <svg
-              class="w-3 h-3 transition-transform duration-300 group-hover:translate-x-1"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              stroke-width="2.5"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M9 5l7 7-7 7"></path>
-            </svg>
-          </div>
-        </a>
+          title={t("hero.pillar.health.title")}
+          description={t("hero.pillar.health.desc")}
+          iconPath="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
+          iconColorClass="bg-emerald-500/10 text-emerald-500"
+        />
       </div>
     </div>
   </div>

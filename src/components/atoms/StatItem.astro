@@ -1,0 +1,23 @@
+---
+// src/components/atoms/StatItem.astro
+interface Props {
+  value: string;
+  label: string;
+  class?: string;
+}
+
+const { value, label, class: className = "" } = Astro.props;
+---
+
+<div class={`stats-item flex flex-col items-center ${className}`}>
+  <span
+    class="stats-val text-3xl sm:text-4xl md:text-5xl font-black bg-gradient-to-r from-primary-brand to-secondary-accent bg-clip-text text-transparent"
+  >
+    {value}
+  </span>
+  <span
+    class="stats-lbl text-[10px] font-extrabold text-text-muted mt-2 uppercase tracking-wider"
+  >
+    {label}
+  </span>
+</div>

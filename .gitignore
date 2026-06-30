@@ -106,3 +106,5 @@ gitlab-runner.exe
 # 9. Lighthouse CI
 # ------------------------------------------------------------------------------
 .lighthouseci/
+lhr.json
+lhr-debug.json

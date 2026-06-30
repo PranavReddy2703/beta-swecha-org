@@ -1,0 +1,46 @@
+---
+// src/components/atoms/ActionPill.astro
+interface Props {
+  href: string;
+  label: string;
+  iconPath?: string;
+  target?: string;
+  rel?: string;
+  class?: string;
+}
+
+const {
+  href,
+  label,
+  iconPath,
+  target,
+  rel,
+  class: className = "",
+} = Astro.props;
+
+const hasIconSlot = Astro.slots.has("icon");
+---
+
+<a
+  href={href}
+  target={target}
+  rel={rel}
+  class={`group inline-flex items-center space-x-2.5 rounded-full border border-structural-borders/80 bg-card-bg/40 px-6 py-3 text-sm font-semibold text-text-main backdrop-blur-md transition-all duration-300 hover:border-primary-brand/50 hover:bg-card-bg/60 hover:scale-[1.02] hover:shadow-[0_0_15px_rgba(0,212,255,0.12)] active:scale-[0.98] focus:outline-none focus:ring-1 focus:ring-primary-brand ${className}`}
+>
+  {
+    hasIconSlot ? (
+      <slot name="icon" />
+    ) : iconPath ? (
+      <svg
+        class="h-4.5 w-4.5 text-primary-brand transform transition-transform duration-300 group-hover:scale-105"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+        stroke-width="2"
+      >
+        <path stroke-linecap="round" stroke-linejoin="round" d={iconPath} />
+      </svg>
+    ) : null
+  }
+  <span>{label}</span>
+</a>
