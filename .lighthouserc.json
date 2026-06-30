@@ -18,6 +18,7 @@
           }
         ],
         "network-dependency-tree-insight": "off",
+        "forced-reflow-insight": "off",
         "categories:accessibility": [
           "error",
           {
