@@ -10,7 +10,6 @@
   "ignore": [
     "src/components/types/index.ts",
     "src/i18n/ui.ts",
-    "src/pwa.ts",
     "src/mock-pwa.ts",
     "generate-swecha-news.js",
     "scripts/apply-local-fallbacks.js",
@@ -23,8 +22,7 @@
     "@storybook/builder-vite",
     "astro-eslint-parser",
     "react",
-    "workbox-window",
-    "lint-staged"
+    "workbox-window"
   ],
   "astro": {
     "entry": [
