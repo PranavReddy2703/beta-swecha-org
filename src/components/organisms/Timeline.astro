@@ -235,15 +235,15 @@ const N = events.length;
     const nodes = document.querySelectorAll(".timeline-node");
     const prevBtn = document.getElementById("prev-btn");
     const nextBtn = document.getElementById("next-btn");
-    /** @type {HTMLElement | null} */
-    const slidingTimeline = document.getElementById("sliding-timeline");
+    const slidingTimeline = document.getElementById(
+      "sliding-timeline",
+    ) as HTMLElement | null;
 
     if (cards.length === 0 || nodes.length === 0) return;
 
     let activeIndex = 0;
 
-    /** @param {number} index */
-    function updateTimeline(index) {
+    function updateTimeline(index: number) {
       activeIndex = index;
 
       // 1. Update Cards
@@ -261,12 +261,13 @@ const N = events.length;
       // 2. Update DaisyUI Timeline Lines
       const lis = document.querySelectorAll(".timeline > li");
       lis.forEach((li, idx) => {
-        /** @type {HTMLElement | null} */
-        const prevHr = li.querySelector(".timeline-line-prev");
-        /** @type {HTMLElement | null} */
-        const nextHr = li.querySelector(".timeline-line-next");
-        /** @type {HTMLElement | null} */
-        const node = li.querySelector(".timeline-node");
+        const prevHr = li.querySelector(
+          ".timeline-line-prev",
+        ) as HTMLElement | null;
+        const nextHr = li.querySelector(
+          ".timeline-line-next",
+        ) as HTMLElement | null;
+        const node = li.querySelector(".timeline-node") as HTMLElement | null;
 
         // Check if light theme is active
         const isLight =
@@ -302,12 +303,9 @@ const N = events.length;
 
       // 3. Update Timeline Nodes
       nodes.forEach((node, idx) => {
-        /** @type {HTMLElement | null} */
-        const ring = node.querySelector(".pulse-ring");
-        /** @type {HTMLElement | null} */
-        const dot = node.querySelector(".node-dot");
-        /** @type {HTMLElement | null} */
-        const glow = node.querySelector(".dot-glow");
+        const ring = node.querySelector(".pulse-ring") as HTMLElement | null;
+        const dot = node.querySelector(".node-dot") as HTMLElement | null;
+        const glow = node.querySelector(".dot-glow") as HTMLElement | null;
 
         // Find the node year within the same li item
         const li = node.closest("li");
@@ -365,7 +363,7 @@ const N = events.length;
 
         // Toggle Year Label styling
         if (year) {
-          /** @type {HTMLElement} */ (year).style.color = colorVal; // Apply theme color to all labels
+          (year as HTMLElement).style.color = colorVal; // Apply theme color to all labels
           if (idx === activeIndex) {
             year.className =
               "node-year text-xs sm:text-sm font-black scale-105 transition-all duration-300 opacity-100";
@@ -378,17 +376,14 @@ const N = events.length;
 
       // 4. Centering Slide Offset Logic and Dynamic Edge Extension Widths
       if (slidingTimeline) {
-        /** @type {HTMLElement} */
-        const activeLi = lis[activeIndex];
+        const activeLi = lis[activeIndex] as HTMLElement;
         if (activeLi) {
           const activeCenter = activeLi.offsetLeft + activeLi.offsetWidth / 2;
           slidingTimeline.style.transform = `translateX(-${activeCenter}px)`;
 
           // Dynamically compute exact widths for the left/right extension lines so they end exactly at the viewport borders
-          /** @type {HTMLElement} */
-          const firstLi = lis[0];
-          /** @type {HTMLElement} */
-          const lastLi = lis[lis.length - 1];
+          const firstLi = lis[0] as HTMLElement;
+          const lastLi = lis[lis.length - 1] as HTMLElement;
           if (firstLi && lastLi) {
             const x_0 = firstLi.offsetLeft + firstLi.offsetWidth / 2;
             const x_N = lastLi.offsetLeft + lastLi.offsetWidth / 2;
@@ -400,14 +395,12 @@ const N = events.length;
               window.innerWidth -
               (window.innerWidth / 2 + (x_N - activeCenter));
 
-            /** @type {HTMLElement | null} */
             const leftExtend = document.querySelector(
               ".timeline-line-prev-extend",
-            );
-            /** @type {HTMLElement | null} */
+            ) as HTMLElement | null;
             const rightExtend = document.querySelector(
               ".timeline-line-next-extend",
-            );
+            ) as HTMLElement | null;
 
             if (leftExtend) {
               leftExtend.style.setProperty(
@@ -500,8 +493,9 @@ const N = events.length;
   function initMobileTimeline() {
     const mobileRows = document.querySelectorAll(".mobile-timeline-row");
     const readMoreBtns = document.querySelectorAll(".read-more-btn");
-    /** @type {HTMLDialogElement | null} */
-    const modal = document.getElementById("timeline-modal");
+    const modal = document.getElementById(
+      "timeline-modal",
+    ) as HTMLDialogElement | null;
 
     if (!mobileRows.length) return;
 
@@ -522,12 +516,15 @@ const N = events.length;
               dot.classList.add("scale-100", "opacity-100");
               dot.classList.remove("scale-75", "opacity-40");
 
-              /** @type {HTMLElement | null} */
-              const coreDot = dot.querySelector(".mobile-node-dot");
-              /** @type {HTMLElement | null} */
-              const pulse = dot.querySelector(".mobile-pulse-ring");
-              /** @type {HTMLElement | null} */
-              const glow = dot.querySelector(".mobile-dot-glow");
+              const coreDot = dot.querySelector(
+                ".mobile-node-dot",
+              ) as HTMLElement | null;
+              const pulse = dot.querySelector(
+                ".mobile-pulse-ring",
+              ) as HTMLElement | null;
+              const glow = dot.querySelector(
+                ".mobile-dot-glow",
+              ) as HTMLElement | null;
 
               if (coreDot) {
                 coreDot.style.boxShadow = `0 0 0 1.5px var(--current-node-color), 0 0 10px var(--current-node-shadow)`;
@@ -557,12 +554,15 @@ const N = events.length;
                   otherDot.classList.remove("scale-100", "opacity-100");
                   otherDot.classList.add("scale-75", "opacity-40");
 
-                  /** @type {HTMLElement | null} */
-                  const coreDot = otherDot.querySelector(".mobile-node-dot");
-                  /** @type {HTMLElement | null} */
-                  const pulse = otherDot.querySelector(".mobile-pulse-ring");
-                  /** @type {HTMLElement | null} */
-                  const glow = otherDot.querySelector(".mobile-dot-glow");
+                  const coreDot = otherDot.querySelector(
+                    ".mobile-node-dot",
+                  ) as HTMLElement | null;
+                  const pulse = otherDot.querySelector(
+                    ".mobile-pulse-ring",
+                  ) as HTMLElement | null;
+                  const glow = otherDot.querySelector(
+                    ".mobile-dot-glow",
+                  ) as HTMLElement | null;
 
                   if (coreDot) {
                     coreDot.style.boxShadow = "none";
@@ -600,8 +600,9 @@ const N = events.length;
         const modalYear = document.getElementById("modal-year");
         const modalTitle = document.getElementById("modal-title");
         const modalDesc = document.getElementById("modal-description");
-        /** @type {HTMLImageElement | null} */
-        const modalImage = document.getElementById("modal-image");
+        const modalImage = document.getElementById(
+          "modal-image",
+        ) as HTMLImageElement | null;
         const modalPlaceholder = document.getElementById("modal-placeholder");
         const modalTags = document.getElementById("modal-tags");
 
@@ -623,8 +624,7 @@ const N = events.length;
 
         if (modalTags) {
           modalTags.innerHTML = "";
-          /** @param {string} tag */
-          tags.forEach((tag) => {
+          tags.forEach((tag: string) => {
             const badge = document.createElement("div");
             badge.className =
               "badge badge-outline border-structural-borders/60 text-text-muted text-[11px] font-semibold px-2.5 py-1";
