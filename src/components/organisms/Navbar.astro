@@ -72,7 +72,11 @@ const isCurrentPage = (href: string) => {
 
 <header id="site-header" class="navbar-header">
   <!-- Animated gradient border at bottom -->
-  <div class="navbar-gradient-border"></div>
+  <div
+    class="absolute bottom-0 left-0 right-0 h-[2px] overflow-hidden pointer-events-none"
+  >
+    <div class="navbar-gradient-border"></div>
+  </div>
 
   <div class="px-6 sm:px-10 lg:px-16">
     <div class="navbar-inner">
@@ -258,7 +262,7 @@ const isCurrentPage = (href: string) => {
     position: absolute;
     bottom: 0;
     left: 0;
-    right: 0;
+    width: 200%;
     height: 1px;
     background: linear-gradient(
       90deg,
@@ -269,12 +273,12 @@ const isCurrentPage = (href: string) => {
       var(--border-edge) 85%,
       transparent 100%
     );
-    background-size: 200% 100%;
     opacity: 0.5;
     transition:
       opacity 0.35s ease,
       height 0.35s ease;
     animation: borderShimmer 8s linear infinite;
+    will-change: transform;
   }
 
   :global(html[data-theme="light"]) .navbar-gradient-border {
@@ -284,10 +288,10 @@ const isCurrentPage = (href: string) => {
   @keyframes borderShimmer {
     0%,
     100% {
-      background-position: 200% 0;
+      transform: translateX(0);
     }
     50% {
-      background-position: -200% 0;
+      transform: translateX(-50%);
     }
   }
 

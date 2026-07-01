@@ -242,11 +242,13 @@ const translatePath = useTranslatedPath(lang);
     transform: translate(0px, 5px) scale(0.4) rotate(-10deg);
     animation: hero-flap-large 2.6s ease-in-out infinite;
     transform-origin: center;
+    will-change: transform;
   }
   .hero-bird-2 {
     transform: translate(25px, 18px) scale(0.28) rotate(-5deg);
     animation: hero-flap-small 2.2s ease-in-out infinite;
     transform-origin: center;
+    will-change: transform;
   }
 
   @keyframes hero-flap-large {
