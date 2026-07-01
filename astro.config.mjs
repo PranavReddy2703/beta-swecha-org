@@ -9,7 +9,7 @@ export default defineConfig({
 
   build: {
     format: "directory",
-    inlineStylesheets: "always",
+    inlineStylesheets: "auto",
   },
 
   integrations: [
