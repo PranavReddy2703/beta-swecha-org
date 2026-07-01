@@ -24,7 +24,8 @@ const translatePath = useTranslatedPath(lang);
   >
     <!-- Animated Big Swecha Logo -->
     <div
-      class="hero-logo-container mb-8 md:mb-12 relative flex items-center justify-center w-full max-w-lg mx-auto"
+      class="hero-logo-container mb-8 md:mb-12 relative flex items-center justify-center w-full max-w-lg mx-auto animate-fade-in-up"
+      style="animation-delay: 0.1s;"
     >
       <div
         class="logo-glow-effect absolute w-72 h-72 md:w-[450px] md:h-[450px] rounded-full bg-primary-brand/10 blur-[100px] opacity-60 dark:opacity-40 animate-pulse pointer-events-none"
@@ -94,7 +95,8 @@ const translatePath = useTranslatedPath(lang);
 
     <!-- Headline with premium typography -->
     <h1
-      class="hero-title text-3xl sm:text-4xl md:text-5xl lg:text-5xl font-black text-text-main tracking-tight mb-6 max-w-5xl"
+      class="hero-title text-3xl sm:text-4xl md:text-5xl lg:text-5xl font-black text-text-main tracking-tight mb-6 max-w-5xl animate-fade-in-up"
+      style="animation-delay: 0.3s;"
     >
       {t("hero.title1")}
       <span
@@ -106,13 +108,17 @@ const translatePath = useTranslatedPath(lang);
 
     <!-- Subtitle description -->
     <p
-      class="hero-desc text-base sm:text-lg text-text-muted mb-10 leading-relaxed max-w-3xl"
+      class="hero-desc text-base sm:text-lg text-text-muted mb-10 leading-relaxed max-w-3xl animate-fade-in-up"
+      style="animation-delay: 0.4s;"
     >
       {t("hero.desc")}
     </p>
 
     <!-- Action buttons -->
-    <div class="flex flex-wrap items-center justify-center gap-4 mb-16">
+    <div
+      class="flex flex-wrap items-center justify-center gap-4 mb-16 animate-fade-in-up"
+      style="animation-delay: 0.5s;"
+    >
       <a
         href={translatePath("/projects")}
         class="hero-primary-btn px-6 py-3.5 rounded-xl bg-primary-brand text-[var(--primary-btn-text)] font-black text-sm tracking-wide shadow-md shadow-primary-brand/10 hover:bg-hover-brand hover:scale-105 active:scale-95 transition-all duration-300"
@@ -129,7 +135,8 @@ const translatePath = useTranslatedPath(lang);
 
     <!-- Impact Statistics Grid -->
     <div
-      class="grid grid-cols-2 sm:grid-cols-4 gap-8 md:gap-12 w-full max-w-4xl pt-10 border-t border-structural-borders/30 justify-center items-center mb-24"
+      class="grid grid-cols-2 sm:grid-cols-4 gap-8 md:gap-12 w-full max-w-4xl pt-10 border-t border-structural-borders/30 justify-center items-center mb-24 animate-fade-in-up"
+      style="animation-delay: 0.6s;"
     >
       <StatItem
         value={t("hero.stats.students.val")}
@@ -150,7 +157,7 @@ const translatePath = useTranslatedPath(lang);
     </div>
 
     <!-- Initiatives/Pillars horizontal grid at the bottom -->
-    <div class="w-full mt-8">
+    <div class="w-full mt-8 animate-fade-in-up" style="animation-delay: 0.7s;">
       <!-- Section Title & Decoration -->
       <SectionHeading title={t("nav.initiatives")} class="mb-10" />
 
@@ -242,13 +249,11 @@ const translatePath = useTranslatedPath(lang);
     transform: translate(0px, 5px) scale(0.4) rotate(-10deg);
     animation: hero-flap-large 2.6s ease-in-out infinite;
     transform-origin: center;
-    will-change: transform;
   }
   .hero-bird-2 {
     transform: translate(25px, 18px) scale(0.28) rotate(-5deg);
     animation: hero-flap-small 2.2s ease-in-out infinite;
     transform-origin: center;
-    will-change: transform;
   }
 
   @keyframes hero-flap-large {
@@ -283,6 +288,23 @@ const translatePath = useTranslatedPath(lang);
   /* Stats grid val */
   .stats-val {
     filter: drop-shadow(0 2px 8px rgba(0, 212, 255, 0.2));
+  }
+
+  /* Entrance animations */
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-fade-in-up {
+    animation: fadeInUp 0.8s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+    opacity: 0;
   }
 
   /* Light mode overrides */

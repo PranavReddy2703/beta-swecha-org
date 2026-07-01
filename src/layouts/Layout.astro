@@ -41,11 +41,9 @@ const {
       document.documentElement.setAttribute("data-theme", savedTheme);
     </script>
 
-    <!-- PWA Registration (Deferred to prevent blocking the critical path) -->
+    <!-- PWA Registration -->
     <script>
-      window.addEventListener("load", () => {
-        import("../pwa.ts");
-      });
+      import "../pwa.ts";
     </script>
 
     <!-- Fonts -->
@@ -68,12 +66,20 @@ const {
     <link
       rel="preload"
       as="style"
-      href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Great+Vibes&family=Outfit:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Great+Vibes&family=Alex+Brush&display=swap"
     />
     <link
       rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Great+Vibes&family=Outfit:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Great+Vibes&family=Alex+Brush&display=swap"
+      media="print"
+      onload="this.media='all'"
     />
+    <noscript>
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Great+Vibes&family=Alex+Brush&display=swap"
+      />
+    </noscript>
 
     <style>
       body {

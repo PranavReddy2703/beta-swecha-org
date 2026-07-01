@@ -56,10 +56,10 @@
   }
 </style>
 
-<script>
+<script is:inline>
   // @ts-nocheck
-  // ─── Procedural Bird Flight System ──────
-  const initBirds = () => {
+  // ─── Procedural Bird Flight System ───────────────────────────────
+  (function () {
     "use strict";
 
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
@@ -569,13 +569,5 @@
         });
       }, 300);
     });
-  };
-
-  window.addEventListener("load", () => {
-    setTimeout(() => {
-      (typeof requestIdleCallback === "function"
-        ? requestIdleCallback
-        : (cb) => setTimeout(cb, 200))(initBirds);
-    }, 1000);
-  });
+  })();
 </script>

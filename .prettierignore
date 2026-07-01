@@ -4,5 +4,3 @@ dist
 .lighthouseci
 builds
 cache
-lhr.json
-lhr-debug.json

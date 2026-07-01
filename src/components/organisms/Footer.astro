@@ -52,6 +52,7 @@ const copyrightText = footerData.copyrightTemplate.replace(
   // Support Astro View Transitions (DOMContentLoaded & astro:page-load)
   document.addEventListener("DOMContentLoaded", setupStickyFooterReveal);
   document.addEventListener("astro:page-load", setupStickyFooterReveal);
+  setupStickyFooterReveal();
 </script>
 
 <style>

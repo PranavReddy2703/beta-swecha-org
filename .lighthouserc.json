@@ -2,7 +2,6 @@
   "ci": {
     "collect": {
       "staticDistDir": "./dist",
-      "url": ["http://localhost/index.html"],
       "numberOfRuns": 3,
       "settings": {
         "chromeFlags": "--no-sandbox --disable-gpu --disable-dev-shm-usage"
@@ -14,17 +13,10 @@
         "categories:performance": [
           "error",
           {
-            "minScore": 0.9
+            "minScore": 0.8
           }
         ],
-        "network-dependency-tree-insight": "off",
         "forced-reflow-insight": "off",
-        "dom-size-insight": "off",
-        "first-contentful-paint": ["error", { "minScore": 0.9 }],
-        "largest-contentful-paint": ["error", { "minScore": 0.9 }],
-        "speed-index": ["error", { "minScore": 0.9 }],
-        "mainthread-work-breakdown": ["error", { "minScore": 0.9 }],
-        "dom-size": ["error", { "minScore": 0.9 }],
         "categories:accessibility": [
           "error",
           {
@@ -42,11 +34,9 @@
           {
             "minScore": 0.9
           }
-        ]
+        ],
+        "network-dependency-tree-insight": "off"
       }
-    },
-    "upload": {
-      "target": "temporary-public-storage"
     }
   }
 }

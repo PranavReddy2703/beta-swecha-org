@@ -53,10 +53,10 @@ validate_and_build:
     # 3. Build Apps
     - npm run build
     - npm run build-storybook
-    - tar -czf build-artifacts.tar.gz dist/ storybook-static/
   artifacts:
     paths:
-      - build-artifacts.tar.gz
+      - dist/
+      - storybook-static/
     expire_in: 1 day
 
 lighthouse_ci:
@@ -68,7 +68,6 @@ lighthouse_ci:
   variables:
     CHROME_FLAGS: "--headless --no-sandbox --disable-dev-shm-usage"
   script:
-    - tar -xzf build-artifacts.tar.gz
     - lhci autorun
   rules:
     - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
@@ -77,7 +76,6 @@ pages:
   stage: deploy
   needs: ["validate_and_build", "lighthouse_ci"]
   script:
-    - tar -xzf build-artifacts.tar.gz
     - mkdir -p public public/storybook
     - cp -a dist/. public/
     - cp -a storybook-static/. public/storybook/
