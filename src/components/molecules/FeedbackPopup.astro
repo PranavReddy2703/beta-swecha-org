@@ -118,9 +118,6 @@
   // Hook into Astro's router load events for SPA/transition compatibility
   document.addEventListener("DOMContentLoaded", setupFeedbackPopup);
   document.addEventListener("astro:page-load", setupFeedbackPopup);
-
-  // Call it immediately in case script is run after page swap/navigation
-  setupFeedbackPopup();
 </script>
 
 <style>

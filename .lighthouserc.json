@@ -19,6 +19,12 @@
         ],
         "network-dependency-tree-insight": "off",
         "forced-reflow-insight": "off",
+        "dom-size-insight": "off",
+        "first-contentful-paint": ["error", { "minScore": 0.9 }],
+        "largest-contentful-paint": ["error", { "minScore": 0.9 }],
+        "speed-index": ["error", { "minScore": 0.9 }],
+        "mainthread-work-breakdown": ["error", { "minScore": 0.9 }],
+        "dom-size": ["error", { "minScore": 0.9 }],
         "categories:accessibility": [
           "error",
           {
